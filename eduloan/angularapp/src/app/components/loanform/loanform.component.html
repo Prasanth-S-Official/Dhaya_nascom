@@ -1,0 +1,67 @@
+<div>
+  <div class="container" [ngClass]="{ blur: successPopup }">
+    <div class="button-container">
+      <button (click)="navigateBack()">Back</button>
+    </div>
+    <h2>Loan Application Form</h2>
+
+    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="institution">Institution<span class="required">*</span></label>
+        <input id="institution" type="text" formControlName="institution" />
+        <div *ngIf="loanForm.controls['institution']?.touched && loanForm.controls['institution'].hasError('required')" class="error">
+          *Institution is required
+        </div>
+      </div>
+
+      <div>
+        <label for="course">Course<span class="required">*</span></label>
+        <input id="course" type="text" formControlName="course" />
+        <div *ngIf="loanForm.controls['course']?.touched && loanForm.controls['course'].hasError('required')" class="error">
+          *Course is required
+        </div>
+      </div>
+
+      <div>
+        <label for="tuitionFee">Tuition Fee<span class="required">*</span></label>
+        <input id="tuitionFee" type="number" formControlName="tuitionFee" />
+        <div *ngIf="loanForm.controls['tuitionFee']?.touched && loanForm.controls['tuitionFee'].hasError('required')" class="error">
+          *Tuition Fee is required
+        </div>
+      </div>
+
+      <div>
+        <label for="address">Address<span class="required">*</span></label>
+        <input id="address" type="text" formControlName="address" />
+        <div *ngIf="loanForm.controls['address']?.touched && loanForm.controls['address'].hasError('required')" class="error">
+          *Address is required
+        </div>
+      </div>
+
+      <div>
+        <label for="file">Proof<span class="required">*</span></label>
+        <input
+          id="file"
+          type="file"
+          (change)="handleFileChange($event)"
+          accept=".jpg, .jpeg, .png, .pdf"
+        />
+        <div *ngIf="loanForm.controls['file']?.touched && loanForm.controls['file'].hasError('required')" class="error">
+          *Proof is required
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error">
+        *{{ errorMessage }}
+      </div>
+
+      <div>
+        <button type="submit" class="submit-button">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="successPopup" class="success-popup">
+    <p>Successfully Added!</p>
+    <button (click)="handleSuccessMessage()">Ok</button>
+  </div>
+</div>
