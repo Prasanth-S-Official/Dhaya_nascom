@@ -47,16 +47,21 @@ export class AuthService {
           localStorage.setItem('token',response.token)
           const decodedToken = this.decodeToken(response.token);
 
+          localStorage.setItem('token',response.token)
+          localStorage.setItem('userRole',response.userRole)
+          localStorage.setItem('username',response.username)
+          localStorage.setItem('userId',response.userId)
+          console.log(localStorage.getItem('userId'));
+          console.log(localStorage.getItem('username'));
+
+
           if (decodedToken) {
-            localStorage.setItem('userId', decodedToken['nameid']);
-            // localStorage.setItem('userRole', decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
-            localStorage.setItem('userRole', decodedToken['role']);
-            localStorage.setItem('userName', decodedToken['name']);
             console.log(localStorage.getItem('userRole'))
             // Update BehaviorSubjects
             this.userRoleSubject.next(decodedToken['role']);
             this.userIdSubject.next(decodedToken['nameid']);
             this.isAuthenticatedSubject.next(true);
+
           } else {
             console.error('Unable to decode token or missing claims');
           }
@@ -79,29 +84,56 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = this.decodeToken(token);
-      console.log("isAdmindecodedToken", decodedToken);
-      return decodedToken['role'] === 'Admin';
-    }
-    return false;
+    const token = localStorage.getItem('userRole');
+    const userId= localStorage.getItem('userId');
+    const username =localStorage.getItem('username');
+     console.log(localStorage.getItem('userId'));
+     console.log(localStorage.getItem('userRole'));
+     console.log(localStorage.getItem('username'))
+
+
+  if (token=="Admin") {
+    //const decodedToken = this.decodeToken(token);
+    console.log(token);
+    return true;
   }
+  return false;
+}
+
 
   isCustomer(): boolean {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = this.decodeToken(token);
-      return decodedToken['role'] === 'User';
+  
+    const token = localStorage.getItem('userRole');
+    const userId= localStorage.getItem('userId');
+    const username =localStorage.getItem('username');
+     console.log(localStorage.getItem('userId'));
+     console.log(localStorage.getItem('userRole'));
+     console.log(localStorage.getItem('username'));
+     if (token=="User") {
+      //const decodedToken = this.decodeToken(token);
+      console.log(token);
+      return true;
     }
     return false;
   }
 
+  // getCustomerName(): string {
+  //   const token = localStorage.getItem('username');
+  //   if (token) {
+  //     const decodedToken = this.decodeToken(token);
+  //     return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+  //   }
+  //   return '';
+  // }
+
+
   getCustomerName(): string {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('username');
+    console.log(token);
     if (token) {
-      const decodedToken = this.decodeToken(token);
-      return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+     // const decodedToken = this.decodeToken(token);
+     // return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+     return token;
     }
     return '';
   }
@@ -110,6 +142,8 @@ export class AuthService {
     localStorage.setItem('token', user.token);
     localStorage.setItem('userRole', user.role);
     localStorage.setItem('userId', user.userId);
+    localStorage.setItem('username', user.username);
+
   }
 
   private decodeToken(token: string): any {

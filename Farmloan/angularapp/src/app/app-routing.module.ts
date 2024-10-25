@@ -15,11 +15,12 @@ import { LoanformComponent } from './components/loanform/loanform.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent },
-  {path: 'signup', component: RegistrationComponent },
+  {path: 'signup', component: SignupComponent },
   {path: 'error', component: ErrorComponent },
   {path: 'admin/add/newloan', component: CreateloanComponent, canActivate: [AuthGuard]},
   {path: 'admin/view/viewloan', component: ViewloanComponent, canActivate: [AuthGuard]},
