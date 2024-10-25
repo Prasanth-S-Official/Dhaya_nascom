@@ -4,7 +4,6 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateloanComponent } from './components/createloan/createloan.component';
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/authguard/auth.guard';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
@@ -21,7 +20,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent },
   {path: 'signup', component: SignupComponent },
   {path: 'error', component: ErrorComponent },
-  { path: 'home', component: HomePageComponent},
 
   {path: 'admin/add/newloan', component: CreateloanComponent, canActivate: [AuthGuard]},
   {path: 'admin/view/viewloan', component: ViewloanComponent, canActivate: [AuthGuard]},

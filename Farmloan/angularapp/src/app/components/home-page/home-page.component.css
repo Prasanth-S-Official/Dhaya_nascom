@@ -74,7 +74,7 @@ body, html {
   align-items: center; /* Centers items on the cross axis */
   justify-content: center; /* Centers items on the main axis */
   padding: 10px;
-  width: 100%;
+  width: 98% ;
   margin: 20px auto 0;
   background-color: #454545;
   color: #fff;
