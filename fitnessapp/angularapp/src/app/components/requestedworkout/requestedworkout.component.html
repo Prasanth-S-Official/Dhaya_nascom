@@ -1,0 +1,88 @@
+<app-adminnav></app-adminnav>
+<div class="page-content" [ngClass]="{ blur: showModal }">
+  <h1>Workout Requests for Approval</h1>
+  <hr>
+  <div class="top-container">
+    <input
+      id="searchBox"
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchValue"
+      (input)="handleSearchChange()"
+    />
+    <label id="filter">
+      Filter by Status:
+      <select [(ngModel)]="statusFilter" (change)="handleFilterChange()">
+        <option value="-1">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </label>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Username</th>
+        <th>Workout Name</th>
+        <th>Submission Date</th>
+        <th>Age</th>
+        <th>BMI</th>
+        <th>Gender</th>
+        <th>Dietary Preferences</th>
+        <th>Medical History</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredWorkouts.length > 0; else noRecords">
+      <tr *ngFor="let request of filteredWorkouts; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ request.userId?.userName }}</td> <!-- Correct user reference -->
+        <td>{{ request.workoutId?.workoutName }}</td> <!-- Correct workout reference -->
+        <td>{{ request.requestedDate | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ request.age }}</td>
+        <td>{{ request.bmi }}</td>
+        <td>{{ request.gender }}</td>
+        <td>{{ request.dietaryPreferences }}</td>
+        <td>{{ request.medicalHistory }}</td>
+        <td>{{ request.requestStatus }}</td>
+        <td>
+          <button (click)="handleRowExpand(i)">Show More</button>
+          <button
+            id="greenButton"
+            *ngIf="request.requestStatus === 'Pending' || request.requestStatus === 'Rejected'"
+            (click)="handleApprove(request)"
+          >
+            Approve
+          </button>
+          <button
+            id="redButton"
+            *ngIf="request.requestStatus === 'Pending' || request.requestStatus === 'Approved'"
+            (click)="handleReject(request)"
+          >
+            Reject
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #noRecords>
+      <tr>
+        <td colspan="11" class="no-records-cell">Oops! No records Found</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>
+
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <button id="cross" (click)="closeWorkoutDetailsModal()">X</button>
+    <div class="workout-details">
+      <h2>Workout Details</h2>
+      <div><b>Workout Description:</b> {{ selectedWorkout?.workoutId?.description }}</div>
+      <div><b>Target Area:</b> {{ selectedWorkout?.workoutId?.targetArea }}</div>
+      <div><b>Duration:</b> {{ selectedWorkout?.workoutId?.averageWorkoutDurationInMinutes }} mins</div>
+    </div>
+  </div>
+</div>

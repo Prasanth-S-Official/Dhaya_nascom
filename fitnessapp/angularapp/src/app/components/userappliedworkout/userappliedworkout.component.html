@@ -1,0 +1,79 @@
+<app-usernav></app-usernav>
+<div class="page-content" [ngClass]="{ blur: showDeletePopup }">
+
+  <h1>Applied Workouts</h1>
+  <hr>
+
+  <!-- Search Box -->
+  <input
+    id="searchBox"
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="searchValue"
+    (input)="filterWorkouts()"
+  />
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Workout Name</th>
+        <th>Submission Date</th>
+        <th>Age</th>
+        <th>BMI</th>
+        <th>Gender</th>
+        <th>Dietary Preferences</th>
+        <th>Medical History</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredWorkouts.length > 0; else noRecords">
+      <tr *ngFor="let workout of filteredWorkouts; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ workout.workoutId.workoutName }}</td>
+        <td>{{ workout.requestedDate | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ workout.age }}</td>
+        <td>{{ workout.bmi }}</td>
+        <td>{{ workout.gender }}</td>
+        <td>{{ workout.dietaryPreferences }}</td>
+        <td>{{ workout.medicalHistory }}</td>
+        <td>
+          {{
+            workout.requestStatus === "Pending"
+              ? "Pending"
+              : workout.requestStatus === "Approved"
+              ? "Approved"
+              : "Rejected"
+          }}
+        </td>
+        <td>
+          <button
+            id="redButton"
+            [disabled]="workout.requestStatus !== 'Pending'"
+            [ngClass]="{ 'disabled-button': workout.requestStatus !== 'Pending' }"
+            (click)="handleDeleteClick(workout)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #noRecords>
+      <tr>
+        <td colspan="10" class="no-records-cell">Oops! No records Found</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>
+
+<!-- Delete Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">
+    Yes, Delete
+  </button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">
+    Cancel
+  </button>
+</div>

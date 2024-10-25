@@ -1,0 +1,19 @@
+
+<div class="wrapper">
+  <app-adminnav *ngIf="userRole === 'Admin'"></app-adminnav> 
+  <app-usernav *ngIf="userRole === 'User'"></app-usernav>
+  
+  <div class="coverimage">
+    <img src="/assets/images/fitnessapp.webp" alt="Cover" class="lazyload">
+    <div class="title">FitnessApp</div>
+  </div>
+
+  <div class="content">
+    <p>Your journey to better farming begins with us. Our platform offers a seamless process for managing crops, agrochemicals, and feedback. Start today and get one step closer to enhancing your agricultural practices.</p>
+  </div>
+
+  <div class="contact">
+    <h2>Contact Us</h2>
+    <p>Phone: 123-456-7890</p>
+  </div>
+</div>
