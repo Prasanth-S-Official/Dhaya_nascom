@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adminnav',
@@ -7,30 +7,22 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
+  showLogoutPopup = false;
+  userName = '';
+  userRole = '';
 
-
-  isLoggedIn: boolean = false;
-  isAdmin: boolean = false;
-
-  constructor(private authService: AuthService) {
-    this.authService.isAuthenticated$.subscribe((authenticated: boolean) => {
-      this.isLoggedIn = authenticated;
-      if (this.isLoggedIn) {
-        this.isAdmin = this.authService.isAdmin();
-        console.log(this.isAdmin);
-      } else {
-        this.isAdmin = false;
-      }
-    });
-  }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // Initialize the properties on component initialization
-    this.isLoggedIn = this.authService.isAuthenticated();
-    if (this.isLoggedIn) {
-      this.isAdmin = this.authService.isAdmin();
-    }
+    const storedUserName = localStorage.getItem('userName');
+    const storedUserRole = localStorage.getItem('userRole');
+
+    this.userName = storedUserName || '';
+    this.userRole = storedUserRole || '';
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }
-
-

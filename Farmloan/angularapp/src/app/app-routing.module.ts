@@ -15,11 +15,13 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
   {path: 'signup', component: SignupComponent },
   {path: 'error', component: ErrorComponent },
+  { path: 'home', component: HomePageComponent},
 
   {path: 'admin/add/newloan', component: CreateloanComponent, canActivate: [AuthGuard]},
   {path: 'admin/view/viewloan', component: ViewloanComponent, canActivate: [AuthGuard]},
