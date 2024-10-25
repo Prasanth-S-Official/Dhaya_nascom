@@ -97,6 +97,10 @@ CREATE TABLE `loan_application` (
   `tuition_fee` double NOT NULL,
   `loan_id` bigint(20) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `farm_location` varchar(255) DEFAULT NULL,
+  `farm_purpose` varchar(255) DEFAULT NULL,
+  `farm_size_in_acres` double NOT NULL,
+  `farmer_address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`loan_application_id`),
   KEY `FKkrn3iq83xftqmisca4n75sbml` (`loan_id`),
   KEY `FK9mvuefv6gd4ggkfkcooi087vd` (`user_id`),
@@ -173,4 +177,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-25  5:34:58
+-- Dump completed on 2024-10-25  5:50:00
