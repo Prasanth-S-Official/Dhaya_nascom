@@ -4,7 +4,7 @@
     <div class="signup-left">
       <img src="/assets/images/coverimage.webp" alt="Signup Image" class="signup-image">
       <div class="image-title">
-        <h1>Fitness Tracker</h1>
+        <h1>FarmAid</h1>
       </div>
     </div>
 
@@ -15,13 +15,14 @@
         <div class="form-group">
           <input
             type="text"
-            name="userName"
-            [(ngModel)]="formData.userName"
-            (ngModelChange)="validateField('userName', formData.userName)"
-            placeholder="UserName"
+            name="username"
+            [(ngModel)]="formData.username"
+            (ngModelChange)="validateField('username', formData.username)"
+            placeholder="Username"
           />
-          <div *ngIf="errors.userName" class="error">{{ errors.userName }}</div>
+          <div *ngIf="errors.username" class="error">{{ errors.username }}</div>
         </div>
+        
         <div class="form-group">
           <input
             type="email"
@@ -32,16 +33,18 @@
           />
           <div *ngIf="errors.email" class="error">{{ errors.email }}</div>
         </div>
+        
         <div class="form-group">
           <input
             type="text"
-            name="mobile"
-            [(ngModel)]="formData.mobile"
-            (ngModelChange)="validateField('mobile', formData.mobile)"
+            name="mobileNumber"
+            [(ngModel)]="formData.mobileNumber"
+            (ngModelChange)="validateField('mobileNumber', formData.mobileNumber)"
             placeholder="Mobile"
           />
-          <div *ngIf="errors.mobile" class="error">{{ errors.mobile }}</div>
+          <div *ngIf="errors.mobileNumber" class="error">{{ errors.mobileNumber }}</div>
         </div>
+        
         <div class="form-group">
           <input
             type="password"
@@ -52,24 +55,27 @@
           />
           <div *ngIf="errors.password" class="error">{{ errors.password }}</div>
         </div>
+        
         <div class="form-group">
           <input
             type="password"
             name="confirmPassword"
-            [(ngModel)]="formData.confirmPassword"
-            (ngModelChange)="validateField('confirmPassword', formData.confirmPassword)"
+            [(ngModel)]="confirmPassword"
+            (ngModelChange)="validateField('confirmPassword', confirmPassword)"
             placeholder="Confirm Password"
           />
           <div *ngIf="errors.confirmPassword" class="error">{{ errors.confirmPassword }}</div>
         </div>
+        
         <div class="form-group">
-          <select name="role" [(ngModel)]="formData.role">
+          <select name="userRole" [(ngModel)]="formData.userRole">
             <option value="">Select Role</option>
             <option value="Admin">Admin</option>
             <option value="User">User</option>
           </select>
-          <div *ngIf="errors.role" class="error">{{ errors.role }}</div>
+          <div *ngIf="errors.userRole" class="error">{{ errors.userRole }}</div>
         </div>
+        
         <button type="submit" class="signup-button" (click)="handleSubmit()">
           Signup
         </button>

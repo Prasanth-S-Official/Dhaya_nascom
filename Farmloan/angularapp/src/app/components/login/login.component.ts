@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
             isAuthenticated: true,
           };
           console.log("userData", userData);
-          this.authService.storeUserData(userData);
+          // this.authService.storeUserData(userData);
 
           if (response.role === "Admin") {
             this.router.navigate(['/home']);

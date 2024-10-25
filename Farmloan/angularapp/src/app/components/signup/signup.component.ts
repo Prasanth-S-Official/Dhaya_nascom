@@ -12,42 +12,42 @@ export class SignupComponent {
   error: string = "";
   successPopup: boolean = false;
 
-  formData: any ={
-    userName: '',
+  formData: User = {
+    userId: undefined,  // userId is optional during registration
     email: '',
-    mobile: '',
     password: '',
-    confirmPassword: '',
-    role: ''
+    username: '',
+    mobileNumber: '',
+    userRole: ''
   };
 
-  errors: any = {};
+  confirmPassword: string = ''; // Separate confirmPassword field
+  errors: { [key: string]: string } = {};
 
   constructor(private authService: AuthService, private router: Router) {}
-
-  handleChange(event: any) {
-    const { name, value } = event.target;
-    this.formData[name] = value;
-    this.validateField(name, value);
-  }
 
   validateField(fieldName: string, value: string) {
     const fieldErrors = { ...this.errors };
 
     switch (fieldName) {
+      case 'username':
+        fieldErrors.username = value.trim() === '' ? 'Username is required' : '';
+        break;
       case 'email':
         fieldErrors.email = value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
           ? '' : 'Please enter a valid email';
         break;
-      case 'mobile':
-        fieldErrors.mobile = value.match(/^[0-9]{10}$/) ? '' : 'Mobile number must be 10 digits';
+      case 'mobileNumber':
+        fieldErrors.mobileNumber = value.match(/^[0-9]{10}$/) ? '' : 'Mobile number must be 10 digits';
         break;
       case 'password':
         fieldErrors.password = value.length >= 6 ? '' : 'Password must be at least 6 characters';
         break;
       case 'confirmPassword':
-        fieldErrors.confirmPassword =
-          value === this.formData.password ? '' : 'Passwords do not match';
+        fieldErrors.confirmPassword = value === this.formData.password ? '' : 'Passwords do not match';
+        break;
+      case 'userRole':
+        fieldErrors.userRole = value.trim() === '' ? 'Role is required' : '';
         break;
       default:
         break;
@@ -57,53 +57,26 @@ export class SignupComponent {
   }
 
   async handleSubmit() {
-    const fieldErrors = { ...this.errors };
+    const requiredFields = ['username', 'email', 'mobileNumber', 'password', 'confirmPassword', 'userRole'];
+    
+    // Check all required fields
+    requiredFields.forEach(field => {
+      if (field !== 'confirmPassword' && (!this.formData[field] || this.formData[field].trim() === '')) {
+        this.errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+      } else if (field === 'confirmPassword' && this.confirmPassword.trim() === '') {
+        this.errors[field] = 'Confirm Password is required';
+      } else {
+        this.errors[field] = '';
+      }
+    });
 
-    if (this.formData.userName.trim() === '') {
-      fieldErrors.userName = 'User Name is required';
-    } else {
-      fieldErrors.userName = '';
-    }
-    if (this.formData.email.trim() === '') {
-      fieldErrors.email = 'Email is required';
-    } else {
-      fieldErrors.email = '';
-    }
-    if (this.formData.mobile.trim() === '') {
-      fieldErrors.mobile = 'Mobile Number is required';
-    } else {
-      fieldErrors.mobile = '';
-    }
-    if (this.formData.password === '') {
-      fieldErrors.password = 'Password is required';
-    } else if (fieldErrors.password.trim() !== '') {
-      fieldErrors.password = fieldErrors.password;
-    } else {
-      fieldErrors.password = '';
-    }
-    if (this.formData.confirmPassword === '') {
-      fieldErrors.confirmPassword = 'Confirm Password is required';
-    } else if (this.formData.confirmPassword !== this.formData.password) {
-      fieldErrors.confirmPassword = 'Passwords do not match';
-    } else {
-      fieldErrors.confirmPassword = '';
-    }
+    // Validate field values (for confirmPassword)
+    this.validateField('confirmPassword', this.confirmPassword);
 
-    this.errors = fieldErrors;
-
-    const hasErrors = Object.values(fieldErrors).some((error) => error !== '');
+    const hasErrors = Object.values(this.errors).some(error => error !== '');
     if (!hasErrors) {
-      let requestObject = {
-        userName: this.formData.userName,
-        email: this.formData.email,
-        mobile: this.formData.mobile,
-        password: this.formData.password,
-        role: this.formData.role
-      };
-
       try {
-        const response = await this.authService.register(requestObject).toPromise();
-
+        const response = await this.authService.register(this.formData).toPromise();
         if (response) {
           this.successPopup = true;
         } else {
