@@ -14,7 +14,7 @@ export class AdminnavComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    const storedUserName = localStorage.getItem('userName');
+    const storedUserName = localStorage.getItem('username');
     const storedUserRole = localStorage.getItem('userRole');
 
     this.userName = storedUserName || '';
