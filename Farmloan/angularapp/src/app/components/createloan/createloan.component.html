@@ -1,0 +1,106 @@
+<div>
+  <div class="loan-form-container" [ngClass]="{ blur: successPopup }">
+    <h2>Create New Loan</h2>
+    <hr>
+    <form #loanForm="ngForm" (ngSubmit)="onSubmit(loanForm)">
+      <label for="LoanType">Loan Type<span class="required">*</span></label>
+      <input
+        type="text"
+        name="LoanType"
+        [(ngModel)]="formData.LoanType"
+        placeholder="Loan Type"
+        required
+        #LoanType="ngModel"
+        (change)="handleChange($event, 'LoanType')"
+      />
+      <div class="error" *ngIf="LoanType.invalid && LoanType.touched">*Loan Type is required</div>
+
+      <label for="Description">Description<span class="required">*</span></label>
+      <input
+        type="text"
+        name="Description"
+        [(ngModel)]="formData.Description"
+        placeholder="Loan Description"
+        required
+        #Description="ngModel"
+        (change)="handleChange($event, 'Description')"
+      />
+      <div class="error" *ngIf="Description.invalid && Description.touched">*Description is required</div>
+
+      <label for="InterestRate">Interest Rate<span class="required">*</span></label>
+      <input
+        type="number"
+        name="InterestRate"
+        [(ngModel)]="formData.InterestRate"
+        placeholder="Interest Rate"
+        required
+        #InterestRate="ngModel"
+        (change)="handleChange($event, 'InterestRate')"
+      />
+      <div class="error" *ngIf="InterestRate.invalid && InterestRate.touched">*Interest Rate is required</div>
+
+      <label for="MaximumAmount">Maximum Amount<span class="required">*</span></label>
+      <input
+        type="number"
+        name="MaximumAmount"
+        [(ngModel)]="formData.MaximumAmount"
+        placeholder="Maximum Amount"
+        required
+        #MaximumAmount="ngModel"
+        (change)="handleChange($event, 'MaximumAmount')"
+      />
+      <div class="error" *ngIf="MaximumAmount.invalid && MaximumAmount.touched">
+        *Maximum Amount is required
+      </div>
+
+      <label for="RepaymentTenure">Repayment Tenure<span class="required">*</span></label>
+      <input
+        type="number"
+        name="RepaymentTenure"
+        [(ngModel)]="formData.RepaymentTenure"
+        placeholder="Repayment Tenure (Months)"
+        required
+        #RepaymentTenure="ngModel"
+        (change)="handleChange($event, 'RepaymentTenure')"
+      />
+      <div class="error" *ngIf="RepaymentTenure.invalid && RepaymentTenure.touched">
+        *Repayment Tenure is required
+      </div>
+
+      <label for="Eligibility">Eligibility<span class="required">*</span></label>
+      <input
+        type="text"
+        name="Eligibility"
+        [(ngModel)]="formData.Eligibility"
+        placeholder="Eligibility Criteria"
+        required
+        #Eligibility="ngModel"
+        (change)="handleChange($event, 'Eligibility')"
+      />
+      <div class="error" *ngIf="Eligibility.invalid && Eligibility.touched">*Eligibility is required</div>
+
+      <label for="DocumentsRequired">Documents Required<span class="required">*</span></label>
+      <input
+        type="text"
+        name="DocumentsRequired"
+        [(ngModel)]="formData.DocumentsRequired"
+        placeholder="Documents Required"
+        required
+        #DocumentsRequired="ngModel"
+        (change)="handleChange($event, 'DocumentsRequired')"
+      />
+      <div class="error" *ngIf="DocumentsRequired.invalid && DocumentsRequired.touched">
+        *Documents Required is required
+      </div>
+
+      <div *ngIf="errorMessage" class="error">*{{ errorMessage }}</div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div *ngIf="successPopup" class="success-popup">
+    <p>Successfully Added!</p>
+    <button (click)="handleSuccessMessage()">Ok</button>
+  </div>
+</div>

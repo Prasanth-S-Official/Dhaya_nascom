@@ -1,0 +1,63 @@
+<div>
+  <div id="loanHomeBody">
+    <h1>Available Loans</h1>
+    <hr>
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Loans Table -->
+    <table class="loan-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Loan Type</th>
+          <th>Loan Description</th>
+          <th>Interest Rate</th>
+          <th>Maximum Amount</th>
+          <th>Repayment Tenure (Months)</th>  <!-- New Field -->
+          <th>Eligibility</th>                 <!-- New Field -->
+          <th>Documents Required</th>          <!-- New Field -->
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredLoans.length; else noRecords">
+        <tr *ngFor="let loan of filteredLoans, let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ loan.LoanType }}</td>
+          <td>{{ loan.Description }}</td>
+          <td>{{ loan.InterestRate }}%</td>
+          <td>₹{{ loan.MaximumAmount }}</td>
+          <td>{{ loan.RepaymentTenure }}</td>     <!-- Displaying new field -->
+          <td>{{ loan.Eligibility }}</td>         <!-- Displaying new field -->
+          <td>{{ loan.DocumentsRequired }}</td>   <!-- Displaying new field -->
+          <td>
+            <button
+              id="greenButton"
+              *ngIf="!isLoanApplied(loan)"
+              (click)="handleApplyClick(loan)"
+            >
+              Apply
+            </button>
+            <button id="appliedButton" *ngIf="isLoanApplied(loan)">Applied</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colSpan="9" class="no-records-cell">Oops! No records Found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>
