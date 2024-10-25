@@ -1,1 +1,1 @@
-export const apiUrl = 'https://8080-dbaeccff314644937bccfaccecfone.premiumproject.examly.io';
+export const apiUrl = 'https://8080-abfdabeabcbaed319332313dbaefebdaefbfone.premiumproject.examly.io';
