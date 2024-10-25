@@ -1,7 +1,6 @@
 package com.examly.springapp.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,31 +14,28 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class LoanApplication {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanApplicationId;
-
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
 
-    
-
     @ManyToOne
     @JoinColumn(name = "loanId")
     private Loan loan;
-    private LocalDate submissionDate;
-    private String institution;
-    private String course;
-    private double tuitionFee;
-    private int LoanStatus;
-    private String address;
-    @Lob
-    @Column(name = "image", nullable = false , columnDefinition = "LONGBLOB")
-    private String file;
 
+    private LocalDate submissionDate;
+    private int loanStatus;
+    private String farmLocation;
+    private String farmerAddress;
+    private double farmSizeInAcres;
+    private String farmPurpose;
+
+    @Lob
+    @Column(name = "image", nullable = false, columnDefinition = "LONGBLOB")
+    private String file;
 
     public LoanApplication() {
     }
@@ -76,44 +72,44 @@ public class LoanApplication {
         this.submissionDate = submissionDate;
     }
 
-    public String getInstitution() {
-        return institution;
-    }
-
-    public void setInstitution(String institution) {
-        this.institution = institution;
-    }
-
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    public double getTuitionFee() {
-        return tuitionFee;
-    }
-
-    public void setTuitionFee(double tuitionFee) {
-        this.tuitionFee = tuitionFee;
-    }
-
     public int getLoanStatus() {
-        return LoanStatus;
+        return loanStatus;
     }
 
     public void setLoanStatus(int loanStatus) {
-        LoanStatus = loanStatus;
+        this.loanStatus = loanStatus;
     }
 
-    public String getAddress() {
-        return address;
+    public String getFarmLocation() {
+        return farmLocation;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFarmLocation(String farmLocation) {
+        this.farmLocation = farmLocation;
+    }
+
+    public String getFarmerAddress() {
+        return farmerAddress;
+    }
+
+    public void setFarmerAddress(String farmerAddress) {
+        this.farmerAddress = farmerAddress;
+    }
+
+    public double getFarmSizeInAcres() {
+        return farmSizeInAcres;
+    }
+
+    public void setFarmSizeInAcres(double farmSizeInAcres) {
+        this.farmSizeInAcres = farmSizeInAcres;
+    }
+
+    public String getFarmPurpose() {
+        return farmPurpose;
+    }
+
+    public void setFarmPurpose(String farmPurpose) {
+        this.farmPurpose = farmPurpose;
     }
 
     public String getFile() {
@@ -123,15 +119,4 @@ public class LoanApplication {
     public void setFile(String file) {
         this.file = file;
     }
-
-
-
-    
-
-
-
-
-
-
-    
 }
