@@ -83,9 +83,9 @@ export class LoginComponent implements OnInit {
         if (response) {
           let userData = {
             token: response.token,
-            role: response.role,
-            userId: response.id,
-            userName: response.userName,
+            role: response.userRole,
+            userId: response.userId,
+            userName: response.username,
             isAuthenticated: true,
           };
           console.log("userData", userData);
