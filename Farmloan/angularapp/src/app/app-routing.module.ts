@@ -18,8 +18,10 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
+  {path: 'home', component: HomePageComponent },
   {path: 'signup', component: SignupComponent },
   {path: 'error', component: ErrorComponent },
+
 
   {path: 'admin/add/newloan', component: CreateloanComponent, canActivate: [AuthGuard]},
   {path: 'admin/view/viewloan', component: ViewloanComponent, canActivate: [AuthGuard]},
