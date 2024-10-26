@@ -11,13 +11,13 @@ import { Loan } from 'src/app/models/loan.model';
 })
 export class CreateloanComponent implements OnInit {
   formData: Loan = {
-    LoanType: '',
-    Description: '',
-    InterestRate: null,
-    MaximumAmount: null,
-    RepaymentTenure: null,  // New field added
-    Eligibility: '',         // New field added
-    DocumentsRequired: ''    // New field added
+    loanType: '',
+    description: '',
+    interestRate: null,
+    maximumAmount: null,
+    repaymentTenure: null,
+    eligibility: '',
+    documentsRequired: ''
   };
   errors: any = {};
   errorMessage: string;
@@ -61,13 +61,13 @@ export class CreateloanComponent implements OnInit {
     this.successPopup = false;
     this.errorMessage = '';
     this.formData = {
-      LoanType: '',
-      Description: '',
-      InterestRate: null,
-      MaximumAmount: null,
-      RepaymentTenure: null,  // Reset new field
-      Eligibility: '',         // Reset new field
-      DocumentsRequired: ''    // Reset new field
+      loanType: '',
+      description: '',
+      interestRate: null,
+      maximumAmount: null,
+      repaymentTenure: null,
+      eligibility: '',
+      documentsRequired: ''
     };
   }
 }

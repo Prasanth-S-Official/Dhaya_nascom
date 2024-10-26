@@ -12,17 +12,17 @@ import { Loan } from 'src/app/models/loan.model';
 export class AdmineditloanComponent implements OnInit {
   id: string;
   errorMessage: string = '';
-  formData: Loan = { // Updated formData object with additional fields
-    LoanType: '',
-    Description: '',
-    InterestRate: null,
-    MaximumAmount: null,
-    RepaymentTenure: null,
-    Eligibility: '',
-    DocumentsRequired: ''
+  formData: Loan = {
+    loanType: '',
+    description: '',
+    interestRate: null,
+    maximumAmount: null,
+    repaymentTenure: null,
+    eligibility: '',
+    documentsRequired: ''
   };
   errors: any = {};
-  successPopup: boolean; // Add this line to declare the successPopup property
+  successPopup: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,13 +40,13 @@ export class AdmineditloanComponent implements OnInit {
       (response) => {
         console.log('Loan details:', response);
         this.formData = {
-          LoanType: response.LoanType,
-          Description: response.Description,
-          InterestRate: response.InterestRate,
-          MaximumAmount: response.MaximumAmount,
-          RepaymentTenure: response.RepaymentTenure,
-          Eligibility: response.Eligibility,
-          DocumentsRequired: response.DocumentsRequired
+          loanType: response.loanType,
+          description: response.description,
+          interestRate: response.interestRate,
+          maximumAmount: response.maximumAmount,
+          repaymentTenure: response.repaymentTenure,
+          eligibility: response.eligibility,
+          documentsRequired: response.documentsRequired
         };
       },
       (error) => {

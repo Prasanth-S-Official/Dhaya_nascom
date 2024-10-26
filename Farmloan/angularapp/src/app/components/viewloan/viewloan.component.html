@@ -39,10 +39,10 @@
       <tbody *ngIf="availableLoans.length > 0; else noRecords">
         <tr *ngFor="let loan of availableLoans; let i = index">
           <td>{{ i + 1 }}</td>
-          <td>{{ loan.LoanType }}</td>
-          <td>₹{{ loan.MaximumAmount }}</td>
-          <td>{{ loan.InterestRate }}%</td>
-          <td>{{ loan.RepaymentTenure }} months</td>
+          <td>{{ loan.loanType }}</td>
+          <td>₹{{ loan.maximumAmount }}</td>
+          <td>{{ loan.interestRate }}%</td>
+          <td>{{ loan.repaymentTenure }} months</td>
           <td>{{ loan.Eligibility }}</td>
           <td>{{ loan.DocumentsRequired }}</td>
           <td>{{ loan.Description }}</td>
