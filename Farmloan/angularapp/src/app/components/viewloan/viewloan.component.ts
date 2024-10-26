@@ -50,6 +50,7 @@ export class ViewloanComponent implements OnInit {
   }
 
   navigateToEditLoan(id: string) {
+    console.log("navtoedit",id);
     this.router.navigate(['/admin/editloan', id]);
   }
 
@@ -102,8 +103,8 @@ export class ViewloanComponent implements OnInit {
     if (searchLower === '') return this.availableLoans;
     return this.availableLoans.filter(
       (loan) =>
-        loan.LoanType.toLowerCase().includes(searchLower) ||
-        loan.Description.toLowerCase().includes(searchLower)
+        loan.loanType.toLowerCase().includes(searchLower) ||
+        loan.description.toLowerCase().includes(searchLower)
     );
   }
 }
