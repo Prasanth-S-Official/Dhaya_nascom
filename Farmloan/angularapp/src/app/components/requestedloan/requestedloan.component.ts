@@ -43,7 +43,7 @@ export class RequestedloanComponent implements OnInit {
   handleSearchChange(event: any): void {
     this.searchValue = event.target.value.toLowerCase();
     this.filteredLoans = this.loanRequests.filter((loan) =>
-      loan.Loan.LoanType.toLowerCase().includes(this.searchValue)
+      loan.loan.loanType.toLowerCase().includes(this.searchValue)
     );
   }
 
@@ -56,26 +56,26 @@ export class RequestedloanComponent implements OnInit {
         return true;
       } else {
         // Return only loans matching the selected status
-        return loan.LoanStatus === parseInt(this.statusFilter, 10);
+        return loan.loanStatus === parseInt(this.statusFilter, 10);
       }
     });
   }
 
   // Approve a loan application
   handleApprove(loanApplication: any): void {
-    loanApplication.LoanStatus = 1; // Status for Approved
+    loanApplication.loanStatus = 1; // Status for Approved
     this.updateLoanStatus(loanApplication);
   }
 
   // Reject a loan application
   handleReject(loanApplication: any): void {
-    loanApplication.LoanStatus = 2; // Status for Rejected
+    loanApplication.loanStatus = 2; // Status for Rejected
     this.updateLoanStatus(loanApplication);
   }
 
   // Update loan status via the LoanService
   updateLoanStatus(loanApplication: any): void {
-    this.loanService.updateLoanStatus(loanApplication.LoanApplicationId, loanApplication).subscribe(
+    this.loanService.updateLoanStatus(loanApplication.loanApplicationId, loanApplication).subscribe(
       (response) => {
         console.log('Loan status updated:', response);
         this.fetchData(); // Refresh data after status update
