@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { LoanService } from 'src/app/services/loan.service';
 import { Loan } from 'src/app/models/loan.model';
+import { LoanApplication } from 'src/app/models/loanapplication.model';
 
 @Component({
   selector: 'app-userviewloan',
@@ -19,7 +20,7 @@ export class UserviewloanComponent implements OnInit {
   page: number = 1;
   searchField: string = '';
   limit: number = 5;
-  appliedLoans: Loan[] = [];
+  appliedLoans: LoanApplication[] = [];
   loans: Loan[] = [];
 
   constructor(private router: Router, private loanService: LoanService) {}
@@ -92,7 +93,19 @@ export class UserviewloanComponent implements OnInit {
     if (isLoanApplied) {
       alert('Loan is already applied.');
     } else {
-      this.appliedLoans.push(loan); // Add the applied loan to the appliedLoans array
+      const newLoanApplication: LoanApplication = {
+        loanApplicationId: undefined,
+        userId: Number(localStorage.getItem('userId')), // Convert userId to number
+        loanId: loan.loanId,
+        submissionDate: new Date().toISOString().split('T')[0], // Set current date as submission date
+        loanStatus: 0, // Set default loan status to pending
+        farmLocation: '',
+        farmerAddress: '',
+        farmSizeInAcres: 0,
+        farmPurpose: '',
+        file: ''
+      };
+      this.appliedLoans.push(newLoanApplication); // Add the applied loan to the appliedLoans array
       localStorage.setItem('loanId', loan.loanId.toString()); // Store loanId in local storage
       this.router.navigate(['/user/loanapplicationform']);
     }
