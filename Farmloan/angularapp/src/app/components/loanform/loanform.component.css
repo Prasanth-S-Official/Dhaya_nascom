@@ -1,8 +1,39 @@
-/* loan-application-form.component.css */
+/* Enhancements for input styling with underline effect */
+input {
+  width: 95%;
+  padding: 8px;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  border: none; /* Remove all borders */
+  border-bottom: 2px solid #ccc; /* Add underline only */
+  border-radius: 0; /* Remove border-radius for a straight underline */
+  outline: none; /* Remove default outline on focus */
+  transition: border-color 0.3s; /* Smooth transition for focus effect */
+}
 
+input:focus {
+  border-bottom: 2px solid #3498db; /* Change color on focus */
+}
+
+/* Maintain consistency with other form elements */
+select {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 15px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/* Rest of the styles for layout and popups */
 .container {
   position: relative;
-  max-width: 600px;
+  max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -12,8 +43,8 @@
 }
 
 .button-container {
-  position: absolute; /* Add this line */
-  top: 20px; /* Adjust as needed */
+  position: absolute;
+  top: 20px;
   right: 20px;
   display: flex;
   justify-content: space-between;
@@ -26,7 +57,7 @@
 }
 
 button {
-  padding: 5px;
+  padding: 10px;
   background-color: #3498db;
   color: #fff;
   border: none;
@@ -34,62 +65,10 @@ button {
   cursor: pointer;
 }
 
-h2 {
-  margin: 0;
-}
-
-form {
-  margin-top: 20px;
-}
-
-label {
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 95%;
-  padding: 8px;
-  margin-top: 2px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.error {
-  color: #e74c3c;
-  font-size: 15px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
-
 .submit-button {
   background-color: #2ecc71;
   color: #fff;
   margin-top: 10px;
-}
-
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  margin-bottom: 10px;
-}
-
-.form-group input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-group .error-message {
-  color: red;
-  margin-top: 5px;
 }
 
 .success-popup {
@@ -121,7 +100,7 @@ input {
 }
 
 .blur {
-  filter: blur(4px); /* Add a blur effect when success popup is displayed */
+  filter: blur(4px);
 }
 
 h2 {
