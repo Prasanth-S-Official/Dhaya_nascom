@@ -89,25 +89,21 @@ DROP TABLE IF EXISTS `loan_application`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `loan_application` (
   `loan_application_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `loan_status` int(11) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `course` varchar(255) DEFAULT NULL,
-  `image` longblob NOT NULL,
-  `institution` varchar(255) DEFAULT NULL,
-  `submission_date` date DEFAULT NULL,
-  `tuition_fee` double NOT NULL,
-  `loan_id` bigint(20) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
   `farm_location` varchar(255) DEFAULT NULL,
   `farm_purpose` varchar(255) DEFAULT NULL,
   `farm_size_in_acres` double NOT NULL,
   `farmer_address` varchar(255) DEFAULT NULL,
+  `image` longblob NOT NULL,
+  `loan_status` int(11) NOT NULL,
+  `submission_date` date DEFAULT NULL,
+  `loan_id` bigint(20) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`loan_application_id`),
   KEY `FKkrn3iq83xftqmisca4n75sbml` (`loan_id`),
   KEY `FK9mvuefv6gd4ggkfkcooi087vd` (`user_id`),
   CONSTRAINT `FK9mvuefv6gd4ggkfkcooi087vd` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKkrn3iq83xftqmisca4n75sbml` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`loan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +112,7 @@ CREATE TABLE `loan_application` (
 
 LOCK TABLES `loan_application` WRITE;
 /*!40000 ALTER TABLE `loan_application` DISABLE KEYS */;
+INSERT INTO `loan_application` VALUES (1,'CBE','For Banana',45,'2/10 Kinathukadavu','data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExIVFRUXGB4bGBgYGRoeHRsYHhcfGh0aGiAaHSggHRolGx4dITEiJykrLi8uGh8zODMtNygtLisBCgoKDg0OGxAQGi0mICUtMi8rLTAtLS0vLS0tLS0vLS0vLy0vLTUtLi0tLS0tNS0SoA//Z',0,'2024-10-27',1,3);
 /*!40000 ALTER TABLE `loan_application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-27 16:29:18
+-- Dump completed on 2024-10-27 16:44:18

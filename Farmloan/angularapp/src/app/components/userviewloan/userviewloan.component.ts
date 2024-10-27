@@ -117,7 +117,7 @@ export class UserviewloanComponent implements OnInit {
 
   isLoanApplied(loan: Loan): boolean {
     return this.appliedLoans.some(
-      (appliedLoan) => appliedLoan.loanId === loan.loanId
+      (appliedLoan) => appliedLoan.loan.loanId === loan.loanId
     );
   }
 
