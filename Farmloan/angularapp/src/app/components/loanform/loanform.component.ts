@@ -25,7 +25,7 @@ export class LoanformComponent implements OnInit {
     this.loanForm = this.fb.group({
       farmLocation: ['', Validators.required],      // Farm location field
       farmerAddress: ['', Validators.required],     // Farmer address field
-      farmSizeInAcres: ['', Validators.required],   // Farm size field
+      farmSizeInAcres: [0, Validators.required],   // Farm size field, updated to default to 0
       farmPurpose: ['', Validators.required],       // Farm purpose field
       file: [null, Validators.required],            // File input
     });
@@ -37,15 +37,15 @@ export class LoanformComponent implements OnInit {
     if (this.loanForm.valid) {
       const formData = this.loanForm.value;
       const requestObject: LoanApplication = {
-        UserId: Number(localStorage.getItem('userId')),
-        LoanId: Number(localStorage.getItem('loanId')),
-        SubmissionDate: new Date().toISOString(),
-        LoanStatus: 0, // Default to pending status
-        FarmLocation: formData.farmLocation,
-        FarmerAddress: formData.farmerAddress,
-        FarmSizeInAcres: Number(formData.farmSizeInAcres),
-        FarmPurpose: formData.farmPurpose,
-        File: formData.file, // Base64-encoded file
+        userId: Number(localStorage.getItem('userId')),
+        loanId: Number(localStorage.getItem('loanId')),
+        submissionDate: new Date().toISOString().split('T')[0], // Set current date as submission date
+        loanStatus: 0, // Default to pending status
+        farmLocation: formData.farmLocation,
+        farmerAddress: formData.farmerAddress,
+        farmSizeInAcres: Number(formData.farmSizeInAcres),
+        farmPurpose: formData.farmPurpose,
+        file: formData.file, // Base64-encoded file
       };
 
       this.loanService.addLoanApplication(requestObject).subscribe(
