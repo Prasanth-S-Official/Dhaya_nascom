@@ -1,4 +1,4 @@
-<!-- applied-loans.component.html -->
+<app-usernav></app-usernav>
 <div class="page-content" [ngClass]="{ blur: showDeletePopup }">
 
   <h1>Applied Loans</h1>
@@ -26,13 +26,13 @@
     <tbody *ngIf="filteredLoans.length > 0; else noRecords">
       <tr *ngFor="let loan of filteredLoans; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ loan.Loan.LoanType }}</td>
-        <td>{{ loan.SubmissionDate | date : "yyyy-MM-dd" }}</td>
+        <td>{{ loan.loan.loanType }}</td>
+        <td>{{ loan.submissionDate | date : "yyyy-MM-dd" }}</td>
         <td>
           {{
-            loan.LoanStatus === 0
+            loan.loanStatus === 0
               ? "Pending"
-              : loan.LoanStatus === 1
+              : loan.loanStatus === 1
               ? "Approved"
               : "Rejected"
           }}
