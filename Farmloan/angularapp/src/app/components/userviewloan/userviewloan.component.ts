@@ -1,7 +1,9 @@
+// userviewloan.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { LoanService } from 'src/app/services/loan.service';
+import { Loan } from 'src/app/models/loan.model';
 
 @Component({
   selector: 'app-userviewloan',
@@ -10,15 +12,15 @@ import { LoanService } from 'src/app/services/loan.service';
 })
 export class UserviewloanComponent implements OnInit {
 
-  availableLoans: any[] = [];
-  filteredLoans = [];
+  availableLoans: Loan[] = [];
+  filteredLoans: Loan[] = [];
   searchValue: string = '';
   sortValue: number = 0;
   page: number = 1;
-  searchField: string = '';  // Declaring searchField here
+  searchField: string = '';
   limit: number = 5;
-  appliedLoans: any[] = [];
-  loans = [];
+  appliedLoans: Loan[] = [];
+  loans: Loan[] = [];
 
   constructor(private router: Router, private loanService: LoanService) {}
 
@@ -35,15 +37,15 @@ export class UserviewloanComponent implements OnInit {
     }).subscribe(
       ({ appliedLoans, allLoans }) => {
         this.appliedLoans = appliedLoans;
-        this.availableLoans = allLoans.map((loan: any) => ({
-          LoanId: loan.LoanId,
-          LoanType: loan.LoanType,
-          Description: loan.Description,
-          InterestRate: loan.InterestRate,
-          MaximumAmount: loan.MaximumAmount,
-          RepaymentTenure: loan.RepaymentTenure,       // New field
-          Eligibility: loan.Eligibility,               // New field
-          DocumentsRequired: loan.DocumentsRequired    // New field
+        this.availableLoans = allLoans.map((loan: Loan) => ({
+          loanId: loan.loanId,
+          loanType: loan.loanType,
+          description: loan.description,
+          interestRate: loan.interestRate,
+          maximumAmount: loan.maximumAmount,
+          repaymentTenure: loan.repaymentTenure,
+          eligibility: loan.eligibility,
+          documentsRequired: loan.documentsRequired
         }));
         this.filteredLoans = this.availableLoans;
         console.log('Applied loans:', this.appliedLoans);
@@ -65,8 +67,8 @@ export class UserviewloanComponent implements OnInit {
     if (searchLower === '') return this.availableLoans;
     return this.availableLoans.filter(
       (loan) =>
-        loan.LoanType.toLowerCase().includes(searchLower) ||
-        loan.Description.toLowerCase().includes(searchLower)
+        loan.loanType.toLowerCase().includes(searchLower) ||
+        loan.description.toLowerCase().includes(searchLower)
     );
   }
 
@@ -75,23 +77,23 @@ export class UserviewloanComponent implements OnInit {
 
     this.filteredLoans = [...this.filteredLoans].sort((a, b) => {
       if (order === 1) {
-        return a.InterestRate - b.InterestRate;
+        return a.interestRate - b.interestRate;
       } else if (order === -1) {
-        return b.InterestRate - a.InterestRate;
+        return b.interestRate - a.interestRate;
       } else {
         return 0;
       }
     });
   }
 
-  handleApplyClick(loan: any) {
+  handleApplyClick(loan: Loan) {
     const isLoanApplied = this.isLoanApplied(loan);
 
     if (isLoanApplied) {
       alert('Loan is already applied.');
     } else {
       this.appliedLoans.push(loan); // Add the applied loan to the appliedLoans array
-      localStorage.setItem('loanId', loan.LoanId); // Store loanId in local storage
+      localStorage.setItem('loanId', loan.loanId.toString()); // Store loanId in local storage
       this.router.navigate(['/user/loanapplicationform']);
     }
   }
@@ -100,9 +102,9 @@ export class UserviewloanComponent implements OnInit {
     return Math.ceil(this.filteredLoans.length / this.limit);
   }
 
-  isLoanApplied(loan: any): boolean {
+  isLoanApplied(loan: Loan): boolean {
     return this.appliedLoans.some(
-      (appliedLoan) => appliedLoan.LoanId === loan.LoanId
+      (appliedLoan) => appliedLoan.loanId === loan.loanId
     );
   }
 

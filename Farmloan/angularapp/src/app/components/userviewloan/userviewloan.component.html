@@ -1,3 +1,4 @@
+// userviewloan.component.html
 <div>
   <div id="loanHomeBody">
     <h1>Available Loans</h1>
@@ -23,22 +24,22 @@
           <th>Loan Description</th>
           <th>Interest Rate</th>
           <th>Maximum Amount</th>
-          <th>Repayment Tenure (Months)</th>  <!-- New Field -->
-          <th>Eligibility</th>                 <!-- New Field -->
-          <th>Documents Required</th>          <!-- New Field -->
+          <th>Repayment Tenure (Months)</th>
+          <th>Eligibility</th>
+          <th>Documents Required</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody *ngIf="filteredLoans.length; else noRecords">
-        <tr *ngFor="let loan of filteredLoans, let i = index">
+        <tr *ngFor="let loan of filteredLoans; let i = index">
           <td>{{ i + 1 }}</td>
-          <td>{{ loan.LoanType }}</td>
-          <td>{{ loan.Description }}</td>
-          <td>{{ loan.InterestRate }}%</td>
-          <td>₹{{ loan.MaximumAmount }}</td>
-          <td>{{ loan.RepaymentTenure }}</td>     <!-- Displaying new field -->
-          <td>{{ loan.Eligibility }}</td>         <!-- Displaying new field -->
-          <td>{{ loan.DocumentsRequired }}</td>   <!-- Displaying new field -->
+          <td>{{ loan.loanType }}</td>
+          <td>{{ loan.description }}</td>
+          <td>{{ loan.interestRate }}%</td>
+          <td>₹{{ loan.maximumAmount }}</td>
+          <td>{{ loan.repaymentTenure }}</td>
+          <td>{{ loan.eligibility }}</td>
+          <td>{{ loan.documentsRequired }}</td>
           <td>
             <button
               id="greenButton"
