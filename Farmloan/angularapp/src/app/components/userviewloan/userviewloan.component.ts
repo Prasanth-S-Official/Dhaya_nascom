@@ -115,11 +115,18 @@ export class UserviewloanComponent implements OnInit {
     return Math.ceil(this.filteredLoans.length / this.limit);
   }
 
+  // isLoanApplied(loan: Loan): boolean {
+  //   return this.appliedLoans.some(
+  //     (appliedLoan) => appliedLoan.loanId === loan.loanId
+  //   );
+  // }
+
   isLoanApplied(loan: Loan): boolean {
     return this.appliedLoans.some(
-      (appliedLoan) => appliedLoan.loan.loanId === loan.loanId
+      (appliedLoan) => (appliedLoan as any).loan?.loanId === loan.loanId
     );
   }
+  
 
   navigateToViewAppliedLoan() {
     this.router.navigate(['/appliedloan']);

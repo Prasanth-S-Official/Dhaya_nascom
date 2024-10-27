@@ -103,7 +103,7 @@ CREATE TABLE `loan_application` (
   KEY `FK9mvuefv6gd4ggkfkcooi087vd` (`user_id`),
   CONSTRAINT `FK9mvuefv6gd4ggkfkcooi087vd` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKkrn3iq83xftqmisca4n75sbml` FOREIGN KEY (`loan_id`) REFERENCES `loan` (`loan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,6 @@ CREATE TABLE `loan_application` (
 
 LOCK TABLES `loan_application` WRITE;
 /*!40000 ALTER TABLE `loan_application` DISABLE KEYS */;
-INSERT INTO `loan_application` VALUES (1,'CBE','For Banana',45,'2/10 Kinathukadavu','data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExIVFRUXGB4bGBgYGRoeHRsYHhcfGh0aGiAaHSggHRolGx4dITEiJykrLi8uGh8zODMtNygtLisBCgoKDg0OGxAQGi0mICUtMi8rLTAtLS0vLS0tLS0vLS0vLy0vLTUtLi0tLS0tNS0SoA//Z',0,'2024-10-27',1,3);
 /*!40000 ALTER TABLE `loan_application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-27 16:44:18
+-- Dump completed on 2024-10-27 16:59:18

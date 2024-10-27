@@ -36,6 +36,8 @@ export class LoanformComponent implements OnInit {
   onSubmit(): void {
     if (this.loanForm.valid) {
       const formData = this.loanForm.value;
+  
+      // Create a LoanApplication object using the current model structure
       const requestObject: LoanApplication = {
         userId: Number(localStorage.getItem('userId')),
         loanId: Number(localStorage.getItem('loanId')),
@@ -45,10 +47,27 @@ export class LoanformComponent implements OnInit {
         farmerAddress: formData.farmerAddress,
         farmSizeInAcres: Number(formData.farmSizeInAcres),
         farmPurpose: formData.farmPurpose,
-        file: formData.file, // Base64-encoded file
+        file: formData.file // Base64-encoded file
       };
-
-      this.loanService.addLoanApplication(requestObject).subscribe(
+  
+      // Transform requestObject to match the required nested structure before sending to the API
+      const transformedRequestObject = {
+        user: {
+          userId: requestObject.userId,
+        },
+        loan: {
+          loanId: requestObject.loanId,
+        },
+        submissionDate: requestObject.submissionDate,
+        loanStatus: requestObject.loanStatus,
+        farmLocation: requestObject.farmLocation,
+        farmerAddress: requestObject.farmerAddress,
+        farmSizeInAcres: requestObject.farmSizeInAcres,
+        farmPurpose: requestObject.farmPurpose,
+        file: requestObject.file,
+      };
+  
+      this.loanService.addLoanApplication(transformedRequestObject).subscribe(
         (response) => {
           console.log('Response:', response);
           this.successPopup = true;
@@ -62,6 +81,7 @@ export class LoanformComponent implements OnInit {
       this.errorMessage = "All fields are required";
     }
   }
+  
 
   handleFileChange(event: any): void {
     const file = event.target.files[0];
