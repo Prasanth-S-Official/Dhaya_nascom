@@ -54,7 +54,8 @@ updateLoan(id: string, requestObject: Loan): Observable<Loan> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.get<LoanApplication[]>(`${this.apiUrl}/api/loan-application/user/${userId}`, { headers });
+    return this.http.get<LoanApplication[]>(`${this.apiUrl}/api/loanapplication/user/${userId}`, { headers });
+    // /api/loanapplication/user/{userId}
 }
 
   deleteLoanApplication(loanId: string): Observable<void> {
@@ -62,7 +63,7 @@ updateLoan(id: string, requestObject: Loan): Observable<Loan> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.delete<void>(`${this.apiUrl}/api/loan-application/${loanId}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}/api/loanapplication/${loanId}`, { headers });
   }
 
 
@@ -70,7 +71,7 @@ updateLoan(id: string, requestObject: Loan): Observable<Loan> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.post<LoanApplication>(`${this.apiUrl}/api/loan-application`, data, { headers });
+    return this.http.post<LoanApplication>(`${this.apiUrl}/api/loanapplication`, data, { headers });
 }
 
 
@@ -78,7 +79,7 @@ getAllLoanApplications(): Observable<LoanApplication[]> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.get<LoanApplication[]>(`${this.apiUrl}/api/loan-application`, { headers });
+    return this.http.get<LoanApplication[]>(`${this.apiUrl}/api/loanapplication`, { headers });
 }
 
 updateLoanStatus(id: string, loanApplication: LoanApplication): Observable<LoanApplication> {
@@ -86,6 +87,6 @@ updateLoanStatus(id: string, loanApplication: LoanApplication): Observable<LoanA
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
-    return this.http.put<LoanApplication>(`${this.apiUrl}/api/loan-application/${id}`, loanApplication, { headers });
+    return this.http.put<LoanApplication>(`${this.apiUrl}/api/loanapplication/${id}`, loanApplication, { headers });
 }
 }
