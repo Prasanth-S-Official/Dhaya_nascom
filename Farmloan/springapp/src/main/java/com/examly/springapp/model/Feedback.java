@@ -23,9 +23,6 @@ public class Feedback {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
   
-  
-
-
     public Feedback() {
     }
   
