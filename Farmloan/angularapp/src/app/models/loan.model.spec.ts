@@ -16,8 +16,6 @@ describe('Loan Model', () => {
 
     expect(loan).toBeTruthy();
     expect(loan.loanType).toBe('Home Loan');
-
-    
   });
 
 });
