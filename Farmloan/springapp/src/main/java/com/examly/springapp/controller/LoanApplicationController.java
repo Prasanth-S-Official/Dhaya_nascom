@@ -23,20 +23,7 @@ public class LoanApplicationController {
     @Autowired
     private LoanApplicationServiceImpl loanApplicationServiceImpl;
 
-    // @PostMapping("/api/loanapplication")
-    // public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication)
-    // {
-    //     LoanApplication newLoanApplication = loanApplicationServiceImpl.addLoanApplication(loanApplication);
-    //     if(newLoanApplication!=null)
-    //     {
 
-    //         return ResponseEntity.status(HttpStatus.CREATED).body(newLoanApplication);
-    //     }
-    //     else
-    //     {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-    //     }
-    // }
 
     @PostMapping("/api/loanapplication")
     public ResponseEntity<LoanApplication> addLoanApplication(@RequestBody LoanApplication loanApplication) {
