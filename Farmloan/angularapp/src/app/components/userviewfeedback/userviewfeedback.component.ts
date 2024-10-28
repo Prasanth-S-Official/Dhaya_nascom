@@ -6,19 +6,18 @@ import { FeedbackService } from 'src/app/services/feedback.service';
   templateUrl: './userviewfeedback.component.html',
   styleUrls: ['./userviewfeedback.component.css']
 })
-
 export class UserviewfeedbackComponent implements OnInit {
   feedbacks: any[] = [];
   showDeletePopup = false;
-  feedbackToDelete: string;
+  feedbackToDelete: number;
 
   constructor(private feedbackService: FeedbackService) { }
 
   ngOnInit(): void {
-    this.getAllLoansByUserId();
+    this.getAllFeedbacksByUserId();
   }
 
-  getAllLoansByUserId() {
+  getAllFeedbacksByUserId() {
     const userId = localStorage.getItem('userId');
     this.feedbackService.getAllfeedbacksByUserId(userId).subscribe(
       (data: any) => {
@@ -31,12 +30,12 @@ export class UserviewfeedbackComponent implements OnInit {
     );
   }
 
-  deleteFeedback(feedbackId: string) {
+  deleteFeedback(feedbackId: number) {
     this.feedbackService.deleteFeedback(feedbackId).subscribe(
       (response) => {
         console.log('Feedback deleted:', response);
         // Refresh the feedbacks
-        this.getAllLoansByUserId();
+        this.getAllFeedbacksByUserId();
       },
       (error) => {
         console.error('Error:', error);
@@ -44,7 +43,7 @@ export class UserviewfeedbackComponent implements OnInit {
     );
   }
 
-  openDeletePopup(feedbackId: string) {
+  openDeletePopup(feedbackId: number) {
     this.showDeletePopup = true;
     this.feedbackToDelete = feedbackId;
   }

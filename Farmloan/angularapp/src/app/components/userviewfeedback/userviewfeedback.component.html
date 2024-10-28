@@ -1,5 +1,5 @@
 <app-usernav></app-usernav>
-<div class="feedback-table-container"  >
+<div class="feedback-table-container">
   <h1>My Feedback</h1>
   <hr>
   <table class="feedback-table" [ngClass]="{ blur: showDeletePopup }">
@@ -13,8 +13,8 @@
     <tbody>
       <tr *ngFor="let feedback of feedbacks; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ feedback.FeedbackText }}</td>
-        <td><button class="delete-button" (click)="openDeletePopup(feedback.FeedbackId)">Delete</button></td>
+        <td>{{ feedback.feedbackText }}</td>
+        <td><button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button></td>
       </tr>
     </tbody>
   </table>

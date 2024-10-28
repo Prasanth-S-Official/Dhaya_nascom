@@ -12,7 +12,7 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
-  sendFeedback(feedback: Feedback): Observable<Feedback> {
+  sendFeedback(feedback: any): Observable<Feedback> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
