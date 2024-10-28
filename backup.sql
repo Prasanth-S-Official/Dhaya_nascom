@@ -154,7 +154,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$dvnXcHQNPLIHKpDiXslcaO5B5TDtmYxaoojD3eUo5lfN9cmaqgKlC','Admin','admin'),(2,'user@gmail.com','5551234567','$2a$10$pacS5pMN8MuThzSBEPrtuOGbSG..yvPsQXUv2oAMlTbaNmanAT2A.','User','user'),(3,'duser@gmail.com','1234567890','$2a$10$mYs5XXljs88OQHlUKbDDVuPhxg5TYLctu5Js1j9NQ2LcdngGv4gsm','User','demouser');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$dvnXcHQNPLIHKpDiXslcaO5B5TDtmYxaoojD3eUo5lfN9cmaqgKlC','Admin','admin'),(2,'user@gmail.com','5551234567','$2a$10$pacS5pMN8MuThzSBEPrtuOGbSG..yvPsQXUv2oAMlTbaNmanAT2A.','User','user'),(3,'duser@gmail.com','1234567890','$2a$10$mYs5XXljs88OQHlUKbDDVuPhxg5TYLctu5Js1j9NQ2LcdngGv4gsm','User','demouser'),(4,'duser2@gmail.com','9876543213','$2a$10$aOZlh2UV1PtmfxwgZfOY3uuYRHAN0udRNgzhb9e083xuUeEIDdRQy','User','demouser2');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-28 17:45:23
+-- Dump completed on 2024-10-28 17:58:44
