@@ -15,12 +15,9 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
 
-    
 
     private String feedbackText;
     private LocalDate date;
-
-
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
