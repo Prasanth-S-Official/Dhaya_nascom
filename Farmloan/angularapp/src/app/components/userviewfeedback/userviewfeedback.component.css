@@ -1,14 +1,13 @@
 /* Container Styling */
 .feedback-table-container {
   margin-top: 20px;
-  max-width: 900px;
   width: 90%;
-  margin: auto ;
+  margin: 30px auto ;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .feedback-table-heading {
@@ -47,7 +46,7 @@ h1 {
 }
 
 .feedback-table th {
-  background-color: #3498db;
+  background-color: #3276a6;
   color: white;
   font-weight: 600;
 }
@@ -94,6 +93,7 @@ h1 {
 .cancel-delete-button {
   background-color: #6c757d;
   color: white;
+  margin-left: 20px;
 }
 
 .cancel-delete-button:hover {
@@ -107,7 +107,7 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  max-width: 400px;
+  max-width: 300px;
   background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
@@ -125,7 +125,7 @@ h1 {
 /* Horizontal Rule Styling */
 hr {
   border: none;
-  border-top: 2px solid #3498db;
+  border-top: 2px solid #3276a6;
   overflow: visible;
   text-align: center;
   height: 8px;

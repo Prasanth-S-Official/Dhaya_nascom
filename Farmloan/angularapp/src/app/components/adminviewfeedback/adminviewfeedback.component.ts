@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
-
 @Component({
   selector: 'app-adminviewfeedback',
   templateUrl: './adminviewfeedback.component.html',
   styleUrls: ['./adminviewfeedback.component.css']
 })
-
 export class AdminviewfeedbackComponent implements OnInit {
   feedbacks = [];
   showProfilePopup = false;
   selectedUser = null;
-
 
   constructor(private feedbackService: FeedbackService) { }
 
@@ -29,7 +26,7 @@ export class AdminviewfeedbackComponent implements OnInit {
   }
 
   showProfile(user): void {
-    this.selectedUser = user;
+    this.selectedUser = user; // Updated to use user directly
     this.showProfilePopup = true;
   }
 
