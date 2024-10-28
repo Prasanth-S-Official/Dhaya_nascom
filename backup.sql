@@ -47,7 +47,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,'2024-10-28','This is a feedback message.',1),(2,'2024-10-28','This is a feedback message 2',1),(3,'2024-10-28','This is a feedback message 2',3),(4,'2024-10-28','This is a feedback message 2',3),(5,'2024-10-28','sxsxsxsxsx',3);
+INSERT INTO `feedback` VALUES (1,'2024-10-28','This is a feedback message.',1),(2,'2024-10-28','This is a feedback message 2',1);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-28  7:02:21
+-- Dump completed on 2024-10-28  7:17:21

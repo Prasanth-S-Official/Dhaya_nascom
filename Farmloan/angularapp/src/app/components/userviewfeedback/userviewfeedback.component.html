@@ -10,7 +10,7 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="feedbacks.length > 0; else noData">
       <tr *ngFor="let feedback of feedbacks; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ feedback.feedbackText }}</td>
@@ -18,6 +18,13 @@
       </tr>
     </tbody>
   </table>
+  <ng-template #noData>
+    <tbody>
+      <tr>
+        <td colspan="3" class="no-records-cell">Oops! No Data Found</td>
+      </tr>
+    </tbody>
+  </ng-template>
 </div>
 
 <div *ngIf="showDeletePopup" class="delete-popup">

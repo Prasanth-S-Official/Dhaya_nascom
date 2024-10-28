@@ -12,7 +12,7 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
-  sendFeedback(feedback: any): Observable<Feedback> {
+  sendFeedback(feedback: Feedback): Observable<Feedback> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
@@ -26,7 +26,7 @@ export class FeedbackService {
     return this.http.get<Feedback[]>(`${this.apiUrl}/api/feedback/user/${userId}`, { headers });
   }
 
-  deleteFeedback(feedbackId: string): Observable<void> {
+  deleteFeedback(feedbackId: number): Observable<void> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
