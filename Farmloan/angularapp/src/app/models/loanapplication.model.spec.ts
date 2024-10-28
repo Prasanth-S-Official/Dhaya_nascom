@@ -4,11 +4,11 @@ describe('LoanApplication Model', () => {
 
   fit('Frontend_LoanApplication_model_should_create_an_instance', () => {
     // Create a sample LoanApplication object
-    const loanApplication: LoanApplication as any = {
+    const loanApplication: LoanApplication = {
       loanApplicationId: 1,
       userId: 123,
       loanId: 456,
-      submissionDatee: '2024-07-15',
+      submissionDate: '2024-07-15',
       loanStatus: 1,
       farmLocation: 'Farmville, USA',
       farmerAddress: '123 Main St, Anytown, USA',
