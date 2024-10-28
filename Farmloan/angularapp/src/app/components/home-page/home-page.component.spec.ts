@@ -27,12 +27,12 @@ describe('HomePageComponent', () => {
 
   fit('Frontend_should_display_title_fitnessapp_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('FitnessApp');
+    expect(compiled.textContent).toContain('FarmAid');
   });
 
   fit('Frontend_should_display_content_paragraph_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('Your journey to better farming begins with us');
+    expect(compiled.textContent).toContain('Your journey to financial growth begins with us');
   });
 
   fit('Frontend_should_display_contact_us_section_in_home_page_component', () => {
