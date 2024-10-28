@@ -1,10 +1,9 @@
-import { User } from './user.model';
+import { User } from "./user.model";
 
 describe('User Model', () => {
 
   fit('Frontend_User_model_should_create_an_instance', () => {
-    // Create a sample User object
-    const user: User = {
+       const user: User = {
       userId: 1,
       email: 'user@example.com',
       password: 'password123',

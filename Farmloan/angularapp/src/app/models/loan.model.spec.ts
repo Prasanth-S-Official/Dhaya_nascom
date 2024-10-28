@@ -1,5 +1,4 @@
-import { Loan } from './loan.model';
-
+import { Loan } from "./loan.model";
 describe('Loan Model', () => {
 
   fit('Frontend_Loan_model_should_create_an_instance', () => {
