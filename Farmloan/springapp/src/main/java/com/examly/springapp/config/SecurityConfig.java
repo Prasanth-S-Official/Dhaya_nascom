@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/loanapplication/{loanapplicationId}").hasRole("User")
                 .requestMatchers(HttpMethod.PUT, "/api/feedback/{feedbackId}").hasAnyRole("Admin", "User")
                 .requestMatchers(HttpMethod.DELETE, "/api/feedback/{feedbackId}").hasRole("User")
-                .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("User")
+                .requestMatchers(HttpMethod.POST, "/api/feedback").hasRole("User")
                 .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasRole("User")
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
