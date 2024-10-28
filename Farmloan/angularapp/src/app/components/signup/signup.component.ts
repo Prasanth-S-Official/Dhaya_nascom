@@ -57,22 +57,27 @@ export class SignupComponent {
   }
 
   async handleSubmit() {
-    const requiredFields = ['username', 'email', 'mobileNumber', 'password', 'confirmPassword', 'userRole'];
-    
-    // Check all required fields
+    const requiredFields = ['username', 'email', 'mobileNumber', 'password', 'userRole'];
+  
+    // Check required fields in formData
     requiredFields.forEach(field => {
-      if (field !== 'confirmPassword' && (!this.formData[field] || this.formData[field].trim() === '')) {
+      if (!this.formData[field] || this.formData[field].trim() === '') {
         this.errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
-      } else if (field === 'confirmPassword' && this.confirmPassword.trim() === '') {
-        this.errors[field] = 'Confirm Password is required';
       } else {
         this.errors[field] = '';
       }
     });
-
-    // Validate field values (for confirmPassword)
-    this.validateField('confirmPassword', this.confirmPassword);
-
+  
+    // Validate confirmPassword separately
+    if (!this.confirmPassword.trim()) {
+      this.errors.confirmPassword = 'Confirm Password is required';
+    } else if (this.confirmPassword !== this.formData.password) {
+      this.errors.confirmPassword = 'Passwords do not match';
+    } else {
+      this.errors.confirmPassword = '';
+    }
+  
+    // Check if any errors exist before submitting
     const hasErrors = Object.values(this.errors).some(error => error !== '');
     if (!hasErrors) {
       try {
@@ -80,13 +85,15 @@ export class SignupComponent {
         if (response) {
           this.successPopup = true;
         } else {
-          this.error = "Something went wrong, Please try with different data";
+          this.error = "Something went wrong, please try with different data.";
         }
       } catch (error) {
-        this.error = "Something went wrong, Please try with different data";
+        this.error = "Something went wrong, please try with different data.";
       }
     }
   }
+  
+  
 
   handleSuccessMessage() {
     this.successPopup = false;

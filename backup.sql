@@ -77,7 +77,7 @@ CREATE TABLE `loan` (
 
 LOCK TABLES `loan` WRITE;
 /*!40000 ALTER TABLE `loan` DISABLE KEYS */;
-INSERT INTO `loan` VALUES (1,'Loan for purchasing or constructing a house','Proof of income, identity, and property details','Minimum annual income of $50,000 and good credit score',3.5,'Home Loan',500000,50),(2,'best for Car around 22 lakhs','Proof of income, identity','Minimum annual income $59000',12,'Car Loan',1200000,36);
+INSERT INTO `loan` VALUES (1,'Loan for purchasing or constructing a farm house','Proof of income, identity, and property details','Minimum annual income of $50,000 and good credit score',3.5,'House Loan',500000,50),(2,'Loan for Cattle Shed','Proof of income, identity','Minimum annual income $59000',12,'Shed Loan',1200000,36);
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-28 17:30:22
+-- Dump completed on 2024-10-28 17:45:23
