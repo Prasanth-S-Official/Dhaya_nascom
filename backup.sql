@@ -77,7 +77,7 @@ CREATE TABLE `loan` (
 
 LOCK TABLES `loan` WRITE;
 /*!40000 ALTER TABLE `loan` DISABLE KEYS */;
-INSERT INTO `loan` VALUES (1,'Loan for purchasing or constructing a farm house','Proof of income, identity, and property details','Minimum annual income of $50,000 and good credit score',3.5,'House Loan',500000,50),(2,'Loan for Cattle Shed','Proof of income, identity','Minimum annual income $59000',12,'Shed Loan',1200000,36);
+INSERT INTO `loan` VALUES (1,'Loan for purchasing or constructing a farm house','Proof of income, identity, and property details','Minimum annual income of $50,000 and good credit score',3.5,'House Loan',500000,50),(2,'Loan for Cattle Shed','Proof of income, identity','Minimum annual income $59000',12,'Shed Loan',1200000,36),(53,'Demo description','demo documents','demo eligibility',11,'Demo loan 1',280000,36);
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `loan_seq` (
 
 LOCK TABLES `loan_seq` WRITE;
 /*!40000 ALTER TABLE `loan_seq` DISABLE KEYS */;
-INSERT INTO `loan_seq` VALUES (101);
+INSERT INTO `loan_seq` VALUES (151);
 /*!40000 ALTER TABLE `loan_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-29  0:11:16
+-- Dump completed on 2024-10-29  0:26:17
