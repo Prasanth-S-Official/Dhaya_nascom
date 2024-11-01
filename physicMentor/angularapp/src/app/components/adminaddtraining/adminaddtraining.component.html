@@ -1,0 +1,118 @@
+<div>
+    <div class="training-form-container" [ngClass]="{ blur: successPopup }">
+      <h2>Create New Training</h2>
+      <hr>
+      <form #trainingForm="ngForm" (ngSubmit)="onSubmit(trainingForm)">
+        <label for="TrainingName">Training Name<span class="required">*</span></label>
+        <input
+          type="text"
+          name="TrainingName"
+          [(ngModel)]="formData.TrainingName"
+          placeholder="Training Name"
+          required
+          #TrainingName="ngModel"
+          (change)="handleChange($event, 'TrainingName')"
+        />
+        <div class="error" *ngIf="TrainingName.invalid && TrainingName.touched">*Training Name is required</div>
+  
+        <label for="Description">Description<span class="required">*</span></label>
+        <input
+          type="text"
+          name="Description"
+          [(ngModel)]="formData.Description"
+          placeholder="Training Description"
+          required
+          #Description="ngModel"
+          (change)="handleChange($event, 'Description')"
+        />
+        <div class="error" *ngIf="Description.invalid && Description.touched">*Description is required</div>
+  
+        <label for="TrainerName">Trainer Name<span class="required">*</span></label>
+        <input
+          type="text"
+          name="TrainerName"
+          [(ngModel)]="formData.TrainerName"
+          placeholder="Trainer Name"
+          required
+          #TrainerName="ngModel"
+          (change)="handleChange($event, 'TrainerName')"
+        />
+        <div class="error" *ngIf="TrainerName.invalid && TrainerName.touched">*Trainer Name is required</div>
+  
+        <label for="Location">Location<span class="required">*</span></label>
+        <input
+          type="text"
+          name="Location"
+          [(ngModel)]="formData.Location"
+          placeholder="Location"
+          required
+          #Location="ngModel"
+          (change)="handleChange($event, 'Location')"
+        />
+        <div class="error" *ngIf="Location.invalid && Location.touched">*Location is required</div>
+  
+        <label for="IsIndoor">Indoor/Outdoor<span class="required">*</span></label>
+        <select
+          name="IsIndoor"
+          [(ngModel)]="formData.IsIndoor"
+          required
+          #IsIndoor="ngModel"
+          (change)="handleChange($event, 'IsIndoor')"
+        >
+          <option [ngValue]="true">Indoor</option>
+          <option [ngValue]="false">Outdoor</option>
+        </select>
+        <div class="error" *ngIf="IsIndoor.invalid && IsIndoor.touched">*Indoor/Outdoor information is required</div>
+  
+        <label for="Fee">Fee<span class="required">*</span></label>
+        <input
+          type="number"
+          name="Fee"
+          [(ngModel)]="formData.Fee"
+          placeholder="Fee"
+          required
+          #Fee="ngModel"
+          (change)="handleChange($event, 'Fee')"
+        />
+        <div class="error" *ngIf="Fee.invalid && Fee.touched">*Fee is required</div>
+  
+        <label for="FocusArea">Focus Area<span class="required">*</span></label>
+        <input
+          type="text"
+          name="FocusArea"
+          [(ngModel)]="formData.FocusArea"
+          placeholder="Focus Area"
+          required
+          #FocusArea="ngModel"
+          (change)="handleChange($event, 'FocusArea')"
+        />
+        <div class="error" *ngIf="FocusArea.invalid && FocusArea.touched">*Focus Area is required</div>
+  
+        <label for="PhysicalRequirements">Physical Requirements<span class="required">*</span></label>
+        <input
+          type="text"
+          name="PhysicalRequirements"
+          [(ngModel)]="formData.PhysicalRequirements"
+          placeholder="Physical Requirements"
+          required
+          #PhysicalRequirements="ngModel"
+          (change)="handleChange($event, 'PhysicalRequirements')"
+        />
+        <div class="error" *ngIf="PhysicalRequirements.invalid && PhysicalRequirements.touched">
+          *Physical Requirements are required
+        </div>
+  
+    
+  
+        <div *ngIf="errorMessage" class="error">*{{ errorMessage }}</div>
+  
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  
+    <div *ngIf="successPopup" class="success-popup">
+      <p>Successfully Added!</p>
+      <button (click)="handleSuccessMessage()">Ok</button>
+    </div>
+  </div>
+  

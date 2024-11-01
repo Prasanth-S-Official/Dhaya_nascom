@@ -1,0 +1,74 @@
+<div class="page-content" [ngClass]="{ blur: showModal }">
+    <h1>Training Requests for Approval</h1>
+    <hr>
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Training Name..."
+        [(ngModel)]="searchValue"
+        (input)="handleSearchChange($event)"
+      />
+      <label id="filter">
+        Filter by Status:
+        <select [(ngModel)]="statusFilter" (change)="handleFilterChange($event)">
+          <option value="-1">All</option>
+          <option value="0">Pending</option>
+          <option value="1">Approved</option>
+          <option value="2">Rejected</option>
+        </select>
+      </label>
+    </div>
+  
+    <!-- Training Requests Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Username</th>
+          <th>Training Name</th>
+          <th>Location</th>
+          <th>Submission Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredRequests.length > 0; else noRecords">
+        <tr *ngFor="let request of filteredRequests; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ request.User.Username }}</td>
+          <td>{{ request.PhysicalTraining.TrainingName }}</td>
+          <td>{{ request.PhysicalTraining.Location }}</td>
+          <td>{{ request.RequestDate | date: 'yyyy-MM-dd' }}</td>
+          <td>
+            {{ request.Status }}
+          </td>
+          <td>
+            <button
+              id="greenButton"
+              *ngIf="request.Status === 'Pending' || request.Status === 'Rejected'"
+              (click)="handleApprove(request)"
+            >
+              Approve
+            </button>
+            <button
+              id="redButton"
+              *ngIf="request.Status === 'Pending' || request.Status === 'Approved'"
+              (click)="handleReject(request)"
+            >
+              Reject
+            </button>
+          </td>
+          
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tr>
+          <td colspan="7" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
+  
+
+  

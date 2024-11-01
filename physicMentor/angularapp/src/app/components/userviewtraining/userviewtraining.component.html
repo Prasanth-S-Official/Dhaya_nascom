@@ -1,0 +1,66 @@
+<div>
+    <div id="trainingHomeBody">
+      <h1>Available Trainings</h1>
+      <hr>
+  
+      <!-- Search Box -->
+      <div class="top-container">
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Search by Training Name, Description, or Focus Area..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="handleSearchChange($event)"
+        />
+      </div>
+  
+      <!-- Available Trainings Table -->
+      <table class="training-table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Training Name</th>
+            <th>Description</th>
+            <th>Trainer Name</th>
+            <th>Location</th>
+            <th>Indoor/Outdoor</th>
+            <th>Fee</th>
+            <th>Focus Area</th>
+            <th>Requirements</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="filteredTrainings.length&&availableTrainings.length; else noRecords">
+          <tr *ngFor="let training of filteredTrainings; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ training.TrainingName }}</td>
+            <td>{{ training.Description }}</td>
+            <td>{{ training.TrainerName }}</td>
+            <td>{{ training.Location }}</td>
+            <td>{{ training.IsIndoor ? 'Indoor' : 'Outdoor' }}</td>
+            <td>₹{{ training.Fee }}</td>
+            <td>{{ training.FocusArea }}</td>
+            <td>{{ training.PhysicalRequirements }}</td>
+            <td>
+              <button
+                id="applyButton"
+                *ngIf="!isTrainingApplied(training)"
+                (click)="handleApplyClick(training)"
+              >
+                Apply
+              </button>
+              <button id="appliedButton" *ngIf="isTrainingApplied(training)">Applied</button>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #noRecords>
+          <tbody>
+            <tr>
+              <td colspan="11" class="no-records-cell">Oops! No records found</td>
+            </tr>
+          </tbody>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+  

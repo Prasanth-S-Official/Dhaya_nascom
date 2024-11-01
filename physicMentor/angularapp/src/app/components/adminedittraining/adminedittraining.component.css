@@ -1,0 +1,119 @@
+/* Container styling for the form */
+.training-form-container {
+    position: relative;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  /* Title styling */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Required field asterisk styling */
+  .required {
+    color: red;
+  }
+  
+  /* Divider line styling */
+  hr {
+    border: none;
+    border-top: 2px solid #007bff;
+    color: #007bff;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+    margin-bottom: 3%;
+  }
+  
+  /* Form elements styling */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input,
+  select {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  select {
+    cursor: pointer;
+  }
+  
+  /* Submit button styling */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error message styling */
+  .error {
+    color: red;
+    font-size: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  
+  /* Blur effect applied to the form when the success popup is active */
+  .blur {
+    filter: blur(2px);
+    pointer-events: none;
+  }
+  
+  /* Success popup styling */
+  .success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #dff0d8; /* Light green for success */
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+  
+  /* Success popup button styling */
+  .success-popup button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+  
+  #backButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  /* Media query for responsiveness */
+  @media (max-width: 480px) {
+    .training-form-container {
+      max-width: 100%;
+    }
+  }
+  

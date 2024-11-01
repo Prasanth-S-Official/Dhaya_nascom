@@ -1,0 +1,47 @@
+<div class="page-content" [ngClass]="{ blur: showDeletePopup }">
+    <h1>Applied Training Requests</h1>
+    <hr>
+  
+    <input
+      id="searchBox"
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchValue"
+      (input)="filterRequests()"
+    />
+  
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Training Name</th>
+          <th>Request Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredRequests.length > 0; else noRecords">
+        <tr *ngFor="let request of filteredRequests; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ request.PhysicalTraining.TrainingName }}</td>
+          <td>{{ request.RequestDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ request.Status }}</td>
+          <td>
+            <button id="redButton" (click)="handleDeleteClick(request)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tr>
+          <td colspan="5" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
+  
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete?</p>
+    <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+    <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+  </div>
+  
