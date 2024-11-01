@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
 import com.examly.springapp.service.UserServiceImpl;
 
@@ -62,7 +61,6 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/feedback/{feedbackId}").hasRole("User")
                 .requestMatchers(HttpMethod.POST, "/api/feedback").hasRole("User")
                 .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasRole("User")
-                .requestMatchers("/v2/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint).and()
