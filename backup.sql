@@ -140,6 +140,69 @@ INSERT INTO `loan_seq` VALUES (151);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `physical_training`
+--
+
+DROP TABLE IF EXISTS `physical_training`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `physical_training` (
+  `physical_training_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `fee` double DEFAULT NULL,
+  `focus_area` varchar(255) DEFAULT NULL,
+  `is_indoor` bit(1) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `physical_requirements` varchar(255) DEFAULT NULL,
+  `trainer_name` varchar(255) DEFAULT NULL,
+  `training_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`physical_training_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `physical_training`
+--
+
+LOCK TABLES `physical_training` WRITE;
+/*!40000 ALTER TABLE `physical_training` DISABLE KEYS */;
+/*!40000 ALTER TABLE `physical_training` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `physical_training_request`
+--
+
+DROP TABLE IF EXISTS `physical_training_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `physical_training_request` (
+  `physical_training_request_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `comments` varchar(255) DEFAULT NULL,
+  `fitness_goals` varchar(255) DEFAULT NULL,
+  `health_conditions` varchar(255) DEFAULT NULL,
+  `request_date` date DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `physical_training_id` bigint(20) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`physical_training_request_id`),
+  KEY `FK4ouv6iu42xeyckr1ouufcjj8a` (`physical_training_id`),
+  KEY `FKan79gfnwjjvggashsxdvgx85d` (`user_id`),
+  CONSTRAINT `FK4ouv6iu42xeyckr1ouufcjj8a` FOREIGN KEY (`physical_training_id`) REFERENCES `physical_training` (`physical_training_id`),
+  CONSTRAINT `FKan79gfnwjjvggashsxdvgx85d` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `physical_training_request`
+--
+
+LOCK TABLES `physical_training_request` WRITE;
+/*!40000 ALTER TABLE `physical_training_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `physical_training_request` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -176,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-01 16:34:28
+-- Dump completed on 2024-11-01 16:49:29

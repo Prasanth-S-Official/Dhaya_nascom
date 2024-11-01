@@ -57,7 +57,7 @@ public class PhysicalTrainingServiceImpl implements PhysicalTrainingService {
             PhysicalTraining training = trainingOptional.get();
 
             // Check if the training is referenced in any request
-            if (physicalTrainingRequestRepo.existsByPhysicalTrainingPhysicalTrainingId(trainingId)) {
+            if (physicalTrainingRequestRepo.existsByPhysicalTraining_PhysicalTrainingId(trainingId)) {
                 throw new TrainingDeletionException("Training cannot be deleted as it is referenced in a request.");
             }
 

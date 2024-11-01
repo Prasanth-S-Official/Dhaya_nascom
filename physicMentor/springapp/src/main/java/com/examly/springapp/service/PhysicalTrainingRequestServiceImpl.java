@@ -32,7 +32,7 @@ public class PhysicalTrainingRequestServiceImpl implements PhysicalTrainingReque
 
     @Override
     public PhysicalTrainingRequest addPhysicalTrainingRequest(PhysicalTrainingRequest request) {
-        Long userId = request.getUser().getUserId();
+        Long userId = Long.valueOf(request.getUser().getUserId()); // Convert int to Long
         Long trainingId = request.getPhysicalTraining().getPhysicalTrainingId();
         Optional<PhysicalTrainingRequest> existingRequest = trainingRequestRepo.findByUser_UserIdAndPhysicalTraining_PhysicalTrainingId(userId, trainingId);
         if (existingRequest.isPresent()) {

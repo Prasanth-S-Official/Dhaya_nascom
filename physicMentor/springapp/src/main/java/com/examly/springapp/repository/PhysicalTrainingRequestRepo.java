@@ -12,12 +12,12 @@ import java.util.Optional;
 public interface PhysicalTrainingRequestRepo extends JpaRepository<PhysicalTrainingRequest, Long> {
 
     @Query("SELECT p FROM PhysicalTrainingRequest p WHERE p.user.userId = :userId")
-    List<PhysicalTrainingRequest> findPhysicalTrainingRequestsByUserId(Long userId);
+    List<PhysicalTrainingRequest> findPhysicalTrainingRequestsByUserId(long userId);
 
     @Query("SELECT p FROM PhysicalTrainingRequest p WHERE p.physicalTraining.physicalTrainingId = :physicalTrainingId")
     List<PhysicalTrainingRequest> findPhysicalTrainingRequestsByTrainingId(Long physicalTrainingId);
 
-    Optional<PhysicalTrainingRequest> findByUser_UserIdAndPhysicalTraining_PhysicalTrainingId(Long userId, Long physicalTrainingId);
+    Optional<PhysicalTrainingRequest> findByUser_UserIdAndPhysicalTraining_PhysicalTrainingId(long userId, Long physicalTrainingId);
 
     boolean existsByPhysicalTraining_PhysicalTrainingId(Long physicalTrainingId);
 }
