@@ -8,8 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class PhysicalTrainingRequest {
@@ -17,27 +15,24 @@ public class PhysicalTrainingRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long physicalTrainingRequestId;
-
-    @NotNull(message = "User ID is required")
+    
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
 
-    @NotNull(message = "Physical Training ID is required")
     @ManyToOne
     @JoinColumn(name = "physicalTrainingId")
     private PhysicalTraining physicalTraining;
 
-    @NotNull(message = "Request date is required")
+   
     private LocalDate requestDate;
 
-    @NotBlank(message = "Status is required")
+
     private String status;
 
-    @NotBlank(message = "Health conditions are required")
     private String healthConditions;
 
-    @NotBlank(message = "Fitness goals are required")
+
     private String fitnessGoals;
 
     private String comments;

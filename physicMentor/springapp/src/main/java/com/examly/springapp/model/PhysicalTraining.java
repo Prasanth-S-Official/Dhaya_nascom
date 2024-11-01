@@ -1,12 +1,12 @@
 package com.examly.springapp.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
+
 
 @Entity
 public class PhysicalTraining {
@@ -14,30 +14,13 @@ public class PhysicalTraining {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long physicalTrainingId;
-
-    @NotBlank(message = "Training name is required")
     private String trainingName;
-
-    @NotBlank(message = "Description is required")
     private String description;
-
-    @NotBlank(message = "Trainer name is required")
     private String trainerName;
-
-    @NotBlank(message = "Location is required")
     private String location;
-
-    @NotNull(message = "Indoor/Outdoor information is required")
     private Boolean isIndoor;
-
-    @NotNull(message = "Fee is required")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Fee must be a non-negative value")
     private Double fee;
-
-    @NotBlank(message = "Focus area is required")
     private String focusArea;
-
-    @NotBlank(message = "Physical requirements are required")
     private String physicalRequirements;
 
     public PhysicalTraining() {

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/physicalTrainingRequests")
@@ -31,11 +32,11 @@ public class PhysicalTrainingRequestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PhysicalTrainingRequest> getRequestById(@PathVariable Long id) {
-        PhysicalTrainingRequest request = requestService.getPhysicalTrainingRequestById(id);
-        if (request != null) {
-            return ResponseEntity.ok(request);
+        Optional<PhysicalTrainingRequest> request = requestService.getPhysicalTrainingRequestById(id);
+        if (request.isPresent()) {
+            return ResponseEntity.ok(request.get());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -45,7 +46,7 @@ public class PhysicalTrainingRequestController {
             PhysicalTrainingRequest addedRequest = requestService.addPhysicalTrainingRequest(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(addedRequest);
         } catch (PhysicalTrainingException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
     }
 
@@ -55,7 +56,7 @@ public class PhysicalTrainingRequestController {
         if (updatedRequest != null) {
             return ResponseEntity.ok(updatedRequest);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -63,9 +64,9 @@ public class PhysicalTrainingRequestController {
     public ResponseEntity<Void> deleteRequest(@PathVariable Long id) {
         boolean deleted = requestService.deletePhysicalTrainingRequest(id);
         if (deleted) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

@@ -1,3 +1,4 @@
+// PhysicalTrainingController.java
 package com.examly.springapp.controller;
 
 import com.examly.springapp.exceptions.PhysicalTrainingException;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/physicalTraining")
@@ -25,11 +27,11 @@ public class PhysicalTrainingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PhysicalTraining> getTrainingById(@PathVariable Long id) {
-        PhysicalTraining training = trainingService.getPhysicalTrainingById(id);
-        if (training != null) {
-            return ResponseEntity.ok(training);
+        Optional<PhysicalTraining> training = trainingService.getPhysicalTrainingById(id);
+        if (training.isPresent()) {
+            return ResponseEntity.ok(training.get());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -39,7 +41,7 @@ public class PhysicalTrainingController {
             PhysicalTraining addedTraining = trainingService.addPhysicalTraining(training);
             return ResponseEntity.status(HttpStatus.CREATED).body(addedTraining);
         } catch (PhysicalTrainingException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
     }
 
@@ -49,7 +51,7 @@ public class PhysicalTrainingController {
         if (updatedTraining != null) {
             return ResponseEntity.ok(updatedTraining);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -57,9 +59,9 @@ public class PhysicalTrainingController {
     public ResponseEntity<Void> deleteTraining(@PathVariable Long id) {
         boolean deleted = trainingService.deletePhysicalTraining(id);
         if (deleted) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }
