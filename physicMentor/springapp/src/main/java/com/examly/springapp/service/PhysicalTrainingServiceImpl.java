@@ -1,16 +1,15 @@
 package com.examly.springapp.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.examly.springapp.exceptions.DuplicateTrainingException;
 import com.examly.springapp.exceptions.TrainingDeletionException;
 import com.examly.springapp.model.PhysicalTraining;
 import com.examly.springapp.repository.PhysicalTrainingRepo;
 import com.examly.springapp.repository.PhysicalTrainingRequestRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhysicalTrainingServiceImpl implements PhysicalTrainingService {
@@ -23,7 +22,6 @@ public class PhysicalTrainingServiceImpl implements PhysicalTrainingService {
 
     @Override
     public PhysicalTraining addPhysicalTraining(PhysicalTraining training) {
-        // Check for duplicate training name
         Optional<PhysicalTraining> existingTraining = physicalTrainingRepo.findByTrainingName(training.getTrainingName());
         if (existingTraining.isPresent()) {
             throw new DuplicateTrainingException("Training with the name " + training.getTrainingName() + " already exists.");
@@ -59,7 +57,7 @@ public class PhysicalTrainingServiceImpl implements PhysicalTrainingService {
             PhysicalTraining training = trainingOptional.get();
 
             // Check if the training is referenced in any request
-            if (physicalTrainingRequestRepo.existsByPhysicalTrainingId(trainingId)) {
+            if (physicalTrainingRequestRepo.existsByPhysicalTrainingPhysicalTrainingId(trainingId)) {
                 throw new TrainingDeletionException("Training cannot be deleted as it is referenced in a request.");
             }
 

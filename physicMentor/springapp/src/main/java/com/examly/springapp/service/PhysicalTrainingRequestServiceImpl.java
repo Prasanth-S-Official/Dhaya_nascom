@@ -26,13 +26,15 @@ public class PhysicalTrainingRequestServiceImpl implements PhysicalTrainingReque
     }
 
     @Override
-    public PhysicalTrainingRequest getPhysicalTrainingRequestById(Long requestId) {
-        return trainingRequestRepo.findById(requestId).orElse(null);
+    public Optional<PhysicalTrainingRequest> getPhysicalTrainingRequestById(Long requestId) {
+        return trainingRequestRepo.findById(requestId);
     }
 
     @Override
     public PhysicalTrainingRequest addPhysicalTrainingRequest(PhysicalTrainingRequest request) {
-        Optional<PhysicalTrainingRequest> existingRequest = trainingRequestRepo.findByUserIdAndPhysicalTrainingId(request.getUser().getUserId(), request.getPhysicalTraining().getPhysicalTrainingId());
+        Long userId = request.getUser().getUserId();
+        Long trainingId = request.getPhysicalTraining().getPhysicalTrainingId();
+        Optional<PhysicalTrainingRequest> existingRequest = trainingRequestRepo.findByUser_UserIdAndPhysicalTraining_PhysicalTrainingId(userId, trainingId);
         if (existingRequest.isPresent()) {
             throw new PhysicalTrainingException("User already requested this training");
         }

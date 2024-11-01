@@ -19,47 +19,47 @@ public class PhysicalTrainingController {
     @Autowired
     private PhysicalTrainingService trainingService;
 
+    @PostMapping
+    public ResponseEntity<?> addTraining(@RequestBody PhysicalTraining training) {
+        try {
+            PhysicalTraining newTraining = trainingService.addPhysicalTraining(training);
+            return new ResponseEntity<>(newTraining, HttpStatus.CREATED);
+        } catch (PhysicalTrainingException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping("/{trainingId}")
+    public ResponseEntity<PhysicalTraining> getTrainingById(@PathVariable Long trainingId) {
+        Optional<PhysicalTraining> training = trainingService.getPhysicalTrainingById(trainingId);
+        if (training.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(training.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<PhysicalTraining>> getAllTrainings() {
-        List<PhysicalTraining> trainings = trainingService.getAllPhysicalTrainings();
-        return ResponseEntity.ok(trainings);
+        List<PhysicalTraining> allTrainings = trainingService.getAllPhysicalTrainings();
+        return ResponseEntity.status(HttpStatus.OK).body(allTrainings);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PhysicalTraining> getTrainingById(@PathVariable Long id) {
-        Optional<PhysicalTraining> training = trainingService.getPhysicalTrainingById(id);
-        if (training.isPresent()) {
-            return ResponseEntity.ok(training.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<PhysicalTraining> addTraining(@RequestBody PhysicalTraining training) {
-        try {
-            PhysicalTraining addedTraining = trainingService.addPhysicalTraining(training);
-            return ResponseEntity.status(HttpStatus.CREATED).body(addedTraining);
-        } catch (PhysicalTrainingException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<PhysicalTraining> updateTraining(@PathVariable Long id, @RequestBody PhysicalTraining training) {
-        PhysicalTraining updatedTraining = trainingService.updatePhysicalTraining(id, training);
+    @PutMapping("/{trainingId}")
+    public ResponseEntity<PhysicalTraining> updateTraining(@PathVariable Long trainingId, @RequestBody PhysicalTraining training) {
+        PhysicalTraining updatedTraining = trainingService.updatePhysicalTraining(trainingId, training);
         if (updatedTraining != null) {
-            return ResponseEntity.ok(updatedTraining);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedTraining);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTraining(@PathVariable Long id) {
-        boolean deleted = trainingService.deletePhysicalTraining(id);
-        if (deleted) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    @DeleteMapping("/{trainingId}")
+    public ResponseEntity<PhysicalTraining> deleteTraining(@PathVariable Long trainingId) {
+        PhysicalTraining deletedTraining = trainingService.deletePhysicalTraining(trainingId);
+        if (deletedTraining != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(deletedTraining);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

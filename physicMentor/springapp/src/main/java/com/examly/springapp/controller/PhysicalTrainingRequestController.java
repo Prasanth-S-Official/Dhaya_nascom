@@ -36,7 +36,7 @@ public class PhysicalTrainingRequestController {
         if (request.isPresent()) {
             return ResponseEntity.ok(request.get());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -46,7 +46,7 @@ public class PhysicalTrainingRequestController {
             PhysicalTrainingRequest addedRequest = requestService.addPhysicalTrainingRequest(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(addedRequest);
         } catch (PhysicalTrainingException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
@@ -56,7 +56,7 @@ public class PhysicalTrainingRequestController {
         if (updatedRequest != null) {
             return ResponseEntity.ok(updatedRequest);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -64,9 +64,9 @@ public class PhysicalTrainingRequestController {
     public ResponseEntity<Void> deleteRequest(@PathVariable Long id) {
         boolean deleted = requestService.deletePhysicalTrainingRequest(id);
         if (deleted) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
     }
 }

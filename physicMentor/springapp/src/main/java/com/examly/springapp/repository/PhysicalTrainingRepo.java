@@ -10,7 +10,5 @@ public interface PhysicalTrainingRepo extends JpaRepository<PhysicalTraining, Lo
 
     Optional<PhysicalTraining> findByTrainingName(String trainingName);
     
-    boolean existsByPhysicalTraining_PhysicalTrainingId(Long physicalTrainingId);
-
     
 }
