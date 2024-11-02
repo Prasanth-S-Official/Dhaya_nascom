@@ -47,7 +47,6 @@ export class AdminviewtrainingComponent implements OnInit {
 
   // Navigate to the edit page for a training session
   navigateToEditTraining(id: string) {
-    console.log("Came")
     this.router.navigate(['/admin/edit/training', id]);
   }
 
@@ -91,8 +90,8 @@ export class AdminviewtrainingComponent implements OnInit {
     const searchLower = search.toLowerCase();
     return this.allTrainings.filter(
       (training) =>
-        training.TrainingName.toLowerCase().includes(searchLower) ||
-        training.Description.toLowerCase().includes(searchLower)
+        training.trainingName.toLowerCase().includes(searchLower) ||
+        training.description.toLowerCase().includes(searchLower)
     );
   }
 }

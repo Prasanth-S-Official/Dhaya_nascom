@@ -13,14 +13,14 @@ export class AdminedittrainingComponent implements OnInit {
   id: string;
   errorMessage: string = '';
   formData: PhysicalTraining = { 
-    TrainingName: '',
-    Description: '',
-    TrainerName: '',
-    Location: '',
-    IsIndoor: true,
-    Fee: null,
-    FocusArea: '',
-    PhysicalRequirements: '',
+    trainingName: '',
+    description: '',
+    trainerName: '',
+    location: '',
+    isIndoor: true,
+    fee: null,
+    focusArea: '',
+    physicalRequirements: '',
   };
   errors: any = {};
   successPopup: boolean = false;

@@ -52,9 +52,9 @@ export class UserviewtrainingComponent implements OnInit {
     const searchLower = search.toLowerCase();
     return this.availableTrainings.filter(
       (training) =>
-        training.TrainingName.toLowerCase().includes(searchLower) ||
-        training.Description.toLowerCase().includes(searchLower) ||
-        training.FocusArea.toLowerCase().includes(searchLower)
+        training.trainingName.toLowerCase().includes(searchLower) ||
+        training.description.toLowerCase().includes(searchLower) ||
+        training.focusArea.toLowerCase().includes(searchLower)
     );
   }
 
@@ -63,14 +63,14 @@ export class UserviewtrainingComponent implements OnInit {
     if (isTrainingApplied) {
       alert('Training is already applied.');
     } else {
-      localStorage.setItem('trainingId', training.PhysicalTrainingId.toString());
+      localStorage.setItem('trainingId', training.physicalTrainingId.toString());
       this.router.navigate(['/user/add/request']);
     }
   }
 
   isTrainingApplied(training: PhysicalTraining): boolean {
     return this.appliedTrainings.some(
-      (appliedTraining) => appliedTraining.PhysicalTrainingId === training.PhysicalTrainingId
+      (appliedTraining) => appliedTraining.physicalTrainingId === training.physicalTrainingId
     );
   }
 

@@ -11,14 +11,14 @@ import { PhysicalTraining } from 'src/app/models/physical-training.model';
 })
 export class AdminaddtrainingComponent implements OnInit {
   formData: PhysicalTraining = {
-    TrainingName: '',
-    Description: '',
-    TrainerName: '',
-    Location: '',
-    IsIndoor: true,
-    Fee: null,
-    FocusArea: '',
-    PhysicalRequirements: '',
+    trainingName: '',
+    description: '',
+    trainerName: '',
+    location: '',
+    isIndoor: true,
+    fee: null,
+    focusArea: '',
+    physicalRequirements: '',
   };
   errors: any = {};
   errorMessage: string;
@@ -62,14 +62,15 @@ export class AdminaddtrainingComponent implements OnInit {
     this.successPopup = false;
     this.errorMessage = '';
     this.formData = {
-      TrainingName: '',
-      Description: '',
-      TrainerName: '',
-      Location: '',
-      IsIndoor: true,
-      Fee: null,
-      FocusArea: '',
-      PhysicalRequirements: '',
+      trainingName: '',
+      description: '',
+      trainerName: '',
+      location: '',
+      isIndoor: true,
+      fee: null,
+      focusArea: '',
+      physicalRequirements: '',
     };
   }
 }
+
