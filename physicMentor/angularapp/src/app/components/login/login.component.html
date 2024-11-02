@@ -1,29 +1,46 @@
-<div class="container">
-     <h1>Login</h1>
 
-     <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
-          <div class="validation">
-               <label for="email">Email<span class="asterisk">*</span></label>
-          </div><input type="text" id="email" [(ngModel)]="email" name="email" [ngModelOptions]="{standalone: true}"
-               required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailNgModel="ngModel">
-          <div *ngIf="emailNgModel.invalid && (emailNgModel.dirty || emailNgModel.touched)" class="error-message">
-               <div *ngIf="emailNgModel.errors?.required">*Email is required</div>
-               <div *ngIf="emailNgModel.errors?.pattern">*Please enter a valid email address</div>
-          </div>
-
-          <div class="validation">
-               <label for="password">Password<span class="asterisk">*</span></label>
-
-          </div>
-          <input type="password" id="password" [(ngModel)]="password" name="password"
-               [ngModelOptions]="{standalone: true}" required #passwordNgModel="ngModel">
-          <div *ngIf="passwordNgModel.invalid && (passwordNgModel.dirty || passwordNgModel.touched || loginForm.submitted)"
-               class="error-message">*Password is required</div>
-          <div *ngIf="error" class="error-message">{{ error }}</div>
-
-          <button type="submit"
-               [disabled]="loginForm.invalid || emailNgModel.invalid || passwordNgModel.invalid">Login</button>
-     </form>
-
-     <p class="register-link">Don't have an account? <a href="/signup">Register here</a></p>
+<div class="login-container">
+  <div class="login-wrapper">
+    <!-- Left Side: Image -->
+    <div class="login-left">
+      <img src="/assets/images/background.webp" alt="AgroLink Image" class="login-image">
+      <div class="image-title">
+        <h1>FarmAid</h1>
+      </div>
+    </div>
+    
+    <!-- Right Side: Login Form -->
+    <div class="login-right">
+      <div class="login-box">
+        <h2>Login</h2>
+        <div class="form-group">
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="formData.email"
+            (ngModelChange)="validateField('email', formData.email)"
+            placeholder="Email"
+          />
+          <div *ngIf="errors.email" class="error">{{ errors.email }}</div>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="formData.password"
+            (ngModelChange)="validateField('password', formData.password)"
+            placeholder="Password"
+          />
+          <div *ngIf="errors.password" class="error">{{ errors.password }}</div>
+        </div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+        <button type="submit" class="login-button" (click)="handleLogin()">
+          Login
+        </button>
+        <div class="signup-link">
+          Don't have an account? <a routerLink="/signup">Signup</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,39 +1,108 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { Login } from 'src/app/models/login.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  error: string = '';
+export class LoginComponent implements OnInit {
+  error: string = "";
+  formData: any = {
+    email: "",
+    password: ""
+  };
+  errors: any = {};
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login(): void {
-    const loginData: Login = { Email: this.email, Password: this.password };
-    this.authService.login(loginData).subscribe(
-      (asd) => {
-        // Successful login
-        console.log(asd);
-        if (this.authService.isAdmin()) {
-          this.router.navigate(['/']); // Navigate to admin page
+  ngOnInit(): void {
+    localStorage.setItem("token", "");
+  }
+
+  handleChange(event: any) {
+    const { name, value } = event.target;
+    this.formData[name] = value;
+    this.validateField(name, value);
+  }
+
+  validateField(fieldName: string, value: string) {
+    const fieldErrors = { ...this.errors };
+
+    switch (fieldName) {
+      case "email":
+        fieldErrors.email = value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
+          ? ""
+          : "Please enter a valid email";
+        break;
+      case "password":
+        fieldErrors.password =
+          value.length >= 6 ? "" : "Password must be at least 6 characters";
+        break;
+      default:
+        break;
+    }
+
+    this.errors = fieldErrors;
+  }
+
+  async handleLogin() {
+    this.error = "";
+    console.log("Login clicked");
+
+    const fieldErrors = { ...this.errors };
+
+    if (
+      this.formData.email.trim() === "" ||
+      this.formData.password.trim() === "" ||
+      fieldErrors.email.trim() !== "" ||
+      fieldErrors.password.trim() !== ""
+    ) {
+      this.errors = {
+        email: this.formData.email.trim() === "" ? "Email is required" : fieldErrors.email,
+        password:
+          this.formData.password.trim() === ""
+            ? "Password is required"
+            : fieldErrors.password,
+      };
+      return;
+    } else {
+      try {
+        let requestObject = {
+          email: this.formData.email,
+          password: this.formData.password,
+        };
+
+        console.log("requestObject", requestObject);
+
+        const response = await this.authService.login(requestObject).toPromise();
+
+        console.log("response in login", response);
+
+        if (response) {
+          let userData = {
+            token: response.token,
+            role: response.userRole,
+            userId: response.userId,
+            userName: response.username,
+            isAuthenticated: true,
+          };
+          console.log("userData", userData);
+          // this.authService.storeUserData(userData);
+
+          if (response.role === "Admin") {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         } else {
-          this.router.navigate(['/']); // Navigate to organizer page
+          this.error = "Invalid Email or Password";
         }
-      },
-      (error) => {
-        if (error.status === 500) {
-          this.error = '*Account not found. Please check your email and password.';
-        } else {
-          this.error = '*Invalid email or password'; // Display error message for other errors
-        }
+      } catch (error) {
+        console.log(error);
+        this.error = "Invalid Email or Password";
       }
-    );
+    }
   }
 }
