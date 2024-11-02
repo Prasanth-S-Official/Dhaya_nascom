@@ -23,18 +23,10 @@ public class PhysicalTrainingRequest {
     @ManyToOne
     @JoinColumn(name = "physicalTrainingId")
     private PhysicalTraining physicalTraining;
-
-   
     private LocalDate requestDate;
-
-
     private String status;
-
     private String healthConditions;
-
-
     private String fitnessGoals;
-
     private String comments;
 
     public PhysicalTrainingRequest() {

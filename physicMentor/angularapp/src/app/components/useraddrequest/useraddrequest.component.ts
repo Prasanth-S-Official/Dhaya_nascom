@@ -34,13 +34,13 @@ export class UseraddrequestComponent implements OnInit {
     if (this.requestForm.valid) {
       const formData = this.requestForm.value;
       const requestObject: PhysicalTrainingRequest = {
-        UserId: Number(localStorage.getItem('userId')),
-        PhysicalTrainingId: Number(localStorage.getItem('trainingId')),
-        RequestDate: new Date().toISOString().split('T')[0],
-        Status: 'Pending', // Default status
-        HealthConditions: formData.healthConditions,
-        FitnessGoals: formData.fitnessGoals,
-        Comments: formData.comments,
+        userId: Number(localStorage.getItem('userId')),
+        physicalTrainingId: Number(localStorage.getItem('trainingId')),
+        requestDate: new Date().toISOString().split('T')[0],
+        status: 'Pending', // Default status
+        healthConditions: formData.healthConditions,
+        fitnessGoals: formData.fitnessGoals,
+        comments: formData.comments,
       };
 
       this.trainingService.addPhysicalTrainingRequest(requestObject).subscribe(

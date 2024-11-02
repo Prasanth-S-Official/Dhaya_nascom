@@ -1,3 +1,4 @@
+<app-usernav></app-usernav>
 <div class="container" [ngClass]="{ blur: successPopup }">
   <div class="button-container">
     <button (click)="navigateBack()">Back</button>
@@ -5,6 +6,7 @@
   <h2>Training Request Form</h2>
 
   <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+    <!-- Health Conditions Field -->
     <div>
       <label for="healthConditions">Health Conditions<span class="required">*</span></label>
       <input id="healthConditions" type="text" formControlName="healthConditions" />
@@ -13,6 +15,7 @@
       </div>
     </div>
 
+    <!-- Fitness Goals Field -->
     <div>
       <label for="fitnessGoals">Fitness Goals<span class="required">*</span></label>
       <input id="fitnessGoals" type="text" formControlName="fitnessGoals" />
@@ -21,21 +24,25 @@
       </div>
     </div>
 
+    <!-- Comments Field -->
     <div>
       <label for="comments">Comments</label>
       <textarea id="comments" formControlName="comments"></textarea>
     </div>
 
+    <!-- Error Message Display -->
     <div *ngIf="errorMessage" class="error">
       *{{ errorMessage }}
     </div>
 
+    <!-- Submit Button -->
     <div>
       <button type="submit" class="submit-button">Submit</button>
     </div>
   </form>
 </div>
 
+<!-- Success Popup -->
 <div *ngIf="successPopup" class="success-popup">
   <p>Successfully Submitted!</p>
   <button (click)="handleSuccessMessage()">Ok</button>
