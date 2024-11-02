@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/physicalTrainingRequests")
+@RequestMapping("/api/physical-training-request")
 public class PhysicalTrainingRequestController {
 
     @Autowired
