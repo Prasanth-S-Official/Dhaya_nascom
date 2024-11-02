@@ -36,8 +36,8 @@ export class AdminaddtrainingComponent implements OnInit {
 
   onSubmit(trainingForm: NgForm) {
     console.log('Form Validity:', trainingForm.valid);
-    console.log("formdata", this.formData);
     if (trainingForm.valid) {
+      console.log("formdata", this.formData);
       this.trainingService.addPhysicalTraining(this.formData).subscribe(
         (res) => {
           this.successPopup = true;
