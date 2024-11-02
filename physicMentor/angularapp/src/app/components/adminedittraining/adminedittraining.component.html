@@ -58,6 +58,7 @@
 
     <label for="isIndoor">Indoor/Outdoor<span class="required">*</span></label>
     <select
+      id="isIndoor"
       name="isIndoor"
       [(ngModel)]="formData.isIndoor"
       required
@@ -68,7 +69,7 @@
       <option [ngValue]="false">Outdoor</option>
     </select>
     <div class="error" *ngIf="isIndoor.invalid && isIndoor.touched">*Indoor/Outdoor information is required</div>
-
+    
     <label for="fee">Fee<span class="required">*</span></label>
     <input
       id="fee"

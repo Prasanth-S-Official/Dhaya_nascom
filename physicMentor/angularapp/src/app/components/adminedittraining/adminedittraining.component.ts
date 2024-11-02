@@ -50,12 +50,17 @@ export class AdminedittrainingComponent implements OnInit {
   }
 
   handleChange(event: any, field: string) {
-    this.formData[field] = event.target.value;
+    if (field === 'isIndoor') {
+      this.formData.isIndoor = event.target.value === 'true';
+    } else {
+      this.formData[field] = event.target.value;
+    }
     this.errors[field] = ''; // Clear error when the user makes a change
   }
-
+  
   handleUpdateTraining(trainingForm: NgForm) {
     if (trainingForm.valid) {
+      console.log("Updating", this.formData);
       this.trainingService.updatePhysicalTraining(this.id, this.formData).subscribe(
         (response) => {
           console.log('Training updated successfully', response);
