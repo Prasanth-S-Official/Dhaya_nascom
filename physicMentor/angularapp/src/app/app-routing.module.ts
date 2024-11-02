@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
-
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/authguard/auth.guard';
 
 import { AdminaddtrainingComponent } from './components/adminaddtraining/adminaddtraining.component';
@@ -18,11 +15,13 @@ import { UserviewappliedrequestComponent } from './components/userviewappliedreq
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: RegistrationComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'error', component: ErrorComponent },
 
   // Admin Routes
@@ -40,7 +39,8 @@ const routes: Routes = [
   { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes
-  { path: '**', redirectTo: '/error' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'error' }
 ];
 
 @NgModule({

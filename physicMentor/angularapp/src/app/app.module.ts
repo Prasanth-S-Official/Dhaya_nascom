@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -21,12 +20,16 @@ import { AdminaddtrainingComponent } from './components/adminaddtraining/adminad
 import { AdminedittrainingComponent } from './components/adminedittraining/adminedittraining.component';
 import { AdminviewappliedrequestComponent } from './components/adminviewappliedrequest/adminviewappliedrequest.component';
 import { AdminviewtrainingComponent } from './components/adminviewtraining/adminviewtraining.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent,
+    // RegistrationComponent,
+    SignupComponent,
+    HomePageComponent,
     ErrorComponent,
     NavbarComponent,
     AdminviewfeedbackComponent,
