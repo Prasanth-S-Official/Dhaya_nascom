@@ -43,7 +43,21 @@ export class UseraddrequestComponent implements OnInit {
         comments: formData.comments,
       };
 
-      this.trainingService.addPhysicalTrainingRequest(requestObject).subscribe(
+      console.log("AddingRequest" , requestObject);
+       
+      const payload : any = {
+        requestDate: requestObject.requestDate,
+        status: requestObject.status,
+        healthConditions: requestObject.healthConditions,
+        fitnessGoals: requestObject.fitnessGoals,
+        comments: requestObject.comments,
+        user: { userId: requestObject.userId },
+        physicalTraining: { physicalTrainingId: requestObject.physicalTrainingId },
+      };
+  
+      console.log("AddingRequest" , payload);
+
+      this.trainingService.addPhysicalTrainingRequest(payload).subscribe(
         (response) => {
           console.log('Response:', response);
           this.successPopup = true;

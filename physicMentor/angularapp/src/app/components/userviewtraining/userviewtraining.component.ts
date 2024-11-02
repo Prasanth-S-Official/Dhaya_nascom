@@ -70,7 +70,7 @@ export class UserviewtrainingComponent implements OnInit {
 
   isTrainingApplied(training: PhysicalTraining): boolean {
     return this.appliedTrainings.some(
-      (appliedTraining) => appliedTraining.physicalTrainingId === training.physicalTrainingId
+      (appliedTraining) => appliedTraining.physicalTraining.physicalTrainingId === training.physicalTrainingId
     );
   }
 
