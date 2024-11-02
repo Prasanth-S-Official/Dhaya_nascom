@@ -26,6 +26,7 @@ public class LoanServiceImpl implements LoanService {
         }
         return loanRepo.save(loan);
     }
+    
     public Optional<Loan> getLoanById(Long loanId)
     {
         return loanRepo.findById(loanId);

@@ -157,7 +157,7 @@ CREATE TABLE `physical_training` (
   `trainer_name` varchar(255) DEFAULT NULL,
   `training_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`physical_training_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +166,7 @@ CREATE TABLE `physical_training` (
 
 LOCK TABLES `physical_training` WRITE;
 /*!40000 ALTER TABLE `physical_training` DISABLE KEYS */;
+INSERT INTO `physical_training` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `physical_training` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-02 12:59:46
+-- Dump completed on 2024-11-02 13:14:47
