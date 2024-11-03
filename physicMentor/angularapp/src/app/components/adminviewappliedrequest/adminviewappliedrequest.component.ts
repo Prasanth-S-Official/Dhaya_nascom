@@ -64,6 +64,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
   // Approve a training request
   handleApprove(trainingRequest: any): void {
     trainingRequest.Status = "Approved"; // Status for Approved
+    console.log("trainingRequest",trainingRequest);
     this.updateRequestStatus(trainingRequest);
   }
 
