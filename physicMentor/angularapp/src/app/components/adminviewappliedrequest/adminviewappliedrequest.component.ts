@@ -63,21 +63,21 @@ export class AdminviewappliedrequestComponent implements OnInit {
 
   // Approve a training request
   handleApprove(trainingRequest: any): void {
-    trainingRequest.Status = "Approved"; // Status for Approved
+    trainingRequest.status = "Approved"; // Status for Approved
     console.log("trainingRequest",trainingRequest);
     this.updateRequestStatus(trainingRequest);
   }
 
   // Reject a training request
   handleReject(trainingRequest: any): void {
-    trainingRequest.Status = "Rejected"; // Status for Approved
+    trainingRequest.status = "Rejected"; // Status for Approved
     this.updateRequestStatus(trainingRequest);
   }
 
   // Update request status via the TrainingService
   updateRequestStatus(trainingRequest: any): void {
     console.log("trainingRequest",trainingRequest);
-    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.PhysicalTrainingRequestId, trainingRequest).subscribe(
+    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.physicalTrainingRequestId, trainingRequest).subscribe(
       (response) => {
         console.log('Training request status updated:', response);
         this.fetchTrainingRequests(); // Refresh data after status update

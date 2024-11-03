@@ -200,7 +200,7 @@ CREATE TABLE `physical_training_request` (
 
 LOCK TABLES `physical_training_request` WRITE;
 /*!40000 ALTER TABLE `physical_training_request` DISABLE KEYS */;
-INSERT INTO `physical_training_request` VALUES (1,'w','being summa','good','2024-11-02','Pending',2,3);
+INSERT INTO `physical_training_request` VALUES (1,'w','being summa','good','2024-11-02','Approved',2,3);
 /*!40000 ALTER TABLE `physical_training_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-03 15:39:32
+-- Dump completed on 2024-11-03 15:54:33
