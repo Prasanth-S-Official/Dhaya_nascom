@@ -41,22 +41,19 @@ export class AdminviewappliedrequestComponent implements OnInit {
 
   // Search functionality to filter training requests by Training Name
   handleSearchChange(event: any): void {
-    this.searchValue = event.target.value.toLowerCase();
+    const searchValueLower = this.searchValue.toLowerCase();
     this.filteredRequests = this.trainingRequests.filter((request) =>
-      request.Training.TrainingName.toLowerCase().includes(this.searchValue)
+      request.physicalTraining.trainingName.toLowerCase().includes(searchValueLower)
     );
   }
 
   // Filter requests based on their status (Pending, Approved, Rejected)
   handleFilterChange(event: any): void {
-    this.statusFilter = event.target.value;
     this.filteredRequests = this.trainingRequests.filter((request) => {
       if (this.statusFilter === '-1') {
-        // If 'All' is selected, return all requests
-        return true;
+        return true; // Show all
       } else {
-        // Return only requests matching the selected status
-        return request.RequestStatus === parseInt(this.statusFilter, 10);
+        return request.status === (this.statusFilter === '0' ? 'Pending' : this.statusFilter === '1' ? 'Approved' : 'Rejected');
       }
     });
   }
