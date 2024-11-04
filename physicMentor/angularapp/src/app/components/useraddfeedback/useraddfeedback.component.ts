@@ -29,12 +29,21 @@ export class UseraddfeedbackComponent implements OnInit {
     this.submitted = true;
     if (this.addFeedbackForm.valid) {
       const feedback: Feedback = {
-        UserId: this.addFeedbackForm.get('userId').value,
-        FeedbackText: this.addFeedbackForm.get('feedbackText').value,
-        Date: new Date()
+        userId: this.addFeedbackForm.get('userId').value,
+        feedbackText: this.addFeedbackForm.get('feedbackText').value,
+        date: new Date()
       };
 
-      this.feedbackService.sendFeedback(feedback).subscribe(
+      // Transforming feedback object to match the backend format
+      const requestPayload = {
+        feedbackText: feedback.feedbackText,
+        date: feedback.date.toISOString().split('T')[0],
+        user: {
+          userId: feedback.userId
+        }
+      };
+
+      this.feedbackService.sendFeedback(requestPayload as unknown as Feedback).subscribe(
         (response) => {
           console.log('Response:', response);
           this.successPopup = true;
