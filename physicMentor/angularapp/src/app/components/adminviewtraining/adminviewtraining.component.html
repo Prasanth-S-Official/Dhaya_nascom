@@ -18,10 +18,11 @@
       <div>
         <label for="trainingTypeSelect">Filter by:</label>
         <select [(ngModel)]="selectedTrainingType" (ngModelChange)="applyFilters()" id="trainingTypeSelect">
-          <option value="">All</option>
+          <option [ngValue]="null">All</option>
           <option [ngValue]="true">Indoor</option>
           <option [ngValue]="false">Outdoor</option>
         </select>
+        
       </div>
     </div>
 
