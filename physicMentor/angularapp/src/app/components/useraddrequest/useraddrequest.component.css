@@ -1,100 +1,132 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+}
+
+/* Training Request Form Container */
 .container {
-  position: relative;
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 400px;
+  margin: 5rem auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #edebeba4;
+  border-radius: 8px; /* Slightly larger border radius for a softer look */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
-.button-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Header Style */
+h2 {
+  font-size: 26px; /* Increased font size for better visibility */
   margin-bottom: 20px;
+  text-align: center;
+  color: #333;
 }
 
+/* Form Flexbox Layout */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input and Textarea Styles */
+input,
+textarea {
+  margin: 10px 0; /* Consistent margin */
+  padding: 12px 15px; /* Increased padding for comfort */
+  border: 1px solid #ccc; /* Added a border for better visibility */
+  border-radius: 30px; /* Rounded corners */
+  background-color: #f1f1f1; /* Light background */
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s; /* Smooth transitions */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  font-size: 16px; /* Increased font size for readability */
+}
+
+/* Focus Styles for Inputs and Textareas */
+input:focus,
+textarea:focus {
+  outline: none; /* Remove the default outline */
+  background-color: #ffffff; /* Change background on focus */
+  border: 1px solid #007bff; /* Highlight border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
+}
+
+/* Error Message Style */
+.error {
+  color: red;
+  font-size: 14px; /* Adjusted for better fit */
+  margin-top: -6px; /* Negative margin to pull up error message */
+  margin-bottom: 10px; /* Space below error message */
+}
+
+/* Required Indicator */
 .required {
   color: red;
 }
 
+/* Button Styles */
 button {
-  padding: 5px;
-  background-color: #3498db;
+  background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 30px; /* Rounded button */
+  padding: 12px 20px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+  margin-top: 10px; /* Margin above the button */
 }
 
-h2 {
-  text-align: center;
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
-form {
-  margin-top: 20px;
+button:active {
+  transform: translateY(1px); /* Slight depress effect */
 }
 
-label {
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 5px;
+/* Media Query for Responsiveness */
+@media (max-width: 480px) {
+  .container {
+    max-width: 90%; /* Full width on smaller screens */
+    padding: 15px; /* Adjust padding */
+  }
 }
 
-input {
-  width: 95%;
-  padding: 8px;
-  margin-top: 2px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Blur Effect for Background */
+.blur {
+  filter: blur(2px);
+  pointer-events: none; /* Disable interactions with blurred content */
 }
 
-.error {
-  color: #e74c3c;
-  font-size: 15px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
-
-.submit-button {
-  background-color: #2ecc71;
-  color: #fff;
-  margin-top: 10px;
-}
-
+/* Success Popup Styles */
 .success-popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
   padding: 20px;
-  background-color: #dff0d8;
-  border: 1px solid #d6e9c6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  z-index: 1000;
   text-align: center;
+  z-index: 2; /* Above the overlay */
 }
 
 .success-popup p {
   margin: 0;
-  color: #3c763d;
+  color: #3c763d; /* Success message color */
 }
 
-.success-popup button {
-  margin-top: 10px;
-  padding: 5px 10px;
+/* Horizontal Rule Style */
+hr {
   border: none;
-  background-color: #5cb85c;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.blur {
-  filter: blur(4px);
+  border-top: 2px solid #007bff; /* Styled horizontal line */
+  color: #007bff;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+  margin: 20px 0; /* Spacing above and below the line */
 }
