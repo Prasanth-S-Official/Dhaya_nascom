@@ -107,12 +107,13 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class AdminviewtrainingComponent implements OnInit {
   availableTrainings: any[] = [];
+  allTrainings: any[] = [];
   showDeletePopup = false;
   trainingToDelete: string | null = null;
   searchField = '';
-  status: string = ''; // For handling loading state
+  selectedTrainingType: boolean | null = null; // Indoor/Outdoor filter
+  status: string = ''; 
   errorMessage: string = '';
-  allTrainings: any[] = []; // Holds the full list of training sessions
 
   constructor(private router: Router, private trainingService: PhysicalTrainingService) {}
 
@@ -125,12 +126,12 @@ export class AdminviewtrainingComponent implements OnInit {
     this.trainingService.getAllPhysicalTrainings().subscribe(
       (data: any) => {
         this.availableTrainings = data;
-        this.allTrainings = data;
-        this.status = ''; // Clear loading state
+        this.allTrainings = data; 
+        this.status = ''; 
       },
       (error) => {
         console.error('Error fetching trainings:', error);
-        this.status = 'error';
+        this.status = 'error'; 
       }
     );
   }
@@ -147,12 +148,14 @@ export class AdminviewtrainingComponent implements OnInit {
   handleConfirmDelete() {
     if (this.trainingToDelete) {
       this.trainingService.deletePhysicalTraining(this.trainingToDelete).subscribe(
-        (response) => {
+        () => {
           this.closeDeletePopup();
-          this.fetchAvailableTrainings();
+          this.fetchAvailableTrainings(); 
+          this.errorMessage = '';
         },
         (error) => {
-          this.errorMessage = error.error.message || 'An error occurred';
+          console.error('Error deleting training:', error);
+          this.errorMessage = error.error.message;
         }
       );
     }
@@ -164,22 +167,13 @@ export class AdminviewtrainingComponent implements OnInit {
     this.errorMessage = '';
   }
 
-  handleSearchChange(searchValue: string): void {
-    this.searchField = searchValue;
-    if (searchValue) {
-      this.availableTrainings = this.filterTrainings(searchValue);
-    } else {
-      this.availableTrainings = this.allTrainings;
-    }
-  }
-
-  filterTrainings(search: string) {
-    const searchLower = search.toLowerCase();
-    return this.allTrainings.filter(
-      (training) =>
-        training.trainingName.toLowerCase().includes(searchLower) ||
-        training.description.toLowerCase().includes(searchLower)
-    );
+  applyFilters(): void {
+    this.availableTrainings = this.allTrainings.filter(training => {
+      const matchesSearch = training.trainingName.toLowerCase().includes(this.searchField.toLowerCase()) ||
+                            training.description.toLowerCase().includes(this.searchField.toLowerCase());
+      const matchesType = this.selectedTrainingType === null || training.isIndoor === this.selectedTrainingType;
+      return matchesSearch && matchesType;
+    });
   }
 }
 

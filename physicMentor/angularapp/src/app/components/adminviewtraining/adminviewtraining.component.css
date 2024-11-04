@@ -52,51 +52,45 @@ h1 {
 #searchBox:focus {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
-
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 20px;
-  justify-content: center;
+.training-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.training-card {
-  width: 300px;
+.training-table th,
+.training-table td {
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: box-shadow 0.3s ease;
+  padding: 8px;
+  text-align: center;
 }
 
-.training-card:hover {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+.training-table th {
+  background-color: #3276a6;
+  color: white;
 }
 
-.training-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2em;
-  color: #3276a6;
+#sortButtonsone {
+  background-color: #fff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
-.training-card p {
-  margin: 4px 0;
-}
-
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+#sortButtonstwo {
+  background-color: #fff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
 button {
-  padding: 8px 12px;
+  padding: 10px 20px;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  margin: 4px 2px;
   border-radius: 5px;
 }
 
@@ -109,12 +103,12 @@ button:first-of-type:hover {
   background-color: #45a049; /* Darker green on hover */
 }
 
-button:last-of-type {
+#deleteButton {
   background-color: #cc2b1f; /* Red background */
   color: white; /* White text */
 }
 
-button:last-of-type:hover {
+#deleteButton:hover {
   background-color: #d32f2f; /* Darker red on hover */
 }
 
@@ -166,23 +160,34 @@ button:last-of-type:hover {
   background-color: #5a6268; /* Darker gray on hover */
 }
 
-.error {
-  color: #ff0000; /* Red color for the text */
-  background-color: #ffe6e6; /* Light red background */
-  border: 1px solid #ff0000; /* Red border */
-  padding: 10px; /* Space between the border and the text */
-  margin-top: 10px; /* Space above the error message */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 10px;
-  font-weight: bold; /* Bold text */
-  width: fit-content; /* Width just enough for the content */
+#prevButton,
+#nextButton {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 40px 2px;
+  cursor: pointer;
 }
 
-.no-records-cell {
-  text-align: center;
-  color: #666;
-  font-size: 1.1em;
-  padding: 20px;
+#prevButton[disabled],
+#nextButton[disabled] {
+  background-color: #ccc; /* Gray */
+  color: #888;
+  cursor: not-allowed;
+}
+
+span {
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+#delete-btn{
+  background-color: #eb192e;
 }
 
 hr {
@@ -193,4 +198,16 @@ hr {
   text-align: center;
   height: 8px;
   margin-bottom: 2%;
+}
+
+.error {
+  color: #ff0000; /* Red color for the text */
+  background-color: #ffe6e6; /* Light red background */
+  border: 1px solid #ff0000; /* Red border */
+  padding: 10px; /* Space between the border and the text */
+  margin-top: 10px; /* Space above the error message */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 10px;
+  font-weight: bold; /* Bold text */
+  width: fit-content; /* Width just enough for the content */
 }
