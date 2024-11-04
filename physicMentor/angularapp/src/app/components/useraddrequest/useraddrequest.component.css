@@ -7,6 +7,7 @@ body {
 
 /* Training Request Form Container */
 .container {
+  position: relative;
   max-width: 400px;
   margin: 5rem auto;
   padding: 20px;
@@ -16,6 +17,30 @@ body {
   background-color: #fff;
 }
 
+/* Back Button Positioning */
+.button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.button-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Form Header */
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
@@ -23,14 +48,21 @@ h2 {
   color: #333;
 }
 
+/* Form Layout */
 form {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center-align form items */
+}
+
+form > div {
+  width: 100%;
 }
 
 /* Input and Textarea Styles */
 input[type="text"],
 textarea {
+  width: 90%;
   margin: 10px 0;
   padding: 12px 15px;
   border: none;
@@ -41,6 +73,28 @@ textarea {
   font-size: 16px;
 }
 
+/* Success Popup Button Style */
+.success-popup button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 15px; /* Space between text and button */
+}
+
+.success-popup button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.success-popup button:active {
+  transform: translateY(1px);
+}
+
 input:focus,
 textarea:focus {
   outline: none;
@@ -48,24 +102,9 @@ textarea:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Button Styles */
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-button:active {
-  transform: translateY(1px);
+/* Required Indicator */
+.required {
+  color: red;
 }
 
 /* Error Message Style */
@@ -76,9 +115,26 @@ button:active {
   margin-bottom: 4px;
 }
 
-/* Required Indicator */
-.required {
-  color: red;
+/* Submit Button Styles */
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 20px;
+  text-align: center; /* Center the button in the form */
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(1px);
 }
 
 /* Blur Effect */
@@ -100,24 +156,6 @@ button:active {
   border-radius: 5px;
   text-align: center;
   z-index: 2;
-}
-
-/* Back Button Styling */
-.button-container button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  margin-bottom: 15px;
-}
-
-.button-container button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
 }
 
 /* Responsive Design */

@@ -9,7 +9,9 @@ import { PhysicalTrainingService } from 'src/app/services/physical-training.serv
 })
 export class UserviewappliedrequestComponent implements OnInit {
   showDeletePopup = false;
+  showDetailsModal = false;
   requestToDelete: any = null;
+  selectedRequest: any = null;
   appliedRequests: any[] = [];
   filteredRequests: any[] = [];
   searchValue = '';
@@ -28,7 +30,6 @@ export class UserviewappliedrequestComponent implements OnInit {
     const userId = localStorage.getItem('userId');
     this.trainingService.getPhysicalTrainingRequestsByUserId(userId).subscribe(
       (response: any) => {
-        console.log("response",response);
         this.appliedRequests = response;
         this.filteredRequests = response;
         this.maxRecords = response.length;
@@ -50,14 +51,13 @@ export class UserviewappliedrequestComponent implements OnInit {
     );
     this.maxRecords = this.filteredRequests.length;
   }
-  
 
   toggleSort(order: number): void {
     this.sortValue = order;
     this.filteredRequests.sort((a, b) =>
       order === 1
-        ? new Date(a.RequestDate).getTime() - new Date(b.RequestDate).getTime()
-        : new Date(b.RequestDate).getTime() - new Date(a.RequestDate).getTime()
+        ? new Date(a.requestDate).getTime() - new Date(b.requestDate).getTime()
+        : new Date(b.requestDate).getTime() - new Date(a.requestDate).getTime()
     );
   }
 
@@ -79,5 +79,17 @@ export class UserviewappliedrequestComponent implements OnInit {
   closeDeletePopup(): void {
     this.requestToDelete = null;
     this.showDeletePopup = false;
+  }
+
+  // Show additional request details in modal
+  showRequestDetails(request: any): void {
+    this.selectedRequest = request;
+    this.showDetailsModal = true;
+  }
+
+  // Close the details modal
+  closeDetailsModal(): void {
+    this.selectedRequest = null;
+    this.showDetailsModal = false;
   }
 }
