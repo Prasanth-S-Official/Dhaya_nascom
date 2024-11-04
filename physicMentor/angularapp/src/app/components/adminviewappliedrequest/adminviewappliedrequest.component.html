@@ -43,6 +43,7 @@
         <td>{{ request.requestDate | date: 'yyyy-MM-dd' }}</td>
         <td>{{ request.status }}</td>
         <td>
+          <button (click)="handleShowMore(request)">Show More</button>
           <button
             id="greenButton"
             *ngIf="request.status === 'Pending' || request.status === 'Rejected'"
@@ -69,9 +70,15 @@
 </div>
 
 <!-- Success Modal -->
-<div *ngIf="showModal" class="success-modal">
+<div *ngIf="showModal" class="modal-overlay">
   <div class="modal-content">
-    <p>Request status updated successfully!</p>
-    <button (click)="closeModal()">OK</button>
+    <button class="close-button" (click)="closeModal()">X</button>
+    <h2>Request Details</h2>
+    <p><strong>Username:</strong> {{ selectedRequest?.user?.username }}</p>
+    <p><strong>Training Name:</strong> {{ selectedRequest?.physicalTraining?.trainingName }}</p>
+    <p><strong>Location:</strong> {{ selectedRequest?.physicalTraining?.location }}</p>
+    <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
+    <p><strong>Description:</strong> {{ selectedRequest?.physicalTraining?.description }}</p>
   </div>
 </div>

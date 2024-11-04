@@ -12,7 +12,6 @@ export class AdminviewappliedrequestComponent implements OnInit {
   filteredRequests: any[] = [];
   searchValue = '';
   statusFilter = '-1'; // All statuses by default
-  expandedRow: number | null = null;
   showModal = false;
   selectedRequest: any = null;
 
@@ -25,13 +24,11 @@ export class AdminviewappliedrequestComponent implements OnInit {
     this.fetchTrainingRequests();
   }
 
-  // Fetch all training applications from the service
   fetchTrainingRequests(): void {
     this.trainingService.getAllPhysicalTrainingRequests().subscribe(
       (response) => {
         this.trainingRequests = response;
-        this.filteredRequests = [...this.trainingRequests]; // Initialize the filtered list
-        console.log('Training requests:', this.trainingRequests);
+        this.filteredRequests = [...this.trainingRequests];
       },
       (error) => {
         console.error('Error fetching training requests:', error);
@@ -39,7 +36,6 @@ export class AdminviewappliedrequestComponent implements OnInit {
     );
   }
 
-  // Search functionality to filter training requests by Training Name
   handleSearchChange(event: any): void {
     const searchValueLower = this.searchValue.toLowerCase();
     this.filteredRequests = this.trainingRequests.filter((request) =>
@@ -47,37 +43,30 @@ export class AdminviewappliedrequestComponent implements OnInit {
     );
   }
 
-  // Filter requests based on their status (Pending, Approved, Rejected)
   handleFilterChange(event: any): void {
     this.filteredRequests = this.trainingRequests.filter((request) => {
       if (this.statusFilter === '-1') {
-        return true; // Show all
+        return true;
       } else {
         return request.status === (this.statusFilter === '0' ? 'Pending' : this.statusFilter === '1' ? 'Approved' : 'Rejected');
       }
     });
   }
 
-  // Approve a training request
   handleApprove(trainingRequest: any): void {
-    trainingRequest.status = "Approved"; // Status for Approved
-    console.log("trainingRequest",trainingRequest);
+    trainingRequest.status = 'Approved';
     this.updateRequestStatus(trainingRequest);
   }
 
-  // Reject a training request
   handleReject(trainingRequest: any): void {
-    trainingRequest.status = "Rejected"; // Status for Approved
+    trainingRequest.status = 'Rejected';
     this.updateRequestStatus(trainingRequest);
   }
 
-  // Update request status via the TrainingService
   updateRequestStatus(trainingRequest: any): void {
-    console.log("trainingRequest",trainingRequest);
     this.trainingService.updatePhysicalTrainingRequest(trainingRequest.physicalTrainingRequestId, trainingRequest).subscribe(
-      (response) => {
-        console.log('Training request status updated:', response);
-        this.fetchTrainingRequests(); // Refresh data after status update
+      () => {
+        this.fetchTrainingRequests();
       },
       (error) => {
         console.error('Error updating request status:', error);
@@ -85,16 +74,15 @@ export class AdminviewappliedrequestComponent implements OnInit {
     );
   }
 
-  // Expand row to show more details
-  handleRowExpand(index: number): void {
-    const selected = this.trainingRequests[index];
-    this.expandedRow = this.expandedRow === index ? null : index;
-    this.selectedRequest = selected;
-    this.showModal = !this.showModal;
+  // Show More button handler to display the modal with details
+  handleShowMore(request: any): void {
+    this.selectedRequest = request;
+    this.showModal = true;
   }
 
-  // Close the request details modal
-  closeRequestDetailsModal(): void {
+  // Close the modal
+  closeModal(): void {
     this.showModal = false;
+    this.selectedRequest = null;
   }
 }
