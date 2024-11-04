@@ -48,12 +48,12 @@
           <td colspan="8">Error loading data</td>
         </tr>
       </tbody>
-      <tbody *ngIf="status !== 'loading' && availableTrainings.length === 0">
+      <tbody *ngIf="status === 'noRecords'">
         <tr>
           <td colspan="8" class="no-records-cell">Oops! No records found</td>
         </tr>
       </tbody>
-      <tbody *ngIf="status !== 'loading' && availableTrainings.length > 0">
+      <tbody *ngIf="availableTrainings.length > 0">
         <tr *ngFor="let training of availableTrainings; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ training.trainingName }}</td>
@@ -64,9 +64,7 @@
           <td>{{ training.description }}</td>
           <td>
             <button (click)="navigateToEditTraining(training.physicalTrainingId)">Edit</button>
-            <button (click)="handleDeleteClick(training.physicalTrainingId)" id="deleteButton">
-              Delete
-            </button>
+            <button (click)="handleDeleteClick(training.physicalTrainingId)" id="deleteButton">Delete</button>
           </td>
         </tr>
       </tbody>
