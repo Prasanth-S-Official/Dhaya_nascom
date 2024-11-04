@@ -60,12 +60,12 @@
           #isIndoor="ngModel"
           (change)="handleChange($event, 'isIndoor')"
         >
-          <option value="" disabled selected>Select an option</option> <!-- Placeholder option -->
+          <option value="" disabled>Select an option</option> <!-- Placeholder option -->
           <option [ngValue]="true">Indoor</option>
           <option [ngValue]="false">Outdoor</option>
         </select>
         <div class="error" *ngIf="isIndoor.invalid && isIndoor.touched">*Indoor/Outdoor information is required</div>
-        
+
         <label for="fee">Fee<span class="required">*</span></label>
         <input
           type="number"
@@ -78,18 +78,19 @@
         />
         <div class="error" *ngIf="fee.invalid && fee.touched">*Fee is required</div>
       
-        <label for="focusArea">Focus Area<span class="required">*</span></label>
-        <input
-          type="text"
-          name="focusArea"
-          [(ngModel)]="formData.focusArea"
-          placeholder="Focus Area"
-          required
-          #focusArea="ngModel"
-          (change)="handleChange($event, 'focusArea')"
-        />
-        <div class="error" *ngIf="focusArea.invalid && focusArea.touched">*Focus Area is required</div>
-      
+       <label for="focusArea">Focus Area<span class="required">*</span></label>
+      <select
+        name="focusArea"
+        [(ngModel)]="formData.focusArea"
+        required
+        #focusArea="ngModel"
+        (change)="handleChange($event, 'focusArea')"
+      >
+        <option value="" disabled>Select a focus area</option> <!-- Placeholder option -->
+        <option *ngFor="let area of focusAreas" [ngValue]="area">{{ area }}</option>
+      </select>
+      <div class="error" *ngIf="focusArea.invalid && focusArea.touched">*Focus Area is required</div>
+
         <label for="physicalRequirements">Physical Requirements<span class="required">*</span></label>
         <input
           type="text"

@@ -23,6 +23,30 @@ export class AdminaddtrainingComponent implements OnInit {
   errors: any = {};
   errorMessage: string;
   successPopup: boolean = false;
+  
+  focusAreas: string[] = [
+    'Strength Training',
+    'Cardio',
+    'Yoga',
+    'Pilates',
+    'Martial Arts',
+    'CrossFit',
+    'Dance',
+    'Zumba',
+    'Swimming',
+    'Cycling',
+    'Kickboxing',
+    'Bodybuilding',
+    'Athletic Conditioning',
+    'Functional Training',
+    'Resistance Training',
+    'High-Intensity Interval Training (HIIT)',
+    'Flexibility and Mobility',
+    'Group Fitness',
+    'Outdoor Adventure',
+    'Wellness and Recovery',
+    'Core Stability'
+  ];
 
   constructor(private trainingService: PhysicalTrainingService, private router: Router) { }
 
