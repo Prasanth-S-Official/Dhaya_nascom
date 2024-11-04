@@ -191,7 +191,7 @@ CREATE TABLE `physical_training_request` (
   KEY `FKan79gfnwjjvggashsxdvgx85d` (`user_id`),
   CONSTRAINT `FK4ouv6iu42xeyckr1ouufcjj8a` FOREIGN KEY (`physical_training_id`) REFERENCES `physical_training` (`physical_training_id`),
   CONSTRAINT `FKan79gfnwjjvggashsxdvgx85d` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,6 +200,7 @@ CREATE TABLE `physical_training_request` (
 
 LOCK TABLES `physical_training_request` WRITE;
 /*!40000 ALTER TABLE `physical_training_request` DISABLE KEYS */;
+INSERT INTO `physical_training_request` VALUES (2,'rt','being summa','good','2024-11-04','Pending',2,3),(3,'work hard','slim','good very','2024-11-04','Pending',3,5);
 /*!40000 ALTER TABLE `physical_training_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +228,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$dvnXcHQNPLIHKpDiXslcaO5B5TDtmYxaoojD3eUo5lfN9cmaqgKlC','Admin','admin'),(2,'user@gmail.com','5551234567','$2a$10$pacS5pMN8MuThzSBEPrtuOGbSG..yvPsQXUv2oAMlTbaNmanAT2A.','User','user'),(3,'duser@gmail.com','1234567890','$2a$10$mYs5XXljs88OQHlUKbDDVuPhxg5TYLctu5Js1j9NQ2LcdngGv4gsm','User','demouser'),(4,'duser2@gmail.com','9876543213','$2a$10$aOZlh2UV1PtmfxwgZfOY3uuYRHAN0udRNgzhb9e083xuUeEIDdRQy','User','demouser2'),(5,'duser2@gmail.com','9876543211','$2a$10$JDIXC8IFHq4IHdDFWsXjOOJsrZiC7XQGolhvYy2XB6TXQIGufhG.2','User','duser');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$dvnXcHQNPLIHKpDiXslcaO5B5TDtmYxaoojD3eUo5lfN9cmaqgKlC','Admin','admin'),(2,'user@gmail.com','5551234567','$2a$10$pacS5pMN8MuThzSBEPrtuOGbSG..yvPsQXUv2oAMlTbaNmanAT2A.','User','user'),(3,'duser@gmail.com','1234567890','$2a$10$mYs5XXljs88OQHlUKbDDVuPhxg5TYLctu5Js1j9NQ2LcdngGv4gsm','User','demouser'),(5,'duser2@gmail.com','9876543211','$2a$10$JDIXC8IFHq4IHdDFWsXjOOJsrZiC7XQGolhvYy2XB6TXQIGufhG.2','User','duser');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -240,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-04  6:41:27
+-- Dump completed on 2024-11-04  6:56:27
