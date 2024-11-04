@@ -11,58 +11,41 @@ body {
   margin: 5rem auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px; /* Slightly larger border radius for a softer look */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
 
-/* Header Style */
 h2 {
-  font-size: 26px; /* Increased font size for better visibility */
+  font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
   color: #333;
 }
 
-/* Form Flexbox Layout */
 form {
   display: flex;
   flex-direction: column;
 }
 
 /* Input and Textarea Styles */
-input,
+input[type="text"],
 textarea {
-  margin: 10px 0; /* Consistent margin */
-  padding: 12px 15px; /* Increased padding for comfort */
-  border: 1px solid #ccc; /* Added a border for better visibility */
-  border-radius: 30px; /* Rounded corners */
-  background-color: #f1f1f1; /* Light background */
-  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s; /* Smooth transitions */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  font-size: 16px; /* Increased font size for readability */
+  margin: 10px 0;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 30px;
+  background-color: #f1f1f1;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
 }
 
-/* Focus Styles for Inputs and Textareas */
 input:focus,
 textarea:focus {
-  outline: none; /* Remove the default outline */
-  background-color: #ffffff; /* Change background on focus */
-  border: 1px solid #007bff; /* Highlight border on focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
-}
-
-/* Error Message Style */
-.error {
-  color: red;
-  font-size: 14px; /* Adjusted for better fit */
-  margin-top: -6px; /* Negative margin to pull up error message */
-  margin-bottom: 10px; /* Space below error message */
-}
-
-/* Required Indicator */
-.required {
-  color: red;
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 /* Button Styles */
@@ -70,37 +53,41 @@ button {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 30px; /* Rounded button */
+  border-radius: 30px;
   padding: 12px 20px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
-  margin-top: 10px; /* Margin above the button */
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: translateY(-2px); /* Slight lift effect */
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 button:active {
-  transform: translateY(1px); /* Slight depress effect */
+  transform: translateY(1px);
 }
 
-/* Media Query for Responsiveness */
-@media (max-width: 480px) {
-  .container {
-    max-width: 90%; /* Full width on smaller screens */
-    padding: 15px; /* Adjust padding */
-  }
+/* Error Message Style */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
-/* Blur Effect for Background */
+/* Required Indicator */
+.required {
+  color: red;
+}
+
+/* Blur Effect */
 .blur {
   filter: blur(2px);
-  pointer-events: none; /* Disable interactions with blurred content */
+  pointer-events: none;
 }
 
-/* Success Popup Styles */
+/* Success Popup */
 .success-popup {
   position: fixed;
   top: 50%;
@@ -112,21 +99,42 @@ button:active {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   text-align: center;
-  z-index: 2; /* Above the overlay */
+  z-index: 2;
 }
 
-.success-popup p {
-  margin: 0;
-  color: #3c763d; /* Success message color */
+/* Back Button Styling */
+.button-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: 15px;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 15px;
+  }
 }
 
 /* Horizontal Rule Style */
 hr {
   border: none;
-  border-top: 2px solid #007bff; /* Styled horizontal line */
+  border-top: 2px solid #007bff;
   color: #007bff;
   overflow: visible;
   text-align: center;
   height: 5px;
-  margin: 20px 0; /* Spacing above and below the line */
+  margin: 20px 0;
 }
