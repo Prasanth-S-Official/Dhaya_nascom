@@ -26,8 +26,10 @@ body, html {
 }
 
 .coverimage img {
-  width: 100%;
+  width: 100%; /* Make the image responsive */
   height: auto;
+  border-radius: 50%; /* Make the image round */
+  object-fit: cover; /* Ensures the image covers the element without distortion */
 }
 
 .title {
@@ -74,16 +76,42 @@ body, html {
   align-items: center; /* Centers items on the cross axis */
   justify-content: center; /* Centers items on the main axis */
   padding: 10px;
-  width: 98% ;
+  width: 98%;
   margin: 20px auto 0;
   background-color: #454545;
   color: #fff;
   border-radius: 5px;
 }
+
 .contact h2 {
   margin-bottom: 10px;
 }
 
 .contact p {
   margin-bottom: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .content {
+    width: 90%; /* Adjust content width for smaller screens */
+  }
+
+  .coverimage {
+    height: 300px; /* Adjust cover image height */
+  }
+
+  .title {
+    font-size: 1.5em; /* Decrease title font size */
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 1.2em; /* Further decrease title font size */
+  }
+
+  .content {
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
 }
