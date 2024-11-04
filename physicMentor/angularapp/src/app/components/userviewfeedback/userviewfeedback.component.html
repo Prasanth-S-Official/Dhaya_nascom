@@ -13,8 +13,8 @@
     <tbody>
       <tr *ngFor="let feedback of feedbacks; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ feedback.FeedbackText }}</td>
-        <td><button class="delete-button" (click)="openDeletePopup(feedback.FeedbackId)">Delete</button></td>
+        <td>{{ feedback.feedbackText }}</td>
+        <td><button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button></td>
       </tr>
     </tbody>
   </table>
