@@ -6,22 +6,22 @@
 
     <div class="top-container">
       <div>
-      <label for="searchBox">Search by:</label>
-      <input
-        id="searchBox"
-        type="text"
-        placeholder="Training Name..."
-        [(ngModel)]="searchField"
-        (ngModelChange)="applyFilters()"
-      />
+        <label for="searchBox">Search by:</label>
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Training Name..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="applyFilters()"
+        />
       </div>
       <div>
-      <label for="trainingTypeSelect">Filter by:</label>
-      <select [(ngModel)]="selectedTrainingType" (ngModelChange)="applyFilters()" id="trainingTypeSelect">
-        <option value="">All</option>
-        <option [ngValue]="true">Indoor</option>
-        <option [ngValue]="false">Outdoor</option>
-      </select>
+        <label for="trainingTypeSelect">Filter by:</label>
+        <select [(ngModel)]="selectedTrainingType" (ngModelChange)="applyFilters()" id="trainingTypeSelect">
+          <option value="">All</option>
+          <option [ngValue]="true">Indoor</option>
+          <option [ngValue]="false">Outdoor</option>
+        </select>
       </div>
     </div>
 
@@ -48,7 +48,12 @@
           <td colspan="8">Error loading data</td>
         </tr>
       </tbody>
-      <tbody *ngIf="availableTrainings.length > 0; else noRecords">
+      <tbody *ngIf="status !== 'loading' && availableTrainings.length === 0">
+        <tr>
+          <td colspan="8" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status !== 'loading' && availableTrainings.length > 0">
         <tr *ngFor="let training of availableTrainings; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ training.trainingName }}</td>
@@ -65,11 +70,6 @@
           </td>
         </tr>
       </tbody>
-      <ng-template #noRecords>
-        <tr>
-          <td colspan="8" class="no-records-cell">Oops! No records found</td>
-        </tr>
-      </ng-template>
     </table>
   </div>
 
