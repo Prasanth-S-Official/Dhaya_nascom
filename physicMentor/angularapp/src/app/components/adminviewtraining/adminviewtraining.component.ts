@@ -71,22 +71,26 @@ export class AdminviewtrainingComponent implements OnInit {
 
   applyFilters(): void {
     // Filter trainings based on search field and selected training type
+    console.log("Selected Training Type:", this.selectedTrainingType); // Log the selected training type
+
     this.availableTrainings = this.allTrainings.filter(training => {
       // Check if training matches the search field
       const matchesSearch = training.trainingName.toLowerCase().includes(this.searchField.toLowerCase()) ||
                             training.description.toLowerCase().includes(this.searchField.toLowerCase());
       
       // Check if the training type matches the selected type or if "All" is selected
-      const matchesType = this.selectedTrainingType ===  || training.isIndoor === this.selectedTrainingType;
+      const matchesType = this.selectedTrainingType === null || 
+                          (this.selectedTrainingType === true && training.isIndoor) || 
+                          (this.selectedTrainingType === false && !training.isIndoor);
 
       return matchesSearch && matchesType; // Return true if both conditions are met
     });
 
-    // Set status based on available trainings
-    if (this.availableTrainings.length === 0) {
-      this.status = this.searchField === '' ? 'noRecords' : ''; // Set no records status only if search is empty
+    // Set status based on available trainings after filtering
+    if (this.availableTrainings.length === 0 && this.searchField !== '') {
+      this.status = 'noRecords'; // Set no records status when no results are found
     } else {
-      this.status = ''; // Reset status if there are records
+      this.status = ''; // Reset status if there are records found
     }
   }
 }
