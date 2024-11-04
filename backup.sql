@@ -166,7 +166,7 @@ CREATE TABLE `physical_training` (
 
 LOCK TABLES `physical_training` WRITE;
 /*!40000 ALTER TABLE `physical_training` DISABLE KEYS */;
-INSERT INTO `physical_training` VALUES (2,'demo description',300,'Resistance Training','\0','CBEs','demo requirements','vijian','demo dance'),(3,'demo description',450,'Body','','CBE','requirements updated','Malani','yoga training');
+INSERT INTO `physical_training` VALUES (2,'demo description',300,'Cycling','\0','CBEs','demo requirements','vijian','demo dance'),(3,'demo description',450,'Yoga','','CBE','requirements updated','Malani','yoga training');
 /*!40000 ALTER TABLE `physical_training` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-04  8:56:49
+-- Dump completed on 2024-11-04  9:11:49

@@ -1,4 +1,4 @@
-<app-adminnav></app-adminnav>
+<!-- <app-adminnav></app-adminnav>
 <div id="parent">
   <div id="trainingHomeBody" [ngClass]="{ blur: showDeletePopup }">
     <h1>Training Sessions</h1>
@@ -59,6 +59,61 @@
         </tr>
       </ng-template>
     </table>
+  </div>
+
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete?</p>
+    <button (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button (click)="closeDeletePopup()">Cancel</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div> -->
+
+<app-adminnav></app-adminnav>
+<div id="parent">
+  <div id="trainingHomeBody" [class.blur]="showDeletePopup">
+    <h1>Training Sessions</h1>
+    <hr>
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Training Name..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+
+      <!-- Indoor/Outdoor Filter -->
+      <select [(ngModel)]="selectedTrainingType" (ngModelChange)="handleFilterChange($event)" id="filterSelect">
+        <option value="">All</option>
+        <option value="Indoor">Indoor</option>
+        <option value="Outdoor">Outdoor</option>
+      </select>
+    </div>
+
+    <div *ngIf="status === 'loading'" class="loading">Loading...</div>
+    <div *ngIf="status === 'error'" class="error">Error loading data</div>
+
+    <div *ngIf="availableTrainings.length > 0; else noRecords" class="cards-container">
+      <div class="training-card" *ngFor="let training of availableTrainings; let i = index">
+        <h3>{{ training.trainingName }}</h3>
+        <p><strong>Location:</strong> {{ training.location }}</p>
+        <p><strong>Trainer:</strong> {{ training.trainerName }}</p>
+        <p><strong>Fee:</strong> ₹{{ training.fee }}</p>
+        <p><strong>Focus Area:</strong> {{ training.focusArea }}</p>
+        <p><strong>Description:</strong> {{ training.description }}</p>
+        <p><strong>PhysicalRequirement:</strong> {{ training.physicalRequirements }}</p>
+        <p><strong>Type:</strong> {{ training.type }}</p>
+        <div class="card-actions">
+          <button (click)="navigateToEditTraining(training.physicalTrainingId)">Edit</button>
+          <button (click)="handleDeleteClick(training.physicalTrainingId)">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noRecords>
+      <div class="no-records-cell">Oops! No records found</div>
+    </ng-template>
   </div>
 
   <div *ngIf="showDeletePopup" class="delete-popup">
