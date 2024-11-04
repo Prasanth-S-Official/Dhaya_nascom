@@ -15,7 +15,7 @@ export class AdminaddtrainingComponent implements OnInit {
     description: '',
     trainerName: '',
     location: '',
-    isIndoor: true,
+    isIndoor: null,
     fee: null,
     focusArea: '',
     physicalRequirements: '',
