@@ -67,7 +67,7 @@ export class UserviewappliedrequestComponent implements OnInit {
   }
 
   handleConfirmDelete(): void {
-    this.trainingService.deletePhysicalTrainingRequest(this.requestToDelete.PhysicalTrainingRequestId).subscribe(
+    this.trainingService.deletePhysicalTrainingRequest(this.requestToDelete.physicalTrainingRequestId).subscribe(
       () => {
         this.fetchData();
         this.closeDeletePopup();
