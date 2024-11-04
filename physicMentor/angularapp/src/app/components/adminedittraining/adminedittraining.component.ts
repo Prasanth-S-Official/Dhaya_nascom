@@ -17,13 +17,34 @@ export class AdminedittrainingComponent implements OnInit {
     description: '',
     trainerName: '',
     location: '',
-    isIndoor: true,
+    isIndoor: null,
     fee: null,
     focusArea: '',
     physicalRequirements: '',
   };
   errors: any = {};
   successPopup: boolean = false;
+
+  focusAreas: string[] = [
+    'Strength Training',
+    'Cardio',
+    'Yoga',
+    'Pilates',
+    'Martial Arts',
+    'CrossFit',
+    'Dance',
+    'Zumba',
+    'Swimming',
+    'Cycling',
+    'Kickboxing',
+    'Bodybuilding',
+    'Athletic Conditioning',
+    'Functional Training',
+    'Resistance Training',
+    'High-Intensity Interval Training (HIIT)',
+    'Core Stability'
+  ];
+
 
   constructor(
     private route: ActivatedRoute,

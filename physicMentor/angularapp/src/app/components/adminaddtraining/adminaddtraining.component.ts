@@ -23,7 +23,7 @@ export class AdminaddtrainingComponent implements OnInit {
   errors: any = {};
   errorMessage: string;
   successPopup: boolean = false;
-  
+
   focusAreas: string[] = [
     'Strength Training',
     'Cardio',
@@ -41,10 +41,6 @@ export class AdminaddtrainingComponent implements OnInit {
     'Functional Training',
     'Resistance Training',
     'High-Intensity Interval Training (HIIT)',
-    'Flexibility and Mobility',
-    'Group Fitness',
-    'Outdoor Adventure',
-    'Wellness and Recovery',
     'Core Stability'
   ];
 
