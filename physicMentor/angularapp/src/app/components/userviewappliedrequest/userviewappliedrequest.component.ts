@@ -28,6 +28,7 @@ export class UserviewappliedrequestComponent implements OnInit {
     const userId = localStorage.getItem('userId');
     this.trainingService.getPhysicalTrainingRequestsByUserId(userId).subscribe(
       (response: any) => {
+        console.log("response",response);
         this.appliedRequests = response;
         this.filteredRequests = response;
         this.maxRecords = response.length;
@@ -45,10 +46,11 @@ export class UserviewappliedrequestComponent implements OnInit {
   filterRequests(): void {
     const searchLower = this.searchValue.toLowerCase();
     this.filteredRequests = this.appliedRequests.filter(request =>
-      request.PhysicalTraining?.TrainingName.toLowerCase().includes(searchLower)
+      request.physicalTraining.trainingName.toLowerCase().includes(searchLower)
     );
     this.maxRecords = this.filteredRequests.length;
   }
+  
 
   toggleSort(order: number): void {
     this.sortValue = order;
