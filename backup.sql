@@ -157,7 +157,7 @@ CREATE TABLE `physical_training` (
   `trainer_name` varchar(255) DEFAULT NULL,
   `training_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`physical_training_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +166,7 @@ CREATE TABLE `physical_training` (
 
 LOCK TABLES `physical_training` WRITE;
 /*!40000 ALTER TABLE `physical_training` DISABLE KEYS */;
-INSERT INTO `physical_training` VALUES (4,'Demo description',35000,'12: Bodybuilding','','Demo Location','Demo Physical Requirements','Demo Name','Demo training'),(6,'Demo description',35000,'Athletic Conditioning','','Demo Location','Demo Physical Requirements','Demo Name','Demo training 2');
+INSERT INTO `physical_training` VALUES (4,'Demo description',35000,'Bodybuilding','','Demo Location','Demo Physical Requirements','Demo Name','Demo training'),(6,'Demo description',75000,'Athletic Conditioning','','Demo Location','Demo Physical Requirements','Demo Name','Demo training 2');
 /*!40000 ALTER TABLE `physical_training` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-05  8:22:03
+-- Dump completed on 2024-11-05  8:37:04

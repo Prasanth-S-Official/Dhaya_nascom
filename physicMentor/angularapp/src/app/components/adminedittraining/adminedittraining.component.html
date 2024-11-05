@@ -92,7 +92,6 @@
       [(ngModel)]="formData.focusArea"
       required
       #focusArea="ngModel"
-      (change)="handleChange($event, 'focusArea')"
     >
       <option value="" disabled selected>Select Focus Area</option> <!-- Placeholder option -->
       <option *ngFor="let area of focusAreas" [value]="area">{{ area }}</option>
