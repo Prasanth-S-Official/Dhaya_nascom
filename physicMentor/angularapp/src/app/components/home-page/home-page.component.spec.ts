@@ -25,9 +25,9 @@ describe('HomePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('Frontend_should_display_title_Physicmentor_in_home_page_component', () => {
+  fit('Frontend_should_display_title_FitMentor_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('PhysicMentor');
+    expect(compiled.textContent).toContain('FitMentor');
   });
 
   fit('Frontend_should_display_content_paragraph_in_home_page_component', () => {
