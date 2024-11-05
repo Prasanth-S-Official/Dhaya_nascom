@@ -27,6 +27,7 @@ export class AdminviewtrainingComponent implements OnInit {
     this.status = 'loading'; // Set loading status
     this.trainingService.getAllPhysicalTrainings().subscribe(
       (data: any) => {
+        console.log("data",data);
         this.availableTrainings = data; // Set the available trainings from the response
         this.allTrainings = data;        // Keep a copy of all trainings for filtering
         this.status = this.availableTrainings.length === 0 ? 'noRecords' : ''; // Update status

@@ -58,14 +58,13 @@
           [(ngModel)]="formData.isIndoor"
           required
           #isIndoor="ngModel"
-          (change)="handleChange($event, 'isIndoor')"
         >
           <option value="" disabled>Select an option</option> <!-- Placeholder option -->
           <option [ngValue]="true">Indoor</option>
           <option [ngValue]="false">Outdoor</option>
         </select>
         <div class="error" *ngIf="isIndoor.invalid && isIndoor.touched">*Indoor/Outdoor information is required</div>
-
+        
         <label for="fee">Fee<span class="required">*</span></label>
         <input
           type="number"
