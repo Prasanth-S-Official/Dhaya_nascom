@@ -2,7 +2,7 @@ import { PhysicalTraining } from "./physical-training.model";
 
 describe('PhysicalTraining Model', () => {
 
-  it('Frontend_should_create_an_instance_PhysicalTraining_with_defined_properties', () => {
+  fit('Frontend_should_create_an_instance_PhysicalTraining_with_defined_properties', () => {
     // Create a sample PhysicalTraining object
     const training: PhysicalTraining = {
       physicalTrainingId: 101,

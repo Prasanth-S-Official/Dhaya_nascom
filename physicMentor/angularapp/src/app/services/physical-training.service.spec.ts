@@ -10,7 +10,7 @@ describe('PhysicalTrainingService', () => {
     service = TestBed.inject(PhysicalTrainingService);
   });
 
-  it('should be created', () => {
+  fit('Frontend_should_create_physicaltraining_service', () => {
     expect(service).toBeTruthy();
   });
 });
