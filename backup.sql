@@ -191,7 +191,7 @@ CREATE TABLE `physical_training_request` (
   KEY `FKan79gfnwjjvggashsxdvgx85d` (`user_id`),
   CONSTRAINT `FK4ouv6iu42xeyckr1ouufcjj8a` FOREIGN KEY (`physical_training_id`) REFERENCES `physical_training` (`physical_training_id`),
   CONSTRAINT `FKan79gfnwjjvggashsxdvgx85d` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,6 +200,7 @@ CREATE TABLE `physical_training_request` (
 
 LOCK TABLES `physical_training_request` WRITE;
 /*!40000 ALTER TABLE `physical_training_request` DISABLE KEYS */;
+INSERT INTO `physical_training_request` VALUES (7,'demo comments','demo goals','demo health conditions','2024-11-05','Pending',4,3);
 /*!40000 ALTER TABLE `physical_training_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-05  9:37:03
+-- Dump completed on 2024-11-05  9:52:03
