@@ -38,7 +38,7 @@ CREATE TABLE `feedback` (
   PRIMARY KEY (`feedback_id`),
   KEY `FK7k33yw505d347mw3avr93akao` (`user_id`),
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,'2024-10-28','This is a feedback message.',1),(9,'2024-10-29','Thank You! GREAT...',3),(10,'2024-11-04','ssss',3);
+INSERT INTO `feedback` VALUES (1,'2024-10-28','This is a feedback message.',1),(9,'2024-10-29','Thank You! GREAT...',3),(12,'2024-11-05','Thank You!',3);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +200,7 @@ CREATE TABLE `physical_training_request` (
 
 LOCK TABLES `physical_training_request` WRITE;
 /*!40000 ALTER TABLE `physical_training_request` DISABLE KEYS */;
-INSERT INTO `physical_training_request` VALUES (7,'demo comments','demo goals','demo health conditions','2024-11-05','Pending',4,3);
+INSERT INTO `physical_training_request` VALUES (7,'demo comments','demo goals','demo health conditions','2024-11-05','Rejected',4,3);
 /*!40000 ALTER TABLE `physical_training_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-05  9:52:03
+-- Dump completed on 2024-11-05 10:07:03
