@@ -6,7 +6,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
@@ -31,7 +30,6 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     SignupComponent,
     HomePageComponent,
     ErrorComponent,
-    NavbarComponent,
     AdminviewfeedbackComponent,
     UserviewfeedbackComponent,
     UseraddfeedbackComponent,

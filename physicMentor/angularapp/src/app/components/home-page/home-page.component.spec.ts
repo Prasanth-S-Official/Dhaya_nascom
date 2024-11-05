@@ -25,14 +25,14 @@ describe('HomePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('Frontend_should_display_title_fitnessapp_in_home_page_component', () => {
+  fit('Frontend_should_display_title_Physicmentor_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('FarmAid');
+    expect(compiled.textContent).toContain('PhysicMentor');
   });
 
   fit('Frontend_should_display_content_paragraph_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('Your journey to financial growth begins with us');
+    expect(compiled.textContent).toContain('Your journey to being healthy begins with us');
   });
 
   fit('Frontend_should_display_contact_us_section_in_home_page_component', () => {
