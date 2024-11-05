@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllloans() throws Exception {
-	        mockMvc.perform(get("/api/loan")
+	    public void backend_testGetAllphysicalTraining() throws Exception {
+	        mockMvc.perform(get("/api/physicalTraining")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -97,10 +97,10 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testLoanApplicationHasManyToManyAnnotation() {
+    public void backend_testPhysicalTrainingRequestHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.LoanApplication");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.PhysicalTrainingRequest");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
@@ -127,10 +127,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testLoanInterfaceAndImplementation() {
+    public void backend_testPhysicalTrainingInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.LoanService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.LoanServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.PhysicalTrainingService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.PhysicalTrainingServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testLoanApplicationInterfaceAndImplementation() {
+    public void backend_testPhysicalTrainingRequestInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.LoanApplicationService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.LoanApplicationServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.PhysicalTrainingRequestService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.PhysicalTrainingRequestServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testLoanControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.LoanController");
+	   public void backend_testPhysicalTrainingControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.PhysicalTrainingController");
 	   }
 
 	   @Test
-	   public void backend_testLoanApplicationControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.LoanApplicationController");
+	   public void backend_testPhysicalTrainingRequestControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.PhysicalTrainingRequestController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testLoanModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Loan");
+	   public void backend_testPhysicalTrainingModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.PhysicalTraining");
 	   }
 	 
 	 @Test
@@ -200,8 +200,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testLoanApplocationModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.LoanApplication");
+	   public void backend_testPhysicalTrainingRequestModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.PhysicalTrainingRequest");
 	   }
 
 }
