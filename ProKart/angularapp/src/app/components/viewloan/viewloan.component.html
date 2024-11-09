@@ -1,0 +1,72 @@
+<app-adminnav></app-adminnav>
+<div id="parent">
+  <div id="loanHomeBody" [ngClass]="{ blur: showDeletePopup }">
+    <h1>Loan Details</h1>
+    <hr>
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <table class="loan-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Loan Type</th>
+          <th>Maximum Amount</th>
+          <th>Interest Rate</th>
+          <th>Repayment Tenure</th>
+          <th>Eligibility Criteria</th>
+          <th>Documents Required</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="status === 'loading'">
+        <tr>
+          <td colspan="9">Loading...</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'error'">
+        <tr>
+          <td colspan="9">Error loading data</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="availableLoans.length > 0; else noRecords">
+        <tr *ngFor="let loan of availableLoans; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ loan.loanType }}</td>
+          <td>₹{{ loan.maximumAmount }}</td>
+          <td>{{ loan.interestRate }}%</td>
+          <td>{{ loan.repaymentTenure }} months</td>
+          <td>{{ loan.eligibility }}</td>
+          <td>{{ loan.documentsRequired }}</td>
+          <td>{{ loan.description }}</td>
+          <td>
+            <button (click)="navigateToEditLoan(loan.loanId)">Edit</button>
+            <button (click)="handleDeleteClick(loan.loanId)" id="deleteButton">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tr>
+          <td colspan="9" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
+
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete?</p>
+    <button (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button (click)="closeDeletePopup()">Cancel</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>

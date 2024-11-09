@@ -1,0 +1,89 @@
+<app-usernav></app-usernav>
+<div class="page-content" [ngClass]="{ blur: showDeletePopup || showDetailsPopup }">
+
+  <h1>Applied Loans</h1>
+  <hr>
+
+  <!-- Search Box -->
+  <input
+    id="searchBox"
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="searchValue"
+    (input)="filterLoans()"
+  />
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Loan Name</th>
+        <th>Submission Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredLoans.length > 0; else noRecords">
+      <tr *ngFor="let loan of filteredLoans; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ loan.loan.loanType }}</td>
+        <td>{{ loan.submissionDate | date : "yyyy-MM-dd" }}</td>
+        <td>
+          {{
+            loan.loanStatus === 0
+              ? "Pending"
+              : loan.loanStatus === 1
+              ? "Approved"
+              : "Rejected"
+          }}
+        </td>
+        <td>
+          <button
+            id="redButton"
+            (click)="handleDeleteClick(loan)"
+            [disabled]="loan.loanStatus !== 0"
+          >
+            Delete
+          </button>
+          <button id="detailsButton" (click)="handleViewDetailsClick(loan)">
+            View Details
+          </button>
+        </td>
+        
+      </tr>
+    </tbody>
+    <ng-template #noRecords>
+      <tr>
+        <td colspan="5" class="no-records-cell">Oops! No records Found</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>
+
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">
+    Yes, Delete
+  </button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">
+    Cancel
+  </button>
+</div>
+
+<div *ngIf="showDetailsPopup" class="details-popup">
+  <button class="close-button" (click)="closeDetailsPopup()">X</button>
+  <h2>Loan Details</h2>
+  <p><strong>Loan Name:</strong> {{ selectedLoan?.loan.loanType }}</p>
+  <p><strong>Submission Date:</strong> {{ selectedLoan?.submissionDate | date : "yyyy-MM-dd" }}</p>
+  <p><strong>Status:</strong> {{
+    selectedLoan?.loanStatus === 0
+      ? "Pending"
+      : selectedLoan?.loanStatus === 1
+      ? "Approved"
+      : "Rejected"
+  }}</p>
+  <p><strong>Farm Location:</strong> {{ selectedLoan?.farmLocation }}</p>
+  <p><strong>Farmer Address:</strong> {{ selectedLoan?.farmerAddress }}</p>
+  <p><strong>Farm Size (in acres):</strong> {{ selectedLoan?.farmSizeInAcres }}</p>
+  <p><strong>Farm Purpose:</strong> {{ selectedLoan?.farmPurpose }}</p>
+</div>
