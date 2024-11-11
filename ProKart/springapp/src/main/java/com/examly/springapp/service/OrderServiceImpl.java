@@ -25,7 +25,8 @@ public class OrderServiceImpl implements OrderService {
     public Order addOrder(Order order) {
         // Example check for duplicate order, assuming "userId" and "orderStatus" can uniquely identify an order
         Optional<Order> existingOrder = orderRepo.findOrdersByUserId(order.getUser().getUserId()).stream()
-                .filter(o -> o.getOrderStatus().equals(order.getOrderStatus())).findFirst();
+                .filter(o -> o.getOrderStatus().equals(order.getOrderStatus()))
+                .findFirst();
 
         if (existingOrder.isPresent()) {
             throw new DuplicateOrderException("Order for user ID " + order.getUser().getUserId() 
@@ -46,8 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Optional<Order> getOrderById(Long orderId) {
-        return orderRepo.findById(orderId)
-                .orElseThrow(() -> new OrderNotFoundException("Order with ID " + orderId + " not found"));
+        return orderRepo.findById(orderId);
     }
 
     @Override
