@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.examly.springapp.exceptions.DuplicateOrderException;
+import com.examly.springapp.exceptions.OrderNotFoundException;
 import com.examly.springapp.model.Order;
 import com.examly.springapp.model.OrderItem;
 import com.examly.springapp.repository.OrderRepo;
@@ -16,25 +19,35 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepo orderRepo;
 
     @Autowired
-    private OrderItemRepo orderItemRepo; // To handle saving order items
+    private OrderItemRepo orderItemRepo;
 
     @Override
     public Order addOrder(Order order) {
-        // Save the order first
-        Order savedOrder = orderRepo.save(order);
+        // Example check for duplicate order, assuming "userId" and "orderStatus" can uniquely identify an order
+        Optional<Order> existingOrder = orderRepo.findOrdersByUserId(order.getUser().getUserId()).stream()
+                .filter(o -> o.getOrderStatus().equals(order.getOrderStatus())).findFirst();
 
-        // For each item in the order, set the order reference and save it as an OrderItem
-        for (OrderItem item : order.getOrderItems()) {
-            item.setOrder(savedOrder); // Associate the item with the order
-            orderItemRepo.save(item);  // Save each order item
+        if (existingOrder.isPresent()) {
+            throw new DuplicateOrderException("Order for user ID " + order.getUser().getUserId() 
+                                              + " with status " + order.getOrderStatus() + " already exists.");
         }
 
-        return savedOrder; // Return the saved order with items
+        // Save the order
+        Order savedOrder = orderRepo.save(order);
+
+        // Save each OrderItem and associate it with the Order
+        for (OrderItem item : order.getOrderItems()) {
+            item.setOrder(savedOrder);
+            orderItemRepo.save(item);
+        }
+
+        return savedOrder;
     }
 
     @Override
     public Optional<Order> getOrderById(Long orderId) {
-        return orderRepo.findById(orderId);
+        return orderRepo.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order with ID " + orderId + " not found"));
     }
 
     @Override
@@ -47,8 +60,9 @@ public class OrderServiceImpl implements OrderService {
         if (orderRepo.existsById(orderId)) {
             updatedOrder.setOrderId(orderId);
             return orderRepo.save(updatedOrder);
+        } else {
+            throw new OrderNotFoundException("Order with ID " + orderId + " not found");
         }
-        return null;
     }
 
     @Override
@@ -56,7 +70,8 @@ public class OrderServiceImpl implements OrderService {
         if (orderRepo.existsById(orderId)) {
             orderRepo.deleteById(orderId);
             return true;
+        } else {
+            throw new OrderNotFoundException("Order with ID " + orderId + " not found");
         }
-        return false;
     }
 }
