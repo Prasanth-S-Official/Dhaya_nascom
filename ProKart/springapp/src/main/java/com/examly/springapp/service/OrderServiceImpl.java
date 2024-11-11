@@ -2,6 +2,8 @@ package com.examly.springapp.service;
 
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +26,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderItemRepo orderItemRepo;
 
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Autowired
     private ProductRepo productRepo; // Needed to retrieve product details
-
     @Override
     public Order addOrder(Order order) {
         // Example check for duplicate order, assuming "userId" and "orderStatus" can uniquely identify an order
@@ -42,28 +45,26 @@ public class OrderServiceImpl implements OrderService {
         // Calculate total amount for the order
         double totalAmount = 0.0;
         for (OrderItem item : order.getOrderItems()) {
-            // Retrieve the product details based on productId
             Optional<Product> productOpt = productRepo.findById(item.getProduct().getProductId());
             if (productOpt.isPresent()) {
                 Product product = productOpt.get();
-                item.setPrice(product.getPrice()); // Set price from product
-                item.setOrder(order); // Set the order reference
-                totalAmount += item.getPrice() * item.getQuantity(); // Calculate total
+                item.setPrice(product.getPrice());
+                item.setOrder(order);
+                totalAmount += item.getPrice() * item.getQuantity();
             } else {
                 throw new IllegalArgumentException("Product with ID " + item.getProduct().getProductId() + " not found");
             }
         }
         order.setTotalAmount(totalAmount);
 
-        // Save the order
         Order savedOrder = orderRepo.save(order);
 
-        // Save each OrderItem and associate it with the Order
         for (OrderItem item : order.getOrderItems()) {
             item.setOrder(savedOrder);
             orderItemRepo.save(item);
         }
 
+        logger.info("Order saved with ID: " + savedOrder.getOrderId());
         return savedOrder;
     }
 
