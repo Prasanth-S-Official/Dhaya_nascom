@@ -1,6 +1,8 @@
 package com.examly.springapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<Order> addOrder(@RequestBody Order order) {
-        // Add order and order items (like from the cart)
-        Order newOrder = orderService.addOrder(order);
-        return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
-    }
+@PostMapping
+public ResponseEntity<Map<String, String>> addOrder(@RequestBody Order order) {
+    // Add order and order items (like from the cart)
+    orderService.addOrder(order);
+
+    // Create response with custom message
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Order Placed Successfully!!");
+
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
+}
 
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
