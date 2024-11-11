@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Order;
+import com.examly.springapp.model.OrderItem;
 import com.examly.springapp.service.OrderService;
 
 @RestController
@@ -20,6 +21,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Order> addOrder(@RequestBody Order order) {
+        // Add order and order items (like from the cart)
         Order newOrder = orderService.addOrder(order);
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
