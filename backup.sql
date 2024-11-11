@@ -31,14 +31,16 @@ DROP TABLE IF EXISTS `order_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_item` (
-  `order_item_id` bigint(20) NOT NULL,
+  `order_item_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `price` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `order_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL,
   PRIMARY KEY (`order_item_id`),
+  KEY `FKt4dc2r9nbvbujrljv3e23iibt` (`order_id`),
   KEY `FK551losx9j75ss5d6bfsqvijna` (`product_id`),
-  CONSTRAINT `FK551losx9j75ss5d6bfsqvijna` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+  CONSTRAINT `FK551losx9j75ss5d6bfsqvijna` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `FKt4dc2r9nbvbujrljv3e23iibt` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,47 +54,33 @@ LOCK TABLES `order_item` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `order_item_seq`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `order_item_seq`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `order_item_seq` (
-  `next_val` bigint(20) DEFAULT NULL
+CREATE TABLE `orders` (
+  `order_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `billing_address` varchar(255) DEFAULT NULL,
+  `order_date` date DEFAULT NULL,
+  `order_status` varchar(255) DEFAULT NULL,
+  `shipping_address` varchar(255) DEFAULT NULL,
+  `total_amount` double NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `FKel9kyl84ego2otj2accfd8mr7` (`user_id`),
+  CONSTRAINT `FKel9kyl84ego2otj2accfd8mr7` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order_item_seq`
+-- Dumping data for table `orders`
 --
 
-LOCK TABLES `order_item_seq` WRITE;
-/*!40000 ALTER TABLE `order_item_seq` DISABLE KEYS */;
-INSERT INTO `order_item_seq` VALUES (1);
-/*!40000 ALTER TABLE `order_item_seq` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `order_seq`
---
-
-DROP TABLE IF EXISTS `order_seq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `order_seq` (
-  `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `order_seq`
---
-
-LOCK TABLES `order_seq` WRITE;
-/*!40000 ALTER TABLE `order_seq` DISABLE KEYS */;
-INSERT INTO `order_seq` VALUES (1);
-/*!40000 ALTER TABLE `order_seq` ENABLE KEYS */;
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -103,7 +91,7 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
-  `product_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `brand` varchar(255) DEFAULT NULL,
   `category` varchar(255) DEFAULT NULL,
   `cover_image` longblob NOT NULL,
@@ -125,28 +113,6 @@ LOCK TABLES `product` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `product_seq`
---
-
-DROP TABLE IF EXISTS `product_seq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `product_seq` (
-  `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product_seq`
---
-
-LOCK TABLES `product_seq` WRITE;
-/*!40000 ALTER TABLE `product_seq` DISABLE KEYS */;
-INSERT INTO `product_seq` VALUES (1);
-/*!40000 ALTER TABLE `product_seq` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `review`
 --
 
@@ -154,7 +120,7 @@ DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `review` (
-  `review_id` bigint(20) NOT NULL,
+  `review_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
   `rating` int(11) NOT NULL,
   `review_text` varchar(255) DEFAULT NULL,
@@ -175,28 +141,6 @@ CREATE TABLE `review` (
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `review_seq`
---
-
-DROP TABLE IF EXISTS `review_seq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `review_seq` (
-  `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `review_seq`
---
-
-LOCK TABLES `review_seq` WRITE;
-/*!40000 ALTER TABLE `review_seq` DISABLE KEYS */;
-INSERT INTO `review_seq` VALUES (1);
-/*!40000 ALTER TABLE `review_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -223,7 +167,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$k36oSngsQhY2IdKV0SyO7e3lwWc31m3ueWco/DyE6Wvj80iiTG/U2','Admin','admin');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$WQQupswJDcrnFHqk5CHVM.K0Z12gOGBdWcyAxMcWWMScvANJNgCyG','Admin','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -236,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-11  6:43:50
+-- Dump completed on 2024-11-11  6:58:50

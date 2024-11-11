@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
     private String reviewText;
     private int rating;

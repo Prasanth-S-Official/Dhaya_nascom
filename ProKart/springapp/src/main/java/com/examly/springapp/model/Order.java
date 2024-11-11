@@ -5,11 +5,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "orders") // Renaming the table to avoid using the reserved keyword "order"
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
+
     private LocalDate orderDate;
     private String orderStatus;
     private String shippingAddress;
@@ -20,12 +22,10 @@ public class Order {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    // Many-to-Many relationship through OrderItem
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    public Order() {
-    }
+    public Order() {}
 
     // Getters and Setters
     public Long getOrderId() {
