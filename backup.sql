@@ -100,7 +100,7 @@ CREATE TABLE `product` (
   `product_name` varchar(255) DEFAULT NULL,
   `stock_quantity` int(11) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,6 +109,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,'Sample Brand','Electronics','/9j/4AAQSkZJRgABAQEAAAAAAAD/4QBsRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAExAAIAAAAiAAAAMgAA...','This is a sample product description.',99.99,'Sample Product',50),(4,'Sample Brand','Homeware','/9j/4AAQSkZJRgABAQEAAAAAAAD/4QBsRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAExAAIAAAAiAAAAMgAA2...','This is 3 sample description',10,'Sample Product 3',10);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,4 +181,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-11  7:13:50
+-- Dump completed on 2024-11-11  7:28:50
