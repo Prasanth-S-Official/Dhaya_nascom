@@ -1,6 +1,8 @@
 package com.examly.springapp.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference; // Import JsonBackReference
+
 
 @Entity
 public class OrderItem {
@@ -17,6 +19,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "orderId", nullable = false)
+    @JsonBackReference
     private Order order;
 
     public OrderItem() {
