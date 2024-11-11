@@ -34,11 +34,16 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderService.getAllOrders();
-        return ResponseEntity.ok(orders);
+    public ResponseEntity<?> getAllOrders() {
+        try {
+            List<Order> orders = orderService.getAllOrders();
+            return ResponseEntity.ok(orders);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while fetching orders: " + e.getMessage());
+        }
     }
-
+    
     @PutMapping("/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long orderId, @RequestBody Order order) {
         Order updatedOrder = orderService.updateOrder(orderId, order);

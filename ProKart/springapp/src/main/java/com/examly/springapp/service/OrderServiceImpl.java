@@ -72,12 +72,13 @@ public class OrderServiceImpl implements OrderService {
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepo.findById(orderId);
     }
-
     @Override
     public List<Order> getAllOrders() {
-        return orderRepo.findAll();
+        List<Order> orders = orderRepo.findAll();
+        System.out.println("Orders fetched from database: " + orders.size()); // Debugging line
+        return orders;
     }
-
+    
     @Override
     public Order updateOrder(Long orderId, Order updatedOrder) {
         if (orderRepo.existsById(orderId)) {
