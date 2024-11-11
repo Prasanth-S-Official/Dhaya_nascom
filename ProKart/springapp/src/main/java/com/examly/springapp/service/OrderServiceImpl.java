@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderItemRepo orderItemRepo;
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+    // private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
     private ProductRepo productRepo; // Needed to retrieve product details
@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
             orderItemRepo.save(item);
         }
 
-        logger.info("Order saved with ID: " + savedOrder.getOrderId());
+        // logger.info("Order saved with ID: " + savedOrder.getOrderId());
         return savedOrder;
     }
 
