@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Column;
 
 @Entity
 public class Product {
@@ -17,6 +19,10 @@ public class Product {
     private int stockQuantity;
     private String category;
     private String brand;
+
+    @Lob
+    @Column(name = "coverImage", nullable = false, columnDefinition = "LONGBLOB")
+    private String coverImage;
 
     public Product() {
     }
@@ -76,5 +82,13 @@ public class Product {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 }
