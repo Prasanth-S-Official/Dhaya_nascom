@@ -30,18 +30,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductRepo productRepo; // Needed to retrieve product details
+ 
+
     @Override
     public Order addOrder(Order order) {
-        // Example check for duplicate order, assuming "userId" and "orderStatus" can uniquely identify an order
-        Optional<Order> existingOrder = orderRepo.findOrdersByUserId(order.getUser().getUserId()).stream()
-                .filter(o -> o.getOrderStatus().equals(order.getOrderStatus()))
-                .findFirst();
-
-        if (existingOrder.isPresent()) {
-            throw new DuplicateOrderException("Order for user ID " + order.getUser().getUserId() 
-                                              + " with status " + order.getOrderStatus() + " already exists.");
-        }
-
         // Calculate total amount for the order
         double totalAmount = 0.0;
         for (OrderItem item : order.getOrderItems()) {
@@ -56,18 +48,17 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         order.setTotalAmount(totalAmount);
-
+    
         Order savedOrder = orderRepo.save(order);
-
+    
         for (OrderItem item : order.getOrderItems()) {
             item.setOrder(savedOrder);
             orderItemRepo.save(item);
         }
-
-        // logger.info("Order saved with ID: " + savedOrder.getOrderId());
+    
         return savedOrder;
     }
-
+    
     @Override
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepo.findById(orderId);
