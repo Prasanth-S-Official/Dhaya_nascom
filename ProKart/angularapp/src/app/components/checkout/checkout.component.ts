@@ -46,7 +46,7 @@ export class CheckoutComponent implements OnInit {
     // Cast orderPayload to Order and pass it to the placeOrder method
     this.orderService.placeOrder(orderPayload as Order).subscribe(
       (response) => {
-        alert('Order placed successfully!');
+        // alert('Order placed successfully!');
         this.cartService.clearCart();
         this.router.navigate(['/user/orders']);
       },

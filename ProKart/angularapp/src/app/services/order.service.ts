@@ -19,6 +19,7 @@ export class OrderService {
   }
 
   placeOrder(order: Order): Observable<any> {
+    console.log("orderdatapassed",order);
     return this.http.post<any>(this.apiUrl, order, { headers: this.getHeaders() });
   }
 
