@@ -27,6 +27,7 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product> {
+    console.log("Product to be added",product);
     return this.http.post<Product>(this.apiUrl, product, { headers: this.getHeaders() });
   }
 
