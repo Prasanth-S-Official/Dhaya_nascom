@@ -46,6 +46,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/login").permitAll()
                 .requestMatchers("/api/register").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                 .requestMatchers(HttpMethod.POST, "/api/products").hasRole("Admin")
                 .requestMatchers(HttpMethod.PUT, "/api/loan/{loanId}").hasRole("Admin")
                 .requestMatchers(HttpMethod.DELETE, "/api/loan/{loanId}").hasRole("Admin")
