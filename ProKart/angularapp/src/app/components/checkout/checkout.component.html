@@ -1,24 +1,31 @@
 <app-usernav></app-usernav>
 <div class="checkout-container">
-    <h2>Checkout</h2>
-    <div *ngIf="cartItems.length > 0; else emptyCart">
-      <div *ngFor="let item of cartItems" class="cart-item">
-        <p>{{ item.product.productName }} - Quantity: {{ item.quantity }} - Price: ₹{{ item.price }}</p>
-      </div>
-      <div class="total">
-        <p>Total Amount: ₹{{ totalAmount }}</p>
-      </div>
-      <div class="address-section">
-        <label for="shippingAddress">Shipping Address:</label>
-        <input id="shippingAddress" [(ngModel)]="shippingAddress" placeholder="Enter shipping address" />
-  
-        <label for="billingAddress">Billing Address:</label>
-        <input id="billingAddress" [(ngModel)]="billingAddress" placeholder="Enter billing address" />
-      </div>
-      <button (click)="placeOrder()" class="place-order-button">Place Order</button>
+  <h2>Checkout</h2>
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <p>{{ item.product.productName }} - Quantity: {{ item.quantity }} - Price: ₹{{ item.price }}</p>
     </div>
-    <ng-template #emptyCart>
-      <p>Your cart is empty.</p>
-    </ng-template>
+    <div class="total">
+      <p>Total Amount: ₹{{ totalAmount }}</p>
+    </div>
+    <div class="address-section">
+      <label for="shippingAddress">Shipping Address:</label>
+      <input id="shippingAddress" [(ngModel)]="shippingAddress" placeholder="Enter shipping address" />
+
+      <label for="billingAddress">Billing Address:</label>
+      <input id="billingAddress" [(ngModel)]="billingAddress" placeholder="Enter billing address" />
+    </div>
+    <button (click)="placeOrder()" class="place-order-button">Place Order</button>
   </div>
-  
+  <ng-template #emptyCart>
+    <p>Your cart is empty.</p>
+  </ng-template>
+
+  <!-- Success Modal -->
+  <div *ngIf="showSuccessModal" class="modal">
+    <div class="modal-content">
+      <p>Order placed successfully!</p>
+      <button (click)="continueShopping()" class="continue-shopping-button">Continue Shopping</button>
+    </div>
+  </div>
+</div>

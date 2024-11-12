@@ -15,6 +15,7 @@ export class CheckoutComponent implements OnInit {
   totalAmount: number = 0;
   shippingAddress: string = '';
   billingAddress: string = '';
+  showSuccessModal: boolean = false; // Flag for success modal
 
   constructor(private cartService: CartService, private orderService: OrderService, private router: Router) {}
 
@@ -28,32 +29,33 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder(): void {
-    // Create the payload using the Order type, assigning only userId for the user field
     const orderPayload: Partial<Order> = {
       orderDate: new Date().toISOString().split('T')[0],
       orderStatus: 'Pending',
       shippingAddress: this.shippingAddress,
       billingAddress: this.billingAddress,
       totalAmount: this.totalAmount,
-      user: { userId: parseInt(localStorage.getItem('userId') || '0') } as any,  // Use a partial user with only userId
+      user: { userId: parseInt(localStorage.getItem('userId') || '0') } as any,
       orderItems: this.cartItems.map(item => ({
         quantity: item.quantity,
-        price: item.price,  // Include the price for each item
-        product: { productId: item.product.productId } as any  // Cast product to bypass type check
+        price: item.price,
+        product: { productId: item.product.productId } as any
       }))
     };
   
-    // Cast orderPayload to Order and pass it to the placeOrder method
     this.orderService.placeOrder(orderPayload as Order).subscribe(
       (response) => {
-        // alert('Order placed successfully!');
         this.cartService.clearCart();
-        this.router.navigate(['/user/products']);
+        this.showSuccessModal = true; // Show the success modal
       },
       (error) => {
         alert('Error placing order. Please try again.');
       }
     );
   }
-  
+
+  continueShopping(): void {
+    this.showSuccessModal = false;
+    this.router.navigate(['/user/products']);
+  }
 }
