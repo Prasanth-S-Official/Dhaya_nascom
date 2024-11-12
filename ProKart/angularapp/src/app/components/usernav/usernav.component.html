@@ -1,4 +1,4 @@
- <nav class="usernav">
+ <!-- <nav class="usernav">
   <h1 class="site-title" id="heading">
     <a routerLink="/home" style="color: inherit; text-decoration: inherit;">ProKart</a>
   </h1>
@@ -30,7 +30,7 @@
     </li>
   </ul>
 
-  <!-- Logout Popup -->
+
   <div *ngIf="showLogoutPopup" class="logout-popup">
     <div class="logout-popup-content">
       <p>Are you sure you want to logout?</p>
@@ -40,6 +40,71 @@
       <button (click)="showLogoutPopup = false" class="button button-cancel">
         Cancel
       </button>
+    </div>
+  </div>
+</nav> -->
+
+<nav class="usernav">
+  <h1 class="site-title" id="heading">
+    <a routerLink="/home" style="color: inherit; text-decoration: inherit;">ProKart</a>
+  </h1>
+  <ul class="nav-links">
+    <li>
+      <p class="user-role">{{ userName }} / {{ userRole }}</p>
+    </li>
+    <li><a [routerLink]="['/home']">Home</a></li>
+    <li class="dropdown">
+      <span class="dropdown-label">Products</span>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/user/products">View Products</a></li>
+        <li><a routerLink="/user/view/appliedloan">My Orders</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <span class="dropdown-label">Feedback</span>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/user/add/feedback">Post Feedback</a></li>
+        <li><a routerLink="/user/view/feedback">My Feedbacks</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <!-- Cart Icon with Item Count -->
+      <button class="cart-button" (click)="toggleCartOverlay()">
+        🛒 <span *ngIf="cartItemCount > 0" class="cart-count">{{ cartItemCount }}</span>
+     </button>
+    </li>
+
+    <li>
+      <button id="redbutton" class="button" (click)="showLogoutPopup = true">
+        Logout
+      </button>
+    </li>
+  </ul>
+
+
+ <!-- Cart Overlay -->
+ <div [ngClass]="{'cart-overlay': true, 'show': showCartOverlay}">
+    <h2>Your Cart</h2>
+    <ul *ngIf="cartItemCount > 0; else emptyCart">
+       <li *ngFor="let item of cartService.getCartItems()">
+          {{ item.product.productName }} - Quantity: {{ item.quantity }}
+       </li>
+    </ul>
+    <ng-template #emptyCart>
+       <p>Your cart is empty.</p>
+    </ng-template>
+    <button (click)="toggleCartOverlay()" class="close-button">Close</button>
+    <button [routerLink]="['/checkout']" class="checkout-button">Checkout</button>
+ </div>
+
+  <!-- Logout Popup -->
+  <div *ngIf="showLogoutPopup" class="logout-popup">
+    <div class="logout-popup-content">
+      <p>Are you sure you want to logout?</p>
+      <button (click)="logout(); showLogoutPopup = false;" class="button button-yes">Yes, Logout</button>
+      <button (click)="showLogoutPopup = false" class="button button-cancel">Cancel</button>
     </div>
   </div>
 </nav>
