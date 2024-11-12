@@ -1,6 +1,6 @@
 <app-adminnav></app-adminnav>
 <div class="container">
-  <h1>Product Management</h1>
+  <h1>Products</h1>
   <hr>
 
   <!-- Search Box -->
@@ -16,7 +16,7 @@
   <!-- Products List as Cards -->
   <div class="product-cards">
     <div *ngFor="let product of filteredProducts" class="product-card">
-      <img [src]="product.coverImage" alt="{{ product.productName }}" class="product-image" />
+        <img [src]="'data:image/jpeg;base64,' + product.coverImage" alt="{{ product.productName }}" class="product-image" />
       <div class="product-details">
         <h3>{{ product.productName }}</h3>
         <p>{{ product.description }}</p>
