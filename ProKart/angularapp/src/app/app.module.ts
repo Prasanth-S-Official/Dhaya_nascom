@@ -26,6 +26,7 @@ import { ProductCreateComponent } from './components/product-create/product-crea
 import { AdminviewproductComponent } from './components/adminviewproduct/adminviewproduct.component';
 import { UserviewproductComponent } from './components/userviewproduct/userviewproduct.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
