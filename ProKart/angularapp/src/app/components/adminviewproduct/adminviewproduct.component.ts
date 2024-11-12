@@ -25,6 +25,7 @@ export class AdminviewproductComponent implements OnInit {
   fetchProducts(): void {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
+        console.log("getProducts",data);
         this.products = data;
         this.filteredProducts = this.products;
       },

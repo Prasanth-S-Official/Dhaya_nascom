@@ -16,6 +16,7 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { AdminviewproductComponent } from './components/adminviewproduct/adminviewproduct.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -25,7 +26,7 @@ const routes: Routes = [
 
   // -------------------------------
   {path: 'admin/newproduct', component: ProductCreateComponent, canActivate: [AuthGuard]},
-  {path: 'admin/products', component: ViewloanComponent, canActivate: [AuthGuard]},
+  {path: 'admin/products', component: AdminviewproductComponent, canActivate: [AuthGuard]},
 
 
   //---------------------------------
