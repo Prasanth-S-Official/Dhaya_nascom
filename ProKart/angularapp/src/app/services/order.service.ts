@@ -1,17 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Order } from 'src/app/models/order.model';
+import { apiUrl } from 'src/apiconfig';
+import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private orderUrl = '/api/orders';
+  private apiUrl = `${apiUrl}/api/orders`;
 
   constructor(private http: HttpClient) {}
 
+  private getHeaders() {
+    return new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+  }
+
   placeOrder(order: Order): Observable<any> {
-    return this.http.post<any>(this.orderUrl, order);
+    return this.http.post<any>(this.apiUrl, order, { headers: this.getHeaders() });
+  }
+
+  getOrderById(orderId: number): Observable<Order> {
+    return this.http.get<Order>(`${this.apiUrl}/${orderId}`, { headers: this.getHeaders() });
+  }
+
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.apiUrl, { headers: this.getHeaders() });
+  }
+
+  updateOrder(orderId: number, order: Order): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}`, order, { headers: this.getHeaders() });
+  }
+
+  deleteOrder(orderId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${orderId}`, { headers: this.getHeaders() });
   }
 }

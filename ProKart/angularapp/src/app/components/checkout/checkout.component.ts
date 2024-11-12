@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit {
       }))
     };
 
-    this.orderService.addOrder(order).subscribe(
+    this.orderService.placeOrder(order).subscribe(
       (response) => {
         alert('Order placed successfully!');
         this.cartService.clearCart();
