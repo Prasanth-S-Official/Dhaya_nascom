@@ -23,7 +23,7 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
-import { AdminViewProductComponentComponent } from './components/admin-view-product-component/admin-view-product-component.component';
+import { AdminviewproductComponent } from './components/adminviewproduct/adminviewproduct.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { AdminViewProductComponentComponent } from './components/admin-view-prod
     AdminnavComponent,
     UsernavComponent,
     ProductCreateComponent,
-    AdminViewProductComponentComponent,
+    AdminviewproductComponent
   ],
   imports: [
     BrowserModule,
