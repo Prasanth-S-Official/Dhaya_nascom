@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/login").permitAll()
                 .requestMatchers("/api/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/loan").hasRole("Admin")
+                .requestMatchers(HttpMethod.POST, "/api/products").hasRole("Admin")
                 .requestMatchers(HttpMethod.PUT, "/api/loan/{loanId}").hasRole("Admin")
                 .requestMatchers(HttpMethod.DELETE, "/api/loan/{loanId}").hasRole("Admin")
                 .requestMatchers(HttpMethod.GET, "/api/loan/{loanId}").hasRole("Admin")
@@ -97,11 +97,14 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("https://8081-abfdabeabcbaed319332313dbaefebdaefbfone.premiumproject.examly.io"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true); // Set this to false if not required
+        configuration.addExposedHeader("Authorization"); // Expose headers if needed
+    
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+    
 }
