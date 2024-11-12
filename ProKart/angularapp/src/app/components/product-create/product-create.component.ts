@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
@@ -10,16 +10,17 @@ import { Product } from 'src/app/models/product.model';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-
   productForm: FormGroup;
   successPopup = false;
   errorMessage = "";
   imageError = "";
   coverImageBase64: string = "";
+  id: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private productService: ProductService
   ) {
     this.productForm = this.fb.group({
@@ -33,7 +34,25 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.id = idParam ? Number(idParam) : null;
+    if (this.id) {
+      this.fetchProduct(this.id);
+    }
+  }
+
+  fetchProduct(id: number): void {
+    this.productService.getProductById(id).subscribe(
+      (response) => {
+        this.productForm.patchValue(response);
+        this.coverImageBase64 = response.coverImage;
+      },
+      (error) => {
+        this.router.navigate(['/error']);
+      }
+    );
+  }
 
   onSubmit(): void {
     if (this.productForm.valid && this.coverImageBase64) {
@@ -49,16 +68,17 @@ export class ProductCreateComponent implements OnInit {
         coverImage: this.coverImageBase64,
       };
 
-      this.productService.addProduct(product).subscribe(
-        (response) => {
-          console.log('Product added:', response);
-          this.successPopup = true;
-        },
-        (error) => {
-          console.error('Error adding product:', error);
-          this.errorMessage = 'Error adding product. Please try again.';
-        }
-      );
+      if (this.id) {
+        this.productService.updateProduct(this.id, product).subscribe(
+          () => this.showSuccessPopup(),
+          () => this.showErrorPopup('Error updating product')
+        );
+      } else {
+        this.productService.addProduct(product).subscribe(
+          () => this.showSuccessPopup(),
+          () => this.showErrorPopup('Error adding product')
+        );
+      }
     } else {
       this.errorMessage = "All fields are required";
       if (!this.coverImageBase64) {
@@ -69,9 +89,7 @@ export class ProductCreateComponent implements OnInit {
 
   handleFileChange(event: any): void {
     const file = event.target.files[0];
-
     if (file) {
-      // Validate file type
       const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
       if (!validTypes.includes(file.type)) {
         this.imageError = "Invalid file type. Only JPG and PNG are allowed.";
@@ -79,8 +97,7 @@ export class ProductCreateComponent implements OnInit {
         return;
       }
 
-      // Validate file size (optional)
-      const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+      const maxSizeInBytes = 5 * 1024 * 1024;
       if (file.size > maxSizeInBytes) {
         this.imageError = "File size exceeds the maximum limit of 5MB.";
         this.coverImageBase64 = "";
@@ -107,7 +124,6 @@ export class ProductCreateComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => {
-        // Remove the "data:image/*;base64," prefix if necessary
         const base64String = (reader.result as string).split(',')[1];
         resolve(base64String);
       };
@@ -116,16 +132,24 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  showSuccessPopup(): void {
+    this.successPopup = true;
+  }
+
+  showErrorPopup(message: string): void {
+    this.errorMessage = message;
+  }
+
   handleSuccessMessage(): void {
     this.successPopup = false;
     this.errorMessage = '';
     this.imageError = '';
     this.coverImageBase64 = '';
     this.productForm.reset();
-    this.router.navigate(['/admin/products']); // Navigate to product list or desired route
+    this.router.navigate(['/admin/products']);
   }
 
   navigateBack(): void {
-    this.router.navigate(['/admin/products']); // Adjust the route as needed
+    this.router.navigate(['/admin/products']);
   }
 }

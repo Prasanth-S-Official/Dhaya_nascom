@@ -50,7 +50,8 @@ export class AdminviewproductComponent implements OnInit {
   }
 
   navigateToEditProduct(productId: number): void {
-    this.router.navigate(['/admin/editproduct', productId]);
+    console.log("Navigate to edit",productId);
+    this.router.navigate(['/admin/newproduct', productId]);
   }
 
   handleDeleteClick(productId: number): void {
