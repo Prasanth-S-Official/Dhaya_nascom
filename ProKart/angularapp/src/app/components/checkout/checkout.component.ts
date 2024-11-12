@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit {
       (response) => {
         // alert('Order placed successfully!');
         this.cartService.clearCart();
-        this.router.navigate(['/user/orders']);
+        this.router.navigate(['/user/products']);
       },
       (error) => {
         alert('Error placing order. Please try again.');
