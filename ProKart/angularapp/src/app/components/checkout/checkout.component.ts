@@ -3,6 +3,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
 import { OrderItem } from 'src/app/models/order-item.model';
+import { Order } from 'src/app/models/order.model';
 
 @Component({
   selector: 'app-checkout',
@@ -27,20 +28,23 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder(): void {
-    const order = {
+    // Create the payload using the Order type, assigning only userId for the user field
+    const orderPayload: Partial<Order> = {
       orderDate: new Date().toISOString().split('T')[0],
       orderStatus: 'Pending',
       shippingAddress: this.shippingAddress,
       billingAddress: this.billingAddress,
       totalAmount: this.totalAmount,
-      user: { userId: parseInt(localStorage.getItem('userId') || '0') },
+      user: { userId: parseInt(localStorage.getItem('userId') || '0') } as any,  // Use a partial user with only userId
       orderItems: this.cartItems.map(item => ({
         quantity: item.quantity,
-        product: { productId: item.product.productId }
+        price: item.price,  // Include the price for each item
+        product: { productId: item.product.productId } as any  // Cast product to bypass type check
       }))
     };
-
-    this.orderService.placeOrder(order).subscribe(
+  
+    // Cast orderPayload to Order and pass it to the placeOrder method
+    this.orderService.placeOrder(orderPayload as Order).subscribe(
       (response) => {
         alert('Order placed successfully!');
         this.cartService.clearCart();
@@ -51,4 +55,5 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
+  
 }
