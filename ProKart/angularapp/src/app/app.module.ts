@@ -24,6 +24,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { AdminviewproductComponent } from './components/adminviewproduct/adminviewproduct.component';
+import { UserviewproductComponent } from './components/userviewproduct/userviewproduct.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AdminviewproductComponent } from './components/adminviewproduct/adminvi
     AdminnavComponent,
     UsernavComponent,
     ProductCreateComponent,
-    AdminviewproductComponent
+    AdminviewproductComponent,
+    UserviewproductComponent
   ],
   imports: [
     BrowserModule,

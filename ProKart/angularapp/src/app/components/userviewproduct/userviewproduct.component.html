@@ -1,0 +1,42 @@
+<app-usernav></app-usernav>
+<div class="container">
+  <h1>Products</h1>
+  <hr />
+
+  <!-- Search Box -->
+  <div class="search-container">
+    <input
+      type="text"
+      placeholder="Search products..."
+      [(ngModel)]="searchField"
+      (ngModelChange)="handleSearchChange($event)"
+    />
+  </div>
+
+  <!-- Product Cards -->
+  <div class="product-cards">
+    <div *ngFor="let product of filteredProducts" class="product-card">
+      <img [src]="'data:image/jpeg;base64,' + product.coverImage" alt="{{ product.productName }}" class="product-image" />
+      <div class="product-details">
+        <h3>{{ product.productName }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Price: ₹{{ product.price }}</p>
+        <p>Stock: {{ product.stockQuantity }}</p>
+        <p>Category: {{ product.category }}</p>
+        <p>Brand: {{ product.brand }}</p>
+
+        <!-- Quantity Selector -->
+        <label for="quantity">Quantity:</label>
+        <input type="number" [(ngModel)]="quantities[product.productId]" min="1" max="{{ product.stockQuantity }}" />
+
+        <!-- Add to Cart Button -->
+        <button (click)="addToCart(product)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Products Found Message -->
+  <div *ngIf="filteredProducts.length === 0" class="no-products">
+    <p>No products found.</p>
+  </div>
+</div>

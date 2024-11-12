@@ -1,0 +1,59 @@
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from 'src/app/services/product.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Product } from 'src/app/models/product.model';
+
+@Component({
+  selector: 'app-userviewproduct',
+  templateUrl: './userviewproduct.component.html',
+  styleUrls: ['./userviewproduct.component.css']
+})
+export class UserviewproductComponent implements OnInit {
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  searchField: string = '';
+  quantities: { [productId: number]: number } = {}; // Store quantity for each product
+
+  constructor(private productService: ProductService, private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.fetchProducts();
+  }
+
+  fetchProducts(): void {
+    this.productService.getAllProducts().subscribe(
+      (data: Product[]) => {
+        this.products = data;
+        this.filteredProducts = this.products;
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
+  }
+
+  handleSearchChange(searchValue: string): void {
+    this.searchField = searchValue;
+    this.filteredProducts = this.filterProducts(searchValue);
+  }
+
+  filterProducts(search: string): Product[] {
+    const searchLower = search.toLowerCase();
+    return this.products.filter(
+      (product) =>
+        product.productName.toLowerCase().includes(searchLower) ||
+        product.description.toLowerCase().includes(searchLower)
+    );
+  }
+
+  addToCart(product: Product): void {
+    const quantity = this.quantities[product.productId] || 1; // Default to 1 if not specified
+    if (quantity > product.stockQuantity) {
+      alert(`Only ${product.stockQuantity} items are available for ${product.productName}.`);
+      return;
+    }
+
+    this.cartService.addToCart(product, quantity);
+    alert(`${product.productName} added to cart!`);
+  }
+}
