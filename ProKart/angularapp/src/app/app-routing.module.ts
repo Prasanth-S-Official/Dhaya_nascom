@@ -15,6 +15,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { ProductCreateComponent } from './components/product-create/product-create.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -22,6 +23,11 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent },
   {path: 'error', component: ErrorComponent },
 
+  // -------------------------------
+  {path: 'admin/newproduct', component: ProductCreateComponent, canActivate: [AuthGuard]},
+
+
+  //---------------------------------
 
   {path: 'admin/add/newloan', component: CreateloanComponent, canActivate: [AuthGuard]},
   {path: 'admin/view/viewloan', component: ViewloanComponent, canActivate: [AuthGuard]},

@@ -1,0 +1,81 @@
+<p>product-create works!</p>
+<app-adminnav></app-adminnav>
+<div>
+  <div class="product-form-container" [ngClass]="{ blur: successPopup }">
+    <div class="button-container">
+      <button (click)="navigateBack()">Back</button>
+    </div>
+    <h2>Create New Product</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="productName">Product Name<span class="required">*</span></label>
+        <input id="productName" type="text" formControlName="productName" />
+        <div *ngIf="productForm.controls['productName'].touched && productForm.controls['productName'].hasError('required')" class="error">
+          *Product Name is required
+        </div>
+      </div>
+
+      <div>
+        <label for="description">Description<span class="required">*</span></label>
+        <textarea id="description" formControlName="description"></textarea>
+        <div *ngIf="productForm.controls['description'].touched && productForm.controls['description'].hasError('required')" class="error">
+          *Description is required
+        </div>
+      </div>
+
+      <div>
+        <label for="price">Price<span class="required">*</span></label>
+        <input id="price" type="number" formControlName="price" />
+        <div *ngIf="productForm.controls['price'].touched && productForm.controls['price'].hasError('required')" class="error">
+          *Price is required
+        </div>
+      </div>
+
+      <div>
+        <label for="stockQuantity">Stock Quantity<span class="required">*</span></label>
+        <input id="stockQuantity" type="number" formControlName="stockQuantity" />
+        <div *ngIf="productForm.controls['stockQuantity'].touched && productForm.controls['stockQuantity'].hasError('required')" class="error">
+          *Stock Quantity is required
+        </div>
+      </div>
+
+      <div>
+        <label for="category">Category<span class="required">*</span></label>
+        <input id="category" type="text" formControlName="category" />
+        <div *ngIf="productForm.controls['category'].touched && productForm.controls['category'].hasError('required')" class="error">
+          *Category is required
+        </div>
+      </div>
+
+      <div>
+        <label for="brand">Brand<span class="required">*</span></label>
+        <input id="brand" type="text" formControlName="brand" />
+        <div *ngIf="productForm.controls['brand'].touched && productForm.controls['brand'].hasError('required')" class="error">
+          *Brand is required
+        </div>
+      </div>
+
+      <div>
+        <label for="coverImage">Cover Image<span class="required">*</span></label>
+        <input id="coverImage" type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" />
+        <div *ngIf="imageError" class="error">
+          *{{ imageError }}
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error">
+        *{{ errorMessage }}
+      </div>
+
+      <div>
+        <button type="submit" class="submit-button">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="successPopup" class="success-popup">
+    <p>Product Added Successfully!</p>
+    <button (click)="handleSuccessMessage()">Ok</button>
+  </div>
+</div>
