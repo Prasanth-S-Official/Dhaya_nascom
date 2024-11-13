@@ -134,7 +134,7 @@ CREATE TABLE `review` (
   KEY `FKiyf57dy48lyiftdrf7y87rnxi` (`user_id`),
   CONSTRAINT `FKiyf57dy48lyiftdrf7y87rnxi` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKiyof1sindb9qiqr9o8npj8klt` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (1,'2024-11-13',5,'Great product, highly recommend!',6,3),(3,'2024-11-13',0,'ssss',6,3),(4,'2024-11-13',0,'sssssee',6,3);
+INSERT INTO `review` VALUES (1,'2024-11-13',5,'Great product, highly recommend!',6,3),(3,'2024-11-13',0,'ssss',6,3),(4,'2024-11-13',0,'sssssee',6,3),(5,'2024-11-13',4,'cdcdcd',6,3);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-13 11:53:15
+-- Dump completed on 2024-11-13 11:59:48

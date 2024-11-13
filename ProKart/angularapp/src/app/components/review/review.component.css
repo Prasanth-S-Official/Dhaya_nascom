@@ -37,26 +37,28 @@
     outline: none;
   }
   
-  /* Star Rating Styling */
-  .rating {
+/* Star Rating Styling */
+.rating {
     font-size: 2rem;
-    color: #ccc;
+    color: #ddd; /* Default color for unselected stars */
     margin: 1rem 0;
   }
   
-  .rating .fa {
+  .star {
     cursor: pointer;
     transition: color 0.3s ease, transform 0.2s ease;
+    color: #ddd; /* Default unselected star color */
   }
   
-  .rating .fa:hover {
+  .star:hover {
     color: #ffca28;
     transform: scale(1.1);
   }
   
-  .rating .filled {
-    color: #ffd700;
+  .star.filled {
+    color: #ffd700; /* Color for selected stars */
   }
+  
   
   /* Submit Button Styling */
   .submit-button {
@@ -67,7 +69,7 @@
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
@@ -76,18 +78,4 @@
     transform: translateY(-2px);
   }
   
-  /* Snackbar Styling */
-  .success-snackbar, .error-snackbar {
-    color: white;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .success-snackbar {
-    background-color: #4caf50;
-  }
-  
-  .error-snackbar {
-    background-color: #f44336;
-  }
   

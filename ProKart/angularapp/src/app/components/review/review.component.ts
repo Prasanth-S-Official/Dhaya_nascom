@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ReviewComponent implements OnInit {
   productId: number;
   reviewText: string = '';
-  rating: number = 0;
+  rating: number = 0; // Variable to hold the selected rating
   userId: number;
 
   constructor(
@@ -26,26 +26,28 @@ export class ReviewComponent implements OnInit {
     this.userId = parseInt(localStorage.getItem('userId') || '0', 10); // Get the user ID from localStorage or set it to 0 if not available
   }
 
+  // Function to set the rating based on the star clicked
+  setRating(star: number): void {
+    this.rating = star;
+  }
+
   addReview(): void {
-    // Create payload for the review
     const reviewPayload: Partial<Review> = {
       reviewText: this.reviewText,
       rating: this.rating,
       date: new Date().toISOString().split('T')[0], // Set date to today’s date
-      user: { userId: this.userId } as any, // Partial user object with only userId
-      product: { productId: this.productId } as any // Partial product object with only productId
+      user: { userId: this.userId } as any,
+      product: { productId: this.productId } as any
     };
-  
-    console.log("Review payload:", reviewPayload);
-  
+
+    console.log("Review",reviewPayload);
     this.reviewService.addReview(reviewPayload as Review).subscribe(
       (response) => {
-        console.log("Review added:", response); // Handle and log the response
+        console.log("Review",response);
         this.snackBar.open('Review added successfully!', 'Close', {
           duration: 3000,
           panelClass: ['success-snackbar']
         });
-        // Optional: Clear the form fields after successful submission
         this.reviewText = '';
         this.rating = 0;
       },
@@ -58,5 +60,4 @@ export class ReviewComponent implements OnInit {
       }
     );
   }
-  
 }

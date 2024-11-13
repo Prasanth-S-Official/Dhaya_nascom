@@ -8,7 +8,7 @@
   <!-- Star Rating -->
   <div class="rating">
     <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)">
-      <i class="fa" [ngClass]="rating >= star ? 'fa-star filled' : 'fa-star'"></i>
+      <span class="star" [ngClass]="rating >= star ? 'filled' : ''">&#9733;</span>
     </span>
   </div>
 
