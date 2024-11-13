@@ -84,20 +84,28 @@
   </ul>
 
 
- <!-- Cart Overlay -->
- <div [ngClass]="{'cart-overlay': true, 'show': showCartOverlay}">
-    <h2>Your Cart</h2>
-    <ul *ngIf="cartItemCount > 0; else emptyCart">
-       <li *ngFor="let item of cartService.getCartItems()">
-          {{ item.product.productName }} - Quantity: {{ item.quantity }}
-       </li>
-    </ul>
-    <ng-template #emptyCart>
-       <p>Your cart is empty.</p>
-    </ng-template>
-    <button (click)="toggleCartOverlay()" class="close-button">Close</button>
+<!-- Cart Overlay -->
+<div [ngClass]="{'cart-overlay': true, 'show': showCartOverlay}">
+  <!-- Close button (X symbol) at the top right -->
+  <button (click)="toggleCartOverlay()" class="close-button-top">×</button>
+  <h2>Your Cart</h2>
+  <ul *ngIf="cartItemCount > 0; else emptyCart">
+    <li *ngFor="let item of cartService.getCartItems()">
+      {{ item.product.productName }} - Quantity: {{ item.quantity }}
+    </li>
+  </ul>
+  
+  <ng-template #emptyCart>
+    <p>Your cart is empty.</p>
+  </ng-template>
+
+  <!-- Clear and Checkout Buttons -->
+  <div class="cart-buttons">
+    <button (click)="clearCart()" class="clear-button">Clear Cart</button>
     <button [routerLink]="['/checkout']" class="checkout-button">Checkout</button>
- </div>
+  </div>
+</div>
+
 
   <!-- Logout Popup -->
   <div *ngIf="showLogoutPopup" class="logout-popup">

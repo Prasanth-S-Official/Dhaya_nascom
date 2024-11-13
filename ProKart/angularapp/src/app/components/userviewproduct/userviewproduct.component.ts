@@ -60,17 +60,21 @@ export class UserviewproductComponent implements OnInit {
       });
       return;
     }
-
+  
     this.cartService.addToCart(product, quantity);
     this.showAddToCartMessage(product.productName);
+  
+    // Clear the selected quantity after adding to cart
+    this.quantities[product.productId] = null;
   }
+  
 
   showAddToCartMessage(productName: string): void {
     this.snackBar.open(`✔️ ${productName} added to cart!`, '', {
       duration: 3000,
       panelClass: ['success-snackbar'],
       horizontalPosition: 'right',
-      verticalPosition: 'top'
+      verticalPosition: 'bottom'
     });
   }
 

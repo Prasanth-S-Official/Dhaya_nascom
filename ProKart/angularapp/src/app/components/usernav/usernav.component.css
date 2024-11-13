@@ -213,90 +213,75 @@ body, h1, ul, li, p, button {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Cart Overlay */
+/* Cart Overlay Styling */
 .cart-overlay {
   position: fixed;
-  top: 20%;
+  top: 10%;
   right: 0;
   width: 300px;
   height: 60%;
-  background: #ffffff;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-  z-index: 1500;
+  background-color: #fff;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
 }
 
 .cart-overlay.show {
   transform: translateX(0);
 }
 
-.cart-overlay h2 {
-  font-size: 1.5rem;
-  color: #333333;
-  margin-bottom: 1rem;
+.close-button-top {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.cart-overlay ul {
-  list-style: none;
-  overflow-y: auto;
-  max-height: 70%;
-  margin-bottom: 1rem;
-}
-
-.cart-overlay li {
+.cart-buttons {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  margin-top: 20px;
 }
 
-.cart-overlay li:last-child {
-  border-bottom: none;
-}
-
-.cart-overlay li p {
-  font-size: 1rem;
-  color: #333333;
-}
-
-.cart-overlay button {
-  background-color: #e74c3c;
+.clear-button,
+.checkout-button {
+  padding: 10px 15px;
   border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
-  margin: 0.5rem 0;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+  flex: 1;
+  margin: 0 5px;
 }
 
-.cart-overlay button:hover {
-  background-color: #c0392b;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.clear-button {
+  background-color: #ff5252;
+  color: white;
 }
 
-.cart-overlay .close-button {
-  background-color: #7f8c8d;
+.clear-button:hover {
+  background-color: #e53935;
 }
 
-.cart-overlay .close-button:hover {
-  background-color: #5a6268;
+.checkout-button {
+  background-color: #4caf50;
+  color: white;
 }
 
-.cart-overlay .checkout-button {
-  background-color: #27ae60;
+.checkout-button:hover {
+  background-color: #43a047;
 }
 
-.cart-overlay .checkout-button:hover {
-  background-color: #229954;
-}
 
 /* Rest of the styling */
 .site-title {

@@ -29,7 +29,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from 'src/app/services/cart.service'; // Import your cart service
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-usernav',
@@ -60,6 +60,11 @@ export class UsernavComponent implements OnInit {
 
   toggleCartOverlay(): void {
     this.showCartOverlay = !this.showCartOverlay;
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart();
+    this.toggleCartOverlay(); // Optionally close the cart overlay after clearing
   }
 
   logout(): void {
