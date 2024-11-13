@@ -21,16 +21,28 @@
         <h3>{{ product.productName }}</h3>
         <p>{{ product.description }}</p>
         <p>Price: ₹{{ product.price }}</p>
-        <p>Stock: {{ product.stockQuantity }}</p>
+
+        <!-- Dynamic Stock Status -->
+        <p [ngClass]="{
+          'in-stock': product.stockQuantity > 10,
+          'limited-stock': product.stockQuantity > 0 && product.stockQuantity <= 10,
+          'out-of-stock': product.stockQuantity === 0
+        }">
+          {{ product.stockQuantity > 10 ? 'In Stock' : product.stockQuantity > 0 ? 'Limited stock available: ' + product.stockQuantity : 'Out of Stock' }}
+        </p>
+
         <p>Category: {{ product.category }}</p>
         <p>Brand: {{ product.brand }}</p>
 
         <!-- Quantity Selector -->
         <label for="quantity">Quantity:</label>
-        <input type="number" [(ngModel)]="quantities[product.productId]" min="1" max="{{ product.stockQuantity }}" />
+        <input type="number" [(ngModel)]="quantities[product.productId]" min="1" [max]="product.stockQuantity" />
 
         <!-- Add to Cart Button -->
-        <button (click)="addToCart(product)">Add to Cart</button>
+        <button (click)="addToCart(product)" [disabled]="product.stockQuantity === 0">Add to Cart</button>
+        
+        <!-- Write a Review Button -->
+        <button class="btn-review" (click)="navigateToReview(product)">Write a Review</button>
       </div>
     </div>
   </div>
