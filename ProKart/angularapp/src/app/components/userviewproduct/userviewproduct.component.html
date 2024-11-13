@@ -27,8 +27,14 @@
           'limited-stock': product.stockQuantity > 0 && product.stockQuantity <= 10,
           'out-of-stock': product.stockQuantity === 0
         }">
-          {{ product.stockQuantity > 10 ? 'In Stock' : product.stockQuantity > 0 ? 'Limited stock available: ' + product.stockQuantity : 'Out of Stock' }}
-        </p>
+        {{ product.stockQuantity === 0 
+            ? 'Out of Stock' 
+            : product.stockQuantity > 10 
+            ? 'In Stock: ' + product.stockQuantity 
+            : 'Limited stock available: ' + product.stockQuantity 
+        }}
+      </p>
+      
 
         <p>Category: {{ product.category }}</p>
         <p>Brand: {{ product.brand }}</p>

@@ -27,6 +27,9 @@ import { AdminviewproductComponent } from './components/adminviewproduct/adminvi
 import { UserviewproductComponent } from './components/userviewproduct/userviewproduct.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyorderComponent } from './components/myorder/myorder.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -63,7 +66,9 @@ import { MyorderComponent } from './components/myorder/myorder.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    NoopAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product.model';
@@ -14,7 +15,11 @@ export class UserviewproductComponent implements OnInit {
   searchField: string = '';
   quantities: { [productId: number]: number } = {}; // Store quantity for each product
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(
+    private productService: ProductService, 
+    private cartService: CartService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.fetchProducts();
@@ -49,12 +54,24 @@ export class UserviewproductComponent implements OnInit {
   addToCart(product: Product): void {
     const quantity = this.quantities[product.productId] || 1; // Default to 1 if not specified
     if (quantity > product.stockQuantity) {
-      alert(`Only ${product.stockQuantity} items are available for ${product.productName}.`);
+      this.snackBar.open(`Only ${product.stockQuantity} items are available for ${product.productName}.`, 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
       return;
     }
 
     this.cartService.addToCart(product, quantity);
-    alert(`${product.productName} added to cart!`);
+    this.showAddToCartMessage(product.productName);
+  }
+
+  showAddToCartMessage(productName: string): void {
+    this.snackBar.open(`✔️ ${productName} added to cart!`, '', {
+      duration: 3000,
+      panelClass: ['success-snackbar'],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
   }
 
   generateQuantityOptions(stockQuantity: number): number[] {
