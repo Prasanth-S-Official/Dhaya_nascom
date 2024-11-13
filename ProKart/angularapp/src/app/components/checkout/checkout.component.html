@@ -1,24 +1,40 @@
 <app-usernav></app-usernav>
 <div class="checkout-container">
-  <h2>Checkout</h2>
+  <h2>Order Confirmation</h2>
+  <hr>
+  
   <div *ngIf="cartItems.length > 0; else emptyCart">
-    <div *ngFor="let item of cartItems" class="cart-item">
-      <p>{{ item.product.productName }} - Quantity: {{ item.quantity }} - Price: ₹{{ item.price }}</p>
+    <!-- Invoice Section -->
+    <div class="invoice-section">
+      <h3>Invoice</h3>
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <div class="item-info">
+          <p class="item-name">{{ item.product.productName }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: ₹{{ item.price }}</p>
+        </div>
+      </div>
+      <div class="total">
+        <p>Total Amount: <strong>₹{{ totalAmount }}</strong></p>
+      </div>
     </div>
-    <div class="total">
-      <p>Total Amount: ₹{{ totalAmount }}</p>
-    </div>
+
+    <!-- Shipping and Billing Address Section -->
     <div class="address-section">
+      <h3>Enter Shipping Details</h3>
       <label for="shippingAddress">Shipping Address:</label>
       <input id="shippingAddress" [(ngModel)]="shippingAddress" placeholder="Enter shipping address" />
 
       <label for="billingAddress">Billing Address:</label>
       <input id="billingAddress" [(ngModel)]="billingAddress" placeholder="Enter billing address" />
     </div>
+
+    <!-- Place Order Button -->
     <button (click)="placeOrder()" class="place-order-button">Place Order</button>
   </div>
+  
   <ng-template #emptyCart>
-    <p>Your cart is empty.</p>
+    <p class="empty-cart">Your cart is empty.</p>
   </ng-template>
 
   <!-- Success Modal -->
