@@ -21,17 +21,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-@PostMapping
-public ResponseEntity<Map<String, String>> addOrder(@RequestBody Order order) {
-    // Add order and order items (like from the cart)
-    orderService.addOrder(order);
+    @PostMapping
+    public ResponseEntity<Map<String, String>> addOrder(@RequestBody Order order) {
+        // Add order and order items (like from the cart)
+        orderService.addOrder(order);
 
-    // Create response with custom message
-    Map<String, String> response = new HashMap<>();
-    response.put("message", "Order Placed Successfully!!");
+        // Create response with custom message
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Order Placed Successfully!!");
 
-    return new ResponseEntity<>(response, HttpStatus.CREATED);
-}
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
