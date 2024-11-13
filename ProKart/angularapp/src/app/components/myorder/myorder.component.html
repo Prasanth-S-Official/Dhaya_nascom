@@ -24,6 +24,8 @@
     <!-- Track Order Progress Bar Modal-like Section -->
     <div *ngIf="selectedOrderForTracking && selectedOrderForTracking.orderId === order.orderId" class="modal-overlay">
       <div class="modal-content">
+        <!-- X button in top-right corner -->
+        <button (click)="closeTrackOrder()" class="btn-close-top">×</button>
         <h4>Order Tracking Status</h4>
         <div class="progress-bar">
           <ng-container *ngFor="let stage of stages; let i = index">
@@ -35,13 +37,14 @@
                  [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
           </ng-container>
         </div>
-        <button (click)="closeTrackOrder()" class="btn-close">Close</button>
       </div>
     </div>
 
     <!-- View Order Items Modal-like Section -->
     <div *ngIf="selectedOrderForItems && selectedOrderForItems.orderId === order.orderId" class="modal-overlay">
       <div class="modal-content-product">
+        <!-- X button in top-right corner -->
+        <button (click)="closeOrderItems()" class="btn-close-top">×</button>
         <h4>Order Items</h4>
         <div *ngFor="let item of order.orderItems" class="product-detail">
           <img [src]="'data:image/jpeg;base64,'+ item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
@@ -54,7 +57,6 @@
             <p><strong>Quantity:</strong> {{ item.quantity }}</p>
           </div>
         </div>
-        <button (click)="closeOrderItems()" class="btn-close">Close</button>
       </div>
     </div>
   </div>
