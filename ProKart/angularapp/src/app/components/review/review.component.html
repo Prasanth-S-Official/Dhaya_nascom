@@ -4,10 +4,11 @@
     <textarea [(ngModel)]="reviewText" placeholder="Write your review here..."></textarea>
   
     <div class="rating">
-      <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)">
-        <i class="fa" [ngClass]="rating >= star ? 'fa-star filled' : 'fa-star'"></i>
-      </span>
-    </div>
+        <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)">
+          <i class="fas" [ngClass]="rating >= star ? 'fa-star filled' : 'fa-star'"></i>
+        </span>
+      </div>
+      
   
     <button (click)="addReview()">Submit Review</button>
   </div>
