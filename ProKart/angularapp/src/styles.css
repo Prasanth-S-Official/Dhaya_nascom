@@ -1,8 +1,25 @@
-body {
+ body {
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+ 
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #333;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.review-container h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
