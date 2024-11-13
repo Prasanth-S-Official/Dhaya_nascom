@@ -10,6 +10,9 @@ import { OrderService } from 'src/app/services/order.service';
 export class MyorderComponent implements OnInit {
 
   orders: Order[] = [];
+  stages = ['Pending', 'Accepted', 'Dispatched', 'OutForDelivery', 'Delivered'];
+  selectedOrderForTracking: Order | null = null;
+  selectedOrderForItems: Order | null = null;
 
   constructor(private orderService: OrderService) {}
 
@@ -34,17 +37,23 @@ export class MyorderComponent implements OnInit {
     }
   }
 
-  viewProducts(orderItems: any[]): void {
-    console.log('Viewing products:', orderItems);
-    // Implement logic to open product details or navigate to product page.
+  getCurrentStageIndex(status: string): number {
+    return this.stages.indexOf(status);
   }
 
-  trackOrder(orderId: number): void {
-    console.log('Tracking order:', orderId);
-    // Implement logic to track order (e.g., navigate to tracking page or open a modal).
+  showTrackOrder(order: Order): void {
+    this.selectedOrderForTracking = order;
   }
 
-  statusClass(status: string): string {
-    return status === 'Shipped' ? 'status-shipped' : 'status-pending';
+  closeTrackOrder(): void {
+    this.selectedOrderForTracking = null;
+  }
+
+  showOrderItems(order: Order): void {
+    this.selectedOrderForItems = order;
+  }
+
+  closeOrderItems(): void {
+    this.selectedOrderForItems = null;
   }
 }

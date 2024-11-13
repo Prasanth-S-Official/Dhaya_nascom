@@ -2,22 +2,54 @@
 <div *ngIf="orders.length > 0; else noOrders">
   <div *ngFor="let order of orders" class="order-card">
     <h3>Order ID: {{ order.orderId }}</h3>
-    <p>Status: <span [ngClass]="statusClass(order.orderStatus)">{{ order.orderStatus }}</span></p>
+    <p>Status: {{ order.orderStatus }}</p>
     <p>Total Amount: {{ order.totalAmount | currency }}</p>
-    <div class="order-items">
-      <div *ngFor="let item of order.orderItems" class="order-item">
-        <img [src]="item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
-        <div>
-          <p><strong>{{ item.product.productName }}</strong></p>
-          <p>Brand: {{ item.product.brand }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
-          <p>Price: {{ item.price | currency }}</p>
+    <p>Billing Address: {{ order.billingAddress }}</p>
+    <p>Shipping Address: {{ order.shippingAddress }}</p>
+    <p>Order Date: {{ order.orderDate | date }}</p>
+    
+    <!-- Show names of ordered products by default -->
+    <div *ngFor="let item of order.orderItems" class="order-item-summary">
+      <p>Product: {{ item.product.productName }} - Quantity: {{ item.quantity }}</p>
+    </div>
+
+    <button (click)="showTrackOrder(order)" class="btn-track-order">Track Order</button>
+    <button (click)="showOrderItems(order)" class="btn-view-products">View Items</button>
+
+    <!-- Track Order Progress Bar Modal-like Section -->
+    <div *ngIf="selectedOrderForTracking && selectedOrderForTracking.orderId === order.orderId" class="modal-overlay">
+      <div class="modal-content">
+        <h4>Order Tracking Status</h4>
+        <div class="progress-bar">
+          <div *ngFor="let stage of stages; let i = index" 
+               [class.completed]="i <= getCurrentStageIndex(order.orderStatus)">
+            <span>{{ stage }}</span>
+            <div *ngIf="i < stages.length - 1" class="connector" 
+                 [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
+          </div>
         </div>
+        <button (click)="closeTrackOrder()" class="btn-close">Close</button>
       </div>
     </div>
-    <button (click)="viewProducts(order.orderItems)" class="btn-view-products">View Products</button>
-    <button *ngIf="order.orderStatus === 'Shipped'" (click)="trackOrder(order.orderId)" class="btn-track-order">Track Order</button>
-    <hr />
+
+    <!-- View Order Items Modal-like Section -->
+    <div *ngIf="selectedOrderForItems && selectedOrderForItems.orderId === order.orderId" class="modal-overlay">
+      <div class="modal-content">
+        <h4>Order Items</h4>
+        <div *ngFor="let item of order.orderItems" class="product-detail">
+          <img [src]="item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
+          <div>
+            <p><strong>Product:</strong> {{ item.product.productName }}</p>
+            <p><strong>Brand:</strong> {{ item.product.brand }}</p>
+            <p><strong>Category:</strong> {{ item.product.category }}</p>
+            <p><strong>Description:</strong> {{ item.product.description }}</p>
+            <p><strong>Price:</strong> {{ item.price | currency }}</p>
+            <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+          </div>
+        </div>
+        <button (click)="closeOrderItems()" class="btn-close">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
