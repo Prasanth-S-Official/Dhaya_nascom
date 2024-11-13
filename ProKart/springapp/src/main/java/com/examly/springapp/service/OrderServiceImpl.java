@@ -69,7 +69,12 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("Orders fetched from database: " + orders.size()); // Debugging line
         return orders;
     }
-    
+
+    @Override
+    public List<Order> getOrdersByUserId(int userId) {
+        return orderRepo.findOrdersByUserId(userId);
+    }
+
     @Override
     public Order updateOrder(Long orderId, Order updatedOrder) {
         if (orderRepo.existsById(orderId)) {
