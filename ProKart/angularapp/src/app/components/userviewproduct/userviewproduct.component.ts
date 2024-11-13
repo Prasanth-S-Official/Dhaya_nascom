@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product.model';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-userviewproduct',
@@ -18,7 +19,8 @@ export class UserviewproductComponent implements OnInit {
   constructor(
     private productService: ProductService, 
     private cartService: CartService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -84,5 +86,9 @@ export class UserviewproductComponent implements OnInit {
       options.push(qty);
     }
     return options;
+  }
+
+  navigateToReview(product: Product): void {
+    this.router.navigate(['/user/review', product.productId]); // Navigate to review with productId
   }
 }

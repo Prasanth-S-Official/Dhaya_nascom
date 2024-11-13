@@ -20,6 +20,7 @@ import { AdminviewproductComponent } from './components/adminviewproduct/adminvi
 import { UserviewproductComponent } from './components/userviewproduct/userviewproduct.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyorderComponent } from './components/myorder/myorder.component';
+import { ReviewComponent } from './components/review/review.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -34,6 +35,8 @@ const routes: Routes = [
   {path :'user/products', component: UserviewproductComponent, canActivate: [AuthGuard]},
   { path: 'checkout', component: CheckoutComponent,canActivate: [AuthGuard]},
   { path: 'user/myorders', component: MyorderComponent,canActivate: [AuthGuard]},
+  { path: 'user/review/:productId', component: ReviewComponent,canActivate: [AuthGuard]},
+
 
 
   //---------------------------------

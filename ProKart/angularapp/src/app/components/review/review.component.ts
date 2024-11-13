@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ReviewService } from 'src/app/services/review.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Review } from 'src/app/models/review.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-review',
@@ -9,44 +10,53 @@ import { Review } from 'src/app/models/review.model';
   styleUrls: ['./review.component.css']
 })
 export class ReviewComponent implements OnInit {
+  productId: number;
   reviewText: string = '';
   rating: number = 0;
-  productId: number;
   userId: number;
 
   constructor(
-    private reviewService: ReviewService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {
-    // Assume userId is stored in localStorage, modify if you have a different user management system
-    this.userId = parseInt(localStorage.getItem('userId') || '0');
-    this.productId = this.route.snapshot.params['productId']; // Get productId from route
+    private reviewService: ReviewService,
+    private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit(): void {
+    this.productId = +this.route.snapshot.paramMap.get('productId')!;
+    this.userId = parseInt(localStorage.getItem('userId') || '0', 10); // Get the user ID from localStorage or set it to 0 if not available
   }
 
-  ngOnInit(): void {}
-
-  setRating(star: number): void {
-    this.rating = star; // Sets the rating based on selected star
-  }
-
-  submitReview(): void {
-    const reviewPayload: Review = {
+  addReview(): void {
+    // Create payload for the review
+    const reviewPayload: Partial<Review> = {
       reviewText: this.reviewText,
       rating: this.rating,
-      date: new Date().toISOString().split('T')[0],
-      user: { userId: this.userId },
-      product: { productId: this.productId }
+      date: new Date().toISOString().split('T')[0], // Set date to today’s date
+      user: { userId: this.userId } as any, // Partial user object with only userId
+      product: { productId: this.productId } as any // Partial product object with only productId
     };
-
-    this.reviewService.addReview(reviewPayload).subscribe(
+  
+    console.log("Review payload:", reviewPayload);
+  
+    this.reviewService.addReview(reviewPayload as Review).subscribe(
       (response) => {
-        alert('Review submitted successfully!');
-        this.router.navigate(['/product', this.productId]); // Redirect to the product page
+        console.log("Review added:", response); // Handle and log the response
+        this.snackBar.open('Review added successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
+        // Optional: Clear the form fields after successful submission
+        this.reviewText = '';
+        this.rating = 0;
       },
       (error) => {
-        alert('Error submitting review. Please try again.');
+        console.error("Error adding review:", error);
+        this.snackBar.open('Error adding review. Please try again.', 'Close', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
       }
     );
   }
+  
 }

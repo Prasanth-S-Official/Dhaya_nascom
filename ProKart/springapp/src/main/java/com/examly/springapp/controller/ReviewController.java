@@ -1,6 +1,8 @@
 package com.examly.springapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,14 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping
-    public ResponseEntity<Review> addReview(@RequestBody Review review) {
-        Review newReview = reviewService.addReview(review);
-        return new ResponseEntity<>(newReview, HttpStatus.CREATED);
-    }
+  @PostMapping
+public ResponseEntity<Map<String, String>> addReview(@RequestBody Review review) {
+    reviewService.addReview(review); // Add the review but don't return the object
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Review added successfully!");
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
+}
+
 
     @GetMapping("/{reviewId}")
     public ResponseEntity<Review> getReviewById(@PathVariable Long reviewId) {
