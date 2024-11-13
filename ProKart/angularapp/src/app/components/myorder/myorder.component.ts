@@ -13,6 +13,9 @@ export class MyorderComponent implements OnInit {
   stages = ['Pending', 'Accepted', 'Dispatched', 'OutForDelivery', 'Delivered'];
   selectedOrderForTracking: Order | null = null;
   selectedOrderForItems: Order | null = null;
+  showDeletePopup: boolean = false;
+  showSuccessMessage: boolean = false;
+  orderToDelete: Order | null = null;
 
   constructor(private orderService: OrderService) {}
 
@@ -25,7 +28,6 @@ export class MyorderComponent implements OnInit {
     if (userId) {
       this.orderService.getOrdersByUserId(userId).subscribe(
         (data) => {
-          console.log("Myorder", data);
           this.orders = data;
         },
         (error) => {
@@ -55,5 +57,32 @@ export class MyorderComponent implements OnInit {
 
   closeOrderItems(): void {
     this.selectedOrderForItems = null;
+  }
+
+  confirmCancelOrder(order: Order): void {
+    this.orderToDelete = order;
+    this.showDeletePopup = true;
+  }
+
+  handleConfirmDelete(): void {
+    if (this.orderToDelete) {
+      this.orderService.deleteOrder(this.orderToDelete.orderId).subscribe(
+        () => {
+          this.showSuccessMessage = true;
+          this.closeDeletePopup();
+          this.loadOrders();
+          setTimeout(() => this.showSuccessMessage = false, 3000);
+        },
+        (error) => {
+          console.error('Error canceling order:', error);
+          this.closeDeletePopup();
+        }
+      );
+    }
+  }
+
+  closeDeletePopup(): void {
+    this.showDeletePopup = false;
+    this.orderToDelete = null;
   }
 }

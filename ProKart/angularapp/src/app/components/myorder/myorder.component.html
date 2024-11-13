@@ -18,13 +18,19 @@
         </div>
     </div>
 
+    <!-- Action Buttons -->
     <button (click)="showTrackOrder(order)" class="btn-track-order">Track Order</button>
     <button (click)="showOrderItems(order)" class="btn-view-products">View Items</button>
+    <button 
+      (click)="confirmCancelOrder(order)" 
+      [disabled]="order.orderStatus !== 'Pending'" 
+      class="btn-cancel-order">
+      Cancel Order
+    </button>
 
     <!-- Track Order Progress Bar Modal-like Section -->
     <div *ngIf="selectedOrderForTracking && selectedOrderForTracking.orderId === order.orderId" class="modal-overlay">
       <div class="modal-content">
-        <!-- X button in top-right corner -->
         <button (click)="closeTrackOrder()" class="btn-close-top">×</button>
         <h4>Order Tracking Status</h4>
         <div class="progress-bar">
@@ -32,7 +38,6 @@
             <div class="stage" [class.completed]="i <= getCurrentStageIndex(order.orderStatus)">
               <span>{{ stage }}</span>
             </div>
-            <!-- Only show connector if it is not the last stage -->
             <div *ngIf="i < stages.length - 1" class="connector" 
                  [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
           </ng-container>
@@ -43,7 +48,6 @@
     <!-- View Order Items Modal-like Section -->
     <div *ngIf="selectedOrderForItems && selectedOrderForItems.orderId === order.orderId" class="modal-overlay">
       <div class="modal-content-product">
-        <!-- X button in top-right corner -->
         <button (click)="closeOrderItems()" class="btn-close-top">×</button>
         <h4>Order Items</h4>
         <div *ngFor="let item of order.orderItems" class="product-detail">
@@ -65,3 +69,15 @@
 <ng-template #noOrders>
   <p>No orders found.</p>
 </ng-template>
+
+<!-- Confirmation Popup for Cancel Order -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to cancel this order?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Cancel Order</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Success Message Popup -->
+<div *ngIf="showSuccessMessage" class="success-popup">
+  <p>Order Canceled Successfully!</p>
+</div>
