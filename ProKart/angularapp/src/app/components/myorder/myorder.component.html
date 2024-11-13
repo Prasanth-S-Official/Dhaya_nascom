@@ -1,4 +1,6 @@
 <app-usernav></app-usernav>
+<h1>MyOrders</h1>
+<hr>
 <div *ngIf="orders.length > 0; else noOrders">
   <div *ngFor="let order of orders" class="order-card">
     <h3>Order ID: {{ order.orderId }}</h3>
@@ -18,26 +20,29 @@
 
     <!-- Track Order Progress Bar Modal-like Section -->
     <div *ngIf="selectedOrderForTracking && selectedOrderForTracking.orderId === order.orderId" class="modal-overlay">
-      <div class="modal-content">
-        <h4>Order Tracking Status</h4>
-        <div class="progress-bar">
-          <div *ngFor="let stage of stages; let i = index" 
-               [class.completed]="i <= getCurrentStageIndex(order.orderStatus)">
-            <span>{{ stage }}</span>
-            <div *ngIf="i < stages.length - 1" class="connector" 
-                 [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
+        <div class="modal-content">
+          <h4>Order Tracking Status</h4>
+          <div class="progress-bar">
+            <ng-container *ngFor="let stage of stages; let i = index">
+              <div class="stage" [class.completed]="i <= getCurrentStageIndex(order.orderStatus)">
+                <span>{{ stage }}</span>
+              </div>
+              <!-- Only show connector if it is not the last stage -->
+              <div *ngIf="i < stages.length - 1" class="connector" 
+                   [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
+            </ng-container>
           </div>
+          <button (click)="closeTrackOrder()" class="btn-close">Close</button>
         </div>
-        <button (click)="closeTrackOrder()" class="btn-close">Close</button>
       </div>
-    </div>
+      
 
     <!-- View Order Items Modal-like Section -->
     <div *ngIf="selectedOrderForItems && selectedOrderForItems.orderId === order.orderId" class="modal-overlay">
       <div class="modal-content">
         <h4>Order Items</h4>
         <div *ngFor="let item of order.orderItems" class="product-detail">
-          <img [src]="item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
+          <img [src]="'data:image/jpeg;base64,'+ item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
           <div>
             <p><strong>Product:</strong> {{ item.product.productName }}</p>
             <p><strong>Brand:</strong> {{ item.product.brand }}</p>

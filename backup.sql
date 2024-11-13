@@ -81,7 +81,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (4,'demo address for billing','2024-11-12','Pending','demo addresss',122,3),(5,'demo address for billing CBE','2024-11-12','Pending','demo addresss kkd',299.96999999999997,3);
+INSERT INTO `orders` VALUES (4,'demo address for billing','2024-11-12','Dispatched','demo addresss',122,3),(5,'demo address for billing CBE','2024-11-12','Pending','demo addresss kkd',299.96999999999997,3);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-13  6:32:16
+-- Dump completed on 2024-11-13  6:47:16
