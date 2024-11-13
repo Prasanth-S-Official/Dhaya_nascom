@@ -82,6 +82,24 @@
     z-index: 1000;
 }
 
+/* Star Rating Styling */
+.star-rating {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #ffd700; /* Default star color */
+}
+
+.star {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #ddd; /* Default unfilled star color */
+}
+
+.star.filled {
+    color: #ffd700; /* Filled star color */
+}
+
 .modal-content {
     background: #ffffff;
     padding: 1rem;
@@ -90,7 +108,7 @@
     max-width: 250px; /* Reduced width for a smaller modal */
     max-height: 70%; /* Smaller max height */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    text-align: left;
+    text-align: center;
     overflow-y: auto;
     position: relative;
 }

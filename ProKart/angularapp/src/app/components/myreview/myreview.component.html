@@ -6,7 +6,9 @@
   <div *ngIf="reviews.length > 0; else noReviews">
     <div *ngFor="let review of reviews" class="review-card">
       <h3>{{ review.product.productName }}</h3>
-      <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+      <div class="star-rating">
+        <p>Rating: <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [ngClass]="{ 'filled': star <= review.rating }">&#9733;</span> </p>
+      </div>
       <p><strong>Date:</strong> {{ review.date | date }}</p>
       <p>{{ review.reviewText }}</p>
 
