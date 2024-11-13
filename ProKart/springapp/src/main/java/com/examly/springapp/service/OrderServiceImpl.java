@@ -32,14 +32,52 @@ public class OrderServiceImpl implements OrderService {
     private ProductRepo productRepo; // Needed to retrieve product details
  
 
+    // @Override
+    // public Order addOrder(Order order) {
+    //     // Calculate total amount for the order
+    //     double totalAmount = 0.0;
+    //     for (OrderItem item : order.getOrderItems()) {
+    //         Optional<Product> productOpt = productRepo.findById(item.getProduct().getProductId());
+    //         if (productOpt.isPresent()) {
+    //             Product product = productOpt.get();
+    //             item.setPrice(product.getPrice());
+    //             item.setOrder(order);
+    //             totalAmount += item.getPrice() * item.getQuantity();
+    //         } else {
+    //             throw new IllegalArgumentException("Product with ID " + item.getProduct().getProductId() + " not found");
+    //         }
+    //     }
+    //     order.setTotalAmount(totalAmount);
+    
+    //     Order savedOrder = orderRepo.save(order);
+    
+    //     for (OrderItem item : order.getOrderItems()) {
+    //         item.setOrder(savedOrder);
+    //         orderItemRepo.save(item);
+    //     }
+    
+    //     return savedOrder;
+    // }
+    
     @Override
     public Order addOrder(Order order) {
-        // Calculate total amount for the order
         double totalAmount = 0.0;
+    
         for (OrderItem item : order.getOrderItems()) {
             Optional<Product> productOpt = productRepo.findById(item.getProduct().getProductId());
+    
             if (productOpt.isPresent()) {
                 Product product = productOpt.get();
+    
+                // Check if stock is sufficient
+                if (product.getStockQuantity() < item.getQuantity()) {
+                    throw new IllegalArgumentException("Insufficient stock for product with ID " + product.getProductId());
+                }
+    
+                // Update stock quantity
+                product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
+                productRepo.save(product); // Save updated stock in database
+    
                 item.setPrice(product.getPrice());
                 item.setOrder(order);
                 totalAmount += item.getPrice() * item.getQuantity();
@@ -47,10 +85,11 @@ public class OrderServiceImpl implements OrderService {
                 throw new IllegalArgumentException("Product with ID " + item.getProduct().getProductId() + " not found");
             }
         }
-        order.setTotalAmount(totalAmount);
     
+        order.setTotalAmount(totalAmount);
         Order savedOrder = orderRepo.save(order);
     
+        // Save each OrderItem with reference to the savedOrder
         for (OrderItem item : order.getOrderItems()) {
             item.setOrder(savedOrder);
             orderItemRepo.save(item);
@@ -59,6 +98,7 @@ public class OrderServiceImpl implements OrderService {
         return savedOrder;
     }
     
+
     @Override
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepo.findById(orderId);
