@@ -2,17 +2,20 @@
 <h1>MyOrders</h1>
 <hr>
 <div *ngIf="orders.length > 0; else noOrders">
-  <div *ngFor="let order of orders" class="order-card">
+  <div *ngFor="let order of orders" [ngClass]="{'order-card': true, 'no-hover': selectedOrderForTracking?.orderId === order.orderId || selectedOrderForItems?.orderId === order.orderId}">
     <h3>Order ID: {{ order.orderId }}</h3>
     <p>Status: {{ order.orderStatus }}</p>
     <p>Total Amount: {{ order.totalAmount | currency }}</p>
     <p>Billing Address: {{ order.billingAddress }}</p>
     <p>Shipping Address: {{ order.shippingAddress }}</p>
     <p>Order Date: {{ order.orderDate | date }}</p>
-    
+
     <!-- Show names of ordered products by default -->
     <div *ngFor="let item of order.orderItems" class="order-item-summary">
-      <p>Product: {{ item.product.productName }} - Quantity: {{ item.quantity }}</p>
+        <div class="product-summary-block">
+          <p><strong>Product:</strong> {{ item.product.productName }}</p>
+          <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+        </div>
     </div>
 
     <button (click)="showTrackOrder(order)" class="btn-track-order">Track Order</button>
@@ -20,22 +23,21 @@
 
     <!-- Track Order Progress Bar Modal-like Section -->
     <div *ngIf="selectedOrderForTracking && selectedOrderForTracking.orderId === order.orderId" class="modal-overlay">
-        <div class="modal-content">
-          <h4>Order Tracking Status</h4>
-          <div class="progress-bar">
-            <ng-container *ngFor="let stage of stages; let i = index">
-              <div class="stage" [class.completed]="i <= getCurrentStageIndex(order.orderStatus)">
-                <span>{{ stage }}</span>
-              </div>
-              <!-- Only show connector if it is not the last stage -->
-              <div *ngIf="i < stages.length - 1" class="connector" 
-                   [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
-            </ng-container>
-          </div>
-          <button (click)="closeTrackOrder()" class="btn-close">Close</button>
+      <div class="modal-content">
+        <h4>Order Tracking Status</h4>
+        <div class="progress-bar">
+          <ng-container *ngFor="let stage of stages; let i = index">
+            <div class="stage" [class.completed]="i <= getCurrentStageIndex(order.orderStatus)">
+              <span>{{ stage }}</span>
+            </div>
+            <!-- Only show connector if it is not the last stage -->
+            <div *ngIf="i < stages.length - 1" class="connector" 
+                 [class.active]="i < getCurrentStageIndex(order.orderStatus)"></div>
+          </ng-container>
         </div>
+        <button (click)="closeTrackOrder()" class="btn-close">Close</button>
       </div>
-      
+    </div>
 
     <!-- View Order Items Modal-like Section -->
     <div *ngIf="selectedOrderForItems && selectedOrderForItems.orderId === order.orderId" class="modal-overlay">
