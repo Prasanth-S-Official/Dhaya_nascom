@@ -29,6 +29,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyorderComponent } from './components/myorder/myorder.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ReviewComponent } from './components/review/review.component';
 
 
 
@@ -57,7 +58,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AdminviewproductComponent,
     UserviewproductComponent,
     CheckoutComponent,
-    MyorderComponent
+    MyorderComponent,
+    ReviewComponent
 
   ],
   imports: [

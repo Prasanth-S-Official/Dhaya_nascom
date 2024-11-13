@@ -1,21 +1,27 @@
 /* Container Styling */
 .checkout-container {
-  padding: 20px;
+  padding: 25px;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 30px auto;
   font-family: Arial, sans-serif;
   color: #333;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #f0f4f8, #e4ebf1);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.checkout-container:hover {
+  transform: scale(1.02);
 }
 
 /* Heading Styling */
 h2, h3 {
   text-align: center;
   margin-bottom: 20px;
-  color: #4caf50;
+  color: #388e3c;
   font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 hr {
@@ -25,18 +31,23 @@ hr {
 
 /* Invoice Section */
 .invoice-section {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cart-item {
   display: flex;
   flex-direction: column;
   padding: 10px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px dashed #ccc;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item:hover {
+  background-color: #f7fafc;
 }
 
 .item-info {
@@ -47,23 +58,26 @@ hr {
 
 .item-name {
   font-weight: bold;
+  font-size: 1em;
 }
 
 .total {
-  font-size: 1.2em;
+  font-size: 1.3em;
   text-align: right;
   font-weight: bold;
   margin-top: 10px;
   color: #333;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
 }
 
 /* Address Section */
 .address-section {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .address-section label {
@@ -73,45 +87,51 @@ hr {
 }
 
 .address-section input {
-  width: 100%;
-  padding: 8px;
+  width: 95%;
+  padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+  border-radius: 5px;
+  background-color: #f0f4f8;
   transition: all 0.2s ease-in-out;
+  font-family: inherit;
 }
 
 .address-section input:focus {
   border-color: #4caf50;
-  background-color: #fff;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
 }
 
 /* Place Order Button */
 .place-order-button {
   display: block;
   width: 100%;
-  padding: 12px;
-  background-color: #4caf50;
+  padding: 15px;
+  background-color: #388e3c;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .place-order-button:hover {
-  background-color: #45a049;
+  background-color: #2e7d32;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Empty Cart Message */
 .empty-cart {
   text-align: center;
   font-size: 1.2em;
-  color: #777;
+  color: #888;
   margin-top: 20px;
 }
 
@@ -122,32 +142,57 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
   background: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 25px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .continue-shopping-button {
   background-color: #4caf50;
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s;
+  margin-top: 15px;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .continue-shopping-button:hover {
   background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
