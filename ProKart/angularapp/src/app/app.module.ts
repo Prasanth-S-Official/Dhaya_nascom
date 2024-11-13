@@ -27,6 +27,7 @@ import { AdminviewproductComponent } from './components/adminviewproduct/adminvi
 import { UserviewproductComponent } from './components/userviewproduct/userviewproduct.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyorderComponent } from './components/myorder/myorder.component';
+import { ReviewComponent } from './services/review/review.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { MyorderComponent } from './components/myorder/myorder.component';
     AdminviewproductComponent,
     UserviewproductComponent,
     CheckoutComponent,
-    MyorderComponent
+    MyorderComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
