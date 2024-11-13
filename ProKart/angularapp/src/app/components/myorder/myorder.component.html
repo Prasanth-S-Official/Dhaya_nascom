@@ -1,19 +1,26 @@
 <app-usernav></app-usernav>
 <div *ngIf="orders.length > 0; else noOrders">
-    <div *ngFor="let order of orders" class="order-card">
-      <h3>Order ID: {{ order.orderId }}</h3>
-      <p>Status: {{ order.orderStatus }}</p>
-      <p>Total Amount: {{ order.totalAmount }}</p>
+  <div *ngFor="let order of orders" class="order-card">
+    <h3>Order ID: {{ order.orderId }}</h3>
+    <p>Status: <span [ngClass]="statusClass(order.orderStatus)">{{ order.orderStatus }}</span></p>
+    <p>Total Amount: {{ order.totalAmount | currency }}</p>
+    <div class="order-items">
       <div *ngFor="let item of order.orderItems" class="order-item">
-        <p>Product: {{ item.product.productName }}</p>
-        <p>Quantity: {{ item.quantity }}</p>
-        <p>Price: {{ item.price }}</p>
+        <img [src]="item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
+        <div>
+          <p><strong>{{ item.product.productName }}</strong></p>
+          <p>Brand: {{ item.product.brand }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: {{ item.price | currency }}</p>
+        </div>
       </div>
-      <hr />
     </div>
+    <button (click)="viewProducts(order.orderItems)" class="btn-view-products">View Products</button>
+    <button *ngIf="order.orderStatus === 'Shipped'" (click)="trackOrder(order.orderId)" class="btn-track-order">Track Order</button>
+    <hr />
   </div>
-  
-  <ng-template #noOrders>
-    <p>No orders found.</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #noOrders>
+  <p>No orders found.</p>
+</ng-template>
