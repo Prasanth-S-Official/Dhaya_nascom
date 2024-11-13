@@ -31,6 +31,11 @@ export class OrderService {
     return this.http.get<Order[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
+  getOrdersByUserId(userId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`, { headers: this.getHeaders() });
+  }
+
+
   updateOrder(orderId: number, order: Order): Observable<Order> {
     return this.http.put<Order>(`${this.apiUrl}/${orderId}`, order, { headers: this.getHeaders() });
   }
