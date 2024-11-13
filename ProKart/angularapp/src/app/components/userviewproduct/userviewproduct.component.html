@@ -19,9 +19,8 @@
       <img [src]="'data:image/jpeg;base64,' + product.coverImage" alt="{{ product.productName }}" class="product-image" />
       <div class="product-details">
         <h3>{{ product.productName }}</h3>
-        <p>{{ product.description }}</p>
         <p>Price: ₹{{ product.price }}</p>
-
+        <p>{{ product.description }}</p>
         <!-- Dynamic Stock Status -->
         <p [ngClass]="{
           'in-stock': product.stockQuantity > 10,
@@ -34,16 +33,21 @@
         <p>Category: {{ product.category }}</p>
         <p>Brand: {{ product.brand }}</p>
 
-        <!-- Quantity Selector -->
+        <!-- Quantity Selector (Dropdown) -->
         <label for="quantity">Quantity:</label>
-        <input type="number" [(ngModel)]="quantities[product.productId]" min="1" [max]="product.stockQuantity" />
+        <select [(ngModel)]="quantities[product.productId]">
+          <option *ngFor="let qty of generateQuantityOptions(product.stockQuantity)" [value]="qty">
+            {{ qty }}
+          </option>
+        </select>
 
         <!-- Add to Cart Button -->
         <button (click)="addToCart(product)" [disabled]="product.stockQuantity === 0">Add to Cart</button>
         
         <!-- Write a Review Button -->
-        <button class="btn-review" (click)="navigateToReview(product)">Write a Review</button>
+       
       </div>
+      <button class="btn-review" (click)="navigateToReview(product)">Write a Review</button>
     </div>
   </div>
 

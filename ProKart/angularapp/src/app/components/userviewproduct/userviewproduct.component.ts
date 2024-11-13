@@ -56,4 +56,12 @@ export class UserviewproductComponent implements OnInit {
     this.cartService.addToCart(product, quantity);
     alert(`${product.productName} added to cart!`);
   }
+
+  generateQuantityOptions(stockQuantity: number): number[] {
+    const options = [];
+    for (let qty = 1; qty <= stockQuantity; qty += qty < 10 ? 1 : 10) {
+      options.push(qty);
+    }
+    return options;
+  }
 }
