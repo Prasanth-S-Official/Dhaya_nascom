@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product.model';
+import { Review } from 'src/app/models/review.model';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-myreview',
@@ -6,13 +10,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myreview.component.css']
 })
 export class MyreviewComponent implements OnInit {
-
   reviews: Review[] = [];
   userId: number;
   showDeleteModal: boolean = false;
+  showProductModal: boolean = false;
   reviewIdToDelete: number | null = null;
+  selectedProduct: Product | null = null;
 
-  constructor(private reviewService: ReviewService, private router: Router) {}
+  constructor(private reviewService: ReviewService) {}
 
   ngOnInit(): void {
     this.userId = parseInt(localStorage.getItem('userId') || '0', 10);
@@ -30,8 +35,14 @@ export class MyreviewComponent implements OnInit {
     );
   }
 
-  viewProduct(productId: number): void {
-    this.router.navigate(['/product', productId]);
+  openProductModal(product: Product): void {
+    this.selectedProduct = product;
+    this.showProductModal = true;
+  }
+
+  closeProductModal(): void {
+    this.showProductModal = false;
+    this.selectedProduct = null;
   }
 
   confirmDelete(reviewId: number): void {
