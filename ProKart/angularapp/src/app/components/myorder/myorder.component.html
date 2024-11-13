@@ -41,7 +41,7 @@
 
     <!-- View Order Items Modal-like Section -->
     <div *ngIf="selectedOrderForItems && selectedOrderForItems.orderId === order.orderId" class="modal-overlay">
-      <div class="modal-content">
+      <div class="modal-content-product">
         <h4>Order Items</h4>
         <div *ngFor="let item of order.orderItems" class="product-detail">
           <img [src]="'data:image/jpeg;base64,'+ item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
