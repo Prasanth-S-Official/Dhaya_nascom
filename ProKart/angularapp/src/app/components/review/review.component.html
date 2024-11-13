@@ -1,15 +1,17 @@
 <app-usernav></app-usernav>
 <div class="review-container">
-    <h2>Submit Your Review</h2>
-    <textarea [(ngModel)]="reviewText" placeholder="Write your review here..."></textarea>
+  <h2>Submit Your Review</h2>
   
-    <div class="rating">
-        <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)">
-          <i class="fas" [ngClass]="rating >= star ? 'fa-star filled' : 'fa-star'"></i>
-        </span>
-      </div>
-      
+  <!-- Review Text Area -->
+  <textarea [(ngModel)]="reviewText" placeholder="Write your review here..."></textarea>
   
-    <button (click)="addReview()">Submit Review</button>
+  <!-- Star Rating -->
+  <div class="rating">
+    <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)">
+      <i class="fa" [ngClass]="rating >= star ? 'fa-star filled' : 'fa-star'"></i>
+    </span>
   </div>
-  
+
+  <!-- Submit Button -->
+  <button (click)="addReview()" class="submit-button">Submit Review</button>
+</div>
