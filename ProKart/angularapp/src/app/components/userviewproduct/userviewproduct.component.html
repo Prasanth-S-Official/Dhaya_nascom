@@ -49,6 +49,8 @@
 
         <!-- Add to Cart Button -->
         <button (click)="addToCart(product)" [disabled]="product.stockQuantity === 0">Add to Cart</button>
+
+        <button (click)="showReviews(product)" class="btn-review">View Reviews</button>
         
         <!-- Write a Review Button -->
        
@@ -61,4 +63,25 @@
   <div *ngIf="filteredProducts.length === 0" class="no-products">
     <p>No products found.</p>
   </div>
+
+
+
+<div *ngIf="showReviewModal" class="modal">
+  <div class="modal-content">
+    <button (click)="closeReviewModal()" class="close-modal">&times;</button>
+    <h3>Reviews for {{ selectedProduct?.productName }}</h3>
+    <div *ngIf="reviews.length > 0; else noReviews">
+      <div *ngFor="let review of reviews" class="review-item">
+        <p><strong>{{ review.user.username }}</strong></p>
+        <p>Rating: {{ review.rating }} / 5</p>
+        <p>{{ review.reviewText }}</p>
+        <p><em>Date: {{ review.date | date }}</em></p>
+        <hr />
+      </div>
+    </div>
+    <ng-template #noReviews>
+      <p>No reviews found for this product.</p>
+    </ng-template>
+  </div>
+</div>
 </div>

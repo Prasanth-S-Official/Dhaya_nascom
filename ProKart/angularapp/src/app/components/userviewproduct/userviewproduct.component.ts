@@ -4,6 +4,8 @@ import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router'; // Import Router
+import { Review } from 'src/app/models/review.model';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-userviewproduct',
@@ -15,12 +17,16 @@ export class UserviewproductComponent implements OnInit {
   filteredProducts: Product[] = [];
   searchField: string = '';
   quantities: { [productId: number]: number } = {}; // Store quantity for each product
+  reviews: Review[] = [];
+  showReviewModal: boolean = false;
+  selectedProduct: Product | null = null;
 
   constructor(
     private productService: ProductService, 
     private cartService: CartService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -90,5 +96,23 @@ export class UserviewproductComponent implements OnInit {
 
   navigateToReview(product: Product): void {
     this.router.navigate(['/user/review', product.productId]); // Navigate to review with productId
+  }
+
+  showReviews(product: Product): void {
+    this.selectedProduct = product;
+    this.reviewService.getReviewsByProductId(product.productId).subscribe(
+      (reviews) => {
+        this.reviews = reviews;
+        this.showReviewModal = true;
+      },
+      (error) => {
+        console.error('Error fetching reviews:', error);
+      }
+    );
+  }
+
+  closeReviewModal(): void {
+    this.showReviewModal = false;
+    this.reviews = [];
   }
 }
