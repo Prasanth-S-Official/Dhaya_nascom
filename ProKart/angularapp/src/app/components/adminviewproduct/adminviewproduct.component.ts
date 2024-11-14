@@ -15,6 +15,7 @@ export class AdminviewproductComponent implements OnInit {
   searchField: string = '';
   showDeletePopup: boolean = false;
   productToDelete: number | null = null;
+  categories: string[] = ['Electronics', 'Home Appliances', 'Books', 'Fashion', 'Toys', 'Furniture', 'Beauty']; // Example categories
 
   constructor(private router: Router, private productService: ProductService) {}
 

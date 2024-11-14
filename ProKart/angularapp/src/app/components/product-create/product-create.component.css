@@ -1,105 +1,158 @@
+/* Container Styling */
 .product-form-container {
-    max-width: 400px;
-    margin: 5rem auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input,
-  select {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  select {
-    cursor: pointer;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Media query for responsiveness */
-  @media (max-width: 480px) {
-    .loan-form-container {
-      max-width: 100%;
-    }
-  }
-  
-  .required {
-    color: red;
-  }
-  
-  .blur {
-    /* Your existing styles for the content here */
-    filter: blur(2px);
-    pointer-events: none;
-    /* Apply a blur filter to the content */
-  }
-  /* CSS for Delete Popup */
-  .success-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f2f2f2;
-    border: 1px solid black;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    text-align: center;
-    z-index: 2; /* Above the overlay */
-  }
-  
-  #backButton {
-    float: left;
-    /* display: block; */
-  }
-  
-  .error{
-    color: red;
-    font-size: 16px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  
-  .required {
-    color: red;
-  }
-  
-  hr {
-    border: none;
-    border-top: 2px solid #007bff;
-    color: #007bff;
-    overflow: visible;
-    text-align: center;
-    height: 5px;
-    margin-bottom: 3%;
-  }
-  
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+
+/* Heading Styling */
+h2 {
+  text-align: center;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Field Label Styling */
+label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.required {
+  color: #d32f2f;
+}
+
+/* Input, Textarea, and Select Styling - Line-only Style */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px 5px;
+  margin-bottom: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: none;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-bottom: 2px solid #4caf50;
+  outline: none;
+}
+
+/* File Input Styling */
+input[type="file"] {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
+/* Error Message Styling */
+.error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Submit Button Styling */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Back Button Styling */
+.back-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #1976d2;
+}
+
+/* Success Popup Styling */
+.success-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.success-popup-content {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 250px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Shadow effect */
+  text-align: center;
+}
+
+.success-popup-content p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.success-popup-content .ok-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.success-popup-content .ok-button:hover {
+  background-color: #45a049;
+}
+
+
+/* Blur Effect */
+.blur {
+  filter: blur(3px);
+}
