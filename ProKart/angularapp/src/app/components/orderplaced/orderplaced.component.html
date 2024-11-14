@@ -3,8 +3,18 @@
   <h2>Orders Placed</h2>
   <hr />
 
-  <div *ngIf="orders.length > 0; else noOrders">
-    <div *ngFor="let order of orders" class="order-card">
+  <!-- Search and Sort Section -->
+  <div class="search-sort">
+    <input type="text" placeholder="Search orders..." [(ngModel)]="searchQuery" (input)="applyFilters()" />
+    <select (change)="sortOrders($event.target.value)">
+      <option value="asc">Sort by Date: Ascending</option>
+      <option value="desc">Sort by Date: Descending</option>
+    </select>
+  </div>
+
+  <!-- Orders List with Pagination -->
+  <div *ngIf="filteredOrders.length > 0; else noOrders">
+    <div *ngFor="let order of paginatedOrders" class="order-card">
       <h3>Order ID: {{ order.orderId }}</h3>
       <p><strong>Date:</strong> {{ order.orderDate | date }}</p>
       <p><strong>Total Amount:</strong> ₹{{ order.totalAmount }}</p>
@@ -18,22 +28,45 @@
         <option *ngFor="let status of stages" [value]="status">{{ status }}</option>
       </select>
 
-      <!-- Order Items -->
-      <div class="order-items">
-        <h4>Order Items</h4>
-        <div *ngFor="let item of order.orderItems" class="order-item">
-          <img [src]="'data:image/jpeg;base64,' + item.product.coverImage" alt="{{ item.product.productName }}" class="product-image" />
-          <div class="item-details">
-            <p><strong>Product:</strong> {{ item.product.productName }}</p>
-            <p><strong>Quantity:</strong> {{ item.quantity }}</p>
-            <p><strong>Price:</strong> ₹{{ item.price }}</p>
-          </div>
-        </div>
+      <!-- Action Buttons -->
+      <div class="order-actions">
+        <button (click)="openProductModal(order)">View Items</button>
+        <button (click)="openProfileModal(order.user)">View Profile</button>
       </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
     </div>
   </div>
 
   <ng-template #noOrders>
     <p>No orders found.</p>
   </ng-template>
+
+  <!-- Product Modal -->
+  <div *ngIf="showProductModal" class="modal">
+    <div class="modal-content">
+      <button (click)="closeProductModal()" class="close-modal">&times;</button>
+      <h3>Order Items</h3>
+      <div *ngFor="let item of selectedOrder?.orderItems" class="modal-item">
+        <img [src]="'data:image/jpeg;base64,' + item.product.coverImage" alt="{{ item.product.productName }}" />
+        <p><strong>{{ item.product.productName }}</strong> - Quantity: {{ item.quantity }} - Price: ₹{{ item.price }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div *ngIf="showProfileModal" class="modal">
+    <div class="modal-content">
+      <button (click)="closeProfileModal()" class="close-modal">&times;</button>
+      <h3>User Profile</h3>
+      <p><strong>Username:</strong> {{ selectedUser?.username }}</p>
+      <p><strong>Email:</strong> {{ selectedUser?.email }}</p>
+      <p><strong>Mobile Number:</strong> {{ selectedUser?.mobileNumber }}</p>
+    </div>
+  </div>
 </div>
