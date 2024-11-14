@@ -127,10 +127,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testLoanInterfaceAndImplementation() {
+    public void backend_testProductInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.LoanService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.LoanServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.ProductService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.ProductServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testLoanApplicationInterfaceAndImplementation() {
+    public void backend_testOrderInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.LoanApplicationService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.LoanApplicationServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.OrderService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.OrderServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -164,18 +164,18 @@ class SpringappApplicationTests {
     }
 
 	 @Test
-     public void backend_testFeedbackControllerClassExists() {
-       checkClassExists("com.examly.springapp.controller.FeedbackController");
+     public void backend_testReviewControllerClassExists() {
+       checkClassExists("com.examly.springapp.controller.ReviewController");
      }
 	 
 	 @Test
-	   public void backend_testLoanControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.LoanController");
+	   public void backend_testProductControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.ProductController");
 	   }
 
 	   @Test
-	   public void backend_testLoanApplicationControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.LoanApplicationController");
+	   public void backend_testOrderControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.OrderController");
 	   }
 
 	   @Test
@@ -185,13 +185,13 @@ class SpringappApplicationTests {
 
 	 
 	 @Test
-	   public void backend_testFeedbackModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Feedback");
+	   public void backend_testReviewModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Review");
 	   }
 	 
 	 @Test
-	   public void backend_testLoanModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Loan");
+	   public void backend_testOrderModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Order");
 	   }
 	 
 	 @Test
@@ -200,8 +200,13 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testLoanApplocationModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.LoanApplication");
+	   public void backend_testProductModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Product");
+	   }
+
+	   @Test
+	   public void backend_testOrderItemModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.OrderItem");
 	   }
 
 }
