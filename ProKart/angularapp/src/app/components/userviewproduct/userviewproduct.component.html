@@ -49,12 +49,10 @@
 
         <!-- Add to Cart Button -->
         <button (click)="addToCart(product)" [disabled]="product.stockQuantity === 0">Add to Cart</button>
-
-        <button (click)="showReviews(product)" class="btn-review">View Reviews</button>
-        
         <!-- Write a Review Button -->
        
       </div>
+      <button (click)="showReviews(product)" class="btn-reviews">View Reviews</button>
       <button class="btn-review" (click)="navigateToReview(product)">Write a Review</button>
     </div>
   </div>

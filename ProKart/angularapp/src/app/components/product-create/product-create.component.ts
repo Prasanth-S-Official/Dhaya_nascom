@@ -16,6 +16,7 @@ export class ProductCreateComponent implements OnInit {
   imageError = "";
   coverImageBase64: string = "";
   id: number | null = null;
+  categories: string[] = ['Electronics', 'Home Appliances', 'Books', 'Fashion', 'Toys', 'Furniture', 'Beauty'];
 
   constructor(
     private fb: FormBuilder,

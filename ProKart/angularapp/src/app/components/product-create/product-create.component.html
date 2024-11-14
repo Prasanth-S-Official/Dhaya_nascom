@@ -39,7 +39,10 @@
 
     <div>
       <label for="category">Category<span class="required">*</span></label>
-      <input id="category" type="text" formControlName="category" />
+      <select id="category" formControlName="category">
+        <option value="">Select Category</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
       <div *ngIf="productForm.controls['category'].touched && productForm.controls['category'].hasError('required')" class="error">
         *Category is required
       </div>
