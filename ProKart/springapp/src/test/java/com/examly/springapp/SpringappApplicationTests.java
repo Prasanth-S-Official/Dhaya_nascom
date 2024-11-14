@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllloans() throws Exception {
-	        mockMvc.perform(get("/api/loan")
+	    public void backend_testGetAllProducts() throws Exception {
+	        mockMvc.perform(get("/api/products")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -55,9 +55,9 @@ class SpringappApplicationTests {
 		
 	    @Test
 		@Order(2)
-	    public void backend_testGetFeedBackAll() throws Exception {
+	    public void backend_testGetAllReviews() throws Exception {
 
-	        mockMvc.perform(get("/api/feedback")
+	        mockMvc.perform(get("/api/reviews")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -67,10 +67,10 @@ class SpringappApplicationTests {
 	    }
 	    
 	    @Test
-	    public void backend_testFeedbackHasManyToOneAnnotation() {
+	    public void backend_testReviewHasManyToOneAnnotation() {
 	        try {
 	            // Use reflection to get the Class object for the Course class
-	            Class<?> courseClass = Class.forName("com.examly.springapp.model.Feedback");
+	            Class<?> courseClass = Class.forName("com.examly.springapp.model.Review");
 
 	            // Get all declared fields in the Course class
 	            Field[] declaredFields = courseClass.getDeclaredFields();
@@ -97,26 +97,26 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testLoanApplicationHasManyToManyAnnotation() {
+    public void backend_testOrderHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.LoanApplication");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.Order");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
 
             // Check each field for the @OneToMany annotation
-            boolean hasManyToMany = false;
+            boolean hasManyToOne = false;
             for (Field field : declaredFields) {
                 if (field.isAnnotationPresent(ManyToOne.class)) {
-                    hasManyToMany = true;
+                    hasManyToOne = true;
                     break; // Stop checking once we find one field with @OneToMany
                 }
             }
 	
 	
             // If no field with @OneToMany is found, fail the test
-            if (!hasManyToMany) {
+            if (!hasManyToOne) {
                 fail("No field with @ManyToOne annotation found in Request class.");
             }
 
