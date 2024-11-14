@@ -31,6 +31,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReviewComponent } from './components/review/review.component';
 import { MyreviewComponent } from './components/myreview/myreview.component';
+import { OrderplacedComponent } from './components/orderplaced/orderplaced.component';
 
 
 
@@ -61,7 +62,8 @@ import { MyreviewComponent } from './components/myreview/myreview.component';
     CheckoutComponent,
     MyorderComponent,
     ReviewComponent,
-    MyreviewComponent
+    MyreviewComponent,
+    OrderplacedComponent
 
   ],
   imports: [

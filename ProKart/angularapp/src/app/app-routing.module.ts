@@ -22,6 +22,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyorderComponent } from './components/myorder/myorder.component';
 import { ReviewComponent } from './components/review/review.component';
 import { MyreviewComponent } from './components/myreview/myreview.component';
+import { OrderplacedComponent } from './components/orderplaced/orderplaced.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'user/myorders', component: MyorderComponent,canActivate: [AuthGuard]},
   { path: 'user/review/:productId', component: ReviewComponent,canActivate: [AuthGuard]},
   {path :'user/myreview', component: MyreviewComponent, canActivate: [AuthGuard]},
+  {path :'admin/orderplaced', component: OrderplacedComponent, canActivate: [AuthGuard]},
 
 
   //---------------------------------
