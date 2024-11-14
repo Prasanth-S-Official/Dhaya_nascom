@@ -21,7 +21,14 @@
   <div *ngIf="paginatedReviews.length > 0; else noReviews">
     <div *ngFor="let review of paginatedReviews" class="review-card">
       <h3>{{ review.product.productName }}</h3>
-      <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+
+      <!-- Star Rating Display -->
+      <div class="star-rating">
+        <span *ngFor="let star of [1, 2, 3, 4, 5]">
+          <span class="star" [ngClass]="review.rating >= star ? 'filled' : ''">&#9733;</span>
+        </span>
+      </div>
+
       <p><strong>Date:</strong> {{ review.date | date }}</p>
       <p>{{ review.reviewText }}</p>
 
@@ -49,6 +56,7 @@
     <div class="modal-content">
       <button (click)="closeProductModal()" class="close-modal">&times;</button>
       <h3>Product Details</h3>
+      <img [src]="'data:image/jpeg;base64,' + selectedProduct?.coverImage" alt="Product Image" class="product-image" />
       <p><strong>Name:</strong> {{ selectedProduct?.productName }}</p>
       <p><strong>Price:</strong> ₹{{ selectedProduct?.price }}</p>
       <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>

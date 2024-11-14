@@ -23,6 +23,7 @@ import { MyorderComponent } from './components/myorder/myorder.component';
 import { ReviewComponent } from './components/review/review.component';
 import { MyreviewComponent } from './components/myreview/myreview.component';
 import { OrderplacedComponent } from './components/orderplaced/orderplaced.component';
+import { AdminviewreviewsComponent } from './components/adminviewreviews/adminviewreviews.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
@@ -40,7 +41,7 @@ const routes: Routes = [
   { path: 'user/review/:productId', component: ReviewComponent,canActivate: [AuthGuard]},
   {path :'user/myreview', component: MyreviewComponent, canActivate: [AuthGuard]},
   {path :'admin/orderplaced', component: OrderplacedComponent, canActivate: [AuthGuard]},
-
+  {path :'admin/view/reviews', component: AdminviewreviewsComponent, canActivate: [AuthGuard]},
 
   //---------------------------------
 
