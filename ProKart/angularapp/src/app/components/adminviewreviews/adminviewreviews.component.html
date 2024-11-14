@@ -1,0 +1,70 @@
+<app-adminnav></app-adminnav>
+<div class="admin-review-container">
+  <h2>Manage Reviews</h2>
+  <hr />
+
+  <!-- Search and Sort Section -->
+  <div class="search-sort">
+    <input
+      type="text"
+      placeholder="Search reviews..."
+      [(ngModel)]="searchQuery"
+      (input)="applyFilters()"
+    />
+    <select (change)="sortReviews($event.target.value)">
+      <option value="asc">Sort by Date: Ascending</option>
+      <option value="desc">Sort by Date: Descending</option>
+    </select>
+  </div>
+
+  <!-- Reviews List with Pagination -->
+  <div *ngIf="paginatedReviews.length > 0; else noReviews">
+    <div *ngFor="let review of paginatedReviews" class="review-card">
+      <h3>{{ review.product.productName }}</h3>
+      <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+      <p><strong>Date:</strong> {{ review.date | date }}</p>
+      <p>{{ review.reviewText }}</p>
+
+      <!-- Action Buttons -->
+      <div class="review-actions">
+        <button (click)="openProductModal(review)">View Product</button>
+        <button (click)="openProfileModal(review)">View Profile</button>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+
+  <ng-template #noReviews>
+    <p>No reviews found.</p>
+  </ng-template>
+
+  <!-- Product Modal -->
+  <div *ngIf="showProductModal" class="modal">
+    <div class="modal-content">
+      <button (click)="closeProductModal()" class="close-modal">&times;</button>
+      <h3>Product Details</h3>
+      <p><strong>Name:</strong> {{ selectedProduct?.productName }}</p>
+      <p><strong>Price:</strong> ₹{{ selectedProduct?.price }}</p>
+      <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
+      <p><strong>Brand:</strong> {{ selectedProduct?.brand }}</p>
+      <p><strong>Description:</strong> {{ selectedProduct?.description }}</p>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div *ngIf="showProfileModal" class="modal">
+    <div class="modal-content">
+      <button (click)="closeProfileModal()" class="close-modal">&times;</button>
+      <h3>User Profile</h3>
+      <p><strong>Username:</strong> {{ selectedUser?.username }}</p>
+      <p><strong>Email:</strong> {{ selectedUser?.email }}</p>
+      <p><strong>Mobile Number:</strong> {{ selectedUser?.mobileNumber }}</p>
+    </div>
+  </div>
+</div>

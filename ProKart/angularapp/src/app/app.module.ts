@@ -32,6 +32,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReviewComponent } from './components/review/review.component';
 import { MyreviewComponent } from './components/myreview/myreview.component';
 import { OrderplacedComponent } from './components/orderplaced/orderplaced.component';
+import { AdminviewreviewsComponent } from './components/adminviewreviews/adminviewreviews.component';
 
 
 
@@ -63,7 +64,8 @@ import { OrderplacedComponent } from './components/orderplaced/orderplaced.compo
     MyorderComponent,
     ReviewComponent,
     MyreviewComponent,
-    OrderplacedComponent
+    OrderplacedComponent,
+    AdminviewreviewsComponent
 
   ],
   imports: [
