@@ -7,7 +7,7 @@ body, h1, ul, li, p, button {
 
 .usernav {
   background-color: #3a3f44;
-  background-image: linear-gradient(124deg, #781c6b 0%, #506a05 50%, #1d1f20 100%);
+  background-image: linear-gradient(124deg, #f66972 0%, #c0bd9d 50%, #6b3100 100%);
   color: #ecf0f1;
   display: flex;
   justify-content: space-between;
