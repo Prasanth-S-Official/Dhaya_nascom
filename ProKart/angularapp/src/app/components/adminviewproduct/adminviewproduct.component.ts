@@ -16,7 +16,7 @@ export class AdminviewproductComponent implements OnInit {
   showDeletePopup: boolean = false;
   productToDelete: number | null = null;
   categories: string[] = ['Electronics', 'Home Appliances', 'Books', 'Fashion', 'Toys', 'Furniture', 'Beauty']; // Example categories
-
+  selectedCategory: string = '';
   constructor(private router: Router, private productService: ProductService) {}
 
   ngOnInit(): void {
@@ -36,18 +36,27 @@ export class AdminviewproductComponent implements OnInit {
     );
   }
 
+
   handleSearchChange(searchValue: string): void {
     this.searchField = searchValue;
-    this.filteredProducts = this.filterProducts(searchValue);
+    this.applyFilters();
   }
 
-  filterProducts(search: string): Product[] {
-    const searchLower = search.toLowerCase();
-    return this.products.filter(
+  applyFilters(): void {
+    this.filteredProducts = this.products.filter(
       (product) =>
-        product.productName.toLowerCase().includes(searchLower) ||
-        product.description.toLowerCase().includes(searchLower)
+        (this.selectedCategory === '' || product.category === this.selectedCategory) &&
+        (product.productName.toLowerCase().includes(this.searchField.toLowerCase()) ||
+          product.description.toLowerCase().includes(this.searchField.toLowerCase()))
     );
+  }
+
+  filterByCategory(): void {
+    this.applyFilters();
+  }
+
+  extractCategories(): void {
+    this.categories = [...new Set(this.products.map(product => product.category))];
   }
 
   navigateToEditProduct(productId: number): void {
