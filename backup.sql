@@ -143,7 +143,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (11,'2024-11-15',4,'Great product!!! nice quality',9,3),(12,'2024-11-15',1,'Product damaged!!! worst packing....',1,3),(13,'2024-11-15',3,'Nice product!!!',9,3);
+INSERT INTO `review` VALUES (11,'2024-11-15',4,'Great product!!! nice quality',9,3),(12,'2024-11-15',1,'Product damaged!!! worst packing....',1,3),(13,'2024-11-14',3,'Nice product!!!',9,3);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-15 16:41:46
+-- Dump completed on 2024-11-15 16:56:46
