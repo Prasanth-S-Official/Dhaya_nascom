@@ -1,6 +1,7 @@
 <app-usernav></app-usernav>
 <h1>MyOrders</h1>
 <hr>
+<div [ngClass]="{ blur: showDeletePopup }">
 <div *ngIf="orders.length > 0; else noOrders" >
   <div *ngFor="let order of orders" [ngClass]="{'order-card': true, 'no-hover': selectedOrderForTracking?.orderId === order.orderId || selectedOrderForItems?.orderId === order.orderId}">
     <h3>Order ID: {{ order.orderId }}</h3>
@@ -69,6 +70,7 @@
 <ng-template #noOrders>
     <p class="no-orders-message">No orders found.</p>
   </ng-template>
+</div>
 
 <!-- Confirmation Popup for Cancel Order -->
 <div *ngIf="showDeletePopup" class="delete-popup">
