@@ -1,7 +1,7 @@
 <app-usernav></app-usernav>
 <h1>MyOrders</h1>
 <hr>
-<div *ngIf="orders.length > 0; else noOrders">
+<div *ngIf="orders.length > 0; else noOrders" >
   <div *ngFor="let order of orders" [ngClass]="{'order-card': true, 'no-hover': selectedOrderForTracking?.orderId === order.orderId || selectedOrderForItems?.orderId === order.orderId}">
     <h3>Order ID: {{ order.orderId }}</h3>
     <p>Status: {{ order.orderStatus }}</p>
