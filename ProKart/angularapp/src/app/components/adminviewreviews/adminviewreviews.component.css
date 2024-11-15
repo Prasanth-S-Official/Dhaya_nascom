@@ -116,7 +116,7 @@
   }
   
   /* Modal Styling */
-.modal {
+  .modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -127,27 +127,29 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
+}
   
   .modal-content {
     background: #ffffff;
-    padding: 1rem; /* Reduced padding */
+    padding: 1rem;
     border-radius: 8px;
-    width: 70%; /* Reduced width */
-    max-width: 300px; /* Smaller maximum width */
-    max-height: 250px;
+    width: 90%; /* Adjusted for smaller screens */
+    max-width: 250px; /* Reduced width for a smaller modal */
+    max-height: 70%; /* Smaller max height */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
-    position: relative;
     overflow-y: auto;
-  }
-  
-  /* Product Image */
-  .product-image {
-    width: 80%; /* Reduced image width */
-    height: auto;
+    position: relative;
+}
+
+/* Smaller product image within modal */
+.product-image {
+    width: 100%;
+    max-height: 120px; /* Set a maximum height to reduce size */
+    object-fit: contain;
     border-radius: 8px;
-    margin: 0.5rem auto; /* Centered and with smaller margin */
-  }
+    margin-bottom: 0.5rem;
+}
   
   /* Close Button */
   .close-modal {
