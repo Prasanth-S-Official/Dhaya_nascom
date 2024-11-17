@@ -1,6 +1,3 @@
-public class BookService {
-    
-}
 package com.examly.springapp.service;
 
 import com.examly.springapp.model.Book;
