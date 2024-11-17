@@ -1,0 +1,40 @@
+<nav class="adminnav">
+  <h1 class="site-title" id="heading">
+    <a routerLink="/home" style="color: inherit; text-decoration: inherit;">FitMentor</a>
+  </h1>
+  <ul class="nav-links">
+    <li>
+      <p class="user-role">{{ userName }} / {{ userRole }}</p>
+    </li>
+    <li><a [routerLink]="['/home']">Home</a></li>
+    <li class="dropdown">
+      <span class="dropdown-label">Training</span>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/admin/add/training">Add Training</a></li>
+        <li><a routerLink="/admin/view/trainings">View Training</a></li>
+      </ul>
+    </li>
+    <li><a routerLink="/admin/view/applied-requests">Training Requested</a></li>
+    <li><a routerLink="/admin/view/feedback">Feedbacks</a></li>
+
+    <li>
+      <button id="redbutton" class="button" (click)="showLogoutPopup = true">
+        Logout
+      </button>
+    </li>
+  </ul>
+
+  <!-- Logout Popup -->
+  <div *ngIf="showLogoutPopup" class="logout-popup">
+    <div class="logout-popup-content">
+      <p>Are you sure you want to logout?</p>
+      <button (click)="logout(); showLogoutPopup = false;" class="button button-yes">
+        Yes, Logout
+      </button>
+      <button (click)="showLogoutPopup = false" class="button button-cancel">
+        Cancel
+      </button>
+    </div>
+  </div>
+</nav>
+
