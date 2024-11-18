@@ -1,12 +1,12 @@
 <app-adminnav></app-adminnav>
 <div class="page-content" [ngClass]="{ blur: showModal }">
-  <h1>Training Requests for Approval</h1>
+  <h1>Book Rental Requests for Approval</h1>
   <hr>
   <div class="top-container">
     <input
       id="searchBox"
       type="text"
-      placeholder="Search by Training Name..."
+      placeholder="Search by Book Title..."
       [(ngModel)]="searchValue"
       (input)="handleSearchChange($event)"
     />
@@ -21,14 +21,14 @@
     </label>
   </div>
 
-  <!-- Training Requests Table -->
+  <!-- Rental Requests Table -->
   <table>
     <thead>
       <tr>
         <th>S.No</th>
         <th>Username</th>
-        <th>Training Name</th>
-        <th>Location</th>
+        <th>Book Title</th>
+        <th>Author</th>
         <th>Submission Date</th>
         <th>Status</th>
         <th>Action</th>
@@ -38,8 +38,8 @@
       <tr *ngFor="let request of filteredRequests; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ request.user.username }}</td>
-        <td>{{ request.physicalTraining.trainingName }}</td>
-        <td>{{ request.physicalTraining.location }}</td>
+        <td>{{ request.book.title }}</td>
+        <td>{{ request.book.author }}</td>
         <td>{{ request.requestDate | date: 'yyyy-MM-dd' }}</td>
         <td>{{ request.status }}</td>
         <td>
@@ -75,10 +75,12 @@
     <button class="close-button" (click)="closeModal()">X</button>
     <h2>Request Details</h2>
     <p><strong>Username:</strong> {{ selectedRequest?.user?.username }}</p>
-    <p><strong>Training Name:</strong> {{ selectedRequest?.physicalTraining?.trainingName }}</p>
-    <p><strong>Location:</strong> {{ selectedRequest?.physicalTraining?.location }}</p>
+    <p><strong>Book Title:</strong> {{ selectedRequest?.book?.title }}</p>
+    <p><strong>Author:</strong> {{ selectedRequest?.book?.author }}</p>
+    <p><strong>Genre:</strong> {{ selectedRequest?.book?.genre }}</p>
     <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Return Date:</strong> {{ selectedRequest?.returnDate | date: 'yyyy-MM-dd' }}</p>
     <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
-    <p><strong>Description:</strong> {{ selectedRequest?.physicalTraining?.description }}</p>
+    <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
   </div>
 </div>

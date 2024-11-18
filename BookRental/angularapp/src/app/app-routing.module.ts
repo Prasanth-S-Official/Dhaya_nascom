@@ -43,8 +43,8 @@ const routes: Routes = [
 
   // User Routes
   { path: 'user/view/trainings', component: UserviewtrainingComponent, canActivate: [AuthGuard] },
-  { path: 'user/add/request', component: UseraddrequestComponent, canActivate: [AuthGuard] },
-  { path: 'user/view/applied-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'user/add/rental', component: UseraddrequestComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/rental-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
 import { Router } from '@angular/router';
+import { BookrentalrequestService } from 'src/app/services/bookrentalrequest.service';
 
 @Component({
   selector: 'app-adminviewappliedrequest',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminviewappliedrequest.component.css']
 })
 export class AdminviewappliedrequestComponent implements OnInit {
-  trainingRequests: any[] = [];
+  rentalRequests: any[] = [];
   filteredRequests: any[] = [];
   searchValue = '';
   statusFilter = '-1'; // All statuses by default
@@ -16,35 +16,36 @@ export class AdminviewappliedrequestComponent implements OnInit {
   selectedRequest: any = null;
 
   constructor(
-    private trainingService: PhysicalTrainingService,
+    private bookRentalService: BookrentalrequestService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.fetchTrainingRequests();
+    this.fetchRentalRequests();
   }
 
-  fetchTrainingRequests(): void {
-    this.trainingService.getAllPhysicalTrainingRequests().subscribe(
+  fetchRentalRequests(): void {
+    this.bookRentalService.getAllBookRentalRequests().subscribe(
       (response) => {
-        this.trainingRequests = response;
-        this.filteredRequests = [...this.trainingRequests];
+        console.log("AppliedRental",response);
+        this.rentalRequests = response;
+        this.filteredRequests = [...this.rentalRequests];
       },
       (error) => {
-        console.error('Error fetching training requests:', error);
+        console.error('Error fetching rental requests:', error);
       }
     );
   }
 
   handleSearchChange(event: any): void {
     const searchValueLower = this.searchValue.toLowerCase();
-    this.filteredRequests = this.trainingRequests.filter((request) =>
-      request.physicalTraining.trainingName.toLowerCase().includes(searchValueLower)
+    this.filteredRequests = this.rentalRequests.filter((request) =>
+      request.book.title.toLowerCase().includes(searchValueLower)
     );
   }
 
   handleFilterChange(event: any): void {
-    this.filteredRequests = this.trainingRequests.filter((request) => {
+    this.filteredRequests = this.rentalRequests.filter((request) => {
       if (this.statusFilter === '-1') {
         return true;
       } else {
@@ -53,20 +54,20 @@ export class AdminviewappliedrequestComponent implements OnInit {
     });
   }
 
-  handleApprove(trainingRequest: any): void {
-    trainingRequest.status = 'Approved';
-    this.updateRequestStatus(trainingRequest);
+  handleApprove(rentalRequest: any): void {
+    rentalRequest.status = 'Approved';
+    this.updateRequestStatus(rentalRequest);
   }
 
-  handleReject(trainingRequest: any): void {
-    trainingRequest.status = 'Rejected';
-    this.updateRequestStatus(trainingRequest);
+  handleReject(rentalRequest: any): void {
+    rentalRequest.status = 'Rejected';
+    this.updateRequestStatus(rentalRequest);
   }
 
-  updateRequestStatus(trainingRequest: any): void {
-    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.physicalTrainingRequestId, trainingRequest).subscribe(
+  updateRequestStatus(rentalRequest: any): void {
+    this.bookRentalService.updateBookRentalRequest(rentalRequest.rentalId, rentalRequest).subscribe(
       () => {
-        this.fetchTrainingRequests();
+        this.fetchRentalRequests();
       },
       (error) => {
         console.error('Error updating request status:', error);

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
+import { BookrentalrequestService } from 'src/app/services/bookrentalrequest.service';
 import { Router } from '@angular/router';
-import { PhysicalTrainingRequest } from 'src/app/models/physical-training-request.model';
 
 @Component({
   selector: 'app-useraddrequest',
@@ -18,13 +17,12 @@ export class UseraddrequestComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private trainingService: PhysicalTrainingService
+    private bookrentalrequestService: BookrentalrequestService
   ) {
-    // Initializing form group with fields matching the model
+    // Initialize the form group with fields
     this.requestForm = this.fb.group({
-      healthConditions: ['', Validators.required],     // Health conditions
-      fitnessGoals: ['', Validators.required],         // Fitness goals
-      comments: [''],                                  // Additional comments
+      returnDate: ['', Validators.required], // Return date is mandatory
+      comments: [''],                       // Optional comments
     });
   }
 
@@ -33,31 +31,19 @@ export class UseraddrequestComponent implements OnInit {
   onSubmit(): void {
     if (this.requestForm.valid) {
       const formData = this.requestForm.value;
-      const requestObject: PhysicalTrainingRequest = {
-        userId: Number(localStorage.getItem('userId')),
-        physicalTrainingId: Number(localStorage.getItem('trainingId')),
-        requestDate: new Date().toISOString().split('T')[0],
+
+      const payload:  any = {
+        requestDate: new Date().toISOString().split('T')[0], // Current date
+        returnDate: formData.returnDate,
         status: 'Pending', // Default status
-        healthConditions: formData.healthConditions,
-        fitnessGoals: formData.fitnessGoals,
         comments: formData.comments,
+        user: { userId: Number(localStorage.getItem('userId')) }, // User ID from local storage
+        book: { bookId: Number(localStorage.getItem('bookId')) }  // Book ID from local storage
       };
 
-      console.log("AddingRequest" , requestObject);
-       
-      const payload : any = {
-        requestDate: requestObject.requestDate,
-        status: requestObject.status,
-        healthConditions: requestObject.healthConditions,
-        fitnessGoals: requestObject.fitnessGoals,
-        comments: requestObject.comments,
-        user: { userId: requestObject.userId },
-        physicalTraining: { physicalTrainingId: requestObject.physicalTrainingId },
-      };
-  
-      console.log("AddingRequest" , payload);
+      console.log("Submitting Payload:", payload);
 
-      this.trainingService.addPhysicalTrainingRequest(payload).subscribe(
+      this.bookrentalrequestService.addBookRentalRequest(payload).subscribe(
         (response) => {
           console.log('Response:', response);
           this.successPopup = true;
@@ -74,10 +60,10 @@ export class UseraddrequestComponent implements OnInit {
 
   handleSuccessMessage(): void {
     this.successPopup = false;
-    this.router.navigate(['/user/view/trainings']);
+    this.router.navigate(['/user/view/books']);
   }
 
   navigateBack(): void {
-    this.router.navigate(['/user/view/trainings']);
+    this.router.navigate(['/user/view/books']);
   }
 }
