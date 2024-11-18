@@ -26,7 +26,6 @@ export class UserviewappliedrequestComponent implements OnInit {
     const userId = localStorage.getItem('userId');
     this.rentalRequestService.getBookRentalRequestsByUserId(Number(userId)).subscribe(
       (response: any) => {
-        console.log("AppliedRental",response);
         this.appliedRequests = response;
         this.filteredRequests = response;
       },

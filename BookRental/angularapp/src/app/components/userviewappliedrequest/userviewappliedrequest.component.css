@@ -217,3 +217,31 @@ button:hover {
 .close-button:hover {
   color: #dc3545;
 }
+
+/* General Button Styles */
+button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Red Button */
+#redButton {
+  background-color: #dc3545;
+  color: white;
+  font-weight: bold;
+}
+
+#redButton:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+#redButton:disabled {
+  background-color: #d6d6d6; /* Light gray background for disabled state */
+  color: #a1a1a1; /* Gray text for disabled state */
+  cursor: not-allowed; /* Not-allowed cursor for disabled button */
+  box-shadow: none; /* Remove shadow for a flat look */
+}

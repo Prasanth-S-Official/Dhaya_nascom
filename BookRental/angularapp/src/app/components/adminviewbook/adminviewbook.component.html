@@ -37,17 +37,18 @@
           <th>Genre</th>
           <th>Rental Fee</th>
           <th>Description</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody *ngIf="status === 'error'">
         <tr>
-          <td colspan="7">Error loading data</td>
+          <td colspan="8">Error loading data</td>
         </tr>
       </tbody>
       <tbody *ngIf="status === 'noRecords'">
         <tr>
-          <td colspan="7" class="no-records-cell">Oops! No records found</td>
+          <td colspan="8" class="no-records-cell">Oops! No records found</td>
         </tr>
       </tbody>
       <tbody *ngIf="availableBooks.length > 0">
@@ -58,10 +59,17 @@
           <td>{{ book.genre }}</td>
           <td>₹{{ book.rentalFee }}</td>
           <td>{{ book.description }}</td>
+          <td>{{ book.isAvailable ? 'Available' : 'Unavailable' }}</td>
           <td>
             <button (click)="navigateToEditBook(book.bookId)">Edit</button>
             <button (click)="handleDeleteClick(book.bookId)" id="deleteButton">Delete</button>
             <button class="blue" (click)="showCoverImage(book.coverImage)">Show Cover Image</button>
+            <button
+              (click)="toggleAvailability(book)"
+              [ngClass]="book.isAvailable ? 'red' : 'green'"
+            >
+              {{ book.isAvailable ? 'Make Unavailable' : 'Make Available' }}
+            </button>
           </td>
         </tr>
       </tbody>

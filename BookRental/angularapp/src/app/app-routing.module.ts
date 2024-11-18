@@ -37,14 +37,14 @@ const routes: Routes = [
   // Admin Routes
   { path: 'admin/add/training', component: AdminaddtrainingComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/training/:id', component: AdminedittrainingComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/rental-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/trainings', component: AdminviewtrainingComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // User Routes
   { path: 'user/view/trainings', component: UserviewtrainingComponent, canActivate: [AuthGuard] },
   { path: 'user/add/rental', component: UseraddrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/rental-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'user/view/applied-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
 
