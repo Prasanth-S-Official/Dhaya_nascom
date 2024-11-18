@@ -1,81 +1,69 @@
 <app-adminnav></app-adminnav>
-<div>
-    <div class="book-form-container" [ngClass]="{ blur: successPopup }">
-      <h2>Create New Book</h2>
-      <hr>
-      <form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm)">
-        <label for="title">Book Title<span class="required">*</span></label>
-        <input
-          type="text"
-          name="title"
-          [(ngModel)]="formData.title"
-          placeholder="Book Title"
-          required
-          #title="ngModel"
-          (change)="handleChange($event, 'title')"
-        />
-        <div class="error" *ngIf="title.invalid && title.touched">*Book Title is required</div>
-      
-        <label for="author">Author<span class="required">*</span></label>
-        <input
-          type="text"
-          name="author"
-          [(ngModel)]="formData.author"
-          placeholder="Author"
-          required
-          #author="ngModel"
-          (change)="handleChange($event, 'author')"
-        />
-        <div class="error" *ngIf="author.invalid && author.touched">*Author is required</div>
-      
-        <label for="genre">Genre<span class="required">*</span></label>
-        <input
-          type="text"
-          name="genre"
-          [(ngModel)]="formData.genre"
-          placeholder="Genre"
-          required
-          #genre="ngModel"
-          (change)="handleChange($event, 'genre')"
-        />
-        <div class="error" *ngIf="genre.invalid && genre.touched">*Genre is required</div>
-      
-        <label for="description">Description<span class="required">*</span></label>
-        <input
-          type="text"
-          name="description"
-          [(ngModel)]="formData.description"
-          placeholder="Description"
-          required
-          #description="ngModel"
-          (change)="handleChange($event, 'description')"
-        />
-        <div class="error" *ngIf="description.invalid && description.touched">*Description is required</div>
-      
-        <label for="rentalFee">Rental Fee<span class="required">*</span></label>
-        <input
-          type="number"
-          name="rentalFee"
-          [(ngModel)]="formData.rentalFee"
-          placeholder="Rental Fee"
-          required
-          #rentalFee="ngModel"
-          (change)="handleChange($event, 'rentalFee')"
-        />
-        <div class="error" *ngIf="rentalFee.invalid && rentalFee.touched">*Rental Fee is required</div>
-      
-        <label for="coverImage">Cover Image<span class="required">*</span></label>
-        <input id="coverImage" type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" />
-        <div class="error" *ngIf="errorMessage">*{{ errorMessage }}</div>
+<div class="book-form-container" [ngClass]="{ blur: successPopup }">
+  <button *ngIf="id" type="button" class="back-button" (click)="navigateBack()">Back</button>
+  <h2>{{ id ? 'Edit Book' : 'Create New Book' }}</h2>
+  <hr />
 
-        <div *ngIf="errorMessage" class="error">*{{ errorMessage }}</div>
-      
-        <button type="submit">Submit</button>
-      </form>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Book Title<span class="required">*</span></label>
+      <input id="title" type="text" formControlName="title" />
+      <div *ngIf="bookForm.controls['title'].touched && bookForm.controls['title'].hasError('required')" class="error">
+        *Book Title is required
+      </div>
     </div>
-  
-    <div *ngIf="successPopup" class="success-popup">
-      <p>Successfully Added!</p>
-      <button (click)="handleSuccessMessage()">Ok</button>
+
+    <div>
+      <label for="author">Author<span class="required">*</span></label>
+      <input id="author" type="text" formControlName="author" />
+      <div *ngIf="bookForm.controls['author'].touched && bookForm.controls['author'].hasError('required')" class="error">
+        *Author is required
+      </div>
     </div>
+
+    <div>
+      <label for="genre">Genre<span class="required">*</span></label>
+      <input id="genre" type="text" formControlName="genre" />
+      <div *ngIf="bookForm.controls['genre'].touched && bookForm.controls['genre'].hasError('required')" class="error">
+        *Genre is required
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description<span class="required">*</span></label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div *ngIf="bookForm.controls['description'].touched && bookForm.controls['description'].hasError('required')" class="error">
+        *Description is required
+      </div>
+    </div>
+
+    <div>
+      <label for="rentalFee">Rental Fee<span class="required">*</span></label>
+      <input id="rentalFee" type="number" formControlName="rentalFee" />
+      <div *ngIf="bookForm.controls['rentalFee'].touched && bookForm.controls['rentalFee'].hasError('required')" class="error">
+        *Rental Fee is required
+      </div>
+    </div>
+
+    <div>
+      <label for="coverImage">Cover Image<span class="required">*</span></label>
+      <input id="coverImage" type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" />
+      <div *ngIf="imageError" class="error">
+        *{{ imageError }}
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+      *{{ errorMessage }}
+    </div>
+
+    <button type="submit" class="submit-button">{{ id ? 'Update Book' : 'Add Book' }}</button>
+  </form>
+</div>
+
+<div *ngIf="successPopup" class="success-popup">
+  <div class="success-popup-content">
+    <p>{{ id ? 'Book Updated Successfully!' : 'Book Added Successfully!' }}</p>
+    <button (click)="handleSuccessMessage()" class="ok-button">Ok</button>
+  </div>
 </div>

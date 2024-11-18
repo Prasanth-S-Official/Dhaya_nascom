@@ -18,7 +18,7 @@ export class BookService {
     return this.http.get<Book[]>(`${this.apiUrl}/api/books`, { headers });
   }
 
-  getBookById(bookId: string): Observable<Book> {
+  getBookById(bookId: number): Observable<Book> {
     const headers = this.getHeaders();
     return this.http.get<Book>(`${this.apiUrl}/api/books/${bookId}`, { headers });
   }
@@ -29,7 +29,7 @@ export class BookService {
     return this.http.post<Book>(`${this.apiUrl}/api/books`, book, { headers });
   }
 
-  updateBook(bookId: string, book: Book): Observable<Book> {
+  updateBook(bookId: number, book: Book): Observable<Book> {
     const headers = this.getHeaders();
     return this.http.put<Book>(`${this.apiUrl}/api/books/${bookId}`, book, { headers });
   }

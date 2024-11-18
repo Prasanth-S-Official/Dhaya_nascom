@@ -1,109 +1,150 @@
-/* LoanForm.css */
-
 .book-form-container {
-    max-width: 400px;
-    margin: 5rem auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+  max-width: 350px; /* Reduced the overall width */
+  margin: 4rem auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+h2 {
+  font-size: 22px; /* Reduced font size for the heading */
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align form elements */
+}
+
+input,
+select,
+textarea,
+button {
+  width: 100%; /* Make all inputs, select, and textarea uniform in width */
+  margin: 10px 0;
+  padding: 10px 12px; /* Adjusted padding for a balanced look */
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+textarea {
+  resize: none; /* Prevent resizing */
+  min-height: 80px; /* Adjusted height for better readability */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+  font-size: 12px; /* Reduced size for subtle emphasis */
+}
+
+.error {
+  color: #d9534f;
+  font-size: 12px; /* Reduced size for error messages */
+  margin: 5px 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #007bff;
+  margin: 15px 0;
+}
+
+/* Success Popup */
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #007bff;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.success-popup p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* File Input Styling */
+input[type="file"] {
+  font-size: 14px;
+  color: #555;
+  background-color: #f5f5f5;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+  .book-form-container {
+      max-width: 90%; /* Expand to fit smaller screens */
+      padding: 15px;
   }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
+
   input,
-  select {
-    margin: 10px 0;
-    padding: 12px 15px; /* Increased padding for a more comfortable feel */
-    border: none; /* Remove the default border */
-    border-radius: 30px; /* Rounded corners */
-    background-color: #f1f1f1; /* Light background for inputs */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effect */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  }
-  
-  input:focus,
-  select:focus {
-    outline: none; /* Remove the default outline */
-    background-color: #ffffff; /* Change background on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
-  }
-  
+  select,
+  textarea,
   button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 30px; /* Rounded button */
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Added transform for hover effect */
+      font-size: 12px; /* Adjust font size for smaller screens */
   }
-  
-  button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px); /* Slight lift effect on hover */
-  }
-  
-  button:active {
-    transform: translateY(1px); /* Slight depress effect when clicked */
-  }
-  
-  /* Media query for responsiveness */
-  @media (max-width: 480px) {
-    .training-form-container {
-      max-width: 100%;
-    }
-  }
-  
-  .required {
-    color: red;
-  }
-  
-  .blur {
-    filter: blur(2px);
-    pointer-events: none; /* Apply a blur filter to the content */
-  }
-  
-  /* CSS for Success Popup */
-  .success-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f2f2f2;
-    border: 1px solid black;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    text-align: center;
-    z-index: 2; /* Above the overlay */
-  }
-  
-  .error {
-    color: red;
-    font-size: 16px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  
-  hr {
-    border: none;
-    border-top: 2px solid #007bff;
-    color: #007bff;
-    overflow: visible;
-    text-align: center;
-    height: 5px;
-    margin-bottom: 3%;
-  }
-  
+}
