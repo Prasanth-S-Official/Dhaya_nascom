@@ -1,0 +1,62 @@
+<app-usernav></app-usernav>
+<div>
+  <div id="bookHomeBody">
+    <h1>Available Books</h1>
+    <hr>
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Title, Author, or Genre..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Books Table -->
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Rental Fee</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredBooks.length && availableBooks.length; else noRecords">
+        <tr *ngFor="let book of filteredBooks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.genre }}</td>
+          <td>₹{{ book.rentalFee }}</td>
+          <td>{{ book.description }}</td>
+          <td>{{ book.isAvailable ? 'Available' : 'Not Available' }}</td>
+          <td>
+            <button
+              id="applyButton"
+              *ngIf="!isBookRented(book)"
+              (click)="handleRentClick(book)"
+            >
+              Rent
+            </button>
+            <button id="rentedButton" *ngIf="isBookRented(book)">Rented</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colspan="8" class="no-records-cell">Oops! No records found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>

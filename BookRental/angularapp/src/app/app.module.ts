@@ -23,6 +23,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { AdminbookComponent } from './components/adminbook/adminbook.component';
 import { AdminviewbookComponent } from './components/adminviewbook/adminviewbook.component';
+import { UserviewbooksComponent } from './components/userviewbooks/userviewbooks.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AdminviewbookComponent } from './components/adminviewbook/adminviewbook
     AdminviewappliedrequestComponent,
     AdminviewtrainingComponent,
     AdminbookComponent,
-    AdminviewbookComponent
+    AdminviewbookComponent,
+    UserviewbooksComponent
   ],
   imports: [
     BrowserModule,
