@@ -18,6 +18,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AdminbookComponent } from './components/adminbook/adminbook.component';
+import { AdminviewbookComponent } from './components/adminviewbook/adminviewbook.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
 
 
   { path: 'admin/add/book', component: AdminbookComponent, canActivate: [AuthGuard] },
-
+  { path: 'admin/view/books', component: AdminviewbookComponent, canActivate: [AuthGuard] },
+  { path: 'admin/edit/book/:id', component: AdminbookComponent, canActivate: [AuthGuard] },
 
 
 
