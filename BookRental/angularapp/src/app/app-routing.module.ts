@@ -19,6 +19,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AdminbookComponent } from './components/adminbook/adminbook.component';
 import { AdminviewbookComponent } from './components/adminviewbook/adminviewbook.component';
+import { UserviewbooksComponent } from './components/userviewbooks/userviewbooks.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -31,7 +32,7 @@ const routes: Routes = [
   { path: 'admin/view/books', component: AdminviewbookComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/book/:id', component: AdminbookComponent, canActivate: [AuthGuard] },
 
-
+  { path: 'user/view/books', component: UserviewbooksComponent, canActivate: [AuthGuard] },
 
   // Admin Routes
   { path: 'admin/add/training', component: AdminaddtrainingComponent, canActivate: [AuthGuard] },

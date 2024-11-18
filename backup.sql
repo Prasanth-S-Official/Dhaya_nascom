@@ -73,7 +73,7 @@ CREATE TABLE `book_rental_request` (
   KEY `FK5qcqugnfu7tlcf74gv0dclhfm` (`user_id`),
   CONSTRAINT `FK4q775uoj9hpbdynsvi47oe8n4` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
   CONSTRAINT `FK5qcqugnfu7tlcf74gv0dclhfm` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,6 +82,7 @@ CREATE TABLE `book_rental_request` (
 
 LOCK TABLES `book_rental_request` WRITE;
 /*!40000 ALTER TABLE `book_rental_request` DISABLE KEYS */;
+INSERT INTO `book_rental_request` VALUES (1,'Requesting an extension for the due date.','2024-11-11','2024-11-18','Pending',2,2);
 /*!40000 ALTER TABLE `book_rental_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-18  7:40:46
+-- Dump completed on 2024-11-18  7:55:46

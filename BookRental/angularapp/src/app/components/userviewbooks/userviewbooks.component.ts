@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Book } from 'src/app/models/book.model';
+import { BookService } from 'src/app/services/book.service';
+import { BookrentalrequestService } from 'src/app/services/bookrentalrequest.service';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class UserviewbooksComponent implements OnInit {
   constructor(
     private router: Router,
     private bookService: BookService,
-    private rentalRequestService: BookRentalRequestService
+    private rentalRequestService: BookrentalrequestService
   ) {}
 
   ngOnInit(): void {

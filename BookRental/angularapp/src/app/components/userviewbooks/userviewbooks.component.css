@@ -24,7 +24,7 @@ body {
   }
   
   /* Main Container */
-  #trainingHomeBody {
+  #bookHomeBody {
     margin: 20px auto;
     width: 90%;
     max-width: 1200px; /* Max width for large screens */
@@ -59,20 +59,20 @@ body {
   }
   
   /* Training Table */
-  .training-table {
+  .book-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
   }
   
-  .training-table th,
-  .training-table td {
+  .book-table th,
+  .book-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
   }
   
-  .training-table th {
+  .book-table th {
     background-color: #3276a6;
     color: white;
   }
