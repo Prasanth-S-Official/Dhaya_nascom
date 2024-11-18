@@ -4,7 +4,7 @@
     <h1>Books</h1>
     <hr>
 
-    <div class="top-container">
+    <div class="top-container" *ngIf="status !== 'loading'">
       <div>
         <label for="searchBox">Search by:</label>
         <input
@@ -24,7 +24,11 @@
       </div>
     </div>
 
-    <table class="book-table">
+    <div *ngIf="status === 'loading'" class="loading-container">
+      <p>Loading...</p>
+    </div>
+
+    <table *ngIf="status !== 'loading'" class="book-table">
       <thead>
         <tr>
           <th>S.No</th>
@@ -36,11 +40,6 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody *ngIf="status === 'loading'">
-        <tr>
-          <td colspan="7">Loading...</td>
-        </tr>
-      </tbody>
       <tbody *ngIf="status === 'error'">
         <tr>
           <td colspan="7">Error loading data</td>

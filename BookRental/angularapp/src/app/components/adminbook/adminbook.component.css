@@ -11,7 +11,7 @@
 
 .back-button {
   position: absolute; /* Place the button absolutely within the container */
-  top: -20px; /* Move above the container */
+  top: -10px; /* Move above the container */
   right: 10px; /* Align to the right edge */
   background-color: #2196f3;
   color: white;
@@ -22,6 +22,7 @@
   font-weight: bold;
   transition: background-color 0.3s ease;
   z-index: 10;
+  width: 100px;
 }
 
 .back-button:hover {

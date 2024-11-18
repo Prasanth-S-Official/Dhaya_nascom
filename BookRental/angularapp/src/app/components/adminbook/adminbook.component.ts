@@ -145,10 +145,10 @@ export class AdminbookComponent implements OnInit {
     this.imageError = '';
     this.coverImageBase64 = '';
     this.bookForm.reset();
-    this.router.navigate(['/admin/books']);
+    this.router.navigate(['/admin/view/books']);
   }
 
   navigateBack(): void {
-    this.router.navigate(['/admin/books']);
+    this.router.navigate(['/admin/view/books']);
   }
 }
