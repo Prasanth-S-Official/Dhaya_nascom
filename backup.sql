@@ -82,7 +82,6 @@ CREATE TABLE `book_rental_request` (
 
 LOCK TABLES `book_rental_request` WRITE;
 /*!40000 ALTER TABLE `book_rental_request` DISABLE KEYS */;
-INSERT INTO `book_rental_request` VALUES (1,'Requesting an extension for the due date.','2024-11-11','2024-11-18','Pending',2,2);
 /*!40000 ALTER TABLE `book_rental_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-18  9:58:11
+-- Dump completed on 2024-11-18 10:13:11
