@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllphysicalTraining() throws Exception {
-	        mockMvc.perform(get("/api/physicalTraining")
+	    public void backend_testGetAllBooks() throws Exception {
+	        mockMvc.perform(get("/api/books")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -97,10 +97,10 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testPhysicalTrainingRequestHasManyToOneAnnotation() {
+    public void backend_testPhysicalBookRentalRequestHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.PhysicalTrainingRequest");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.BookRentalRequest");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
@@ -127,10 +127,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testPhysicalTrainingInterfaceAndImplementation() {
+    public void backend_testBookInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.PhysicalTrainingService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.PhysicalTrainingServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.BookService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.BookServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testPhysicalTrainingRequestInterfaceAndImplementation() {
+    public void backend_testBookRentalRequestInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.PhysicalTrainingRequestService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.PhysicalTrainingRequestServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.BookRentalRequestService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.BookRentalRequestServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
