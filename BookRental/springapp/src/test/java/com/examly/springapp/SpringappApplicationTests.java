@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testPhysicalTrainingControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.PhysicalTrainingController");
+	   public void backend_testBookControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.BookController");
 	   }
 
 	   @Test
-	   public void backend_testPhysicalTrainingRequestControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.PhysicalTrainingRequestController");
+	   public void backend_testBookRentalRequestControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.BookRentalRequestController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testPhysicalTrainingModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.PhysicalTraining");
+	   public void backend_testBookModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Book");
 	   }
 	 
 	 @Test
@@ -200,8 +200,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testPhysicalTrainingRequestModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.PhysicalTrainingRequest");
+	   public void backend_testBookRentalRequestModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.BookRentalRequest");
 	   }
 
 }
