@@ -88,7 +88,8 @@ export class AdminviewbookComponent implements OnInit {
   toggleAvailability(book: Book): void {
     const updatedBook = { ...book, isAvailable: !book.isAvailable };
     this.bookService.updateBook(book.bookId!, updatedBook).subscribe(
-      () => {
+      (response) => {
+        console.log("UpdateToggle",response);
         this.fetchAvailableBooks();
       },
       (error) => {
