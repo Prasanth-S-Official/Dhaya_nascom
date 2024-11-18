@@ -1,0 +1,77 @@
+<app-adminnav></app-adminnav>
+<div id="parent">
+  <div id="bookHomeBody" [ngClass]="{ blur: showDeletePopup }">
+    <h1>Books</h1>
+    <hr>
+
+    <div class="top-container">
+      <div>
+        <label for="searchBox">Search by:</label>
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Book Title..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="applyFilters()"
+        />
+      </div>
+      <div>
+        <label for="genreSelect">Filter by:</label>
+        <select [(ngModel)]="selectedGenre" (ngModelChange)="applyFilters()" id="genreSelect">
+          <option [ngValue]="null">All Genres</option>
+          <option *ngFor="let genre of uniqueGenres" [ngValue]="genre">{{ genre }}</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Rental Fee</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="status === 'loading'">
+        <tr>
+          <td colspan="7">Loading...</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'error'">
+        <tr>
+          <td colspan="7">Error loading data</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'noRecords'">
+        <tr>
+          <td colspan="7" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="availableBooks.length > 0">
+        <tr *ngFor="let book of availableBooks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.genre }}</td>
+          <td>₹{{ book.rentalFee }}</td>
+          <td>{{ book.description }}</td>
+          <td>
+            <button (click)="navigateToEditBook(book.bookId)">Edit</button>
+            <button (click)="handleDeleteClick(book.bookId)" id="deleteButton">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete?</p>
+    <button (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button (click)="closeDeletePopup()">Cancel</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>

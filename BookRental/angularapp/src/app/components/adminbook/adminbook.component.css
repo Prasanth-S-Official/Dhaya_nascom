@@ -1,5 +1,5 @@
 .book-form-container {
-  max-width: 350px; /* Reduced the overall width */
+  max-width: 400px; /* Reduced overall width */
   margin: 4rem auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -9,7 +9,7 @@
 }
 
 h2 {
-  font-size: 22px; /* Reduced font size for the heading */
+  font-size: 22px;
   margin-bottom: 20px;
   text-align: center;
   color: #333;
@@ -19,16 +19,18 @@ h2 {
 form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align form elements */
+}
+
+form div {
+  margin-bottom: 15px; /* Add spacing between form fields */
 }
 
 input,
 select,
-textarea,
-button {
-  width: 100%; /* Make all inputs, select, and textarea uniform in width */
-  margin: 10px 0;
-  padding: 10px 12px; /* Adjusted padding for a balanced look */
+textarea {
+  width: 90%; /* Uniform width for all inputs */
+  margin: 5px 0;
+  padding: 12px 15px;
   border: none;
   border-radius: 5px;
   background-color: #f5f5f5;
@@ -39,7 +41,7 @@ button {
 
 textarea {
   resize: none; /* Prevent resizing */
-  min-height: 80px; /* Adjusted height for better readability */
+  min-height: 80px; /* Ensure textarea has consistent height */
 }
 
 input:focus,
@@ -55,11 +57,14 @@ button {
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 12px 20px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
+  display: block; /* Block-level element for centering */
+  margin: 20px auto 0; /* Center button and add top margin */
+  width: 150px; /* Consistent button size */
 }
 
 button:hover {
@@ -74,13 +79,13 @@ button:active {
 .required {
   color: red;
   font-weight: bold;
-  font-size: 12px; /* Reduced size for subtle emphasis */
+  font-size: 12px;
 }
 
 .error {
   color: #d9534f;
-  font-size: 12px; /* Reduced size for error messages */
-  margin: 5px 0;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 hr {
@@ -116,8 +121,10 @@ input[type="file"] {
   color: #555;
   background-color: #f5f5f5;
   border: none;
-  padding: 8px;
+  padding: 12px 15px; /* Match padding with other inputs */
   border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Match other input shadows */
+  width: 90%; /* Uniform width */
 }
 
 input[type="file"]::file-selector-button {
@@ -137,14 +144,18 @@ input[type="file"]::file-selector-button:hover {
 /* Responsive Styling */
 @media (max-width: 480px) {
   .book-form-container {
-      max-width: 90%; /* Expand to fit smaller screens */
-      padding: 15px;
+    max-width: 90%; /* Expand to fit smaller screens */
+    padding: 15px;
   }
 
   input,
   select,
   textarea,
   button {
-      font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  button {
+    width: 100%; /* Expand button for smaller screens */
   }
 }
