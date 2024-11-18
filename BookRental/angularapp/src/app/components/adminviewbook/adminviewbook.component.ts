@@ -19,6 +19,10 @@ export class AdminviewbookComponent implements OnInit {
   status: string = ''; // Status for loading, error, or no records
   errorMessage: string = ''; // Error message for delete operation
 
+  // Variables for image popup
+  showImagePopup = false;
+  selectedCoverImage: string | null = null; // Base64 string of the selected cover image
+
   constructor(private router: Router, private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -82,5 +86,15 @@ export class AdminviewbookComponent implements OnInit {
     });
 
     this.status = this.availableBooks.length === 0 ? 'noRecords' : ''; // Update status if no records found
+  }
+
+  showCoverImage(base64Image: string): void {
+    this.selectedCoverImage = base64Image;
+    this.showImagePopup = true;
+  }
+
+  closeImagePopup(): void {
+    this.selectedCoverImage = null;
+    this.showImagePopup = false;
   }
 }
