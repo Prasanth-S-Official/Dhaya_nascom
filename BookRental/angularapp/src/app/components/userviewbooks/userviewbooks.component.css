@@ -206,4 +206,35 @@ body {
       font-size: 14px; /* Smaller pagination button size */
     }
   }
+
+  .image-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 1);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 10;
+  }
   
+  .image-popup img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+.blue {
+    background-color: rgb(11, 155, 124)333 !important;
+}

@@ -266,6 +266,10 @@
     font-weight: bold; /* Bold text */
     width: fit-content; /* Width just enough for the content */
   }
+
+  .blue {
+    background-color:#00a2ff !important;
+  }
   
   .image-popup {
     position: fixed;

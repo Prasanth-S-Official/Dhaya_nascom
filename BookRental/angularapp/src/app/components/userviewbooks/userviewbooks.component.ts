@@ -5,18 +5,20 @@ import { Book } from 'src/app/models/book.model';
 import { BookService } from 'src/app/services/book.service';
 import { BookrentalrequestService } from 'src/app/services/bookrentalrequest.service';
 
-
 @Component({
   selector: 'app-userviewbooks',
   templateUrl: './userviewbooks.component.html',
   styleUrls: ['./userviewbooks.component.css']
 })
 export class UserviewbooksComponent implements OnInit {
-
   availableBooks: Book[] = [];
   filteredBooks: Book[] = [];
   rentedBooks: any[] = [];
   searchField: string = '';
+
+  // Variables for Image Popup
+  showImagePopup: boolean = false;
+  selectedCoverImage: string | null = null;
 
   constructor(
     private router: Router,
@@ -76,6 +78,16 @@ export class UserviewbooksComponent implements OnInit {
     return this.rentedBooks.some(
       (rental) => rental.book.bookId === book.bookId
     );
+  }
+
+  showCoverImage(base64Image: string): void {
+    this.selectedCoverImage = base64Image;
+    this.showImagePopup = true;
+  }
+
+  closeImagePopup(): void {
+    this.selectedCoverImage = null;
+    this.showImagePopup = false;
   }
 
   logout() {
