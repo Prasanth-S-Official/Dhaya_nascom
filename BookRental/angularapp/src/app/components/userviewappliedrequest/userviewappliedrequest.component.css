@@ -159,15 +159,16 @@ button:hover {
 .details-modal-content {
   background-color: #fff;
   padding: 10px; /* Reduced padding */
-  width: 80%; /* Reduced width */
-  max-width: 300px; /* Smaller max-width */
+  width: 60%; /* Reduced width */
+  max-width: 400px; /* Smaller max-width */
+  max-height: 70%; /* Restrict the height to 80% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
-  text-align: left;
-  margin-top: 10px;
+  text-align: Center;
+  margin-top: 5%;
 }
-
 
 .details-modal-content h2 {
   font-size: 24px;
@@ -177,11 +178,29 @@ button:hover {
 }
 
 .details-modal-content p {
-  font-size: 12px;
+  font-size: 14px;
   color: #555;
   margin-bottom: 8px;
 }
 
+.details-modal-content::-webkit-scrollbar {
+  width: 8px; /* Set width of the scrollbar */
+}
+
+.details-modal-content::-webkit-scrollbar-thumb {
+  background: #ddd; /* Thumb color */
+  border-radius: 10px; /* Rounded edges */
+}
+
+.details-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #bbb; /* Darker on hover */
+}
+
+.details-modal-content::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track color */
+}
+
+/* Close Button */
 .close-button {
   position: absolute;
   top: 10px;
