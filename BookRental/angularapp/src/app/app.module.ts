@@ -21,6 +21,8 @@ import { AdminviewappliedrequestComponent } from './components/adminviewappliedr
 import { AdminviewtrainingComponent } from './components/adminviewtraining/adminviewtraining.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { AdminbookComponent } from './components/adminbook/adminbook.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     AdminedittrainingComponent,
     AdminviewappliedrequestComponent,
     AdminviewtrainingComponent,
+    AdminbookComponent
   ],
   imports: [
     BrowserModule,

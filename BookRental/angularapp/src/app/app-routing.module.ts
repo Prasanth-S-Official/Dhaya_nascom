@@ -17,12 +17,19 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { AdminbookComponent } from './components/adminbook/adminbook.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'error', component: ErrorComponent },
+
+
+  { path: 'admin/add/book', component: AdminbookComponent, canActivate: [AuthGuard] },
+
+
+
 
   // Admin Routes
   { path: 'admin/add/training', component: AdminaddtrainingComponent, canActivate: [AuthGuard] },
