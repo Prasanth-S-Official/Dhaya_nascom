@@ -25,14 +25,14 @@ describe('HomePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('Frontend_should_display_title_BookHaven_in_home_page_component', () => {
+  fit('Frontend_should_display_title_BookHeaven_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('BookHaven');
+    expect(compiled.textContent).toContain('BookHeaven');
   });
 
   fit('Frontend_should_display_content_paragraph_in_home_page_component', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('BookHaven offers a diverse collection of books');
+    expect(compiled.textContent).toContain('BookHeaven offers a diverse collection of books');
   });
 
   fit('Frontend_should_display_contact_us_section_in_home_page_component', () => {
