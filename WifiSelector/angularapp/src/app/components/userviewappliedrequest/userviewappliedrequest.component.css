@@ -1,0 +1,200 @@
+.page-content {
+  margin-top: 20px;
+  width: 90%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.page-content.blur {
+  filter: blur(2px);
+  pointer-events: none; /* Prevent interactions when blurred */
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Search Box */
+#searchBox {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 20px 0;
+  display: block;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+#searchBox:focus {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0; /* Added border to define the table grid */
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd; /* Border for grid lines */
+}
+
+table th {
+  background-color: #3276a6;
+  color: white;
+  font-weight: bold;
+}
+
+table tbody tr:hover {
+  background-color: #f9f9f9; /* Row hover effect */
+}
+
+table .no-records-cell {
+  font-style: italic;
+  color: #666;
+}
+
+/* Button Styles */
+button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Action Button: Show More */
+button:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+#redButton {
+  background-color: #dc3545;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#redButton:hover {
+  background-color: #c82333;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+/* Delete Confirmation Popup */
+.delete-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 10;
+  width: 90%;
+  max-width: 400px;
+}
+
+.confirm-delete-button,
+.cancel-delete-button {
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 20px;
+  margin: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.confirm-delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.confirm-delete-button:hover {
+  background-color: #c82333;
+}
+
+.cancel-delete-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-delete-button:hover {
+  background-color: #5a6268;
+}
+
+/* Details Modal Overlay */
+.details-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.details-modal-content {
+  background-color: #fff;
+  padding: 10px; /* Reduced padding */
+  width: 80%; /* Reduced width */
+  max-width: 300px; /* Smaller max-width */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: left;
+  margin-top: 10px;
+}
+
+
+.details-modal-content h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.details-modal-content p {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #333;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #dc3545;
+}

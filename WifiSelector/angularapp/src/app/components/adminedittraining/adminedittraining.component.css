@@ -1,0 +1,165 @@
+/* Container styling for the form */
+.training-form-container {
+  position: relative;
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 25px;
+  border: none; /* Remove border for a cleaner look */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a floating effect */
+  background-color: #f8f9fa;
+}
+
+/* Title styling */
+h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Required field asterisk styling */
+.required {
+  color: #e74c3c;
+}
+
+/* Divider line styling */
+hr {
+  border: none;
+  border-top: 2px solid #007bff;
+  color: #007bff;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+  margin-bottom: 3%;
+}
+
+/* Form elements styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+select {
+  margin: 10px 0;
+  padding: 12px 15px; /* Increased padding for comfort */
+  border: none; /* Removed border for a cleaner look */
+  border-radius: 20px; /* Rounded corners for a softer feel */
+  background-color: #e9ecef;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft glow effect on focus */
+}
+
+select {
+  cursor: pointer;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+button[type="submit"]:active {
+  transform: translateY(1px); /* Slight depress effect on click */
+}
+
+/* Error message styling */
+.error {
+  color: #e74c3c;
+  font-size: 15px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/* Blur effect applied to the form when the success popup is active */
+.blur {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Success popup styling */
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.success-popup p {
+  font-size: 18px;
+  color: #3c763d;
+}
+
+.success-popup button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.success-popup button:hover {
+  background-color: #388e3c;
+  transform: translateY(-2px);
+}
+
+.success-popup button:active {
+  transform: translateY(1px);
+}
+
+/* Back button styling */
+#backButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f8f9fa;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#backButton:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 480px) {
+  .training-form-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+}

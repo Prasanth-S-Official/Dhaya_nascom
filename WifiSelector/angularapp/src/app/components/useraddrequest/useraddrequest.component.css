@@ -1,0 +1,178 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+}
+
+/* Training Request Form Container */
+.container {
+  position: relative;
+  max-width: 400px;
+  margin: 5rem auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Back Button Positioning */
+.button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.button-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button-container button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Form Header */
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Form Layout */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align form items */
+}
+
+form > div {
+  width: 100%;
+}
+
+/* Input and Textarea Styles */
+input[type="text"],
+textarea {
+  width: 90%;
+  margin: 10px 0;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 30px;
+  background-color: #f1f1f1;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+/* Success Popup Button Style */
+.success-popup button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 15px; /* Space between text and button */
+}
+
+.success-popup button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.success-popup button:active {
+  transform: translateY(1px);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Required Indicator */
+.required {
+  color: red;
+}
+
+/* Error Message Style */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/* Submit Button Styles */
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 20px;
+  text-align: center; /* Center the button in the form */
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+}
+
+/* Blur Effect */
+.blur {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Success Popup */
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
+
+/* Horizontal Rule Style */
+hr {
+  border: none;
+  border-top: 2px solid #007bff;
+  color: #007bff;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+  margin: 20px 0;
+}
