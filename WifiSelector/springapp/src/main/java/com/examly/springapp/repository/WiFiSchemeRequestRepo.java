@@ -10,14 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface WiFiSchemeRequestRepo extends JpaRepository<WiFiSchemeRequest, Long> {
+    @Query("SELECT r FROM WiFiSchemeRequest r WHERE r.user.userId = :userId")
+    List<WiFiSchemeRequest> findWiFiSchemeRequestsByUserId(Long userId);
 
-    @Query("SELECT w FROM WiFiSchemeRequest w WHERE w.user.userId = :userId")
-    List<WiFiSchemeRequest> findWiFiSchemeRequestsByUserId(long userId);
-
-    @Query("SELECT w FROM WiFiSchemeRequest w WHERE w.wifiScheme.wifiSchemeId = :wifiSchemeId")
+    @Query("SELECT r FROM WiFiSchemeRequest r WHERE r.wifiScheme.wifiSchemeId = :wifiSchemeId")
     List<WiFiSchemeRequest> findWiFiSchemeRequestsBySchemeId(Long wifiSchemeId);
 
-    Optional<WiFiSchemeRequest> findByUser_UserIdAndWiFiScheme_WifiSchemeId(long userId, Long wifiSchemeId);
-
-    boolean existsByWiFiScheme_WifiSchemeId(Long wifiSchemeId);
+    Optional<WiFiSchemeRequest> findByUser_UserIdAndWifiScheme_WifiSchemeId(Long userId, Long wifiSchemeId);
 }

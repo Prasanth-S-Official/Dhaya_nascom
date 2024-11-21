@@ -2,6 +2,9 @@ package com.examly.springapp.service;
 
 import com.examly.springapp.model.WiFiScheme;
 import com.examly.springapp.repository.WiFiSchemeRepo;
+
+import main.java.com.examly.springapp.exceptions.DuplicateWiFiSchemeException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +19,13 @@ public class WiFiSchemeServiceImpl implements WiFiSchemeService {
 
     @Override
     public WiFiScheme addWiFiScheme(WiFiScheme wifiScheme) {
+        Optional<WiFiScheme> existingScheme = wifiSchemeRepo.findBySchemeName(wifiScheme.getSchemeName());
+        if (existingScheme.isPresent()) {
+            throw new DuplicateWiFiSchemeException("Scheme with the same name already exists.");
+        }
         return wifiSchemeRepo.save(wifiScheme);
     }
+
 
     @Override
     public Optional<WiFiScheme> getWiFiSchemeById(Long wifiSchemeId) {
@@ -44,7 +52,9 @@ public class WiFiSchemeServiceImpl implements WiFiSchemeService {
         if (existingScheme.isPresent()) {
             wifiSchemeRepo.deleteById(wifiSchemeId);
             return existingScheme.get();
+        } else {
+            throw new WiFiSchemeDeletionException("WiFi scheme not found for deletion.");
         }
-        return null;
     }
+    
 }
