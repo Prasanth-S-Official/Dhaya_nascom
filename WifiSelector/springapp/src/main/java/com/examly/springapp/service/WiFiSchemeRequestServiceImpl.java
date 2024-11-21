@@ -1,9 +1,8 @@
 package com.examly.springapp.service;
 
+import com.examly.springapp.exceptions.WiFiSchemeRequestException;
 import com.examly.springapp.model.WiFiSchemeRequest;
 import com.examly.springapp.repository.WiFiSchemeRequestRepo;
-
-import main.java.com.examly.springapp.exceptions.WiFiSchemeRequestException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,8 @@ public class WiFiSchemeRequestServiceImpl implements WiFiSchemeRequestService {
 
    @Override
     public WiFiSchemeRequest addWiFiSchemeRequest(WiFiSchemeRequest request) {
-        Long userId = request.getUser().getUserId();
-        Long schemeId = request.getWifiScheme().getWifiSchemeId();
+        Long userId = Long.valueOf(request.getUser().getUserId());
+        Long schemeId = request.getWifiScheme().getWifiSchemeId();        
         Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findByUser_UserIdAndWifiScheme_WifiSchemeId(userId, schemeId);
         if (existingRequest.isPresent()) {
             throw new WiFiSchemeRequestException("User has already requested this WiFi scheme.");

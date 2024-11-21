@@ -141,6 +141,67 @@ LOCK TABLES `user` WRITE;
 INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$R2vA.DFW/JKxEGdAjmkVCOgohFJciY0gagMqlnLKZbcNIEKK0T/mi','Admin','admin'),(2,'user@gmail.com','1234567899','$2a$10$zJJ78PqGFJslC88vYZIIvepbAbpEftwNk5zA4giTTFthOq.mIqbke','User','user'),(3,'demouser3@gmail.com','7888499919','$2a$10$2LhFM465x2rdTMPp7BPIjOfNUs6raiYG5JhCLP.d83u6UsNergu4.','User','demo');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `wi_fi_scheme`
+--
+
+DROP TABLE IF EXISTS `wi_fi_scheme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wi_fi_scheme` (
+  `wifi_scheme_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `availability_reason` varchar(255) DEFAULT NULL,
+  `availability_status` varchar(255) DEFAULT NULL,
+  `data_limit` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `fee` double DEFAULT NULL,
+  `region` varchar(255) DEFAULT NULL,
+  `scheme_name` varchar(255) DEFAULT NULL,
+  `speed` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`wifi_scheme_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wi_fi_scheme`
+--
+
+LOCK TABLES `wi_fi_scheme` WRITE;
+/*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wi_fi_scheme_request`
+--
+
+DROP TABLE IF EXISTS `wi_fi_scheme_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wi_fi_scheme_request` (
+  `wifi_scheme_request_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `comments` varchar(255) DEFAULT NULL,
+  `request_date` date NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `wifi_scheme_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`wifi_scheme_request_id`),
+  KEY `FKn4rmj4a4yy7jdnstsms8feim0` (`user_id`),
+  KEY `FK66l6wgtnsmludnwu0f3xqnpux` (`wifi_scheme_id`),
+  CONSTRAINT `FK66l6wgtnsmludnwu0f3xqnpux` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
+  CONSTRAINT `FKn4rmj4a4yy7jdnstsms8feim0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wi_fi_scheme_request`
+--
+
+LOCK TABLES `wi_fi_scheme_request` WRITE;
+/*!40000 ALTER TABLE `wi_fi_scheme_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wi_fi_scheme_request` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -151,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-21  5:26:25
+-- Dump completed on 2024-11-21  5:41:24

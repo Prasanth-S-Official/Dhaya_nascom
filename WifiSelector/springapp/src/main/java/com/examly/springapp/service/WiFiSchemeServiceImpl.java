@@ -1,9 +1,12 @@
 package com.examly.springapp.service;
 
+
+import com.examly.springapp.exceptions.DuplicateWiFiSchemeException;
+import com.examly.springapp.exceptions.WiFiSchemeDeletionException;
 import com.examly.springapp.model.WiFiScheme;
 import com.examly.springapp.repository.WiFiSchemeRepo;
 
-import main.java.com.examly.springapp.exceptions.DuplicateWiFiSchemeException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
