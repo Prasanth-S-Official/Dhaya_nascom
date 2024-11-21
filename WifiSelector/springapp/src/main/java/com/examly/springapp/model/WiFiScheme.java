@@ -21,7 +21,18 @@ public class WiFiScheme {
 
     // New attributes for real-time availability
     private String availabilityStatus; // "Available" or "Unavailable"
-    private String availabilityReason; // Explanation for unavailability, if applicable
+
+    public WiFiScheme(Long wifiSchemeId, String schemeName, String description, String region, String speed,
+            String dataLimit, Double fee, String availabilityStatus) {
+        this.wifiSchemeId = wifiSchemeId;
+        this.schemeName = schemeName;
+        this.description = description;
+        this.region = region;
+        this.speed = speed;
+        this.dataLimit = dataLimit;
+        this.fee = fee;
+        this.availabilityStatus = availabilityStatus;
+    }
 
     // Constructor
     public WiFiScheme() {
@@ -93,11 +104,4 @@ public class WiFiScheme {
         this.availabilityStatus = availabilityStatus;
     }
 
-    public String getAvailabilityReason() {
-        return availabilityReason;
-    }
-
-    public void setAvailabilityReason(String availabilityReason) {
-        this.availabilityReason = availabilityReason;
-    }
 }
