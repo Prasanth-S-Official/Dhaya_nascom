@@ -17,12 +17,20 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'error', component: ErrorComponent },
+
+
+  { path: 'admin/add/scheme', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
+  { path: 'admin/edit/scheme/:id', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/trainings', component: AdminviewtrainingComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Admin Routes
   { path: 'admin/add/training', component: AdminaddtrainingComponent, canActivate: [AuthGuard] },
