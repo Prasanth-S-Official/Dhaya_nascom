@@ -17,7 +17,7 @@ export class WifiSchemeService {
     return this.http.get<WiFiScheme[]>(`${this.apiUrl}/api/wifiScheme`, { headers });
   }
 
-  getWiFiSchemeById(wifiSchemeId: string): Observable<WiFiScheme> {
+  getWiFiSchemeById(wifiSchemeId: number): Observable<WiFiScheme> {
     const headers = this.getHeaders();
     return this.http.get<WiFiScheme>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, { headers });
   }
@@ -27,12 +27,12 @@ export class WifiSchemeService {
     return this.http.post<WiFiScheme>(`${this.apiUrl}/api/wifiScheme`, wifiScheme, { headers });
   }
 
-  updateWiFiScheme(wifiSchemeId: string, wifiScheme: WiFiScheme): Observable<WiFiScheme> {
+  updateWiFiScheme(wifiSchemeId: number, wifiScheme: WiFiScheme): Observable<WiFiScheme> {
     const headers = this.getHeaders();
     return this.http.put<WiFiScheme>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, wifiScheme, { headers });
   }
 
-  deleteWiFiScheme(wifiSchemeId: string): Observable<void> {
+  deleteWiFiScheme(wifiSchemeId: number): Observable<void> {
     const headers = this.getHeaders();
     return this.http.delete<void>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, { headers });
   }
