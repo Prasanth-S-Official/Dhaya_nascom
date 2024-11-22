@@ -1,0 +1,78 @@
+<app-adminnav></app-adminnav>
+<div id="parent">
+  <div id="schemeHomeBody" [ngClass]="{ blur: showDeletePopup }">
+    <h1>WiFi Schemes</h1>
+    <hr>
+
+    <div class="top-container">
+      <div>
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Scheme Name or Description..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="applyFilters()"
+        />
+      </div>
+      <div>
+        <label for="regionSelect">Filter by Region:</label>
+        <select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()" id="regionSelect">
+          <option [ngValue]="null">All</option>
+          <option *ngFor="let region of allSchemes.map(scheme => scheme.region).filter((value, index, self) => self.indexOf(value) === index)" [ngValue]="region">{{ region }}</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="scheme-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Scheme Name</th>
+          <th>Region</th>
+          <th>Speed</th>
+          <th>Data Limit</th>
+          <th>Fee</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="status === 'loading'">
+        <tr>
+          <td colspan="8">Loading...</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'error'">
+        <tr>
+          <td colspan="8">Error loading data</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'noRecords'">
+        <tr>
+          <td colspan="8" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="availableSchemes.length > 0">
+        <tr *ngFor="let scheme of availableSchemes; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ scheme.schemeName }}</td>
+          <td>{{ scheme.region }}</td>
+          <td>{{ scheme.speed }}</td>
+          <td>{{ scheme.dataLimit }}</td>
+          <td>₹{{ scheme.fee }}</td>
+          <td>{{ scheme.description }}</td>
+          <td>
+            <button (click)="navigateToEditScheme(scheme.wifiSchemeId)">Edit</button>
+            <button (click)="handleDeleteClick(scheme.wifiSchemeId)" id="deleteButton">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete?</p>
+    <button (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button (click)="closeDeletePopup()">Cancel</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>

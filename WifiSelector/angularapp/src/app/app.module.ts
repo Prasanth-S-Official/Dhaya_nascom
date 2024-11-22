@@ -22,6 +22,7 @@ import { AdminviewtrainingComponent } from './components/adminviewtraining/admin
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
+import { AdminviewschemeComponent } from './components/adminviewscheme/adminviewscheme.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-w
     AdminviewappliedrequestComponent,
     AdminviewtrainingComponent,
     AdminWifiSchemeComponent,
+    AdminviewschemeComponent,
   ],
   imports: [
     BrowserModule,
