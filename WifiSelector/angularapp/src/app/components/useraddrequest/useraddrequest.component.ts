@@ -19,7 +19,7 @@ export class UseraddrequestComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private schemeRequestService: WiFiSchemeRequestService
+    private wifi : WiFiSchemeRequestService
   ) {
     this.requestForm = this.fb.group({
       streetName: ['', Validators.required],
@@ -79,10 +79,8 @@ export class UseraddrequestComponent implements OnInit {
       const formData = this.requestForm.value;
       const userId = Number(localStorage.getItem('userId'));
       const wifiSchemeId = Number(localStorage.getItem('wifiSchemeId'));
-
-      const payload: WiFiSchemeRequest = {
-        userId,
-        wifiSchemeId,
+    
+      const payload: any = {
         requestDate: new Date().toISOString().split('T')[0],
         status: 'Pending',
         comments: formData.comments,
@@ -94,20 +92,29 @@ export class UseraddrequestComponent implements OnInit {
         preferredSetupDate: formData.preferredSetupDate,
         timeSlot: formData.timeSlot,
         proof: this.proofBase64,
+        user: {
+          userId: userId, // Nested user object
+        },
+        wifiScheme: {
+          wifiSchemeId: wifiSchemeId, // Nested WiFi scheme object
+        },
       };
-
-      this.schemeRequestService.addWiFiSchemeRequest(payload).subscribe(
+    
+      console.log("PayloadRequest", payload);
+    
+      this.wifiSchemeRequestService.addWiFiSchemeRequest(payload).subscribe(
         (response) => {
-          console.log('Request Submitted:', response);
+          console.log('Request submitted successfully:', response);
           this.successPopup = true;
         },
         (error) => {
           console.error('Error submitting request:', error);
-          this.errorMessage = 'Error submitting request.';
+          this.errorMessage = 'Error submitting request';
         }
       );
     } else {
-      this.errorMessage = 'All required fields must be filled out.';
+      this.errorMessage = 'All required fields must be filled out';
+  
       if (!this.proofBase64) {
         this.imageError = 'Proof document is required.';
       }

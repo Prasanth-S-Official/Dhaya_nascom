@@ -42,14 +42,16 @@
           <td>{{ scheme.availabilityStatus }}</td>
           <td>
             <button
-              id="applyButton"
-              *ngIf="!isSchemeApplied(scheme)"
-              (click)="handleApplyClick(scheme)"
-              [disabled]="scheme.availabilityStatus !== 'Available'"
-            >
-              Apply
-            </button>
-            <button id="appliedButton" *ngIf="isSchemeApplied(scheme)">Applied</button>
+                id="applyButton"
+                *ngIf="!isSchemeApplied(scheme)"
+                (click)="handleApplyClick(scheme)"
+                [disabled]="scheme.availabilityStatus !== 'Available'"
+                [ngClass]="{ 'grey-button': scheme.availabilityStatus !== 'Available' }"
+                >
+                Apply
+                </button>
+                <button id="appliedButton" *ngIf="isSchemeApplied(scheme)">Applied</button>
+
           </td>
         </tr>
       </tbody>
