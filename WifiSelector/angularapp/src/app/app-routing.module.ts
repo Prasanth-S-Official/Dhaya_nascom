@@ -18,6 +18,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
+import { AdminViewSchemeComponent } from './components/admin-view-scheme/admin-view-scheme.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'admin/add/scheme', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/scheme/:id', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/trainings', component: AdminviewtrainingComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/schemes', component: AdminViewSchemeComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Admin Routes

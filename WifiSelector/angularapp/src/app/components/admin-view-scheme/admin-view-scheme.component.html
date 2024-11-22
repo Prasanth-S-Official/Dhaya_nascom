@@ -14,15 +14,15 @@
           [(ngModel)]="searchField"
           (ngModelChange)="applyFilters()"
         />
+
       </div>
       <div>
         <label for="regionSelect">Filter by Region:</label>
-        <select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()" id="regionSelect">
-          <option [ngValue]="null">All Regions</option>
-          <option *ngFor="let scheme of allSchemes | unique:'region'" [ngValue]="scheme.region">
-            {{ scheme.region }}
-          </option>
+       <select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()" id="regionSelect">
+        <option [ngValue]="null">All Regions</option>
+        <option *ngFor="let region of uniqueRegions" [ngValue]="region">{{ region }}</option>
         </select>
+
       </div>
     </div>
 

@@ -16,6 +16,7 @@ export class AdminViewSchemeComponent implements OnInit {
   selectedRegion: string | null = null; // Filter by region
   status: string = '';          // Status for loading, error, or no records
   errorMessage: string = '';    // Error message for delete operation
+  uniqueRegions: string[] = []; // List of unique regions for filtering
 
   constructor(private router: Router, private wifiSchemeService: WifiSchemeService) {}
 
@@ -29,6 +30,7 @@ export class AdminViewSchemeComponent implements OnInit {
       (data: any) => {
         this.availableSchemes = data; // Set the available schemes from the response
         this.allSchemes = data;       // Keep a copy of all schemes for filtering
+        this.uniqueRegions = this.getUniqueRegions(data); // Extract unique regions
         this.status = this.availableSchemes.length === 0 ? 'noRecords' : ''; // Update status
       },
       (error) => {
@@ -38,8 +40,13 @@ export class AdminViewSchemeComponent implements OnInit {
     );
   }
 
+  getUniqueRegions(schemes: any[]): string[] {
+    // Extract unique regions from the list of schemes
+    return Array.from(new Set(schemes.map(scheme => scheme.region)));
+  }
+
   handleDeleteClick(schemeId: string) {
-    this.schemeToDelete = schemeId;
+    this.schemeToDelete = Number(schemeId);
     this.showDeletePopup = true; // Show the delete confirmation popup
   }
 

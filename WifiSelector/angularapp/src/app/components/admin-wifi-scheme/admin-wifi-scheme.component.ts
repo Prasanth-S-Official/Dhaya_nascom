@@ -88,10 +88,10 @@ export class AdminWifiSchemeComponent implements OnInit {
     this.successPopup = false;
     this.errorMessage = '';
     this.wifiSchemeForm.reset();
-    this.router.navigate(['/admin/view/wifi-schemes']);
+    this.router.navigate(['/admin/view/schemes']);
   }
 
   navigateBack(): void {
-    this.router.navigate(['/admin/view/wifi-schemes']);
+    this.router.navigate(['/admin/view/schemes']);
   }
 }
