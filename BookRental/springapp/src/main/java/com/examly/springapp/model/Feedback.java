@@ -25,8 +25,22 @@ public class Feedback {
   
     public Feedback() {
     }
+
+
   
+    
   
+    public Feedback(Long feedbackId, String feedbackText, LocalDate date, User user) {
+        this.feedbackId = feedbackId;
+        this.feedbackText = feedbackText;
+        this.date = date;
+        this.user = user;
+    }
+
+
+
+
+
     public Long getFeedbackId() {
         return feedbackId;
     }

@@ -1,8 +1,6 @@
 package com.examly.springapp.repository;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.examly.springapp.model.Feedback;
 
 @Repository
-public interface FeedbackRepo  extends JpaRepository<Feedback,Long>{
-@Query("SELECT f FROM Feedback f WHERE f.user.userId = :userId")
-    List<Feedback> findFeedbackByUserId(int userId);    
+public interface FeedbackRepo extends JpaRepository<Feedback, Long> {
+
+    @Query("SELECT f FROM Feedback f WHERE f.user.userId = :userId")
+    List<Feedback> findFeedbackByUserId(Long userId); // Changed int to Long
 }
