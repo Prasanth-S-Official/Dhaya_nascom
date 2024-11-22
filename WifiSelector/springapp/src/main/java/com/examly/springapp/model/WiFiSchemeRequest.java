@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import java.time.LocalDate;
 
 @Entity
@@ -32,12 +33,27 @@ public class WiFiSchemeRequest {
 
     private String comments; // Optional comments provided by the user
 
+    @Lob
+    @Column(name = "proof", nullable = false, columnDefinition = "LONGBLOB")
+    private String proof; // Proof document uploaded by the user (base64 encoded)
+
+    @Column(nullable = false)
+    private String address; // User's address for service setup
+
+    @Column(nullable = false)
+    private String city; // City for the Wi-Fi service setup
+
+    @Column(nullable = false)
+    private LocalDate preferredSetupDate; // Preferred date for Wi-Fi setup
+
+    @Column(nullable = false)
+    private String timeSlot; // Preferred time slot for Wi-Fi setup
+
     // Constructor
     public WiFiSchemeRequest() {
     }
 
     // Getters and Setters
-
     public Long getWifiSchemeRequestId() {
         return wifiSchemeRequestId;
     }
@@ -84,5 +100,45 @@ public class WiFiSchemeRequest {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String getProof() {
+        return proof;
+    }
+
+    public void setProof(String proof) {
+        this.proof = proof;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public LocalDate getPreferredSetupDate() {
+        return preferredSetupDate;
+    }
+
+    public void setPreferredSetupDate(LocalDate preferredSetupDate) {
+        this.preferredSetupDate = preferredSetupDate;
+    }
+
+    public String getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
     }
 }
