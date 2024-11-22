@@ -122,6 +122,14 @@ CREATE TABLE `wi_fi_scheme_request` (
   `status` varchar(255) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `wifi_scheme_id` bigint(20) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `landmark` varchar(255) NOT NULL,
+  `preferred_setup_date` date NOT NULL,
+  `proof` longblob NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `street_name` varchar(255) NOT NULL,
+  `time_slot` varchar(255) NOT NULL,
+  `zip_code` varchar(255) NOT NULL,
   PRIMARY KEY (`wifi_scheme_request_id`),
   KEY `FKn4rmj4a4yy7jdnstsms8feim0` (`user_id`),
   KEY `FK66l6wgtnsmludnwu0f3xqnpux` (`wifi_scheme_id`),
@@ -148,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22 11:04:10
+-- Dump completed on 2024-11-22 11:19:10

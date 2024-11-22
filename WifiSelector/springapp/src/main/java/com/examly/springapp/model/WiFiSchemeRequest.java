@@ -37,11 +37,21 @@ public class WiFiSchemeRequest {
     @Column(name = "proof", nullable = false, columnDefinition = "LONGBLOB")
     private String proof; // Proof document uploaded by the user (base64 encoded)
 
+    // Split address fields
     @Column(nullable = false)
-    private String address; // User's address for service setup
+    private String streetName; // Street name for the service setup
+
+    @Column(nullable = false)
+    private String landmark; // Nearby landmark for easier location identification
 
     @Column(nullable = false)
     private String city; // City for the Wi-Fi service setup
+
+    @Column(nullable = false)
+    private String state; // State for the Wi-Fi service setup
+
+    @Column(nullable = false)
+    private String zipCode; // ZIP/Postal code for the location
 
     @Column(nullable = false)
     private LocalDate preferredSetupDate; // Preferred date for Wi-Fi setup
@@ -110,12 +120,20 @@ public class WiFiSchemeRequest {
         this.proof = proof;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
     }
 
     public String getCity() {
@@ -124,6 +142,22 @@ public class WiFiSchemeRequest {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public LocalDate getPreferredSetupDate() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { WiFiSchemeRequest } from '../models/wifi-scheme-request.model.spec';
+import { WiFiSchemeRequest } from '../models/wifi-scheme-request.model';
 import { apiUrl } from 'src/apiconfig';
 
 @Injectable({
