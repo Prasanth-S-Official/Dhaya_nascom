@@ -19,7 +19,7 @@ export class UseraddrequestComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private wifi : WiFiSchemeRequestService
+    private wifiSchemeRequestService : WiFiSchemeRequestService
   ) {
     this.requestForm = this.fb.group({
       streetName: ['', Validators.required],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
+import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 
 @Component({
   selector: 'app-userviewappliedrequest',
@@ -15,12 +15,8 @@ export class UserviewappliedrequestComponent implements OnInit {
   appliedRequests: any[] = [];
   filteredRequests: any[] = [];
   searchValue = '';
-  sortValue = 0;
-  page = 1;
-  limit = 5;
-  maxRecords = 1;
 
-  constructor(private trainingService: PhysicalTrainingService, private router: Router) {}
+  constructor(private wifiSchemeRequestService: WiFiSchemeRequestService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -28,11 +24,10 @@ export class UserviewappliedrequestComponent implements OnInit {
 
   fetchData(): void {
     const userId = localStorage.getItem('userId');
-    this.trainingService.getPhysicalTrainingRequestsByUserId(userId).subscribe(
+    this.wifiSchemeRequestService.getWiFiSchemeRequestsByUserId(userId!).subscribe(
       (response: any) => {
         this.appliedRequests = response;
         this.filteredRequests = response;
-        this.maxRecords = response.length;
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -40,24 +35,10 @@ export class UserviewappliedrequestComponent implements OnInit {
     );
   }
 
-  totalPages(): number {
-    return Math.ceil(this.maxRecords / this.limit);
-  }
-
   filterRequests(): void {
     const searchLower = this.searchValue.toLowerCase();
     this.filteredRequests = this.appliedRequests.filter(request =>
-      request.physicalTraining.trainingName.toLowerCase().includes(searchLower)
-    );
-    this.maxRecords = this.filteredRequests.length;
-  }
-
-  toggleSort(order: number): void {
-    this.sortValue = order;
-    this.filteredRequests.sort((a, b) =>
-      order === 1
-        ? new Date(a.requestDate).getTime() - new Date(b.requestDate).getTime()
-        : new Date(b.requestDate).getTime() - new Date(a.requestDate).getTime()
+      request.wifiScheme.schemeName.toLowerCase().includes(searchLower)
     );
   }
 
@@ -67,7 +48,7 @@ export class UserviewappliedrequestComponent implements OnInit {
   }
 
   handleConfirmDelete(): void {
-    this.trainingService.deletePhysicalTrainingRequest(this.requestToDelete.physicalTrainingRequestId).subscribe(
+    this.wifiSchemeRequestService.deleteWiFiSchemeRequest(this.requestToDelete.wifiSchemeRequestId).subscribe(
       () => {
         this.fetchData();
         this.closeDeletePopup();

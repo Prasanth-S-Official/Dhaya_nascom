@@ -1,23 +1,23 @@
 <app-usernav></app-usernav>
 <div class="page-content" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
-  <h1>Applied Training Requests</h1>
-  <hr>
+  <h1>Applied WiFi Scheme Requests</h1>
+  <hr />
 
   <!-- Search Box -->
   <input
     id="searchBox"
     type="text"
-    placeholder="Search by Training Name..."
+    placeholder="Search by Scheme Name..."
     [(ngModel)]="searchValue"
     (input)="filterRequests()"
   />
 
-  <!-- Training Requests Table -->
+  <!-- WiFi Scheme Requests Table -->
   <table>
     <thead>
       <tr>
         <th>S.No</th>
-        <th>Training Name</th>
+        <th>Scheme Name</th>
         <th>Request Date</th>
         <th>Status</th>
         <th>Action</th>
@@ -26,7 +26,7 @@
     <tbody *ngIf="filteredRequests.length > 0; else noRecords">
       <tr *ngFor="let request of filteredRequests; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ request.physicalTraining.trainingName }}</td>
+        <td>{{ request.wifiScheme.schemeName }}</td>
         <td>{{ request.requestDate | date: 'yyyy-MM-dd' }}</td>
         <td>{{ request.status }}</td>
         <td>
@@ -61,15 +61,13 @@
   <div class="details-modal-content">
     <button class="close-button" (click)="closeDetailsModal()">X</button>
     <h2>Request Details</h2>
-    <p><strong>Training Name:</strong> {{ selectedRequest?.physicalTraining?.trainingName }}</p>
-    <p><strong>Trainer Name:</strong> {{ selectedRequest?.physicalTraining?.trainerName }}</p>
-    <p><strong>Location:</strong> {{ selectedRequest?.physicalTraining?.location }}</p>
-    <p><strong>Is Indoor:</strong> {{ selectedRequest?.physicalTraining?.isIndoor ? 'Yes' : 'No' }}</p>
-    <p><strong>Fee:</strong> {{ selectedRequest?.physicalTraining?.fee }}</p>
-    <p><strong>Focus Area:</strong> {{ selectedRequest?.physicalTraining?.focusArea }}</p>
-    <p><strong>Physical Requirements:</strong> {{ selectedRequest?.physicalTraining?.physicalRequirements }}</p>
-    <p><strong>Health Conditions:</strong> {{ selectedRequest?.healthConditions }}</p>
-    <p><strong>Fitness Goals:</strong> {{ selectedRequest?.fitnessGoals }}</p>
+    <p><strong>Scheme Name:</strong> {{ selectedRequest?.wifiScheme?.schemeName }}</p>
+    <p><strong>Region:</strong> {{ selectedRequest?.wifiScheme?.region }}</p>
+    <p><strong>Speed:</strong> {{ selectedRequest?.wifiScheme?.speed }}</p>
+    <p><strong>Data Limit:</strong> {{ selectedRequest?.wifiScheme?.dataLimit }}</p>
+    <p><strong>Fee:</strong> {{ selectedRequest?.wifiScheme?.fee }}</p>
+    <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate }}</p>
+    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
     <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
   </div>
 </div>
