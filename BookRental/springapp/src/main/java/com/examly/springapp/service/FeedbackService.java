@@ -10,5 +10,5 @@ public interface FeedbackService
     Feedback getFeedbackById(Long id);
     List<Feedback> getAllFeedbacks();
     Feedback deleteFeedback(Long id);
-    List<Feedback> getFeedbacksByUserId(int userId);
+    List<Feedback> getFeedbacksByUserId(Long userId);
 }

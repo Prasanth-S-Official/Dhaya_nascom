@@ -54,7 +54,7 @@ export class AdminviewbookComponent implements OnInit {
 
   handleConfirmDelete(): void {
     if (this.bookToDelete) {
-      this.bookService.deleteBook(this.bookToDelete.toString()).subscribe(
+      this.bookService.deleteBook(this.bookToDelete).subscribe(
         () => {
           this.closeDeletePopup();
           this.fetchAvailableBooks();
