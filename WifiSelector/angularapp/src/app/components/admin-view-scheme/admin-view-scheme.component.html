@@ -10,7 +10,7 @@
         <input
           id="searchBox"
           type="text"
-          placeholder="Scheme Name or Description..."
+          placeholder="Scheme Name..."
           [(ngModel)]="searchField"
           (ngModelChange)="applyFilters()"
         />
@@ -18,8 +18,10 @@
       <div>
         <label for="regionSelect">Filter by Region:</label>
         <select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()" id="regionSelect">
-          <option [ngValue]="null">All</option>
-          <option *ngFor="let region of allSchemes.map(scheme => scheme.region).filter((value, index, self) => self.indexOf(value) === index)" [ngValue]="region">{{ region }}</option>
+          <option [ngValue]="null">All Regions</option>
+          <option *ngFor="let scheme of allSchemes | unique:'region'" [ngValue]="scheme.region">
+            {{ scheme.region }}
+          </option>
         </select>
       </div>
     </div>

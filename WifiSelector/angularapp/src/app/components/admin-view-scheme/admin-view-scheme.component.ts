@@ -3,20 +3,19 @@ import { Router } from '@angular/router';
 import { WifiSchemeService } from 'src/app/services/wifi-scheme.service';
 
 @Component({
-  selector: 'app-adminviewscheme',
-  templateUrl: './adminviewscheme.component.html',
-  styleUrls: ['./adminviewscheme.component.css']
+  selector: 'app-admin-view-scheme',
+  templateUrl: './admin-view-scheme.component.html',
+  styleUrls: ['./admin-view-scheme.component.css']
 })
-export class AdminviewschemeComponent implements OnInit {
-
-  availableSchemes: any[] = [];  // List of WiFi schemes to display
-  allSchemes: any[] = [];       // Full list of WiFi schemes fetched from the server
-  showDeletePopup = false;      // Controls the visibility of the delete confirmation popup
-  schemeToDelete: number | null = null;  // ID of the scheme to delete
-  searchField = '';              // Search field input value
-  selectedRegion: string | null = null;  // Selected region filter
-  status: string = '';           // Status for loading, error, or no records
-  errorMessage: string = '';     // Error message for delete operation
+export class AdminViewSchemeComponent implements OnInit {
+  availableSchemes: any[] = [];  // List of schemes displayed
+  allSchemes: any[] = [];       // Full list of schemes fetched from the server
+  showDeletePopup = false;      // Controls visibility of delete confirmation popup
+  schemeToDelete: number | null = null; // ID of the scheme to delete
+  searchField = '';             // Search field input value
+  selectedRegion: string | null = null; // Filter by region
+  status: string = '';          // Status for loading, error, or no records
+  errorMessage: string = '';    // Error message for delete operation
 
   constructor(private router: Router, private wifiSchemeService: WifiSchemeService) {}
 
@@ -24,12 +23,12 @@ export class AdminviewschemeComponent implements OnInit {
     this.fetchAvailableSchemes(); // Fetch schemes on component initialization
   }
 
-  fetchAvailableSchemes(): void {
+  fetchAvailableSchemes() {
     this.status = 'loading'; // Set loading status
     this.wifiSchemeService.getAllWiFiSchemes().subscribe(
       (data: any) => {
         this.availableSchemes = data; // Set the available schemes from the response
-        this.allSchemes = data;      // Keep a copy of all schemes for filtering
+        this.allSchemes = data;       // Keep a copy of all schemes for filtering
         this.status = this.availableSchemes.length === 0 ? 'noRecords' : ''; // Update status
       },
       (error) => {
@@ -39,16 +38,16 @@ export class AdminviewschemeComponent implements OnInit {
     );
   }
 
-  handleDeleteClick(schemeId: string): void {
-    this.schemeToDelete = Number(schemeId);
+  handleDeleteClick(schemeId: string) {
+    this.schemeToDelete = schemeId;
     this.showDeletePopup = true; // Show the delete confirmation popup
   }
 
-  navigateToEditScheme(id: string): void {
+  navigateToEditScheme(id: string) {
     this.router.navigate(['/admin/edit/scheme', id]); // Navigate to edit page
   }
 
-  handleConfirmDelete(): void {
+  handleConfirmDelete() {
     if (this.schemeToDelete) {
       this.wifiSchemeService.deleteWiFiScheme(this.schemeToDelete).subscribe(
         () => {
@@ -64,7 +63,7 @@ export class AdminviewschemeComponent implements OnInit {
     }
   }
 
-  closeDeletePopup(): void {
+  closeDeletePopup() {
     this.schemeToDelete = null; // Reset scheme to delete
     this.showDeletePopup = false; // Hide the delete popup
     this.errorMessage = ''; // Clear error message
