@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 import com.examly.springapp.model.User;
 
 @Repository
-public interface UserRepo  extends JpaRepository<User,Integer>{
+public interface UserRepo  extends JpaRepository<User,Long>{
     @Query("SELECT u FROM User u WHERE u.email = :email  or u.username = :email")
 	    Optional<User> findByEmail(@Param("email") String email);
 	 

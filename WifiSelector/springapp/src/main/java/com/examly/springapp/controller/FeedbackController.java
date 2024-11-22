@@ -49,7 +49,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/api/feedback/user/{userId}")
-    public ResponseEntity<List<Feedback>> getFeedbacksByUserId(@PathVariable int userId) {
+    public ResponseEntity<List<Feedback>> getFeedbacksByUserId(@PathVariable Long userId) {
         List<Feedback> feedbacks = feedbackService.getFeedbacksByUserId(userId);
         return new ResponseEntity<>(feedbacks, HttpStatus.OK);
     }

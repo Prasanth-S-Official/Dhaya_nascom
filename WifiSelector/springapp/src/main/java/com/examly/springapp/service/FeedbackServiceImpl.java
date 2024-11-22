@@ -44,7 +44,8 @@ public class FeedbackServiceImpl  {
            
     }
 
-    public List<Feedback> getFeedbacksByUserId(int userId) {
+    public List<Feedback> getFeedbacksByUserId(Long userId) {
         return feedbackRepo.findFeedbackByUserId(userId);
     }
+    
 }

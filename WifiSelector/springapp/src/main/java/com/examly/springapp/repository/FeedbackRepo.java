@@ -12,5 +12,5 @@ import com.examly.springapp.model.Feedback;
 @Repository
 public interface FeedbackRepo  extends JpaRepository<Feedback,Long>{
 @Query("SELECT f FROM Feedback f WHERE f.user.userId = :userId")
-    List<Feedback> findFeedbackByUserId(int userId);    
+    List<Feedback> findFeedbackByUserId(Long userId);    
 }
