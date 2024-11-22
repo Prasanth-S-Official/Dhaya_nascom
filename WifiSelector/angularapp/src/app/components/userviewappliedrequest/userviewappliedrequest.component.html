@@ -69,5 +69,9 @@
     <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate }}</p>
     <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
     <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
+    <p *ngIf="selectedRequest?.proof">
+      <strong>Proof:</strong>
+      <img [src]="'data:image/jpeg;base64,' + selectedRequest.proof" alt="Proof Document" class="proof-image" />
+    </p>
   </div>
 </div>
