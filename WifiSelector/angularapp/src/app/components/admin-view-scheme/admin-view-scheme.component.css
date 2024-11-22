@@ -170,7 +170,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .available-button:hover {
@@ -184,7 +184,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .unavailable-button:hover {
