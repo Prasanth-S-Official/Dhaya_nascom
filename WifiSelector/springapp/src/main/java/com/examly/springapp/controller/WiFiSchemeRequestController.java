@@ -30,6 +30,17 @@ public class WiFiSchemeRequestController {
                       .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping("/user/{userId}")
+public ResponseEntity<List<WiFiSchemeRequest>> getWiFiSchemeRequestsByUserId(@PathVariable Long userId) {
+    List<WiFiSchemeRequest> userRequests = wifiSchemeRequestService.getWiFiSchemeRequestsByUserId(userId);
+    if (!userRequests.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.OK).body(userRequests);
+    } else {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+}
+
+
     @GetMapping
     public ResponseEntity<List<WiFiSchemeRequest>> getAllWiFiSchemeRequests() {
         List<WiFiSchemeRequest> allRequests = wifiSchemeRequestService.getAllWiFiSchemeRequests();

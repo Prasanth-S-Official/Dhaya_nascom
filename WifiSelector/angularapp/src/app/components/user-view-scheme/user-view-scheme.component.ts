@@ -16,7 +16,11 @@ export class UserViewSchemeComponent implements OnInit {
   appliedSchemes: any[] = [];
   searchField: string = '';
 
-  constructor(private router: Router, private wifiSchemeService: WifiSchemeService ,private wifiSchemeRequestService: WiFiSchemeRequestService) {}
+  constructor(
+    private router: Router,
+    private wifiSchemeService: WifiSchemeService,
+    private wifiSchemeRequestService: WiFiSchemeRequestService
+  ) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -30,7 +34,7 @@ export class UserViewSchemeComponent implements OnInit {
       allSchemes: this.wifiSchemeService.getAllWiFiSchemes(),
     }).subscribe(
       ({ appliedSchemes, allSchemes }) => {
-        this.appliedSchemes = appliedSchemes;
+        this.appliedSchemes = appliedSchemes || []; // Ensure it is initialized as an array
         this.availableSchemes = allSchemes;
         this.filteredSchemes = this.availableSchemes;
         console.log('Applied schemes:', this.appliedSchemes);
@@ -58,8 +62,7 @@ export class UserViewSchemeComponent implements OnInit {
   }
 
   handleApplyClick(scheme: WiFiScheme): void {
-    const isSchemeApplied = this.isSchemeApplied(scheme);
-    if (isSchemeApplied) {
+    if (this.isSchemeApplied(scheme)) {
       alert('You have already applied for this scheme.');
     } else {
       localStorage.setItem('wifiSchemeId', scheme.wifiSchemeId.toString());
@@ -68,6 +71,9 @@ export class UserViewSchemeComponent implements OnInit {
   }
 
   isSchemeApplied(scheme: WiFiScheme): boolean {
+    // Ensure `appliedSchemes` is not null before checking
+    if (!this.appliedSchemes) return false;
+
     return this.appliedSchemes.some(
       (appliedScheme) => appliedScheme.wifiScheme.wifiSchemeId === scheme.wifiSchemeId
     );

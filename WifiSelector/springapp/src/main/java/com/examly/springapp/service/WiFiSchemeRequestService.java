@@ -11,4 +11,6 @@ public interface WiFiSchemeRequestService {
     List<WiFiSchemeRequest> getAllWiFiSchemeRequests();
     WiFiSchemeRequest updateWiFiSchemeRequest(Long requestId, WiFiSchemeRequest request);
     boolean deleteWiFiSchemeRequest(Long requestId);
+    List<WiFiSchemeRequest> getWiFiSchemeRequestsByUserId(Long userId);
+
 }

@@ -17,4 +17,5 @@ public interface WiFiSchemeRequestRepo extends JpaRepository<WiFiSchemeRequest, 
     List<WiFiSchemeRequest> findWiFiSchemeRequestsBySchemeId(Long wifiSchemeId);
 
     Optional<WiFiSchemeRequest> findByUser_UserIdAndWifiScheme_WifiSchemeId(Long userId, Long wifiSchemeId);
+
 }
