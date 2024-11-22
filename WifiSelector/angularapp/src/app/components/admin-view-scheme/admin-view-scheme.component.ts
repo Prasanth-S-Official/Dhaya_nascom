@@ -8,84 +8,98 @@ import { WifiSchemeService } from 'src/app/services/wifi-scheme.service';
   styleUrls: ['./admin-view-scheme.component.css']
 })
 export class AdminViewSchemeComponent implements OnInit {
-  availableSchemes: any[] = [];  // List of schemes displayed
-  allSchemes: any[] = [];       // Full list of schemes fetched from the server
-  showDeletePopup = false;      // Controls visibility of delete confirmation popup
-  schemeToDelete: number | null = null; // ID of the scheme to delete
-  searchField = '';             // Search field input value
-  selectedRegion: string | null = null; // Filter by region
-  status: string = '';          // Status for loading, error, or no records
-  errorMessage: string = '';    // Error message for delete operation
-  uniqueRegions: string[] = []; // List of unique regions for filtering
+  availableSchemes: any[] = [];
+  allSchemes: any[] = [];
+  showDeletePopup = false;
+  schemeToDelete: number | null = null;
+  searchField = '';
+  selectedRegion: string | null = null;
+  status: string = '';
+  errorMessage: string = '';
+  uniqueRegions: string[] = [];
 
   constructor(private router: Router, private wifiSchemeService: WifiSchemeService) {}
 
   ngOnInit(): void {
-    this.fetchAvailableSchemes(); // Fetch schemes on component initialization
+    this.fetchAvailableSchemes();
   }
 
   fetchAvailableSchemes() {
-    this.status = 'loading'; // Set loading status
+    this.status = 'loading';
     this.wifiSchemeService.getAllWiFiSchemes().subscribe(
       (data: any) => {
-        this.availableSchemes = data; // Set the available schemes from the response
-        this.allSchemes = data;       // Keep a copy of all schemes for filtering
-        this.uniqueRegions = this.getUniqueRegions(data); // Extract unique regions
-        this.status = this.availableSchemes.length === 0 ? 'noRecords' : ''; // Update status
+        this.availableSchemes = data;
+        this.allSchemes = data;
+        this.uniqueRegions = this.getUniqueRegions(data);
+        this.status = this.availableSchemes.length === 0 ? 'noRecords' : '';
       },
       (error) => {
         console.error('Error fetching schemes:', error);
-        this.status = 'error'; // Set error status
+        this.status = 'error';
       }
     );
   }
 
   getUniqueRegions(schemes: any[]): string[] {
-    // Extract unique regions from the list of schemes
-    return Array.from(new Set(schemes.map(scheme => scheme.region)));
+    return Array.from(new Set(schemes.map((scheme) => scheme.region)));
   }
 
   handleDeleteClick(schemeId: string) {
     this.schemeToDelete = Number(schemeId);
-    this.showDeletePopup = true; // Show the delete confirmation popup
+    this.showDeletePopup = true;
   }
 
   navigateToEditScheme(id: string) {
-    this.router.navigate(['/admin/edit/scheme', id]); // Navigate to edit page
+    this.router.navigate(['/admin/edit/scheme', id]);
   }
 
   handleConfirmDelete() {
     if (this.schemeToDelete) {
       this.wifiSchemeService.deleteWiFiScheme(this.schemeToDelete).subscribe(
         () => {
-          this.closeDeletePopup(); // Close popup after deletion
-          this.fetchAvailableSchemes(); // Refresh schemes after deletion
-          this.errorMessage = ''; // Clear any error messages
+          this.closeDeletePopup();
+          this.fetchAvailableSchemes();
+          this.errorMessage = '';
         },
         (error) => {
           console.error('Error deleting scheme:', error);
-          this.errorMessage = error.error.message; // Set error message
+          this.errorMessage = error.error.message;
         }
       );
     }
   }
 
   closeDeletePopup() {
-    this.schemeToDelete = null; // Reset scheme to delete
-    this.showDeletePopup = false; // Hide the delete popup
-    this.errorMessage = ''; // Clear error message
+    this.schemeToDelete = null;
+    this.showDeletePopup = false;
+    this.errorMessage = '';
   }
 
   applyFilters(): void {
-    this.availableSchemes = this.allSchemes.filter(scheme => {
-      const matchesSearch = scheme.schemeName.toLowerCase().includes(this.searchField.toLowerCase()) ||
-                            scheme.description.toLowerCase().includes(this.searchField.toLowerCase());
+    this.availableSchemes = this.allSchemes.filter((scheme) => {
+      const matchesSearch =
+        scheme.schemeName.toLowerCase().includes(this.searchField.toLowerCase()) ||
+        scheme.description.toLowerCase().includes(this.searchField.toLowerCase());
 
       const matchesRegion = !this.selectedRegion || scheme.region === this.selectedRegion;
 
       return matchesSearch && matchesRegion;
     });
 
-    this.status = this.availableSchemes.length === 0 ? 'noRecords' : ''; // Update status
+    this.status = this.availableSchemes.length === 0 ? 'noRecords' : '';
+  }
+
+  toggleAvailability(scheme: any): void {
+    const newStatus = scheme.availabilityStatus === 'Available' ? 'Unavailable' : 'Available';
+    const updatedScheme = { ...scheme, availabilityStatus: newStatus };
+
+    this.wifiSchemeService.updateWiFiScheme(scheme.wifiSchemeId, updatedScheme).subscribe(
+      () => {
+        scheme.availabilityStatus = newStatus; // Update the local data
+      },
+      (error) => {
+        console.error('Error updating scheme availability:', error);
+      }
+    );
   }
 }

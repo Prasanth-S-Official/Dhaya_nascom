@@ -104,7 +104,7 @@ CREATE TABLE `wi_fi_scheme` (
 
 LOCK TABLES `wi_fi_scheme` WRITE;
 /*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
-INSERT INTO `wi_fi_scheme` VALUES (2,'Available','Unlimited','Best for 340 days',4999,'CBEs','Xtreme','140Mb/sec');
+INSERT INTO `wi_fi_scheme` VALUES (2,'Unavailable','Unlimited','Best for 340 days',4999,'CBEs','Xtreme','140Mb/sec');
 /*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22 10:21:44
+-- Dump completed on 2024-11-22 10:34:10

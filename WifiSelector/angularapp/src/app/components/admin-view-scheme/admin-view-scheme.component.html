@@ -14,15 +14,13 @@
           [(ngModel)]="searchField"
           (ngModelChange)="applyFilters()"
         />
-
       </div>
       <div>
         <label for="regionSelect">Filter by Region:</label>
-       <select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()" id="regionSelect">
-        <option [ngValue]="null">All Regions</option>
-        <option *ngFor="let region of uniqueRegions" [ngValue]="region">{{ region }}</option>
+        <select [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()" id="regionSelect">
+          <option [ngValue]="null">All Regions</option>
+          <option *ngFor="let region of uniqueRegions" [ngValue]="region">{{ region }}</option>
         </select>
-
       </div>
     </div>
 
@@ -42,17 +40,17 @@
       </thead>
       <tbody *ngIf="status === 'loading'">
         <tr>
-          <td colspan="8">Loading...</td>
+          <td colspan="9">Loading...</td>
         </tr>
       </tbody>
       <tbody *ngIf="status === 'error'">
         <tr>
-          <td colspan="8">Error loading data</td>
+          <td colspan="9">Error loading data</td>
         </tr>
       </tbody>
       <tbody *ngIf="status === 'noRecords'">
         <tr>
-          <td colspan="8" class="no-records-cell">Oops! No records found</td>
+          <td colspan="9" class="no-records-cell">Oops! No records found</td>
         </tr>
       </tbody>
       <tbody *ngIf="availableSchemes.length > 0">
@@ -64,10 +62,16 @@
           <td>{{ scheme.dataLimit }}</td>
           <td>₹{{ scheme.fee }}</td>
           <td>{{ scheme.description }}</td>
-          <td>{{ scheme.availabilityStatus}}</td>
+          <td>{{ scheme.availabilityStatus }}</td>
           <td>
             <button (click)="navigateToEditScheme(scheme.wifiSchemeId)">Edit</button>
             <button (click)="handleDeleteClick(scheme.wifiSchemeId)" id="deleteButton">Delete</button>
+            <button 
+            (click)="toggleAvailability(scheme)" 
+            [innerText]="scheme.availabilityStatus === 'Available' ? 'Make Unavailable' : 'Make Available'"
+            [ngClass]="scheme.availabilityStatus === 'Available' ? 'unavailable-button' : 'available-button'">
+          </button>
+          
           </td>
         </tr>
       </tbody>
