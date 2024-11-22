@@ -36,6 +36,7 @@
           <th>Data Limit</th>
           <th>Fee</th>
           <th>Description</th>
+          <th>Availability</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -63,6 +64,7 @@
           <td>{{ scheme.dataLimit }}</td>
           <td>₹{{ scheme.fee }}</td>
           <td>{{ scheme.description }}</td>
+          <td>{{ scheme.availabilityStatus}}</td>
           <td>
             <button (click)="navigateToEditScheme(scheme.wifiSchemeId)">Edit</button>
             <button (click)="handleDeleteClick(scheme.wifiSchemeId)" id="deleteButton">Delete</button>
