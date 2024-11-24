@@ -5,7 +5,7 @@ import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.s
 @Component({
   selector: 'app-userviewappliedrequest',
   templateUrl: './userviewappliedrequest.component.html',
-  styleUrls: ['./userviewappliedrequest.component.css']
+  styleUrls: ['./userviewappliedrequest.component.css'],
 })
 export class UserviewappliedrequestComponent implements OnInit {
   showDeletePopup = false;
@@ -62,15 +62,17 @@ export class UserviewappliedrequestComponent implements OnInit {
     this.showDeletePopup = false;
   }
 
-  // Show additional request details in modal
   showRequestDetails(request: any): void {
     this.selectedRequest = request;
     this.showDetailsModal = true;
   }
 
-  // Close the details modal
   closeDetailsModal(): void {
     this.selectedRequest = null;
     this.showDetailsModal = false;
+  }
+
+  navigateToFeedback(wifiSchemeId: number): void {
+    this.router.navigate(['/user/add/feedback'], { queryParams: { wifiSchemeId } });
   }
 }

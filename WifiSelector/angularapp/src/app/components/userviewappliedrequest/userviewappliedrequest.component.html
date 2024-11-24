@@ -1,5 +1,5 @@
 <app-usernav></app-usernav>
-<div class="page-content" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
+<div class="card-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
   <h1>Applied WiFi Scheme Requests</h1>
   <hr />
 
@@ -12,41 +12,34 @@
     (input)="filterRequests()"
   />
 
-  <!-- WiFi Scheme Requests Table -->
-  <table>
-    <thead>
-      <tr>
-        <th>S.No</th>
-        <th>Scheme Name</th>
-        <th>Request Date</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="filteredRequests.length > 0; else noRecords">
-      <tr *ngFor="let request of filteredRequests; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ request.wifiScheme.schemeName }}</td>
-        <td>{{ request.requestDate | date: 'yyyy-MM-dd' }}</td>
-        <td>{{ request.status }}</td>
-        <td>
-          <button (click)="showRequestDetails(request)">Show More</button>
-          <button
-            id="redButton"
-            [disabled]="request.status !== 'Pending'"
-            (click)="handleDeleteClick(request)"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-    <ng-template #noRecords>
-      <tr>
-        <td colspan="5" class="no-records-cell">Oops! No records found</td>
-      </tr>
-    </ng-template>
-  </table>
+  <!-- Card View for WiFi Scheme Requests -->
+  <div class="card-row" *ngFor="let request of filteredRequests; let i = index">
+    <div class="card" *ngFor="let request of filteredRequests | slice: (i * 2):(i * 2 + 2)">
+      <h3>{{ request.wifiScheme.schemeName }}</h3>
+      <p><strong>Region:</strong> {{ request.wifiScheme.region }}</p>
+      <p><strong>Speed:</strong> {{ request.wifiScheme.speed }}</p>
+      <p><strong>Data Limit:</strong> {{ request.wifiScheme.dataLimit }}</p>
+      <p><strong>Fee:</strong> ₹{{ request.wifiScheme.fee }}</p>
+      <p><strong>Status:</strong> {{ request.status }}</p>
+
+      <div class="action-buttons">
+        <button (click)="showRequestDetails(request)">Show More</button>
+        <button
+          id="redButton"
+          [disabled]="request.status !== 'Pending'"
+          (click)="handleDeleteClick(request)"
+        >
+          Delete
+        </button>
+        <button
+          class="review-button"
+          (click)="navigateToFeedback(request.wifiScheme.wifiSchemeId)"
+        >
+          Write a Review
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Delete Confirmation Popup -->
@@ -65,7 +58,7 @@
     <p><strong>Region:</strong> {{ selectedRequest?.wifiScheme?.region }}</p>
     <p><strong>Speed:</strong> {{ selectedRequest?.wifiScheme?.speed }}</p>
     <p><strong>Data Limit:</strong> {{ selectedRequest?.wifiScheme?.dataLimit }}</p>
-    <p><strong>Fee:</strong> {{ selectedRequest?.wifiScheme?.fee }}</p>
+    <p><strong>Fee:</strong> ₹{{ selectedRequest?.wifiScheme?.fee }}</p>
     <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate }}</p>
     <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
     <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
