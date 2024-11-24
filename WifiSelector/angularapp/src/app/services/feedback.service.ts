@@ -19,14 +19,14 @@ export class FeedbackService {
     return this.http.post<Feedback>(`${this.apiUrl}/api/feedback`, feedback, { headers });
   }
 
-  getAllfeedbacksByUserId(userId: string): Observable<Feedback[]> {
+  getAllfeedbacksByUserId(userId: number): Observable<Feedback[]> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
     return this.http.get<Feedback[]>(`${this.apiUrl}/api/feedback/user/${userId}`, { headers });
   }
 
-  deleteFeedback(feedbackId: string): Observable<void> {
+  deleteFeedback(feedbackId: number): Observable<void> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     });

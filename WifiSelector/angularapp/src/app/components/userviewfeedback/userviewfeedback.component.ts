@@ -10,51 +10,60 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class UserviewfeedbackComponent implements OnInit {
   feedbacks: any[] = [];
   showDeletePopup = false;
-  feedbackToDelete: string;
+  showDetailsModal = false;
+  selectedScheme: any = null;
+  feedbackToDelete: number | null = null;
 
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService) {}
 
   ngOnInit(): void {
-    this.getAllLoansByUserId();
+    this.fetchFeedbacks();
   }
 
-  getAllLoansByUserId() {
-    const userId = localStorage.getItem('userId');
+  fetchFeedbacks(): void {
+    const userId = Number(localStorage.getItem('userId'));
     this.feedbackService.getAllfeedbacksByUserId(userId).subscribe(
-      (data: any) => {
-        this.feedbacks = data;
-        console.log(this.feedbacks);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-
-  deleteFeedback(feedbackId: string) {
-    this.feedbackService.deleteFeedback(feedbackId).subscribe(
       (response) => {
-        console.log('Feedback deleted:', response);
-        // Refresh the feedbacks
-        this.getAllLoansByUserId();
+        this.feedbacks = response;
+        console.log('Fetched Feedbacks:', this.feedbacks);
       },
       (error) => {
-        console.error('Error:', error);
+        console.error('Error fetching feedbacks:', error);
       }
     );
   }
 
-  openDeletePopup(feedbackId: string) {
-    this.showDeletePopup = true;
+  openDeletePopup(feedbackId: number): void {
     this.feedbackToDelete = feedbackId;
+    this.showDeletePopup = true;
   }
 
-  closeDeletePopup() {
+  handleConfirmDelete(): void {
+    if (this.feedbackToDelete) {
+      this.feedbackService.deleteFeedback(this.feedbackToDelete).subscribe(
+        () => {
+          this.fetchFeedbacks();
+          this.closeDeletePopup();
+        },
+        (error) => {
+          console.error('Error deleting feedback:', error);
+        }
+      );
+    }
+  }
+
+  closeDeletePopup(): void {
+    this.feedbackToDelete = null;
     this.showDeletePopup = false;
   }
 
-  handleConfirmDelete() {
-    this.deleteFeedback(this.feedbackToDelete);
-    this.closeDeletePopup();
+  showSchemeDetails(scheme: any): void {
+    this.selectedScheme = scheme;
+    this.showDetailsModal = true;
+  }
+
+  closeDetailsModal(): void {
+    this.selectedScheme = null;
+    this.showDetailsModal = false;
   }
 }
