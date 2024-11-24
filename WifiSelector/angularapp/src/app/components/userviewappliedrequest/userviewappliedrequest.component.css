@@ -24,6 +24,14 @@
   position: relative;
   overflow: hidden; /* Prevent content overflow */
 }
+.no-data-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-top: 20px;
+}
+
 
 .card:hover {
   transform: translateY(-8px);

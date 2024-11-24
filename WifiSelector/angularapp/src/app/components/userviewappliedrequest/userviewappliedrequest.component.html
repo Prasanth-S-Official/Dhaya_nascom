@@ -12,8 +12,13 @@
     (input)="filterRequests()"
   />
 
+  <!-- No Data Found Message -->
+  <div *ngIf="filteredRequests.length === 0" class="no-data-message">
+    <p>No Data Found</p>
+  </div>
+
   <!-- Card View for WiFi Scheme Requests -->
-  <div class="card-row">
+  <div class="card-row" *ngIf="filteredRequests.length > 0">
     <div class="card" *ngFor="let request of filteredRequests">
       <h3>{{ request.wifiScheme.schemeName }}</h3>
       <p><strong>Region:</strong> {{ request.wifiScheme.region }}</p>
