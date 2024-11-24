@@ -13,8 +13,8 @@
   />
 
   <!-- Card View for WiFi Scheme Requests -->
-  <div class="card-row" *ngFor="let request of filteredRequests; let i = index">
-    <div class="card" *ngFor="let request of filteredRequests | slice: (i * 2):(i * 2 + 2)">
+  <div class="card-row">
+    <div class="card" *ngFor="let request of filteredRequests">
       <h3>{{ request.wifiScheme.schemeName }}</h3>
       <p><strong>Region:</strong> {{ request.wifiScheme.region }}</p>
       <p><strong>Speed:</strong> {{ request.wifiScheme.speed }}</p>
