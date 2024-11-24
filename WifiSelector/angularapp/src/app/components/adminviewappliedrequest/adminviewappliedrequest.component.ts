@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PhysicalTrainingService } from 'src/app/services/physical-training.service';
+import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminviewappliedrequest.component.css']
 })
 export class AdminviewappliedrequestComponent implements OnInit {
-  trainingRequests: any[] = [];
+  wifiSchemeRequests: any[] = [];
   filteredRequests: any[] = [];
   searchValue = '';
   statusFilter = '-1'; // All statuses by default
@@ -16,35 +16,35 @@ export class AdminviewappliedrequestComponent implements OnInit {
   selectedRequest: any = null;
 
   constructor(
-    private trainingService: PhysicalTrainingService,
+    private wifiSchemeRequestService: WiFiSchemeRequestService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.fetchTrainingRequests();
+    this.fetchWiFiSchemeRequests();
   }
 
-  fetchTrainingRequests(): void {
-    this.trainingService.getAllPhysicalTrainingRequests().subscribe(
+  fetchWiFiSchemeRequests(): void {
+    this.wifiSchemeRequestService.getAllWiFiSchemeRequests().subscribe(
       (response) => {
-        this.trainingRequests = response;
-        this.filteredRequests = [...this.trainingRequests];
+        this.wifiSchemeRequests = response;
+        this.filteredRequests = [...this.wifiSchemeRequests];
       },
       (error) => {
-        console.error('Error fetching training requests:', error);
+        console.error('Error fetching WiFi scheme requests:', error);
       }
     );
   }
 
   handleSearchChange(event: any): void {
     const searchValueLower = this.searchValue.toLowerCase();
-    this.filteredRequests = this.trainingRequests.filter((request) =>
-      request.physicalTraining.trainingName.toLowerCase().includes(searchValueLower)
+    this.filteredRequests = this.wifiSchemeRequests.filter((request) =>
+      request.wifiScheme.schemeName.toLowerCase().includes(searchValueLower)
     );
   }
 
   handleFilterChange(event: any): void {
-    this.filteredRequests = this.trainingRequests.filter((request) => {
+    this.filteredRequests = this.wifiSchemeRequests.filter((request) => {
       if (this.statusFilter === '-1') {
         return true;
       } else {
@@ -53,20 +53,20 @@ export class AdminviewappliedrequestComponent implements OnInit {
     });
   }
 
-  handleApprove(trainingRequest: any): void {
-    trainingRequest.status = 'Approved';
-    this.updateRequestStatus(trainingRequest);
+  handleApprove(request: any): void {
+    request.status = 'Approved';
+    this.updateRequestStatus(request);
   }
 
-  handleReject(trainingRequest: any): void {
-    trainingRequest.status = 'Rejected';
-    this.updateRequestStatus(trainingRequest);
+  handleReject(request: any): void {
+    request.status = 'Rejected';
+    this.updateRequestStatus(request);
   }
 
-  updateRequestStatus(trainingRequest: any): void {
-    this.trainingService.updatePhysicalTrainingRequest(trainingRequest.physicalTrainingRequestId, trainingRequest).subscribe(
+  updateRequestStatus(request: any): void {
+    this.wifiSchemeRequestService.updateWiFiSchemeRequest(request.wifiSchemeRequestId, request).subscribe(
       () => {
-        this.fetchTrainingRequests();
+        this.fetchWiFiSchemeRequests();
       },
       (error) => {
         console.error('Error updating request status:', error);
@@ -74,13 +74,11 @@ export class AdminviewappliedrequestComponent implements OnInit {
     );
   }
 
-  // Show More button handler to display the modal with details
   handleShowMore(request: any): void {
     this.selectedRequest = request;
     this.showModal = true;
   }
 
-  // Close the modal
   closeModal(): void {
     this.showModal = false;
     this.selectedRequest = null;

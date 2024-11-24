@@ -1,12 +1,12 @@
 <app-adminnav></app-adminnav>
 <div class="page-content" [ngClass]="{ blur: showModal }">
-  <h1>Training Requests for Approval</h1>
-  <hr>
+  <h1>WiFi Scheme Requests for Approval</h1>
+  <hr />
   <div class="top-container">
     <input
       id="searchBox"
       type="text"
-      placeholder="Search by Training Name..."
+      placeholder="Search by Scheme Name..."
       [(ngModel)]="searchValue"
       (input)="handleSearchChange($event)"
     />
@@ -21,15 +21,15 @@
     </label>
   </div>
 
-  <!-- Training Requests Table -->
+  <!-- WiFi Scheme Requests Table -->
   <table>
     <thead>
       <tr>
         <th>S.No</th>
         <th>Username</th>
-        <th>Training Name</th>
-        <th>Location</th>
-        <th>Submission Date</th>
+        <th>Scheme Name</th>
+        <th>City</th>
+        <th>Request Date</th>
         <th>Status</th>
         <th>Action</th>
       </tr>
@@ -38,8 +38,8 @@
       <tr *ngFor="let request of filteredRequests; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ request.user.username }}</td>
-        <td>{{ request.physicalTraining.trainingName }}</td>
-        <td>{{ request.physicalTraining.location }}</td>
+        <td>{{ request.wifiScheme.schemeName }}</td>
+        <td>{{ request.city }}</td>
         <td>{{ request.requestDate | date: 'yyyy-MM-dd' }}</td>
         <td>{{ request.status }}</td>
         <td>
@@ -69,16 +69,23 @@
   </table>
 </div>
 
-<!-- Success Modal -->
+<!-- Details Modal -->
 <div *ngIf="showModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-button" (click)="closeModal()">X</button>
     <h2>Request Details</h2>
     <p><strong>Username:</strong> {{ selectedRequest?.user?.username }}</p>
-    <p><strong>Training Name:</strong> {{ selectedRequest?.physicalTraining?.trainingName }}</p>
-    <p><strong>Location:</strong> {{ selectedRequest?.physicalTraining?.location }}</p>
+    <p><strong>Scheme Name:</strong> {{ selectedRequest?.wifiScheme?.schemeName }}</p>
+    <p><strong>City:</strong> {{ selectedRequest?.city }}</p>
     <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate | date: 'yyyy-MM-dd' }}</p>
     <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
-    <p><strong>Description:</strong> {{ selectedRequest?.physicalTraining?.description }}</p>
+    <p><strong>Street Name:</strong> {{ selectedRequest?.streetName }}</p>
+    <p><strong>Landmark:</strong> {{ selectedRequest?.landmark }}</p>
+    <p><strong>Preferred Setup Date:</strong> {{ selectedRequest?.preferredSetupDate | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Time Slot:</strong> {{ selectedRequest?.timeSlot }}</p>
+    <p *ngIf="selectedRequest?.proof">
+      <strong>Proof:</strong>
+      <img [src]="'data:image/jpeg;base64,' + selectedRequest.proof" alt="Proof Document" class="proof-image" />
+    </p>
   </div>
 </div>
