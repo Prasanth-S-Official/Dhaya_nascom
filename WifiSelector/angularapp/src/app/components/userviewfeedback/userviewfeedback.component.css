@@ -1,8 +1,11 @@
 .feedback-table-container {
-  margin-top: 20px;
+  margin: 20px auto;
   width: 90%;
-  margin: auto;
+  max-width: 1200px; /* Max width for large screens */
   font-family: Arial, sans-serif;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .feedback-table-heading {
@@ -19,7 +22,8 @@
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #3276a6;
+  margin-bottom: 20px;
 }
 
 .feedback-table {
@@ -67,48 +71,55 @@ h1 {
 .view-button:hover {
   background-color: #0056b3;
 }
-
+/* Delete Confirmation Popup */
 .delete-popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 25px;
+  background: white;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px 25px;
   text-align: center;
-  z-index: 10;
-  width: 90%;
-  max-width: 400px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.delete-popup p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.confirm-delete-button,
+.cancel-delete-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .confirm-delete-button {
   background-color: #dc3545;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .confirm-delete-button:hover {
   background-color: #c82333;
+  transform: scale(1.05);
 }
 
 .cancel-delete-button {
   background-color: #6c757d;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .cancel-delete-button:hover {
   background-color: #5a6268;
+  transform: scale(1.05);
 }
 .details-modal-overlay {
   position: fixed;
@@ -146,6 +157,17 @@ h1 {
   margin-bottom: 10px;
 }
 
+  /* Horizontal Rule */
+  hr {
+    border: none;
+    border-top: 2px solid #3276a6;
+    color: #3276a6;
+    overflow: visible;
+    text-align: center;
+    height: 8px;
+    margin-bottom: 2%;
+  }
+  
 .close-button {
   position: absolute;
   top: 10px;
