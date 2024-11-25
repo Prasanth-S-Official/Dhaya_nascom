@@ -1,23 +1,23 @@
 /* General Styles */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #f7f9fc;
 }
 
-/* Training Request Form Container */
+/* Form Container */
 .container {
   position: relative;
-  max-width: 400px;
+  max-width: 500px;
   margin: 5rem auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
 
-/* Back Button Positioning */
+/* Back Button */
 .button-container {
   position: absolute;
   top: 10px;
@@ -25,122 +25,126 @@ body {
 }
 
 .button-container button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #3c91e6;
+  color: white;
   border: none;
-  border-radius: 20px;
-  padding: 8px 12px;
+  border-radius: 30px;
+  padding: 8px 15px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-container button:hover {
-  background-color: #0056b3;
+  background-color: #3276a6;
   transform: translateY(-2px);
 }
 
 /* Form Header */
 h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 26px;
   text-align: center;
   color: #333;
+  margin-bottom: 20px;
 }
 
 /* Form Layout */
 form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-align form items */
+  gap: 20px;
 }
 
-form > div {
-  width: 100%;
-}
-
-/* Input and Textarea Styles */
+/* Input Fields */
 input[type="text"],
+input[type="date"],
+select,
 textarea {
-  width: 90%;
-  margin: 10px 0;
+  width: 95%;
   padding: 12px 15px;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 30px;
-  background-color: #f1f1f1;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: #f9f9f9;
+  font-size: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
-/* Success Popup Button Style */
-.success-popup button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
+input[type="date"] {
+  background-color: #ffffff;
+  color: #333;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
+  filter: invert(50%);
+}
+
+select {
+  background-color: #ffffff;
+  color: #333;
+  appearance: none;
   font-size: 16px;
-  transition: background-color 0.3s, transform 0.3s;
-  margin-top: 15px; /* Space between text and button */
-}
-
-.success-popup button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-.success-popup button:active {
-  transform: translateY(1px);
+  font-family: 'Poppins', sans-serif;
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
+  border-color: #3c91e6;
   outline: none;
   background-color: #ffffff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Required Indicator */
-.required {
-  color: red;
+/* Time Slot Dropdown */
+select {
+  position: relative;
 }
 
-/* Error Message Style */
+select option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Error Messages */
 .error {
   color: red;
   font-size: 14px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
-/* Submit Button Styles */
+/* Required Asterisk */
+.required {
+  color: red;
+  margin-left: 5px;
+}
+
+/* Proof Upload */
+input[type="file"] {
+  border: none;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Submit Button */
 .submit-button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #3c91e6;
+  color: white;
   border: none;
   border-radius: 30px;
   padding: 12px 20px;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  margin-top: 20px;
-  text-align: center; /* Center the button in the form */
+  width: 100%;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #3276a6;
   transform: translateY(-2px);
 }
 
 .submit-button:active {
   transform: translateY(1px);
-}
-
-/* Blur Effect */
-.blur {
-  filter: blur(2px);
-  pointer-events: none;
 }
 
 /* Success Popup */
@@ -149,30 +153,77 @@ textarea:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
+  background-color: #f9f9f9;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
   text-align: center;
-  z-index: 2;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Responsive Design */
-@media (max-width: 480px) {
-  .container {
-    max-width: 100%;
-    padding: 15px;
+.success-popup p {
+  font-size: 18px;
+  color: #333;
+}
+
+.success-popup button {
+  margin-top: 15px;
+  background-color: #3c91e6;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.success-popup button:hover {
+  background-color: #3276a6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* Horizontal Rule Style */
-hr {
-  border: none;
-  border-top: 2px solid #007bff;
-  color: #007bff;
-  overflow: visible;
-  text-align: center;
-  height: 5px;
-  margin: 20px 0;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .submit-button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 14px;
+  }
+
+  .submit-button {
+    padding: 10px 12px;
+  }
 }
