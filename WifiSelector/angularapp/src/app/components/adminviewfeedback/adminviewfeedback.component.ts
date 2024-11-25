@@ -16,6 +16,7 @@ export class AdminviewfeedbackComponent implements OnInit {
   ngOnInit(): void {
     this.feedbackService.getFeedbacks().subscribe(
       (response) => {
+        console.log("GetFeedback",response);
         this.feedbacks = response;
       },
       (error) => {
