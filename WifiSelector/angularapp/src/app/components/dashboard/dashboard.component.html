@@ -1,6 +1,8 @@
 <app-adminnav></app-adminnav>
 <div class="dashboard-container">
   <h1>Admin Dashboard</h1>
+  
+  <!-- Dashboard Summary Cards -->
   <div class="card-grid">
     <!-- Total Schemes Card -->
     <div class="dashboard-card" (click)="toggleSchemeDetails('all')">
@@ -45,13 +47,6 @@
         ></div>
       </div>
     </div>
-
-    <!-- Famous Scheme Card -->
-    <div class="dashboard-card" *ngIf="famousScheme">
-      <h2>Famous Scheme</h2>
-      <p><strong>{{ famousScheme.schemeName }}</strong></p>
-      <p>Total Requests: {{ totalRequestsForFamousScheme }}</p>
-    </div>
   </div>
 
   <!-- Scheme Details Section -->
@@ -65,6 +60,18 @@
         <p><strong>Data Limit:</strong> {{ scheme.dataLimit }}</p>
         <p><strong>Fee:</strong> ₹{{ scheme.fee }}</p>
         <p><strong>Status:</strong> {{ scheme.availabilityStatus }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Region-Wise Famous Schemes -->
+  <div class="famous-schemes-section">
+    <h2>Famous Schemes by Region</h2>
+    <div class="region-cards">
+      <div class="region-card" *ngFor="let region of Object.keys(famousSchemeByRegion)">
+        <h3>{{ region }}</h3>
+        <p><strong>Scheme:</strong> {{ famousSchemeByRegion[region].scheme?.schemeName }}</p>
+        <p><strong>Total Requests:</strong> {{ famousSchemeByRegion[region].totalRequests }}</p>
       </div>
     </div>
   </div>
