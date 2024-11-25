@@ -20,12 +20,15 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
 import { AdminViewSchemeComponent } from './components/admin-view-scheme/admin-view-scheme.component';
 import { UserViewSchemeComponent } from './components/user-view-scheme/user-view-scheme.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'error', component: ErrorComponent },
+
 
 
   { path: 'admin/add/scheme', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },

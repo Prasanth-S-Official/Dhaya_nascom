@@ -24,6 +24,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
 import { AdminViewSchemeComponent } from './components/admin-view-scheme/admin-view-scheme.component';
 import { UserViewSchemeComponent } from './components/user-view-scheme/user-view-scheme.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UserViewSchemeComponent } from './components/user-view-scheme/user-view
     AdminWifiSchemeComponent,
     AdminViewSchemeComponent,
     UserViewSchemeComponent,
+    DashboardComponent,
   
 
   ],
