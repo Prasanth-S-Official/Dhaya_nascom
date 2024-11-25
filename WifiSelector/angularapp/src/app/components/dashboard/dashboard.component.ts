@@ -11,6 +11,10 @@ export class DashboardComponent implements OnInit {
   availableSchemes: number = 0;
   nonAvailableSchemes: number = 0;
 
+  allSchemes = [];
+  selectedSchemes = [];
+  lastClickedFilter: string = null; // To track the last clicked filter
+
   constructor(private wifiSchemeService: WifiSchemeService) {}
 
   ngOnInit(): void {
@@ -20,6 +24,7 @@ export class DashboardComponent implements OnInit {
   fetchWiFiSchemeData(): void {
     this.wifiSchemeService.getAllWiFiSchemes().subscribe(
       (schemes) => {
+        this.allSchemes = schemes;
         this.totalSchemes = schemes.length;
         this.availableSchemes = schemes.filter(scheme => scheme.availabilityStatus === 'Available').length;
         this.nonAvailableSchemes = this.totalSchemes - this.availableSchemes;
@@ -28,5 +33,22 @@ export class DashboardComponent implements OnInit {
         console.error('Error fetching schemes:', error);
       }
     );
+  }
+
+  toggleSchemeDetails(filter: string): void {
+    // If the same filter is clicked again, hide the details
+    if (this.lastClickedFilter === filter) {
+      this.selectedSchemes = [];
+      this.lastClickedFilter = null;
+    } else {
+      this.lastClickedFilter = filter;
+      if (filter === 'all') {
+        this.selectedSchemes = this.allSchemes;
+      } else if (filter === 'available') {
+        this.selectedSchemes = this.allSchemes.filter(scheme => scheme.availabilityStatus === 'Available');
+      } else if (filter === 'not-available') {
+        this.selectedSchemes = this.allSchemes.filter(scheme => scheme.availabilityStatus !== 'Available');
+      }
+    }
   }
 }

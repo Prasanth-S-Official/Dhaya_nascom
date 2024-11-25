@@ -1,24 +1,52 @@
 <app-adminnav></app-adminnav>
 <div class="dashboard-container">
-    <h1>Admin Dashboard</h1>
-    <div class="card-grid">
-      <!-- Total Schemes Card -->
-      <div class="dashboard-card">
-        <h2>Total WiFi Schemes</h2>
-        <p>{{ totalSchemes }}</p>
+  <h1>Admin Dashboard</h1>
+  <div class="card-grid">
+    <!-- Total Schemes Card -->
+    <div class="dashboard-card" (click)="toggleSchemeDetails('all')">
+      <h2>Total WiFi Schemes</h2>
+      <div class="circular-progress">
+        <div class="inner-circle">{{ totalSchemes }}</div>
       </div>
-  
-      <!-- Available Schemes Card -->
-      <div class="dashboard-card">
-        <h2>Available Schemes</h2>
-        <p>{{ availableSchemes }}</p>
+    </div>
+
+    <!-- Available Schemes Card -->
+    <div class="dashboard-card" (click)="toggleSchemeDetails('available')">
+      <h2>Available Schemes</h2>
+      <div class="circular-progress">
+        <div class="inner-circle">{{ availableSchemes }}</div>
+        <div
+          class="circle"
+          [style.background]= "'conic-gradient(#4caf50 ' + (availableSchemes/totalSchemes*100) + '%, #ddd ' + (availableSchemes/totalSchemes*100) + '%)'">
+        </div>
       </div>
-  
-      <!-- Non-Available Schemes Card -->
-      <div class="dashboard-card">
-        <h2>Non-Available Schemes</h2>
-        <p>{{ nonAvailableSchemes }}</p>
+    </div>
+
+    <!-- Non-Available Schemes Card -->
+    <div class="dashboard-card" (click)="toggleSchemeDetails('not-available')">
+      <h2>Non-Available Schemes</h2>
+      <div class="circular-progress">
+        <div class="inner-circle">{{ nonAvailableSchemes }}</div>
+        <div
+          class="circle"
+          [style.background]= "'conic-gradient(#f44336 ' + (nonAvailableSchemes/totalSchemes*100) + '%, #ddd ' + (nonAvailableSchemes/totalSchemes*100) + '%)'">
+        </div>
       </div>
     </div>
   </div>
-  
+
+  <!-- Scheme Details Section -->
+  <div class="scheme-details" *ngIf="selectedSchemes && selectedSchemes.length > 0">
+    <h2>Scheme Details</h2>
+    <div class="scheme-list">
+      <div class="scheme-card" *ngFor="let scheme of selectedSchemes">
+        <h3>{{ scheme.schemeName }}</h3>
+        <p><strong>Region:</strong> {{ scheme.region }}</p>
+        <p><strong>Speed:</strong> {{ scheme.speed }}</p>
+        <p><strong>Data Limit:</strong> {{ scheme.dataLimit }}</p>
+        <p><strong>Fee:</strong> ₹{{ scheme.fee }}</p>
+        <p><strong>Status:</strong> {{ scheme.availabilityStatus }}</p>
+      </div>
+    </div>
+  </div>
+</div>
