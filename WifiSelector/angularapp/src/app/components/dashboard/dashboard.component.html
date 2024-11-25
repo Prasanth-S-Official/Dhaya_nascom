@@ -1,24 +1,29 @@
 <app-adminnav></app-adminnav>
 <div class="dashboard-container">
-  <h1>Admin Dashboard</h1>
-  
-  <!-- Dashboard Summary Cards -->
-  <div class="card-grid">
-    <!-- Total Schemes Card -->
-    <div class="dashboard-card" (click)="toggleSchemeDetails('all')">
-      <h2>Total WiFi Schemes</h2>
-      <div class="circular-progress">
-        <div class="inner-circle">{{ totalSchemes }}</div>
-      </div>
-    </div>
-
-    <!-- Available Schemes Card -->
-    <div class="dashboard-card" (click)="toggleSchemeDetails('available')">
-      <h2>Available Schemes</h2>
-      <div class="circular-progress">
-        <div class="inner-circle">{{ availableSchemes }}</div>
+    <h1>Admin Dashboard</h1>
+    <div class="card-grid">
+      <!-- Total Schemes Card -->
+      <div class="dashboard-card">
+        <h2>Total WiFi Schemes</h2>
         <div
-          class="circle"
+          class="circular-progress"
+          [style.background]="
+            'conic-gradient(#00bfff ' +
+            (totalSchemes / totalSchemes) * 100 +
+            '%, #ddd ' +
+            (totalSchemes / totalSchemes) * 100 +
+            '%)'
+          "
+        >
+          <div class="inner-circle">{{ totalSchemes }}</div>
+        </div>
+      </div>
+  
+      <!-- Available Schemes Card -->
+      <div class="dashboard-card">
+        <h2>Available Schemes</h2>
+        <div
+          class="circular-progress"
           [style.background]="
             'conic-gradient(#4caf50 ' +
             (availableSchemes / totalSchemes) * 100 +
@@ -26,17 +31,16 @@
             (availableSchemes / totalSchemes) * 100 +
             '%)'
           "
-        ></div>
+        >
+          <div class="inner-circle">{{ availableSchemes }}</div>
+        </div>
       </div>
-    </div>
-
-    <!-- Non-Available Schemes Card -->
-    <div class="dashboard-card" (click)="toggleSchemeDetails('not-available')">
-      <h2>Non-Available Schemes</h2>
-      <div class="circular-progress">
-        <div class="inner-circle">{{ nonAvailableSchemes }}</div>
+  
+      <!-- Non-Available Schemes Card -->
+      <div class="dashboard-card">
+        <h2>Non-Available Schemes</h2>
         <div
-          class="circle"
+          class="circular-progress"
           [style.background]="
             'conic-gradient(#f44336 ' +
             (nonAvailableSchemes / totalSchemes) * 100 +
@@ -44,10 +48,12 @@
             (nonAvailableSchemes / totalSchemes) * 100 +
             '%)'
           "
-        ></div>
+        >
+          <div class="inner-circle">{{ nonAvailableSchemes }}</div>
+        </div>
       </div>
     </div>
-  </div>
+  
 
   <!-- Scheme Details Section -->
   <div class="scheme-details" *ngIf="selectedSchemes && selectedSchemes.length > 0">
@@ -65,14 +71,13 @@
   </div>
 
   <!-- Region-Wise Famous Schemes -->
-  <div class="famous-schemes-section">
-    <h2>Famous Schemes by Region</h2>
-    <div class="region-cards">
-      <div class="region-card" *ngFor="let region of Object.keys(famousSchemeByRegion)">
-        <h3>{{ region }}</h3>
-        <p><strong>Scheme:</strong> {{ famousSchemeByRegion[region].scheme?.schemeName }}</p>
-        <p><strong>Total Requests:</strong> {{ famousSchemeByRegion[region].totalRequests }}</p>
-      </div>
+  <div class="region-cards">
+   <h2>Region Wise</h2>
+    <div class="region-card" *ngFor="let region of regions">
+      <h3>{{ region }}</h3>
+      <p><strong>Scheme:</strong> {{ famousSchemeByRegion[region].scheme?.schemeName }}</p>
+      <p><strong>Total Requests:</strong> {{ famousSchemeByRegion[region].totalRequests }}</p>
     </div>
   </div>
+  
 </div>

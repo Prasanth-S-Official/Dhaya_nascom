@@ -5,7 +5,7 @@ import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.s
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   totalSchemes: number = 0;
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
       (schemes) => {
         this.allSchemes = schemes;
         this.totalSchemes = schemes.length;
-        this.availableSchemes = schemes.filter(scheme => scheme.availabilityStatus === 'Available').length;
+        this.availableSchemes = schemes.filter((scheme) => scheme.availabilityStatus === 'Available').length;
         this.nonAvailableSchemes = this.totalSchemes - this.availableSchemes;
 
         this.fetchRegionWiseFamousSchemes();
@@ -113,10 +113,15 @@ export class DashboardComponent implements OnInit {
       if (filter === 'all') {
         this.selectedSchemes = this.allSchemes;
       } else if (filter === 'available') {
-        this.selectedSchemes = this.allSchemes.filter(scheme => scheme.availabilityStatus === 'Available');
+        this.selectedSchemes = this.allSchemes.filter((scheme) => scheme.availabilityStatus === 'Available');
       } else if (filter === 'not-available') {
-        this.selectedSchemes = this.allSchemes.filter(scheme => scheme.availabilityStatus !== 'Available');
+        this.selectedSchemes = this.allSchemes.filter((scheme) => scheme.availabilityStatus !== 'Available');
       }
     }
+  }
+
+  // Getter to expose Object.keys for template use
+  get regions(): string[] {
+    return Object.keys(this.famousSchemeByRegion);
   }
 }
