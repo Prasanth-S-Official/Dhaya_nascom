@@ -8,7 +8,7 @@
         <div
           class="circular-progress"
           [style.background]="
-            'conic-gradient(#00bfff ' +
+            'conic-gradient(#00ffc0 ' +
             (totalSchemes / totalSchemes) * 100 +
             '%, #ddd ' +
             (totalSchemes / totalSchemes) * 100 +
@@ -69,10 +69,10 @@
       </div>
     </div>
   </div>
-
+  
+  <h2>Region Wise</h2>
   <!-- Region-Wise Famous Schemes -->
   <div class="region-cards">
-   <h2>Region Wise</h2>
     <div class="region-card" *ngFor="let region of regions">
       <h3>{{ region }}</h3>
       <p><strong>Scheme:</strong> {{ famousSchemeByRegion[region].scheme?.schemeName }}</p>
