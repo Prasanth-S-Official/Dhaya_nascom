@@ -17,8 +17,14 @@
         <div class="inner-circle">{{ availableSchemes }}</div>
         <div
           class="circle"
-          [style.background]= "'conic-gradient(#4caf50 ' + (availableSchemes/totalSchemes*100) + '%, #ddd ' + (availableSchemes/totalSchemes*100) + '%)'">
-        </div>
+          [style.background]="
+            'conic-gradient(#4caf50 ' +
+            (availableSchemes / totalSchemes) * 100 +
+            '%, #ddd ' +
+            (availableSchemes / totalSchemes) * 100 +
+            '%)'
+          "
+        ></div>
       </div>
     </div>
 
@@ -29,9 +35,22 @@
         <div class="inner-circle">{{ nonAvailableSchemes }}</div>
         <div
           class="circle"
-          [style.background]= "'conic-gradient(#f44336 ' + (nonAvailableSchemes/totalSchemes*100) + '%, #ddd ' + (nonAvailableSchemes/totalSchemes*100) + '%)'">
-        </div>
+          [style.background]="
+            'conic-gradient(#f44336 ' +
+            (nonAvailableSchemes / totalSchemes) * 100 +
+            '%, #ddd ' +
+            (nonAvailableSchemes / totalSchemes) * 100 +
+            '%)'
+          "
+        ></div>
       </div>
+    </div>
+
+    <!-- Famous Scheme Card -->
+    <div class="dashboard-card" *ngIf="famousScheme">
+      <h2>Famous Scheme</h2>
+      <p><strong>{{ famousScheme.schemeName }}</strong></p>
+      <p>Total Requests: {{ totalRequestsForFamousScheme }}</p>
     </div>
   </div>
 
