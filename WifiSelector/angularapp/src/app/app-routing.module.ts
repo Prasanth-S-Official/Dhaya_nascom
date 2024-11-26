@@ -4,12 +4,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/authguard/auth.guard';
 
-import { AdminaddtrainingComponent } from './components/adminaddtraining/adminaddtraining.component';
-import { AdminedittrainingComponent } from './components/adminedittraining/adminedittraining.component';
 import { AdminviewappliedrequestComponent } from './components/adminviewappliedrequest/adminviewappliedrequest.component';
-import { AdminviewtrainingComponent } from './components/adminviewtraining/adminviewtraining.component';
-
-import { UserviewtrainingComponent } from './components/userviewtraining/userviewtraining.component';
 import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
 import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
@@ -38,10 +33,7 @@ const routes: Routes = [
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Admin Routes
-  { path: 'admin/add/training', component: AdminaddtrainingComponent, canActivate: [AuthGuard] },
-  { path: 'admin/edit/training/:id', component: AdminedittrainingComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/trainings', component: AdminviewtrainingComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // User Routes

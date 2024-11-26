@@ -14,11 +14,7 @@ import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
 import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
-import { UserviewtrainingComponent } from './components/userviewtraining/userviewtraining.component';
-import { AdminaddtrainingComponent } from './components/adminaddtraining/adminaddtraining.component';
-import { AdminedittrainingComponent } from './components/adminedittraining/adminedittraining.component';
 import { AdminviewappliedrequestComponent } from './components/adminviewappliedrequest/adminviewappliedrequest.component';
-import { AdminviewtrainingComponent } from './components/adminviewtraining/adminviewtraining.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
@@ -41,11 +37,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     UsernavComponent,
     UseraddrequestComponent,
     UserviewappliedrequestComponent,
-    UserviewtrainingComponent,
-    AdminaddtrainingComponent,
-    AdminedittrainingComponent,
     AdminviewappliedrequestComponent,
-    AdminviewtrainingComponent,
     AdminWifiSchemeComponent,
     AdminViewSchemeComponent,
     UserViewSchemeComponent,
