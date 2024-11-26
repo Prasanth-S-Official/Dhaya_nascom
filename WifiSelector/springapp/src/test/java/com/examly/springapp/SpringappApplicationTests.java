@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testPhysicalTrainingRequestInterfaceAndImplementation() {
+    public void backend_testWiFiSchemeRequestInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.PhysicalTrainingRequestService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.PhysicalTrainingRequestServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.WiFiSchemeRequestService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.WiFiSchemeRequestServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testPhysicalTrainingControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.PhysicalTrainingController");
+	   public void backend_testWiFiSchemeControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.WiFiSchemeController");
 	   }
 
 	   @Test
-	   public void backend_testPhysicalTrainingRequestControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.PhysicalTrainingRequestController");
+	   public void backend_testWiFiSchemeRequestControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.WiFiSchemeRequestController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testPhysicalTrainingModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.PhysicalTraining");
+	   public void backend_testWiFiSchemeModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.WiFiScheme");
 	   }
 	 
 	 @Test
@@ -200,8 +200,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testPhysicalTrainingRequestModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.PhysicalTrainingRequest");
+	   public void backend_testWiFiSchemeRequestModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.WiFiSchemeRequest");
 	   }
 
 }
