@@ -46,11 +46,17 @@
     <!-- Setup Preferences -->
     <div>
       <label for="preferredSetupDate">Preferred Setup Date<span class="required">*</span></label>
-      <input id="preferredSetupDate" type="date" formControlName="preferredSetupDate" />
+      <input 
+        id="preferredSetupDate" 
+        type="date" 
+        formControlName="preferredSetupDate" 
+        [min]="minDate" 
+      />
       <div *ngIf="requestForm.controls['preferredSetupDate']?.touched && requestForm.controls['preferredSetupDate'].hasError('required')" class="error">
         *Preferred Setup Date is required
       </div>
     </div>
+    
     <div>
       <label for="timeSlot">Preferred Time Slot<span class="required">*</span></label>
       <select id="timeSlot" formControlName="timeSlot">

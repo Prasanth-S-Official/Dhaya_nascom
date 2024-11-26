@@ -14,6 +14,7 @@ export class UseraddrequestComponent implements OnInit {
   errorMessage = '';
   imageError = '';
   proofBase64: string = '';
+  minDate: string;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +33,10 @@ export class UseraddrequestComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0]; // Set today's date in 'YYYY-MM-DD' format
+  }
 
   handleFileChange(event: any): void {
     const file = event.target.files[0];

@@ -26,6 +26,7 @@ export class UserviewappliedrequestComponent implements OnInit {
     const userId = Number(localStorage.getItem('userId'));
     this.wifiSchemeRequestService.getWiFiSchemeRequestsByUserId(userId!).subscribe(
       (response: any) => {
+        console.log("userapplied",response);
         this.appliedRequests = response;
         this.filteredRequests = response;
       },

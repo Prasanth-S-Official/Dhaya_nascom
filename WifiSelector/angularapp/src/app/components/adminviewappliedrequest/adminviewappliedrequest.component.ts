@@ -27,6 +27,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
   fetchWiFiSchemeRequests(): void {
     this.wifiSchemeRequestService.getAllWiFiSchemeRequests().subscribe(
       (response) => {
+        console.log("Request",response);
         this.wifiSchemeRequests = response;
         this.filteredRequests = [...this.wifiSchemeRequests];
       },
