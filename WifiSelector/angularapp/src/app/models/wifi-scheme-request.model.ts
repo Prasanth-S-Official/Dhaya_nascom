@@ -1,4 +1,4 @@
-export interface WiFiSchemeRequest {
+export interface WifiSchemeRequest {
     wifiSchemeRequestId?: number;   // Unique identifier for the request
     userId: number;                 // ID of the user making the request
     wifiSchemeId: number;           // ID of the WiFi scheme being requested

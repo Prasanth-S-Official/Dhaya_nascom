@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WiFiScheme } from 'src/app/models/wifi-scheme.model';
+import { WifiScheme } from 'src/app/models/wifi-scheme.model';
 import { WifiSchemeService } from 'src/app/services/wifi-scheme.service';
 
 @Component({
@@ -55,7 +55,7 @@ export class AdminWifiSchemeComponent implements OnInit {
     if (this.wifiSchemeForm.valid) {
       const formData = this.wifiSchemeForm.value;
 
-      const wifiScheme: WiFiScheme = {
+      const wifiScheme: WifiScheme = {
         ...formData,
         wifiSchemeId: this.id || undefined,
       };

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { WiFiSchemeRequest } from '../models/wifi-scheme-request.model';
+import { WifiSchemeRequest } from '../models/wifi-scheme-request.model';
 import { apiUrl } from 'src/apiconfig';
 
 @Injectable({
@@ -12,24 +12,24 @@ export class WifiSchemeRequestService {
 
   constructor(private http: HttpClient) {}
 
-  getAllWiFiSchemeRequests(): Observable<WiFiSchemeRequest[]> {
+  getAllWiFiSchemeRequests(): Observable<WifiSchemeRequest[]> {
     const headers = this.getHeaders();
-    return this.http.get<WiFiSchemeRequest[]>(`${this.apiUrl}/api/wifiSchemeRequest`, { headers });
+    return this.http.get<WifiSchemeRequest[]>(`${this.apiUrl}/api/wifiSchemeRequest`, { headers });
   }
 
-  getWiFiSchemeRequestsByUserId(userId: number): Observable<WiFiSchemeRequest[]> {
+  getWiFiSchemeRequestsByUserId(userId: number): Observable<WifiSchemeRequest[]> {
     const headers = this.getHeaders();
-    return this.http.get<WiFiSchemeRequest[]>(`${this.apiUrl}/api/wifiSchemeRequest/user/${userId}`, { headers });
+    return this.http.get<WifiSchemeRequest[]>(`${this.apiUrl}/api/wifiSchemeRequest/user/${userId}`, { headers });
   }
 
-  addWiFiSchemeRequest(request: WiFiSchemeRequest): Observable<WiFiSchemeRequest> {
+  addWiFiSchemeRequest(request: WifiSchemeRequest): Observable<WifiSchemeRequest> {
     const headers = this.getHeaders();
-    return this.http.post<WiFiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest`, request, { headers });
+    return this.http.post<WifiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest`, request, { headers });
   }
 
-  updateWiFiSchemeRequest(requestId: number, request: WiFiSchemeRequest): Observable<WiFiSchemeRequest> {
+  updateWiFiSchemeRequest(requestId: number, request: WifiSchemeRequest): Observable<WifiSchemeRequest> {
     const headers = this.getHeaders();
-    return this.http.put<WiFiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest/${requestId}`, request, { headers });
+    return this.http.put<WifiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest/${requestId}`, request, { headers });
   }
 
   deleteWiFiSchemeRequest(requestId: number): Observable<void> {

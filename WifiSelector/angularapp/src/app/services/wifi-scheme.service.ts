@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { WiFiScheme } from '../models/wifi-scheme.model';
+import { WifiScheme } from '../models/wifi-scheme.model';
 import { apiUrl } from 'src/apiconfig';
 
 @Injectable({
@@ -12,24 +12,24 @@ export class WifiSchemeService {
 
   constructor(private http: HttpClient) {}
 
-  getAllWiFiSchemes(): Observable<WiFiScheme[]> {
+  getAllWiFiSchemes(): Observable<WifiScheme[]> {
     const headers = this.getHeaders();
-    return this.http.get<WiFiScheme[]>(`${this.apiUrl}/api/wifiScheme`, { headers });
+    return this.http.get<WifiScheme[]>(`${this.apiUrl}/api/wifiScheme`, { headers });
   }
 
-  getWiFiSchemeById(wifiSchemeId: number): Observable<WiFiScheme> {
+  getWiFiSchemeById(wifiSchemeId: number): Observable<WifiScheme> {
     const headers = this.getHeaders();
-    return this.http.get<WiFiScheme>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, { headers });
+    return this.http.get<WifiScheme>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, { headers });
   }
 
-  addWiFiScheme(wifiScheme: WiFiScheme): Observable<WiFiScheme> {
+  addWiFiScheme(wifiScheme: WifiScheme): Observable<WifiScheme> {
     const headers = this.getHeaders();
-    return this.http.post<WiFiScheme>(`${this.apiUrl}/api/wifiScheme`, wifiScheme, { headers });
+    return this.http.post<WifiScheme>(`${this.apiUrl}/api/wifiScheme`, wifiScheme, { headers });
   }
 
-  updateWiFiScheme(wifiSchemeId: number, wifiScheme: WiFiScheme): Observable<WiFiScheme> {
+  updateWiFiScheme(wifiSchemeId: number, wifiScheme: WifiScheme): Observable<WifiScheme> {
     const headers = this.getHeaders();
-    return this.http.put<WiFiScheme>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, wifiScheme, { headers });
+    return this.http.put<WifiScheme>(`${this.apiUrl}/api/wifiScheme/${wifiSchemeId}`, wifiScheme, { headers });
   }
 
   deleteWiFiScheme(wifiSchemeId: number): Observable<void> {

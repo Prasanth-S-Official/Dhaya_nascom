@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { WifiSchemeService } from 'src/app/services/wifi-scheme.service';
-import { WiFiScheme } from 'src/app/models/wifi-scheme.model';
+import { WifiScheme } from 'src/app/models/wifi-scheme.model';
 import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.s
   styleUrls: ['./user-view-scheme.component.css'],
 })
 export class UserViewSchemeComponent implements OnInit {
-  availableSchemes: WiFiScheme[] = [];
-  filteredSchemes: WiFiScheme[] = [];
+  availableSchemes: WifiScheme[] = [];
+  filteredSchemes: WifiScheme[] = [];
   appliedSchemes: any[] = [];
   searchField: string = '';
 
@@ -51,7 +51,7 @@ export class UserViewSchemeComponent implements OnInit {
     this.filteredSchemes = this.filterSchemes(searchValue);
   }
 
-  filterSchemes(search: string): WiFiScheme[] {
+  filterSchemes(search: string): WifiScheme[] {
     const searchLower = search.toLowerCase();
     return this.availableSchemes.filter(
       (scheme) =>
@@ -61,7 +61,7 @@ export class UserViewSchemeComponent implements OnInit {
     );
   }
 
-  handleApplyClick(scheme: WiFiScheme): void {
+  handleApplyClick(scheme: WifiScheme): void {
     if (this.isSchemeApplied(scheme)) {
       alert('You have already applied for this scheme.');
     } else {
@@ -70,7 +70,7 @@ export class UserViewSchemeComponent implements OnInit {
     }
   }
 
-  isSchemeApplied(scheme: WiFiScheme): boolean {
+  isSchemeApplied(scheme: WifiScheme): boolean {
     // Ensure `appliedSchemes` is not null before checking
     if (!this.appliedSchemes) return false;
 

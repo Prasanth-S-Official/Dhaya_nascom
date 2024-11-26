@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
-import { WiFiSchemeRequest } from 'src/app/models/wifi-scheme-request.model';
 
 @Component({
   selector: 'app-useraddrequest',

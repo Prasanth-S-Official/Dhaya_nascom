@@ -1,4 +1,4 @@
-export interface WiFiScheme {
+export interface WifiScheme {
     wifiSchemeId?: number;
     schemeName: string;
     description: string;
