@@ -15,6 +15,6 @@ export interface WifiSchemeRequest {
     zipCode: string;                // ZIP/Postal code for the location
 
     // Setup preferences
-    preferredSetupDate: string;     // Preferred date for WiFi setup (ISO format: YYYY-MM-DD)
+    preferredSetupDate: Date;     // Preferred date for WiFi setup (ISO format: YYYY-MM-DD)
     timeSlot: string;               // Preferred time slot for WiFi setup
 }
