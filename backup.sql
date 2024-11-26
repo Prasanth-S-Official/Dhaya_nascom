@@ -70,7 +70,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$gpPIr2u.tAXO9QGRpesbuua26Cf.l1wepdqat/1sdCzbHk6X970aK','Admin','admin'),(2,'user@gmail.com','9876543211','$2a$10$H6Z.yKIYW6A0ksFs5bqcLOs2LBzSCdnA2ar/1zAf23cbBhqibolXq','User','user'),(3,'user2@gmail.com','0876543211','$2a$10$kzU0RA8DhwJFgITvwJ8jYetsD1SzaOb/7IpV.dSritYYlPaMNSB6O','User','demouser2');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$gpPIr2u.tAXO9QGRpesbuua26Cf.l1wepdqat/1sdCzbHk6X970aK','Admin','admin'),(2,'user@gmail.com','9876543211','$2a$10$H6Z.yKIYW6A0ksFs5bqcLOs2LBzSCdnA2ar/1zAf23cbBhqibolXq','User','user'),(3,'user2@gmail.com','0876543211','$2a$10$kzU0RA8DhwJFgITvwJ8jYetsD1SzaOb/7IpV.dSritYYlPaMNSB6O','User','demouser2'),(4,'user3@gmail.com','1234567899','$2a$10$yXkLH1Y6Zow3vBtJexHWsOQSnDYVstUTU19O4WKFB.6NM1KsG5sbq','User','demouser3');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ CREATE TABLE `wi_fi_scheme` (
   `scheme_name` varchar(255) DEFAULT NULL,
   `speed` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`wifi_scheme_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `wi_fi_scheme` (
 
 LOCK TABLES `wi_fi_scheme` WRITE;
 /*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
-INSERT INTO `wi_fi_scheme` VALUES (2,'Unavailable','Unlimited','Best for 340 days',4999,'CBEs','Xtreme','140Mb/sec'),(3,'Available','limited','Best for 140 days',1999,'CBE','Xtreme Plus','100Mb/sec'),(4,'Available','limited','Best for 140 days',999,'CBE','Xtreme Power Plus','50Mb/sec'),(5,'Available','limited','Best for 28 days',999,'Erode','Power Plus','250Mb/sec');
+INSERT INTO `wi_fi_scheme` VALUES (2,'Unavailable','Unlimited','Best for 340 days',4999,'CBEs','Xtreme','140Mb/sec'),(3,'Available','limited','Best for 140 days',1999,'CBE','Xtreme Plus','100Mb/sec'),(4,'Available','limited','Best for 140 days',999,'CBE','Xtreme Power Plus','50Mb/sec'),(5,'Available','limited','Best for 28 days',999,'Erode','Power Plus','250Mb/sec'),(6,'Available','limited','Best for 28 days',999,'Chennai','Value Plus','250Mb/sec');
 /*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-26 10:05:34
+-- Dump completed on 2024-11-26 10:20:34
