@@ -48,15 +48,33 @@ export class UserviewappliedrequestComponent implements OnInit {
     this.showDeletePopup = true;
   }
 
+  // handleConfirmDelete(): void {
+  //   this.wifiSchemeRequestService.deleteWiFiSchemeRequest(this.requestToDelete.wifiSchemeRequestId).subscribe(
+  //     () => {
+  //       this.fetchData();
+  //       this.closeDeletePopup();
+  //     },
+  //     error => console.error('Error deleting request:', error)
+  //   );
+  // }
+
   handleConfirmDelete(): void {
     this.wifiSchemeRequestService.deleteWiFiSchemeRequest(this.requestToDelete.wifiSchemeRequestId).subscribe(
       () => {
-        this.fetchData();
-        this.closeDeletePopup();
+        // Remove the deleted request from the array
+        this.appliedRequests = this.appliedRequests.filter(
+          (req) => req.wifiSchemeRequestId !== this.requestToDelete.wifiSchemeRequestId
+        );
+        this.filteredRequests = [...this.appliedRequests]; // Update the filteredRequests array
+  
+        this.closeDeletePopup(); // Close the popup
       },
-      error => console.error('Error deleting request:', error)
+      (error) => {
+        console.error('Error deleting request:', error);
+      }
     );
   }
+  
 
   closeDeletePopup(): void {
     this.requestToDelete = null;

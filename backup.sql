@@ -140,7 +140,7 @@ CREATE TABLE `wi_fi_scheme_request` (
   KEY `FK66l6wgtnsmludnwu0f3xqnpux` (`wifi_scheme_id`),
   CONSTRAINT `FK66l6wgtnsmludnwu0f3xqnpux` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
   CONSTRAINT `FKn4rmj4a4yy7jdnstsms8feim0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-26  5:08:56
+-- Dump completed on 2024-11-26  5:10:04
