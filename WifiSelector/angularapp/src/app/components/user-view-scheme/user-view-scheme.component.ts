@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { WifiSchemeService } from 'src/app/services/wifi-scheme.service';
 import { WiFiScheme } from 'src/app/models/wifi-scheme.model';
-import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
+import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 
 @Component({
   selector: 'app-user-view-scheme',
@@ -19,7 +19,7 @@ export class UserViewSchemeComponent implements OnInit {
   constructor(
     private router: Router,
     private wifiSchemeService: WifiSchemeService,
-    private wifiSchemeRequestService: WiFiSchemeRequestService
+    private wifiSchemeRequestService: WifiSchemeRequestService
   ) {}
 
   ngOnInit(): void {

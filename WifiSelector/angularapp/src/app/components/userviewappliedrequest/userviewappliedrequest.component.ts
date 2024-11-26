@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
+import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 
 @Component({
   selector: 'app-userviewappliedrequest',
@@ -16,7 +16,7 @@ export class UserviewappliedrequestComponent implements OnInit {
   filteredRequests: any[] = [];
   searchValue = '';
 
-  constructor(private wifiSchemeRequestService: WiFiSchemeRequestService, private router: Router) {}
+  constructor(private wifiSchemeRequestService: WifiSchemeRequestService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchData();

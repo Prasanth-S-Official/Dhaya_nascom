@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
+import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class AdminviewappliedrequestComponent implements OnInit {
   selectedRequest: any = null;
 
   constructor(
-    private wifiSchemeRequestService: WiFiSchemeRequestService,
+    private wifiSchemeRequestService: WifiSchemeRequestService,
     private router: Router
   ) {}
 

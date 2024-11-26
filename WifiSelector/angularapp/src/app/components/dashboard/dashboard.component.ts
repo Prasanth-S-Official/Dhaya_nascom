@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WifiSchemeService } from 'src/app/services/wifi-scheme.service';
-import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
+import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private wifiSchemeService: WifiSchemeService,
-    private wifiSchemeRequestService: WiFiSchemeRequestService
+    private wifiSchemeRequestService: WifiSchemeRequestService
   ) {}
 
   ngOnInit(): void {

@@ -7,7 +7,7 @@ import { apiUrl } from 'src/apiconfig';
 @Injectable({
   providedIn: 'root',
 })
-export class WiFiSchemeRequestService {
+export class WifiSchemeRequestService {
   private apiUrl = apiUrl;
 
   constructor(private http: HttpClient) {}

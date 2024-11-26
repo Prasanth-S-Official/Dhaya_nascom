@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WiFiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
+import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 import { WiFiSchemeRequest } from 'src/app/models/wifi-scheme-request.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class UseraddrequestComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private wifiSchemeRequestService : WiFiSchemeRequestService
+    private wifiSchemeRequestService : WifiSchemeRequestService
   ) {
     this.requestForm = this.fb.group({
       streetName: ['', Validators.required],
