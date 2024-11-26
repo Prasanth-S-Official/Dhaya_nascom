@@ -118,9 +118,9 @@ export class UseraddrequestComponent implements OnInit {
     } else {
       this.errorMessage = 'All required fields must be filled out';
   
-      if (!this.proofBase64) {
-        this.imageError = 'Proof document is required.';
-      }
+      // if (!this.proofBase64) {
+      //   this.imageError = 'Proof document is required.';
+      // }
     }
   }
 
