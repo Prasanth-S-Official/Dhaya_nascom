@@ -27,7 +27,7 @@ export class UserViewSchemeComponent implements OnInit {
   }
 
   fetchData(): void {
-    const userId = localStorage.getItem('userId');
+    const userId = Number(localStorage.getItem('userId'));
 
     forkJoin({
       appliedSchemes: this.wifiSchemeRequestService.getWiFiSchemeRequestsByUserId(userId),

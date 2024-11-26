@@ -23,7 +23,7 @@ export class UserviewappliedrequestComponent implements OnInit {
   }
 
   fetchData(): void {
-    const userId = localStorage.getItem('userId');
+    const userId = Number(localStorage.getItem('userId'));
     this.wifiSchemeRequestService.getWiFiSchemeRequestsByUserId(userId!).subscribe(
       (response: any) => {
         this.appliedRequests = response;
