@@ -1,0 +1,46 @@
+
+<div class="login-container">
+  <div class="login-wrapper">
+    <!-- Left Side: Image -->
+    <div class="login-left">
+      <img src="/assets/images/background.webp" alt="AgroLink Image" class="login-image">
+      <div class="image-title">
+        <h1>WiZone</h1>
+      </div>
+    </div>
+    
+    <!-- Right Side: Login Form -->
+    <div class="login-right">
+      <div class="login-box">
+        <h2>Login</h2>
+        <div class="form-group">
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="formData.email"
+            (ngModelChange)="validateField('email', formData.email)"
+            placeholder="Email"
+          />
+          <div *ngIf="errors.email" class="error">{{ errors.email }}</div>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="formData.password"
+            (ngModelChange)="validateField('password', formData.password)"
+            placeholder="Password"
+          />
+          <div *ngIf="errors.password" class="error">{{ errors.password }}</div>
+        </div>
+        <div *ngIf="error" class="error">{{ error }}</div>
+        <button type="submit" class="login-button" (click)="handleLogin()">
+          Login
+        </button>
+        <div class="signup-link">
+          Don't have an account? <a routerLink="/signup">Signup</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

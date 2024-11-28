@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <!-- Navigation Bar -->
+  <app-adminnav *ngIf="userRole === 'Admin'"></app-adminnav>
+  <app-usernav *ngIf="userRole === 'User'"></app-usernav>
+
+  <!-- Cover Section -->
+  <div class="coverimage">
+    <div class="title">
+      <h1>WiZone</h1>
+      <p>Your gateway to seamless connectivity</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Welcome to WiZone</h2>
+    <p>
+      Stay connected with the best WiFi plans tailored for your needs. WiZone offers a wide range of schemes, from high-speed internet and unlimited data to region-specific plans designed for affordability and reliability.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- Contact Section -->
+  <div class="contact">
+    <h2>Contact Us</h2>
+    <p>📞 Phone: 123-456-7890</p>
+    <p>📧 Email: support@wifiselector.com</p>
+  </div>
+</div>

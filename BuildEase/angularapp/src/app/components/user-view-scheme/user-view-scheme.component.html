@@ -1,0 +1,67 @@
+<app-usernav></app-usernav>
+<div>
+  <div id="schemeHomeBody">
+    <h1>Available WiFi Schemes</h1>
+    <hr />
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Scheme Name, Description, or Region..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Schemes Table -->
+    <table class="scheme-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Scheme Name</th>
+          <th>Description</th>
+          <th>Region</th>
+          <th>Speed</th>
+          <th>Data Limit</th>
+          <th>Fee</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredSchemes.length && availableSchemes.length; else noRecords">
+        <tr *ngFor="let scheme of filteredSchemes; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ scheme.schemeName }}</td>
+          <td>{{ scheme.description }}</td>
+          <td>{{ scheme.region }}</td>
+          <td>{{ scheme.speed }}</td>
+          <td>{{ scheme.dataLimit }}</td>
+          <td>₹{{ scheme.fee }}</td>
+          <td>{{ scheme.availabilityStatus }}</td>
+          <td>
+            <button
+                id="applyButton"
+                *ngIf="!isSchemeApplied(scheme)"
+                (click)="handleApplyClick(scheme)"
+                [disabled]="scheme.availabilityStatus !== 'Available'"
+                [ngClass]="{ 'grey-button': scheme.availabilityStatus !== 'Available' }"
+                >
+                Apply
+                </button>
+                <button id="appliedButton" *ngIf="isSchemeApplied(scheme)">Applied</button>
+
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colspan="9" class="no-records-cell">Oops! No records found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>

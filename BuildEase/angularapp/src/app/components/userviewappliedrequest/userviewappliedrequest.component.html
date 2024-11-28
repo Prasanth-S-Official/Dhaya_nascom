@@ -1,0 +1,75 @@
+<app-usernav></app-usernav>
+<div class="card-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
+  <h1>Applied WiFi Scheme Requests</h1>
+  <hr>
+
+  <!-- Search Box -->
+  <input
+    id="searchBox"
+    type="text"
+    placeholder="Search by Scheme Name..."
+    [(ngModel)]="searchValue"
+    (input)="filterRequests()"
+  />
+
+  <!-- No Data Found Message -->
+  <div *ngIf="filteredRequests.length === 0" class="no-data-message">
+    <p>No Data Found</p>
+  </div>
+
+  <!-- Card View for WiFi Scheme Requests -->
+  <div class="card-row" *ngIf="filteredRequests.length > 0">
+    <div class="card" *ngFor="let request of filteredRequests">
+      <h3>{{ request.wifiScheme.schemeName }}</h3>
+      <p><strong>Region:</strong> {{ request.wifiScheme.region }}</p>
+      <p><strong>Speed:</strong> {{ request.wifiScheme.speed }}</p>
+      <p><strong>Data Limit:</strong> {{ request.wifiScheme.dataLimit }}</p>
+      <p><strong>Fee:</strong> ₹{{ request.wifiScheme.fee }}</p>
+      <p><strong>Status:</strong> {{ request.status }}</p>
+
+      <div class="action-buttons">
+        <button (click)="showRequestDetails(request)">Show More</button>
+        <button
+          id="redButton"
+          [disabled]="request.status !== 'Pending'"
+          (click)="handleDeleteClick(request)"
+        >
+          Delete
+        </button>
+        <button
+          class="review-button"
+          (click)="navigateToFeedback(request.wifiScheme.wifiSchemeId)"
+        >
+          Write a Review
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete this request?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Request Details Modal -->
+<div *ngIf="showDetailsModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeDetailsModal()">X</button>
+    <h2>Request Details</h2>
+    <p><strong>Scheme Name:</strong> {{ selectedRequest?.wifiScheme?.schemeName }}</p>
+    <p><strong>Region:</strong> {{ selectedRequest?.wifiScheme?.region }}</p>
+    <p><strong>Speed:</strong> {{ selectedRequest?.wifiScheme?.speed }}</p>
+    <p><strong>Data Limit:</strong> {{ selectedRequest?.wifiScheme?.dataLimit }}</p>
+    <p><strong>Fee:</strong> ₹{{ selectedRequest?.wifiScheme?.fee }}</p>
+    <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate }}</p>
+    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
+    <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
+    <p *ngIf="selectedRequest?.proof">
+      <strong>Proof:</strong>
+      <img [src]="'data:image/jpeg;base64,' + selectedRequest.proof" alt="Proof Document" class="proof-image" />
+    </p>
+  </div>
+</div>

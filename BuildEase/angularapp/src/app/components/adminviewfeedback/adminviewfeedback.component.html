@@ -1,0 +1,70 @@
+<app-adminnav></app-adminnav>
+<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showSchemePopup }">
+  <div class="main-head">
+    <h1>Feedback Recived</h1>
+  </div>
+  <hr>
+
+  <!-- Filter and Search Section -->
+  <div class="filter-section">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterFeedbacks()">
+      <option value="">All Categories</option>
+      <option *ngFor="let category of uniqueCategories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+
+  <div class="table-responsive">
+    <ng-container *ngIf="filteredFeedbacks.length > 0; else noRecordsFound">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="column-review-id">S.No</th>
+            <th class="column-user-id">User Name</th>
+            <th class="column-subject">Feedback</th>
+            <th class="column-date">Posted Date</th>
+            <th class="column-action">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ feedback.user.username }}</td>
+            <td>{{ feedback.feedbackText }}</td>
+            <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
+              <button class="button" (click)="showSchemeDetails(feedback.wifiScheme)">View Scheme Info</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #noRecordsFound>
+      <p class="records">No data found</p>
+    </ng-template>
+  </div>
+</div>
+
+<!-- User Profile Popup -->
+<div *ngIf="showProfilePopup" class="profile-popup">
+  <p><strong>User Details:</strong></p>
+  <p>Email: {{ selectedUser?.email }}</p>
+  <p>Username: {{ selectedUser?.username }}</p>
+  <p>Mobile Number: {{ selectedUser?.mobileNumber }}</p>
+  <button (click)="closeProfilePopup()">Close</button>
+</div>
+
+<!-- Scheme Info Popup -->
+<div *ngIf="showSchemePopup" class="scheme-popup">
+  <p><strong>Scheme Details:</strong></p>
+  <p>Scheme Name: {{ selectedScheme?.schemeName }}</p>
+  <p>Region: {{ selectedScheme?.region }}</p>
+  <p>Speed: {{ selectedScheme?.speed }}</p>
+  <p>Data Limit: {{ selectedScheme?.dataLimit }}</p>
+  <p>Fee: ₹{{ selectedScheme?.fee }}</p>
+  <p>Description: {{ selectedScheme?.description }}</p>
+  <p>Availability Status: {{ selectedScheme?.availabilityStatus }}</p>
+  <button (click)="closeSchemePopup()">Close</button>
+</div>
