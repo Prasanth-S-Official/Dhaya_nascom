@@ -17,6 +17,7 @@ import { AdminViewSchemeComponent } from './components/admin-view-scheme/admin-v
 import { UserViewSchemeComponent } from './components/user-view-scheme/user-view-scheme.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
+import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -28,9 +29,9 @@ const routes: Routes = [
 
 
   { path: 'admin/add/material', component: AdminMaterialComponent, canActivate: [AuthGuard] },
-  { path: 'admin/edit/scheme/:id', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
+  { path: 'admin/edit/material/:id', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/schemes', component: AdminViewSchemeComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/materials', component: AdminViewMaterialComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Admin Routes

@@ -22,6 +22,7 @@ import { AdminViewSchemeComponent } from './components/admin-view-scheme/admin-v
 import { UserViewSchemeComponent } from './components/user-view-scheme/user-view-scheme.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
+import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminMaterialComponent } from './components/admin-material/admin-materi
     UserViewSchemeComponent,
     DashboardComponent,
     AdminMaterialComponent,
+    AdminViewMaterialComponent,
   
 
   ],
