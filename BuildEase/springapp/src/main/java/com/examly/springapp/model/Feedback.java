@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import main.java.com.examly.springapp.model.Material;
 
 @Entity
 public class Feedback {
@@ -23,15 +24,14 @@ public class Feedback {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "wifiSchemeId", nullable = true)
-    private WiFiScheme wifiScheme; // Reference to WiFiScheme, can be nullable
+    @JoinColumn(name = "materialId", nullable = true)
+    private Material material; 
 
     private String category; // Category of feedback, e.g., "Service", "Pricing", etc.
 
     public Feedback() {
     }
 
-    // Getters and Setters
     public Long getFeedbackId() {
         return feedbackId;
     }
@@ -64,12 +64,12 @@ public class Feedback {
         this.user = user;
     }
 
-    public WiFiScheme getWifiScheme() {
-        return wifiScheme;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setWifiScheme(WiFiScheme wifiScheme) {
-        this.wifiScheme = wifiScheme;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public String getCategory() {
@@ -79,4 +79,7 @@ public class Feedback {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    // Getters and Setters
+   
 }
