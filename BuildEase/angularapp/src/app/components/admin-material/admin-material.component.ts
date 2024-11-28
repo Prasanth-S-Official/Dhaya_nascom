@@ -42,6 +42,7 @@ export class AdminMaterialComponent implements OnInit {
   fetchMaterial(id: number): void {
     this.materialService.getMaterialById(id).subscribe(
       (response) => {
+        console.log("fetchMaterial",response);
         this.materialForm.patchValue(response);
       },
       () => {

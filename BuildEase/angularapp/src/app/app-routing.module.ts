@@ -29,7 +29,7 @@ const routes: Routes = [
 
 
   { path: 'admin/add/material', component: AdminMaterialComponent, canActivate: [AuthGuard] },
-  { path: 'admin/edit/material/:id', component: AdminWifiSchemeComponent, canActivate: [AuthGuard] },
+  { path: 'admin/edit/material/:id', component: AdminMaterialComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/materials', component: AdminViewMaterialComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },

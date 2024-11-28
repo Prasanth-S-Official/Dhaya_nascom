@@ -79,7 +79,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'In Stock','Cement','level 2 wash','MSand',3500,'kg');
+INSERT INTO `material` VALUES (1,'In Stock','Tiles','level 2 wash','MSand',3500,'kg');
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-28 16:01:44
+-- Dump completed on 2024-11-28 16:04:22
