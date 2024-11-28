@@ -65,6 +65,7 @@ export class AdminMaterialComponent implements OnInit {
           () => this.showErrorPopup('Error updating material')
         );
       } else {
+        console.log("AddMaterial",material);
         this.materialService.addMaterial(material).subscribe(
           () => this.showSuccessPopup(),
           () => this.showErrorPopup('Error adding material')

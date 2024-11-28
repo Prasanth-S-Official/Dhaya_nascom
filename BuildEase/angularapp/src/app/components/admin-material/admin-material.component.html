@@ -22,12 +22,25 @@
     </div>
 
     <div>
-      <label for="category">Category<span class="required">*</span></label>
-      <input id="category" type="text" formControlName="category" />
-      <div *ngIf="materialForm.controls['category'].touched && materialForm.controls['category'].hasError('required')" class="error">
-        *Category is required
+        <label for="category">Category<span class="required">*</span></label>
+        <select id="category" formControlName="category">
+          <option value="" disabled>Select Category</option>
+          <option value="Cement">Cement</option>
+          <option value="Metal">Metal</option>
+          <option value="Wood">Wood</option>
+          <option value="Bricks">Bricks</option>
+          <option value="Tiles">Tiles</option>
+          <option value="Paint">Paint</option>
+          <option value="Plumbing">Plumbing</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Glass">Glass</option>
+          <option value="Roofing">Roofing</option>
+        </select>
+        <div *ngIf="materialForm.controls['category'].touched && materialForm.controls['category'].hasError('required')" class="error">
+          *Category is required
+        </div>
       </div>
-    </div>
+      
 
     <div>
       <label for="pricePerUnit">Price Per Unit<span class="required">*</span></label>
@@ -39,7 +52,12 @@
 
     <div>
       <label for="unitType">Unit Type<span class="required">*</span></label>
-      <input id="unitType" type="text" formControlName="unitType" />
+      <select id="unitType" formControlName="unitType">
+        <option value="" disabled>Select Unit Type</option>
+        <option value="kg">Kilogram (kg)</option>
+        <option value="ton">Ton</option>
+        <option value="piece">Piece</option>
+      </select>
       <div *ngIf="materialForm.controls['unitType'].touched && materialForm.controls['unitType'].hasError('required')" class="error">
         *Unit Type is required
       </div>
