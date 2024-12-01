@@ -24,7 +24,7 @@ body {
   }
   
   /* Main Container */
-  #schemeHomeBody {
+  #materialHomeBody {
     margin: 20px auto;
     width: 90%;
     max-width: 1200px; /* Max width for large screens */
@@ -59,20 +59,20 @@ body {
   }
   
   /* Training Table */
-  .scheme-table {
+  .material-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
   }
   
-  .scheme-table th,
-  .scheme-table td {
+  .material-table th,
+  .material-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
   }
   
-  .scheme-table th {
+  .material-table th {
     background-color: #3276a6;
     color: white;
   }

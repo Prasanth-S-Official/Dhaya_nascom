@@ -3,60 +3,59 @@
   <div class="button-container">
     <button (click)="navigateBack()">Back</button>
   </div>
-  <h2>WiFi Scheme Request Form</h2>
+  <h2>Material Request Form</h2>
 
   <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
     <!-- Address Fields -->
     <div>
-      <label for="streetName">Street Name<span class="required">*</span></label>
-      <input id="streetName" type="text" formControlName="streetName" />
-      <div *ngIf="requestForm.controls['streetName']?.touched && requestForm.controls['streetName'].hasError('required')" class="error">
-        *Street Name is required
+      <label for="deliveryAddress">Delivery Address<span class="required">*</span></label>
+      <textarea id="deliveryAddress" formControlName="deliveryAddress"></textarea>
+      <div *ngIf="requestForm.controls['deliveryAddress']?.touched && requestForm.controls['deliveryAddress'].hasError('required')" class="error">
+        *Delivery Address is required
       </div>
     </div>
     <div>
-      <label for="landmark">Landmark<span class="required">*</span></label>
-      <input id="landmark" type="text" formControlName="landmark" />
-      <div *ngIf="requestForm.controls['landmark']?.touched && requestForm.controls['landmark'].hasError('required')" class="error">
-        *Landmark is required
-      </div>
-    </div>
-    <div>
-      <label for="city">City<span class="required">*</span></label>
-      <input id="city" type="text" formControlName="city" />
-      <div *ngIf="requestForm.controls['city']?.touched && requestForm.controls['city'].hasError('required')" class="error">
-        *City is required
-      </div>
-    </div>
-    <div>
-      <label for="state">State<span class="required">*</span></label>
-      <input id="state" type="text" formControlName="state" />
-      <div *ngIf="requestForm.controls['state']?.touched && requestForm.controls['state'].hasError('required')" class="error">
-        *State is required
-      </div>
-    </div>
-    <div>
-      <label for="zipCode">ZIP Code<span class="required">*</span></label>
-      <input id="zipCode" type="text" formControlName="zipCode" />
-      <div *ngIf="requestForm.controls['zipCode']?.touched && requestForm.controls['zipCode'].hasError('required')" class="error">
-        *ZIP Code is required
+      <label for="contactNumber">Contact Number<span class="required">*</span></label>
+      <input id="contactNumber" type="text" formControlName="contactNumber" />
+      <div *ngIf="requestForm.controls['contactNumber']?.touched && requestForm.controls['contactNumber'].hasError('required')" class="error">
+        *Contact Number is required
       </div>
     </div>
 
-    <!-- Setup Preferences -->
+    <!-- Material Details -->
     <div>
-      <label for="preferredSetupDate">Preferred Setup Date<span class="required">*</span></label>
-      <input 
-        id="preferredSetupDate" 
-        type="date" 
-        formControlName="preferredSetupDate" 
-        [min]="minDate" 
-      />
-      <div *ngIf="requestForm.controls['preferredSetupDate']?.touched && requestForm.controls['preferredSetupDate'].hasError('required')" class="error">
-        *Preferred Setup Date is required
+      <label for="quantity">Quantity<span class="required">*</span></label>
+      <input id="quantity" type="number" formControlName="quantity" />
+      <div *ngIf="requestForm.controls['quantity']?.touched && requestForm.controls['quantity'].hasError('required')" class="error">
+        *Quantity is required
       </div>
     </div>
-    
+    <div>
+      <label for="urgencyLevel">Urgency Level<span class="required">*</span></label>
+      <select id="urgencyLevel" formControlName="urgencyLevel">
+        <option value="">Select Urgency</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <div *ngIf="requestForm.controls['urgencyLevel']?.touched && requestForm.controls['urgencyLevel'].hasError('required')" class="error">
+        *Urgency Level is required
+      </div>
+    </div>
+
+    <!-- Preferred Delivery -->
+    <div>
+      <label for="preferredDeliveryDate">Preferred Delivery Date<span class="required">*</span></label>
+      <input
+        id="preferredDeliveryDate"
+        type="date"
+        formControlName="preferredDeliveryDate"
+        [min]="minDate"
+      />
+      <div *ngIf="requestForm.controls['preferredDeliveryDate']?.touched && requestForm.controls['preferredDeliveryDate'].hasError('required')" class="error">
+        *Preferred Delivery Date is required
+      </div>
+    </div>
     <div>
       <label for="timeSlot">Preferred Time Slot<span class="required">*</span></label>
       <select id="timeSlot" formControlName="timeSlot">
@@ -66,16 +65,7 @@
         <option value="Evening">Evening</option>
       </select>
       <div *ngIf="requestForm.controls['timeSlot']?.touched && requestForm.controls['timeSlot'].hasError('required')" class="error">
-        *Time slot is required
-      </div>
-    </div>
-
-    <!-- Proof Upload -->
-    <div>
-      <label for="proof">Upload Proof<span class="required">*</span></label>
-      <input id="proof" type="file" (change)="handleFileChange($event)" />
-      <div *ngIf="imageError" class="error">
-        *{{ imageError }}
+        *Time Slot is required
       </div>
     </div>
 

@@ -108,7 +108,7 @@ CREATE TABLE `material_request` (
   KEY `FKh35glrhuw1rlutn67iulomnkg` (`user_id`),
   CONSTRAINT `FK8ma5fsipaor0ksgqkwtghtnyr` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`),
   CONSTRAINT `FKh35glrhuw1rlutn67iulomnkg` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +117,7 @@ CREATE TABLE `material_request` (
 
 LOCK TABLES `material_request` WRITE;
 /*!40000 ALTER TABLE `material_request` DISABLE KEYS */;
+INSERT INTO `material_request` VALUES (1,'demo comments','07888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Pending','Morning','Low',1,2);
 /*!40000 ALTER TABLE `material_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-01 14:22:21
+-- Dump completed on 2024-12-01 14:37:21
