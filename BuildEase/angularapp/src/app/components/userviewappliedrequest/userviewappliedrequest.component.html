@@ -1,13 +1,13 @@
 <app-usernav></app-usernav>
 <div class="card-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
-  <h1>Applied WiFi Scheme Requests</h1>
+  <h1>Applied Material Requests</h1>
   <hr>
 
   <!-- Search Box -->
   <input
     id="searchBox"
     type="text"
-    placeholder="Search by Scheme Name..."
+    placeholder="Search by Material Name..."
     [(ngModel)]="searchValue"
     (input)="filterRequests()"
   />
@@ -17,14 +17,13 @@
     <p>No Data Found</p>
   </div>
 
-  <!-- Card View for WiFi Scheme Requests -->
+  <!-- Card View for Material Requests -->
   <div class="card-row" *ngIf="filteredRequests.length > 0">
     <div class="card" *ngFor="let request of filteredRequests">
-      <h3>{{ request.wifiScheme.schemeName }}</h3>
-      <p><strong>Region:</strong> {{ request.wifiScheme.region }}</p>
-      <p><strong>Speed:</strong> {{ request.wifiScheme.speed }}</p>
-      <p><strong>Data Limit:</strong> {{ request.wifiScheme.dataLimit }}</p>
-      <p><strong>Fee:</strong> ₹{{ request.wifiScheme.fee }}</p>
+      <h3>{{ request.material.materialName }}</h3>
+      <p><strong>Category:</strong> {{ request.material.category }}</p>
+      <p><strong>Price Per Unit:</strong> ₹{{ request.material.pricePerUnit }}</p>
+      <p><strong>Unit Type:</strong> {{ request.material.unitType }}</p>
       <p><strong>Status:</strong> {{ request.status }}</p>
 
       <div class="action-buttons">
@@ -38,7 +37,7 @@
         </button>
         <button
           class="review-button"
-          (click)="navigateToFeedback(request.wifiScheme.wifiSchemeId)"
+          (click)="navigateToFeedback(request.material.materialId)"
         >
           Write a Review
         </button>
@@ -59,17 +58,15 @@
   <div class="details-modal-content">
     <button class="close-button" (click)="closeDetailsModal()">X</button>
     <h2>Request Details</h2>
-    <p><strong>Scheme Name:</strong> {{ selectedRequest?.wifiScheme?.schemeName }}</p>
-    <p><strong>Region:</strong> {{ selectedRequest?.wifiScheme?.region }}</p>
-    <p><strong>Speed:</strong> {{ selectedRequest?.wifiScheme?.speed }}</p>
-    <p><strong>Data Limit:</strong> {{ selectedRequest?.wifiScheme?.dataLimit }}</p>
-    <p><strong>Fee:</strong> ₹{{ selectedRequest?.wifiScheme?.fee }}</p>
+    <p><strong>Material Name:</strong> {{ selectedRequest?.material?.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedRequest?.material?.category }}</p>
+    <p><strong>Price Per Unit:</strong> ₹{{ selectedRequest?.material?.pricePerUnit }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedRequest?.material?.unitType }}</p>
     <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate }}</p>
+    <p><strong>Quantity:</strong> {{ selectedRequest?.quantity }}</p>
+    <p><strong>Urgency Level:</strong> {{ selectedRequest?.urgencyLevel }}</p>
     <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
     <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
-    <p *ngIf="selectedRequest?.proof">
-      <strong>Proof:</strong>
-      <img [src]="'data:image/jpeg;base64,' + selectedRequest.proof" alt="Proof Document" class="proof-image" />
-    </p>
+    <p><strong>Delivery Address:</strong> {{ selectedRequest?.deliveryAddress }}</p>
   </div>
 </div>

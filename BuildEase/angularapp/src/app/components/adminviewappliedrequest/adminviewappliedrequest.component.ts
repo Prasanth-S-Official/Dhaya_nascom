@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
 import { Router } from '@angular/router';
+import { MaterialRequestService } from 'src/app/services/material-request.service';
 
 @Component({
   selector: 'app-adminviewappliedrequest',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminviewappliedrequest.component.css']
 })
 export class AdminviewappliedrequestComponent implements OnInit {
-  wifiSchemeRequests: any[] = [];
+  materialRequests: any[] = [];
   filteredRequests: any[] = [];
   searchValue = '';
   statusFilter = '-1'; // All statuses by default
@@ -16,43 +16,44 @@ export class AdminviewappliedrequestComponent implements OnInit {
   selectedRequest: any = null;
 
   constructor(
-    private wifiSchemeRequestService: WifiSchemeRequestService,
+    private materialRequestService: MaterialRequestService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.fetchWiFiSchemeRequests();
+    this.fetchMaterialRequests();
   }
 
-  fetchWiFiSchemeRequests(): void {
-    this.wifiSchemeRequestService.getAllWiFiSchemeRequests().subscribe(
+  fetchMaterialRequests(): void {
+    this.materialRequestService.getAllMaterialRequests().subscribe(
       (response) => {
-        console.log("Request",response);
-        this.wifiSchemeRequests = response;
-        this.filteredRequests = [...this.wifiSchemeRequests];
+        console.log('Requests:', response);
+        this.materialRequests = response;
+        this.filteredRequests = [...this.materialRequests];
       },
       (error) => {
-        console.error('Error fetching WiFi scheme requests:', error);
+        console.error('Error fetching material requests:', error);
       }
     );
   }
 
-  handleSearchChange(event: any): void {
+  handleSearchChange(): void {
     const searchValueLower = this.searchValue.toLowerCase();
-    this.filteredRequests = this.wifiSchemeRequests.filter((request) =>
-      request.wifiScheme.schemeName.toLowerCase().includes(searchValueLower)
+    this.filteredRequests = this.materialRequests.filter((request) =>
+      request.material.materialName.toLowerCase().includes(searchValueLower)
     );
   }
 
-  handleFilterChange(event: any): void {
-    this.filteredRequests = this.wifiSchemeRequests.filter((request) => {
+  handleFilterChange(): void {
+    this.filteredRequests = this.materialRequests.filter((request) => {
       if (this.statusFilter === '-1') {
-        return true;
+        return true; // Show all statuses
       } else {
         return request.status === (this.statusFilter === '0' ? 'Pending' : this.statusFilter === '1' ? 'Approved' : 'Rejected');
       }
     });
   }
+  
 
   handleApprove(request: any): void {
     request.status = 'Approved';
@@ -65,9 +66,9 @@ export class AdminviewappliedrequestComponent implements OnInit {
   }
 
   updateRequestStatus(request: any): void {
-    this.wifiSchemeRequestService.updateWiFiSchemeRequest(request.wifiSchemeRequestId, request).subscribe(
+    this.materialRequestService.updateMaterialRequest(request.materialRequestId, request).subscribe(
       () => {
-        this.fetchWiFiSchemeRequests();
+        this.fetchMaterialRequests();
       },
       (error) => {
         console.error('Error updating request status:', error);

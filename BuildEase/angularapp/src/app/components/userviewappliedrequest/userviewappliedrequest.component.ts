@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WifiSchemeRequestService } from 'src/app/services/wifi-scheme-request.service';
+import { MaterialRequestService } from 'src/app/services/material-request.service';
 
 @Component({
   selector: 'app-userviewappliedrequest',
@@ -16,7 +16,7 @@ export class UserviewappliedrequestComponent implements OnInit {
   filteredRequests: any[] = [];
   searchValue = '';
 
-  constructor(private wifiSchemeRequestService: WifiSchemeRequestService, private router: Router) {}
+  constructor(private materialRequestService: MaterialRequestService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -24,9 +24,9 @@ export class UserviewappliedrequestComponent implements OnInit {
 
   fetchData(): void {
     const userId = Number(localStorage.getItem('userId'));
-    this.wifiSchemeRequestService.getWiFiSchemeRequestsByUserId(userId!).subscribe(
+    this.materialRequestService.getMaterialRequestsByUserId(userId).subscribe(
       (response: any) => {
-        console.log("userapplied",response);
+        console.log('User Applied Requests:', response);
         this.appliedRequests = response;
         this.filteredRequests = response;
       },
@@ -39,7 +39,7 @@ export class UserviewappliedrequestComponent implements OnInit {
   filterRequests(): void {
     const searchLower = this.searchValue.toLowerCase();
     this.filteredRequests = this.appliedRequests.filter(request =>
-      request.wifiScheme.schemeName.toLowerCase().includes(searchLower)
+      request.material.materialName.toLowerCase().includes(searchLower)
     );
   }
 
@@ -48,25 +48,15 @@ export class UserviewappliedrequestComponent implements OnInit {
     this.showDeletePopup = true;
   }
 
-  // handleConfirmDelete(): void {
-  //   this.wifiSchemeRequestService.deleteWiFiSchemeRequest(this.requestToDelete.wifiSchemeRequestId).subscribe(
-  //     () => {
-  //       this.fetchData();
-  //       this.closeDeletePopup();
-  //     },
-  //     error => console.error('Error deleting request:', error)
-  //   );
-  // }
-
   handleConfirmDelete(): void {
-    this.wifiSchemeRequestService.deleteWiFiSchemeRequest(this.requestToDelete.wifiSchemeRequestId).subscribe(
+    this.materialRequestService.deleteMaterialRequest(this.requestToDelete.materialRequestId).subscribe(
       () => {
-        // Remove the deleted request from the array
+        // Remove the deleted request from the arrays
         this.appliedRequests = this.appliedRequests.filter(
-          (req) => req.wifiSchemeRequestId !== this.requestToDelete.wifiSchemeRequestId
+          (req) => req.materialRequestId !== this.requestToDelete.materialRequestId
         );
-        this.filteredRequests = [...this.appliedRequests]; // Update the filteredRequests array
-  
+        this.filteredRequests = [...this.appliedRequests]; // Update the filtered list
+
         this.closeDeletePopup(); // Close the popup
       },
       (error) => {
@@ -74,7 +64,6 @@ export class UserviewappliedrequestComponent implements OnInit {
       }
     );
   }
-  
 
   closeDeletePopup(): void {
     this.requestToDelete = null;
@@ -91,7 +80,7 @@ export class UserviewappliedrequestComponent implements OnInit {
     this.showDetailsModal = false;
   }
 
-  navigateToFeedback(wifiSchemeId: number): void {
-    this.router.navigate(['/user/add/feedback'], { queryParams: { wifiSchemeId } });
+  navigateToFeedback(materialId: number): void {
+    this.router.navigate(['/user/add/feedback'], { queryParams: { materialId } });
   }
 }
