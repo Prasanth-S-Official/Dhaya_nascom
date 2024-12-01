@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { MaterialService } from 'src/app/services/material.service';
-import { MaterialRequestService } from 'src/app/services/material-request.service';
 import { Material } from 'src/app/models/material.model';
+import { MaterialRequestService } from 'src/app/services/material-request.service';
 
 @Component({
   selector: 'app-userviewmaterial',

@@ -18,6 +18,7 @@ import { UserViewSchemeComponent } from './components/user-view-scheme/user-view
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
 import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
+import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -39,7 +40,7 @@ const routes: Routes = [
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // User Routes
-  { path: 'user/view/schemes', component: UserViewSchemeComponent, canActivate: [AuthGuard] },
+  { path: 'user/view/materials', component: UserviewmaterialComponent, canActivate: [AuthGuard] },
   { path: 'user/add/request', component: UseraddrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/view/applied-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },
