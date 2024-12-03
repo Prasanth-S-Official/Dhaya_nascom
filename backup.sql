@@ -109,7 +109,7 @@ CREATE TABLE `material_request` (
   KEY `FKh35glrhuw1rlutn67iulomnkg` (`user_id`),
   CONSTRAINT `FK8ma5fsipaor0ksgqkwtghtnyr` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`),
   CONSTRAINT `FKh35glrhuw1rlutn67iulomnkg` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `material_request` (
 
 LOCK TABLES `material_request` WRITE;
 /*!40000 ALTER TABLE `material_request` DISABLE KEYS */;
-INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2),(4,'demo comments','07888499919','2/10-1 Pollachi','2024-12-04',3,'2024-12-03','Approved','Morning','High',2,3);
+INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2),(4,'demo comments','07888499919','2/10-1 Pollachi','2024-12-04',3,'2024-12-03','Approved','Morning','High',2,3),(5,'demo comments','7888495919','1/10-1 demo address','2024-12-04',3,'2024-12-03','Pending','Afternoon','High',3,2);
 /*!40000 ALTER TABLE `material_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-03 17:52:33
+-- Dump completed on 2024-12-03 18:07:33
