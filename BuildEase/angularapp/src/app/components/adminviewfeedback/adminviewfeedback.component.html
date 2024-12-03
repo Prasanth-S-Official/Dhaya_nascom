@@ -1,7 +1,7 @@
 <app-adminnav></app-adminnav>
-<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showSchemePopup }">
+<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showMaterialPopup }">
   <div class="main-head">
-    <h1>Feedback Recived</h1>
+    <h1>Feedback Received</h1>
   </div>
   <hr>
 
@@ -34,7 +34,7 @@
             <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
             <td>
               <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
-              <button class="button" (click)="showSchemeDetails(feedback.wifiScheme)">View Scheme Info</button>
+              <button class="button" (click)="showMaterialDetails(feedback.material)">View Material Info</button>
             </td>
           </tr>
         </tbody>
@@ -56,15 +56,16 @@
   <button (click)="closeProfilePopup()">Close</button>
 </div>
 
-<!-- Scheme Info Popup -->
-<div *ngIf="showSchemePopup" class="scheme-popup">
-  <p><strong>Scheme Details:</strong></p>
-  <p>Scheme Name: {{ selectedScheme?.schemeName }}</p>
-  <p>Region: {{ selectedScheme?.region }}</p>
-  <p>Speed: {{ selectedScheme?.speed }}</p>
-  <p>Data Limit: {{ selectedScheme?.dataLimit }}</p>
-  <p>Fee: ₹{{ selectedScheme?.fee }}</p>
-  <p>Description: {{ selectedScheme?.description }}</p>
-  <p>Availability Status: {{ selectedScheme?.availabilityStatus }}</p>
-  <button (click)="closeSchemePopup()">Close</button>
+<!-- Material Info Popup -->
+<div *ngIf="showMaterialPopup" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeMaterialPopup()">&#x2715;</button>
+    <h2>Material Details</h2>
+    <p><strong>Material Name:</strong> {{ selectedMaterial?.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedMaterial?.category }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedMaterial?.unitType }}</p>
+    <p><strong>Price Per Unit:</strong> ₹{{ selectedMaterial?.pricePerUnit }}</p>
+    <p><strong>Availability Status:</strong> {{ selectedMaterial?.availabilityStatus }}</p>
+    <p><strong>Description:</strong> {{ selectedMaterial?.description }}</p>
+  </div>
 </div>

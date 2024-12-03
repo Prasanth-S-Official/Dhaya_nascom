@@ -12,9 +12,9 @@ export class AdminviewfeedbackComponent implements OnInit {
   uniqueCategories = [];
   selectedCategory = '';
   showProfilePopup = false;
-  showSchemePopup = false;
+  showMaterialPopup = false;
   selectedUser = null;
-  selectedScheme = null;
+  selectedMaterial = null;
 
   constructor(private feedbackService: FeedbackService) {}
 
@@ -53,12 +53,12 @@ export class AdminviewfeedbackComponent implements OnInit {
     this.showProfilePopup = false;
   }
 
-  showSchemeDetails(scheme): void {
-    this.selectedScheme = scheme;
-    this.showSchemePopup = true;
+  showMaterialDetails(material): void {
+    this.selectedMaterial = material;
+    this.showMaterialPopup = true;
   }
 
-  closeSchemePopup(): void {
-    this.showSchemePopup = false;
+  closeMaterialPopup(): void {
+    this.showMaterialPopup = false;
   }
 }
