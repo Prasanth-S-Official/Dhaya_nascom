@@ -220,3 +220,7 @@ hr {
 .close-button:hover {
   color: #c00;
 }
+
+.blur {
+  filter: blur(3px);
+}
