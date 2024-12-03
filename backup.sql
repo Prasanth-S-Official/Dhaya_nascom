@@ -71,7 +71,7 @@ CREATE TABLE `material` (
   `price_per_unit` double DEFAULT NULL,
   `unit_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`material_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'Out of Stock','Tiles','level 2 wash','MSand',3500,'kg'),(2,'In Stock','Electrical','demo description','demo name',6000,'piece');
+INSERT INTO `material` VALUES (1,'Out of Stock','Tiles','level 2 wash','MSand',3500,'kg'),(2,'In Stock','Electrical','demo description','demo name',6000,'piece'),(3,'In Stock','Tiles','demo description','demo material name',65,'piece');
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-03 17:07:31
+-- Dump completed on 2024-12-03 17:22:31
