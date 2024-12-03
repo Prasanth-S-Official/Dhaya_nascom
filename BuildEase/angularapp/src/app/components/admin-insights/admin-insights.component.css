@@ -128,4 +128,24 @@
   .close-button:hover {
     color: #c00;
   }
+
+  .search-section {
+    margin-bottom: 15px;
+    text-align: Left;
+}
+
+.search-input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    width: 250px;
+}
+
+.search-input:focus {
+    border-color: #3c91e6;
+    box-shadow: 0 0 5px rgba(60, 145, 230, 0.5);
+}
+
   

@@ -8,8 +8,10 @@ import { MaterialRequestService } from 'src/app/services/material-request.servic
 })
 export class AdminInsightsComponent implements OnInit {
   allUserInsights: any[] = [];
+  filteredUserInsights: any[] = [];
   selectedUserOrders: any[] = [];
   showOrdersPopup: boolean = false;
+  searchQuery: string = '';
 
   constructor(private materialRequestService: MaterialRequestService) {}
 
@@ -21,11 +23,19 @@ export class AdminInsightsComponent implements OnInit {
     this.materialRequestService.getAdminInsights().subscribe(
       (data: any[]) => {
         this.allUserInsights = data;
+        this.filteredUserInsights = [...this.allUserInsights]; // Initialize filtered array
         console.log('Fetched User Insights:', this.allUserInsights);
       },
       (error) => {
         console.error('Error fetching insights:', error);
       }
+    );
+  }
+
+  applySearch(): void {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredUserInsights = this.allUserInsights.filter(user =>
+      user.email.toLowerCase().includes(query)
     );
   }
 
