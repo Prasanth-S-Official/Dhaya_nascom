@@ -1,301 +1,305 @@
+/* General Styling */
 #parent {
-    width: 100%;
-    font-family: Arial, sans-serif;
-    margin-bottom: 25px;
-  }
-  
-  #logoutbutton {
-    float: right;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #materialHomeBody {
-    margin-top: 20px;
-    width: 90%;
-    margin: auto;
-  }
-  
-  #materialHomeBody.blur {
-    filter: blur(2px);
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .greenButton {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin: 10px;
-  }
-  
-  #searchBox {
-    width: 50%;
-    padding: 8px;
-    border: none;
-    border-bottom: 2px solid #3276a6; /* Line-only style */
-    outline: none; /* Remove the default outline */
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-    margin-bottom: 20px;
-    background-color: transparent; /* Transparent background */
-  }
-  
-  #searchBox:focus {
-    border-color: #45a049; /* Change line color on focus */
-  }
-  
-  label {
-    font-weight: bold;
-    margin-right: 10px; /* Spacing between label and input */
-  }
-  
+  margin: 30px auto;
+  padding: 20px;
+  width: 90%;
+  font-family: 'Poppins', sans-serif;
+  /* background: linear-gradient(135deg, #f5f7fa, #e1e9f2); */
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+#materialHomeBody h1 {
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+hr {
+  border: none;
+  border-top: 3px solid #3276a6;
+  height: 10px;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+/* Search and Filter Section */
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+#searchBox {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 40%;
+  background: #fff;
+}
+
+#searchBox:focus {
+  border-color: #3276a6;
+}
+
+#categorySelect {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  background: linear-gradient(135deg, #f5f5f5, #d3d3d3);
+  transition: border-color 0.3s ease;
+}
+
+#categorySelect:hover {
+  border-color: #3c91e6;
+}
+
+#categorySelect:focus {
+  border-color: #3276a6;
+}
+
+/* Table Styling */
+.material-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.material-table th,
+.material-table td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ddd;
+}
+
+.material-table th {
+  background-color: #3c91e6;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.material-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.material-table tbody tr:hover {
+  background: rgba(60, 145, 230, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+/* No Records Found Styling */
+.no-records-cell {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+  font-style: italic;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #3c91e6, #3276a6);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #3276a6, #3c91e6);
+  transform: scale(1.1);
+}
+
+.unavailable-button {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+}
+
+.unavailable-button:hover {
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+}
+
+.available-button {
+  background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.available-button:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+}
+
+/* Delete Confirmation Popup */
+.delete-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  z-index: 1000;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 15px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-left: 5px;
+}
+
+/* Edit Button - Green */
+button.edit-button {
+  background: linear-gradient(135deg, #28a745, #218838);
+}
+
+button.edit-button:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+  transform: scale(1.1);
+}
+
+/* Delete Button - Red */
+button.delete-button {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+button.delete-button:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  transform: scale(1.1);
+}
+
+/* Toggle Availability Buttons */
+button.unavailable-button {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+}
+
+button.unavailable-button:hover {
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+  transform: scale(1.1);
+}
+
+button.available-button {
+  background: linear-gradient(135deg, #17a2b8, #138496);
+}
+
+button.available-button:hover {
+  background: linear-gradient(135deg, #138496, #17a2b8);
+  transform: scale(1.1);
+}
+
+/* Delete Confirmation Popup Buttons */
+.confirm-delete-button {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.confirm-delete-button:hover {
+  background: #c0392b;
+}
+
+.cancel-delete-button {
+  background: #bdc3c7;
+  color: #333;
+}
+
+.cancel-delete-button:hover {
+  background: #95a5a6;
+}
+
+
+.delete-popup p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.confirm-delete-button,
+.cancel-delete-button {
+  display: inline-block;
+  width: 48%;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-delete-button {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.confirm-delete-button:hover {
+  background: #c0392b;
+}
+
+.cancel-delete-button {
+  background: #bdc3c7;
+  color: #333;
+}
+
+.cancel-delete-button:hover {
+  background: #95a5a6;
+}
+
+/* Blur Effect */
+.blur {
+  filter: blur(5px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .top-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px; /* Space below the top container */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
   }
-  
-  select {
-    padding: 8px;
-    border: none;
-    border-bottom: 2px solid #3276a6; /* Line-only style */
-    outline: none; /* Remove the default outline */
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-    background-color: transparent; /* Transparent background */
-  }
-  
-  select:focus {
-    border-color: #45a049; /* Change line color on focus */
-  }
-  
-  button {
-    padding: 8px 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:first-of-type {
-    background-color: #25902a; /* Green background */
-    color: white; /* White text */
-  }
-  
-  button:first-of-type:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-  
-  button:last-of-type {
-    background-color: #cc2b1f; /* Red background */
-    color: white; /* White text */
-  }
-  
-  button:last-of-type:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-  }
-  
-  .material-table {
+
+  #searchBox,
+  #categorySelect {
     width: 100%;
-    border-collapse: collapse;
+    font-size: 14px;
   }
-  
+
   .material-table th,
   .material-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+    font-size: 14px;
+    padding: 10px;
   }
-  
-  .material-table th {
-    background-color: #3276a6;
-    color: white;
-  }
-  
-  #sortButtonsone {
-    background-color: #fff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-  }
-  
-  #sortButtonstwo {
-    background-color: #fff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 5px;
-  }
-  
-  button:first-of-type {
-    background-color: #25902a; /* Green background */
-    color: white; /* White text */
-  }
-  
-  button:first-of-type:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-  
-  #deleteButton {
-    background-color: #cc2b1f; /* Red background */
-    color: white; /* White text */
-  }
-  
-/* Green button for "Make Available" */
-.available-button {
-    background-color: #4caf50 !important; /* Green */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .available-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-  
-  /* Red button for "Make Unavailable" */
-  .unavailable-button {
-    background-color: #f44336; /* Red */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .unavailable-button:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-  }
-  
 
-  #deleteButton:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-  }
-  
-  .top-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
   .delete-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 2;
+    width: 95%;
   }
-  
-  .delete-popup p {
-    margin-bottom: 20px;
-  }
-  
-  .delete-popup button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 4px 2px;
-  }
-  
-  .delete-popup button:first-child {
-    background-color: #dc3545; /* Red background */
-    color: white; /* White text */
-  }
-  
-  .delete-popup button:first-child:hover {
-    background-color: #c82333; /* Darker red on hover */
-  }
-  
-  .delete-popup button:last-child {
-    background-color: #6c757d; /* Gray background */
-    color: white; /* White text */
-  }
-  
-  .delete-popup button:last-child:hover {
-    background-color: #5a6268; /* Darker gray on hover */
-  }
-  
-  #prevButton,
-  #nextButton {
-    background-color: #4caf50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 40px 2px;
-    cursor: pointer;
-  }
-  
-  #prevButton[disabled],
-  #nextButton[disabled] {
-    background-color: #ccc; /* Gray */
-    color: #888;
-    cursor: not-allowed;
-  }
-  
-  span {
-    margin: 0 10px;
-    font-size: 15px;
-  }
-  
-  #delete-btn{
-    background-color: #eb192e;
-  }
-  
-  hr {
-    border: none;
-    border-top: 2px solid #3276a6;
-    color: #3276a6;
-    overflow: visible;
-    text-align: center;
-    height: 8px;
-    margin-bottom: 2%;
-  }
-  
-  .error {
-    color: #ff0000; /* Red color for the text */
-    background-color: #ffe6e6; /* Light red background */
-    border: 1px solid #ff0000; /* Red border */
-    padding: 10px; /* Space between the border and the text */
-    margin-top: 10px; /* Space above the error message */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 10px;
-    font-weight: bold; /* Bold text */
-    width: fit-content; /* Width just enough for the content */
-  }
-  
-  .blur {
-  filter: blur(3px);
 }

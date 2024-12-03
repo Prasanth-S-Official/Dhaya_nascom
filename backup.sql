@@ -118,7 +118,7 @@ CREATE TABLE `material_request` (
 
 LOCK TABLES `material_request` WRITE;
 /*!40000 ALTER TABLE `material_request` DISABLE KEYS */;
-INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Approved','Morning','Low',1,2);
+INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2);
 /*!40000 ALTER TABLE `material_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-03  5:42:41
+-- Dump completed on 2024-12-03  5:57:41

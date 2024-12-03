@@ -4,7 +4,7 @@
   padding: 20px;
   width: 90%;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #e1e9f2);
+  /* background: linear-gradient(135deg, #f5f7fa, #e1e9f2); */
   border-radius: 15px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }

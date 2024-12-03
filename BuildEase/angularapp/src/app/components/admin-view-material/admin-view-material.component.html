@@ -62,14 +62,15 @@
           <td>{{ material.availabilityStatus }}</td>
           <td>{{ material.description }}</td>
           <td>
-            <button (click)="navigateToEditMaterial(material.materialId)">Edit</button>
-            <button (click)="handleDeleteClick(material.materialId)" id="deleteButton">Delete</button>
+            <button class="edit-button" (click)="navigateToEditMaterial(material.materialId)">Edit</button>
+            <button class="delete-button" (click)="handleDeleteClick(material.materialId)">Delete</button>
             <button 
               (click)="toggleAvailability(material)" 
               [innerText]="material.availabilityStatus === 'In Stock' ? 'Mark Out of Stock' : 'Mark In Stock'"
               [ngClass]="material.availabilityStatus === 'In Stock' ? 'unavailable-button' : 'available-button'">
             </button>
           </td>
+          
         </tr>
       </tbody>
     </table>
