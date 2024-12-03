@@ -38,6 +38,11 @@ export class MaterialRequestService {
     return this.http.delete<void>(`${this.apiUrl}/api/materialRequest/${requestId}`, { headers });
   }
 
+  getAdminInsights(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}/api/materialRequest/admin/insights`, { headers });
+  }
+
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('token'),
