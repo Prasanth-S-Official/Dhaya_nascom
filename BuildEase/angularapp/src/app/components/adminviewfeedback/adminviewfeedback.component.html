@@ -15,35 +15,32 @@
   </div>
 
   <div class="table-responsive">
-    <ng-container *ngIf="filteredFeedbacks.length > 0; else noRecordsFound">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="column-review-id">S.No</th>
-            <th class="column-user-id">User Name</th>
-            <th class="column-subject">Feedback</th>
-            <th class="column-date">Posted Date</th>
-            <th class="column-action">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ feedback.user.username }}</td>
-            <td>{{ feedback.feedbackText }}</td>
-            <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
-            <td>
-              <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
-              <button class="button" (click)="showMaterialDetails(feedback.material)">View Material Info</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-container>
-
-    <ng-template #noRecordsFound>
-      <p class="records">No data found</p>
-    </ng-template>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="column-review-id">S.No</th>
+          <th class="column-user-id">User Name</th>
+          <th class="column-subject">Feedback</th>
+          <th class="column-date">Posted Date</th>
+          <th class="column-action">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.user.username }}</td>
+          <td>{{ feedback.feedbackText }}</td>
+          <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
+            <button class="button" (click)="showMaterialDetails(feedback.material)">View Material Info</button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredFeedbacks.length === 0">
+          <td colspan="5" class="no-records-cell">No Data Found</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
