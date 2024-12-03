@@ -12,10 +12,6 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { AdminWifiSchemeComponent } from './components/admin-wifi-scheme/admin-wifi-scheme.component';
-import { AdminViewSchemeComponent } from './components/admin-view-scheme/admin-view-scheme.component';
-import { UserViewSchemeComponent } from './components/user-view-scheme/user-view-scheme.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
 import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
 import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';

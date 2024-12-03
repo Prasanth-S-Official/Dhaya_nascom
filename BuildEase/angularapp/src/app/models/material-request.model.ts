@@ -4,8 +4,8 @@ export interface MaterialRequest {
     materialId: number; // ID of the material being requested
     quantity: number; // Quantity requested
     urgencyLevel: string; // Urgency level (Low, Medium, High)
-    requestDate: string; // Date of the request
-    preferredDeliveryDate: string; // Preferred delivery date
+    requestDate: Date; // Date of the request
+    preferredDeliveryDate: Date; // Preferred delivery date
     timeSlot: string; // Preferred time slot (Morning, Afternoon, Evening)
     status: string; // Status (Pending, Approved, Rejected)
     deliveryAddress: string; // Delivery address
