@@ -355,3 +355,7 @@ h1 {
 .details-modal-content::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker on hover */
 }
+
+.blur {
+  filter: blur(3px);
+}
