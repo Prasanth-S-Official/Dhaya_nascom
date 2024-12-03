@@ -3,6 +3,7 @@ package com.examly.springapp.service;
 import com.examly.springapp.model.MaterialRequest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface MaterialRequestService {
@@ -12,4 +13,5 @@ public interface MaterialRequestService {
     MaterialRequest updateMaterialRequest(Long requestId, MaterialRequest request);
     boolean deleteMaterialRequest(Long requestId);
     List<MaterialRequest> getMaterialRequestsByUserId(Long userId);
+    List<Map<String, Object>> getAllUserInsights();
 }

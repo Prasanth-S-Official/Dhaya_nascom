@@ -2,19 +2,28 @@ package com.examly.springapp.service;
 
 import com.examly.springapp.exceptions.MaterialRequestException;
 import com.examly.springapp.model.MaterialRequest;
+import com.examly.springapp.model.User;
 import com.examly.springapp.repository.MaterialRequestRepo;
+import com.examly.springapp.repository.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MaterialRequestServiceImpl implements MaterialRequestService {
 
     @Autowired
     private MaterialRequestRepo materialRequestRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     @Override
     public MaterialRequest addMaterialRequest(MaterialRequest request) {
@@ -61,4 +70,31 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
         }
         return false;
     }
+
+     @Override
+    public List<Map<String, Object>> getAllUserInsights() {
+        List<User> users = userRepo.findAll();
+        List<Map<String, Object>> allUserInsights = new ArrayList<>();
+
+        for (User user : users) {
+            List<MaterialRequest> userRequests = materialRequestRepo.findMaterialRequestsByUserId(user.getUserId());
+
+            Map<String, Object> userInsights = new HashMap<>();
+            userInsights.put("userId", user.getUserId());
+            userInsights.put("username", user.getUsername());
+            userInsights.put("email", user.getEmail());
+            userInsights.put("totalRequests", userRequests.size());
+            userInsights.put("highUrgencyRequests", 
+                userRequests.stream().filter(req -> "High".equalsIgnoreCase(req.getUrgencyLevel())).count());
+            userInsights.put("pendingRequests", 
+                userRequests.stream().filter(req -> "Pending".equalsIgnoreCase(req.getStatus())).count());
+            userInsights.put("orders", userRequests); // Add all orders for the user
+            
+            allUserInsights.add(userInsights);
+        }
+
+        return allUserInsights;
+    }
+
+    
 }

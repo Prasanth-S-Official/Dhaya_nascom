@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -64,5 +65,11 @@ public class MaterialRequestController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/admin/insights")
+    public ResponseEntity<?> getAllUserInsights() {
+        List<Map<String, Object>> allUserInsights = materialRequestService.getAllUserInsights();
+        return ResponseEntity.ok(allUserInsights);
     }
 }
