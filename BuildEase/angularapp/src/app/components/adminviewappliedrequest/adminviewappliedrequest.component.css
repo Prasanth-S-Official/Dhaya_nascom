@@ -1,188 +1,214 @@
+/* General Styling */
 .page-content {
-  margin-top: 20px;
+  margin: 30px auto;
+  padding: 20px;
   width: 90%;
-  margin: auto;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #e1e9f2);
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.page-content.blur {
-  filter: blur(2px);
-}
-
-h1 {
-  text-align: center;
+.page-content h1 {
+  font-size: 28px;
   color: #333;
-}
-/* Line-only style for the search box */
-#searchBox {
-  width: 30%;
-  padding: 8px 0;
-  border: none;
-  border-bottom: 2px solid #3276a6; /* Single line bottom border */
-  outline: none;
-  font-size: 16px;
-  background-color: transparent; /* Transparent background */
-  transition: border-color 0.3s ease;
-  margin-bottom: 20px;
-}
-
-#searchBox:focus {
-  border-color: #45a049; /* Change color on focus */
-}
-
-/* Style for the filter dropdown */
-label#filter {
   font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-label#filter select {
-  margin-left: 10px;
-  padding: 8px 0;
-  border: none;
-  border-bottom: 2px solid #3276a6;
-  background-color: transparent;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-label#filter select:focus {
-  border-color: #45a049;
-}
-
-/* Other UI components */
-.top-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-h1 {
   text-align: center;
-  color: #333;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-table th {
-  background-color: #3276a6;
-  color: white;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-#greenButton {
-  background-color: #4caf50;
-  color: white;
-}
-
-#greenButton:hover {
-  background-color: #45a049;
-}
-
-#redButton {
-  background-color: #dc3545;
-  color: white;
-}
-
-#redButton:hover {
-  background-color: #c82333;
 }
 
 hr {
   border: none;
-  border-top: 2px solid #3276a6;
-  color: #3276a6;
-  height: 8px;
-  margin-bottom: 2%;
+  border-top: 3px solid #3276a6;
+  height: 10px;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 10px;
 }
 
+/* Search and Filter Section */
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#searchBox {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 40%;
+  background: #fff;
+}
+
+#searchBox:focus {
+  border-color: #3276a6;
+}
+
+#filter {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#filter select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  background: linear-gradient(135deg, #f5f5f5, #d3d3d3);
+  transition: border-color 0.3s ease;
+}
+
+#filter select:hover {
+  border-color: #3c91e6;
+}
+
+#filter select:focus {
+  border-color: #3276a6;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+table th,
+table td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #3c91e6;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background: rgba(60, 145, 230, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+/* No Records Found Styling */
 .no-records-cell {
   text-align: center;
-  padding: 20px;
-  color: #555;
+  font-size: 18px;
+  color: #777;
   font-style: italic;
 }
 
-/* Modal styling */
+/* Button Styling */
+button {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #3c91e6, #3276a6);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #3276a6, #3c91e6);
+  transform: scale(1.1);
+}
+
+#greenButton {
+  background: linear-gradient(135deg, #28a745, #218838);
+}
+
+#greenButton:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+}
+
+#redButton {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+#redButton:hover {
+  background: linear-gradient(135deg, #c82333, #dc3545);
+}
+
+/* Modal Overlay Styling */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
+/* Modal Content Styling */
 .modal-content {
-  background: white;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
   padding: 20px;
-  width: 300px;
-  border-radius: 5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   position: relative;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
+.modal-content h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Close Button Styling */
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  cursor: pointer;
   background: none;
   border: none;
   font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-/* Modal styling */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Darker overlay for better visibility */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000; /* Ensure it's above all other elements */
+.close-button:hover {
+  color: #c00;
 }
 
-.modal-content {
-  background: #ffffff;
-  padding: 30px 20px;
-  width: 40%; /* Adjust modal width */
-  max-width: 300px; /* Max width for larger screens */
-  border-radius: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for elevation */
-  position: relative;
-  animation: fadeIn 0.3s ease-in-out; /* Smooth fade-in animation */
-  overflow-y: auto; /* Allow scrolling for content that overflows */
-  max-height: 55vh; /* Limit height to viewport */
-}
-
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -194,99 +220,36 @@ hr {
   }
 }
 
-.close-button {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 25px;
-  color: #333;
-  transition: color 0.3s ease;
+/* Blur Effect */
+.blur {
+  filter: blur(5px);
 }
 
-.close-button:hover {
-  color: #dc3545; /* Change color to red on hover */
-}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .top-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
 
-.modal-content h2 {
-  text-align: center;
-  font-size: 22px;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
+  #searchBox,
+  #filter select {
+    width: 100%;
+    font-size: 14px;
+  }
 
-.modal-content p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 10px;
-}
+  table th,
+  table td {
+    font-size: 14px;
+    padding: 10px;
+  }
 
-.modal-content img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 15px auto; /* Center the image */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for images */
-}
-
-.modal-content .action-buttons {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.modal-content .action-buttons button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.modal-content .action-buttons button:hover {
-  transform: translateY(-2px); /* Slight lift on hover */
-}
-
-.modal-content .approve-button {
-  background-color: #4caf50;
-  color: white;
-}
-
-.modal-content .approve-button:hover {
-  background-color: #45a049;
-}
-
-.modal-content .reject-button {
-  background-color: #dc3545;
-  color: white;
-}
-
-.modal-content .reject-button:hover {
-  background-color: #c82333;
-}
-
-/* Responsiveness for smaller screens */
-@media (max-width: 768px) {
   .modal-content {
-    width: 90%; /* Reduce modal width for smaller screens */
-    max-height: 90vh; /* Adjust height for mobile devices */
-    padding: 20px;
-  }
-
-  .modal-content h2 {
-    font-size: 20px; /* Reduce heading size */
-  }
-
-  .modal-content p {
-    font-size: 14px; /* Reduce paragraph size */
+    width: 90%;
   }
 
   .close-button {
-    font-size: 18px; /* Adjust close button size */
+    font-size: 18px;
   }
 }
