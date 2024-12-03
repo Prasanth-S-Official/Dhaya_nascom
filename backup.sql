@@ -80,7 +80,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'Out of Stock','Tiles','level 2 wash','MSand',3500,'kg'),(2,'Out of Stock','Electrical','demo description','demo name',6000,'piece');
+INSERT INTO `material` VALUES (1,'Out of Stock','Tiles','level 2 wash','MSand',3500,'kg'),(2,'In Stock','Electrical','demo description','demo name',6000,'piece');
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `material_request` (
   KEY `FKh35glrhuw1rlutn67iulomnkg` (`user_id`),
   CONSTRAINT `FK8ma5fsipaor0ksgqkwtghtnyr` FOREIGN KEY (`material_id`) REFERENCES `material` (`material_id`),
   CONSTRAINT `FKh35glrhuw1rlutn67iulomnkg` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `material_request` (
 
 LOCK TABLES `material_request` WRITE;
 /*!40000 ALTER TABLE `material_request` DISABLE KEYS */;
-INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2);
+INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2),(3,'demo comments','07888499919','demo address','2024-12-04',4,'2024-12-03','Pending','Morning','High',2,2),(4,'demo comments','07888499919','2/10-1 Pollachi','2024-12-04',3,'2024-12-03','Pending','Morning','High',2,3);
 /*!40000 ALTER TABLE `material_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +137,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$WLl1gIDlI/d4643gpDsqp.Vo.8UKuJAjWHUtAnA8cjXboZNpahjr.','Admin','admin'),(2,'user@gmail.com','9876543211','$2a$10$wKdWc9Yp/I.9de9stEDmr.899zCfJnJ4znm0V5X9LVpx5FmW4Fsd.','User','user');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$WLl1gIDlI/d4643gpDsqp.Vo.8UKuJAjWHUtAnA8cjXboZNpahjr.','Admin','admin'),(2,'user@gmail.com','9876543211','$2a$10$wKdWc9Yp/I.9de9stEDmr.899zCfJnJ4znm0V5X9LVpx5FmW4Fsd.','User','user'),(3,'user2@gmail.com','9876543215','$2a$10$dvzJjie8pIOBWKZdvy3LR.bVaMUDkzquMYhTlVFYa19PSSwfQQrXu','User','user2');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-03  7:57:41
+-- Dump completed on 2024-12-03  8:12:41
