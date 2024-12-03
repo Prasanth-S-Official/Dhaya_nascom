@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MaterialRequestService } from 'src/app/services/material-request.service';
 
 @Component({
   selector: 'app-admin-insights',

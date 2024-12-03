@@ -71,30 +71,36 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
         return false;
     }
 
-     @Override
+    @Override
     public List<Map<String, Object>> getAllUserInsights() {
-        List<User> users = userRepo.findAll();
+        List<User> users = userRepo.findAll(); // Fetch all users
         List<Map<String, Object>> allUserInsights = new ArrayList<>();
-
+    
         for (User user : users) {
+            // Skip users with the "Admin" role
+            if ("Admin".equalsIgnoreCase(user.getUserRole())) {
+                continue;
+            }
+    
             List<MaterialRequest> userRequests = materialRequestRepo.findMaterialRequestsByUserId(user.getUserId());
-
+    
             Map<String, Object> userInsights = new HashMap<>();
             userInsights.put("userId", user.getUserId());
             userInsights.put("username", user.getUsername());
             userInsights.put("email", user.getEmail());
             userInsights.put("totalRequests", userRequests.size());
-            userInsights.put("highUrgencyRequests", 
-                userRequests.stream().filter(req -> "High".equalsIgnoreCase(req.getUrgencyLevel())).count());
-            userInsights.put("pendingRequests", 
-                userRequests.stream().filter(req -> "Pending".equalsIgnoreCase(req.getStatus())).count());
+            userInsights.put("highUrgencyRequests",
+                    userRequests.stream().filter(req -> "High".equalsIgnoreCase(req.getUrgencyLevel())).count());
+            userInsights.put("pendingRequests",
+                    userRequests.stream().filter(req -> "Pending".equalsIgnoreCase(req.getStatus())).count());
             userInsights.put("orders", userRequests); // Add all orders for the user
-            
+    
             allUserInsights.add(userInsights);
         }
-
+    
         return allUserInsights;
     }
+    
 
     
 }

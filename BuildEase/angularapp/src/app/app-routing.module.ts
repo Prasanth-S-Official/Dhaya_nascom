@@ -19,12 +19,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
 import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
 import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
+import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'insights', component: AdminInsightsComponent },
   { path: 'error', component: ErrorComponent },
 
 
