@@ -26,7 +26,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody *ngIf="filteredUserInsights.length > 0; else noDataFound">
+        <tbody>
             <tr *ngFor="let user of filteredUserInsights; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ user.username }}</td>
@@ -40,12 +40,11 @@
                     </button>
                 </td>
             </tr>
+            <tr *ngIf="filteredUserInsights.length === 0">
+                <td colspan="7" class="no-data-cell">No data available</td>
+            </tr>
         </tbody>
     </table>
-
-    <ng-template #noDataFound>
-        <p>No data available</p>
-    </ng-template>
 </div>
 
 <!-- Orders Popup -->
