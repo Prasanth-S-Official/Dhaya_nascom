@@ -12,12 +12,12 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class UseraddfeedbackComponent implements OnInit {
   addFeedbackForm = this.formBuilder.group({
     userId: [{ value: '', disabled: true }, Validators.required], // User ID
-    wifiSchemeId: ['', Validators.required], // WiFi Scheme ID from query parameter
+    materialId: ['', Validators.required], // Material ID from query parameter
     feedbackText: ['', Validators.required], // Feedback text
     category: ['', Validators.required], // Feedback category
   });
 
-  categories = ['Service', 'Pricing', 'Speed', 'Support']; // Example categories
+  categories = ['Quality', 'Pricing', 'Availability', 'Support']; // Example categories
   submitted = false;
   successPopup = false;
 
@@ -33,12 +33,12 @@ export class UseraddfeedbackComponent implements OnInit {
     console.log('User ID from local storage:', userId);
     this.addFeedbackForm.get('userId').setValue(userId);
 
-    // Get wifiSchemeId from query parameters and set it in the form
+    // Get materialId from query parameters and set it in the form
     this.route.queryParams.subscribe((params) => {
-      const wifiSchemeId = params['wifiSchemeId'];
-      console.log('WiFi Scheme ID from query params:', wifiSchemeId);
-      if (wifiSchemeId) {
-        this.addFeedbackForm.get('wifiSchemeId').setValue(wifiSchemeId);
+      const materialId = params['materialId'];
+      console.log('Material ID from query params:', materialId);
+      if (materialId) {
+        this.addFeedbackForm.get('materialId').setValue(materialId);
       }
     });
   }
@@ -49,7 +49,7 @@ export class UseraddfeedbackComponent implements OnInit {
     if (this.addFeedbackForm.valid) {
       const feedback: Feedback = {
         userId: this.addFeedbackForm.get('userId').value,
-        wifiSchemeId: this.addFeedbackForm.get('wifiSchemeId').value,
+        materialId: this.addFeedbackForm.get('materialId').value,
         feedbackText: this.addFeedbackForm.get('feedbackText').value,
         category: this.addFeedbackForm.get('category').value,
         date: new Date(),
@@ -63,8 +63,8 @@ export class UseraddfeedbackComponent implements OnInit {
         user: {
           userId: feedback.userId,
         },
-        wifiScheme: {
-          wifiSchemeId: feedback.wifiSchemeId,
+        material: {
+          materialId: feedback.materialId,
         },
       };
 

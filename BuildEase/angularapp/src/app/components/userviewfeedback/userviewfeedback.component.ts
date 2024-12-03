@@ -4,14 +4,13 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 @Component({
   selector: 'app-userviewfeedback',
   templateUrl: './userviewfeedback.component.html',
-  styleUrls: ['./userviewfeedback.component.css']
+  styleUrls: ['./userviewfeedback.component.css'],
 })
-
 export class UserviewfeedbackComponent implements OnInit {
   feedbacks: any[] = [];
   showDeletePopup = false;
   showDetailsModal = false;
-  selectedScheme: any = null;
+  selectedMaterial: any = null;
   feedbackToDelete: number | null = null;
 
   constructor(private feedbackService: FeedbackService) {}
@@ -57,13 +56,13 @@ export class UserviewfeedbackComponent implements OnInit {
     this.showDeletePopup = false;
   }
 
-  showSchemeDetails(scheme: any): void {
-    this.selectedScheme = scheme;
+  showMaterialDetails(material: any): void {
+    this.selectedMaterial = material;
     this.showDetailsModal = true;
   }
 
   closeDetailsModal(): void {
-    this.selectedScheme = null;
+    this.selectedMaterial = null;
     this.showDetailsModal = false;
   }
 }

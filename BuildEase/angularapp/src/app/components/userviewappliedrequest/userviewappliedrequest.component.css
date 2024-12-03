@@ -61,6 +61,13 @@ hr {
   z-index: -1;
 }
 
+h1 {
+  text-align: center;
+  color: #3276a6;
+  margin-bottom: 20px;
+}
+
+
 .card h3 {
   font-size: 20px;
   margin-bottom: 15px;
