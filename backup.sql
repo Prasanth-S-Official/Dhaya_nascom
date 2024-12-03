@@ -80,7 +80,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'Out of Stock','Tiles','level 2 wash','MSand',3500,'kg'),(2,'In Stock','Electrical','demo description','demo name',6000,'piece'),(3,'In Stock','Tiles','demo description','demo material name',65,'piece');
+INSERT INTO `material` VALUES (1,'Out of Stock','Tiles','demo description updated','MSand',3500,'kg'),(2,'In Stock','Electrical','demo description','demo name',6000,'piece'),(3,'In Stock','Tiles','demo description','demo material name',65,'piece');
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `material_request` (
 
 LOCK TABLES `material_request` WRITE;
 /*!40000 ALTER TABLE `material_request` DISABLE KEYS */;
-INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2),(4,'demo comments','07888499919','2/10-1 Pollachi','2024-12-04',3,'2024-12-03','Pending','Morning','High',2,3);
+INSERT INTO `material_request` VALUES (2,'demo comments','7888499919','2/10-1 KKD','2024-12-03',2,'2024-12-01','Rejected','Morning','Low',1,2),(4,'demo comments','07888499919','2/10-1 Pollachi','2024-12-04',3,'2024-12-03','Approved','Morning','High',2,3);
 /*!40000 ALTER TABLE `material_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-03 17:22:31
+-- Dump completed on 2024-12-03 17:37:31
