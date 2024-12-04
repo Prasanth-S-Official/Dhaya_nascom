@@ -10,7 +10,7 @@ describe('User Model', () => {
       password: 'password123',
       username: 'user123',
       mobileNumber: '1234567890',
-      userRole: 'farmer'
+      userRole: 'admin'
     };
 
     expect(user).toBeTruthy();
