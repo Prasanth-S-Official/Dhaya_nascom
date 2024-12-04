@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllwifiScheme() throws Exception {
-	        mockMvc.perform(get("/api/wifiScheme")
+	    public void backend_testGetAllMaterial() throws Exception {
+	        mockMvc.perform(get("/api/material")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -55,7 +55,7 @@ class SpringappApplicationTests {
 		
 	    @Test
 		@Order(2)
-	    public void backend_testGetFeedBackAll() throws Exception {
+	    public void backend_testGetAllFeedBack() throws Exception {
 
 	        mockMvc.perform(get("/api/feedback")
 			.contentType(MediaType.APPLICATION_JSON))
@@ -97,10 +97,10 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testWiFiSchemeRequestHasManyToOneAnnotation() {
+    public void backend_testMaterialRequestHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.WiFiSchemeRequest");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.MaterialRequest");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
@@ -129,8 +129,8 @@ class SpringappApplicationTests {
     @Test
     public void backend_testWiFiSchemeInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.WiFiSchemeService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.WiFiSchemeServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.MaterialService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.MaterialServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");

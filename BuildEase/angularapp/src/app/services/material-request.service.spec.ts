@@ -1,16 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MaterialRequestService } from './material-request.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MaterialRequestService', () => {
   let service: MaterialRequestService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     service = TestBed.inject(MaterialRequestService);
   });
 
-  it('should be created', () => {
+  fit('Frontend_should_create_materialRequest_service', () => {
     expect(service).toBeTruthy();
   });
 });
