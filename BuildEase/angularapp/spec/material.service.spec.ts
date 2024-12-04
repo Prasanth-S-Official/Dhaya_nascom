@@ -1,19 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 
+import { MaterialService } from './material.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { WifiSchemeRequestService } from './wifi-scheme-request.service';
 
-describe('WifiSchemeRequestService', () => {
-  let service: WifiSchemeRequestService;
+describe('MaterialService', () => {
+  let service: MaterialService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(WifiSchemeRequestService);
+    service = TestBed.inject(MaterialService);
   });
 
-  fit('Frontend_should_create_wifischemerequest_service', () => {
+  fit('Frontend_should_create_material_service', () => {
     expect(service).toBeTruthy();
   });
 });
