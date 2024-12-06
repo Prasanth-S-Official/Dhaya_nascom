@@ -1,0 +1,217 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+  }
+  
+  /* Logout Button */
+  #logoutbutton {
+    float: right;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #logoutbutton:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Main Container */
+  #materialHomeBody {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px; /* Max width for large screens */
+    font-family: Arial, sans-serif;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+  }
+  
+  /* Headings */
+  h1 {
+    text-align: center;
+    color: #3276a6;
+    margin-bottom: 20px;
+  }
+  
+  /* Search Box */
+  #searchBox {
+    width: 30%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  #searchBox:focus {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Training Table */
+  .material-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .material-table th,
+  .material-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .material-table th {
+    background-color: #3276a6;
+    color: white;
+  }
+  
+  /* Button Styles */
+  #greenButton,
+  #applyButton,
+  #appliedButton {
+    background-color: hsl(122, 39%, 49%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #applyButton:hover {
+    background-color: #45a049;
+  }
+  
+  #appliedButton {
+    background-color: hsl(13, 65%, 51%);
+  }
+  
+  #appliedButton:hover {
+    background-color: #d6382d;
+  }
+  
+  /* Top Container for Search and Logout */
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* General Button Styles */
+  button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 5px; /* Consistent border radius for all buttons */
+  }
+  
+  button:enabled {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  button:enabled:hover {
+    background-color: #45a049;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    color: #888;
+  }
+  
+  /* Horizontal Rule */
+  hr {
+    border: none;
+    border-top: 2px solid #3276a6;
+    color: #3276a6;
+    overflow: visible;
+    text-align: center;
+    height: 8px;
+    margin-bottom: 2%;
+  }
+  
+  /* Pagination Button */
+  .pagination-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 28px;
+    background-color: #4caf50;
+    color: white;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #ccc;
+    color: #888;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background-color: #45a049;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    #searchBox {
+      width: 100%; /* Full width on smaller screens */
+    }
+  
+    .top-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .training-table {
+      font-size: 14px; /* Smaller font for tables on small screens */
+    }
+  
+    h1 {
+      font-size: 1.5rem; /* Adjust heading size */
+    }
+  }
+
+  /* Define styles for the grey button */
+.grey-button {
+    background-color: grey !important;
+    color: white;
+    cursor: not-allowed;
+  }
+  
+  
+  @media (max-width: 480px) {
+    #searchBox {
+      font-size: 14px; /* Adjust font size */
+    }
+  
+    h1 {
+      font-size: 1.2rem; /* Further adjust heading size */
+    }
+  
+    button {
+      padding: 8px 16px; /* Adjust button size */
+      font-size: 14px; /* Adjust font size */
+    }
+  
+    .pagination-button {
+      font-size: 14px; /* Smaller pagination button size */
+    }
+  }
+  

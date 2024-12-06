@@ -1,0 +1,68 @@
+<app-adminnav></app-adminnav>
+<div class="insights-container">
+    <h1>User Material Insights</h1>
+    <hr />
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <input
+            type="text"
+            placeholder="Search by Email..."
+            [(ngModel)]="searchQuery"
+            (input)="applySearch()"
+            class="search-input"
+        />
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Total Requests</th>
+                <th>High-Urgency Requests</th>
+                <th>Pending Requests</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of filteredUserInsights; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.totalRequests }}</td>
+                <td>{{ user.highUrgencyRequests }}</td>
+                <td>{{ user.pendingRequests }}</td>
+                <td>
+                    <button class="view-orders-button" (click)="showOrders(user.orders)">
+                        View Orders
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="filteredUserInsights.length === 0">
+                <td colspan="7" class="no-data-cell">No data available</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Orders Popup -->
+<div *ngIf="showOrdersPopup" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-button" (click)="closeOrdersPopup()">X</button>
+        <h2>User Orders</h2>
+        <div *ngIf="selectedUserOrders.length > 0; else noOrders">
+            <ul>
+                <li *ngFor="let order of selectedUserOrders">
+                    <strong>Material:</strong> {{ order.material.materialName }} |
+                    <strong>Quantity:</strong> {{ order.quantity }} |
+                    <strong>Status:</strong> {{ order.status }}
+                </li>
+            </ul>
+        </div>
+        <ng-template #noOrders>
+            <p>No orders found for this user</p>
+        </ng-template>
+    </div>
+</div>

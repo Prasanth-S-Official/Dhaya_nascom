@@ -1,0 +1,93 @@
+<app-adminnav></app-adminnav>
+<div class="page-content" [ngClass]="{ blur: showModal }">
+  <h1>Material Requests for Approval</h1>
+  <hr />
+  <div class="top-container">
+    <input
+      id="searchBox"
+      type="text"
+      placeholder="Search by Material Name..."
+      [(ngModel)]="searchValue"
+      (input)="handleSearchChange()"
+    />
+  
+    <label id="filter">
+      Filter by Status:
+      <select [(ngModel)]="statusFilter" (change)="handleFilterChange()">
+        <option value="-1">All</option>
+        <option value="0">Pending</option>
+        <option value="1">Approved</option>
+        <option value="2">Rejected</option>
+      </select>
+      
+    </label>
+  </div>
+
+  <!-- Material Requests Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Username</th>
+        <th>Material Name</th>
+        <th>Quantity</th>
+        <th>Request Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredRequests.length > 0; else noRecords">
+      <tr *ngFor="let request of filteredRequests; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ request.user.username }}</td>
+        <td>{{ request.material.materialName }}</td>
+        <td>{{ request.quantity }}</td>
+        <td>{{ request.requestDate | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ request.status }}</td>
+        <td>
+          <button (click)="handleShowMore(request)">Show More</button>
+          <button
+            id="greenButton"
+            *ngIf="request.status === 'Pending' || request.status === 'Rejected'"
+            (click)="handleApprove(request)"
+          >
+            Approve
+          </button>
+          <button
+            id="redButton"
+            *ngIf="request.status === 'Pending' || request.status === 'Approved'"
+            (click)="handleReject(request)"
+          >
+            Reject
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #noRecords>
+      <tr>
+        <td colspan="7" class="no-records-cell">Oops! No records found</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>
+
+<!-- Details Modal -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeModal()">X</button>
+    <h2>Request Details</h2>
+    <p><strong>Username:</strong> {{ selectedRequest?.user?.username }}</p>
+    <p><strong>Material Name:</strong> {{ selectedRequest?.material?.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedRequest?.material?.category }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedRequest?.material?.unitType }}</p>
+    <p><strong>Price Per Unit:</strong> ₹{{ selectedRequest?.material?.pricePerUnit }}</p>
+    <p><strong>Quantity:</strong> {{ selectedRequest?.quantity }}</p>
+    <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Urgency Level:</strong> {{ selectedRequest?.urgencyLevel }}</p>
+    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
+    <p><strong>Delivery Address:</strong> {{ selectedRequest?.deliveryAddress }}</p>
+    <p><strong>Preferred Delivery Date:</strong> {{ selectedRequest?.preferredDeliveryDate | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Time Slot:</strong> {{ selectedRequest?.timeSlot }}</p>
+    <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <!-- Navigation Bar -->
+  <app-adminnav *ngIf="userRole === 'Admin'"></app-adminnav>
+  <app-usernav *ngIf="userRole === 'User'"></app-usernav>
+
+  <!-- Cover Section -->
+  <div class="coverimage">
+    <div class="title">
+      <h1>BuildEase</h1>
+      <p>Your trusted partner in construction materials</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Welcome to BuildEase</h2>
+    <p>
+      Simplify your construction needs with BuildEase. We offer a comprehensive range of building materials, from cement and steel to wood and bricks, ensuring quality and timely delivery for your projects.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- Contact Section -->
+  <div class="contact">
+    <h2>Contact Us</h2>
+    <p>📞 Phone: 123-456-7890</p>
+    <p>📧 Email: support@wifiselector.com</p>
+  </div>
+</div>

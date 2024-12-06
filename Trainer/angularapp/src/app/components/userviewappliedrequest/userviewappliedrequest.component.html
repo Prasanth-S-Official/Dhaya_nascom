@@ -1,0 +1,72 @@
+<app-usernav></app-usernav>
+<div class="card-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
+  <h1>Applied Material Requests</h1>
+  <hr>
+
+  <!-- Search Box -->
+  <input
+    id="searchBox"
+    type="text"
+    placeholder="Search by Material Name..."
+    [(ngModel)]="searchValue"
+    (input)="filterRequests()"
+  />
+
+  <!-- No Data Found Message -->
+  <div *ngIf="filteredRequests.length === 0" class="no-data-message">
+    <p>No Data Found</p>
+  </div>
+
+  <!-- Card View for Material Requests -->
+  <div class="card-row" *ngIf="filteredRequests.length > 0">
+    <div class="card" *ngFor="let request of filteredRequests">
+      <h3>{{ request.material.materialName }}</h3>
+      <p><strong>Category:</strong> {{ request.material.category }}</p>
+      <p><strong>Price Per Unit:</strong> ₹{{ request.material.pricePerUnit }}</p>
+      <p><strong>Unit Type:</strong> {{ request.material.unitType }}</p>
+      <p><strong>Status:</strong> {{ request.status }}</p>
+
+      <div class="action-buttons">
+        <button (click)="showRequestDetails(request)">Show More</button>
+        <button
+          id="redButton"
+          [disabled]="request.status !== 'Pending'"
+          (click)="handleDeleteClick(request)"
+        >
+          Delete
+        </button>
+        <button
+          class="review-button"
+          (click)="navigateToFeedback(request.material.materialId)"
+        >
+          Write a Review
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete this request?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Request Details Modal -->
+<div *ngIf="showDetailsModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeDetailsModal()">X</button>
+    <h2>Request Details</h2>
+    <p><strong>Material Name:</strong> {{ selectedRequest?.material?.materialName }}</p>
+    <p><strong>Category:</strong> {{ selectedRequest?.material?.category }}</p>
+    <p><strong>Price Per Unit:</strong> ₹{{ selectedRequest?.material?.pricePerUnit }}</p>
+    <p><strong>Unit Type:</strong> {{ selectedRequest?.material?.unitType }}</p>
+    <p><strong>Request Date:</strong> {{ selectedRequest?.requestDate }}</p>
+    <p><strong>Quantity:</strong> {{ selectedRequest?.quantity }}</p>
+    <p><strong>Urgency Level:</strong> {{ selectedRequest?.urgencyLevel }}</p>
+    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
+    <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
+    <p><strong>Delivery Address:</strong> {{ selectedRequest?.deliveryAddress }}</p>
+  </div>
+</div>
