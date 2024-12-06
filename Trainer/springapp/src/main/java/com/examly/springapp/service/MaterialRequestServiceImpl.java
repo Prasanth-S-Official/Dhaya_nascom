@@ -1,6 +1,6 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.exceptions.MaterialRequestException;
+import com.examly.springapp.exceptions.DuplicateTrainerException;
 import com.examly.springapp.model.MaterialRequest;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.MaterialRequestRepo;
@@ -31,7 +31,7 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
         Long materialId = request.getMaterial().getMaterialId();
         Optional<MaterialRequest> existingRequest = materialRequestRepo.findByUser_UserIdAndMaterial_MaterialId(userId, materialId);
         if (existingRequest.isPresent()) {
-            throw new MaterialRequestException("User has already requested this material.");
+            throw new DuplicateTrainerException("User has already requested this material.");
         }
         return materialRequestRepo.save(request);
     }

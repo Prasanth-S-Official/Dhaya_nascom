@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.exceptions.DuplicateMaterialException;
-import com.examly.springapp.exceptions.MaterialDeletionException;
+import com.examly.springapp.exceptions.DuplicateRequirementException;
+import com.examly.springapp.exceptions.RequirementDeletionException;
 import com.examly.springapp.model.Material;
 import com.examly.springapp.repository.MaterialRepo;
 
@@ -21,7 +21,7 @@ public class MaterialServiceImpl implements MaterialService {
     public Material addMaterial(Material material) {
         Optional<Material> existingMaterial = materialRepo.findByMaterialName(material.getMaterialName());
         if (existingMaterial.isPresent()) {
-            throw new DuplicateMaterialException("Material with the same name already exists.");
+            throw new DuplicateRequirementException("Material with the same name already exists.");
         }
         return materialRepo.save(material);
     }
@@ -52,7 +52,7 @@ public class MaterialServiceImpl implements MaterialService {
             materialRepo.deleteById(materialId);
             return existingMaterial.get();
         } else {
-            throw new MaterialDeletionException("Material not found for deletion.");
+            throw new RequirementDeletionException("Material not found for deletion.");
         }
     }
 }
