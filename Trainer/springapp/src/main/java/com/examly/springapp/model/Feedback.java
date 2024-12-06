@@ -9,9 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
 @Entity
 public class Feedback {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
@@ -21,17 +21,18 @@ public class Feedback {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    private User user; // User who provided the feedback
 
     @ManyToOne
-    @JoinColumn(name = "materialId", nullable = true)
-    private Material material; 
+    @JoinColumn(name = "trainerId", nullable = true)
+    private Trainer trainer; // Trainer about whom the feedback is given
 
-    private String category; // Category of feedback, e.g., "Service", "Pricing", etc.
+    private String category; // Category of feedback, e.g., "Session Quality", "Punctuality", etc.
 
     public Feedback() {
     }
 
+    // Getters and Setters
     public Long getFeedbackId() {
         return feedbackId;
     }
@@ -64,12 +65,12 @@ public class Feedback {
         this.user = user;
     }
 
-    public Material getMaterial() {
-        return material;
+    public Trainer getTrainer() {
+        return trainer;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
     }
 
     public String getCategory() {
@@ -79,7 +80,4 @@ public class Feedback {
     public void setCategory(String category) {
         this.category = category;
     }
-
-    // Getters and Setters
-   
 }
