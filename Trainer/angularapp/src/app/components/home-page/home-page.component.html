@@ -1,6 +1,6 @@
 <div class="wrapper">
   <!-- Navigation Bar -->
-  <app-adminnav *ngIf="userRole === 'Admin'"></app-adminnav>
+  <app-managernav *ngIf="userRole === 'Manager'"></app-managernav>
   <app-usernav *ngIf="userRole === 'User'"></app-usernav>
 
   <!-- Cover Section -->
