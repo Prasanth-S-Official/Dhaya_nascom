@@ -20,9 +20,14 @@ public class RequirementController {
 
     @PostMapping
     public ResponseEntity<?> addRequirement(@RequestBody Requirement requirement) {
-        Requirement newRequirement = requirementService.addRequirement(requirement);
-        return new ResponseEntity<>(newRequirement, HttpStatus.CREATED);
+        try {
+            Requirement newRequirement = requirementService.addRequirement(requirement);
+            return new ResponseEntity<>(newRequirement, HttpStatus.CREATED);
+        } catch (IllegalArgumentException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
+    
 
     @GetMapping("/{requirementId}")
     public ResponseEntity<Requirement> getRequirementById(@PathVariable Long requirementId) {

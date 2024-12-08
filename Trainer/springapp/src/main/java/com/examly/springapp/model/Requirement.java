@@ -23,10 +23,14 @@ public class Requirement {
     private Double budget; // e.g., 5000.0
     private String priority; // e.g., "High", "Medium", "Low"
 
-    // Constructor with parameters
+    @ManyToOne
+    @JoinColumn(name = "trainer_id", nullable = true)
+    private Trainer trainer; // Link to Trainer
+
+    // Constructors
     public Requirement(Long requirementId, String title, String description, String department,
                        LocalDate postedDate, String status, String duration, String mode,
-                       String location, String skillLevel, Double budget, String priority) {
+                       String location, String skillLevel, Double budget, String priority, Trainer trainer) {
         this.requirementId = requirementId;
         this.title = title;
         this.description = description;
@@ -39,9 +43,9 @@ public class Requirement {
         this.skillLevel = skillLevel;
         this.budget = budget;
         this.priority = priority;
+        this.trainer = trainer;
     }
 
-    // Default constructor
     public Requirement() {
     }
 
@@ -140,5 +144,13 @@ public class Requirement {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
     }
 }
