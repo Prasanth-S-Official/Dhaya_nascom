@@ -87,9 +87,14 @@ export class UserService {
     return of(this.users);
   }
 
-  addUser(user: Users): void {
-    this.users.push(user as Required<Users>);
+
+  addUser(){
+    
   }
+
+  // addUser(user: Users): void {
+  //   this.users.push(user as Required<Users>);
+  // }
 
   updateUser(user: Users): void {
     const index = this.users.findIndex((u) => u.id === user.id);
