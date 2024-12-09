@@ -23,6 +23,7 @@ import { UserviewmaterialComponent } from './components/userviewmaterial/uservie
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ManagernavComponent } from './components/managernav/managernav.component';
 import { ManagerRequirementComponent } from './components/manager-requirement/manager-requirement.component';
+import { ManagerViewRequirementsComponent } from './components/manager-view-requirements/manager-view-requirements.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ManagerRequirementComponent } from './components/manager-requirement/ma
     AdminInsightsComponent,
     ManagernavComponent,
     ManagerRequirementComponent,
+    ManagerViewRequirementsComponent,
   
 
   ],

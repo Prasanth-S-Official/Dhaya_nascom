@@ -87,7 +87,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (2,5000,'demo department','demo description','56 days','Demo Location','Offline','2024-12-09','High','Beginner','Open','demo title two',NULL),(3,5000,'demo department','demo description','56 days','Demo Location','Offline','2024-12-09','High','Beginner','Open','demo title three',NULL);
+INSERT INTO `requirement` VALUES (2,5000,'demo department','demo description','56 days','Demo Location','Offline','2024-12-09','High','Beginner','Open','demo title two',NULL);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-09  0:59:52
+-- Dump completed on 2024-12-09  1:14:51

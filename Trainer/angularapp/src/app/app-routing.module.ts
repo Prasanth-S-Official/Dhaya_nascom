@@ -17,6 +17,7 @@ import { AdminViewMaterialComponent } from './components/admin-view-material/adm
 import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ManagerRequirementComponent } from './components/manager-requirement/manager-requirement.component';
+import { ManagerViewRequirementsComponent } from './components/manager-view-requirements/manager-view-requirements.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'manager/add/requirement', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/material/:id', component: AdminMaterialComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/materials', component: AdminViewMaterialComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
 
 
   { path: 'admin/add/material', component: AdminMaterialComponent, canActivate: [AuthGuard] },
