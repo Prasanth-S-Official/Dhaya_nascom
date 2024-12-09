@@ -20,6 +20,7 @@ import { ManagerRequirementComponent } from './components/manager-requirement/ma
 import { ManagerViewRequirementsComponent } from './components/manager-view-requirements/manager-view-requirements.component';
 import { TrainerManagementComponent } from './components/trainer-management/trainer-management.component';
 import { CoordinatorViewTrainersComponent } from './components/coordinator-view-trainers/coordinator-view-trainers.component';
+import { CoordinatorViewRequirementsComponent } from './components/coordinator-view-requirements/coordinator-view-requirements.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
 
   { path: 'coordinator/add/trainer', component: TrainerManagementComponent, canActivate: [AuthGuard] },
   { path: 'coordinator/edit/trainer/:id', component: TrainerManagementComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'coordinator/view/requirements', component: CoordinatorViewRequirementsComponent, canActivate: [AuthGuard] },
   { path: 'coordinator/view/trainers', component: CoordinatorViewTrainersComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 

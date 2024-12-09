@@ -25,6 +25,7 @@
           <th>Department</th>
           <th>Duration</th>
           <th>Status</th>
+          <th>Trainer Assigned</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -36,6 +37,7 @@
           <td>{{ requirement.department }}</td>
           <td>{{ requirement.duration }}</td>
           <td>{{ requirement.status }}</td>
+          <td>{{ getAssignedTrainer(requirement) }}</td>
           <td>
             <button
               id="applyButton"
@@ -53,7 +55,7 @@
       <ng-template #noRecords>
         <tbody>
           <tr>
-            <td colspan="7" class="no-records-cell">Oops! No records found</td>
+            <td colspan="8" class="no-records-cell">Oops! No records found</td>
           </tr>
         </tbody>
       </ng-template>

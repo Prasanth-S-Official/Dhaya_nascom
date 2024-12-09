@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { RequirementService } from 'src/app/services/requirement.service';
+import { TrainerService } from 'src/app/services/trainer.service';
 import { Requirement } from 'src/app/models/requirement.model';
+import { Trainer } from 'src/app/models/trainer.model';
 
 @Component({
   selector: 'app-coordinator-view-requirements',
@@ -13,12 +15,13 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
 
   availableRequirements: Requirement[] = [];
   filteredRequirements: Requirement[] = [];
-  assignedRequirements: any[] = [];
+  allTrainers: Trainer[] = [];
   searchField: string = '';
 
   constructor(
     private router: Router,
-    private requirementService: RequirementService
+    private requirementService: RequirementService,
+    private trainerService: TrainerService
   ) {}
 
   ngOnInit(): void {
@@ -26,18 +29,16 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   }
 
   fetchData(): void {
-    const coordinatorId = Number(localStorage.getItem('userId'));
-
     forkJoin({
-      assignedRequirements: this.requirementService.getRequirementsByCoordinatorId(coordinatorId),
       allRequirements: this.requirementService.getAllRequirements(),
+      allTrainers: this.trainerService.getAllTrainers(),
     }).subscribe(
-      ({ assignedRequirements, allRequirements }) => {
-        this.assignedRequirements = assignedRequirements || [];
+      ({ allRequirements, allTrainers }) => {
         this.availableRequirements = allRequirements;
         this.filteredRequirements = this.availableRequirements;
-        console.log('Assigned requirements:', this.assignedRequirements);
+        this.allTrainers = allTrainers;
         console.log('Available requirements:', this.availableRequirements);
+        console.log('Available trainers:', this.allTrainers);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -60,20 +61,32 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   }
 
   handleAssignClick(requirement: Requirement): void {
-    if (this.isRequirementAssigned(requirement)) {
-      alert('Trainer is already assigned for this requirement.');
+    const trainerId = this.selectTrainer(requirement);
+    if (trainerId) {
+      const updatedRequirement = { ...requirement, trainerId };
+
+      this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
+        () => {
+          alert('Trainer assigned successfully.');
+          this.fetchData(); // Refresh data after assignment
+        },
+        (error) => {
+          console.error('Error assigning trainer:', error);
+          alert('Error assigning trainer.');
+        }
+      );
     } else {
-      localStorage.setItem('requirementId', requirement.requirementId.toString());
-      this.router.navigate(['/coordinator/assign/trainer']);
+      alert('No available trainers to assign.');
     }
   }
 
-  isRequirementAssigned(requirement: Requirement): boolean {
-    if (!this.assignedRequirements) return false;
-
-    return this.assignedRequirements.some(
-      (assigned) => assigned.requirement.requirementId === requirement.requirementId
+  selectTrainer(requirement: Requirement): number | null {
+    // Logic to select an available trainer based on expertise, or assign the first one
+    const suitableTrainer = this.allTrainers.find(
+      (trainer) => trainer.expertise.toLowerCase().includes(requirement.skillLevel.toLowerCase()) && trainer.status === 'Active'
     );
+
+    return suitableTrainer ? suitableTrainer.trainerId : null;
   }
 
   logout(): void {
