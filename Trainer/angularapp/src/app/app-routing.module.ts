@@ -19,6 +19,7 @@ import { AdminInsightsComponent } from './components/admin-insights/admin-insigh
 import { ManagerRequirementComponent } from './components/manager-requirement/manager-requirement.component';
 import { ManagerViewRequirementsComponent } from './components/manager-view-requirements/manager-view-requirements.component';
 import { TrainerManagementComponent } from './components/trainer-management/trainer-management.component';
+import { CoordinatorViewTrainersComponent } from './components/coordinator-view-trainers/coordinator-view-trainers.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
   { path: 'coordinator/add/trainer', component: TrainerManagementComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/material/:id', component: AdminMaterialComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/materials', component: AdminViewMaterialComponent, canActivate: [AuthGuard] },
+  { path: 'coordinator/view/trainers', component: CoordinatorViewTrainersComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Admin Routes

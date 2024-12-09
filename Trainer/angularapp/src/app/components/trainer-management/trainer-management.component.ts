@@ -55,30 +55,37 @@ export class TrainerManagementComponent implements OnInit {
   handleFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
       if (!validTypes.includes(file.type)) {
-        this.fileError = 'Invalid file type. Only PDF, DOC, and DOCX are allowed.';
+        this.fileError = 'Invalid file type. Only JPG, JPEG, and PNG are allowed.';
         this.resumeBase64 = '';
         return;
       }
-
-      this.convertFileToBase64(file).then(
+  
+      const maxSizeInBytes = 5 * 1024 * 1024; // 5MB max size
+      if (file.size > maxSizeInBytes) {
+        this.fileError = 'File size exceeds the maximum limit of 5MB.';
+        this.resumeBase64 = '';
+        return;
+      }
+  
+      this.convertImageToBase64(file).then(
         (base64String) => {
           this.resumeBase64 = base64String;
           this.trainerForm.patchValue({
-            resume: base64String,
+            resume: base64String, // Assuming this is where the Base64 string is stored
           });
           this.fileError = '';
         },
         (error) => {
-          console.error('Error converting file to base64:', error);
-          this.fileError = 'Error processing the file.';
+          console.error('Error converting image to Base64:', error);
+          this.fileError = 'Error processing the image.';
         }
       );
     }
   }
-
-  convertFileToBase64(file: File): Promise<string> {
+  
+  convertImageToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -89,6 +96,7 @@ export class TrainerManagementComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
+  
 
   onSubmit(): void {
     if (this.trainerForm.valid) {

@@ -54,12 +54,13 @@
     </div>
 
     <div>
-      <label for="resume">Resume<span class="required">*</span></label>
-      <input id="resume" type="file" (change)="handleFileChange($event)" accept=".pdf, .doc, .docx" />
-      <div *ngIf="fileError" class="error">
-        *{{ fileError }}
+        <label for="resume">Resume<span class="required">*</span></label>
+        <input id="resume" type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" />
+        <div *ngIf="fileError" class="error">
+          *{{ fileError }}
+        </div>
       </div>
-    </div>
+      
 
     <div>
       <label for="joiningDate">Joining Date<span class="required">*</span></label>

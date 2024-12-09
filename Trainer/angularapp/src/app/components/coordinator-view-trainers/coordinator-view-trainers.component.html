@@ -1,0 +1,78 @@
+<app-coordinatornav></app-coordinatornav>
+<div id="parent">
+  <div id="trainerHomeBody" [ngClass]="{ blur: showDeletePopup }">
+    <h1>Trainers</h1>
+    <hr />
+
+    <div class="top-container">
+      <div>
+        <label for="searchBox">Search by:</label>
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Trainer Name..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="applyFilters()"
+        />
+      </div>
+      <div>
+        <label for="statusSelect">Filter by Status:</label>
+        <select [(ngModel)]="selectedStatus" (ngModelChange)="applyFilters()" id="statusSelect">
+          <option [ngValue]="null">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="trainer-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Expertise</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="status === 'loading'">
+        <tr>
+          <td colspan="7">Loading trainers...</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'error'">
+        <tr>
+          <td colspan="7">Error loading trainers</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'noRecords'">
+        <tr>
+          <td colspan="7" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="filteredTrainers.length > 0">
+        <tr *ngFor="let trainer of filteredTrainers; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ trainer.name }}</td>
+          <td>{{ trainer.email }}</td>
+          <td>{{ trainer.phone }}</td>
+          <td>{{ trainer.expertise }}</td>
+          <td>{{ trainer.status }}</td>
+          <td>
+            <button class="edit-button" (click)="navigateToEditTrainer(trainer.trainerId)">Edit</button>
+            <button class="delete-button" (click)="handleDeleteClick(trainer.trainerId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete this trainer?</p>
+    <button class="confirm-delete-button" (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>
