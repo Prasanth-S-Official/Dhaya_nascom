@@ -79,13 +79,14 @@
           <td>
             <button class="edit-button" (click)="navigateToEditTrainer(trainer.trainerId)">Edit</button>
             <button class="delete-button" (click)="handleDeleteClick(trainer.trainerId)">Delete</button>
-            <button 
-              class="toggle-status-button"
-              [ngClass]="trainer.status === 'Active' ? 'inactive-button' : 'unavailable-button'"
-              (click)="toggleTrainerStatus(trainer)"
-            >
-              {{ trainer.status === 'Active' ? 'Make Inactive' : 'Make Active' }}
-            </button>
+            <button
+            class="toggle-status-button"
+            [ngClass]="trainer.status === 'Active' ? 'inactive-button' : 'active-button'"
+            (click)="toggleTrainerStatus(trainer)"
+          >
+            {{ trainer.status === 'Active' ? 'Make Inactive' : 'Make Active' }}
+          </button>
+          
             <button 
               class="view-resume-button" 
               (click)="viewResume(trainer.resume)"

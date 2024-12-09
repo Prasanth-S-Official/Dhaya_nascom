@@ -132,6 +132,26 @@
     background: linear-gradient(135deg, #3276a6, #3c91e6);
     transform: scale(1.1);
   }
+
+/* Toggle Status Button - Active */
+button.toggle-status-button.active-button {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: #fff;
+  }
+  
+  button.toggle-status-button.active-button:hover {
+    background-color: #218838; /* Darker Green */
+  }
+  
+  /* Toggle Status Button - Inactive */
+  button.toggle-status-button.inactive-button {
+    background: linear-gradient(135deg, #df4b70, #e03f3f);
+    color: #fff;
+  }
+  
+  button.toggle-status-button.inactive-button:hover {
+    background-color: #c82333; /* Darker Red */
+  }
   
   .unavailable-button {
     background: linear-gradient(135deg, #f1c40f, #f39c12);
