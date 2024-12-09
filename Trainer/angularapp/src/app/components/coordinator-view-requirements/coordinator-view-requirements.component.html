@@ -39,19 +39,15 @@
           <td>{{ requirement.status }}</td>
           <td>{{ getTrainerName(requirement) }}</td>
           <td>
-            <select
-              [(ngModel)]="requirement.trainerId"
-              (ngModelChange)="handleTrainerAssign(requirement, $event)"
-              [disabled]="requirement.trainerId || requirement.status !== 'Open'"
+            <button
+              *ngIf="!requirement.trainer"
+              (click)="openAssignTrainerModal(requirement)"
+              [disabled]="requirement.status !== 'Open'"
+              class="assign-button"
             >
-              <option [ngValue]="null">Select Trainer</option>
-              <option
-                *ngFor="let trainer of getAvailableTrainers()"
-                [value]="trainer.trainerId"
-              >
-                {{ trainer.name }} ({{ trainer.expertise }})
-              </option>
-            </select>
+              Assign Trainer
+            </button>
+            <span *ngIf="requirement.trainer">Trainer Assigned</span>
           </td>
         </tr>
       </tbody>
@@ -63,5 +59,19 @@
         </tbody>
       </ng-template>
     </table>
+  </div>
+
+  <!-- Assign Trainer Modal -->
+  <div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Assign Trainer</h2>
+      <p>Select a trainer to assign to <strong>{{ selectedRequirement?.title }}</strong>:</p>
+      <ul>
+        <li *ngFor="let trainer of getAvailableTrainers()" (click)="assignTrainer(selectedRequirement, trainer)">
+          {{ trainer.name }} ({{ trainer.expertise }})
+        </li>
+      </ul>
+      <button (click)="closeModal()" class="close-button">Close</button>
+    </div>
   </div>
 </div>

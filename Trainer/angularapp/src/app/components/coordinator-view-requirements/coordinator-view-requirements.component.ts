@@ -34,10 +34,17 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
       allTrainers: this.trainerService.getAllTrainers(),
     }).subscribe(
       ({ allRequirements, allTrainers }) => {
-        this.availableRequirements = allRequirements;
+        // Map backend trainer object to trainerId in the frontend requirements
+        this.availableRequirements = allRequirements.map((requirement: any) => {
+          return {
+            ...requirement,
+            trainerId: requirement.trainer?.trainerId || null, // Extract trainerId from trainer
+          };
+        });
         this.filteredRequirements = this.availableRequirements;
         this.allTrainers = allTrainers.filter((trainer) => trainer.status === 'Active'); // Filter active trainers only
-        console.log("allReq",allRequirements);
+        console.log('All Requirements:', this.availableRequirements);
+        console.log('All Trainers:', this.allTrainers);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -63,13 +70,12 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     if (!trainerId) {
       return;
     }
-  
+
     const updatedRequirement = {
       ...requirement,
-      trainer: { trainerId }, // Include the nested trainer object
+      trainer: { trainerId }, // Include the nested trainer object for backend
     };
-  
-    console.log("updatedRequirement",updatedRequirement);
+
     this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
       () => {
         this.fetchData(); // Refresh data to update the view
@@ -79,11 +85,10 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
       }
     );
   }
-  
 
   isTrainerAssigned(trainerId: number): boolean {
     return this.availableRequirements.some(
-      (requirement) => requirement.trainerId === trainerId
+      (requirement: any) => requirement.trainerId === trainerId
     );
   }
 
@@ -94,8 +99,10 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   }
 
   getTrainerName(requirement: Requirement): string {
-    const trainer = this.allTrainers.find((t) => t.trainerId === requirement.trainerId);
-    return trainer ? `${trainer.name} (${trainer.expertise})` : 'Not Assigned';
+    const trainer = (requirement as any).trainer; // Use `as any` to bypass the type error
+    return trainer
+      ? `${trainer.name} (${trainer.expertise})`
+      : 'Not Assigned';
   }
 
   logout(): void {
