@@ -36,9 +36,8 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
       ({ allRequirements, allTrainers }) => {
         this.availableRequirements = allRequirements;
         this.filteredRequirements = this.availableRequirements;
-        this.allTrainers = allTrainers;
-        console.log('Available requirements:', this.availableRequirements);
-        console.log('Available trainers:', this.allTrainers);
+        this.allTrainers = allTrainers.filter((trainer) => trainer.status === 'Active'); // Filter active trainers only
+        console.log("requirement",allRequirements);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -60,37 +59,38 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     );
   }
 
-  handleAssignClick(requirement: Requirement): void {
-    const trainerId = this.selectTrainer(requirement);
-    if (trainerId) {
-      const updatedRequirement = { ...requirement, trainerId };
-
-      this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
-        () => {
-          alert('Trainer assigned successfully.');
-          this.fetchData(); // Refresh data after assignment
-        },
-        (error) => {
-          console.error('Error assigning trainer:', error);
-          alert('Error assigning trainer.');
-        }
-      );
-    } else {
-      alert('No available trainers to assign.');
+  handleTrainerAssign(requirement: Requirement): void {
+    if (!requirement.trainerId) {
+      return;
     }
-  }
 
-  selectTrainer(requirement: Requirement): number | null {
-    // Logic to select an available trainer based on expertise, or assign the first one
-    const suitableTrainer = this.allTrainers.find(
-      (trainer) => trainer.expertise.toLowerCase().includes(requirement.skillLevel.toLowerCase()) && trainer.status === 'Active'
+    const updatedRequirement = { ...requirement };
+
+    this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
+      () => {
+        alert('Trainer assigned successfully.');
+        this.fetchData(); // Refresh data after assignment
+      },
+      (error) => {
+        console.error('Error assigning trainer:', error);
+        alert('Error assigning trainer.');
+      }
     );
-
-    return suitableTrainer ? suitableTrainer.trainerId : null;
   }
 
-  logout(): void {
-    localStorage.clear();
-    this.router.navigate(['/login']);
+  isTrainerAssigned(trainerId: number): boolean {
+    return this.availableRequirements.some(
+      (requirement) => requirement.trainerId === trainerId
+    );
+  }
+
+  get availableTrainers(): Trainer[] {
+    return this.allTrainers.filter(
+      (trainer) => !this.isTrainerAssigned(trainer.trainerId)
+    );
+  }
+
+  navigateToProgress(requirement: Requirement): void {
+    this.router.navigate(['/coordinator/progress', requirement.requirementId]);
   }
 }

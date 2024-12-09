@@ -24,7 +24,7 @@ body {
   }
   
   /* Main Container */
-  #materialHomeBody {
+  #requirementHomeBody {
     margin: 20px auto;
     width: 90%;
     max-width: 1200px; /* Max width for large screens */
