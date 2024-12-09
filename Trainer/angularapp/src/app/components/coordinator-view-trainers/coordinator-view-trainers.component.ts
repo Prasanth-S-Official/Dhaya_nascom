@@ -12,7 +12,9 @@ export class CoordinatorViewTrainersComponent implements OnInit {
   allTrainers: any[] = [];
   filteredTrainers: any[] = [];
   showDeletePopup = false;
+  showResumePopup = false;
   trainerToDelete: number | null = null;
+  resumeImage: string | null = null;
   searchField = '';
   selectedStatus: string | null = null;
   status: string = '';
@@ -68,6 +70,30 @@ export class CoordinatorViewTrainersComponent implements OnInit {
 
   navigateToEditTrainer(id: number) {
     this.router.navigate(['/coordinator/edit/trainer', id]);
+  }
+
+  toggleTrainerStatus(trainer: any) {
+    const updatedStatus = trainer.status === 'Active' ? 'Inactive' : 'Active';
+    const updatedTrainer = { ...trainer, status: updatedStatus };
+
+    this.trainerService.updateTrainer(trainer.trainerId, updatedTrainer).subscribe(
+      () => {
+        trainer.status = updatedStatus;
+      },
+      (error) => {
+        console.error('Error updating trainer status:', error);
+      }
+    );
+  }
+
+  viewResume(resumeBase64: string) {
+    this.resumeImage = resumeBase64;
+    this.showResumePopup = true;
+  }
+
+  closeResumePopup() {
+    this.resumeImage = null;
+    this.showResumePopup = false;
   }
 
   applyFilters(): void {
