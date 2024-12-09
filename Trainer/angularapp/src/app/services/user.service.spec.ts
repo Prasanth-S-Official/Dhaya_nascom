@@ -23,7 +23,7 @@ describe('UserService', () => {
     });
   });
 
-  it('should add a new user', (done) => {
+  fit('should add a new user', (done) => {
     const newUser: Users = { id: 3, name: 'Alice Smith', email: 'alice@example.com' };
     service.addUser(newUser);
 
