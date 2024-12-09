@@ -22,6 +22,7 @@ import { AdminViewMaterialComponent } from './components/admin-view-material/adm
 import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ManagernavComponent } from './components/managernav/managernav.component';
+import { ManagerRequirementComponent } from './components/manager-requirement/manager-requirement.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ManagernavComponent } from './components/managernav/managernav.componen
     UserviewmaterialComponent,
     AdminInsightsComponent,
     ManagernavComponent,
+    ManagerRequirementComponent,
   
 
   ],
