@@ -27,10 +27,9 @@ export class TrainerManagementComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       expertise: ['', Validators.required],
-      experience: ['', Validators.required], // Marked as required
-      certification: ['', Validators.required], // Marked as required
+      experience: ['', Validators.required],
+      certification: ['', Validators.required],
       joiningDate: ['', Validators.required],
-      status: ['Active'],
       resume: [''], // Base64 string
     });
   }
@@ -93,7 +92,11 @@ export class TrainerManagementComponent implements OnInit {
 
   onSubmit(): void {
     if (this.trainerForm.valid) {
-      const formData = { ...this.trainerForm.value, resume: this.resumeBase64 };
+      const formData: Trainer = {
+        ...this.trainerForm.value,
+        resume: this.resumeBase64,
+        status: 'Active', // Status is always Active by default
+      };
 
       if (this.id) {
         this.trainerService.updateTrainer(this.id, formData).subscribe(
