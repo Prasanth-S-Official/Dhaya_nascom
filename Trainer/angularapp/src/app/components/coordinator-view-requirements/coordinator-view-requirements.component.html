@@ -1,0 +1,62 @@
+<app-coordinatornav></app-coordinatornav>
+<div>
+  <div id="requirementHomeBody">
+    <h1>Available Requirements</h1>
+    <hr />
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Requirement Title or Department..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Requirements Table -->
+    <table class="requirement-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Department</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredRequirements.length && availableRequirements.length; else noRecords">
+        <tr *ngFor="let requirement of filteredRequirements; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ requirement.title }}</td>
+          <td>{{ requirement.description }}</td>
+          <td>{{ requirement.department }}</td>
+          <td>{{ requirement.duration }}</td>
+          <td>{{ requirement.status }}</td>
+          <td>
+            <button
+              id="applyButton"
+              *ngIf="!isRequirementAssigned(requirement)"
+              (click)="handleAssignClick(requirement)"
+              [disabled]="requirement.status !== 'Open'"
+              [ngClass]="{ 'grey-button': requirement.status !== 'Open' }"
+            >
+              Assign Trainer
+            </button>
+            <button id="assignedButton" *ngIf="isRequirementAssigned(requirement)">Trainer Assigned</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colspan="7" class="no-records-cell">Oops! No records found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>
