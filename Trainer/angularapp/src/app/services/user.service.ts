@@ -79,6 +79,10 @@ export class UserService {
     { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
   ];
 
+  // getUsers(): Observable<Users[]> {
+  //   return of(this.users);
+  // }
+
   getUsers(): Observable<Users[]> {
     return of(this.users);
   }
