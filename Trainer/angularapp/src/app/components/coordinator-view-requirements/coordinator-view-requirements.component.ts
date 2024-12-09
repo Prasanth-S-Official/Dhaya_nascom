@@ -17,6 +17,8 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   filteredRequirements: Requirement[] = [];
   allTrainers: Trainer[] = [];
   searchField: string = '';
+  showModal: boolean = false;
+  selectedRequirement: Requirement | null = null;
 
   constructor(
     private router: Router,
@@ -43,8 +45,6 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
         });
         this.filteredRequirements = this.availableRequirements;
         this.allTrainers = allTrainers.filter((trainer) => trainer.status === 'Active'); // Filter active trainers only
-        console.log('All Requirements:', this.availableRequirements);
-        console.log('All Trainers:', this.allTrainers);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -66,19 +66,26 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     );
   }
 
-  handleTrainerAssign(requirement: Requirement, trainerId: number | null): void {
-    if (!trainerId) {
-      return;
-    }
+  openAssignTrainerModal(requirement: Requirement): void {
+    this.selectedRequirement = requirement;
+    this.showModal = true;
+  }
 
+  closeModal(): void {
+    this.showModal = false;
+    this.selectedRequirement = null;
+  }
+
+  assignTrainer(requirement: Requirement, trainer: Trainer): void {
     const updatedRequirement = {
       ...requirement,
-      trainer: { trainerId }, // Include the nested trainer object for backend
+      trainer: { trainerId: trainer.trainerId }, // Include the nested trainer object for backend
     };
 
     this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
       () => {
         this.fetchData(); // Refresh data to update the view
+        this.closeModal();
       },
       (error) => {
         console.error('Error assigning trainer:', error);
@@ -86,15 +93,12 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     );
   }
 
-  isTrainerAssigned(trainerId: number): boolean {
-    return this.availableRequirements.some(
-      (requirement: any) => requirement.trainerId === trainerId
-    );
-  }
-
   getAvailableTrainers(): Trainer[] {
     return this.allTrainers.filter(
-      (trainer) => !this.isTrainerAssigned(trainer.trainerId)
+      (trainer) =>
+        !this.availableRequirements.some(
+          (requirement) => requirement.trainerId === trainer.trainerId
+        )
     );
   }
 

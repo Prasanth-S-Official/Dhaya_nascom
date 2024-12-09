@@ -78,7 +78,7 @@ CREATE TABLE `requirement` (
   PRIMARY KEY (`requirement_id`),
   KEY `FKqndc0ptamgtq4horxxrrieo7n` (`trainer_id`),
   CONSTRAINT `FKqndc0ptamgtq4horxxrrieo7n` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (2,5000,'demo department','demo description','56 days','Demo Location','Offline','2024-12-09','High','Beginner','Open','demo title two updated',NULL);
+INSERT INTO `requirement` VALUES (2,5000,'demo department','demo description','56 days','Demo Location','Offline','2024-12-09','High','Beginner','Open','demo title two updated',2),(4,9000,'demo department','demo description','26 days','Demo Location','Online','2024-12-09','Medium','Advanced','Open','demo title three updated',NULL);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-09 17:16:00
+-- Dump completed on 2024-12-09 17:19:32
