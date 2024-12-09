@@ -60,7 +60,7 @@
           <td>{{ trainer.phone }}</td>
           <td>{{ trainer.expertise }}</td>
           <td>{{ trainer.status }}</td>
-          <td>
+          <!-- <td>
             <button class="edit-button" (click)="navigateToEditTrainer(trainer.trainerId)">Edit</button>
             <button class="delete-button" (click)="handleDeleteClick(trainer.trainerId)">Delete</button>
             <button 
@@ -75,7 +75,25 @@
             >
               View Resume
             </button>
+          </td> -->
+          <td>
+            <button class="edit-button" (click)="navigateToEditTrainer(trainer.trainerId)">Edit</button>
+            <button class="delete-button" (click)="handleDeleteClick(trainer.trainerId)">Delete</button>
+            <button 
+              class="toggle-status-button"
+              [ngClass]="trainer.status === 'Active' ? 'inactive-button' : 'unavailable-button'"
+              (click)="toggleTrainerStatus(trainer)"
+            >
+              {{ trainer.status === 'Active' ? 'Make Inactive' : 'Make Active' }}
+            </button>
+            <button 
+              class="view-resume-button" 
+              (click)="viewResume(trainer.resume)"
+            >
+              View Resume
+            </button>
           </td>
+          
         </tr>
       </tbody>
     </table>
@@ -92,9 +110,10 @@
   <!-- Resume Viewer Popup -->
   <div *ngIf="showResumePopup" class="resume-popup">
     <div class="resume-popup-content">
+      <button class="close-button" (click)="closeResumePopup()">&#10006;</button>
       <h2>Trainer Resume</h2>
       <img *ngIf="resumeImage" [src]="'data:image/jpeg;base64,' + resumeImage" alt="Trainer Resume" />
-      <button class="ok-button" (click)="closeResumePopup()">Close</button>
     </div>
   </div>
+  
 </div>

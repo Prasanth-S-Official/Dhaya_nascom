@@ -304,3 +304,57 @@
     }
   }
   
+  .resume-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .resume-popup-content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Adjust as needed */
+    width: 90%; /* Responsive */
+  }
+  
+  .resume-popup-content h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+  
+  .resume-popup-content img {
+    max-width: 100%; /* Ensure image fits within container */
+    max-height: 300px; /* Fixed height for the image */
+    object-fit: contain; /* Ensures the image maintains aspect ratio */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: #ff0000;
+  }
+  
