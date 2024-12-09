@@ -37,30 +37,21 @@
           <td>{{ requirement.department }}</td>
           <td>{{ requirement.duration }}</td>
           <td>{{ requirement.status }}</td>
+          <td>{{ getTrainerName(requirement) }}</td>
           <td>
             <select
               [(ngModel)]="requirement.trainerId"
-              (ngModelChange)="handleTrainerAssign(requirement)"
+              (ngModelChange)="handleTrainerAssign(requirement, $event)"
               [disabled]="requirement.trainerId || requirement.status !== 'Open'"
             >
               <option [ngValue]="null">Select Trainer</option>
               <option
-                *ngFor="let trainer of availableTrainers"
+                *ngFor="let trainer of getAvailableTrainers()"
                 [value]="trainer.trainerId"
-                [disabled]="isTrainerAssigned(trainer.trainerId)"
               >
                 {{ trainer.name }} ({{ trainer.expertise }})
               </option>
             </select>
-          </td>
-          <td>
-            <button
-              id="progressButton"
-              (click)="navigateToProgress(requirement)"
-              [disabled]="!requirement.trainerId"
-            >
-              Progress
-            </button>
           </td>
         </tr>
       </tbody>

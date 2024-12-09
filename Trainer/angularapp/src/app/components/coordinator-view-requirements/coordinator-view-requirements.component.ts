@@ -37,7 +37,6 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
         this.availableRequirements = allRequirements;
         this.filteredRequirements = this.availableRequirements;
         this.allTrainers = allTrainers.filter((trainer) => trainer.status === 'Active'); // Filter active trainers only
-        console.log("requirement",allRequirements);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -59,17 +58,18 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     );
   }
 
-  handleTrainerAssign(requirement: Requirement): void {
-    if (!requirement.trainerId) {
+  handleTrainerAssign(requirement: Requirement, trainerId: number | null): void {
+    if (!trainerId) {
       return;
     }
 
-    const updatedRequirement = { ...requirement };
+    const updatedRequirement = { ...requirement, trainerId };
+    console.log("updatedRequirement",updatedRequirement);
 
     this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
       () => {
         alert('Trainer assigned successfully.');
-        this.fetchData(); // Refresh data after assignment
+        this.fetchData(); // Refresh data to update dropdown
       },
       (error) => {
         console.error('Error assigning trainer:', error);
@@ -84,13 +84,19 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     );
   }
 
-  get availableTrainers(): Trainer[] {
+  getAvailableTrainers(): Trainer[] {
     return this.allTrainers.filter(
       (trainer) => !this.isTrainerAssigned(trainer.trainerId)
     );
   }
 
-  navigateToProgress(requirement: Requirement): void {
-    this.router.navigate(['/coordinator/progress', requirement.requirementId]);
+  getTrainerName(requirement: Requirement): string {
+    const trainer = this.allTrainers.find((t) => t.trainerId === requirement.trainerId);
+    return trainer ? `${trainer.name} (${trainer.expertise})` : 'Not Assigned';
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }
