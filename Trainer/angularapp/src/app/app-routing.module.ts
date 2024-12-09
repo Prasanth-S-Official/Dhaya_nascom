@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent },
 
   { path: 'manager/add/requirement', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
-  { path: 'admin/edit/material/:id', component: AdminMaterialComponent, canActivate: [AuthGuard] },
+  { path: 'manager/edit/requirement/:id', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
 

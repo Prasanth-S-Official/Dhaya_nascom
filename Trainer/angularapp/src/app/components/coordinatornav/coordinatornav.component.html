@@ -1,0 +1,39 @@
+<nav class="coordinatornav">
+    <h1 class="site-title" id="heading">
+      <a routerLink="/home" style="color: inherit; text-decoration: inherit;">TrainerHub</a>
+    </h1>
+    <ul class="nav-links">
+      <li>
+        <p class="user-role">{{ userName }} / {{ userRole }}</p>
+      </li>
+      <li><a [routerLink]="['/home']">Home</a></li>
+      <li class="dropdown">
+        <span class="dropdown-label">Trainers</span>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/coordinator/add/trainer">Add Trainer</a></li>
+          <li><a routerLink="/coordinator/view/trainers">View Trainers</a></li>
+        </ul>
+      </li>
+      <li><a routerLink="/coordinator/view/trainers">Trainers</a></li>
+      <li><a routerLink="/coordinator/view/feedback">Feedbacks</a></li>
+      <li>
+        <button id="redbutton" class="button" (click)="showLogoutPopup = true">
+          Logout
+        </button>
+      </li>
+    </ul>
+  
+    <!-- Logout Popup -->
+    <div *ngIf="showLogoutPopup" class="logout-popup">
+      <div class="logout-popup-content">
+        <p>Are you sure you want to logout?</p>
+        <button (click)="logout(); showLogoutPopup = false;" class="button button-yes">
+          Yes, Logout
+        </button>
+        <button (click)="showLogoutPopup = false" class="button button-cancel">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </nav>
+  

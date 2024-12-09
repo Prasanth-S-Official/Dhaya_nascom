@@ -24,6 +24,7 @@ import { AdminInsightsComponent } from './components/admin-insights/admin-insigh
 import { ManagernavComponent } from './components/managernav/managernav.component';
 import { ManagerRequirementComponent } from './components/manager-requirement/manager-requirement.component';
 import { ManagerViewRequirementsComponent } from './components/manager-view-requirements/manager-view-requirements.component';
+import { CoordinatornavComponent } from './components/coordinatornav/coordinatornav.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ManagerViewRequirementsComponent } from './components/manager-view-requ
     ManagernavComponent,
     ManagerRequirementComponent,
     ManagerViewRequirementsComponent,
+    CoordinatornavComponent,
   
 
   ],
