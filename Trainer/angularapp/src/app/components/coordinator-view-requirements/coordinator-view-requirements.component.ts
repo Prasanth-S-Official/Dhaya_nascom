@@ -37,6 +37,7 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
         this.availableRequirements = allRequirements;
         this.filteredRequirements = this.availableRequirements;
         this.allTrainers = allTrainers.filter((trainer) => trainer.status === 'Active'); // Filter active trainers only
+        console.log("allReq",allRequirements);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -62,21 +63,23 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
     if (!trainerId) {
       return;
     }
-
-    const updatedRequirement = { ...requirement, trainerId };
+  
+    const updatedRequirement = {
+      ...requirement,
+      trainer: { trainerId }, // Include the nested trainer object
+    };
+  
     console.log("updatedRequirement",updatedRequirement);
-
     this.requirementService.updateRequirement(requirement.requirementId, updatedRequirement).subscribe(
       () => {
-        alert('Trainer assigned successfully.');
-        this.fetchData(); // Refresh data to update dropdown
+        this.fetchData(); // Refresh data to update the view
       },
       (error) => {
         console.error('Error assigning trainer:', error);
-        alert('Error assigning trainer.');
       }
     );
   }
+  
 
   isTrainerAssigned(trainerId: number): boolean {
     return this.availableRequirements.some(
