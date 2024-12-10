@@ -7,20 +7,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
-import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
-import { AdminnavComponent } from './components/adminnav/adminnav.component';
-import { UsernavComponent } from './components/usernav/usernav.component';
-import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
-import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
-import { AdminviewappliedrequestComponent } from './components/adminviewappliedrequest/adminviewappliedrequest.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
-import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
-import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
-import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ManagernavComponent } from './components/managernav/managernav.component';
 import { ManagerRequirementComponent } from './components/manager-requirement/manager-requirement.component';
 import { ManagerViewRequirementsComponent } from './components/manager-view-requirements/manager-view-requirements.component';
@@ -42,18 +30,6 @@ import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfe
     SignupComponent,
     HomePageComponent,
     ErrorComponent,
-    AdminviewfeedbackComponent,
-    UserviewfeedbackComponent,
-    UseraddfeedbackComponent,
-    AdminnavComponent,
-    UsernavComponent,
-    UseraddrequestComponent,
-    UserviewappliedrequestComponent,
-    AdminviewappliedrequestComponent,
-    AdminMaterialComponent,
-    AdminViewMaterialComponent,
-    UserviewmaterialComponent,
-    AdminInsightsComponent,
     ManagernavComponent,
     ManagerRequirementComponent,
     ManagerViewRequirementsComponent,
