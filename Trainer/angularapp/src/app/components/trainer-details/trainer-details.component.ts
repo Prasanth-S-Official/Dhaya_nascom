@@ -49,8 +49,7 @@ export class TrainerDetailsComponent implements OnInit {
   fetchAssociatedRequirement(trainerId: number): void {
     this.requirementService.getRequirementsByTrainerId(trainerId).subscribe(
       (requirements: any[]) => {
-        // Assuming the trainer can have only one associated open requirement
-        this.requirement = requirements.find(req => req.status !== 'Closed') || null;
+        this.requirement = requirements.find(req => req.status === 'Open') || null;
       },
       (error) => {
         console.error('Failed to load associated requirement:', error);
@@ -66,14 +65,26 @@ export class TrainerDetailsComponent implements OnInit {
     this.showResumePopup = false;
   }
 
-  closeRequirement(requirementId: number): void {
+  acceptRequirement(requirementId: number): void {
     const updatedRequirement = { ...this.requirement, status: 'Closed' };
     this.requirementService.updateRequirement(requirementId, updatedRequirement).subscribe(
       () => {
         this.requirement.status = 'Closed';
       },
       (error) => {
-        console.error('Error closing requirement:', error);
+        console.error('Error accepting requirement:', error);
+      }
+    );
+  }
+
+  rejectRequirement(requirementId: number): void {
+    const updatedRequirement = { ...this.requirement, trainer: null };
+    this.requirementService.updateRequirement(requirementId, updatedRequirement).subscribe(
+      () => {
+        this.requirement.trainer = null;
+      },
+      (error) => {
+        console.error('Error rejecting requirement:', error);
       }
     );
   }

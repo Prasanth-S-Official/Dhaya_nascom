@@ -27,13 +27,10 @@
       <p><strong>Budget:</strong> ₹{{ requirement.budget }}</p>
       <p><strong>Priority:</strong> {{ requirement.priority }}</p>
       <p><strong>Status:</strong> {{ requirement.status }}</p>
-      <button
-        class="close-requirement-button"
-        [disabled]="requirement.status === 'Closed'"
-        (click)="closeRequirement(requirement.requirementId)"
-      >
-        {{ requirement.status === 'Closed' ? 'Closed' : 'Close Requirement' }}
-      </button>
+      <div class="action-buttons" *ngIf="requirement.status === 'Open'">
+        <button class="accept-button" (click)="acceptRequirement(requirement.requirementId)">Accept</button>
+        <button class="reject-button" (click)="rejectRequirement(requirement.requirementId)">Reject</button>
+      </div>
     </div>
   </div>
 
