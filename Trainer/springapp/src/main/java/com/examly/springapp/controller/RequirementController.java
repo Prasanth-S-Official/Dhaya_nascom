@@ -61,4 +61,14 @@ public class RequirementController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @GetMapping("/trainer/{trainerId}")
+public ResponseEntity<List<Requirement>> getRequirementsByTrainerId(@PathVariable Long trainerId) {
+    List<Requirement> requirements = requirementService.getRequirementsByTrainerId(trainerId);
+    if (requirements.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(requirements);
+}
+
 }
