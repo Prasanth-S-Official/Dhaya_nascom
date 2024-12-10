@@ -88,7 +88,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (4,4000,'demo department','demo description','26 days','Demo Location','Online','2024-12-09','Medium','Advanced','Closed','demo react basic',2),(6,9000,'demo department','demo description','16 days','Demo Location','Online','2024-12-10','Low','Beginner','Open','demo dotnet basic',NULL),(7,80000,'Dotnet','description','3 months','Location','Online','2024-12-10','Low','Beginner','Open','title',NULL);
+INSERT INTO `requirement` VALUES (4,4000,'demo department','demo description','26 days','Demo Location','Online','2024-12-09','Medium','Advanced','Closed','demo react basic',2),(6,9000,'demo department','demo description','16 days','Demo Location','Online','2024-12-10','Low','Beginner','Open','demo dotnet basic',NULL),(7,80000,'Dotnet','description','4 months','Location','Online','2024-12-10','Low','Beginner','Open','title',NULL);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-10 18:47:35
+-- Dump completed on 2024-12-10 19:02:35
