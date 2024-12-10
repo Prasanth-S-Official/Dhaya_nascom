@@ -28,6 +28,7 @@ export class ManagerViewRequirementsComponent implements OnInit {
     this.requirementService.getAllRequirements().subscribe(
       (data: any) => {
         this.allRequirements = data;
+        console.log("allRequirements",this.allRequirements);
         this.filteredRequirements = data;
         this.status = this.filteredRequirements.length === 0 ? 'noRecords' : '';
       },
