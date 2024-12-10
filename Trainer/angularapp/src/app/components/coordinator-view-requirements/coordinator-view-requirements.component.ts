@@ -17,6 +17,7 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   filteredRequirements: Requirement[] = [];
   allTrainers: Trainer[] = [];
   searchField: string = '';
+  searchTrainerField: string = ''; // For searching trainers in modal
   showModal: boolean = false;
   selectedRequirement: Requirement | null = null;
 
@@ -74,6 +75,7 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   closeModal(): void {
     this.showModal = false;
     this.selectedRequirement = null;
+    this.searchTrainerField = ''; // Reset the trainer search field when closing the modal
   }
 
   assignTrainer(requirement: Requirement, trainer: Trainer): void {
@@ -94,12 +96,20 @@ export class CoordinatorViewRequirementsComponent implements OnInit {
   }
 
   getAvailableTrainers(): Trainer[] {
-    return this.allTrainers.filter(
-      (trainer) =>
-        !this.availableRequirements.some(
-          (requirement) => requirement.trainerId === trainer.trainerId
-        )
-    );
+    // Filter trainers based on search input
+    const searchLower = this.searchTrainerField.toLowerCase();
+    return this.allTrainers
+      .filter(
+        (trainer) =>
+          !this.availableRequirements.some(
+            (requirement) => requirement.trainerId === trainer.trainerId
+          )
+      )
+      .filter(
+        (trainer) =>
+          trainer.name.toLowerCase().includes(searchLower) ||
+          trainer.expertise.toLowerCase().includes(searchLower)
+      );
   }
 
   getTrainerName(requirement: Requirement): string {

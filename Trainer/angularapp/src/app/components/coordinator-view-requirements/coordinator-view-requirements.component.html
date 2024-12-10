@@ -64,14 +64,26 @@
   <!-- Assign Trainer Modal -->
   <div *ngIf="showModal" class="modal-overlay">
     <div class="modal-content">
+      <!-- Close X Symbol in top-right corner inside the modal -->
+      <span (click)="closeModal()" class="close-icon">&times;</span>
+  
       <h2>Assign Trainer</h2>
       <p>Select a trainer to assign to <strong>{{ selectedRequirement?.title }}</strong>:</p>
+      
+      <!-- Search Box in Modal -->
+      <input
+        id="trainerSearchBox"
+        type="text"
+        placeholder="Search by Name or Expertise..."
+        [(ngModel)]="searchTrainerField"
+      />
+      
       <ul>
         <li *ngFor="let trainer of getAvailableTrainers()" (click)="assignTrainer(selectedRequirement, trainer)">
           {{ trainer.name }} ({{ trainer.expertise }})
         </li>
       </ul>
-      <button (click)="closeModal()" class="close-button">Close</button>
     </div>
   </div>
+  
 </div>
