@@ -48,18 +48,20 @@ export class TrainerDetailsComponent implements OnInit {
       }
     );
   }
-
+  
   fetchAssociatedRequirement(trainerId: number): void {
     this.requirementService.getRequirementsByTrainerId(trainerId).subscribe(
       (requirements: any[]) => {
-        this.requirement = requirements.find(req => req.status === 'Open') || null;
+        // Fetch the first requirement associated with the trainer
+        this.requirement = requirements.length > 0 ? requirements[0] : null;
+        console.log('Fetched requirement:', this.requirement); // Debugging log
       },
       (error) => {
         console.error('Failed to load associated requirement:', error);
       }
     );
   }
-
+  
   viewResume(): void {
     this.showResumePopup = true;
   }
