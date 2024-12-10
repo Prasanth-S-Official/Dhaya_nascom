@@ -22,6 +22,7 @@ import { TrainerManagementComponent } from './components/trainer-management/trai
 import { CoordinatorViewTrainersComponent } from './components/coordinator-view-trainers/coordinator-view-trainers.component';
 import { CoordinatorViewRequirementsComponent } from './components/coordinator-view-requirements/coordinator-view-requirements.component';
 import { TrainerDetailsComponent } from './components/trainer-details/trainer-details.component';
+import { SelectedTrainersComponent } from './components/selected-trainers/selected-trainers.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -32,7 +33,7 @@ const routes: Routes = [
 
   { path: 'manager/add/requirement', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'manager/edit/requirement/:id', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/trainers', component: SelectedTrainersComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/trainer/:trainerId', component: TrainerDetailsComponent, canActivate: [AuthGuard] },
   
