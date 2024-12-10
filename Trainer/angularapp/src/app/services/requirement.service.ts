@@ -28,6 +28,10 @@ export class RequirementService {
     return this.http.put<Requirement>(`${this.apiUrl}/${requirementId}`, requirement, { headers: this.getHeaders() });
   }
 
+  getRequirementsByTrainerId(trainerId: number): Observable<Requirement[]> {
+    return this.http.get<Requirement[]>(`${this.apiUrl}/trainer/${trainerId}`, { headers: this.getHeaders() });
+  }
+  
   deleteRequirement(requirementId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${requirementId}`, { headers: this.getHeaders() });
   }

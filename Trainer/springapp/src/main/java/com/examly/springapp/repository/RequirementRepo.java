@@ -32,4 +32,6 @@ public interface RequirementRepo extends JpaRepository<Requirement, Long> {
     // Custom Query: Find Requirements by Skill Level
     @Query("SELECT r FROM Requirement r WHERE r.skillLevel = :skillLevel")
     List<Requirement> findRequirementsBySkillLevel(String skillLevel);
+
+    List<Requirement> findByTrainer_TrainerId(Long trainerId); 
 }

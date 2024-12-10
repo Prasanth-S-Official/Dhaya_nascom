@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrainerService } from 'src/app/services/trainer.service';
+import { RequirementService } from 'src/app/services/requirement.service';
 
 @Component({
   selector: 'app-trainer-details',
@@ -9,6 +10,7 @@ import { TrainerService } from 'src/app/services/trainer.service';
 })
 export class TrainerDetailsComponent implements OnInit {
   trainer: any = null;
+  requirement: any = null;
   isLoading: boolean = true;
   errorMessage: string = '';
   showResumePopup: boolean = false;
@@ -16,7 +18,8 @@ export class TrainerDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private trainerService: TrainerService
+    private trainerService: TrainerService,
+    private requirementService: RequirementService
   ) {}
 
   ngOnInit(): void {
@@ -33,11 +36,24 @@ export class TrainerDetailsComponent implements OnInit {
     this.trainerService.getTrainerById(trainerId).subscribe(
       (data: any) => {
         this.trainer = data;
+        this.fetchAssociatedRequirement(data.trainerId);
         this.isLoading = false;
       },
       (error) => {
         this.errorMessage = 'Failed to load trainer details.';
         this.isLoading = false;
+      }
+    );
+  }
+
+  fetchAssociatedRequirement(trainerId: number): void {
+    this.requirementService.getRequirementsByTrainerId(trainerId).subscribe(
+      (requirements: any[]) => {
+        // Assuming the trainer can have only one associated open requirement
+        this.requirement = requirements.find(req => req.status !== 'Closed') || null;
+      },
+      (error) => {
+        console.error('Failed to load associated requirement:', error);
       }
     );
   }
@@ -48,5 +64,17 @@ export class TrainerDetailsComponent implements OnInit {
 
   closeResumePopup(): void {
     this.showResumePopup = false;
+  }
+
+  closeRequirement(requirementId: number): void {
+    const updatedRequirement = { ...this.requirement, status: 'Closed' };
+    this.requirementService.updateRequirement(requirementId, updatedRequirement).subscribe(
+      () => {
+        this.requirement.status = 'Closed';
+      },
+      (error) => {
+        console.error('Error closing requirement:', error);
+      }
+    );
   }
 }

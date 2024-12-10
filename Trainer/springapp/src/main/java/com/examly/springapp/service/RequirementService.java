@@ -11,4 +11,5 @@ public interface RequirementService {
     List<Requirement> getAllRequirements();
     Requirement updateRequirement(Long requirementId, Requirement requirement);
     Requirement deleteRequirement(Long requirementId);
+    List<Requirement> getRequirementsByTrainerId(Long trainerId);
 }

@@ -67,4 +67,12 @@ public class RequirementServiceImpl implements RequirementService {
             throw new RequirementDeletionException("Requirement not found for deletion.");
         }
     }
+
+    @Override
+public List<Requirement> getRequirementsByTrainerId(Long trainerId) {
+    return requirementRepo.findByTrainer_TrainerId(trainerId);
+}
+
+
+    
 }
