@@ -25,6 +25,7 @@ import { TrainerDetailsComponent } from './components/trainer-details/trainer-de
 import { SelectedTrainersComponent } from './components/selected-trainers/selected-trainers.component';
 import { ManagerpostfeedbackComponent } from './components/managerpostfeedback/managerpostfeedback.component';
 import { ManagerviewfeedbackComponent } from './components/managerviewfeedback/managerviewfeedback.component';
+import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfeedback/coordinatorviewfeedback.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -49,7 +50,7 @@ const routes: Routes = [
 
   // Admin Routes
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'coordinator/view/feedback', component: CoordinatorviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // User Routes
   { path: 'user/view/materials', component: UserviewmaterialComponent, canActivate: [AuthGuard] },
