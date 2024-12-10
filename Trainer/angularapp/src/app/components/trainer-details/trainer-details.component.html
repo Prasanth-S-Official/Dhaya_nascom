@@ -3,36 +3,39 @@
   <h1>Trainer Details</h1>
   <hr />
 
-  <div *ngIf="trainer; else loadingOrError">
-    <div class="trainer-card">
-      <h2>{{ trainer.name }}</h2>
-      <p><strong>Email:</strong> {{ trainer.email }}</p>
-      <p><strong>Phone:</strong> {{ trainer.phone }}</p>
-      <p><strong>Expertise:</strong> {{ trainer.expertise }}</p>
-      <p><strong>Experience:</strong> {{ trainer.experience }} years</p>
-      <p><strong>Certification:</strong> {{ trainer.certification }}</p>
-      <p><strong>Status:</strong> {{ trainer.status }}</p>
-      <button class="resume-button" *ngIf="trainer.resume" (click)="viewResume()">View Resume</button>
-    </div>
+  <ng-container *ngIf="trainer; else loadingOrError">
+    <div class="cards-container">
+      <div class="trainer-card">
+        <h2>{{ trainer.name }}</h2>
+        <p><strong>Email:</strong> {{ trainer.email }}</p>
+        <p><strong>Phone:</strong> {{ trainer.phone }}</p>
+        <p><strong>Expertise:</strong> {{ trainer.expertise }}</p>
+        <p><strong>Experience:</strong> {{ trainer.experience }} years</p>
+        <p><strong>Certification:</strong> {{ trainer.certification }}</p>
+        <p><strong>Status:</strong> {{ trainer.status }}</p>
+        <button class="resume-button" *ngIf="trainer.resume" (click)="viewResume()">View Resume</button>
+      </div>
 
-    <div class="requirement-card" *ngIf="requirement">
-      <h2>Requirement Details</h2>
-      <p><strong>Title:</strong> {{ requirement.title }}</p>
-      <p><strong>Description:</strong> {{ requirement.description }}</p>
-      <p><strong>Department:</strong> {{ requirement.department }}</p>
-      <p><strong>Duration:</strong> {{ requirement.duration }}</p>
-      <p><strong>Mode:</strong> {{ requirement.mode }}</p>
-      <p><strong>Location:</strong> {{ requirement.location }}</p>
-      <p><strong>Skill Level:</strong> {{ requirement.skillLevel }}</p>
-      <p><strong>Budget:</strong> ₹{{ requirement.budget }}</p>
-      <p><strong>Priority:</strong> {{ requirement.priority }}</p>
-      <p><strong>Status:</strong> {{ requirement.status }}</p>
-      <div class="action-buttons" *ngIf="requirement.status === 'Open'">
-        <button class="accept-button" (click)="showPopup('accept')">Accept</button>
-        <button class="reject-button" (click)="showPopup('reject')">Reject</button>
+
+      <div class="requirement-card" *ngIf="requirement">
+        <h2>Requirement Details</h2>
+        <p><strong>Title:</strong> {{ requirement.title }}</p>
+        <p><strong>Description:</strong> {{ requirement.description }}</p>
+        <p><strong>Department:</strong> {{ requirement.department }}</p>
+        <p><strong>Duration:</strong> {{ requirement.duration }}</p>
+        <p><strong>Mode:</strong> {{ requirement.mode }}</p>
+        <p><strong>Location:</strong> {{ requirement.location }}</p>
+        <p><strong>Skill Level:</strong> {{ requirement.skillLevel }}</p>
+        <p><strong>Budget:</strong> ₹{{ requirement.budget }}</p>
+        <p><strong>Priority:</strong> {{ requirement.priority }}</p>
+        <p><strong>Status:</strong> {{ requirement.status }}</p>
+        <div class="action-buttons" *ngIf="requirement.status === 'Open'">
+          <button class="accept-button" (click)="showPopup('accept')">Accept Trainer</button>
+          <button class="reject-button" (click)="showPopup('reject')">Reject Trainer</button>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
   <ng-template #loadingOrError>
     <p *ngIf="isLoading">Loading trainer details...</p>

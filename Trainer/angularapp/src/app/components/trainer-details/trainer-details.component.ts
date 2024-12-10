@@ -71,8 +71,8 @@ export class TrainerDetailsComponent implements OnInit {
   showPopup(action: string): void {
     this.actionType = action;
     this.popupMessage = action === 'accept' 
-      ? 'Are you sure you want to accept this requirement?' 
-      : 'Are you sure you want to reject this requirement?';
+      ? 'Are you sure you want to accept this trainer?' 
+      : 'Are you sure you want to reject this trainer?';
     this.showActionPopup = true;
   }
 
