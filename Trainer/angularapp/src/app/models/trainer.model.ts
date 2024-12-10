@@ -6,7 +6,7 @@ export interface Trainer {
   expertise: string;
   experience: string;
   certification: string;
-  resume: string; // Base64-encoded resume file
-  joiningDate: string;
+  resume: string; 
+  joiningDate: Date;
   status: string; // "Active" or "Inactive"
 }
