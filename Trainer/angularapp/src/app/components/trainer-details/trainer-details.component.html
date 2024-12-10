@@ -1,0 +1,31 @@
+<app-managernav></app-managernav>
+<div id="trainerDetailsContainer">
+  <h1>Trainer Details</h1>
+  <hr />
+
+  <div *ngIf="trainer; else loadingOrError">
+    <div class="trainer-card">
+      <h2>{{ trainer.name }}</h2>
+      <p><strong>Email:</strong> {{ trainer.email }}</p>
+      <p><strong>Phone:</strong> {{ trainer.phone }}</p>
+      <p><strong>Expertise:</strong> {{ trainer.expertise }}</p>
+      <p><strong>Experience:</strong> {{ trainer.experience }} years</p>
+      <p><strong>Certification:</strong> {{ trainer.certification }}</p>
+      <p><strong>Status:</strong> {{ trainer.status }}</p>
+      <button class="resume-button" *ngIf="trainer.resume" (click)="viewResume()">View Resume</button>
+    </div>
+  </div>
+
+  <ng-template #loadingOrError>
+    <p *ngIf="isLoading">Loading trainer details...</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </ng-template>
+
+  <div *ngIf="showResumePopup" class="resume-popup">
+    <div class="resume-popup-content">
+      <button class="close-button" (click)="closeResumePopup()">&#10005;</button>
+      <h2>Trainer Resume</h2>
+      <img *ngIf="trainer.resume" [src]="'data:image/jpeg;base64,' + trainer.resume" alt="Trainer Resume" />
+    </div>
+  </div>
+</div>

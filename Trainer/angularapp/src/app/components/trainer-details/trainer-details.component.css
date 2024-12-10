@@ -1,0 +1,109 @@
+#trainerDetailsContainer {
+    margin: 30px auto;
+    padding: 20px;
+    width: 90%;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  hr {
+    border: none;
+    border-top: 3px solid #3276a6;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+  
+  .trainer-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .trainer-card h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .trainer-card p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .resume-button {
+    padding: 10px 20px;
+    background: #3c91e6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .resume-button:hover {
+    background: #3276a6;
+  }
+  
+  .resume-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .resume-popup-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+  }
+  
+  .resume-popup-content h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+  
+  .resume-popup-content img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: #ff0000;
+  }
+  

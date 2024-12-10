@@ -28,6 +28,7 @@ import { CoordinatornavComponent } from './components/coordinatornav/coordinator
 import { TrainerManagementComponent } from './components/trainer-management/trainer-management.component';
 import { CoordinatorViewTrainersComponent } from './components/coordinator-view-trainers/coordinator-view-trainers.component';
 import { CoordinatorViewRequirementsComponent } from './components/coordinator-view-requirements/coordinator-view-requirements.component';
+import { TrainerDetailsComponent } from './components/trainer-details/trainer-details.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CoordinatorViewRequirementsComponent } from './components/coordinator-v
     TrainerManagementComponent,
     CoordinatorViewTrainersComponent,
     CoordinatorViewRequirementsComponent,
+    TrainerDetailsComponent,
   
 
   ],
