@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedbackService } from 'src/app/services/feedback.service';
 
 @Component({
   selector: 'app-managerviewfeedback',
@@ -6,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./managerviewfeedback.component.css']
 })
 export class ManagerviewfeedbackComponent implements OnInit {
-
   feedbacks: any[] = [];
   showDeletePopup = false;
   showDetailsModal = false;
-  selectedMaterial: any = null;
+  selectedTrainer: any = null;
   feedbackToDelete: number | null = null;
 
   constructor(private feedbackService: FeedbackService) {}
@@ -56,13 +56,13 @@ export class ManagerviewfeedbackComponent implements OnInit {
     this.showDeletePopup = false;
   }
 
-  showMaterialDetails(material: any): void {
-    this.selectedMaterial = material;
+  showTrainerDetails(trainer: any): void {
+    this.selectedTrainer = trainer;
     this.showDetailsModal = true;
   }
 
   closeDetailsModal(): void {
-    this.selectedMaterial = null;
+    this.selectedTrainer = null;
     this.showDetailsModal = false;
   }
 }

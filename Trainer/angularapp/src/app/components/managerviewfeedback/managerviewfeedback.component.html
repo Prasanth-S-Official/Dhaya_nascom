@@ -18,7 +18,7 @@
         <td>{{ i + 1 }}</td>
         <td>{{ feedback.feedbackText }}</td>
         <td>
-          <button class="view-button" (click)="showMaterialDetails(feedback.material)">View Material Info</button>
+          <button class="view-button" (click)="showTrainerDetails(feedback.trainer)">View Trainer Info</button>
           <button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button>
         </td>
       </tr>
@@ -33,16 +33,14 @@
   <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
 </div>
 
-<!-- Material Info Modal -->
+<!-- Trainer Info Modal -->
 <div *ngIf="showDetailsModal" class="details-modal-overlay">
   <div class="details-modal-content">
     <button class="close-button" (click)="closeDetailsModal()">&#x2715;</button>
-    <h2>Material Details</h2>
-    <p><strong>Material Name:</strong> {{ selectedMaterial?.materialName }}</p>
-    <p><strong>Category:</strong> {{ selectedMaterial?.category }}</p>
-    <p><strong>Unit Type:</strong> {{ selectedMaterial?.unitType }}</p>
-    <p><strong>Price Per Unit:</strong> ₹{{ selectedMaterial?.pricePerUnit }}</p>
-    <p><strong>Availability Status:</strong> {{ selectedMaterial?.availabilityStatus }}</p>
-    <p><strong>Description:</strong> {{ selectedMaterial?.description }}</p>
+    <h2>Trainer Details</h2>
+    <p><strong>Trainer Name:</strong> {{ selectedTrainer?.name }}</p>
+    <p><strong>Expertise:</strong> {{ selectedTrainer?.expertise }}</p>
+    <p><strong>Email:</strong> {{ selectedTrainer?.email }}</p>
+    <p><strong>Phone Number:</strong> {{ selectedTrainer?.phone }}</p>
   </div>
 </div>
