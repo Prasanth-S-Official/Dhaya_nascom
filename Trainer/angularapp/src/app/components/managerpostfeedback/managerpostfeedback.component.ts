@@ -5,11 +5,12 @@ import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
 @Component({
-  selector: 'app-useraddfeedback',
-  templateUrl: './useraddfeedback.component.html',
-  styleUrls: ['./useraddfeedback.component.css'],
+  selector: 'app-managerpostfeedback',
+  templateUrl: './managerpostfeedback.component.html',
+  styleUrls: ['./managerpostfeedback.component.css']
 })
-export class UseraddfeedbackComponent implements OnInit {
+export class ManagerpostfeedbackComponent implements OnInit {
+
   addFeedbackForm = this.formBuilder.group({
     userId: [{ value: '', disabled: true }, Validators.required], // User ID
     trainerId: ['', Validators.required], // Trainer ID from query parameter

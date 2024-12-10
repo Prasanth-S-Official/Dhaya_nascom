@@ -30,6 +30,7 @@ import { CoordinatorViewTrainersComponent } from './components/coordinator-view-
 import { CoordinatorViewRequirementsComponent } from './components/coordinator-view-requirements/coordinator-view-requirements.component';
 import { TrainerDetailsComponent } from './components/trainer-details/trainer-details.component';
 import { SelectedTrainersComponent } from './components/selected-trainers/selected-trainers.component';
+import { ManagerpostfeedbackComponent } from './components/managerpostfeedback/managerpostfeedback.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SelectedTrainersComponent } from './components/selected-trainers/select
     CoordinatorViewRequirementsComponent,
     TrainerDetailsComponent,
     SelectedTrainersComponent,
+    ManagerpostfeedbackComponent,
   
 
   ],

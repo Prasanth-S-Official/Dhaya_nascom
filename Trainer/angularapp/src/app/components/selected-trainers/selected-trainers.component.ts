@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RequirementService } from 'src/app/services/requirement.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class SelectedTrainersComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
 
-  constructor(private requirementService: RequirementService) {}
+  constructor(private requirementService: RequirementService ,  private router: Router) {}
 
   ngOnInit(): void {
     this.fetchClosedRequirements();
@@ -36,6 +37,6 @@ export class SelectedTrainersComponent implements OnInit {
   }
 
   writeReview(trainerId: number): void {
-    this.router.navigate(['/write-review', trainerId]);
+    this.router.navigate(['/manager/add/feedback'], { queryParams: { trainerId } });
   }
 }

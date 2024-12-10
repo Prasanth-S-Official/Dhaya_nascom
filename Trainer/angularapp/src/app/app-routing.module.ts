@@ -23,6 +23,7 @@ import { CoordinatorViewTrainersComponent } from './components/coordinator-view-
 import { CoordinatorViewRequirementsComponent } from './components/coordinator-view-requirements/coordinator-view-requirements.component';
 import { TrainerDetailsComponent } from './components/trainer-details/trainer-details.component';
 import { SelectedTrainersComponent } from './components/selected-trainers/selected-trainers.component';
+import { ManagerpostfeedbackComponent } from './components/managerpostfeedback/managerpostfeedback.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -53,7 +54,7 @@ const routes: Routes = [
   { path: 'user/view/materials', component: UserviewmaterialComponent, canActivate: [AuthGuard] },
   { path: 'user/add/request', component: UseraddrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/view/applied-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'manager/add/feedback', component: ManagerpostfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes
