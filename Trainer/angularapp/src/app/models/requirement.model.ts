@@ -4,7 +4,7 @@ export interface Requirement {
   description: string; // Matches description in the backend
   department: string; // Matches department in the backend
   postedDate: string; // Matches postedDate in the backend (optional since it's usually set by the backend)
-  status: string; // Matches status in the backend (optional)
+  status: string; 
   duration: string; // Matches duration in the backend
   mode: string; // Matches mode in the backend
   location: string; // Matches location in the backend
