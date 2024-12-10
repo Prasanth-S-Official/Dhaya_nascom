@@ -15,7 +15,13 @@
         </ul>
       </li>
       <li><a routerLink="/manager/view/trainers">Selected Trainers</a></li>
-      <li><a routerLink="/manager/view/feedback">Feedbacks</a></li>
+      <li class="dropdown">
+        <span class="dropdown-label">Feedbacks</span>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/manager/view/feedback">My Feedbacks</a></li>
+          <!-- <li><a routerLink="/user/add/feedback">Post Feedback</a></li> -->
+        </ul>
+      </li>
       <li>
         <button id="redbutton" class="button" (click)="showLogoutPopup = true">
           Logout

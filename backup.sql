@@ -42,7 +42,7 @@ CREATE TABLE `feedback` (
   KEY `FK7k33yw505d347mw3avr93akao` (`user_id`),
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKbemwsc34h9o14qmv3mnnkesuv` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,'Expertise','2024-12-10','demo feedback',1,3),(3,'Expertise','2024-12-10','demo feedback for Knowledge',1,3);
+INSERT INTO `feedback` VALUES (2,'Expertise','2024-12-10','demo feedback',1,3),(3,'Expertise','2024-12-10','demo feedback for Knowledge',1,3),(4,'Support','2024-12-10','Excellent',2,3);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-10 23:31:45
+-- Dump completed on 2024-12-10 23:46:45
