@@ -84,6 +84,10 @@
       </select>
     </div>
 
+    <div *ngIf="errorMessage" class="error">
+      *{{ errorMessage }}
+    </div>
+
     <button type="submit" class="submit-button">{{ id ? 'Update Requirement' : 'Add Requirement' }}</button>
   </form>
 </div>

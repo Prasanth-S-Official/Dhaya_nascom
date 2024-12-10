@@ -79,7 +79,7 @@ CREATE TABLE `requirement` (
   PRIMARY KEY (`requirement_id`),
   KEY `FKqndc0ptamgtq4horxxrrieo7n` (`trainer_id`),
   CONSTRAINT `FKqndc0ptamgtq4horxxrrieo7n` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (4,4000,'demo department','demo description','26 days','Demo Location','Online','2024-12-09','Medium','Advanced','Closed','demo react basic',2),(6,9000,'demo department','demo description','16 days','Demo Location','Online','2024-12-10','Low','Beginner','Open','demo dotnet basic',NULL);
+INSERT INTO `requirement` VALUES (4,4000,'demo department','demo description','26 days','Demo Location','Online','2024-12-09','Medium','Advanced','Closed','demo react basic',2),(6,9000,'demo department','demo description','16 days','Demo Location','Online','2024-12-10','Low','Beginner','Open','demo dotnet basic',NULL),(7,80000,'Dotnet','description','3 months','Location','Online','2024-12-10','Low','Beginner','Open','title',NULL);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-10 18:32:35
+-- Dump completed on 2024-12-10 18:47:35
