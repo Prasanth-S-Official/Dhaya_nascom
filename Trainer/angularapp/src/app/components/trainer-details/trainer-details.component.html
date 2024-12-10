@@ -28,8 +28,8 @@
       <p><strong>Priority:</strong> {{ requirement.priority }}</p>
       <p><strong>Status:</strong> {{ requirement.status }}</p>
       <div class="action-buttons" *ngIf="requirement.status === 'Open'">
-        <button class="accept-button" (click)="acceptRequirement(requirement.requirementId)">Accept</button>
-        <button class="reject-button" (click)="rejectRequirement(requirement.requirementId)">Reject</button>
+        <button class="accept-button" (click)="showPopup('accept')">Accept</button>
+        <button class="reject-button" (click)="showPopup('reject')">Reject</button>
       </div>
     </div>
   </div>
@@ -44,6 +44,14 @@
       <button class="close-button" (click)="closeResumePopup()">&#10005;</button>
       <h2>Trainer Resume</h2>
       <img *ngIf="trainer.resume" [src]="'data:image/jpeg;base64,' + trainer.resume" alt="Trainer Resume" />
+    </div>
+  </div>
+
+  <div *ngIf="showActionPopup" class="action-popup">
+    <div class="action-popup-content">
+      <h2>{{ popupMessage }}</h2>
+      <button class="ok-button" (click)="confirmAction()">OK</button>
+      <button class="cancel-button" (click)="closePopup()">Cancel</button>
     </div>
   </div>
 </div>

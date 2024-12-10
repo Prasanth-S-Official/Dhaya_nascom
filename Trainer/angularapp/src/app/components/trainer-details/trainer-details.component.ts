@@ -14,6 +14,9 @@ export class TrainerDetailsComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
   showResumePopup: boolean = false;
+  showActionPopup: boolean = false;
+  actionType: string = ''; // 'accept' or 'reject'
+  popupMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -65,11 +68,31 @@ export class TrainerDetailsComponent implements OnInit {
     this.showResumePopup = false;
   }
 
-  acceptRequirement(requirementId: number): void {
+  showPopup(action: string): void {
+    this.actionType = action;
+    this.popupMessage = action === 'accept' 
+      ? 'Are you sure you want to accept this requirement?' 
+      : 'Are you sure you want to reject this requirement?';
+    this.showActionPopup = true;
+  }
+
+  closePopup(): void {
+    this.showActionPopup = false;
+  }
+
+  confirmAction(): void {
+    if (this.actionType === 'accept') {
+      this.acceptRequirement();
+    } else if (this.actionType === 'reject') {
+      this.rejectRequirement();
+    }
+  }
+
+  acceptRequirement(): void {
     const updatedRequirement = { ...this.requirement, status: 'Closed' };
-    this.requirementService.updateRequirement(requirementId, updatedRequirement).subscribe(
+    this.requirementService.updateRequirement(this.requirement.requirementId, updatedRequirement).subscribe(
       () => {
-        this.requirement.status = 'Closed';
+        this.router.navigate(['/manager/view/requirements']);
       },
       (error) => {
         console.error('Error accepting requirement:', error);
@@ -77,11 +100,11 @@ export class TrainerDetailsComponent implements OnInit {
     );
   }
 
-  rejectRequirement(requirementId: number): void {
+  rejectRequirement(): void {
     const updatedRequirement = { ...this.requirement, trainer: null };
-    this.requirementService.updateRequirement(requirementId, updatedRequirement).subscribe(
+    this.requirementService.updateRequirement(this.requirement.requirementId, updatedRequirement).subscribe(
       () => {
-        this.requirement.trainer = null;
+        this.router.navigate(['/manager/view/requirements']);
       },
       (error) => {
         console.error('Error rejecting requirement:', error);
