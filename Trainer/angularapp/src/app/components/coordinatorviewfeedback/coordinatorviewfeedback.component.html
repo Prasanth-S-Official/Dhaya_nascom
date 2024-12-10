@@ -1,5 +1,5 @@
 <app-coordinatornav></app-coordinatornav>
-<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showMaterialPopup }">
+<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showTrainerPopup }">
   <div class="main-head">
     <h1>Feedback Received</h1>
   </div>
@@ -33,7 +33,7 @@
           <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
           <td>
             <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
-            <button class="button" (click)="showMaterialDetails(feedback.material)">View Material Info</button>
+            <button class="button" (click)="showTrainerDetails(feedback.trainer)">View Trainer Info</button>
           </td>
         </tr>
         <tr *ngIf="filteredFeedbacks.length === 0">
@@ -53,16 +53,14 @@
   <button (click)="closeProfilePopup()">Close</button>
 </div>
 
-<!-- Material Info Popup -->
-<div *ngIf="showMaterialPopup" class="modal-overlay">
+<!-- Trainer Info Popup -->
+<div *ngIf="showTrainerPopup" class="modal-overlay">
   <div class="modal-content">
-    <button class="close-button" (click)="closeMaterialPopup()">&#x2715;</button>
-    <h2>Material Details</h2>
-    <p><strong>Material Name:</strong> {{ selectedMaterial?.materialName }}</p>
-    <p><strong>Category:</strong> {{ selectedMaterial?.category }}</p>
-    <p><strong>Unit Type:</strong> {{ selectedMaterial?.unitType }}</p>
-    <p><strong>Price Per Unit:</strong> ₹{{ selectedMaterial?.pricePerUnit }}</p>
-    <p><strong>Availability Status:</strong> {{ selectedMaterial?.availabilityStatus }}</p>
-    <p><strong>Description:</strong> {{ selectedMaterial?.description }}</p>
+    <button class="close-button" (click)="closeTrainerPopup()">&#x2715;</button>
+    <h2>Trainer Details</h2>
+    <p><strong>Trainer Name:</strong> {{ selectedTrainer?.name }}</p>
+    <p><strong>Expertise:</strong> {{ selectedTrainer?.expertise }}</p>
+    <p><strong>Email:</strong> {{ selectedTrainer?.email }}</p>
+    <p><strong>Phone:</strong> {{ selectedTrainer?.phone }}</p>
   </div>
 </div>

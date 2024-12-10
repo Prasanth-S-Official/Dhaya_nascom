@@ -13,9 +13,9 @@ export class CoordinatorviewfeedbackComponent implements OnInit {
   uniqueCategories = [];
   selectedCategory = '';
   showProfilePopup = false;
-  showMaterialPopup = false;
+  showTrainerPopup = false;
   selectedUser = null;
-  selectedMaterial = null;
+  selectedTrainer = null;
 
   constructor(private feedbackService: FeedbackService) {}
 
@@ -54,12 +54,12 @@ export class CoordinatorviewfeedbackComponent implements OnInit {
     this.showProfilePopup = false;
   }
 
-  showMaterialDetails(material): void {
-    this.selectedMaterial = material;
-    this.showMaterialPopup = true;
+  showTrainerDetails(trainer): void {
+    this.selectedTrainer = trainer;
+    this.showTrainerPopup = true;
   }
 
-  closeMaterialPopup(): void {
-    this.showMaterialPopup = false;
+  closeTrainerPopup(): void {
+    this.showTrainerPopup = false;
   }
 }
