@@ -7,8 +7,8 @@ describe('Feedback Model', () => {
     const feedback: Feedback = {
       feedbackId: 101,
       userId: 1,
-      materialId: 202,
-      category: 'Service',
+      trainerId: 202,
+      category: 'Support',
       feedbackText: 'This is a feedback text.',
       date: new Date('2024-07-02')
     };
@@ -16,8 +16,8 @@ describe('Feedback Model', () => {
     expect(feedback).toBeTruthy();
     expect(feedback.feedbackId).toBe(101);
     expect(feedback.userId).toBe(1);
-    expect(feedback.materialId).toBe(202);
-    expect(feedback.category).toBe('Service');
+    expect(feedback.trainerId).toBe(202);
+    expect(feedback.category).toBe('Support');
     expect(feedback.feedbackText).toBe('This is a feedback text.');
     expect(feedback.date).toEqual(new Date('2024-07-02'));
   });

@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testMaterialRequestInterfaceAndImplementation() {
+    public void backend_testTrainerInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.MaterialRequestService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.MaterialRequestServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.TrainerService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.TrainerServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testMaterialControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.MaterialController");
+	   public void backend_testTrainerControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.TrainerController");
 	   }
 
 	   @Test
-	   public void backend_testMaterialRequestControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.MaterialRequestController");
+	   public void backend_testRequirementControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.RequirementController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testMaterialModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Material");
+	   public void backend_testTrainerModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Trainer");
 	   }
 	 
 	 @Test
@@ -200,8 +200,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testMaterialRequestModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.MaterialRequest");
+	   public void backend_testRequirementModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Requirement");
 	   }
 
 }
