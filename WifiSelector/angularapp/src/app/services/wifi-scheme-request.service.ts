@@ -22,19 +22,19 @@ export class WifiSchemeRequestService {
     return this.http.get<WifiSchemeRequest[]>(`${this.apiUrl}/api/wifiSchemeRequest/user/${userId}`, { headers });
   }
 
-  addWiFiSchemeRequest(request: WifiSchemeRequest): Observable<WifiSchemeRequest> {
+  addWiFiSchemeRequest(wifiSchemeRequest: WifiSchemeRequest): Observable<WifiSchemeRequest> {
     const headers = this.getHeaders();
-    return this.http.post<WifiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest`, request, { headers });
+    return this.http.post<WifiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest`, wifiSchemeRequest, { headers });
   }
 
-  updateWiFiSchemeRequest(requestId: number, request: WifiSchemeRequest): Observable<WifiSchemeRequest> {
+  updateWiFiSchemeRequest(wifiSchemeRequestId: number, request: WifiSchemeRequest): Observable<WifiSchemeRequest> {
     const headers = this.getHeaders();
-    return this.http.put<WifiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest/${requestId}`, request, { headers });
+    return this.http.put<WifiSchemeRequest>(`${this.apiUrl}/api/wifiSchemeRequest/${wifiSchemeRequestId}`, request, { headers });
   }
 
-  deleteWiFiSchemeRequest(requestId: number): Observable<void> {
+  deleteWiFiSchemeRequest(wifiSchemeRequestId: number): Observable<void> {
     const headers = this.getHeaders();
-    return this.http.delete<void>(`${this.apiUrl}/api/wifiSchemeRequest/${requestId}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}/api/wifiSchemeRequest/${wifiSchemeRequestId}`, { headers });
   }
 
   private getHeaders(): HttpHeaders {
