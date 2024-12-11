@@ -33,11 +33,11 @@ public List<WiFiSchemeRequest> getWiFiSchemeRequestsByUserId(Long userId) {
 }
 
 
-
     @Override
-    public Optional<WiFiSchemeRequest> getWiFiSchemeRequestById(Long requestId) {
-        return wifiSchemeRequestRepo.findById(requestId);
+    public Optional<WiFiSchemeRequest> getWiFiSchemeRequestById(Long wifiSchemeRequestId) {
+        return wifiSchemeRequestRepo.findById(wifiSchemeRequestId);
     }
+
 
     @Override
     public List<WiFiSchemeRequest> getAllWiFiSchemeRequests() {
@@ -45,20 +45,20 @@ public List<WiFiSchemeRequest> getWiFiSchemeRequestsByUserId(Long userId) {
     }
 
     @Override
-    public WiFiSchemeRequest updateWiFiSchemeRequest(Long requestId, WiFiSchemeRequest request) {
-        Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findById(requestId);
+    public WiFiSchemeRequest updateWiFiSchemeRequest(Long wifiSchemeRequestId, WiFiSchemeRequest request) {
+        Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findById(wifiSchemeRequestId);
         if (existingRequest.isPresent()) {
-            request.setWifiSchemeRequestId(requestId);
+            request.setWifiSchemeRequestId(wifiSchemeRequestId);
             return wifiSchemeRequestRepo.save(request);
         }
         return null;
     }
 
     @Override
-    public boolean deleteWiFiSchemeRequest(Long requestId) {
-        Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findById(requestId);
+    public boolean deleteWiFiSchemeRequest(Long wifiSchemeRequestId) {
+        Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findById(wifiSchemeRequestId);
         if (existingRequest.isPresent()) {
-            wifiSchemeRequestRepo.deleteById(requestId);
+            wifiSchemeRequestRepo.deleteById(wifiSchemeRequestId);
             return true;
         }
         return false;
