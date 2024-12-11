@@ -17,14 +17,14 @@ public class WiFiSchemeRequestServiceImpl implements WiFiSchemeRequestService {
     private WiFiSchemeRequestRepo wifiSchemeRequestRepo;
 
    @Override
-    public WiFiSchemeRequest addWiFiSchemeRequest(WiFiSchemeRequest request) {
-        Long userId = Long.valueOf(request.getUser().getUserId());
-        Long schemeId = request.getWifiScheme().getWifiSchemeId();        
+    public WiFiSchemeRequest addWiFiSchemeRequest(WiFiSchemeRequest wiFiSchemeRequest) {
+        Long userId = Long.valueOf(wiFiSchemeRequest.getUser().getUserId());
+        Long schemeId = wiFiSchemeRequest.getWifiScheme().getWifiSchemeId();        
         Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findByUser_UserIdAndWifiScheme_WifiSchemeId(userId, schemeId);
         if (existingRequest.isPresent()) {
             throw new WiFiSchemeRequestException("User has already requested this WiFi scheme.");
         }
-        return wifiSchemeRequestRepo.save(request);
+        return wifiSchemeRequestRepo.save(wiFiSchemeRequest);
     }
 
     @Override
@@ -45,11 +45,11 @@ public List<WiFiSchemeRequest> getWiFiSchemeRequestsByUserId(Long userId) {
     }
 
     @Override
-    public WiFiSchemeRequest updateWiFiSchemeRequest(Long wifiSchemeRequestId, WiFiSchemeRequest request) {
+    public WiFiSchemeRequest updateWiFiSchemeRequest(Long wifiSchemeRequestId, WiFiSchemeRequest wiFiSchemeRequest) {
         Optional<WiFiSchemeRequest> existingRequest = wifiSchemeRequestRepo.findById(wifiSchemeRequestId);
         if (existingRequest.isPresent()) {
-            request.setWifiSchemeRequestId(wifiSchemeRequestId);
-            return wifiSchemeRequestRepo.save(request);
+            wiFiSchemeRequest.setWifiSchemeRequestId(wifiSchemeRequestId);
+            return wifiSchemeRequestRepo.save(wiFiSchemeRequest);
         }
         return null;
     }

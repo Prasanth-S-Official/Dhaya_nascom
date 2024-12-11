@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WiFiSchemeRequestService {
-    WiFiSchemeRequest addWiFiSchemeRequest(WiFiSchemeRequest request);
+    WiFiSchemeRequest addWiFiSchemeRequest(WiFiSchemeRequest wiFiSchemeRequest);
     Optional<WiFiSchemeRequest> getWiFiSchemeRequestById(Long wifiSchemeRequestId); 
     List<WiFiSchemeRequest> getAllWiFiSchemeRequests();
-    WiFiSchemeRequest updateWiFiSchemeRequest(Long wifiSchemeRequestId, WiFiSchemeRequest request); 
+    WiFiSchemeRequest updateWiFiSchemeRequest(Long wifiSchemeRequestId, WiFiSchemeRequest wiFiSchemeRequest); 
     boolean deleteWiFiSchemeRequest(Long wifiSchemeRequestId);
     List<WiFiSchemeRequest> getWiFiSchemeRequestsByUserId(Long userId);
 }
