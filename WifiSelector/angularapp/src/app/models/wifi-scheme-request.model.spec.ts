@@ -8,7 +8,7 @@ describe('WifiSchemeRequest Model', () => {
       wifiSchemeRequestId: 301,
       userId: 123,
       wifiSchemeId: 456,
-      requestDate: '2024-11-26',
+      requestDate: new Date('2024-11-26'),
       status: 'Pending',
       comments: 'Please expedite the setup process.',
       proof: 'base64EncodedProofString',
@@ -17,7 +17,7 @@ describe('WifiSchemeRequest Model', () => {
       city: 'New York',
       state: 'NY',
       zipCode: '10001',
-      preferredSetupDate: '2024-11-30',
+      preferredSetupDate: new Date('2024-11-30'),
       timeSlot: '10:00 AM - 12:00 PM'
     };
 
