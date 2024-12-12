@@ -23,19 +23,19 @@ export class MaterialRequestService {
     return this.http.get<MaterialRequest[]>(`${this.apiUrl}/api/materialRequest/user/${userId}`, { headers });
   }
 
-  addMaterialRequest(request: MaterialRequest): Observable<MaterialRequest> {
+  addMaterialRequest(materialRequest: MaterialRequest): Observable<MaterialRequest> {
     const headers = this.getHeaders();
-    return this.http.post<MaterialRequest>(`${this.apiUrl}/api/materialRequest`, request, { headers });
+    return this.http.post<MaterialRequest>(`${this.apiUrl}/api/materialRequest`, materialRequest, { headers });
   }
 
-  updateMaterialRequest(requestId: number, request: MaterialRequest): Observable<MaterialRequest> {
+  updateMaterialRequest(materialRequestId: number, request: MaterialRequest): Observable<MaterialRequest> {
     const headers = this.getHeaders();
-    return this.http.put<MaterialRequest>(`${this.apiUrl}/api/materialRequest/${requestId}`, request, { headers });
+    return this.http.put<MaterialRequest>(`${this.apiUrl}/api/materialRequest/${materialRequestId}`, request, { headers });
   }
 
-  deleteMaterialRequest(requestId: number): Observable<void> {
+  deleteMaterialRequest(materialRequestId: number): Observable<void> {
     const headers = this.getHeaders();
-    return this.http.delete<void>(`${this.apiUrl}/api/materialRequest/${requestId}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}/api/materialRequest/${materialRequestId}`, { headers });
   }
 
   getAdminInsights(): Observable<any[]> {
