@@ -26,8 +26,8 @@ public class FeedbackServiceImpl  {
         return feedbackRepo.save(feedback);
     }
 
-    public Feedback getFeedbackById(Long id) {
-        Optional<Feedback> optionalFeedback = feedbackRepo.findById(id);
+    public Feedback getFeedbackById(Long feedbackId) {
+        Optional<Feedback> optionalFeedback = feedbackRepo.findById(feedbackId);
         return optionalFeedback.orElse(null);
     }
 
@@ -37,9 +37,9 @@ public class FeedbackServiceImpl  {
 
   
     
-    public Feedback deleteFeedback(Long id) {
-        Feedback feedback = feedbackRepo.findById(id).orElse(null);
-        feedbackRepo.deleteById(id);
+    public Feedback deleteFeedback(Long feedbackId) {
+        Feedback feedback = feedbackRepo.findById(feedbackId).orElse(null);
+        feedbackRepo.deleteById(feedbackId);
         return feedback;
            
     }
