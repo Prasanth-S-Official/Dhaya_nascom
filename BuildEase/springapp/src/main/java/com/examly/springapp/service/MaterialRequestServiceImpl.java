@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.*;
 
 @Service
 public class MaterialRequestServiceImpl implements MaterialRequestService {
@@ -26,14 +25,14 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
     private UserRepo userRepo;
 
     @Override
-    public MaterialRequest addMaterialRequest(MaterialRequest request) {
-        Long userId = request.getUser().getUserId();
-        Long materialId = request.getMaterial().getMaterialId();
+    public MaterialRequest addMaterialRequest(MaterialRequest materialRequest) {
+        Long userId = materialRequest.getUser().getUserId();
+        Long materialId = materialRequest.getMaterial().getMaterialId();
         Optional<MaterialRequest> existingRequest = materialRequestRepo.findByUser_UserIdAndMaterial_MaterialId(userId, materialId);
         if (existingRequest.isPresent()) {
             throw new MaterialRequestException("User has already requested this material.");
         }
-        return materialRequestRepo.save(request);
+        return materialRequestRepo.save(materialRequest);
     }
 
     @Override
@@ -42,8 +41,8 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
     }
 
     @Override
-    public Optional<MaterialRequest> getMaterialRequestById(Long requestId) {
-        return materialRequestRepo.findById(requestId);
+    public Optional<MaterialRequest> getMaterialRequestById(Long materialRequestId) {
+        return materialRequestRepo.findById(materialRequestId);
     }
 
     @Override
@@ -52,20 +51,20 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
     }
 
     @Override
-    public MaterialRequest updateMaterialRequest(Long requestId, MaterialRequest request) {
-        Optional<MaterialRequest> existingRequest = materialRequestRepo.findById(requestId);
+    public MaterialRequest updateMaterialRequest(Long materialRequestId, MaterialRequest materialRequest) {
+        Optional<MaterialRequest> existingRequest = materialRequestRepo.findById(materialRequestId);
         if (existingRequest.isPresent()) {
-            request.setMaterialRequestId(requestId);
-            return materialRequestRepo.save(request);
+            materialRequest.setMaterialRequestId(materialRequestId);
+            return materialRequestRepo.save(materialRequest);
         }
         return null;
     }
 
     @Override
-    public boolean deleteMaterialRequest(Long requestId) {
-        Optional<MaterialRequest> existingRequest = materialRequestRepo.findById(requestId);
+    public boolean deleteMaterialRequest(Long materialRequestId) {
+        Optional<MaterialRequest> existingRequest = materialRequestRepo.findById(materialRequestId);
         if (existingRequest.isPresent()) {
-            materialRequestRepo.deleteById(requestId);
+            materialRequestRepo.deleteById(materialRequestId);
             return true;
         }
         return false;
@@ -73,17 +72,16 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
 
     @Override
     public List<Map<String, Object>> getAllUserInsights() {
-        List<User> users = userRepo.findAll(); // Fetch all users
+        List<User> users = userRepo.findAll();
         List<Map<String, Object>> allUserInsights = new ArrayList<>();
-    
+
         for (User user : users) {
-            // Skip users with the "Admin" role
             if ("Admin".equalsIgnoreCase(user.getUserRole())) {
                 continue;
             }
-    
+
             List<MaterialRequest> userRequests = materialRequestRepo.findMaterialRequestsByUserId(user.getUserId());
-    
+
             Map<String, Object> userInsights = new HashMap<>();
             userInsights.put("userId", user.getUserId());
             userInsights.put("username", user.getUsername());
@@ -93,14 +91,11 @@ public class MaterialRequestServiceImpl implements MaterialRequestService {
                     userRequests.stream().filter(req -> "High".equalsIgnoreCase(req.getUrgencyLevel())).count());
             userInsights.put("pendingRequests",
                     userRequests.stream().filter(req -> "Pending".equalsIgnoreCase(req.getStatus())).count());
-            userInsights.put("orders", userRequests); // Add all orders for the user
-    
+            userInsights.put("orders", userRequests);
+
             allUserInsights.add(userInsights);
         }
-    
+
         return allUserInsights;
     }
-    
-
-    
 }

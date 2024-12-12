@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface MaterialRequestService {
-    MaterialRequest addMaterialRequest(MaterialRequest request);
-    Optional<MaterialRequest> getMaterialRequestById(Long requestId);
+    MaterialRequest addMaterialRequest(MaterialRequest materialRequest);
+    Optional<MaterialRequest> getMaterialRequestById(Long materialRequestId);
     List<MaterialRequest> getAllMaterialRequests();
-    MaterialRequest updateMaterialRequest(Long requestId, MaterialRequest request);
-    boolean deleteMaterialRequest(Long requestId);
+    MaterialRequest updateMaterialRequest(Long materialRequestId, MaterialRequest materialRequest);
+    boolean deleteMaterialRequest(Long materialRequestId);
     List<MaterialRequest> getMaterialRequestsByUserId(Long userId);
     List<Map<String, Object>> getAllUserInsights();
 }
