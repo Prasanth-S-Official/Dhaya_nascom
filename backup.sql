@@ -45,7 +45,7 @@ CREATE TABLE `feedback` (
   CONSTRAINT `FK1jag4aj6c4bvpvluq5kbaci1f` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKbemwsc34h9o14qmv3mnnkesuv` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,6 +54,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'Availability','2024-12-12','helo',3,NULL,1);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +82,7 @@ CREATE TABLE `requirement` (
   PRIMARY KEY (`requirement_id`),
   KEY `FKqndc0ptamgtq4horxxrrieo7n` (`trainer_id`),
   CONSTRAINT `FKqndc0ptamgtq4horxxrrieo7n` FOREIGN KEY (`trainer_id`) REFERENCES `trainer` (`trainer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +91,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
+INSERT INTO `requirement` VALUES (1,80000,'Dotnet','sss','4 months','Location','Online','2024-12-12','High','Beginner','Closed','title',1);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12  9:32:48
+-- Dump completed on 2024-12-12  9:47:48
