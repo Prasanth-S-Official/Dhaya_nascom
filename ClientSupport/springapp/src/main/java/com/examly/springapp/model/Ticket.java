@@ -24,7 +24,7 @@ public class Ticket {
     private User user; // Link to the client who raised the ticket
 
     @ManyToOne
-    @JoinColumn(name = "support_agent_id", nullable = true)
+    @JoinColumn(name = "agent_id", nullable = true)
     private SupportAgent supportAgent; // Assigned agent for resolution
 
     public Ticket(){

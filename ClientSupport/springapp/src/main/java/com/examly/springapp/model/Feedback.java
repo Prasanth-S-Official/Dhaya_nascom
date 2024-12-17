@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import main.java.com.examly.springapp.model.SupportAgent;
 
 @Entity
 public class Feedback {
@@ -24,10 +25,10 @@ public class Feedback {
     private User user; // User who provided the feedback
 
     @ManyToOne
-    @JoinColumn(name = "trainerId", nullable = true)
-    private Trainer trainer; // Trainer about whom the feedback is given
+    @JoinColumn(name = "agent_id", nullable = true)
+    private SupportAgent supportAgent; // Trainer about whom the feedback is given
 
-    private String category; // Category of feedback, e.g., "Session Quality", "Punctuality", etc.
+    private String category; 
 
     public Feedback() {
     }
