@@ -17,7 +17,10 @@ public class Ticket {
     private LocalDate createdDate; // Date when the ticket was created
     private LocalDate resolutionDate; // Expected/actual resolution date
     private String issueCategory; // e.g., "Technical", "Billing", "General"
-  
+
+    @Column(name = "resolutionSummary", nullable = true)
+    private String resolutionSummary; // Summary of the resolution (nullable)
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // Link to the client who raised the ticket
@@ -26,33 +29,11 @@ public class Ticket {
     @JoinColumn(name = "agent_id", nullable = true)
     private SupportAgent supportAgent; // Assigned agent for resolution
 
-    public Ticket(){
-
+    // Default Constructor
+    public Ticket() {
     }
 
-
-
-
-
-    public Ticket(Long ticketId, String title, String description, String priority, String status,
-            LocalDate createdDate, LocalDate resolutionDate, String issueCategory, User user,
-            SupportAgent supportAgent) {
-        this.ticketId = ticketId;
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.status = status;
-        this.createdDate = createdDate;
-        this.resolutionDate = resolutionDate;
-        this.issueCategory = issueCategory;
-        this.user = user;
-        this.supportAgent = supportAgent;
-    }
-
-
-
-
-
+    // Getters and Setters
     public Long getTicketId() {
         return ticketId;
     }
@@ -117,12 +98,12 @@ public class Ticket {
         this.issueCategory = issueCategory;
     }
 
-    public String getSeverity() {
-        return severity;
+    public String getResolutionSummary() {
+        return resolutionSummary;
     }
 
-    public void setSeverity(String severity) {
-        this.severity = severity;
+    public void setResolutionSummary(String resolutionSummary) {
+        this.resolutionSummary = resolutionSummary;
     }
 
     public User getUser() {
@@ -140,7 +121,4 @@ public class Ticket {
     public void setSupportAgent(SupportAgent supportAgent) {
         this.supportAgent = supportAgent;
     }
-
-
-
 }
