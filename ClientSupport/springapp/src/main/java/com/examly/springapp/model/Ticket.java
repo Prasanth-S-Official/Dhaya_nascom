@@ -17,8 +17,7 @@ public class Ticket {
     private LocalDate createdDate; // Date when the ticket was created
     private LocalDate resolutionDate; // Expected/actual resolution date
     private String issueCategory; // e.g., "Technical", "Billing", "General"
-    private String severity; // e.g., "Critical", "Major", "Minor"
-
+  
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // Link to the client who raised the ticket
@@ -32,8 +31,11 @@ public class Ticket {
     }
 
 
+
+
+
     public Ticket(Long ticketId, String title, String description, String priority, String status,
-            LocalDate createdDate, LocalDate resolutionDate, String issueCategory, String severity, User user,
+            LocalDate createdDate, LocalDate resolutionDate, String issueCategory, User user,
             SupportAgent supportAgent) {
         this.ticketId = ticketId;
         this.title = title;
@@ -43,10 +45,11 @@ public class Ticket {
         this.createdDate = createdDate;
         this.resolutionDate = resolutionDate;
         this.issueCategory = issueCategory;
-        this.severity = severity;
         this.user = user;
         this.supportAgent = supportAgent;
     }
+
+
 
 
 
