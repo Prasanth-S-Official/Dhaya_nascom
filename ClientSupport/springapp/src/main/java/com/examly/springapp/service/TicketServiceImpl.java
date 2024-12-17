@@ -71,4 +71,10 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> getTicketsByAgentId(Long agentId) {
         return ticketRepo.findBySupportAgent_AgentId(agentId);
     }
+
+    @Override
+public List<Ticket> getTicketsByUserId(Long userId) {
+    return ticketRepo.findByUser_UserId(userId);
+}
+
 }

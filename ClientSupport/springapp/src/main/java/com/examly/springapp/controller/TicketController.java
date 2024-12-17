@@ -69,4 +69,14 @@ public class TicketController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(tickets);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Ticket>> getTicketsByUserId(@PathVariable Long userId) {
+        List<Ticket> tickets = ticketService.getTicketsByUserId(userId);
+        if (tickets.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(tickets);
+    }
+
 }

@@ -27,4 +27,7 @@ public interface TicketRepo extends JpaRepository<Ticket, Long> {
 
     // Custom Query: Find Tickets by Agent ID
     List<Ticket> findBySupportAgent_AgentId(Long agentId);
+    // Custom Query: Find Tickets by User ID
+        List<Ticket> findByUser_UserId(Long userId);
+
 }

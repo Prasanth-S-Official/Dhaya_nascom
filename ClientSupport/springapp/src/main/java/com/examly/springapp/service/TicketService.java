@@ -12,4 +12,7 @@ public interface TicketService {
     Ticket updateTicket(Long ticketId, Ticket ticket);
     Ticket deleteTicket(Long ticketId);
     List<Ticket> getTicketsByAgentId(Long agentId);
+    List<Ticket> getTicketsByUserId(Long userId);
+
+
 }
