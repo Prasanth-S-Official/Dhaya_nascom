@@ -1,0 +1,254 @@
+/* General Styling */
+#requirementHomeBody {
+  margin: 30px auto;
+  padding: 20px;
+  width: 90%;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+#requirementHomeBody h1 {
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #28a745; /* Green color indicating success */
+  background-color: #e6f4ea; /* Light green background */
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  margin-left: 10px;
+}
+
+
+hr {
+  border: none;
+  border-top: 3px solid #3276a6;
+  height: 10px;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+/* Search Box Styling */
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+#searchBox {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 40%;
+  background: #fff;
+}
+
+#searchBox:focus {
+  border-color: #3276a6;
+}
+
+/* Table Styling */
+.requirement-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.requirement-table th,
+.requirement-table td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ddd;
+}
+
+.requirement-table th {
+  background-color: #3c91e6;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.requirement-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.requirement-table tbody tr:hover {
+  background: rgba(60, 145, 230, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+/* No Records Found Styling */
+.no-records-cell {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+  font-style: italic;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #3c91e6, #3276a6);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #3276a6, #3c91e6);
+  transform: scale(1.1);
+}
+
+/* Assign Trainer Button */
+button.assign-button {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+}
+
+button.assign-button:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure the modal appears above other content */
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+/* Modal Styling */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative; /* Ensure close icon stays inside the modal */
+}
+
+/* Close X Symbol inside the modal */
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  z-index: 10; /* Ensure it stays above other elements */
+}
+
+.close-icon:hover {
+  color: #ff0000; /* Change color on hover */
+}
+
+#trainerSearchBox {
+  width: 95%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #f1f1f1;
+}
+
+
+.modal-content ul li:hover {
+  background-color: #e0e0e0;
+}
+
+/* Modal Close Button Styling */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button stays on top */
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .top-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  #searchBox {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .requirement-table th,
+  .requirement-table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}
