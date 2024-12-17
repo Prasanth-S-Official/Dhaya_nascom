@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.exceptions.DuplicateTrainerException;
-import com.examly.springapp.exceptions.TrainerDeletionException;
+import com.examly.springapp.exceptions.DuplicateTicketException;
+import com.examly.springapp.exceptions.AgentDeletionException;
 import com.examly.springapp.model.Trainer;
 import com.examly.springapp.repository.TrainerRepo;
 
@@ -21,7 +21,7 @@ public class TrainerServiceImpl implements TrainerService {
     public Trainer addTrainer(Trainer trainer) {
         Optional<Trainer> existingTrainer = trainerRepo.findByEmail(trainer.getEmail());
         if (existingTrainer.isPresent()) {
-            throw new DuplicateTrainerException("Trainer with the same email already exists.");
+            throw new DuplicateTicketException("Trainer with the same email already exists.");
         }
         return trainerRepo.save(trainer);
     }
@@ -52,7 +52,7 @@ public class TrainerServiceImpl implements TrainerService {
             trainerRepo.deleteById(trainerId);
             return existingTrainer.get();
         } else {
-            throw new TrainerDeletionException("Trainer not found for deletion.");
+            throw new AgentDeletionException("Trainer not found for deletion.");
         }
     }
 }

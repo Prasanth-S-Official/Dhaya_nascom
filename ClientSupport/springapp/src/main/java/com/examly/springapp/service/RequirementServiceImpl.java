@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
 
 import com.examly.springapp.exceptions.DuplicateRequirementException;
-import com.examly.springapp.exceptions.RequirementDeletionException;
+import com.examly.springapp.exceptions.TicketDeletionException;
 import com.examly.springapp.model.Requirement;
 import com.examly.springapp.repository.RequirementRepo;
 import com.examly.springapp.repository.TrainerRepo;
@@ -64,7 +64,7 @@ public class RequirementServiceImpl implements RequirementService {
             requirementRepo.deleteById(requirementId);
             return existingRequirement.get();
         } else {
-            throw new RequirementDeletionException("Requirement not found for deletion.");
+            throw new TicketDeletionException("Requirement not found for deletion.");
         }
     }
 

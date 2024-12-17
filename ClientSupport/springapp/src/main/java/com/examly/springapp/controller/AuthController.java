@@ -37,9 +37,9 @@ public class AuthController {
 	
 	@PostConstruct
     public void initializeAdminUser() {
-		if(!userRepo.existsByEmail("manager@gmail.com"))
+		if(!userRepo.existsByEmail("client@gmail.com"))
 		{
-        User user= new User("Manager","manager@gmail.com","Demo@123","Manager","1234567890");
+        User user= new User("Client","client@gmail.com","client@123","Client","1234567890");
         userService.createUser(user);  
         }
     }
