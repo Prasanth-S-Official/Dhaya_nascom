@@ -13,11 +13,12 @@
           placeholder="Ticket Title or Issue Category..."
           [(ngModel)]="searchField"
           (ngModelChange)="applyFilters()"
+          [disabled]="status === 'loading'"
         />
       </div>
       <div>
         <label for="prioritySelect">Filter by Priority:</label>
-        <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" id="prioritySelect">
+        <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" id="prioritySelect" [disabled]="status === 'loading'">
           <option [ngValue]="null">All Priorities</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
@@ -26,7 +27,13 @@
       </div>
     </div>
 
-    <table class="ticket-table">
+    <!-- Loading State -->
+    <div *ngIf="status === 'loading'" class="loading-indicator">
+      Loading tickets...
+    </div>
+
+    <!-- Table Display -->
+    <table class="ticket-table" *ngIf="status !== 'loading'">
       <thead>
         <tr>
           <th>S.No</th>
@@ -39,11 +46,6 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody *ngIf="status === 'loading'">
-        <tr>
-          <td colspan="8">Loading tickets...</td>
-        </tr>
-      </tbody>
       <tbody *ngIf="status === 'error'">
         <tr>
           <td colspan="8">Error loading tickets</td>
@@ -61,7 +63,7 @@
           <td>{{ ticket.issueCategory }}</td>
           <td>{{ ticket.priority }}</td>
           <td>{{ ticket.createdDate | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ ticket.status }} </td>
+          <td>{{ ticket.status }}</td>
           <td>{{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</td>
           <td>
             <button class="edit-button" (click)="navigateToEditTicket(ticket.ticketId)">Edit</button>
@@ -72,6 +74,7 @@
     </table>
   </div>
 
+  <!-- Delete Confirmation Popup -->
   <div *ngIf="showDeletePopup" class="delete-popup">
     <p>Are you sure you want to delete this ticket?</p>
     <button class="confirm-delete-button" (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>

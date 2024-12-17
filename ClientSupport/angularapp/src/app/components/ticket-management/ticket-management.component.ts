@@ -88,10 +88,10 @@ export class TicketManagementComponent implements OnInit {
   handleSuccessMessage(): void {
     this.successPopup = false;
     this.ticketForm.reset();
-    this.router.navigate(['/manager/view/tickets']);
+    this.router.navigate(['/client/view/ticket']);
   }
 
   navigateBack(): void {
-    this.router.navigate(['/manager/view/tickets']);
+    this.router.navigate(['/client/view/ticket']);
   }
 }
