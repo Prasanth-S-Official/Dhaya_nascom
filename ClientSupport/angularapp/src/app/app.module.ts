@@ -23,6 +23,7 @@ import { ManagerviewfeedbackComponent } from './components/managerviewfeedback/m
 import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfeedback/coordinatorviewfeedback.component';
 import { ClientnavComponent } from './components/clientnav/clientnav.component';
 import { TicketManagementComponent } from './components/ticket-management/ticket-management.component';
+import { ClientViewTicketsComponent } from './components/client-view-tickets/client-view-tickets.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { TicketManagementComponent } from './components/ticket-management/ticket
     CoordinatorviewfeedbackComponent,
     ClientnavComponent,
     TicketManagementComponent,
+    ClientViewTicketsComponent,
   
 
   ],
