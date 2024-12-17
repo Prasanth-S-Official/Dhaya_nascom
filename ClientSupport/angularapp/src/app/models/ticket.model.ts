@@ -12,3 +12,5 @@ export interface Ticket {
     agentId?: number; // ID of the assigned support agent
   }
   
+
+  

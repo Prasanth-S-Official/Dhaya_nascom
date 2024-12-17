@@ -21,6 +21,8 @@ export class TicketService {
   }
 
   addTicket(ticket: Ticket): Observable<Ticket> {
+    console.log(ticket);
+    
     return this.http.post<Ticket>(this.apiUrl, ticket, { headers: this.getHeaders() });
   }
 
