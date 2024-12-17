@@ -55,7 +55,7 @@ export class TicketManagementComponent implements OnInit {
       const ticket: Ticket = {
         ...formData,
         createdDate: new Date(), // Set current date
-        userId: this.userId, // Get userId from localStorage
+        user :{ userId: this.userId,}, // Get userId from localStorage
         status: 'Open', // Status is Open by default
         ticketId: this.id || undefined, // For update or add
       };
