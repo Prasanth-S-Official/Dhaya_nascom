@@ -2,13 +2,7 @@ package com.examly.springapp.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import main.java.com.examly.springapp.model.SupportAgent;
+import jakarta.persistence.*;
 
 @Entity
 public class Feedback {
@@ -21,15 +15,22 @@ public class Feedback {
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user; // User who provided the feedback
 
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = true)
-    private SupportAgent supportAgent; // Trainer about whom the feedback is given
+    private SupportAgent supportAgent; // Support Agent about whom the feedback is given
 
-    private String category; 
+    @ManyToOne
+    @JoinColumn(name = "ticket_id", nullable = false)
+    private Ticket ticket; // Ticket related to the feedback
 
+    private String category; // Feedback category (e.g., "Service Quality", "Professionalism")
+    
+    private Integer rating; // Rating given by the user (e.g., 1-5)
+
+    // Default Constructor
     public Feedback() {
     }
 
@@ -66,12 +67,20 @@ public class Feedback {
         this.user = user;
     }
 
-    public Trainer getTrainer() {
-        return trainer;
+    public SupportAgent getSupportAgent() {
+        return supportAgent;
     }
 
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
+    public void setSupportAgent(SupportAgent supportAgent) {
+        this.supportAgent = supportAgent;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
     public String getCategory() {
@@ -80,5 +89,13 @@ public class Feedback {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }
