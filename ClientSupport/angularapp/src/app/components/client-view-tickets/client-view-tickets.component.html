@@ -41,17 +41,17 @@
       </thead>
       <tbody *ngIf="status === 'loading'">
         <tr>
-          <td colspan="7">Loading tickets...</td>
+          <td colspan="8">Loading tickets...</td>
         </tr>
       </tbody>
       <tbody *ngIf="status === 'error'">
         <tr>
-          <td colspan="7">Error loading tickets</td>
+          <td colspan="8">Error loading tickets</td>
         </tr>
       </tbody>
       <tbody *ngIf="status === 'noRecords'">
         <tr>
-          <td colspan="7" class="no-records-cell">Oops! No records found</td>
+          <td colspan="8" class="no-records-cell">Oops! No records found</td>
         </tr>
       </tbody>
       <tbody *ngIf="filteredTickets.length > 0">
@@ -61,6 +61,7 @@
           <td>{{ ticket.issueCategory }}</td>
           <td>{{ ticket.priority }}</td>
           <td>{{ ticket.createdDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ ticket.status }} </td>
           <td>{{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</td>
           <td>
             <button class="edit-button" (click)="navigateToEditTicket(ticket.ticketId)">Edit</button>
