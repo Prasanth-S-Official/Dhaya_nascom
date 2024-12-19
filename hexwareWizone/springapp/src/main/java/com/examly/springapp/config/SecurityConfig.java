@@ -57,10 +57,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/physical-training-request").hasRole("User")
                 .requestMatchers(HttpMethod.GET, "/api/physical-training-request/user/{userId}").hasRole("User")
                 .requestMatchers(HttpMethod.DELETE, "/api/physical-training-request/{id}").hasRole("User")
-                .requestMatchers(HttpMethod.PUT, "/api/feedback/{feedbackId}").hasAnyRole("Admin", "User")
-                .requestMatchers(HttpMethod.DELETE, "/api/feedback/{feedbackId}").hasRole("User")
-                .requestMatchers(HttpMethod.POST, "/api/feedback").hasRole("User")
-                .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasRole("User")
+           
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint).and()

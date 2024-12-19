@@ -35,17 +35,13 @@ CREATE TABLE `feedback` (
   `category` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `feedback_text` varchar(255) DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL,
-  `agent_id` bigint(20) DEFAULT NULL,
-  `ticket_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
+  `wifi_scheme_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`feedback_id`),
-  KEY `FKss3q5bmq5ojxbu3rc3sk4ckuy` (`agent_id`),
-  KEY `FK8fth5acovhce06e6atsujlb6e` (`ticket_id`),
   KEY `FK7k33yw505d347mw3avr93akao` (`user_id`),
-  CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `FK8fth5acovhce06e6atsujlb6e` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`ticket_id`),
-  CONSTRAINT `FKss3q5bmq5ojxbu3rc3sk4ckuy` FOREIGN KEY (`agent_id`) REFERENCES `support_agent` (`agent_id`)
+  KEY `FK1jag4aj6c4bvpvluq5kbaci1f` (`wifi_scheme_id`),
+  CONSTRAINT `FK1jag4aj6c4bvpvluq5kbaci1f` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
+  CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,75 +52,6 @@ CREATE TABLE `feedback` (
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `support_agent`
---
-
-DROP TABLE IF EXISTS `support_agent`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `support_agent` (
-  `agent_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `added_date` date DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `experience` varchar(255) DEFAULT NULL,
-  `expertise` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `profile` longblob,
-  `remarks` varchar(255) DEFAULT NULL,
-  `shift_timing` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`agent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `support_agent`
---
-
-LOCK TABLES `support_agent` WRITE;
-/*!40000 ALTER TABLE `support_agent` DISABLE KEYS */;
-/*!40000 ALTER TABLE `support_agent` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ticket`
---
-
-DROP TABLE IF EXISTS `ticket`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ticket` (
-  `ticket_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` date DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `issue_category` varchar(255) DEFAULT NULL,
-  `priority` varchar(255) DEFAULT NULL,
-  `resolution_date` date DEFAULT NULL,
-  `resolution_summary` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `agent_id` bigint(20) DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`ticket_id`),
-  KEY `FKc2ajxrr4s4whuncj5xpab9by1` (`agent_id`),
-  KEY `FKdvt57mcco3ogsosi97odw563o` (`user_id`),
-  CONSTRAINT `FKc2ajxrr4s4whuncj5xpab9by1` FOREIGN KEY (`agent_id`) REFERENCES `support_agent` (`agent_id`),
-  CONSTRAINT `FKdvt57mcco3ogsosi97odw563o` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ticket`
---
-
-LOCK TABLES `ticket` WRITE;
-/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'2024-12-17','sss updated','Platform Bug','High',NULL,NULL,'Open','demo title',NULL,4);
-/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -142,7 +69,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,8 +78,76 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'client@gmail.com','1234567890','$2a$10$dTqhu6BIAsreNTcqpHuRIOnKmA5TPsTPOTqsF2NZTmhQgCzm5zESK','Client','Client');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$cx.jGhDHfuZXJw9LDlLHD.AFjdAi6JTTxUV3FH0Xcl5xSdwXQpREC','Admin','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wi_fi_scheme`
+--
+
+DROP TABLE IF EXISTS `wi_fi_scheme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wi_fi_scheme` (
+  `wifi_scheme_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `availability_status` varchar(255) DEFAULT NULL,
+  `data_limit` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `fee` double DEFAULT NULL,
+  `region` varchar(255) DEFAULT NULL,
+  `scheme_name` varchar(255) DEFAULT NULL,
+  `speed` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`wifi_scheme_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wi_fi_scheme`
+--
+
+LOCK TABLES `wi_fi_scheme` WRITE;
+/*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wi_fi_scheme_request`
+--
+
+DROP TABLE IF EXISTS `wi_fi_scheme_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wi_fi_scheme_request` (
+  `wifi_scheme_request_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) NOT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `landmark` varchar(255) NOT NULL,
+  `preferred_setup_date` date NOT NULL,
+  `proof` longblob NOT NULL,
+  `request_date` date NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `street_name` varchar(255) NOT NULL,
+  `time_slot` varchar(255) NOT NULL,
+  `zip_code` varchar(255) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `wifi_scheme_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`wifi_scheme_request_id`),
+  KEY `FKn4rmj4a4yy7jdnstsms8feim0` (`user_id`),
+  KEY `FK66l6wgtnsmludnwu0f3xqnpux` (`wifi_scheme_id`),
+  CONSTRAINT `FK66l6wgtnsmludnwu0f3xqnpux` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
+  CONSTRAINT `FKn4rmj4a4yy7jdnstsms8feim0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wi_fi_scheme_request`
+--
+
+LOCK TABLES `wi_fi_scheme_request` WRITE;
+/*!40000 ALTER TABLE `wi_fi_scheme_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wi_fi_scheme_request` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -164,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-19  8:06:01
+-- Dump completed on 2024-12-19  8:21:01
