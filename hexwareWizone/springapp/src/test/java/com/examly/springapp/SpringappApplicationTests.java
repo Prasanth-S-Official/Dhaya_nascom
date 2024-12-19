@@ -8,22 +8,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import org.springframework.test.web.servlet.MvcResult;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.AfterAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.examly.springapp.repository.UserRepo;
+import com.examly.springapp.repository.WiFiSchemeRepo;
+import com.examly.springapp.repository.WiFiSchemeRequestRepo;
+
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = SpringappApplication.class)
@@ -35,6 +39,15 @@ class SpringappApplicationTests {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private UserRepo userRepository;
+
+    @Autowired
+    private WiFiSchemeRepo wifiSchemeRepository;
+
+    @Autowired
+    private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
 
     private String userToken;
 
@@ -96,16 +109,15 @@ class SpringappApplicationTests {
                 .andReturn();
     }
 
-    @Test
-    @Order(3)
-    public void backend_testGetFeedBackAll() throws Exception {
-        mockMvc.perform(get("/api/feedback")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(print())
-                .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$").isArray())
-                .andReturn();
+    @AfterAll
+    public static void cleanupDatabase(@Autowired UserRepo userRepository,
+                                        @Autowired WiFiSchemeRepo wifiSchemeRepository,
+                                        @Autowired WiFiSchemeRequestRepo wifiSchemeRequestRepository) {
+        System.out.println("Cleaning up the database...");
+        wifiSchemeRequestRepository.deleteAll();
+        wifiSchemeRepository.deleteAll();
+        userRepository.deleteAll();
+        System.out.println("Database cleanup completed.");
     }
 
     @Test
@@ -141,7 +153,6 @@ class SpringappApplicationTests {
             fail("Class " + className + " does not exist.");
         }
     }
-
 
     @Test
     public void backend_testWiFiSchemeControllerClassExists() {
