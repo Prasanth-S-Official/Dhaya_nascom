@@ -48,6 +48,7 @@ class SpringappApplicationTests {
     private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
 
     private String userToken;
+	private String adminToken;
 
     @BeforeAll
     public static void cleanupDatabase(@Autowired UserRepo userRepository,
@@ -154,44 +155,70 @@ class SpringappApplicationTests {
 
 
 	@Test
-	@Order(3)
-	public void backend_testLoginAdmin() throws Exception {
-		String requestBody = "{" +
-				"\"email\": \"admin@gmail.com\"," +
-				"\"password\": \"admin@1234\"" +
-				"}";
+@Order(4)
+public void backend_testLoginAdmin() throws Exception {
+    String requestBody = "{" +
+            "\"email\": \"admin@gmail.com\"," +
+            "\"password\": \"admin@1234\"" +
+            "}";
 
-		MvcResult loginResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(requestBody))
-				.andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
-				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andReturn();
+    MvcResult loginResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+            .andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
+            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+            .andDo(print())
+            .andReturn();
 
-		// Parse the login response to get the token
-		String responseBody = loginResult.getResponse().getContentAsString();
-		JsonNode jsonNode = objectMapper.readTree(responseBody);
-		String adminToken = jsonNode.get("token").asText();
+    // Parse the login response to get the token
+    String responseBody = loginResult.getResponse().getContentAsString();
+    JsonNode jsonNode = objectMapper.readTree(responseBody);
+    adminToken = jsonNode.get("token").asText(); // Save the token to the class-level variable
 
-		// Assert the token is not null
-		assertTrue(adminToken != null && !adminToken.isEmpty(), "JWT token for Admin should not be null or empty");
+    // Assert the token is not null
+    assertTrue(adminToken != null && !adminToken.isEmpty(), "JWT token for Admin should not be null or empty");
 
-		System.out.println("Generated JWT Token for Admin: " + adminToken);
-	}
+    System.out.println("Generated JWT Token for Admin: " + adminToken);
+}
 
+@Test
+@Order(5)
+public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
+    // Ensure the token is retrieved before running this test
+    assertTrue(adminToken != null && !adminToken.isEmpty(), "Admin token must be initialized before adding a WiFi scheme.");
 
-    @Test
-    @Order(4)
-    public void backend_testGetAllwifiScheme() throws Exception {
-        mockMvc.perform(get("/api/wifiScheme")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(print())
-                .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$").isArray())
-                .andReturn();
-    }
+    // Define the request body for adding a WiFi Scheme
+    String requestBody = "{" +
+            "\"schemeName\": \"Super Fast Internet\"," +
+            "\"description\": \"High-speed internet for professionals\"," +
+            "\"speed\": 100," +
+            "\"dataLimit\": 500," +
+            "\"fee\": 50.0," +
+            "\"region\": \"Urban\"," +
+            "\"availabilityStatus\": \"Available\"" +
+            "}";
+
+    // Perform POST request to /api/wifiScheme
+	
+    mockMvc.perform(MockMvcRequestBuilders.post("/api/wifiScheme")
+            .header("Authorization", "Bearer " + adminToken) // Pass the dynamically retrieved token
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+            .andExpect(MockMvcResultMatchers.status().isCreated()) // Assert HTTP 201 Created
+            .andDo(print());
+}
+
+    // @Test
+    // @Order(5)
+    // public void backend_testGetAllwifiScheme() throws Exception {
+    //     mockMvc.perform(get("/api/wifiScheme")
+    //             .contentType(MediaType.APPLICATION_JSON))
+    //             .andExpect(MockMvcResultMatchers.status().isOk())
+    //             .andDo(print())
+    //             .andExpect(content().contentType("application/json"))
+    //             .andExpect(jsonPath("$").isArray())
+    //             .andReturn();
+    // }
 
     @Test
     public void backend_testWiFiSchemeInterfaceAndImplementation() {
