@@ -8,6 +8,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.test.web.servlet.MvcResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -48,6 +55,7 @@ class SpringappApplicationTests {
     private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
 
     private String userToken;
+    private String adminToken;
 
     @BeforeAll
     public static void cleanupDatabase(@Autowired UserRepo userRepository,
@@ -60,6 +68,15 @@ class SpringappApplicationTests {
         System.out.println("Database cleanup completed.");
     }
 
+    private HttpHeaders createHeaders(String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        if (token != null && !token.isEmpty()) {
+            headers.set("Authorization", "Bearer " + token);
+        }
+        return headers;
+    }
+	
     @Test
     @Order(1)
     public void backend_testRegisterUserAndGenerateJwtToken() throws Exception {
@@ -152,9 +169,29 @@ class SpringappApplicationTests {
 		System.out.println("Generated JWT Token for Admin: " + adminToken);
 	}
 
+	@Test
+	@Order(3)
+	void backend_testLoginAsAdmin() throws Exception {
+		String requestBody = "{\"email\": \"admin@gmail.com\", \"password\": \"admin@1234\"}";
+
+		ResponseEntity<String> response = restTemplate.postForEntity("/api/users/login",
+				new HttpEntity<>(requestBody, createHeaders()), String.class);
+
+		JsonNode responseBody = objectMapper.readTree(response.getBody());
+		String token = responseBody.get("token").asText();
+		adminToken = token;
+
+		// Assert status is OK
+		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+		Assertions.assertNotNull(token, "Admin token should not be null");
+
+		// Log the token
+		System.out.println("Admin Token: " + adminToken);
+	}
+
 
     @Test
-    @Order(3)
+    @Order(4)
     public void backend_testGetAllwifiScheme() throws Exception {
         mockMvc.perform(get("/api/wifiScheme")
                 .contentType(MediaType.APPLICATION_JSON))
