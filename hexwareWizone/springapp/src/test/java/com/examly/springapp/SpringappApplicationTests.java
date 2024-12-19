@@ -8,13 +8,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
 import org.springframework.test.web.servlet.MvcResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -55,7 +48,6 @@ class SpringappApplicationTests {
     private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
 
     private String userToken;
-    private String adminToken;
 
     @BeforeAll
     public static void cleanupDatabase(@Autowired UserRepo userRepository,
@@ -68,15 +60,6 @@ class SpringappApplicationTests {
         System.out.println("Database cleanup completed.");
     }
 
-    private HttpHeaders createHeaders(String token) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        if (token != null && !token.isEmpty()) {
-            headers.set("Authorization", "Bearer " + token);
-        }
-        return headers;
-    }
-	
     @Test
     @Order(1)
     public void backend_testRegisterUserAndGenerateJwtToken() throws Exception {
@@ -169,24 +152,32 @@ class SpringappApplicationTests {
 		System.out.println("Generated JWT Token for Admin: " + adminToken);
 	}
 
+
 	@Test
 	@Order(3)
-	void backend_testLoginAsAdmin() throws Exception {
-		String requestBody = "{\"email\": \"admin@gmail.com\", \"password\": \"admin@1234\"}";
+	public void backend_testLoginAdmin() throws Exception {
+		String requestBody = "{" +
+				"\"email\": \"admin@gmail.com\"," +
+				"\"password\": \"admin@1234\"" +
+				"}";
 
-		ResponseEntity<String> response = restTemplate.postForEntity("/api/users/login",
-				new HttpEntity<>(requestBody, createHeaders()), String.class);
+		MvcResult loginResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(requestBody))
+				.andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andReturn();
 
-		JsonNode responseBody = objectMapper.readTree(response.getBody());
-		String token = responseBody.get("token").asText();
-		adminToken = token;
+		// Parse the login response to get the token
+		String responseBody = loginResult.getResponse().getContentAsString();
+		JsonNode jsonNode = objectMapper.readTree(responseBody);
+		String adminToken = jsonNode.get("token").asText();
 
-		// Assert status is OK
-		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-		Assertions.assertNotNull(token, "Admin token should not be null");
+		// Assert the token is not null
+		assertTrue(adminToken != null && !adminToken.isEmpty(), "JWT token for Admin should not be null or empty");
 
-		// Log the token
-		System.out.println("Admin Token: " + adminToken);
+		System.out.println("Generated JWT Token for Admin: " + adminToken);
 	}
 
 
