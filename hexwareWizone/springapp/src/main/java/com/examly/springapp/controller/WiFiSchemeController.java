@@ -1,8 +1,15 @@
+package com.examly.springapp.controller;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.examly.springapp.service.WiFiSchemeService;
+import com.examly.springapp.model.WiFiScheme;
+
+
 
 import java.util.List;
 import java.util.Optional;

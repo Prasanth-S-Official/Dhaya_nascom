@@ -1,6 +1,14 @@
+package com.examly.springapp.service;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.examly.springapp.model.WiFiScheme;
+import com.examly.springapp.repository.WiFiSchemeRepo;
+import com.examly.springapp.exceptions.DuplicateWiFiSchemeException;
+import com.examly.springapp.exceptions.WiFiSchemeDeletionException;
+
 
 import java.util.List;
 import java.util.Optional;
