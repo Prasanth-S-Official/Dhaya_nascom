@@ -2,15 +2,12 @@ package com.examly.springapp;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
-import java.lang.reflect.Field;  // Import the Field class
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -20,110 +17,95 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = SpringappApplication.class)
 @AutoConfigureMockMvc
 class SpringappApplicationTests {
-	
-	 @Autowired
-	    private MockMvc mockMvc;
-	 
-		@Test
-		@Order(1)
-	    public void backend_testGetAllwifiScheme() throws Exception {
-	        mockMvc.perform(get("/api/wifiScheme")
-			.contentType(MediaType.APPLICATION_JSON))
-			.andExpect(MockMvcResultMatchers.status().isOk())
-	        .andDo(print())
-	        .andExpect(content().contentType("application/json"))
-		.andExpect(jsonPath("$").isArray())
-		.andReturn();
-	    }
-	    
-		
-	    @Test
-		@Order(2)
-	    public void backend_testGetFeedBackAll() throws Exception {
 
-	        mockMvc.perform(get("/api/feedback")
-			.contentType(MediaType.APPLICATION_JSON))
-			.andExpect(MockMvcResultMatchers.status().isOk())
-	        .andDo(print())
-	        .andExpect(content().contentType("application/json"))
-		.andExpect(jsonPath("$").isArray())
-		.andReturn();
-	    }
-	    
-	    @Test
-	    public void backend_testFeedbackHasManyToOneAnnotation() {
-	        try {
-	            // Use reflection to get the Class object for the Course class
-	            Class<?> courseClass = Class.forName("com.examly.springapp.model.Feedback");
+    @Autowired
+    private MockMvc mockMvc;
 
-	            // Get all declared fields in the Course class
-	            Field[] declaredFields = courseClass.getDeclaredFields();
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	            // Check each field for the @OneToOne annotation
-	            boolean hasOneToOne = false;
-	            for (Field field : declaredFields) {
-	                if (field.isAnnotationPresent(ManyToOne.class)) {
-	                	hasOneToOne = true;
-	                    break; // Stop checking once we find one field with @OneToMany
-	                }
-	            }
-		
-		
-	            // If no field with @OneToMany is found, fail the test
-	            if (!hasOneToOne) {
-	                fail("No field with @ManyToOne annotation found in Feedback class.");
-	            }
+    private String userToken;
 
-	        } catch (ClassNotFoundException e) {
-	            // If the class is not found, fail the test
-	            fail("Class not found: " + e.getMessage());
-	        }
-	    }
-	 
     @Test
-    public void backend_testWiFiSchemeRequestHasManyToOneAnnotation() {
-        try {
-            // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.WiFiSchemeRequest");
+    @Order(1)
+    public void backend_testRegisterUserAndGenerateJwtToken() throws Exception {
+        // Define the request body for user registration
+        String requestBody = "{" +
+                "\"email\": \"user@gmail.com\"," +
+                "\"password\": \"user@1234\"," +
+                "\"username\": \"TestUser\"," +
+                "\"userRole\": \"User\"," +
+                "\"mobileNumber\": \"9876543210\"" +
+                "}";
 
-            // Get all declared fields in the Course class
-            Field[] declaredFields = courseClass.getDeclaredFields();
+        // Perform POST request to /api/register
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(MockMvcResultMatchers.status().isCreated()) // Assert HTTP 201 Created
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andDo(print());
 
-            // Check each field for the @OneToMany annotation
-            boolean hasManyToMany = false;
-            for (Field field : declaredFields) {
-                if (field.isAnnotationPresent(ManyToOne.class)) {
-                    hasManyToMany = true;
-                    break; // Stop checking once we find one field with @OneToMany
-                }
-            }
-	
-	
-            // If no field with @OneToMany is found, fail the test
-            if (!hasManyToMany) {
-                fail("No field with @ManyToOne annotation found in Request class.");
-            }
+        // Define the request body for user login
+        String loginRequestBody = "{" +
+                "\"email\": \"user@gmail.com\"," +
+                "\"password\": \"user@1234\"" +
+                "}";
 
-        } catch (ClassNotFoundException e) {
-            // If the class is not found, fail the test
-            fail("Class not found: " + e.getMessage());
-        }
+        // Perform POST request to /api/login
+        MvcResult loginResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(loginRequestBody))
+                .andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andReturn();
+
+        // Parse the login response to get the token
+        String responseBody = loginResult.getResponse().getContentAsString();
+        JsonNode jsonNode = objectMapper.readTree(responseBody);
+        userToken = jsonNode.get("token").asText();
+
+        // Assert that the token is not null
+        assertTrue(userToken != null && !userToken.isEmpty(), "JWT token should not be null or empty");
+
+        System.out.println("Generated JWT Token for User: " + userToken);
+    }
+
+    @Test
+    @Order(2)
+    public void backend_testGetAllwifiScheme() throws Exception {
+        mockMvc.perform(get("/api/wifiScheme")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$").isArray())
+                .andReturn();
+    }
+
+    @Test
+    @Order(3)
+    public void backend_testGetFeedBackAll() throws Exception {
+        mockMvc.perform(get("/api/feedback")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$").isArray())
+                .andReturn();
     }
 
     @Test
@@ -152,9 +134,6 @@ class SpringappApplicationTests {
         }
     }
 
-    
-    
-
     private void checkClassExists(String className) {
         try {
             Class.forName(className);
@@ -163,45 +142,34 @@ class SpringappApplicationTests {
         }
     }
 
-	 @Test
-     public void backend_testFeedbackControllerClassExists() {
-       checkClassExists("com.examly.springapp.controller.FeedbackController");
-     }
-	 
-	 @Test
-	   public void backend_testWiFiSchemeControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.WiFiSchemeController");
-	   }
 
-	   @Test
-	   public void backend_testWiFiSchemeRequestControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.WiFiSchemeRequestController");
-	   }
+    @Test
+    public void backend_testWiFiSchemeControllerClassExists() {
+        checkClassExists("com.examly.springapp.controller.WiFiSchemeController");
+    }
 
-	   @Test
-	   public void backend_testAuthControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.AuthController");
-	   }
+    @Test
+    public void backend_testWiFiSchemeRequestControllerClassExists() {
+        checkClassExists("com.examly.springapp.controller.WiFiSchemeRequestController");
+    }
 
-	 
-	 @Test
-	   public void backend_testFeedbackModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Feedback");
-	   }
-	 
-	 @Test
-	   public void backend_testWiFiSchemeModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.WiFiScheme");
-	   }
-	 
-	 @Test
-	   public void backend_testUserModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.User");
-	   }
-	 
-	 @Test
-	   public void backend_testWiFiSchemeRequestModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.WiFiSchemeRequest");
-	   }
+    @Test
+    public void backend_testAuthControllerClassExists() {
+        checkClassExists("com.examly.springapp.controller.AuthController");
+    }
 
+    @Test
+    public void backend_testWiFiSchemeModelClassExists() {
+        checkClassExists("com.examly.springapp.model.WiFiScheme");
+    }
+
+    @Test
+    public void backend_testUserModelClassExists() {
+        checkClassExists("com.examly.springapp.model.User");
+    }
+
+    @Test
+    public void backend_testWiFiSchemeRequestModelClassExists() {
+        checkClassExists("com.examly.springapp.model.WiFiSchemeRequest");
+    }
 }
