@@ -47,7 +47,7 @@ class SpringappApplicationTests {
     @Autowired
     private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
 
-    private String userToken;
+    private static String userToken;
 	private static String adminToken; // Make adminToken static
 
     @BeforeAll
@@ -99,12 +99,12 @@ class SpringappApplicationTests {
         // Parse the login response to get the token
         String responseBody = loginResult.getResponse().getContentAsString();
         JsonNode jsonNode = objectMapper.readTree(responseBody);
-        userToken = jsonNode.get("token").asText();
+         String userTokenJWT = jsonNode.get("token").asText();
 
         // Assert that the token is not null
-        assertTrue(userToken != null && !userToken.isEmpty(), "JWT token should not be null or empty");
+        assertTrue(userTokenJWT != null && !userTokenJWT.isEmpty(), "JWT token should not be null or empty");
 
-        System.out.println("Generated JWT Token for User: " + userToken);
+        System.out.println("Generated JWT Token for User: " + userTokenJWT);
     }
 
 	@Test
@@ -222,6 +222,82 @@ public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
                 .andExpect(jsonPath("$").isArray())
                 .andReturn();
     }
+
+	
+	@Test
+	@Order(6)
+	public void backend_testGetAllwifiSchemeRequest() throws Exception {
+		// Ensure the admin token is available
+		assertTrue(adminToken != null && !adminToken.isEmpty(), "Admin token must be initialized before fetching WiFi scheme requests.");
+	
+		mockMvc.perform(get("/api/wifiSchemeRequest")
+				.header("Authorization", "Bearer " + adminToken) // Include the adminToken in the Authorization header
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
+				.andDo(print())
+				.andExpect(content().contentType("application/json"))
+				.andExpect(jsonPath("$").isArray()) // Assert that the response body is an array
+				.andReturn();
+	}
+
+
+	@Test
+	@Order(7)
+	public void backend_testLoginAsUser() throws Exception {
+		String requestBody = "{" +
+				"\"email\": \"user@gmail.com\"," +
+				"\"password\": \"user@1234\"" +
+				"}";
+
+		MvcResult loginResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(requestBody))
+				.andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andReturn();
+
+		// Parse the login response to get the token
+		String responseBody = loginResult.getResponse().getContentAsString();
+		JsonNode jsonNode = objectMapper.readTree(responseBody);
+		userToken = jsonNode.get("token").asText(); // Save the token to the class-level variable
+
+		// Assert the token is not null
+		assertTrue(userToken != null && !userToken.isEmpty(), "JWT token for User should not be null or empty");
+
+		System.out.println("Generated JWT Token for User: " + userToken);
+	}
+
+	@Test
+@Order(8)
+public void backend_testAddWifiRequestAsUser() throws Exception {
+    // Ensure the token is retrieved before running this test
+    assertTrue(userToken != null && !userToken.isEmpty(), "User token must be initialized before adding a WiFi scheme request.");
+
+    // Define the request body for adding a WiFi Scheme Request
+    String requestBody = "{" +
+            "\"wifiSchemeId\": 1," +
+            "\"preferredSetupDate\": \"2024-12-20\"," +
+            "\"timeSlot\": \"Morning\"," +
+            "\"streetName\": \"123 Main St\"," +
+            "\"landmark\": \"Near Central Park\"," +
+            "\"city\": \"Sample City\"," +
+            "\"state\": \"Sample State\"," +
+            "\"zipCode\": \"123456\"," +
+            "\"comments\": \"Install as soon as possible\"," +
+            "\"proof\": \"Base64EncodedProofHere\"," + // Replace with actual base64 string for testing
+            "\"status\": \"Pending\"" +
+            "}";
+
+    // Perform POST request to /api/wifiSchemeRequest
+    mockMvc.perform(MockMvcRequestBuilders.post("/api/wifiSchemeRequest")
+            .header("Authorization", "Bearer " + userToken) // Include the userToken in the Authorization header
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+            .andExpect(MockMvcResultMatchers.status().isCreated()) // Assert HTTP 201 Created
+            .andDo(print());
+}
+
 
     @Test
     public void backend_testWiFiSchemeInterfaceAndImplementation() {

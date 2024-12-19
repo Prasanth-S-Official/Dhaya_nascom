@@ -69,7 +69,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (40,'user@gmail.com','9876543210','$2a$10$Ds5gNVDLD4z34sOCKCzgf.W0uL/ZGg44in72p3q2vQS3yn9FYuJ/C','User','TestUser'),(41,'admin@gmail.com','9876543211','$2a$10$ui.T8hpOM8QtK2AfEbhGJ.9aJJ5EOY9r2gq5tCKMYr4XccoL0Jnm6','Admin','AdminUser');
+INSERT INTO `user` VALUES (52,'user@gmail.com','9876543210','$2a$10$wltVcRfddZatGkaqBmE3wOywKUaoH3nmRJbXZgUTTqhLHbhRrSDbe','User','TestUser'),(53,'admin@gmail.com','9876543211','$2a$10$PoBBTGmKUMJD4bpPVhLfz.0Y48CEcPv30klByk9Pk9D4kguECRIgG','Admin','AdminUser');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +99,7 @@ CREATE TABLE `wi_fi_scheme` (
   `scheme_name` varchar(255) DEFAULT NULL,
   `speed` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`wifi_scheme_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `wi_fi_scheme` (
 
 LOCK TABLES `wi_fi_scheme` WRITE;
 /*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
-INSERT INTO `wi_fi_scheme` VALUES (2,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet','100');
+INSERT INTO `wi_fi_scheme` VALUES (8,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet','100');
 /*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-19 11:08:23
+-- Dump completed on 2024-12-19 11:23:23
