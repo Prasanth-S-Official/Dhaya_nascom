@@ -9,12 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import org.springframework.test.web.servlet.MvcResult;
-
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.AfterAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
@@ -27,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.WiFiSchemeRepo;
 import com.examly.springapp.repository.WiFiSchemeRequestRepo;
-
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = SpringappApplication.class)
@@ -50,6 +48,17 @@ class SpringappApplicationTests {
     private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
 
     private String userToken;
+
+    @BeforeAll
+    public static void cleanupDatabase(@Autowired UserRepo userRepository,
+                                       @Autowired WiFiSchemeRepo wifiSchemeRepository,
+                                       @Autowired WiFiSchemeRequestRepo wifiSchemeRequestRepository) {
+        System.out.println("Cleaning up the database before tests...");
+        wifiSchemeRequestRepository.deleteAll();
+        wifiSchemeRepository.deleteAll();
+        userRepository.deleteAll();
+        System.out.println("Database cleanup completed.");
+    }
 
     @Test
     @Order(1)
@@ -97,8 +106,55 @@ class SpringappApplicationTests {
         System.out.println("Generated JWT Token for User: " + userToken);
     }
 
+	@Test
+	@Order(2)
+	public void backend_testRegisterAdminAndGenerateJwtToken() throws Exception {
+		// Define the request body for admin registration
+		String requestBody = "{" +
+				"\"email\": \"admin@gmail.com\"," +
+				"\"password\": \"admin@1234\"," +
+				"\"username\": \"AdminUser\"," +
+				"\"userRole\": \"Admin\"," +
+				"\"mobileNumber\": \"9876543211\"" +
+				"}";
+
+		// Perform POST request to /api/register
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/register")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(requestBody))
+				.andExpect(MockMvcResultMatchers.status().isCreated()) // Assert HTTP 201 Created
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andDo(print());
+
+		// Define the request body for admin login
+		String loginRequestBody = "{" +
+				"\"email\": \"admin@gmail.com\"," +
+				"\"password\": \"admin@1234\"" +
+				"}";
+
+		// Perform POST request to /api/login
+		MvcResult loginResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(loginRequestBody))
+				.andExpect(MockMvcResultMatchers.status().isOk()) // Assert HTTP 200 OK
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andReturn();
+
+		// Parse the login response to get the token
+		String responseBody = loginResult.getResponse().getContentAsString();
+		JsonNode jsonNode = objectMapper.readTree(responseBody);
+		String adminToken = jsonNode.get("token").asText();
+
+		// Assert that the token is not null
+		assertTrue(adminToken != null && !adminToken.isEmpty(), "JWT token for Admin should not be null or empty");
+
+		System.out.println("Generated JWT Token for Admin: " + adminToken);
+	}
+
+
     @Test
-    @Order(2)
+    @Order(3)
     public void backend_testGetAllwifiScheme() throws Exception {
         mockMvc.perform(get("/api/wifiScheme")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -107,17 +163,6 @@ class SpringappApplicationTests {
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$").isArray())
                 .andReturn();
-    }
-
-    @AfterAll
-    public static void cleanupDatabase(@Autowired UserRepo userRepository,
-                                        @Autowired WiFiSchemeRepo wifiSchemeRepository,
-                                        @Autowired WiFiSchemeRequestRepo wifiSchemeRequestRepository) {
-        System.out.println("Cleaning up the database...");
-        wifiSchemeRequestRepository.deleteAll();
-        wifiSchemeRepository.deleteAll();
-        userRepository.deleteAll();
-        System.out.println("Database cleanup completed.");
     }
 
     @Test
