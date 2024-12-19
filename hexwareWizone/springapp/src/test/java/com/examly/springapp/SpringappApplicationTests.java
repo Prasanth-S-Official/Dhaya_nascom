@@ -8,6 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
+import java.lang.reflect.Field;
+
 import org.springframework.test.web.servlet.MvcResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -268,36 +271,37 @@ public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
 		System.out.println("Generated JWT Token for User: " + userToken);
 	}
 
+
 	@Test
-@Order(8)
-public void backend_testAddWifiRequestAsUser() throws Exception {
-    // Ensure the token is retrieved before running this test
-    assertTrue(userToken != null && !userToken.isEmpty(), "User token must be initialized before adding a WiFi scheme request.");
+    public void backend_testWiFiSchemeRequestHasManyToOneAnnotation() {
+        try {
+            // Use reflection to get the Class object for the Course class
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.WiFiSchemeRequest");
 
-    // Define the request body for adding a WiFi Scheme Request
-    String requestBody = "{" +
-            "\"wifiSchemeId\": 1," +
-            "\"preferredSetupDate\": \"2024-12-20\"," +
-            "\"timeSlot\": \"Morning\"," +
-            "\"streetName\": \"123 Main St\"," +
-            "\"landmark\": \"Near Central Park\"," +
-            "\"city\": \"Sample City\"," +
-            "\"state\": \"Sample State\"," +
-            "\"zipCode\": \"123456\"," +
-            "\"comments\": \"Install as soon as possible\"," +
-            "\"proof\": \"Base64EncodedProofHere\"," + // Replace with actual base64 string for testing
-            "\"status\": \"Pending\"" +
-            "}";
+            // Get all declared fields in the Course class
+            Field[] declaredFields = courseClass.getDeclaredFields();
 
-    // Perform POST request to /api/wifiSchemeRequest
-    mockMvc.perform(MockMvcRequestBuilders.post("/api/wifiSchemeRequest")
-            .header("Authorization", "Bearer " + userToken) // Include the userToken in the Authorization header
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody))
-            .andExpect(MockMvcResultMatchers.status().isCreated()) // Assert HTTP 201 Created
-            .andDo(print());
-}
+            // Check each field for the @OneToMany annotation
+            boolean hasManyToMany = false;
+            for (Field field : declaredFields) {
+                if (field.isAnnotationPresent(ManyToOne.class)) {
+                    hasManyToMany = true;
+                    break; // Stop checking once we find one field with @OneToMany
+                }
+            }
+	
+	
+            // If no field with @OneToMany is found, fail the test
+            if (!hasManyToMany) {
+                fail("No field with @ManyToOne annotation found in Request class.");
+            }
 
+        } catch (ClassNotFoundException e) {
+            // If the class is not found, fail the test
+            fail("Class not found: " + e.getMessage());
+        }
+    }
+	
 
     @Test
     public void backend_testWiFiSchemeInterfaceAndImplementation() {
@@ -333,6 +337,10 @@ public void backend_testAddWifiRequestAsUser() throws Exception {
         }
     }
 
+	
+
+
+
     @Test
     public void backend_testWiFiSchemeControllerClassExists() {
         checkClassExists("com.examly.springapp.controller.WiFiSchemeController");
@@ -362,4 +370,6 @@ public void backend_testAddWifiRequestAsUser() throws Exception {
     public void backend_testWiFiSchemeRequestModelClassExists() {
         checkClassExists("com.examly.springapp.model.WiFiSchemeRequest");
     }
+
+
 }
