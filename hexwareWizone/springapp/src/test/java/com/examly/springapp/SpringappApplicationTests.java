@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.lang.reflect.Field;
-
+import jakarta.persistence.ManyToOne;
 import org.springframework.test.web.servlet.MvcResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -338,8 +338,6 @@ public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
     }
 
 	
-
-
 
     @Test
     public void backend_testWiFiSchemeControllerClassExists() {
