@@ -53,16 +53,16 @@ class SpringappApplicationTests {
     private static String userToken;
 	private static String adminToken; // Make adminToken static
 
-    @BeforeAll
-    public static void cleanupDatabase(@Autowired UserRepo userRepository,
-                                       @Autowired WiFiSchemeRepo wifiSchemeRepository,
-                                       @Autowired WiFiSchemeRequestRepo wifiSchemeRequestRepository) {
-        System.out.println("Cleaning up the database before tests...");
-        wifiSchemeRequestRepository.deleteAll();
-        wifiSchemeRepository.deleteAll();
-        userRepository.deleteAll();
-        System.out.println("Database cleanup completed.");
-    }
+    // @BeforeAll
+    // public static void cleanupDatabase(@Autowired UserRepo userRepository,
+    //                                    @Autowired WiFiSchemeRepo wifiSchemeRepository,
+    //                                    @Autowired WiFiSchemeRequestRepo wifiSchemeRequestRepository) {
+    //     System.out.println("Cleaning up the database before tests...");
+    //     wifiSchemeRequestRepository.deleteAll();
+    //     wifiSchemeRepository.deleteAll();
+    //     userRepository.deleteAll();
+    //     System.out.println("Database cleanup completed.");
+    // }
 
     @Test
     @Order(1)

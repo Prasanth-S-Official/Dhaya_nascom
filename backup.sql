@@ -24,37 +24,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `appdb` /*!40100 DEFAULT CHARACTER SET 
 USE `appdb`;
 
 --
--- Table structure for table `feedback`
---
-
-DROP TABLE IF EXISTS `feedback`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `feedback` (
-  `feedback_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `category` varchar(255) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `feedback_text` varchar(255) DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `wifi_scheme_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`feedback_id`),
-  KEY `FK7k33yw505d347mw3avr93akao` (`user_id`),
-  KEY `FK1jag4aj6c4bvpvluq5kbaci1f` (`wifi_scheme_id`),
-  CONSTRAINT `FK1jag4aj6c4bvpvluq5kbaci1f` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
-  CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `feedback`
---
-
-LOCK TABLES `feedback` WRITE;
-/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user`
 --
 
@@ -69,7 +38,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +47,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (68,'user@gmail.com','9876543210','$2a$10$KPLcJlZyKqYHrsZDBA64hOAIdS4P4dgB1i/yLypkKK/TDDZJXsq9W','User','TestUser'),(69,'admin@gmail.com','9876543211','$2a$10$PAJrrSftNYTjBYHgq5oYZu4Bq/DtCRAJZDIaUAg6i8Jnepax4r1IS','Admin','AdminUser');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$sb1d0bcMmc/CcqYEThmCl.2rZfotdVzOstch.9fjeoZu1pezBkzUq','Admin','admin'),(2,'user@gmail.com','9876543210','$2a$10$RTgFIifFersWg/Qw15WyoOWULevAEDT0Xr6p1PdhSS/fJW/f3No6m','User','TestUser'),(3,'admin@gmail.com','9876543211','$2a$10$jbs2sLQ0EV0eAHo1Mp0vSOo5r6gk4EWwzesrawDXiKIug4vFaR.se','Admin','AdminUser');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +68,7 @@ CREATE TABLE `wi_fi_scheme` (
   `scheme_name` varchar(255) DEFAULT NULL,
   `speed` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`wifi_scheme_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +77,6 @@ CREATE TABLE `wi_fi_scheme` (
 
 LOCK TABLES `wi_fi_scheme` WRITE;
 /*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
-INSERT INTO `wi_fi_scheme` VALUES (16,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet','100');
 /*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +107,7 @@ CREATE TABLE `wi_fi_scheme_request` (
   KEY `FK66l6wgtnsmludnwu0f3xqnpux` (`wifi_scheme_id`),
   CONSTRAINT `FK66l6wgtnsmludnwu0f3xqnpux` FOREIGN KEY (`wifi_scheme_id`) REFERENCES `wi_fi_scheme` (`wifi_scheme_id`),
   CONSTRAINT `FKn4rmj4a4yy7jdnstsms8feim0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-19 18:22:50
+-- Dump completed on 2024-12-20  2:58:58
