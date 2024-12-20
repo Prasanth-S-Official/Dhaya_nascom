@@ -47,7 +47,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$sb1d0bcMmc/CcqYEThmCl.2rZfotdVzOstch.9fjeoZu1pezBkzUq','Admin','admin'),(2,'user@gmail.com','9876543210','$2a$10$RTgFIifFersWg/Qw15WyoOWULevAEDT0Xr6p1PdhSS/fJW/f3No6m','User','TestUser'),(3,'admin@gmail.com','9876543211','$2a$10$jbs2sLQ0EV0eAHo1Mp0vSOo5r6gk4EWwzesrawDXiKIug4vFaR.se','Admin','AdminUser');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$LgU9fwwQr9EEXdmFCVKsjOmgJ62h0fOIJ9LCPZJ.ZO4krqfRqEyCe','Admin','admin'),(2,'demouser@gmail.com','9876543210','$2a$10$YeKTjxA8HHKzzEmIwR2A..hTLuiEMJh7js9Oy0Hw4y7xXomcB3lEO','User','TestUser'),(3,'demoadmin@gmail.com','9876543211','$2a$10$o6BLbe7Y4z3hGERPrG7ghegf2fJh6wrlcP7uIOBd8bDmUTSvbitN.','Admin','AdminUser');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `wi_fi_scheme` (
   `scheme_name` varchar(255) DEFAULT NULL,
   `speed` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`wifi_scheme_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,6 +77,7 @@ CREATE TABLE `wi_fi_scheme` (
 
 LOCK TABLES `wi_fi_scheme` WRITE;
 /*!40000 ALTER TABLE `wi_fi_scheme` DISABLE KEYS */;
+INSERT INTO `wi_fi_scheme` VALUES (1,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet','100'),(2,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet 1734663903429','100'),(3,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet 1734663939398','100'),(4,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet 1734663994989','100'),(5,'Available','500','High-speed internet for professionals',50,'Urban','Super Fast Internet 1734664034996','100');
 /*!40000 ALTER TABLE `wi_fi_scheme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-20  2:58:58
+-- Dump completed on 2024-12-20  3:13:59

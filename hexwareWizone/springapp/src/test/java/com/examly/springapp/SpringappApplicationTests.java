@@ -26,9 +26,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.examly.springapp.repository.UserRepo;
-import com.examly.springapp.repository.WiFiSchemeRepo;
-import com.examly.springapp.repository.WiFiSchemeRequestRepo;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = SpringappApplication.class)
@@ -41,40 +38,22 @@ class SpringappApplicationTests {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private UserRepo userRepository;
-
-    @Autowired
-    private WiFiSchemeRepo wifiSchemeRepository;
-
-    @Autowired
-    private WiFiSchemeRequestRepo wifiSchemeRequestRepository;
-
     private static String userToken;
 	private static String adminToken; // Make adminToken static
-
-    // @BeforeAll
-    // public static void cleanupDatabase(@Autowired UserRepo userRepository,
-    //                                    @Autowired WiFiSchemeRepo wifiSchemeRepository,
-    //                                    @Autowired WiFiSchemeRequestRepo wifiSchemeRequestRepository) {
-    //     System.out.println("Cleaning up the database before tests...");
-    //     wifiSchemeRequestRepository.deleteAll();
-    //     wifiSchemeRepository.deleteAll();
-    //     userRepository.deleteAll();
-    //     System.out.println("Database cleanup completed.");
-    // }
 
     @Test
     @Order(1)
     public void backend_testRegisterUserAndGenerateJwtToken() throws Exception {
         // Define the request body for user registration
         String requestBody = "{" +
-                "\"email\": \"user@gmail.com\"," +
-                "\"password\": \"user@1234\"," +
-                "\"username\": \"TestUser\"," +
-                "\"userRole\": \"User\"," +
-                "\"mobileNumber\": \"9876543210\"" +
-                "}";
+        "\"userId\": 2," + // Include the userId
+        "\"email\": \"demouser@gmail.com\"," +
+        "\"password\": \"user@1234\"," +
+        "\"username\": \"TestUser\"," +
+        "\"userRole\": \"User\"," +
+        "\"mobileNumber\": \"9876543210\"" +
+        "}";
+
 
         // Perform POST request to /api/register
         mockMvc.perform(MockMvcRequestBuilders.post("/api/register")
@@ -86,7 +65,7 @@ class SpringappApplicationTests {
 
         // Define the request body for user login
         String loginRequestBody = "{" +
-                "\"email\": \"user@gmail.com\"," +
+                "\"email\": \"demouser@gmail.com\"," +
                 "\"password\": \"user@1234\"" +
                 "}";
 
@@ -115,7 +94,8 @@ class SpringappApplicationTests {
 	public void backend_testRegisterAdminAndGenerateJwtToken() throws Exception {
 		// Define the request body for admin registration
 		String requestBody = "{" +
-				"\"email\": \"admin@gmail.com\"," +
+                "\"userId\": 3," +
+				"\"email\": \"demoadmin@gmail.com\"," +
 				"\"password\": \"admin@1234\"," +
 				"\"username\": \"AdminUser\"," +
 				"\"userRole\": \"Admin\"," +
@@ -132,7 +112,7 @@ class SpringappApplicationTests {
 
 		// Define the request body for admin login
 		String loginRequestBody = "{" +
-				"\"email\": \"admin@gmail.com\"," +
+				"\"email\": \"demoadmin@gmail.com\"," +
 				"\"password\": \"admin@1234\"" +
 				"}";
 
@@ -161,7 +141,7 @@ class SpringappApplicationTests {
 	@Order(3)
 	public void backend_testLoginAdmin() throws Exception {
 		String requestBody = "{" +
-				"\"email\": \"admin@gmail.com\"," +
+				"\"email\": \"demoadmin@gmail.com\"," +
 				"\"password\": \"admin@1234\"" +
 				"}";
 	
@@ -192,10 +172,10 @@ public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
 	// System.out.println("helo" + adminToken);
     // Ensure the token is retrieved before running this test
     assertTrue(adminToken != null && !adminToken.isEmpty(), "Admin token must be initialized before adding a WiFi scheme.");
-
+    String uniqueSchemeName = "Super Fast Internet " + System.currentTimeMillis();
     // Define the request body for adding a WiFi Scheme
     String requestBody = "{" +
-            "\"schemeName\": \"Super Fast Internet\"," +
+             "\"schemeName\": \"" + uniqueSchemeName + "\"," +
             "\"description\": \"High-speed internet for professionals\"," +
             "\"speed\": 100," +
             "\"dataLimit\": 500," +
@@ -216,7 +196,7 @@ public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
 
     @Test
     @Order(5)
-    public void backend_testGetAllwifiScheme() throws Exception {
+    public void backend_testGetwifiSchemes() throws Exception {
         mockMvc.perform(get("/api/wifiScheme")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -248,7 +228,7 @@ public void backend_testAddWiFiSchemeAsAdmin() throws Exception {
 	@Order(7)
 	public void backend_testLoginAsUser() throws Exception {
 		String requestBody = "{" +
-				"\"email\": \"user@gmail.com\"," +
+				"\"email\": \"demouser@gmail.com\"," +
 				"\"password\": \"user@1234\"" +
 				"}";
 

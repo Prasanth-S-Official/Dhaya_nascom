@@ -61,7 +61,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/wifiScheme").hasRole("Admin")
                 .requestMatchers(HttpMethod.PUT, "/api/wifiScheme/{wifiSchemeId}").hasRole("Admin")
                 .requestMatchers(HttpMethod.DELETE, "/api/wifiScheme/{wifiSchemeId}").hasRole("Admin")
-                .requestMatchers(HttpMethod.GET, "/api/wifiScssheme").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/wifiScheme").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/wifiScheme/{wifiSchemeId}").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/wifiSchemeRequest").hasRole("User")
                 .requestMatchers(HttpMethod.PUT, "/api/wifiSchemeRequest/{wifiSchemeRequestId}").hasRole("User")
