@@ -14,7 +14,7 @@ export class ManagerViewAgentsComponent implements OnInit {
   showDeletePopup = false;
   showProfilePopup = false;
   agentToDelete: number | null = null;
-  profileImage: string | null = null;
+  selectedAgent: any | null = null;
   searchField = '';
   selectedStatus: string | null = null;
   status: string = '';
@@ -86,13 +86,13 @@ export class ManagerViewAgentsComponent implements OnInit {
     );
   }
 
-  viewProfile(profileBase64: string) {
-    this.profileImage = profileBase64;
+  viewProfile(agent: any) {
+    this.selectedAgent = agent;
     this.showProfilePopup = true;
   }
 
   closeProfilePopup() {
-    this.profileImage = null;
+    this.selectedAgent = null;
     this.showProfilePopup = false;
   }
 
