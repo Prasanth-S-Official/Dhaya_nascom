@@ -8,20 +8,14 @@
       </li>
       <li><a [routerLink]="['/home']">Home</a></li>
       <li class="dropdown">
-        <span class="dropdown-label">Requirements</span>
+        <span class="dropdown-label">SupportAgent</span>
         <ul class="dropdown-menu">
-          <li><a routerLink="/manager/add/requirement">Add Requirement</a></li>
-          <li><a routerLink="/manager/view/requirements">View Requirements</a></li>
+          <li><a routerLink="/manager/add/requirement">Add SupportAgent</a></li>
+          <li><a routerLink="/manager/view/requirements">View SupportAgents</a></li>
         </ul>
       </li>
-      <li><a routerLink="/manager/view/trainers">Selected Trainers</a></li>
-      <li class="dropdown">
-        <span class="dropdown-label">Feedbacks</span>
-        <ul class="dropdown-menu">
-          <li><a routerLink="/manager/view/feedback">My Feedbacks</a></li>
-          <!-- <li><a routerLink="/user/add/feedback">Post Feedback</a></li> -->
-        </ul>
-      </li>
+      <li><a routerLink="/manager/view/trainers">Tickets</a></li>
+      <li><a routerLink="/coordinator/view/feedback">Feedbacks</a></li>
       <li>
         <button id="redbutton" class="button" (click)="showLogoutPopup = true">
           Logout

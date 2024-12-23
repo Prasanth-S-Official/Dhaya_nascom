@@ -21,6 +21,9 @@ public class Ticket {
     @Column(name = "resolutionSummary", nullable = true)
     private String resolutionSummary; // Summary of the resolution (nullable)
 
+    @Column(nullable = true)
+    private Boolean satisfied; // Indicates if the client is satisfied with the resolution (nullable)
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // Link to the client who raised the ticket
@@ -104,6 +107,14 @@ public class Ticket {
 
     public void setResolutionSummary(String resolutionSummary) {
         this.resolutionSummary = resolutionSummary;
+    }
+
+    public Boolean getSatisfied() {
+        return satisfied;
+    }
+
+    public void setSatisfied(Boolean satisfied) {
+        this.satisfied = satisfied;
     }
 
     public User getUser() {

@@ -109,6 +109,7 @@ CREATE TABLE `ticket` (
   `title` varchar(255) DEFAULT NULL,
   `agent_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) NOT NULL,
+  `satisfied` bit(1) DEFAULT NULL,
   PRIMARY KEY (`ticket_id`),
   KEY `FKc2ajxrr4s4whuncj5xpab9by1` (`agent_id`),
   KEY `FKdvt57mcco3ogsosi97odw563o` (`user_id`),
@@ -163,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-23  6:01:24
+-- Dump completed on 2024-12-23  6:16:24

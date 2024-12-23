@@ -121,11 +121,15 @@ export class SignupComponent {
       try {
         const response = await this.authService.register(this.formData).toPromise();
   
-        // Show success popup only for 200 or 201 status
-        if (response && (response.status === 200 || response.status === 201)) {
+        if (response.status === 409) {
+          this.error = response.body?.message || "User already exists with this email";
+        } else if (response.status === 200 || response.status === 201) {
           this.successPopup = true;
-        } 
+        } else {
+          this.error = "Something went wrong, please try again.";
+        }
       } catch (error: any) {
+        console.log('Error Object:', error); 
         if (error.status === 409) {
           this.error = error.error || "User already exists with this email";
         } else {
