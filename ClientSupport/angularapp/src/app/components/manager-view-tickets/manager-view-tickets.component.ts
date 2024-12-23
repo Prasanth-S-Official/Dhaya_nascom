@@ -80,7 +80,7 @@ export class ManagerViewTicketsComponent implements OnInit {
   assignAgent(ticket: Ticket, agent: SupportAgent): void {
     const updatedTicket = {
       ...ticket,
-      agent: { agentId: agent.agentId }, // Include the nested agent object for backend
+      supportAgent: { agentId: agent.agentId }, // Include the nested agent object for backend
     };
 
     console.log(updatedTicket);
