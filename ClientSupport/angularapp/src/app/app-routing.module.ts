@@ -19,6 +19,7 @@ import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfe
 import { TicketManagementComponent } from './components/ticket-management/ticket-management.component';
 import { ClientViewTicketsComponent } from './components/client-view-tickets/client-view-tickets.component';
 import { SupportAgentManagementComponent } from './components/support-agent-management/support-agent-management.component';
+import { ManagerViewAgentsComponent } from './components/manager-view-agents/manager-view-agents.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -27,9 +28,8 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent },
 
   { path: 'manager/add/agent', component: SupportAgentManagementComponent, canActivate: [AuthGuard] },
-  { path: 'manager/edit/requirement/:id', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
-  { path: 'manager/view/trainers', component: SelectedTrainersComponent, canActivate: [AuthGuard] },
-  { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
+  { path: 'manager/edit/agent/:id', component: SupportAgentManagementComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/agents', component: ManagerViewAgentsComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/trainer/:trainerId', component: TrainerDetailsComponent, canActivate: [AuthGuard] },
   
   { path: 'client/add/ticket', component: TicketManagementComponent, canActivate: [AuthGuard] },
