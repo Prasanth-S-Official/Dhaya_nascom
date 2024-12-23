@@ -1,0 +1,88 @@
+<app-managernav></app-managernav>
+<div>
+  <div id="ticketHomeBody">
+    <h1>Available Tickets</h1>
+    <hr />
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Ticket Title or Issue Category..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Tickets Table -->
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Issue Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Agent Assigned</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredTickets.length && availableTickets.length; else noRecords">
+        <tr *ngFor="let ticket of filteredTickets; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ ticket.title }}</td>
+          <td>{{ ticket.description }}</td>
+          <td>{{ ticket.issueCategory }}</td>
+          <td>{{ ticket.priority }}</td>
+          <td>{{ ticket.status }}</td>
+          <td>{{ getAgentName(ticket) }}</td>
+          <td>
+            <button
+              *ngIf="!ticket.agent"
+              (click)="openAssignAgentModal(ticket)"
+              [disabled]="ticket.status !== 'Open'"
+              class="assign-button"
+            >
+              Assign Agent
+            </button>
+            <span *ngIf="ticket.agent">Agent Assigned</span>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colspan="8" class="no-records-cell">Oops! No records found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+
+  <!-- Assign Agent Modal -->
+  <div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-content">
+      <!-- Close X Symbol in top-right corner inside the modal -->
+      <span (click)="closeModal()" class="close-icon">&times;</span>
+  
+      <h2>Assign Agent</h2>
+      <p>Select an agent to assign to <strong>{{ selectedTicket?.title }}</strong>:</p>
+      
+      <!-- Search Box in Modal -->
+      <input
+        id="agentSearchBox"
+        type="text"
+        placeholder="Search by Name or Expertise..."
+        [(ngModel)]="searchAgentField"
+      />
+      
+      <ul>
+        <li *ngFor="let agent of getAvailableAgents()" (click)="assignAgent(selectedTicket, agent)">
+          {{ agent.name }} ({{ agent.expertise }})
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
