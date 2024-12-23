@@ -24,6 +24,7 @@ import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfe
 import { ClientnavComponent } from './components/clientnav/clientnav.component';
 import { TicketManagementComponent } from './components/ticket-management/ticket-management.component';
 import { ClientViewTicketsComponent } from './components/client-view-tickets/client-view-tickets.component';
+import { SupportAgentManagementComponent } from './components/support-agent-management/support-agent-management.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ClientViewTicketsComponent } from './components/client-view-tickets/cli
     ClientnavComponent,
     TicketManagementComponent,
     ClientViewTicketsComponent,
+    SupportAgentManagementComponent,
   
 
   ],

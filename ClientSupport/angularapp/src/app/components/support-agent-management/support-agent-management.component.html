@@ -1,0 +1,78 @@
+<app-managernav></app-managernav>
+<div class="agent-form-container" [ngClass]="{ blur: successPopup }">
+  <button *ngIf="id" type="button" class="back-button" (click)="navigateBack()">Back</button>
+  <h2>{{ id ? 'Edit Support Agent' : 'Add New Support Agent' }}</h2>
+  <hr />
+
+  <form [formGroup]="agentForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name<span class="required">*</span></label>
+      <input id="name" type="text" formControlName="name" />
+      <div *ngIf="agentForm.controls['name'].touched && agentForm.controls['name'].hasError('required')" class="error">
+        *Name is required
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email<span class="required">*</span></label>
+      <input id="email" type="email" formControlName="email" />
+      <div *ngIf="agentForm.controls['email'].touched && agentForm.controls['email'].hasError('required')" class="error">
+        *Email is required
+      </div>
+    </div>
+
+    <div>
+      <label for="phone">Phone<span class="required">*</span></label>
+      <input id="phone" type="text" formControlName="phone" />
+      <div *ngIf="agentForm.controls['phone'].touched && agentForm.controls['phone'].hasError('required')" class="error">
+        *Phone number is required
+      </div>
+    </div>
+
+    <div>
+      <label for="expertise">Expertise<span class="required">*</span></label>
+      <input id="expertise" type="text" formControlName="expertise" />
+      <div *ngIf="agentForm.controls['expertise'].touched && agentForm.controls['expertise'].hasError('required')" class="error">
+        *Expertise is required
+      </div>
+    </div>
+
+    <div>
+      <label for="experience">Experience<span class="required">*</span></label>
+      <input id="experience" type="text" formControlName="experience" />
+      <div *ngIf="agentForm.controls['experience'].touched && agentForm.controls['experience'].hasError('required')" class="error">
+        *Experience is required
+      </div>
+    </div>
+
+    <div>
+      <label for="shiftTiming">Shift Timing<span class="required">*</span></label>
+      <input id="shiftTiming" type="text" formControlName="shiftTiming" />
+      <div *ngIf="agentForm.controls['shiftTiming'].touched && agentForm.controls['shiftTiming'].hasError('required')" class="error">
+        *Shift timing is required
+      </div>
+    </div>
+
+    <div>
+      <label for="remarks">Remarks</label>
+      <textarea id="remarks" formControlName="remarks"></textarea>
+    </div>
+
+    <div>
+      <label for="profile">Profile (Image)<span class="required">*</span></label>
+      <input id="profile" type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" />
+      <div *ngIf="fileError" class="error">
+        *{{ fileError }}
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button">{{ id ? 'Update Agent' : 'Add Agent' }}</button>
+  </form>
+</div>
+
+<div *ngIf="successPopup" class="success-popup">
+  <div class="success-popup-content">
+    <p>{{ id ? 'Support Agent Updated Successfully!' : 'Support Agent Added Successfully!' }}</p>
+    <button (click)="handleSuccessMessage()" class="ok-button">Ok</button>
+  </div>
+</div>
