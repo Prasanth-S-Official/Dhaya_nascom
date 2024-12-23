@@ -83,6 +83,8 @@ export class ManagerViewTicketsComponent implements OnInit {
       agent: { agentId: agent.agentId }, // Include the nested agent object for backend
     };
 
+    console.log(updatedTicket);
+    
     this.ticketService.updateTicket(ticket.ticketId!, updatedTicket).subscribe(
       () => {
         this.fetchData(); // Refresh data to update the view
