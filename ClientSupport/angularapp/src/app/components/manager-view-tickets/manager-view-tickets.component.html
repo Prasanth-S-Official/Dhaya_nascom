@@ -40,15 +40,16 @@
           <td>{{ getAgentName(ticket) }}</td>
           <td>
             <button
-              *ngIf="!ticket.agent"
+              *ngIf="!ticket.supportAgent"
               (click)="openAssignAgentModal(ticket)"
               [disabled]="ticket.status !== 'Open'"
               class="assign-button"
             >
               Assign Agent
             </button>
-            <span *ngIf="ticket.agent">Agent Assigned</span>
+            <span *ngIf="ticket.supportAgent">Agent Assigned</span>
           </td>
+          
         </tr>
       </tbody>
       <ng-template #noRecords>

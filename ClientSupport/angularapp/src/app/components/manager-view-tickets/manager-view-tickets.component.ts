@@ -115,9 +115,10 @@ export class ManagerViewTicketsComponent implements OnInit {
       );
   }
 
+
   getAgentName(ticket: Ticket): string {
-    return ticket.supportAgent 
-      ? `${ticket.supportAgent.name} (${ticket.supportAgent.expertise})`
+    return (ticket as any).supportAgent
+      ? `${(ticket as any).supportAgent.name} (${(ticket as any).supportAgent.expertise})`
       : 'Not Assigned';
   }
   
