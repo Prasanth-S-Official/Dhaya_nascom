@@ -115,7 +115,7 @@ CREATE TABLE `ticket` (
   KEY `FKdvt57mcco3ogsosi97odw563o` (`user_id`),
   CONSTRAINT `FKc2ajxrr4s4whuncj5xpab9by1` FOREIGN KEY (`agent_id`) REFERENCES `support_agent` (`agent_id`),
   CONSTRAINT `FKdvt57mcco3ogsosi97odw563o` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,6 +124,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description','Platform Bug','High',NULL,NULL,'Open','demo title',NULL,2,NULL),(2,'2024-12-23','demo description 2','ContentIssue','Medium',NULL,NULL,'Open','demo title 2',NULL,2,NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-23  6:16:24
+-- Dump completed on 2024-12-23  6:31:24
