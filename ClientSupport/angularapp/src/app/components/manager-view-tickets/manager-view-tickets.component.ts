@@ -37,6 +37,8 @@ export class ManagerViewTicketsComponent implements OnInit {
       allAgents: this.agentService.getAllAgents(),
     }).subscribe(
       ({ allTickets, allAgents }) => {
+        console.log(allTickets);
+        
         this.availableTickets = allTickets.map((ticket: any) => {
           return {
             ...ticket,
@@ -114,12 +116,11 @@ export class ManagerViewTicketsComponent implements OnInit {
   }
 
   getAgentName(ticket: Ticket): string {
-    const agent = (ticket as any).agent; // Use `as any` to bypass the type error
-    return agent
-      ? `${agent.name} (${agent.expertise})`
+    return ticket.supportAgent 
+      ? `${ticket.supportAgent.name} (${ticket.supportAgent.expertise})`
       : 'Not Assigned';
   }
-
+  
   logout(): void {
     localStorage.clear();
     this.router.navigate(['/login']);
