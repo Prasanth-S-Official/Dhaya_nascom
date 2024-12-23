@@ -56,6 +56,44 @@ export class SignupComponent {
     this.errors = fieldErrors;
   }
 
+  // async handleSubmit() {
+  //   const requiredFields = ['username', 'email', 'mobileNumber', 'password', 'userRole'];
+  
+  //   // Check required fields in formData
+  //   requiredFields.forEach(field => {
+  //     if (!this.formData[field] || this.formData[field].trim() === '') {
+  //       this.errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+  //     } else {
+  //       this.errors[field] = '';
+  //     }
+  //   });
+  
+  //   // Validate confirmPassword separately
+  //   if (!this.confirmPassword.trim()) {
+  //     this.errors.confirmPassword = 'Confirm Password is required';
+  //   } else if (this.confirmPassword !== this.formData.password) {
+  //     this.errors.confirmPassword = 'Passwords do not match';
+  //   } else {
+  //     this.errors.confirmPassword = '';
+  //   }
+  
+  //   // Check if any errors exist before submitting
+  //   const hasErrors = Object.values(this.errors).some(error => error !== '');
+  //   if (!hasErrors) {
+  //     try {
+  //       const response = await this.authService.register(this.formData).toPromise();
+  //       if (response) {
+  //         this.successPopup = true;
+  //       } else {
+  //         this.error = "Something went wrong, please try with different data.";
+  //       }
+  //     } catch (error) {
+  //       this.error = "Something went wrong, please try with different data.";
+  //     }
+  //   }
+  // }
+  
+  
   async handleSubmit() {
     const requiredFields = ['username', 'email', 'mobileNumber', 'password', 'userRole'];
   
@@ -82,17 +120,20 @@ export class SignupComponent {
     if (!hasErrors) {
       try {
         const response = await this.authService.register(this.formData).toPromise();
-        if (response) {
+  
+        // Show success popup only for 200 or 201 status
+        if (response && (response.status === 200 || response.status === 201)) {
           this.successPopup = true;
+        } 
+      } catch (error: any) {
+        if (error.status === 409) {
+          this.error = error.error || "User already exists with this email";
         } else {
-          this.error = "Something went wrong, please try with different data.";
+          this.error = "Something went wrong, please try againsssss.";
         }
-      } catch (error) {
-        this.error = "Something went wrong, please try with different data.";
       }
     }
   }
-  
   
 
   handleSuccessMessage() {

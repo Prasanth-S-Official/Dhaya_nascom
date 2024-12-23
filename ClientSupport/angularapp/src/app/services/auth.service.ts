@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { apiUrl } from 'src/apiconfig';
@@ -27,15 +27,30 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  register(user: User): Observable<any> {
-    const body = user;
-    console.log("inservice",body);
+  // register(user: User): Observable<any> {
+  //   const body = user;
+  //   console.log("inservice",body);
 
-    return this.http.post<any>(`${this.apiUrl}/api/register`, body).pipe(
-      tap((user) => this.storeUserData(user)),
-      catchError(this.handleError<any>('register' , true))
+  //   return this.http.post<any>(`${this.apiUrl}/api/register`, body).pipe(
+  //     tap((user) => this.storeUserData(user)),
+  //     catchError(this.handleError<any>('register' , true))
+  //   );
+  // }
+
+  register(user: User): Observable<HttpResponse<any>> {
+    const body = user;
+    console.log("In service", body);
+  
+    return this.http.post<any>(`${this.apiUrl}/api/register`, body, { observe: 'response' }).pipe(
+      tap((response) => {
+        if (response.body) {
+          this.storeUserData(response.body);
+        }
+      }),
+      catchError(this.handleError<HttpResponse<any>>('register', true))
     );
   }
+  
 
   login(login : Login): Observable<any> {
     const loginData = login;
