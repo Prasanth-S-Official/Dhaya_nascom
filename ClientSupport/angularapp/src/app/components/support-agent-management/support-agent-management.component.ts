@@ -101,6 +101,7 @@ export class SupportAgentManagementComponent implements OnInit {
         ...this.agentForm.value,
         profile: this.profileBase64,
         status: 'Available', // Default status
+        addedDate: new Date().toISOString(),
       };
 
       if (this.id) {
@@ -109,6 +110,8 @@ export class SupportAgentManagementComponent implements OnInit {
           (error) => console.error('Error updating agent:', error)
         );
       } else {
+        console.log(formData);
+        
         this.agentService.addAgent(formData).subscribe(
           () => this.showSuccessPopup(),
           (error) => console.error('Error adding agent:', error)

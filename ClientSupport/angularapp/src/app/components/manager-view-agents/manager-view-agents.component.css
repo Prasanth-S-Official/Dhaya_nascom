@@ -43,7 +43,7 @@
     outline: none;
     transition: border-color 0.3s ease;
     width: 100%;
-    max-width: 40%;
+    max-width: 60%;
     background: #fff;
   }
   
@@ -326,7 +326,7 @@
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 500px; /* Adjust as needed */
-    width: 90%; /* Responsive */
+    width: 25%;
   }
   
   .profile-popup-content h2 {
