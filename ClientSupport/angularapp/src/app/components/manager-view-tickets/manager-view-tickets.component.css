@@ -1,5 +1,5 @@
 /* General Styling */
-#requirementHomeBody {
+#ticketHomeBody {
     margin: 30px auto;
     padding: 20px;
     width: 90%;
@@ -8,7 +8,7 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   }
   
-  #requirementHomeBody h1 {
+  #ticketHomeBody h1 {
     font-size: 28px;
     color: #333;
     font-weight: bold;
@@ -64,7 +64,7 @@
   }
   
   /* Table Styling */
-  .requirement-table {
+  .ticket-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -74,15 +74,15 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   }
   
-  .requirement-table th,
-  .requirement-table td {
+  .ticket-table th,
+  .ticket-table td {
     padding: 15px;
     text-align: center;
     font-size: 16px;
     border: 1px solid #ddd;
   }
   
-  .requirement-table th {
+  .ticket-table th {
     background-color: #3c91e6;
     color: white;
     font-size: 18px;
@@ -90,11 +90,11 @@
     text-transform: uppercase;
   }
   
-  .requirement-table tbody tr:nth-child(even) {
+  .ticket-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
   }
   
-  .requirement-table tbody tr:hover {
+  .ticket-table tbody tr:hover {
     background: rgba(60, 145, 230, 0.1);
     cursor: pointer;
     transition: background 0.3s ease-in-out;
@@ -242,8 +242,8 @@
       font-size: 14px;
     }
   
-    .requirement-table th,
-    .requirement-table td {
+    .ticket-table th,
+    .ticket-table td {
       font-size: 14px;
       padding: 10px;
     }
