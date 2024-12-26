@@ -15,7 +15,7 @@
         <p><strong>Status:</strong> {{ ticket.status }}</p>
         <p><strong>Created Date:</strong> {{ ticket.createdDate | date: 'yyyy-MM-dd' }}</p>
         <p><strong>Resolution Date:</strong> {{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</p>
-        <div class="client-feedback" *ngIf="ticket.status === 'Open' || ticket.status === 'In Progress' || ticket.status === 'Resolved'">
+        <div class="client-feedback" *ngIf="ticket.status === 'In Progress' || ticket.status === 'Resolved'">
           <button class="summary-button" (click)="openSummaryModal()">Provide Summary</button>
         </div>
         <button
