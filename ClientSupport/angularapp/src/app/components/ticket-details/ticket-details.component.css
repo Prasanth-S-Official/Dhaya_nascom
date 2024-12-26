@@ -1,268 +1,159 @@
-/* General Container Styling */
+/* Container Styling */
 #ticketDetailsContainer {
-    margin: 40px auto;
-    padding: 25px;
-    max-width: 85%;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f9fafc, #e9eff4);
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Page Title */
-  h1 {
-    font-size: 36px;
-    color: #2c3e50;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Divider */
-  hr {
-    border: none;
-    border-top: 4px solid #3498db;
-    width: 70%;
-    margin: 20px auto;
-    border-radius: 5px;
-  }
-  
-  /* Cards Layout */
-  .cards-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-  
-  /* Ticket Card */
-  .ticket-card {
-    flex: 1;
-    background: linear-gradient(135deg, #ffffff, #eef3f9);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    min-width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .ticket-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-  }
-  
-  .ticket-card h2 {
-    font-size: 24px;
-    color: #2c97de;
-    margin-bottom: 15px;
-  }
-  
-  .ticket-card p {
-    font-size: 16px;
-    color: #5d6d7e;
-    margin: 10px 0;
-  }
-  
-  /* Agent Card */
-  .agent-card {
-    flex: 1;
-    background: linear-gradient(135deg, #ffffff, #eef6f8);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    min-width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .agent-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-  }
-  
-  .agent-card h2 {
-    font-size: 24px;
-    color: #8e44ad;
-    margin-bottom: 15px;
-  }
-  
-  .agent-card p {
-    font-size: 16px;
-    color: #5d6d7e;
-    margin: 10px 0;
-  }
-  
-  /* Buttons */
-  button {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 10px;
-  }
-  
-  button:disabled {
-    background: #bdc3c7;
-    cursor: not-allowed;
-  }
-  
-  .summary-button {
-    background: #3498db;
-  }
-  
-  .summary-button:hover:not(:disabled) {
-    background: #2980b9;
-    transform: scale(1.05);
-  }
-  
-  .resolve-button {
-    background: #27ae60;
-  }
-  
-  .resolve-button:hover:not(:disabled) {
-    background: #229954;
-    transform: scale(1.05);
-  }
-  
-  .submit-summary-button {
-    background: #e67e22;
-  }
-  
-  .submit-summary-button:hover {
-    background: #d35400;
-  }
-  
-  .yes-button {
-    background: #27ae60;
-  }
-  
-  .yes-button:hover {
-    background: #229954;
-  }
-  
-  .no-button {
-    background: #e74c3c;
-  }
-  
-  .no-button:hover {
-    background: #c0392b;
-  }
-  
-  /* Notifications */
-  .notification {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background: #ffcccc;
-    color: #b71c1c;
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-size: 16px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    font-weight: bold;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
-  
-  /* Modal Overlay */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1100;
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 15px 0;
-    font-size: 14px;
-  }
-  
-  .satisfied-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 15px 0;
-  }
-  
-  .satisfied-container label {
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  /* Popup Overlay for Confirm */
-  .confirm-popup-content {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    position: relative;
-  }
-  
-  /* Animations */
-  @keyframes fadein {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeout {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .cards-container {
-      flex-direction: column;
-      gap: 15px;
-    }
-  
-    .ticket-card,
-    .agent-card {
-      width: 100%;
-    }
-  }
-  
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 90%;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Page Title */
+h1 {
+  font-size: 32px;
+  color: #2c3e50;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Divider */
+hr {
+  border: none;
+  border-top: 3px solid #3276a6;
+  height: 10px;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+/* Card Layout */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Ticket Card */
+.ticket-card {
+  flex: 1;
+  background: linear-gradient(135deg, #ecf0f1, #ffffff);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  min-width: 300px;
+}
+
+.ticket-card h2 {
+  font-size: 24px;
+  color: #2980b9;
+  margin-bottom: 15px;
+}
+
+.ticket-card p {
+  font-size: 16px;
+  color: #34495e;
+  margin: 8px 0;
+}
+
+/* Buttons */
+.summary-button,
+.resolve-button,
+.submit-summary-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.summary-button {
+  background: #3498db;
+  color: white;
+}
+
+.resolve-button {
+  background: #27ae60;
+  color: white;
+}
+
+.resolve-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.submit-summary-button {
+  background-color: #e67e22;
+  color: white;
+}
+
+.submit-summary-button:hover {
+  background-color: #d35400;
+}
+
+/* Modals */
+.modal-overlay,
+.confirm-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content,
+.confirm-popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  z-index: 1100;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #c0392b;
+}
+
+/* Confirm Popup Buttons */
+.yes-button {
+  background: #27ae60;
+  color: white;
+}
+
+.no-button {
+  background: #e74c3c;
+  color: white;
+}
+
+.yes-button,
+.no-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
