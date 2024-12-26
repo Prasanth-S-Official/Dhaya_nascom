@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
 @Component({
@@ -45,32 +46,55 @@ export class ClientpostfeedbackComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-
+  
     if (this.addFeedbackForm.valid) {
-      const feedback = {
+      const feedback: Feedback = {
+        feedbackId: undefined, // Optional
         feedbackText: this.addFeedbackForm.get('feedbackText').value,
         date: new Date(),
         category: this.addFeedbackForm.get('category').value,
-        rating: this.addFeedbackForm.get('rating').value,
-        user: { userId: this.addFeedbackForm.get('userId').value },
-        supportAgent: { agentId: this.addFeedbackForm.get('agentId').value },
-        ticket: { ticketId: this.addFeedbackForm.get('ticketId').value },
+        rating: this.addFeedbackForm.get('rating').value, // Assuming rating is in the form
+        userId: Number(this.addFeedbackForm.get('userId').value),
+        ticketId: Number(this.addFeedbackForm.get('ticketId').value), // Assuming ticketId is in the form
+        agentId: Number(this.addFeedbackForm.get('agentId')?.value), // Optional
       };
-
-      this.feedbackService.sendFeedback(feedback).subscribe(
-        () => {
+  
+      // Transforming feedback object to match the backend format
+      const requestPayload = {
+        feedbackText: feedback.feedbackText,
+        date: feedback.date.toISOString().split('T')[0], // Format date to YYYY-MM-DD
+        category: feedback.category,
+        rating: feedback.rating,
+        user: {
+          userId: feedback.userId,
+        },
+        supportAgent: feedback.agentId ? { agentId: feedback.agentId } : null, // Include agentId only if present
+        ticket: {
+          ticketId: feedback.ticketId,
+        },
+      };
+  
+      console.log('Constructed requestPayload:', requestPayload);
+  
+      // Ensure the type matches the expected structure
+      this.feedbackService.sendFeedback(requestPayload as unknown as Feedback).subscribe(
+        (response) => {
+          console.log('Feedback submitted successfully:', response);
           this.successPopup = true;
-          this.addFeedbackForm.reset({ userId: this.addFeedbackForm.get('userId').value });
+          this.addFeedbackForm.reset();
           this.submitted = false;
         },
         (error) => {
-          console.error('Error:', error);
-          alert('Error submitting feedback.');
+          console.error('Error submitting feedback:', error);
+          alert('Error submitting feedback!');
         }
       );
+    } else {
+      console.error('Form is invalid:', this.addFeedbackForm.errors);
     }
   }
-
+  
+  
   handleSuccessMessage(): void {
     this.successPopup = false;
     this.submitted = false;
