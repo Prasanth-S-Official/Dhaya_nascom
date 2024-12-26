@@ -27,12 +27,10 @@
       </div>
     </div>
 
-    <!-- Loading State -->
     <div *ngIf="status === 'loading'" class="loading-indicator">
       Loading tickets...
     </div>
 
-    <!-- Table Display -->
     <table class="ticket-table" *ngIf="status !== 'loading'">
       <thead>
         <tr>
@@ -46,11 +44,6 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody *ngIf="status === 'error'">
-        <tr>
-          <td colspan="8">Error loading tickets</td>
-        </tr>
-      </tbody>
       <tbody *ngIf="status === 'noRecords'">
         <tr>
           <td colspan="8" class="no-records-cell">Oops! No records found</td>
@@ -66,19 +59,38 @@
           <td>{{ ticket.status }}</td>
           <td>{{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</td>
           <td>
-            <button class="edit-button" (click)="navigateToEditTicket(ticket.ticketId)">Edit</button>
-            <button class="delete-button" (click)="handleDeleteClick(ticket.ticketId)">Delete</button>
+            <button
+              class="edit-button"
+              [disabled]="ticket.supportAgent"
+              [ngClass]="{ 'disabled-button': ticket.supportAgent }"
+              (click)="navigateToEditTicket(ticket.ticketId)"
+            >
+              Edit
+            </button>
+            <button
+              class="delete-button"
+              [disabled]="ticket.supportAgent"
+              [ngClass]="{ 'disabled-button': ticket.supportAgent }"
+              (click)="handleDeleteClick(ticket.ticketId)"
+            >
+              Delete
+            </button>
+            <button
+              *ngIf="ticket.supportAgent"
+              class="view-agent-button"
+              (click)="navigateToTicketDetails(ticket.ticketId)"
+            >
+              View Agent
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Delete Confirmation Popup -->
   <div *ngIf="showDeletePopup" class="delete-popup">
     <p>Are you sure you want to delete this ticket?</p>
-    <button class="confirm-delete-button" (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
     <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
-    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
   </div>
 </div>

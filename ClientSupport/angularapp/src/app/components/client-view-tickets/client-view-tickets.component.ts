@@ -76,6 +76,11 @@ export class ClientViewTicketsComponent implements OnInit {
     this.router.navigate(['/client/edit/ticket', ticketId]);
   }
 
+  navigateToTicketDetails(ticketId: number): void {
+    this.router.navigate(['/client/ticket-details', ticketId]);
+  }
+  
+
   applyFilters(): void {
     this.filteredTickets = this.allTickets.filter((ticket) => {
       const matchesSearch =
