@@ -131,7 +131,7 @@ export class TicketDetailsComponent implements OnInit {
 
     this.ticketService.updateTicket(this.ticket.ticketId, updatedTicket).subscribe(
       () => {
-        this.router.navigate(['/client/view/tickets']);
+        this.router.navigate(['/client/view/ticket']);
       },
       (error) => {
         console.error('Error resolving ticket:', error);

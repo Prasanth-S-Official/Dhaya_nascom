@@ -28,6 +28,7 @@ import { SupportAgentManagementComponent } from './components/support-agent-mana
 import { ManagerViewAgentsComponent } from './components/manager-view-agents/manager-view-agents.component';
 import { ManagerViewTicketsComponent } from './components/manager-view-tickets/manager-view-tickets.component';
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
+import { SupportedAgentsComponent } from './components/supported-agents/supported-agents.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
     ManagerViewAgentsComponent,
     ManagerViewTicketsComponent,
     TicketDetailsComponent,
+    SupportedAgentsComponent,
   
 
   ],

@@ -1,0 +1,29 @@
+<app-clientnav></app-clientnav>
+<div id="supportedAgentsContainer">
+  <h1>Supported Agents</h1>
+  <hr />
+
+  <ng-container *ngIf="!isLoading; else loadingOrError">
+    <div *ngIf="supportedAgents.length > 0; else noAgents">
+      <div class="cards-container">
+        <div class="agent-card" *ngFor="let agent of supportedAgents">
+          <h2>{{ agent.name }}</h2>
+          <p><strong>Email:</strong> {{ agent.email }}</p>
+          <p><strong>Phone:</strong> {{ agent.phone }}</p>
+          <p><strong>Expertise:</strong> {{ agent.expertise }}</p>
+          <p><strong>Status:</strong> {{ agent.status }}</p>
+          <button class="review-button" (click)="writeReview(agent.agentId)">Write a Review</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingOrError>
+    <p *ngIf="isLoading">Loading agents...</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </ng-template>
+
+  <ng-template #noAgents>
+    <p>No supported agents found for your tickets.</p>
+  </ng-template>
+</div>
