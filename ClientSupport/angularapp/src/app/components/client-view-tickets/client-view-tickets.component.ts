@@ -32,6 +32,8 @@ export class ClientViewTicketsComponent implements OnInit {
     this.status = 'loading';
     this.ticketService.getTicketsByUserId(this.userId).subscribe(
       (data: Ticket[]) => {
+        console.log(data);
+        
         this.allTickets = data;
         this.filteredTickets = data;
         this.status = this.filteredTickets.length === 0 ? 'noRecords' : '';
