@@ -1,5 +1,5 @@
 <app-clientnav></app-clientnav>
-<div id="ticketDetailsContainer">
+<div id="ticketDetailsContainer" [ngClass]="{ blur: showConfirmPopupModal }">
   <h1>Ticket Details</h1>
   <hr />
 
@@ -98,11 +98,12 @@
   </div>
 
   <!-- Confirm Popup -->
-  <div *ngIf="showConfirmPopupModal" class="confirm-popup">
+</div>
+
+<div *ngIf="showConfirmPopupModal" class="confirm-popup">
     <div class="confirm-popup-content">
       <h2>Are you sure you want to submit this summary?</h2>
       <button class="yes-button" (click)="confirmSummary()">Yes! Confirm</button>
       <button class="no-button" (click)="closeConfirmPopup()">Cancel</button>
     </div>
   </div>
-</div>
