@@ -18,7 +18,6 @@
           <button class="details-button" [disabled]="!agent.agentId" (click)="viewTickets(agent.agentId)">
             Tickets Worked
           </button>
-          <button class="review-button" (click)="writeReview(agent.agentId)">Write a Review</button>
         </div>
       </div>
     </div>
@@ -38,17 +37,26 @@
     <div class="modal-content">
       <button class="close-button" (click)="closeTicketsModal()">&#10006;</button>
       <h2>Tickets Worked By Agent</h2>
-      <div *ngIf="modalTickets.length > 0; else noTickets">
-        <ul class="ticket-list">
-          <li *ngFor="let ticket of modalTickets">
-            <strong>Title:</strong> {{ ticket.title }} |
-            <strong>Status:</strong> {{ ticket.status }}
-          </li>
-        </ul>
+      <div *ngIf="modalTickets.length > 0; else noTickets" class="tickets-scroll-container">
+        <div class="tickets-container">
+          <div class="ticket-card" *ngFor="let ticket of modalTickets">
+            <h3>{{ ticket.title }}</h3>
+            <p><strong>Description:</strong> {{ ticket.description }}</p>
+            <p><strong>Status:</strong> {{ ticket.status }}</p>
+            <button
+              class="review-button"
+              (click)="writeReview(ticket.ticketId, ticket.supportAgent.agentId)"
+            >
+              Write a Review
+            </button>
+          </div>
+        </div>
       </div>
       <ng-template #noTickets>
         <p>No tickets found for this agent.</p>
       </ng-template>
     </div>
   </div>
+  
+  
 </div>

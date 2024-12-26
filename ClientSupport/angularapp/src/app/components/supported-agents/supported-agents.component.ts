@@ -64,7 +64,9 @@ export class SupportedAgentsComponent implements OnInit {
     this.showTicketsModal = false;
   }
 
-  writeReview(agentId: number): void {
-    this.router.navigate(['/client/add/feedback'], { queryParams: { agentId } });
+  writeReview(ticketId: number, agentId: number): void {
+    this.router.navigate(['/client/add/feedback'], {
+      queryParams: { ticketId, agentId },
+    });
   }
 }

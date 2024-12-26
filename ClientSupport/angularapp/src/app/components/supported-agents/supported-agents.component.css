@@ -1,54 +1,45 @@
 /* Container Styling */
 #supportedAgentsContainer {
-    margin: 30px auto;
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 20px;
-    max-width: 90%;
-    font-family: 'Poppins', sans-serif;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   }
   
-  /* Page Title */
   h1 {
     font-size: 28px;
-    color: #2c3e50;
     text-align: center;
+    color: #2c3e50;
     margin-bottom: 20px;
   }
   
-  /* Divider */
   hr {
     border: none;
-    border-top: 3px solid #3276a6;
-    margin: 20px auto;
-    width: 60%;
+    height: 3px;
+    background: #3276a6;
+    margin: 10px 0 20px;
+    border-radius: 5px;
   }
   
-  /* Cards Container */
+  /* Cards Layout */
   .cards-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    justify-content: center;
   }
   
-  /* Agent Card */
   .agent-card {
-    flex: 1 1 300px;
-    background: #f9f9f9;
-    padding: 15px;
+    background: #f4f6f9;
     border-radius: 10px;
+    padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s;
-  }
-  
-  .agent-card:hover {
-    transform: translateY(-5px);
   }
   
   .agent-card h2 {
+    font-size: 20px;
     color: #3498db;
     margin-bottom: 10px;
   }
@@ -56,52 +47,95 @@
   .agent-card p {
     font-size: 14px;
     margin: 5px 0;
-    color: #555;
   }
   
-  /* Profile Picture */
-  .profile-picture {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 10px auto;
-    overflow: hidden;
+  .profile img {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
   }
   
-  .profile-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* Buttons */
   .review-button,
   .details-button {
-    background: #3276a6;
-    color: white;
-    border: none;
+    padding: 8px 12px;
     border-radius: 5px;
-    padding: 8px 15px;
+    border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 14px;
+    margin: 5px;
   }
   
-  .review-button:hover,
+  .review-button {
+    background: #27ae60;
+    color: white;
+  }
+  
+  .review-button:hover {
+    background: #1e8a47;
+  }
+  
+  .details-button {
+    background: #3498db;
+    color: white;
+  }
+  
   .details-button:hover {
-    background: #285a82;
+    background: #2980b9;
   }
-  
-  /* Loading or Error Messages */
-  p {
-    text-align: center;
-    color: #999;
-    font-size: 16px;
+  /* Tickets Modal Styling */
+.tickets-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
     margin-top: 20px;
   }
   
-  /* Modal Overlay */
-  .modal-overlay {
+  .ticket-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .ticket-card h3 {
+    font-size: 18px;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-card p {
+    font-size: 14px;
+    margin: 5px 0;
+    line-height: 1.5;
+  }
+  
+  .ticket-card button {
+    margin-top: 10px;
+    background: #27ae60;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ticket-card button:hover {
+    background: #1e8a47;
+  }
+  
+  .ticket-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  /* Modal Styling */
+ /* Modal Styling */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -114,29 +148,107 @@
     z-index: 1000;
   }
   
-  /* Modal Content */
   .modal-content {
-    background: white;
+    background: #fff;
     border-radius: 10px;
     padding: 20px;
-    text-align: center;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    max-height: 80vh; /* Limit the modal height */
+    overflow: hidden; /* Avoid content overflow */
   }
   
   .close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: transparent;
-    border: none;
     font-size: 1.5rem;
     color: #e74c3c;
+    background: none;
+    border: none;
     cursor: pointer;
   }
   
   .close-button:hover {
     color: #c0392b;
   }
+  
+  /* Scrollable Container */
+  .tickets-scroll-container {
+    max-height: calc(80vh - 100px); /* Adjust for modal padding and heading */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 10px;
+  }
+  
+  .tickets-scroll-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .tickets-scroll-container::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 5px;
+  }
+  
+  .tickets-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+  }
+  
+  /* Tickets Container */
+  .tickets-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .ticket-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .ticket-card h3 {
+    font-size: 18px;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-card p {
+    font-size: 14px;
+    margin: 5px 0;
+    line-height: 1.5;
+  }
+  
+  .ticket-card button {
+    margin-top: 10px;
+    background: #27ae60;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ticket-card button:hover {
+    background: #1e8a47;
+  }
+  
+  .ticket-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* No Tickets Message */
+  .no-tickets-message {
+    font-size: 16px;
+    color: #555;
+  }
+  
   
