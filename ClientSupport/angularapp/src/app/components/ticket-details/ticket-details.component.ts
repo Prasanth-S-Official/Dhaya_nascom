@@ -88,12 +88,35 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   confirmSummary(): void {
-    this.ticket.resolutionSummary = this.resolutionSummary;
-    this.ticket.satisfied = this.satisfied;
-    this.closeSummaryModal();
-    this.closeConfirmPopup();
+    if (!this.resolutionSummary || this.satisfied === null) {
+      this.showNotification('Please provide a resolution summary and select satisfaction status.');
+      return;
+    }
+  
+    // Update the ticket object with the provided resolution details
+    const updatedTicket = {
+      ...this.ticket,
+      resolutionSummary: this.resolutionSummary,
+      satisfied: this.satisfied,
+    };
+  
+    // Call the backend to update the ticket
+    this.ticketService.updateTicket(this.ticket.ticketId, updatedTicket).subscribe(
+      (response: any) => {
+        console.log(response);
+        
+        this.ticket = response; // Update the local ticket object with the response
+        this.closeSummaryModal();
+        this.closeConfirmPopup();
+        this.showNotification('Resolution summary successfully updated.');
+      },
+      (error) => {
+        console.error('Error updating resolution summary:', error);
+        this.showNotification('Failed to update resolution summary. Please try again.');
+      }
+    );
   }
-
+  
   resolveTicket(): void {
     if (!this.ticket.resolutionSummary || this.ticket.satisfied === null) {
       this.showNotification('Please provide resolution details before marking resolve.');

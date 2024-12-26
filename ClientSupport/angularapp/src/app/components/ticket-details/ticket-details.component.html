@@ -40,7 +40,7 @@
       <div class="agent-card">
         <img
           class="agent-profile"
-          [src]="'data:image/png;base64,' + agent.profileImage"
+          [src]="'data:image/png;base64,' + agent.profile"
           alt="Profile Picture"
         />
         <div class="agent-details">
@@ -71,12 +71,13 @@
       <h2 *ngIf="ticket.status !== 'Resolved'">Provide Resolution Summary</h2>
       <h2 *ngIf="ticket.status === 'Resolved'">View Resolution Summary</h2>
 
-      <textarea
+        <textarea
         [(ngModel)]="resolutionSummary"
         [readonly]="ticket.status === 'Resolved'"
         placeholder="Enter Resolution Summary..."
-        rows="4"
-      ></textarea>
+        class="fixed-textarea"
+        ></textarea>
+    
       <div class="satisfied-container" *ngIf="ticket.status !== 'Resolved'">
         <label>
           <input
