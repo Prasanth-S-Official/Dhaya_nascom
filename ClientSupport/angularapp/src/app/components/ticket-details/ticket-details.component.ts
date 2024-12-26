@@ -17,6 +17,7 @@ export class TicketDetailsComponent implements OnInit {
   satisfied: boolean | null = null;
   notificationMessage: string = '';
   showSummaryModal: boolean = false;
+  showConfirmPopupModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,8 +39,6 @@ export class TicketDetailsComponent implements OnInit {
   fetchTicketDetails(ticketId: number): void {
     this.ticketService.getTicketById(ticketId).subscribe(
       (data: any) => {
-        console.log(data);
-        
         this.ticket = data;
         if (data.supportAgent) {
           this.fetchAgentDetails(data.supportAgent.agentId);
@@ -64,28 +63,40 @@ export class TicketDetailsComponent implements OnInit {
     );
   }
 
-  openSummaryModal(): void {
-    this.showSummaryModal = true;
+  toggleSummaryModal(): void {
+    this.showSummaryModal = !this.showSummaryModal;
+    if (this.ticket.status === 'Resolved') {
+      this.resolutionSummary = this.ticket.resolutionSummary;
+      this.satisfied = this.ticket.satisfied;
+    }
   }
 
   closeSummaryModal(): void {
     this.showSummaryModal = false;
   }
 
-  submitSummary(): void {
+  showConfirmPopup(): void {
     if (!this.resolutionSummary || this.satisfied === null) {
       this.showNotification('Please provide a resolution summary and select satisfaction status.');
       return;
     }
+    this.showConfirmPopupModal = true;
+  }
 
+  closeConfirmPopup(): void {
+    this.showConfirmPopupModal = false;
+  }
+
+  confirmSummary(): void {
     this.ticket.resolutionSummary = this.resolutionSummary;
     this.ticket.satisfied = this.satisfied;
-    this.showSummaryModal = false;
+    this.closeSummaryModal();
+    this.closeConfirmPopup();
   }
 
   resolveTicket(): void {
     if (!this.ticket.resolutionSummary || this.ticket.satisfied === null) {
-      this.showNotification('Please provide resolution details before resolving.');
+      this.showNotification('Please provide resolution details before marking resolve.');
       return;
     }
 

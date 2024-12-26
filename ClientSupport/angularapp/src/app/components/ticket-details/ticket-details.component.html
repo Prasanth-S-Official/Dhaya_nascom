@@ -15,9 +15,13 @@
         <p><strong>Status:</strong> {{ ticket.status }}</p>
         <p><strong>Created Date:</strong> {{ ticket.createdDate | date: 'yyyy-MM-dd' }}</p>
         <p><strong>Resolution Date:</strong> {{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</p>
-        <div class="client-feedback" *ngIf="ticket.status === 'In Progress' || ticket.status === 'Resolved'">
-          <button class="summary-button" (click)="openSummaryModal()">Provide Summary</button>
-        </div>
+
+        <!-- Toggle button for "Provide/View Summary" -->
+        <button class="summary-button" (click)="toggleSummaryModal()">
+          {{ ticket.status === 'Resolved' ? 'View Summary' : 'Provide Summary' }}
+        </button>
+
+        <!-- Resolve button -->
         <button
           class="resolve-button"
           [disabled]="ticket.status === 'Resolved'"
@@ -48,17 +52,20 @@
     {{ notificationMessage }}
   </div>
 
-  <!-- Provide Summary Modal -->
+  <!-- Provide/View Summary Modal -->
   <div *ngIf="showSummaryModal" class="modal-overlay">
     <div class="modal-content">
       <button class="close-button" (click)="closeSummaryModal()">&#10006;</button>
-      <h2>Provide Resolution Summary</h2>
+      <h2 *ngIf="ticket.status !== 'Resolved'">Provide Resolution Summary</h2>
+      <h2 *ngIf="ticket.status === 'Resolved'">View Resolution Summary</h2>
+
       <textarea
         [(ngModel)]="resolutionSummary"
+        [readonly]="ticket.status === 'Resolved'"
         placeholder="Enter Resolution Summary..."
         rows="4"
       ></textarea>
-      <div class="satisfied-container">
+      <div class="satisfied-container" *ngIf="ticket.status !== 'Resolved'">
         <label>
           <input
             type="radio"
@@ -78,7 +85,24 @@
           😞 Not Satisfied
         </label>
       </div>
-      <button class="submit-summary-button" (click)="submitSummary()">Submit</button>
+
+      <!-- Submit button for providing summary -->
+      <button
+        class="submit-summary-button"
+        *ngIf="ticket.status !== 'Resolved'"
+        (click)="showConfirmPopup()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+
+  <!-- Confirm Popup -->
+  <div *ngIf="showConfirmPopupModal" class="confirm-popup">
+    <div class="confirm-popup-content">
+      <h2>Are you sure you want to submit this summary?</h2>
+      <button class="yes-button" (click)="confirmSummary()">Yes! Confirm</button>
+      <button class="no-button" (click)="closeConfirmPopup()">Cancel</button>
     </div>
   </div>
 </div>
