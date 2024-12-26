@@ -18,7 +18,6 @@ import { CoordinatorViewTrainersComponent } from './components/coordinator-view-
 import { CoordinatorViewRequirementsComponent } from './components/coordinator-view-requirements/coordinator-view-requirements.component';
 import { TrainerDetailsComponent } from './components/trainer-details/trainer-details.component';
 import { SelectedTrainersComponent } from './components/selected-trainers/selected-trainers.component';
-import { ManagerpostfeedbackComponent } from './components/managerpostfeedback/managerpostfeedback.component';
 import { ManagerviewfeedbackComponent } from './components/managerviewfeedback/managerviewfeedback.component';
 import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfeedback/coordinatorviewfeedback.component';
 import { ClientnavComponent } from './components/clientnav/clientnav.component';
@@ -29,6 +28,7 @@ import { ManagerViewAgentsComponent } from './components/manager-view-agents/man
 import { ManagerViewTicketsComponent } from './components/manager-view-tickets/manager-view-tickets.component';
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 import { SupportedAgentsComponent } from './components/supported-agents/supported-agents.component';
+import { ClientpostfeedbackComponent } from './components/clientpostfeedback/clientpostfeedback.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import { SupportedAgentsComponent } from './components/supported-agents/supporte
     CoordinatorViewRequirementsComponent,
     TrainerDetailsComponent,
     SelectedTrainersComponent,
-    ManagerpostfeedbackComponent,
     ManagerviewfeedbackComponent,
     CoordinatorviewfeedbackComponent,
     ClientnavComponent,
@@ -58,6 +57,7 @@ import { SupportedAgentsComponent } from './components/supported-agents/supporte
     ManagerViewTicketsComponent,
     TicketDetailsComponent,
     SupportedAgentsComponent,
+    ClientpostfeedbackComponent,
   
 
   ],

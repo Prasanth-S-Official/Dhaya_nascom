@@ -1,7 +1,7 @@
-<app-managernav></app-managernav>
+<app-clientnav></app-clientnav>
 <div class="main-container">
   <h1>Add Feedback</h1>
-  <hr/>
+  <hr />
   <form
     [formGroup]="addFeedbackForm"
     (ngSubmit)="onSubmit()"
@@ -10,7 +10,12 @@
     <!-- Feedback Text Field -->
     <div class="form-group">
       <label for="feedbackText">Feedback<span class="asterisk">*</span></label>
-      <textarea id="feedbackText" formControlName="feedbackText"></textarea>
+      <textarea
+        id="feedbackText"
+        formControlName="feedbackText"
+        rows="4"
+        placeholder="Write your feedback here..."
+      ></textarea>
       <div
         *ngIf="addFeedbackForm.get('feedbackText').hasError('required') && (addFeedbackForm.get('feedbackText').touched || submitted)"
         class="error-message"
@@ -36,6 +41,21 @@
       </div>
     </div>
 
+    <!-- Rating -->
+    <div class="form-group">
+      <label for="rating">Rating<span class="asterisk">*</span></label>
+      <select id="rating" formControlName="rating">
+        <option value="" disabled selected>Choose Rating</option>
+        <option *ngFor="let rating of ratings" [value]="rating">{{ rating }}</option>
+      </select>
+      <div
+        *ngIf="addFeedbackForm.get('rating').hasError('required') && (addFeedbackForm.get('rating').touched || submitted)"
+        class="error-message"
+      >
+        *Rating is required
+      </div>
+    </div>
+
     <!-- Submit Button -->
     <div class="add-btn">
       <button type="submit">Submit</button>
@@ -44,7 +64,7 @@
 
   <!-- Success Popup -->
   <div *ngIf="successPopup" class="success-popup">
-    <p>Successfully Added!</p>
-    <button (click)="handleSuccessMessage()">Ok</button>
+    <p>Feedback Submitted Successfully!</p>
+    <button (click)="handleSuccessMessage()">OK</button>
   </div>
 </div>
