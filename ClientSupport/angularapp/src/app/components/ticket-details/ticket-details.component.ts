@@ -14,7 +14,9 @@ export class TicketDetailsComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
   resolutionSummary: string = '';
-  satisfied: boolean = false;
+  satisfied: boolean | null = null;
+  notificationMessage: string = '';
+  showSummaryModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +38,8 @@ export class TicketDetailsComponent implements OnInit {
   fetchTicketDetails(ticketId: number): void {
     this.ticketService.getTicketById(ticketId).subscribe(
       (data: any) => {
+        console.log(data);
+        
         this.ticket = data;
         if (data.supportAgent) {
           this.fetchAgentDetails(data.supportAgent.agentId);
@@ -60,27 +64,51 @@ export class TicketDetailsComponent implements OnInit {
     );
   }
 
-  submitFeedback(): void {
-    if (!this.resolutionSummary.trim()) {
-      alert('Resolution summary is required.');
+  openSummaryModal(): void {
+    this.showSummaryModal = true;
+  }
+
+  closeSummaryModal(): void {
+    this.showSummaryModal = false;
+  }
+
+  submitSummary(): void {
+    if (!this.resolutionSummary || this.satisfied === null) {
+      this.showNotification('Please provide a resolution summary and select satisfaction status.');
+      return;
+    }
+
+    this.ticket.resolutionSummary = this.resolutionSummary;
+    this.ticket.satisfied = this.satisfied;
+    this.showSummaryModal = false;
+  }
+
+  resolveTicket(): void {
+    if (!this.ticket.resolutionSummary || this.ticket.satisfied === null) {
+      this.showNotification('Please provide resolution details before resolving.');
       return;
     }
 
     const updatedTicket = {
       ...this.ticket,
-      resolutionSummary: this.resolutionSummary,
-      satisfied: this.satisfied
+      status: 'Resolved',
+      resolutionDate: new Date().toISOString()
     };
 
     this.ticketService.updateTicket(this.ticket.ticketId, updatedTicket).subscribe(
       () => {
-        alert('Feedback submitted successfully.');
         this.router.navigate(['/client/view/tickets']);
       },
       (error) => {
-        console.error('Error submitting feedback:', error);
-        alert('Failed to submit feedback.');
+        console.error('Error resolving ticket:', error);
       }
     );
+  }
+
+  showNotification(message: string): void {
+    this.notificationMessage = message;
+    setTimeout(() => {
+      this.notificationMessage = '';
+    }, 3000);
   }
 }

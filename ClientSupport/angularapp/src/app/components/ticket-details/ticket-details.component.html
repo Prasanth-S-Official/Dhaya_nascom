@@ -15,23 +15,16 @@
         <p><strong>Status:</strong> {{ ticket.status }}</p>
         <p><strong>Created Date:</strong> {{ ticket.createdDate | date: 'yyyy-MM-dd' }}</p>
         <p><strong>Resolution Date:</strong> {{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</p>
-
-        <div *ngIf="ticket.status !== 'Closed'">
-          <label for="resolutionSummary"><strong>Provide Resolution Summary:</strong></label>
-          <textarea
-            id="resolutionSummary"
-            [(ngModel)]="resolutionSummary"
-            rows="4"
-            placeholder="Write your resolution summary here..."
-          ></textarea>
-          
-          <div class="satisfied-section">
-            <label><strong>Satisfied:</strong></label>
-            <input type="checkbox" [(ngModel)]="satisfied" />
-          </div>
-
-          <button class="submit-button" (click)="submitFeedback()">Submit</button>
+        <div class="client-feedback" *ngIf="ticket.status === 'Open' || ticket.status === 'In Progress' || ticket.status === 'Resolved'">
+          <button class="summary-button" (click)="openSummaryModal()">Provide Summary</button>
         </div>
+        <button
+          class="resolve-button"
+          [disabled]="ticket.status === 'Resolved'"
+          (click)="resolveTicket()"
+        >
+          Mark as Resolved
+        </button>
       </div>
 
       <div class="agent-card" *ngIf="agent">
@@ -49,4 +42,43 @@
     <p *ngIf="isLoading">Loading ticket details...</p>
     <p *ngIf="errorMessage">{{ errorMessage }}</p>
   </ng-template>
+
+  <!-- Notification -->
+  <div *ngIf="notificationMessage" class="notification">
+    {{ notificationMessage }}
+  </div>
+
+  <!-- Provide Summary Modal -->
+  <div *ngIf="showSummaryModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-button" (click)="closeSummaryModal()">&#10006;</button>
+      <h2>Provide Resolution Summary</h2>
+      <textarea
+        [(ngModel)]="resolutionSummary"
+        placeholder="Enter Resolution Summary..."
+        rows="4"
+      ></textarea>
+      <div class="satisfied-container">
+        <label>
+          <input
+            type="radio"
+            name="satisfaction"
+            value="true"
+            [(ngModel)]="satisfied"
+          />
+          😊 Satisfied
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="satisfaction"
+            value="false"
+            [(ngModel)]="satisfied"
+          />
+          😞 Not Satisfied
+        </label>
+      </div>
+      <button class="submit-summary-button" (click)="submitSummary()">Submit</button>
+    </div>
+  </div>
 </div>
