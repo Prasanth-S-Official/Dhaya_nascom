@@ -6,7 +6,8 @@
   <ng-container *ngIf="ticket; else loadingOrError">
     <div class="cards-container">
       <div class="ticket-card">
-        <h1>{{ ticket.ticketId }}</h1>
+        <h1><strong>Ticket Num:</strong> {{ ticket.ticketId }}</h1>
+        <hr />
         <h2>{{ ticket.title }}</h2>
         <p><strong>Description:</strong> {{ ticket.description }}</p>
         <p><strong>Issue Category:</strong> {{ ticket.issueCategory }}</p>
@@ -14,6 +15,23 @@
         <p><strong>Status:</strong> {{ ticket.status }}</p>
         <p><strong>Created Date:</strong> {{ ticket.createdDate | date: 'yyyy-MM-dd' }}</p>
         <p><strong>Resolution Date:</strong> {{ ticket.resolutionDate ? (ticket.resolutionDate | date: 'yyyy-MM-dd') : 'Not Resolved' }}</p>
+
+        <div *ngIf="ticket.status !== 'Closed'">
+          <label for="resolutionSummary"><strong>Provide Resolution Summary:</strong></label>
+          <textarea
+            id="resolutionSummary"
+            [(ngModel)]="resolutionSummary"
+            rows="4"
+            placeholder="Write your resolution summary here..."
+          ></textarea>
+          
+          <div class="satisfied-section">
+            <label><strong>Satisfied:</strong></label>
+            <input type="checkbox" [(ngModel)]="satisfied" />
+          </div>
+
+          <button class="submit-button" (click)="submitFeedback()">Submit</button>
+        </div>
       </div>
 
       <div class="agent-card" *ngIf="agent">
@@ -23,10 +41,6 @@
         <p><strong>Phone:</strong> {{ agent.phone }}</p>
         <p><strong>Expertise:</strong> {{ agent.expertise }}</p>
         <p><strong>Status:</strong> {{ agent.status }}</p>
-        <div class="action-buttons" *ngIf="ticket.status === 'Open'">
-          <button class="accept-button" (click)="showPopup('accept')">Accept Agent</button>
-          <button class="reject-button" (click)="showPopup('reject')">Reject Agent</button>
-        </div>
       </div>
     </div>
   </ng-container>
@@ -35,12 +49,4 @@
     <p *ngIf="isLoading">Loading ticket details...</p>
     <p *ngIf="errorMessage">{{ errorMessage }}</p>
   </ng-template>
-
-  <div *ngIf="showActionPopup" class="action-popup">
-    <div class="action-popup-content">
-      <h2>{{ popupMessage }}</h2>
-      <button class="ok-button" (click)="confirmAction()">OK</button>
-      <button class="cancel-button" (click)="closePopup()">Cancel</button>
-    </div>
-  </div>
 </div>

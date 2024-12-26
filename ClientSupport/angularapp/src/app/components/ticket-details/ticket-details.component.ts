@@ -13,9 +13,8 @@ export class TicketDetailsComponent implements OnInit {
   agent: any = null;
   isLoading: boolean = true;
   errorMessage: string = '';
-  showActionPopup: boolean = false;
-  actionType: string = ''; // 'accept' or 'reject'
-  popupMessage: string = '';
+  resolutionSummary: string = '';
+  satisfied: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,46 +60,26 @@ export class TicketDetailsComponent implements OnInit {
     );
   }
 
-  showPopup(action: string): void {
-    this.actionType = action;
-    this.popupMessage = action === 'accept' 
-      ? 'Are you sure you want to accept this agent?' 
-      : 'Are you sure you want to reject this agent?';
-    this.showActionPopup = true;
-  }
-
-  closePopup(): void {
-    this.showActionPopup = false;
-  }
-
-  confirmAction(): void {
-    if (this.actionType === 'accept') {
-      this.acceptAgent();
-    } else if (this.actionType === 'reject') {
-      this.rejectAgent();
+  submitFeedback(): void {
+    if (!this.resolutionSummary.trim()) {
+      alert('Resolution summary is required.');
+      return;
     }
-  }
 
-  acceptAgent(): void {
-    const updatedTicket = { ...this.ticket, status: 'Resolved' };
+    const updatedTicket = {
+      ...this.ticket,
+      resolutionSummary: this.resolutionSummary,
+      satisfied: this.satisfied
+    };
+
     this.ticketService.updateTicket(this.ticket.ticketId, updatedTicket).subscribe(
       () => {
-        this.router.navigate(['/manager/view/tickets']);
+        alert('Feedback submitted successfully.');
+        this.router.navigate(['/client/view/tickets']);
       },
       (error) => {
-        console.error('Error accepting agent:', error);
-      }
-    );
-  }
-
-  rejectAgent(): void {
-    const updatedTicket = { ...this.ticket, supportAgent: null };
-    this.ticketService.updateTicket(this.ticket.ticketId, updatedTicket).subscribe(
-      () => {
-        this.router.navigate(['/manager/view/tickets']);
-      },
-      (error) => {
-        console.error('Error rejecting agent:', error);
+        console.error('Error submitting feedback:', error);
+        alert('Failed to submit feedback.');
       }
     );
   }
