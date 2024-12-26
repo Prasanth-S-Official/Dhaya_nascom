@@ -101,30 +101,38 @@ hr {
   transition: background 0.3s ease-in-out;
 }
 
-/* No Records Found Styling */
-.no-records-cell {
-  text-align: center;
-  font-size: 18px;
-  color: #777;
-  font-style: italic;
-}
-
 /* Button Styling */
 button {
   padding: 10px 15px;
-  /* background: linear-gradient(135deg, #3c91e6, #3276a6); */
-  color: white;
   border: none;
   border-radius: 30px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s;
-  margin-left: 5px;
-  margin-top: 5px;
+  margin: 5px;
+  color: white;
 }
 
-button:hover {
-  /* background: linear-gradient(135deg, #3276a6, #3c91e6); */
+/* Edit Button - Green */
+button.edit-button {
+  /* background: linear-gradient(135deg, #28a745, #218838); */
+  background-color: #218838;
+}
+
+
+/* Delete Button - Red */
+button.delete-button {
+ background-color: #e74c3c;
+}
+
+
+/* View Agent Button - Blue */
+button.view-agent-button {
+  background: linear-gradient(135deg, #3c91e6, #3276a6);
+}
+
+button.view-agent-button:hover {
+  background: linear-gradient(135deg, #3276a6, #3c91e6);
   transform: scale(1.1);
 }
 
@@ -139,6 +147,14 @@ button.disabled-button {
 
 button:disabled:hover {
   transform: none !important;
+}
+
+/* No Records Found Styling */
+.no-records-cell {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+  font-style: italic;
 }
 
 /* Delete Confirmation Popup */
@@ -198,4 +214,29 @@ button:disabled:hover {
 /* Blur Effect */
 .blur {
   filter: blur(5px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .top-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+  }
+
+  #searchBox,
+  #prioritySelect {
+      width: 100%;
+      font-size: 14px;
+  }
+
+  .ticket-table th,
+  .ticket-table td {
+      font-size: 14px;
+      padding: 10px;
+  }
+
+  .delete-popup {
+      width: 95%;
+  }
 }

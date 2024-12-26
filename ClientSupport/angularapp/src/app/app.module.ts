@@ -27,6 +27,7 @@ import { ClientViewTicketsComponent } from './components/client-view-tickets/cli
 import { SupportAgentManagementComponent } from './components/support-agent-management/support-agent-management.component';
 import { ManagerViewAgentsComponent } from './components/manager-view-agents/manager-view-agents.component';
 import { ManagerViewTicketsComponent } from './components/manager-view-tickets/manager-view-tickets.component';
+import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ManagerViewTicketsComponent } from './components/manager-view-tickets/m
     SupportAgentManagementComponent,
     ManagerViewAgentsComponent,
     ManagerViewTicketsComponent,
+    TicketDetailsComponent,
   
 
   ],
