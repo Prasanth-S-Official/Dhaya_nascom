@@ -1,29 +1,31 @@
-#supportedAgentContainer  {
+/* Container Styling */
+#supportedAgentsContainer {
     margin: 30px auto;
     padding: 20px;
-    width: 90%;
+    max-width: 90%;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa, #e1e9f2);
-    border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
   
-  #supportedAgentContainer h1 {
+  /* Page Title */
+  h1 {
     font-size: 28px;
-    color: #333;
-    font-weight: bold;
+    color: #2c3e50;
     text-align: center;
     margin-bottom: 20px;
   }
   
-  #supportedAgentContainer hr {
+  /* Divider */
+  hr {
     border: none;
     border-top: 3px solid #3276a6;
-    width: 80%;
     margin: 20px auto;
-    border-radius: 10px;
+    width: 60%;
   }
   
+  /* Cards Container */
   .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -31,134 +33,110 @@
     justify-content: center;
   }
   
+  /* Agent Card */
   .agent-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    width: 300px;
-    text-align: left;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    flex: 1 1 300px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
   }
   
   .agent-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   }
   
   .agent-card h2 {
-    font-size: 20px;
-    color: #3276a6;
+    color: #3498db;
     margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .agent-card p {
-    font-size: 15px;
-    margin: 8px 0;
-    color: #555;
-  }
-  
-  .review-button {
-    display: block;
-    margin: 15px auto 0;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #28a745, #218838);
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
-  }
-  
-  .review-button:hover {
-    background: linear-gradient(135deg, #218838, #28a745);
-    transform: scale(1.1);
-  }
-  
-  p {
-    font-size: 16px;
-    text-align: center;
-    color: #777;
-  }
-  
-  @media screen and (max-width: 768px) {
-    #supportedAgentsContainer {
-      width: 95%;
-    }
-  
-    .cards-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-  
-    .agent-card {
-      width: 90%;
-    }
-  }
-  
-#supportedAgentsContainer {
-    margin: 30px auto;
-    padding: 20px;
-    width: 90%;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  h1 {
-    font-size: 28px;
-    color: #333;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  hr {
-    border: none;
-    border-top: 3px solid #3276a6;
-    height: 10px;
-    width: 80%;
-    margin: 20px auto;
-    border-radius: 10px;
-  }
-  
-  .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .agent-card {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-  }
-  
-  .agent-card h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #3c91e6;
   }
   
   .agent-card p {
     font-size: 14px;
     margin: 5px 0;
+    color: #555;
   }
   
-  .review-button {
-    padding: 10px 20px;
-    background: #28a745;
-    color: #fff;
+  /* Profile Picture */
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px auto;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Buttons */
+  .review-button,
+  .details-button {
+    background: #3276a6;
+    color: white;
     border: none;
     border-radius: 5px;
+    padding: 8px 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
   }
   
-  .review-button:hover {
-    background: #218838;
+  .review-button:hover,
+  .details-button:hover {
+    background: #285a82;
+  }
+  
+  /* Loading or Error Messages */
+  p {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #e74c3c;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: #c0392b;
   }
   

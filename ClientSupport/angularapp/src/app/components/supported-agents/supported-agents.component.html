@@ -7,11 +7,17 @@
     <div *ngIf="supportedAgents.length > 0; else noAgents">
       <div class="cards-container">
         <div class="agent-card" *ngFor="let agent of supportedAgents">
+          <div class="profile">
+            <img [src]="'data:image/jpeg;base64,' + agent.profile" alt="Agent Profile" />
+          </div>
           <h2>{{ agent.name }}</h2>
           <p><strong>Email:</strong> {{ agent.email }}</p>
           <p><strong>Phone:</strong> {{ agent.phone }}</p>
           <p><strong>Expertise:</strong> {{ agent.expertise }}</p>
           <p><strong>Status:</strong> {{ agent.status }}</p>
+          <button class="details-button" [disabled]="!agent.agentId" (click)="viewTickets(agent.agentId)">
+            Tickets Worked
+          </button>
           <button class="review-button" (click)="writeReview(agent.agentId)">Write a Review</button>
         </div>
       </div>
@@ -26,4 +32,23 @@
   <ng-template #noAgents>
     <p>No supported agents found for your tickets.</p>
   </ng-template>
+
+  <!-- Tickets Modal -->
+  <div *ngIf="showTicketsModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-button" (click)="closeTicketsModal()">&#10006;</button>
+      <h2>Tickets Worked By Agent</h2>
+      <div *ngIf="modalTickets.length > 0; else noTickets">
+        <ul class="ticket-list">
+          <li *ngFor="let ticket of modalTickets">
+            <strong>Title:</strong> {{ ticket.title }} |
+            <strong>Status:</strong> {{ ticket.status }}
+          </li>
+        </ul>
+      </div>
+      <ng-template #noTickets>
+        <p>No tickets found for this agent.</p>
+      </ng-template>
+    </div>
+  </div>
 </div>
