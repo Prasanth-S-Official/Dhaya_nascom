@@ -47,10 +47,15 @@
             >
               Assign Agent
             </button>
-            <span *ngIf="ticket.supportAgent">Agent Assigned</span>
-            
+            <span *ngIf="ticket.supportAgent && ticket.status !== 'Resolved' && ticket.status !== 'Closed'">Agent Assigned</span>
+            <button
+              class="close-ticket-button"
+              [disabled]="ticket.status !== 'Resolved'"
+              (click)="closeTicket(ticket)"
+            >
+              Close Ticket
+            </button>
           </td>
-          
         </tr>
       </tbody>
       <ng-template #noRecords>

@@ -1,0 +1,41 @@
+<app-managernav></app-managernav>
+<div id="dashboardContainer">
+  <h1>Dashboard</h1>
+  <hr />
+
+  <div class="dashboard-stats">
+    <div class="stat-card">
+      <h2>Happy Clients</h2>
+      <p>{{ happyClientsCount }}</p>
+    </div>
+    <div class="stat-card">
+      <h2>Unhappy Clients</h2>
+      <p>{{ unhappyClientsCount }}</p>
+    </div>
+  </div>
+
+  <div class="tickets-summary">
+    <h2>Tickets Summary</h2>
+    <table class="ticket-summary-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Satisfaction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td>{{ ticket.ticketId }}</td>
+          <td>{{ ticket.title }}</td>
+          <td>{{ ticket.status }}</td>
+          <td>{{ ticket.satisfied ? '😊 Happy' : '😞 Unhappy' }}</td>
+        </tr>
+        <tr *ngIf="tickets.length === 0">
+          <td colspan="4" class="no-records-cell">No Tickets Available</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

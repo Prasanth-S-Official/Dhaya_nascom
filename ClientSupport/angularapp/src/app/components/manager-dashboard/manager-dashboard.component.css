@@ -1,0 +1,47 @@
+#dashboardContainer {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .dashboard-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .stat-card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+  }
+  
+  .stat-card h2 {
+    margin-bottom: 10px;
+  }
+  
+  .tickets-summary {
+    margin-top: 20px;
+  }
+  
+  .ticket-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .ticket-summary-table th,
+  .ticket-summary-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .no-records-cell {
+    text-align: center;
+    color: #777;
+  }
+  

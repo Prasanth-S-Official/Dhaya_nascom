@@ -37,8 +37,6 @@ export class ManagerViewTicketsComponent implements OnInit {
       allAgents: this.agentService.getAllAgents(),
     }).subscribe(
       ({ allTickets, allAgents }) => {
-        console.log(allTickets);
-        
         this.availableTickets = allTickets.map((ticket: any) => {
           return {
             ...ticket,
@@ -85,8 +83,6 @@ export class ManagerViewTicketsComponent implements OnInit {
       supportAgent: { agentId: agent.agentId }, // Include the nested agent object for backend
     };
 
-    console.log(updatedTicket);
-    
     this.ticketService.updateTicket(ticket.ticketId!, updatedTicket).subscribe(
       () => {
         this.fetchData(); // Refresh data to update the view
@@ -94,6 +90,22 @@ export class ManagerViewTicketsComponent implements OnInit {
       },
       (error) => {
         console.error('Error assigning agent:', error);
+      }
+    );
+  }
+
+  closeTicket(ticket: Ticket): void {
+    const updatedTicket = {
+      ...ticket,
+      status: 'Closed', // Update status to Closed
+    };
+
+    this.ticketService.updateTicket(ticket.ticketId!, updatedTicket).subscribe(
+      () => {
+        this.fetchData(); // Refresh data to update the view
+      },
+      (error) => {
+        console.error('Error closing ticket:', error);
       }
     );
   }
@@ -115,13 +127,12 @@ export class ManagerViewTicketsComponent implements OnInit {
       );
   }
 
-
   getAgentName(ticket: Ticket): string {
     return (ticket as any).supportAgent
       ? `${(ticket as any).supportAgent.name} (${(ticket as any).supportAgent.expertise})`
       : 'Not Assigned';
   }
-  
+
   logout(): void {
     localStorage.clear();
     this.router.navigate(['/login']);

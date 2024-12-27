@@ -111,7 +111,7 @@
   /* Button Styling */
   button {
     padding: 10px 15px;
-    background: linear-gradient(135deg, #3c91e6, #3276a6);
+   background-color: #3c91e6;
     color: white;
     border: none;
     border-radius: 30px;
@@ -123,7 +123,7 @@
   }
   
   button:hover {
-    background: linear-gradient(135deg, #3276a6, #3c91e6);
+    background-color: #278df3;
     transform: scale(1.1);
   }
   
@@ -251,5 +251,29 @@
     .modal-content {
       width: 95%;
     }
+  }
+  
+
+
+  .close-ticket-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #27ae60; /* Green for enabled */
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .close-ticket-button:hover:not(:disabled) {
+    background-color: #1e8449; /* Darker green on hover */
+    transform: scale(1.05);
+  }
+  
+  .close-ticket-button:disabled {
+    background-color: #bdc3c7; /* Gray for disabled */
+    color: #7f8c8d; /* Lighter gray text for disabled */
+    cursor: not-allowed;
   }
   

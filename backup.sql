@@ -126,7 +126,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description','Platform Bug','High','2024-12-26','button missed on minimum screen','Resolved','demo title',2,2,''),(2,'2024-12-23','demo description 2','ContentIssue','Medium','2024-12-26','fr','Resolved','demo title 2',2,2,'\0'),(3,'2024-12-27','demo description updated','Platform Bug','High',NULL,NULL,'Open','demo title screen recording',1,2,NULL);
+INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description','Platform Bug','High','2024-12-26','button missed on minimum screen','Resolved','demo title',2,2,''),(2,'2024-12-23','demo description 2','ContentIssue','Medium','2024-12-26','fr','Closed','demo title 2',2,2,'\0'),(3,'2024-12-27','demo description updated','Platform Bug','High',NULL,NULL,'Open','demo title screen recording',1,2,NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-27 17:11:40
+-- Dump completed on 2024-12-27 17:41:40

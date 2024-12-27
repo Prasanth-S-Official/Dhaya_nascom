@@ -30,6 +30,7 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 import { SupportedAgentsComponent } from './components/supported-agents/supported-agents.component';
 import { ClientpostfeedbackComponent } from './components/clientpostfeedback/clientpostfeedback.component';
 import { ClientviewfeedbackComponent } from './components/clientviewfeedback/clientviewfeedback.component';
+import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ClientviewfeedbackComponent } from './components/clientviewfeedback/cli
     SupportedAgentsComponent,
     ClientpostfeedbackComponent,
     ClientviewfeedbackComponent,
+    ManagerDashboardComponent,
   
 
   ],
