@@ -36,12 +36,15 @@
 
     <div>
       <label for="issueCategory">Issue Category<span class="required">*</span></label>
-      <input id="issueCategory" type="text" formControlName="issueCategory" />
+      <select id="issueCategory" formControlName="issueCategory">
+        <option value="" disabled>Select Issue Category</option>
+        <option *ngFor="let category of issueCategories" [value]="category">{{ category }}</option>
+      </select>
       <div *ngIf="ticketForm.controls['issueCategory'].touched && ticketForm.controls['issueCategory'].hasError('required')" class="error">
         *Issue Category is required
       </div>
     </div>
-
+    
     <div *ngIf="errorMessage" class="error">
       *{{ errorMessage }}
     </div>

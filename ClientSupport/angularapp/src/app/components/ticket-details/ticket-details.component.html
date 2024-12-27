@@ -1,6 +1,9 @@
 <app-clientnav></app-clientnav>
 <div id="ticketDetailsContainer" [ngClass]="{ blur: showConfirmPopupModal }">
-  <h1>Ticket Details</h1>
+  <div class="header">
+    <h1>Ticket Details</h1>
+    <button class="back-button" (click)="goBack()">&#8592; Back</button>
+  </div>
   <hr />
 
   <ng-container *ngIf="ticket; else loadingOrError">

@@ -18,6 +18,30 @@ export class TicketManagementComponent implements OnInit {
   id: number | null = null;
   userId: number;
 
+  issueCategories: string[] = [
+    'Hardware',
+    'Software',
+    'Network',
+    'Account',
+    'Security',
+    'Tech Stacks',
+    'Platform Bug',
+    'Content Issue',
+    'Integration Issue',
+    'Performance',
+    'UI/UX',
+    'Database',
+    'Deployment',
+    'API Issue',
+    'Configuration',
+    'Permissions',
+    'Connectivity',
+    'Documentation',
+    'Billing/Payment',
+    'Other',
+  ];
+  
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

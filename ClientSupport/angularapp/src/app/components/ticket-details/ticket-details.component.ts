@@ -145,4 +145,10 @@ export class TicketDetailsComponent implements OnInit {
       this.notificationMessage = '';
     }, 3000);
   }
+
+  goBack(): void {
+    // Use Angular's Location service or Router to navigate back
+    history.back(); // Simple browser back navigation
+  }
+  
 }

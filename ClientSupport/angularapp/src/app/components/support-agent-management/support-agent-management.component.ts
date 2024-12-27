@@ -16,6 +16,30 @@ export class SupportAgentManagementComponent implements OnInit {
   profileBase64 = '';
   id: number | null = null;
 
+  expertiseOptions: string[] = [
+    'Hardware Specialist',        // For 'Hardware'
+    'Software Specialist',        // For 'Software'
+    'Network Engineer',           // For 'Network'
+    'Account Manager',            // For 'Account'
+    'Security Specialist',        // For 'Security'
+    'General IT Support',         // For 'Other'
+    'Tech Stack Expert',          // For 'Tech Stacks'
+    'Platform Support Engineer',  // For 'Platform Bug'
+    'Content Manager',            // For 'Content Issue'
+    'Integration Specialist',     // For 'Integration Issue'
+    'Performance Analyst',        // For 'Performance'
+    'UI/UX Designer',             // For 'UI/UX'
+    'Database Administrator',     // For 'Database'
+    'Deployment Specialist',      // For 'Deployment'
+    'API Integration Specialist', // For 'API Issue'
+    'Configuration Engineer',     // For 'Configuration'
+    'Permissions Manager',        // For 'Permissions'
+    'Connectivity Specialist',    // For 'Connectivity'
+    'Documentation Expert',       // For 'Documentation'
+    'Billing/Payment Support'     // For 'Billing/Payment'
+  ];
+  
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
