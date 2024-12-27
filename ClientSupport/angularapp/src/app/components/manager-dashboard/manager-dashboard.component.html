@@ -27,11 +27,20 @@
       </thead>
       <tbody>
         <tr *ngFor="let ticket of tickets">
-          <td>{{ ticket.ticketId }}</td>
-          <td>{{ ticket.title }}</td>
-          <td>{{ ticket.status }}</td>
-          <td>{{ ticket.satisfied ? '😊 Happy' : '😞 Unhappy' }}</td>
-        </tr>
+            <td>{{ ticket.ticketId }}</td>
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.status }}</td>
+            <td>
+              <ng-container *ngIf="ticket.status === 'Resolved' || ticket.status === 'Closed'; else notResolvedOrClosed">
+                {{ ticket.satisfied ? '😊 Happy' : '😞 Unhappy' }}
+              </ng-container>
+              <ng-template #notResolvedOrClosed>
+                <span>Pending Resolution</span>
+              </ng-template>
+            </td>
+          </tr>
+          
+          
         <tr *ngIf="tickets.length === 0">
           <td colspan="4" class="no-records-cell">No Tickets Available</td>
         </tr>

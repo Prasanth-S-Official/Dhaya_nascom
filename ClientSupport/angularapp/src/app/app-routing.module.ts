@@ -24,6 +24,7 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 import { SupportedAgentsComponent } from './components/supported-agents/supported-agents.component';
 import { ClientpostfeedbackComponent } from './components/clientpostfeedback/clientpostfeedback.component';
 import { ClientviewfeedbackComponent } from './components/clientviewfeedback/clientviewfeedback.component';
+import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
 
   { path: 'manager/view/feedback', component: ManagerviewfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'client/view/feedback', component: ClientviewfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes
   { path: '', redirectTo: 'login', pathMatch: 'full' },
