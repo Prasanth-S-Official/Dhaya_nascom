@@ -31,7 +31,10 @@
 
     <div>
       <label for="expertise">Expertise<span class="required">*</span></label>
-      <input id="expertise" type="text" formControlName="expertise" />
+      <select id="expertise" formControlName="expertise">
+        <option value="" disabled>Select Expertise</option>
+        <option *ngFor="let expertise of expertiseOptions" [value]="expertise">{{ expertise }}</option>
+      </select>
       <div *ngIf="agentForm.controls['expertise'].touched && agentForm.controls['expertise'].hasError('required')" class="error">
         *Expertise is required
       </div>
