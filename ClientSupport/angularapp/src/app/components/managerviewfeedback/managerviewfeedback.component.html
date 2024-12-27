@@ -1,9 +1,9 @@
 <app-managernav></app-managernav>
-<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showTrainerPopup }">
+<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showTrainerPopup || showAgentPopup || showTicketPopup }">
   <div class="main-head">
     <h1>Feedback Received</h1>
   </div>
-  <hr>
+  <hr />
 
   <!-- Filter and Search Section -->
   <div class="filter-section">
@@ -21,6 +21,7 @@
           <th class="column-review-id">S.No</th>
           <th class="column-user-id">User Name</th>
           <th class="column-subject">Feedback</th>
+          <th class="column-subject">Rating</th>
           <th class="column-date">Posted Date</th>
           <th class="column-action">Action</th>
         </tr>
@@ -30,10 +31,12 @@
           <td>{{ i + 1 }}</td>
           <td>{{ feedback.user.username }}</td>
           <td>{{ feedback.feedbackText }}</td>
+          <td>{{ feedback.rating }}</td>
           <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
-            <button class="button" (click)="showTrainerDetails(feedback.trainer)">View Trainer Info</button>
+            <button class="button" (click)="showProfile(feedback.user)">Show User Profile</button>
+            <button class="button" (click)="showAgentProfile(feedback.supportAgent)">Show Agent Profile</button>
+            <button class="button" (click)="showTicketDetails(feedback.ticket)">Show Ticket</button>
           </td>
         </tr>
         <tr *ngIf="filteredFeedbacks.length === 0">
@@ -53,14 +56,26 @@
   <button (click)="closeProfilePopup()">Close</button>
 </div>
 
-<!-- Trainer Info Popup -->
-<div *ngIf="showTrainerPopup" class="modal-overlay">
+<!-- Agent Info Popup -->
+<div *ngIf="showAgentPopup" class="modal-overlay">
   <div class="modal-content">
-    <button class="close-button" (click)="closeTrainerPopup()">&#x2715;</button>
-    <h2>Trainer Details</h2>
-    <p><strong>Trainer Name:</strong> {{ selectedTrainer?.name }}</p>
-    <p><strong>Expertise:</strong> {{ selectedTrainer?.expertise }}</p>
-    <p><strong>Email:</strong> {{ selectedTrainer?.email }}</p>
-    <p><strong>Phone:</strong> {{ selectedTrainer?.phone }}</p>
+    <button class="close-button" (click)="closeAgentPopup()">&#x2715;</button>
+    <h2>Agent Details</h2>
+    <p><strong>Name:</strong> {{ selectedAgent?.name }}</p>
+    <p><strong>Expertise:</strong> {{ selectedAgent?.expertise }}</p>
+    <p><strong>Email:</strong> {{ selectedAgent?.email }}</p>
+    <p><strong>Phone:</strong> {{ selectedAgent?.phone }}</p>
+  </div>
+</div>
+
+<!-- Ticket Details Popup -->
+<div *ngIf="showTicketPopup" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeTicketPopup()">&#x2715;</button>
+    <h2>Ticket Details</h2>
+    <p><strong>Title:</strong> {{ selectedTicket?.title }}</p>
+    <p><strong>Description:</strong> {{ selectedTicket?.description }}</p>
+    <p><strong>Priority:</strong> {{ selectedTicket?.priority }}</p>
+    <p><strong>Status:</strong> {{ selectedTicket?.status }}</p>
   </div>
 </div>
