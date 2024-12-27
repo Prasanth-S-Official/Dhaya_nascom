@@ -1,46 +1,66 @@
 <app-managernav></app-managernav>
-<div class="feedback-table-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
-  <h1>My Feedback</h1>
-  <hr />
-  <table class="feedback-table">
-    <thead>
-      <tr>
-        <th>S.No</th>
-        <th>Feedback</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngIf="feedbacks.length === 0">
-        <td colspan="3" class="no-records-cell">No Data Found</td>
-      </tr>
-      <tr *ngFor="let feedback of feedbacks; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ feedback.feedbackText }}</td>
-        <td>
-          <button class="view-button" (click)="showTrainerDetails(feedback.trainer)">View Trainer Info</button>
-          <button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div id="viewfeedback" [ngClass]="{ blur: showProfilePopup || showTrainerPopup }">
+  <div class="main-head">
+    <h1>Feedback Received</h1>
+  </div>
+  <hr>
+
+  <!-- Filter and Search Section -->
+  <div class="filter-section">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterFeedbacks()">
+      <option value="">All Categories</option>
+      <option *ngFor="let category of uniqueCategories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="column-review-id">S.No</th>
+          <th class="column-user-id">User Name</th>
+          <th class="column-subject">Feedback</th>
+          <th class="column-date">Posted Date</th>
+          <th class="column-action">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.user.username }}</td>
+          <td>{{ feedback.feedbackText }}</td>
+          <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button class="button" (click)="showProfile(feedback.user)">Show Profile</button>
+            <button class="button" (click)="showTrainerDetails(feedback.trainer)">View Trainer Info</button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredFeedbacks.length === 0">
+          <td colspan="5" class="no-records-cell">No Data Found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<!-- Delete Confirmation Popup -->
-<div *ngIf="showDeletePopup" class="delete-popup">
-  <p>Are you sure you want to delete?</p>
-  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
-  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+<!-- User Profile Popup -->
+<div *ngIf="showProfilePopup" class="profile-popup">
+  <p><strong>User Details:</strong></p>
+  <p>Email: {{ selectedUser?.email }}</p>
+  <p>Username: {{ selectedUser?.username }}</p>
+  <p>Mobile Number: {{ selectedUser?.mobileNumber }}</p>
+  <button (click)="closeProfilePopup()">Close</button>
 </div>
 
-<!-- Trainer Info Modal -->
-<div *ngIf="showDetailsModal" class="details-modal-overlay">
-  <div class="details-modal-content">
-    <button class="close-button" (click)="closeDetailsModal()">&#x2715;</button>
+<!-- Trainer Info Popup -->
+<div *ngIf="showTrainerPopup" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeTrainerPopup()">&#x2715;</button>
     <h2>Trainer Details</h2>
     <p><strong>Trainer Name:</strong> {{ selectedTrainer?.name }}</p>
     <p><strong>Expertise:</strong> {{ selectedTrainer?.expertise }}</p>
     <p><strong>Email:</strong> {{ selectedTrainer?.email }}</p>
-    <p><strong>Phone Number:</strong> {{ selectedTrainer?.phone }}</p>
+    <p><strong>Phone:</strong> {{ selectedTrainer?.phone }}</p>
   </div>
 </div>

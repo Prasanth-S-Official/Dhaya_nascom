@@ -7,62 +7,58 @@ import { FeedbackService } from 'src/app/services/feedback.service';
   styleUrls: ['./managerviewfeedback.component.css']
 })
 export class ManagerviewfeedbackComponent implements OnInit {
-  feedbacks: any[] = [];
-  showDeletePopup = false;
-  showDetailsModal = false;
-  selectedTrainer: any = null;
-  feedbackToDelete: number | null = null;
+  feedbacks = [];
+  filteredFeedbacks = [];
+  uniqueCategories = [];
+  selectedCategory = '';
+  showProfilePopup = false;
+  showTrainerPopup = false;
+  selectedUser = null;
+  selectedTrainer = null;
 
   constructor(private feedbackService: FeedbackService) {}
 
   ngOnInit(): void {
-    this.fetchFeedbacks();
-  }
-
-  fetchFeedbacks(): void {
-    const userId = Number(localStorage.getItem('userId'));
-    this.feedbackService.getAllfeedbacksByUserId(userId).subscribe(
+    this.feedbackService.getFeedbacks().subscribe(
       (response) => {
+        console.log("GetFeedback", response);
         this.feedbacks = response;
-        console.log('Fetched Feedbacks:', this.feedbacks);
+        this.filteredFeedbacks = [...this.feedbacks]; // Initialize filtered feedbacks
+        this.extractUniqueCategories(); // Extract unique categories
       },
       (error) => {
-        console.error('Error fetching feedbacks:', error);
+        console.error('Error:', error);
       }
     );
   }
 
-  openDeletePopup(feedbackId: number): void {
-    this.feedbackToDelete = feedbackId;
-    this.showDeletePopup = true;
+  extractUniqueCategories(): void {
+    this.uniqueCategories = Array.from(new Set(this.feedbacks.map(f => f.category)));
   }
 
-  handleConfirmDelete(): void {
-    if (this.feedbackToDelete) {
-      this.feedbackService.deleteFeedback(this.feedbackToDelete).subscribe(
-        () => {
-          this.fetchFeedbacks();
-          this.closeDeletePopup();
-        },
-        (error) => {
-          console.error('Error deleting feedback:', error);
-        }
-      );
+  filterFeedbacks(): void {
+    if (this.selectedCategory) {
+      this.filteredFeedbacks = this.feedbacks.filter(f => f.category === this.selectedCategory);
+    } else {
+      this.filteredFeedbacks = [...this.feedbacks];
     }
   }
 
-  closeDeletePopup(): void {
-    this.feedbackToDelete = null;
-    this.showDeletePopup = false;
+  showProfile(user): void {
+    this.selectedUser = user;
+    this.showProfilePopup = true;
   }
 
-  showTrainerDetails(trainer: any): void {
+  closeProfilePopup(): void {
+    this.showProfilePopup = false;
+  }
+
+  showTrainerDetails(trainer): void {
     this.selectedTrainer = trainer;
-    this.showDetailsModal = true;
+    this.showTrainerPopup = true;
   }
 
-  closeDetailsModal(): void {
-    this.selectedTrainer = null;
-    this.showDetailsModal = false;
+  closeTrainerPopup(): void {
+    this.showTrainerPopup = false;
   }
 }

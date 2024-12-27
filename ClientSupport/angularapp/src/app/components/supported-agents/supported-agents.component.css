@@ -251,4 +251,24 @@
     color: #555;
   }
   
-  
+  /* Disabled button styling */
+.disabled-button {
+  background-color: #d3d3d3 !important;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Default review button styling */
+.review-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-button:hover:not(.disabled-button) {
+  background-color: #2980b9;
+}

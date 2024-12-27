@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'coordinator/view/requirements', component: CoordinatorViewRequirementsComponent, canActivate: [AuthGuard] },
   { path: 'coordinator/view/trainers', component: CoordinatorViewTrainersComponent, canActivate: [AuthGuard] },
 
-  { path: 'coordinator/view/feedback', component: CoordinatorviewfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/feedback', component: ManagerviewfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'client/view/feedback', component: ClientviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes
