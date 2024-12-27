@@ -29,6 +29,7 @@ import { ManagerViewTicketsComponent } from './components/manager-view-tickets/m
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 import { SupportedAgentsComponent } from './components/supported-agents/supported-agents.component';
 import { ClientpostfeedbackComponent } from './components/clientpostfeedback/clientpostfeedback.component';
+import { ClientviewfeedbackComponent } from './components/clientviewfeedback/clientviewfeedback.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ClientpostfeedbackComponent } from './components/clientpostfeedback/cli
     TicketDetailsComponent,
     SupportedAgentsComponent,
     ClientpostfeedbackComponent,
+    ClientviewfeedbackComponent,
   
 
   ],

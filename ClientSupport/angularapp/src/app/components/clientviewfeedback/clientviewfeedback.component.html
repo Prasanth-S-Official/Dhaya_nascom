@@ -1,0 +1,61 @@
+<app-clientnav></app-clientnav>
+<div class="feedback-table-container" [ngClass]="{ blur: showDeletePopup || showAgentModal || showTicketModal }">
+  <h1>My Feedback</h1>
+  <hr />
+  <table class="feedback-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Feedback</th>
+        <th>Rating</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="feedbacks.length === 0">
+        <td colspan="4" class="no-records-cell">No Data Found</td>
+      </tr>
+      <tr *ngFor="let feedback of feedbacks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ feedback.feedbackText }}</td>
+        <td>{{ feedback.rating }}</td>
+        <td>
+          <button class="view-button" (click)="showAgentDetails(feedback.supportAgent)">View Agent Info</button>
+          <button class="view-button" (click)="showTicketDetails(feedback.ticket)">View Ticket Info</button>
+          <button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Agent Info Modal -->
+<div *ngIf="showAgentModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeAgentModal()">&#x2715;</button>
+    <h2>Agent Details</h2>
+    <p><strong>Agent Name:</strong> {{ selectedAgent?.name }}</p>
+    <p><strong>Expertise:</strong> {{ selectedAgent?.expertise }}</p>
+    <p><strong>Email:</strong> {{ selectedAgent?.email }}</p>
+    <p><strong>Phone Number:</strong> {{ selectedAgent?.phone }}</p>
+  </div>
+</div>
+
+<!-- Ticket Info Modal -->
+<div *ngIf="showTicketModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeTicketModal()">&#x2715;</button>
+    <h2>Ticket Details</h2>
+    <p><strong>Title:</strong> {{ selectedTicket?.title }}</p>
+    <p><strong>Description:</strong> {{ selectedTicket?.description }}</p>
+    <p><strong>Priority:</strong> {{ selectedTicket?.priority }}</p>
+    <p><strong>Status:</strong> {{ selectedTicket?.status }}</p>
+  </div>
+</div>

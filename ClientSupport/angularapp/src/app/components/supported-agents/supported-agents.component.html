@@ -43,6 +43,7 @@
             <h3>{{ ticket.title }}</h3>
             <p><strong>Description:</strong> {{ ticket.description }}</p>
             <p><strong>Status:</strong> {{ ticket.status }}</p>
+            <p><strong>Summary:</strong> {{ ticket.resolutionSummary }}</p>
             <button
               class="review-button"
               (click)="writeReview(ticket.ticketId, ticket.supportAgent.agentId)"
