@@ -277,3 +277,30 @@
     cursor: not-allowed;
   }
   
+  /* Suggested Agents Section */
+.suggested-agent {
+  background: #d9f9d9;
+  border: 1px solid #4caf50;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suggested-agent:hover {
+  background: #b2fab4;
+}
+
+/* Manual Select Section */
+.manual-select-agent {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.manual-select-agent:hover {
+  background: #e6e6e6;
+}

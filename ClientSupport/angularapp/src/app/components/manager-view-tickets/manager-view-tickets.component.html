@@ -69,15 +69,14 @@
   </div>
 
   <!-- Assign Agent Modal -->
-  <div *ngIf="showModal" class="modal-overlay">
+  <!-- <div *ngIf="showModal" class="modal-overlay">
     <div class="modal-content">
-      <!-- Close X Symbol in top-right corner inside the modal -->
+    
       <span (click)="closeModal()" class="close-icon">&times;</span>
   
       <h2>Assign Agent</h2>
       <p>Select an agent to assign to <strong>{{ selectedTicket?.title }}</strong>:</p>
-      
-      <!-- Search Box in Modal -->
+  
       <input
         id="agentSearchBox"
         type="text"
@@ -91,5 +90,50 @@
         </li>
       </ul>
     </div>
+  </div> -->
+
+  <!-- Assign Agent Modal -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <!-- Close X Symbol in top-right corner inside the modal -->
+    <span (click)="closeModal()" class="close-icon">&times;</span>
+
+    <h2>Assign Agent</h2>
+    <p>Select an agent to assign to <strong>{{ selectedTicket?.title }}</strong>:</p>
+
+    <!-- Suggested Agents Section -->
+    <h3>Suggested Agents</h3>
+    <ul *ngIf="suggestedAgents.length > 0; else noSuggestions">
+      <li
+        *ngFor="let agent of suggestedAgents"
+        (click)="assignAgent(selectedTicket, agent)"
+        class="suggested-agent"
+      >
+        {{ agent.name }} ({{ agent.expertise }})
+      </li>
+    </ul>
+    <ng-template #noSuggestions>
+      <p>No suggested agents available for this ticket.</p>
+    </ng-template>
+
+    <!-- Manual Select Section -->
+    <h3>Manual Select</h3>
+    <input
+      id="agentSearchBox"
+      type="text"
+      placeholder="Search by Name or Expertise..."
+      [(ngModel)]="searchAgentField"
+    />
+    <ul>
+      <li
+        *ngFor="let agent of getAvailableAgents()"
+        (click)="assignAgent(selectedTicket, agent)"
+        class="manual-select-agent"
+      >
+        {{ agent.name }} ({{ agent.expertise }})
+      </li>
+    </ul>
   </div>
+</div>
+
 </div>
