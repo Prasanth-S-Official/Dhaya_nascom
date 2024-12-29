@@ -7,7 +7,7 @@ body, h1, ul, li, p, button {
   
   .managernav {
     background-color: #3a3f44;
-    background-image: linear-gradient(124deg, #295478 0%, #d1b88fbf 50%, #e9b259bf 100%);
+    background-image: linear-gradient(124deg, #e74c3c 0%, #d1b88fbf 50%, #3c1a0e 100%);
   
     color: #ecf0f1;
     display: flex;
