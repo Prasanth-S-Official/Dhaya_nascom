@@ -22,11 +22,11 @@
 
       <div class="action-buttons">
         <button class="summary-button" (click)="toggleSummaryModal()">
-          {{ ticket.status === 'Resolved' ? 'View Summary' : 'Provide Summary' }}
+          {{ ticket.status === 'Resolved' || ticket.status === 'Closed' ? 'View Summary' : 'Provide Summary' }}
         </button>
         <button
           class="resolve-button"
-          [disabled]="ticket.status === 'Resolved'"
+          [disabled]="ticket.status === 'Resolved' || ticket.status === 'Closed'"
           (click)="resolveTicket()"
         >
           Mark as Resolved
@@ -68,50 +68,52 @@
   </div>
 
   <!-- Provide/View Summary Modal -->
-  <div *ngIf="showSummaryModal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="close-button" (click)="closeSummaryModal()">&#10006;</button>
-      <h2 *ngIf="ticket.status !== 'Resolved'">Provide Resolution Summary</h2>
-      <h2 *ngIf="ticket.status === 'Resolved'">View Resolution Summary</h2>
+<!-- Provide/View Summary Modal -->
+<div *ngIf="showSummaryModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeSummaryModal()">&#10006;</button>
+    <h2 *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'">Provide Resolution Summary</h2>
+    <h2 *ngIf="ticket.status === 'Resolved' || ticket.status === 'Closed'">View Resolution Summary</h2>
 
-        <textarea
-        [(ngModel)]="resolutionSummary"
-        [readonly]="ticket.status === 'Resolved'"
-        placeholder="Enter Resolution Summary..."
-        class="fixed-textarea"
-        ></textarea>
-    
-      <div class="satisfied-container" *ngIf="ticket.status !== 'Resolved'">
-        <label>
-          <input
-            type="radio"
-            name="satisfaction"
-            value="true"
-            [(ngModel)]="satisfied"
-          />
-          😊 Satisfied
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="satisfaction"
-            value="false"
-            [(ngModel)]="satisfied"
-          />
-          😞 Not Satisfied
-        </label>
-      </div>
+    <textarea
+      [(ngModel)]="resolutionSummary"
+      [readonly]="ticket.status === 'Resolved' || ticket.status === 'Closed'"
+      placeholder="Enter Resolution Summary..."
+      class="fixed-textarea"
+    ></textarea>
 
-      <!-- Submit button for providing summary -->
-      <button
-        class="submit-summary-button"
-        *ngIf="ticket.status !== 'Resolved'"
-        (click)="showConfirmPopup()"
-      >
-        Submit
-      </button>
+    <div class="satisfied-container" *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'">
+      <label>
+        <input
+          type="radio"
+          name="satisfaction"
+          value="true"
+          [(ngModel)]="satisfied"
+        />
+        😊 Satisfied
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="satisfaction"
+          value="false"
+          [(ngModel)]="satisfied"
+        />
+        😞 Not Satisfied
+      </label>
     </div>
+
+    <!-- Submit button for providing summary -->
+    <button
+      class="submit-summary-button"
+      *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'"
+      (click)="showConfirmPopup()"
+    >
+      Submit
+    </button>
   </div>
+</div>
+
 
 </div>
 
