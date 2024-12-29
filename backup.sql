@@ -126,7 +126,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description Platform Start issue','Platform Bug','High','2024-12-26','demo start issue summary','Resolved','demo Platform Start issue',2,2,''),(2,'2024-12-23','demo description Content Issue','Content Issue','Medium','2024-12-26','demo content issue summary, provided is wrong','Closed','demo Content Issue',2,2,'\0'),(3,'2024-12-27','demo description Issue in platform','Platform Bug','High',NULL,NULL,'Open','demo Issue in platform',1,2,NULL),(4,'2024-12-29','description Issue in dotnet test','Tech Stacks','Low',NULL,NULL,'Open','demo dotnet test',NULL,2,NULL),(5,'2024-12-29','demo description for network Connectivity Issue','Connectivity','Low',NULL,NULL,'Open','demo network Connectivity Issue',NULL,2,NULL);
+INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description Platform Start issue','Platform Bug','High','2024-12-26','demo start issue summary','Resolved','demo Platform Start issue',2,2,''),(2,'2024-12-23','demo description Content Issue','Content Issue','Medium','2024-12-26','demo content issue summary, provided is wrong','Closed','demo Content Issue',2,2,'\0'),(3,'2024-12-27','demo description Issue in platform','Platform Bug','High',NULL,NULL,'Open','demo Issue in platform',1,2,NULL),(4,'2024-12-29','description Issue in dotnet test.','Tech Stacks','Low',NULL,NULL,'Open','demo dotnet test',NULL,2,NULL),(5,'2024-12-29','demo description for network Connectivity Issue','Connectivity','Low',NULL,NULL,'Open','demo network Connectivity Issue',NULL,2,NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-29 17:06:35
+-- Dump completed on 2024-12-29 17:21:37
