@@ -40,6 +40,8 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.getTicketById(ticketId).subscribe(
       (data: any) => {
         this.ticket = data;
+        console.log("ticket",data);
+  
         if (data.supportAgent) {
           this.fetchAgentDetails(data.supportAgent.agentId);
         }
@@ -65,11 +67,13 @@ export class TicketDetailsComponent implements OnInit {
 
   toggleSummaryModal(): void {
     this.showSummaryModal = !this.showSummaryModal;
-    if (this.ticket.status === 'Resolved') {
-      this.resolutionSummary = this.ticket.resolutionSummary;
-      this.satisfied = this.ticket.satisfied;
+  
+    if (this.showSummaryModal && (this.ticket.status === 'Resolved' || this.ticket.status === 'Closed')) {
+      this.resolutionSummary = this.ticket.resolutionSummary || 'No resolution summary provided.';
+      this.satisfied = this.ticket.satisfied !== null ? this.ticket.satisfied : null;
     }
   }
+  
 
   closeSummaryModal(): void {
     this.showSummaryModal = false;

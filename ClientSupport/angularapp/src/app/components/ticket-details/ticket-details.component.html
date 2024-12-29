@@ -69,19 +69,26 @@
 
   <!-- Provide/View Summary Modal -->
 <!-- Provide/View Summary Modal -->
+<!-- Provide/View Summary Modal -->
 <div *ngIf="showSummaryModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-button" (click)="closeSummaryModal()">&#10006;</button>
-    <h2 *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'">Provide Resolution Summary</h2>
     <h2 *ngIf="ticket.status === 'Resolved' || ticket.status === 'Closed'">View Resolution Summary</h2>
+    <h2 *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'">Provide Resolution Summary</h2>
 
     <textarea
       [(ngModel)]="resolutionSummary"
       [readonly]="ticket.status === 'Resolved' || ticket.status === 'Closed'"
-      placeholder="Enter Resolution Summary..."
+      placeholder="Resolution Summary..."
       class="fixed-textarea"
     ></textarea>
 
+    <!-- Satisfaction Display -->
+    <div *ngIf="ticket.status === 'Resolved' || ticket.status === 'Closed'" class="satisfaction-display">
+      <p><strong>Satisfaction:</strong> {{ ticket.satisfied ? '😊 Satisfied' : '😞 Not Satisfied' }}</p>
+    </div>
+
+    <!-- Satisfaction Options for Providing Summary -->
     <div class="satisfied-container" *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'">
       <label>
         <input
@@ -103,7 +110,7 @@
       </label>
     </div>
 
-    <!-- Submit button for providing summary -->
+    <!-- Submit Button for Providing Summary -->
     <button
       class="submit-summary-button"
       *ngIf="ticket.status !== 'Resolved' && ticket.status !== 'Closed'"
@@ -113,6 +120,7 @@
     </button>
   </div>
 </div>
+
 
 
 </div>
