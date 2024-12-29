@@ -117,7 +117,7 @@ CREATE TABLE `ticket` (
   KEY `FKdvt57mcco3ogsosi97odw563o` (`user_id`),
   CONSTRAINT `FKc2ajxrr4s4whuncj5xpab9by1` FOREIGN KEY (`agent_id`) REFERENCES `support_agent` (`agent_id`),
   CONSTRAINT `FKdvt57mcco3ogsosi97odw563o` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description Platform Start issue','Platform Bug','High','2024-12-26','demo start issue summary','Resolved','demo Platform Start issue',2,2,''),(2,'2024-12-23','demo description Content Issue','Content Issue','Medium','2024-12-26','demo content issue summary, provided is wrong','Closed','demo Content Issue',2,2,'\0'),(3,'2024-12-27','demo description Issue in platform','Platform Bug','High',NULL,NULL,'Open','demo Issue in platform',1,2,NULL),(4,'2024-12-29','description Issue in dotnet test','Tech Stacks','Low',NULL,NULL,'Open','demo dotnet test',NULL,2,NULL);
+INSERT INTO `ticket` VALUES (1,'2024-12-23','demo description Platform Start issue','Platform Bug','High','2024-12-26','demo start issue summary','Resolved','demo Platform Start issue',2,2,''),(2,'2024-12-23','demo description Content Issue','Content Issue','Medium','2024-12-26','demo content issue summary, provided is wrong','Closed','demo Content Issue',2,2,'\0'),(3,'2024-12-27','demo description Issue in platform','Platform Bug','High',NULL,NULL,'Open','demo Issue in platform',1,2,NULL),(4,'2024-12-29','description Issue in dotnet test','Tech Stacks','Low',NULL,NULL,'Open','demo dotnet test',NULL,2,NULL),(5,'2024-12-29','demo description for network Connectivity Issue','Connectivity','Low',NULL,NULL,'Open','demo network Connectivity Issue',NULL,2,NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'client@gmail.com','1234567890','$2a$10$KKpiwMUwmYNmTnOMQ1lcT.q.O3tpG9eCQ7PWAt0K4dllYDmnYqiZG','Client','Client'),(3,'demo@gmail.com','9876543211','$2a$10$NxftFtdhnRbcItBuAYx1iOxqJxnJU0K.Z5WB0cQ1mdk59zhbob7gq','Manager','Manager');
+INSERT INTO `user` VALUES (2,'client@gmail.com','1234567890','$2a$10$KKpiwMUwmYNmTnOMQ1lcT.q.O3tpG9eCQ7PWAt0K4dllYDmnYqiZG','Client','Client'),(3,'demo@gmail.com','9876543211','$2a$10$NxftFtdhnRbcItBuAYx1iOxqJxnJU0K.Z5WB0cQ1mdk59zhbob7gq','Manager','Manager'),(5,'democlient@gmail.com','9876543212','$2a$10$xrzVHvU.IgtBAQv/G56Qo.1ij/nTDZb5reNmRJY/.8ML7EtkCtvsu','Client','democlient');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -167,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-29 16:51:33
+-- Dump completed on 2024-12-29 17:06:35
