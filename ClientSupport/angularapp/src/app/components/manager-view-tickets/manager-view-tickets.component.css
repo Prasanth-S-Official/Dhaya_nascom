@@ -137,78 +137,6 @@
     background: linear-gradient(135deg, #218838, #28a745);
   }
   
-  /* Modal Styling */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure the modal appears above other content */
-  }
-  
-  .modal-content h2 {
-    margin-top: 0;
-  }
-  
-  /* Modal Styling */
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative; /* Ensure close icon stays inside the modal */
-  }
-  
-  /* Close X Symbol inside the modal */
-  .close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    z-index: 10; /* Ensure it stays above other elements */
-  }
-  
-  .close-icon:hover {
-    color: #ff0000; /* Change color on hover */
-  }
-  
-  #trainerSearchBox {
-    width: 95%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-  }
-  
-  li:hover {
-    background-color: #f1f1f1;
-  }
-  
-  
-  .modal-content ul li:hover {
-    background-color: #e0e0e0;
-  }
   
   /* Modal Close Button Styling */
   .close-button {
@@ -277,30 +205,203 @@
     cursor: not-allowed;
   }
   
-  /* Suggested Agents Section */
-.suggested-agent {
-  background: #d9f9d9;
-  border: 1px solid #4caf50;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+
+
+/* Modal Overlay Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Darker background for better focus */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content Styling */
+.modal-content {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa); /* Subtle gradient */
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative; /* Ensure close icon stays inside */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Modal Title */
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #3c91e6;
+  text-align: center;
+}
+
+/* Modal Close Icon */
+.close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
   cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.suggested-agent:hover {
-  background: #b2fab4;
+.close-icon:hover {
+  color: #e74c3c;
+  transform: scale(1.2);
 }
 
-/* Manual Select Section */
-.manual-select-agent {
-  background: #f9f9f9;
+/* Agent List Styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+ul li {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #f4f6f9; /* Soft light grey */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+ul li:hover {
+  background: #e8eff7; /* Hover effect */
+  transform: scale(1.02);
+}
+
+/* Suggested Agents Styling */
+ul li.suggested-agent {
+  border-left: 4px solid #28a745; /* Green border for suggested agents */
+}
+
+ul li.manual-select-agent {
+  border-left: 4px solid #007bff; /* Blue border for manual select agents */
+}
+
+/* Input Box for Manual Select */
+#agentSearchBox {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-.manual-select-agent:hover {
-  background: #e6e6e6;
+#agentSearchBox:focus {
+  border-color: #3276a6;
+}
+
+/* Manual Select Link */
+.manual-select-link {
+  color: #007bff;
+  text-decoration: underline;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  margin: 10px 0;
+  display: block;
+}
+
+.manual-select-link:hover {
+  color: #0056b3;
+}
+
+/* Suggested Agents Header */
+.modal-content h3 {
+  font-size: 18px;
+  color: #3c91e6;
+  margin: 15px 0 10px;
+  text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .modal-content h2 {
+    font-size: 20px;
+  }
+
+  ul li {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  #agentSearchBox {
+    font-size: 13px;
+  }
+}
+
+/* Scrollable Lists Styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+  max-height: 100px; /* Maximum height to show only 2 items */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #ccc #f4f6f9; /* Scrollbar colors for Firefox */
+}
+
+ul::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width for WebKit browsers */
+}
+
+ul::-webkit-scrollbar-track {
+  background: #f4f6f9; /* Scrollbar track color */
+}
+
+ul::-webkit-scrollbar-thumb {
+  background: #ccc; /* Scrollbar thumb color */
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+  background: #999; /* Darker thumb on hover */
+}
+
+ul li {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #f4f6f9; /* Soft light grey */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+ul li:hover {
+  background: #e8eff7; /* Hover effect */
+  transform: scale(1.02);
+}
+
+/* Suggested Agents Styling */
+ul li.suggested-agent {
+  border-left: 4px solid #28a745; /* Green border for suggested agents */
+}
+
+ul li.manual-select-agent {
+  border-left: 4px solid #007bff; /* Blue border for manual select agents */
 }

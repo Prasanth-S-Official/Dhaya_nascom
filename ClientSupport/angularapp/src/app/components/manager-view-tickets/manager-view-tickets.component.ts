@@ -143,7 +143,6 @@
 //     this.router.navigate(['/login']);
 //   }
 // }
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
@@ -158,12 +157,13 @@ import { SupportAgent } from 'src/app/models/support-agent.model';
   styleUrls: ['./manager-view-tickets.component.css']
 })
 export class ManagerViewTicketsComponent implements OnInit {
+
   availableTickets: Ticket[] = [];
   filteredTickets: Ticket[] = [];
   allAgents: SupportAgent[] = [];
   suggestedAgents: SupportAgent[] = [];
   searchField: string = '';
-  searchAgentField: string = ''; // For searching agents in the modal
+  searchAgentField: string = '';
   showModal: boolean = false;
   selectedTicket: Ticket | null = null;
 
@@ -185,10 +185,10 @@ export class ManagerViewTicketsComponent implements OnInit {
       ({ allTickets, allAgents }) => {
         this.availableTickets = allTickets.map((ticket: any) => ({
           ...ticket,
-          agentId: ticket.agent?.agentId || null, // Extract agentId from agent
+          agentId: ticket.agent?.agentId || null,
         }));
         this.filteredTickets = this.availableTickets;
-        this.allAgents = allAgents.filter((agent) => agent.status === 'Available'); // Only available agents
+        this.allAgents = allAgents.filter((agent) => agent.status === 'Available');
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -220,18 +220,18 @@ export class ManagerViewTicketsComponent implements OnInit {
   closeModal(): void {
     this.showModal = false;
     this.selectedTicket = null;
-    this.searchAgentField = ''; // Reset the agent search field when closing the modal
+    this.searchAgentField = '';
   }
 
   assignAgent(ticket: Ticket, agent: SupportAgent): void {
     const updatedTicket = {
       ...ticket,
-      supportAgent: { agentId: agent.agentId }, // Include the nested agent object for the backend
+      supportAgent: { agentId: agent.agentId },
     };
 
     this.ticketService.updateTicket(ticket.ticketId!, updatedTicket).subscribe(
       () => {
-        this.fetchData(); // Refresh data to update the view
+        this.fetchData();
         this.closeModal();
       },
       (error) => {
@@ -243,12 +243,12 @@ export class ManagerViewTicketsComponent implements OnInit {
   closeTicket(ticket: Ticket): void {
     const updatedTicket = {
       ...ticket,
-      status: 'Closed', // Update status to Closed
+      status: 'Closed',
     };
 
     this.ticketService.updateTicket(ticket.ticketId!, updatedTicket).subscribe(
       () => {
-        this.fetchData(); // Refresh data to update the view
+        this.fetchData();
       },
       (error) => {
         console.error('Error closing ticket:', error);
@@ -257,8 +257,32 @@ export class ManagerViewTicketsComponent implements OnInit {
   }
 
   getSuggestedAgents(ticket: Ticket): SupportAgent[] {
-    return this.allAgents.filter(
-      (agent) => agent.expertise.toLowerCase() === ticket.issueCategory.toLowerCase()
+    const issueToExpertiseMap: { [key: string]: string } = {
+      'Hardware': 'Hardware Specialist',
+      'Software': 'Software Specialist',
+      'Network': 'Network Engineer',
+      'Account': 'Account Manager',
+      'Security': 'Security Specialist',
+      'Tech Stacks': 'Tech Stack Expert',
+      'Platform Bug': 'Platform Support Engineer',
+      'Content Issue': 'Content Manager',
+      'Integration Issue': 'Integration Specialist',
+      'Performance': 'Performance Analyst',
+      'UI/UX': 'UI/UX Designer',
+      'Database': 'Database Administrator',
+      'Deployment': 'Deployment Specialist',
+      'API Issue': 'API Integration Specialist',
+      'Configuration': 'Configuration Engineer',
+      'Permissions': 'Permissions Manager',
+      'Connectivity': 'Connectivity Specialist',
+      'Documentation': 'Documentation Expert',
+      'Billing/Payment': 'Billing/Payment Support',
+      'Other': 'General IT Support',
+    };
+
+    const requiredExpertise = issueToExpertiseMap[ticket.issueCategory];
+    return this.allAgents.filter((agent) =>
+      agent.expertise.toLowerCase().includes(requiredExpertise.toLowerCase())
     );
   }
 
@@ -276,6 +300,12 @@ export class ManagerViewTicketsComponent implements OnInit {
       ? `${(ticket as any).supportAgent.name} (${(ticket as any).supportAgent.expertise})`
       : 'Not Assigned';
   }
+
+  isManualSelect: boolean = false; // Flag to toggle manual select visibility
+
+toggleManualSelect(): void {
+  this.isManualSelect = !this.isManualSelect;
+}
 
   logout(): void {
     localStorage.clear();
