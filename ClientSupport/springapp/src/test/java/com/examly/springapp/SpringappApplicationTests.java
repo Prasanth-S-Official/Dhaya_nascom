@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllTrainer() throws Exception {
-	        mockMvc.perform(get("/api/trainer")
+	    public void backend_testGetAllTicket() throws Exception {
+	        mockMvc.perform(get("/api/ticket")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
