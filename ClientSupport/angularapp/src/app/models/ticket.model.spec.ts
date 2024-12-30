@@ -1,33 +1,37 @@
-import { Trainer } from "./trainer.model";
+import { Ticket } from "./ticket.model";
 
-describe('Trainer Model', () => {
+describe('Ticket Model', () => {
 
-  fit('Frontend_Trainer_model_should_create_an_instance_with_defined_properties', () => {
-    // Create a sample Trainer object
-    const trainer: Trainer = {
-      trainerId: 101,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '1234567890',
-      expertise: 'Fitness',
-      experience: '5 years',
-      certification: 'Certified Fitness Trainer',
-      resume: 'path/to/resume.pdf',
-      joiningDate: new Date('2020-01-15'),
-      status: 'Active'
+  fit('Frontend_Ticket_model_should_create_an_instance_with_defined_properties', () => {
+    // Create a sample Ticket object
+    const ticket: Ticket = {
+      ticketId: 1,
+      title: 'Login Issue',
+      description: 'Unable to login to the portal using valid credentials.',
+      priority: 'High',
+      status: 'Open',
+      createdDate: new Date('2023-12-01'),
+      resolutionDate: new Date('2023-12-05'),
+      issueCategory: 'Technical',
+      resolutionSummary: 'Password reset and provided access to the portal.',
+      userId: 101,
+      agentId: 202,
+      satisfied: true
     };
 
-    expect(trainer).toBeTruthy();
-    expect(trainer.trainerId).toBe(101);
-    expect(trainer.name).toBe('John Doe');
-    expect(trainer.email).toBe('john.doe@example.com');
-    expect(trainer.phone).toBe('1234567890');
-    expect(trainer.expertise).toBe('Fitness');
-    expect(trainer.experience).toBe('5 years');
-    expect(trainer.certification).toBe('Certified Fitness Trainer');
-    expect(trainer.resume).toBe('path/to/resume.pdf');
-    expect(trainer.joiningDate).toEqual(new Date('2020-01-15'));
-    expect(trainer.status).toBe('Active');
+    expect(ticket).toBeTruthy();
+    expect(ticket.ticketId).toBe(1);
+    expect(ticket.title).toBe('Login Issue');
+    expect(ticket.description).toBe('Unable to login to the portal using valid credentials.');
+    expect(ticket.priority).toBe('High');
+    expect(ticket.status).toBe('Open');
+    expect(ticket.createdDate).toEqual(new Date('2023-12-01'));
+    expect(ticket.resolutionDate).toEqual(new Date('2023-12-05'));
+    expect(ticket.issueCategory).toBe('Technical');
+    expect(ticket.resolutionSummary).toBe('Password reset and provided access to the portal.');
+    expect(ticket.userId).toBe(101);
+    expect(ticket.agentId).toBe(202);
+    expect(ticket.satisfied).toBe(true);
   });
 
 });

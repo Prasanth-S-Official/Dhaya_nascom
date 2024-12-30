@@ -5,22 +5,25 @@ describe('Feedback Model', () => {
   fit('Frontend_Feedback_model_should_create_an_instance_with_defined_properties', () => {
     // Create a sample Feedback object
     const feedback: Feedback = {
-      feedbackId: 101,
-      userId: 1,
-      trainerId: 202,
+      feedbackId: 1,
+      feedbackText: 'Great support and quick resolution!',
+      date: new Date('2023-12-01'),
+      userId: 101,
+      agentId: 202,
+      ticketId: 303,
       category: 'Support',
-      feedbackText: 'This is a feedback text.',
-      date: new Date('2024-07-02')
+      rating: 5
     };
 
     expect(feedback).toBeTruthy();
-    expect(feedback.feedbackId).toBe(101);
-    expect(feedback.userId).toBe(1);
-    expect(feedback.trainerId).toBe(202);
+    expect(feedback.feedbackId).toBe(1);
+    expect(feedback.feedbackText).toBe('Great support and quick resolution!');
+    expect(feedback.date).toEqual(new Date('2023-12-01'));
+    expect(feedback.userId).toBe(101);
+    expect(feedback.agentId).toBe(202);
+    expect(feedback.ticketId).toBe(303);
     expect(feedback.category).toBe('Support');
-    expect(feedback.feedbackText).toBe('This is a feedback text.');
-    expect(feedback.date).toEqual(new Date('2024-07-02'));
+    expect(feedback.rating).toBe(5);
   });
-
 
 });
