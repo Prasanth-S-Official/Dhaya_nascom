@@ -97,10 +97,10 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testRequirementHasManyToOneAnnotation() {
+    public void backend_testTicketHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.Requirement");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.Ticket");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
@@ -127,10 +127,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testRequirementInterfaceAndImplementation() {
+    public void backend_testTicketInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.RequirementService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.RequirementServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.TicketService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.TicketServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testTrainerInterfaceAndImplementation() {
+    public void backend_testSupportAgentInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.TrainerService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.TrainerServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.SupportAgentService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.SupportAgentServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testTrainerControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.TrainerController");
+	   public void backend_testTicketControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.TicketController");
 	   }
 
 	   @Test
-	   public void backend_testRequirementControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.RequirementController");
+	   public void backend_testSupportAgentControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.SupportAgentController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testTrainerModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Trainer");
+	   public void backend_testTicketModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Ticket");
 	   }
 	 
 	 @Test
@@ -200,8 +200,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testRequirementModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Requirement");
+	   public void backend_testSupportAgentModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.SupportAgent");
 	   }
 
 }
