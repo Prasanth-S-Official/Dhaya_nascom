@@ -1,13 +1,7 @@
 package com.examly.springapp.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Feedback {
@@ -21,14 +15,28 @@ public class Feedback {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User user; // User who provided the feedback
+    private User user; // Relation to the User entity
 
     @ManyToOne
-    @JoinColumn(name = "trainerId", nullable = true)
-    private Trainer trainer; // Trainer about whom the feedback is given
+    @JoinColumn(name = "driverId", nullable = true)
+    private Driver driver; // Relation to the Driver entity, can be nullable
 
-    private String category; // Category of feedback, e.g., "Session Quality", "Punctuality", etc.
+    private String category; // e.g., "Driver Performance", "Service Experience"
+    private Integer rating; // Rating from 1 to 5
 
+    // Constructor with parameters
+    public Feedback(Long feedbackId, String feedbackText, LocalDate date, User user, Driver driver, 
+                    String category, Integer rating) {
+        this.feedbackId = feedbackId;
+        this.feedbackText = feedbackText;
+        this.date = date;
+        this.user = user;
+        this.driver = driver;
+        this.category = category;
+        this.rating = rating;
+    }
+
+    // Default constructor
     public Feedback() {
     }
 
@@ -65,12 +73,12 @@ public class Feedback {
         this.user = user;
     }
 
-    public Trainer getTrainer() {
-        return trainer;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     public String getCategory() {
@@ -79,5 +87,13 @@ public class Feedback {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }
