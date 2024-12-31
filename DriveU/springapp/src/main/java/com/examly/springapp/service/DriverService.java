@@ -1,15 +1,16 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.model.Requirement;
+import com.examly.springapp.model.Driver;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface DriverService {
-    Requirement addRequirement(Requirement requirement);
-    Optional<Requirement> getRequirementById(Long requirementId);
-    List<Requirement> getAllRequirements();
-    Requirement updateRequirement(Long requirementId, Requirement requirement);
-    Requirement deleteRequirement(Long requirementId);
-    List<Requirement> getRequirementsByTrainerId(Long trainerId);
+    Driver addDriver(Driver driver);
+    Optional<Driver> getDriverById(Long driverId);
+    List<Driver> getAllDrivers();
+    Driver updateDriver(Long driverId, Driver driver);
+    Driver deleteDriver(Long driverId);
+    List<Driver> findDriversByVehicleType(String vehicleType);
+    List<Driver> findAvailableDrivers();
 }

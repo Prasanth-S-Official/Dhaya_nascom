@@ -1,7 +1,6 @@
 package com.examly.springapp.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 public class Driver {
@@ -29,8 +28,8 @@ public class Driver {
 
     // Constructor with parameters
     public Driver(Long driverId, String driverName, String licenseNumber, Integer experienceYears, String contactNumber,
-                  String availabilityStatus, String address, String vehicleType, Double hourlyRate,
-                  String image, User user) {
+                  String availabilityStatus, String address, String vehicleType, Double hourlyRate, String image,
+                  User user) {
         this.driverId = driverId;
         this.driverName = driverName;
         this.licenseNumber = licenseNumber;
@@ -96,7 +95,6 @@ public class Driver {
     public void setAvailabilityStatus(String availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
-
 
     public String getAddress() {
         return address;
