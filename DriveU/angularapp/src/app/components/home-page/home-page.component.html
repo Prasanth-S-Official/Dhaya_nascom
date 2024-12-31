@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <!-- Navigation Bar -->
+  <app-managernav *ngIf="userRole === 'Manager'"></app-managernav>
+  <app-coordinatornav *ngIf="userRole === 'Coordinator'"></app-coordinatornav>
+
+  <!-- Cover Section -->
+  <div class="coverimage">
+    <div class="title">
+      <h1>TrainerHub</h1>
+      <p>Your ultimate solution for managing trainers and training requirements</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Welcome to TrainerHub</h2>
+    <p>
+      Streamline your training needs with TrainerHub. We offer a comprehensive platform for managing trainers, tracking requirements, and ensuring efficient execution of training programs.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- Contact Section -->
+  <div class="contact">
+    <h2>Contact Us</h2>
+    <p>📞 Phone: 123-456-7890</p>
+    <p>📧 Email: support@edu.com</p>
+  </div>
+</div>

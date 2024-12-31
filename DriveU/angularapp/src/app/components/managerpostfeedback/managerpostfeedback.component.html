@@ -1,0 +1,50 @@
+<app-managernav></app-managernav>
+<div class="main-container">
+  <h1>Add Feedback</h1>
+  <hr/>
+  <form
+    [formGroup]="addFeedbackForm"
+    (ngSubmit)="onSubmit()"
+    [ngClass]="{ blur: successPopup }"
+  >
+    <!-- Feedback Text Field -->
+    <div class="form-group">
+      <label for="feedbackText">Feedback<span class="asterisk">*</span></label>
+      <textarea id="feedbackText" formControlName="feedbackText"></textarea>
+      <div
+        *ngIf="addFeedbackForm.get('feedbackText').hasError('required') && (addFeedbackForm.get('feedbackText').touched || submitted)"
+        class="error-message"
+      >
+        *Feedback is required
+      </div>
+    </div>
+
+    <!-- Category Dropdown -->
+    <div class="form-group">
+      <label for="category">Category<span class="asterisk">*</span></label>
+      <select id="category" formControlName="category">
+        <option value="" disabled selected>Choose Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+      <div
+        *ngIf="addFeedbackForm.get('category').hasError('required') && (addFeedbackForm.get('category').touched || submitted)"
+        class="error-message"
+      >
+        *Category is required
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="add-btn">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
+  <!-- Success Popup -->
+  <div *ngIf="successPopup" class="success-popup">
+    <p>Successfully Added!</p>
+    <button (click)="handleSuccessMessage()">Ok</button>
+  </div>
+</div>

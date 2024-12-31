@@ -1,0 +1,33 @@
+<app-managernav></app-managernav>
+<div id="selectedTrainersContainer">
+    <h1>Selected Trainers</h1>
+    <hr />
+  
+    <ng-container *ngIf="!isLoading; else loadingOrError">
+      <div *ngIf="closedRequirements.length > 0; else noTrainers">
+        <div class="cards-container">
+          <div class="trainer-card" *ngFor="let requirement of closedRequirements">
+            <h2>{{ requirement.trainer.name }}</h2>
+            <p><strong>Email:</strong> {{ requirement.trainer.email }}</p>
+            <p><strong>Phone:</strong> {{ requirement.trainer.phone }}</p>
+            <p><strong>Expertise:</strong> {{ requirement.trainer.expertise }}</p>
+            <p><strong>Experience:</strong> {{ requirement.trainer.experience }} years</p>
+            <p><strong>Certification:</strong> {{ requirement.trainer.certification }}</p>
+            <p><strong>Requirement Title:</strong> {{ requirement.title }}</p>
+            <p><strong>Status:</strong> {{ requirement.status }}</p>
+            <button class="review-button" (click)="writeReview(requirement.trainer.trainerId)">Write a Review</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  
+    <ng-template #loadingOrError>
+      <p *ngIf="isLoading">Loading trainers...</p>
+      <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    </ng-template>
+  
+    <ng-template #noTrainers>
+      <p>No trainers found with closed requirements.</p>
+    </ng-template>
+  </div>
+  

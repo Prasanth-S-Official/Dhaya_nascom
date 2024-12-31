@@ -1,0 +1,46 @@
+<app-managernav></app-managernav>
+<div class="feedback-table-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
+  <h1>My Feedback</h1>
+  <hr />
+  <table class="feedback-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Feedback</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="feedbacks.length === 0">
+        <td colspan="3" class="no-records-cell">No Data Found</td>
+      </tr>
+      <tr *ngFor="let feedback of feedbacks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ feedback.feedbackText }}</td>
+        <td>
+          <button class="view-button" (click)="showTrainerDetails(feedback.trainer)">View Trainer Info</button>
+          <button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Trainer Info Modal -->
+<div *ngIf="showDetailsModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeDetailsModal()">&#x2715;</button>
+    <h2>Trainer Details</h2>
+    <p><strong>Trainer Name:</strong> {{ selectedTrainer?.name }}</p>
+    <p><strong>Expertise:</strong> {{ selectedTrainer?.expertise }}</p>
+    <p><strong>Email:</strong> {{ selectedTrainer?.email }}</p>
+    <p><strong>Phone Number:</strong> {{ selectedTrainer?.phone }}</p>
+  </div>
+</div>
