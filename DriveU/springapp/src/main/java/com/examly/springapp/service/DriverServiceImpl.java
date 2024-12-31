@@ -1,5 +1,6 @@
 package com.examly.springapp.service;
 
+import com.examly.springapp.exceptions.DuplicateDriverException;
 import com.examly.springapp.exceptions.DriverDeletionException;
 import com.examly.springapp.model.Driver;
 import com.examly.springapp.repository.DriverRepo;
@@ -18,6 +19,11 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver addDriver(Driver driver) {
+        // Check for duplicate driver by license number
+        Optional<Driver> existingDriver = driverRepo.findByLicenseNumber(driver.getLicenseNumber());
+        if (existingDriver.isPresent()) {
+            throw new DuplicateDriverException("Driver with license number " + driver.getLicenseNumber() + " already exists.");
+        }
         return driverRepo.save(driver);
     }
 

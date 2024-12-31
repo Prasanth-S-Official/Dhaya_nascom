@@ -27,8 +27,4 @@ public interface DriverRepo extends JpaRepository<Driver, Long> {
     // Custom Query: Find Available Drivers
     @Query("SELECT d FROM Driver d WHERE d.availabilityStatus = 'Available'")
     List<Driver> findAvailableDrivers();
-
-    // Custom Query: Find Drivers with Rating Above Threshold
-    @Query("SELECT d FROM Driver d WHERE d.rating >= :ratingThreshold")
-    List<Driver> findDriversByRatingThreshold(Double ratingThreshold);
 }

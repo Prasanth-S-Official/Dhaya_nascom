@@ -1,5 +1,6 @@
 package com.examly.springapp.controller;
 
+import com.examly.springapp.exceptions.DuplicateDriverException;
 import com.examly.springapp.model.Driver;
 import com.examly.springapp.service.DriverService;
 
@@ -19,9 +20,13 @@ public class DriverController {
     private DriverService driverService;
 
     @PostMapping
-    public ResponseEntity<Driver> addDriver(@RequestBody Driver driver) {
-        Driver newDriver = driverService.addDriver(driver);
-        return new ResponseEntity<>(newDriver, HttpStatus.CREATED);
+    public ResponseEntity<?> addDriver(@RequestBody Driver driver) {
+        try {
+            Driver newDriver = driverService.addDriver(driver);
+            return new ResponseEntity<>(newDriver, HttpStatus.CREATED);
+        } catch (DuplicateDriverException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{driverId}")
