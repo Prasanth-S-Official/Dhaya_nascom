@@ -1,7 +1,7 @@
 package com.examly.springapp.controller;
 
 import com.examly.springapp.model.Requirement;
-import com.examly.springapp.service.RequirementService;
+import com.examly.springapp.service.DriverService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class RequirementController {
 
     @Autowired
-    private RequirementService requirementService;
+    private DriverService requirementService;
 
     @PostMapping
     public ResponseEntity<?> addRequirement(@RequestBody Requirement requirement) {

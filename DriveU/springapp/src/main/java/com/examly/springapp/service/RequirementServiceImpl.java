@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RequirementServiceImpl implements RequirementService {
+public class RequirementServiceImpl implements DriverService {
 
     @Autowired
     private RequirementRepo requirementRepo;
