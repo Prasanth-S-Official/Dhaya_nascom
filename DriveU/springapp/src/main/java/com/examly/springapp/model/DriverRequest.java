@@ -27,6 +27,8 @@ public class DriverRequest {
     private String dropLocation;
     private String estimatedDuration; // e.g., "3 hours", "Full Day"
 
+    @Column(nullable = true) // Allows paymentAmount to be nullable
+    private Double paymentAmount;
 
     private String comments;
 
@@ -39,7 +41,7 @@ public class DriverRequest {
     // Constructor with parameters
     public DriverRequest(Long driverRequestId, User user, Driver driver, LocalDate requestDate, String status,
                          LocalDate tripDate, String timeSlot, String pickupLocation, String dropLocation,
-                         String estimatedDuration, String comments,
+                         String estimatedDuration, Double paymentAmount, String comments,
                          LocalTime actualPickupTime, LocalTime actualDropTime) {
         this.driverRequestId = driverRequestId;
         this.user = user;
@@ -51,6 +53,7 @@ public class DriverRequest {
         this.pickupLocation = pickupLocation;
         this.dropLocation = dropLocation;
         this.estimatedDuration = estimatedDuration;
+        this.paymentAmount = paymentAmount;
         this.comments = comments;
         this.actualPickupTime = actualPickupTime;
         this.actualDropTime = actualDropTime;
@@ -139,6 +142,14 @@ public class DriverRequest {
 
     public void setEstimatedDuration(String estimatedDuration) {
         this.estimatedDuration = estimatedDuration;
+    }
+
+    public Double getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(Double paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 
     public String getComments() {
