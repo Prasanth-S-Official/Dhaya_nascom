@@ -26,7 +26,54 @@
       </div>
     </div>
 
-    <table class="driver-table">
+    <div class="driver-cards-container">
+        <div *ngFor="let driver of filteredDrivers; let i = index" class="driver-card">
+          <div class="card-header">
+            <h2>{{ driver.driverName }}</h2>
+            <p>{{ driver.vehicleType }}</p>
+          </div>
+          <div class="card-body">
+            <p><strong>License:</strong> {{ driver.licenseNumber }}</p>
+            <p><strong>Phone:</strong> {{ driver.contactNumber }}</p>
+            <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
+          </div>
+          <div class="card-footer">
+            <button class="edit-button" (click)="navigateToEditDriver(driver.driverId)">Edit</button>
+            <button class="delete-button" (click)="handleDeleteClick(driver.driverId)">Delete</button>
+            <button class="view-image-button" (click)="viewDriverImage(driver.image)">View Image</button>
+            <div class="status-popover-container">
+                <button class="toggle-status-button" (click)="toggleDropdown(driver.driverId)">Mark as</button>
+                <div *ngIf="activeDropdown === driver.driverId" class="status-popover">
+                  <button
+                    class="status-option"
+                    *ngIf="driver.availabilityStatus !== 'Active'"
+                    (click)="updateDriverStatus(driver, 'Active')"
+                  >
+                    Active
+                  </button>
+                  <button
+                    class="status-option"
+                    *ngIf="driver.availabilityStatus !== 'On Leave'"
+                    (click)="updateDriverStatus(driver, 'On Leave')"
+                  >
+                    On Leave
+                  </button>
+                  <button
+                    class="status-option"
+                    *ngIf="driver.availabilityStatus !== 'Inactive'"
+                    (click)="updateDriverStatus(driver, 'Inactive')"
+                  >
+                    Inactive
+                  </button>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+      
+
+    <!-- <table class="driver-table">
       <thead>
         <tr>
           <th>S.No</th>
@@ -105,7 +152,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
 
   <!-- Delete Confirmation Popup -->
   <div *ngIf="showDeletePopup" class="delete-popup">
