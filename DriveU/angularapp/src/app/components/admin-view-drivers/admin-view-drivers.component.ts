@@ -30,6 +30,8 @@ export class AdminViewDriversComponent implements OnInit {
     this.status = 'loading';
     this.driverService.getAllDrivers().subscribe(
       (data: any) => {
+        console.log("Data",data);
+        
         this.allDrivers = data;
         this.filteredDrivers = data;
         this.status = this.filteredDrivers.length === 0 ? 'noRecords' : '';
