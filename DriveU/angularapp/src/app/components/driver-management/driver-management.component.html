@@ -1,0 +1,67 @@
+<div class="driver-form-container" [ngClass]="{ blur: successPopup }">
+    <button *ngIf="id" type="button" class="back-button" (click)="navigateBack()">Back</button>
+    <h2>{{ id ? 'Edit Driver' : 'Add New Driver' }}</h2>
+    <hr />
+  
+    <form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="driverName">Name<span class="required">*</span></label>
+        <input id="driverName" type="text" formControlName="driverName" />
+      </div>
+  
+      <div>
+        <label for="licenseNumber">License Number<span class="required">*</span></label>
+        <input id="licenseNumber" type="text" formControlName="licenseNumber" />
+      </div>
+  
+      <div>
+        <label for="experienceYears">Experience Years<span class="required">*</span></label>
+        <input id="experienceYears" type="number" formControlName="experienceYears" />
+      </div>
+  
+      <div>
+        <label for="contactNumber">Contact Number<span class="required">*</span></label>
+        <input id="contactNumber" type="text" formControlName="contactNumber" />
+      </div>
+  
+      <div>
+        <label for="availabilityStatus">Availability<span class="required">*</span></label>
+        <select id="availabilityStatus" formControlName="availabilityStatus">
+          <option value="Available">Available</option>
+          <option value="Assigned">Assigned</option>
+          <option value="On Leave">On Leave</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="vehicleType">Vehicle Type<span class="required">*</span></label>
+        <input id="vehicleType" type="text" formControlName="vehicleType" />
+      </div>
+  
+      <div>
+        <label for="hourlyRate">Hourly Rate<span class="required">*</span></label>
+        <input id="hourlyRate" type="number" formControlName="hourlyRate" />
+      </div>
+  
+      <div>
+        <label for="address">Address<span class="required">*</span></label>
+        <input id="address" type="text" formControlName="address" />
+      </div>
+  
+      <div>
+        <label for="image">Driver Image<span class="required">*</span></label>
+        <input id="image" type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" />
+        <div *ngIf="fileError" class="error">{{ fileError }}</div>
+      </div>
+  
+      <button type="submit" class="submit-button">{{ id ? 'Update Driver' : 'Add Driver' }}</button>
+    </form>
+  </div>
+  
+  <div *ngIf="successPopup" class="success-popup">
+    <div class="success-popup-content">
+      <p>{{ id ? 'Driver Updated Successfully!' : 'Driver Added Successfully!' }}</p>
+      <button (click)="handleSuccessMessage()" class="ok-button">Ok</button>
+    </div>
+  </div>
+  

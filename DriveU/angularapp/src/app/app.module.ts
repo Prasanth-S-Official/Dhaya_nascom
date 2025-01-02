@@ -22,6 +22,7 @@ import { ManagerpostfeedbackComponent } from './components/managerpostfeedback/m
 import { ManagerviewfeedbackComponent } from './components/managerviewfeedback/managerviewfeedback.component';
 import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfeedback/coordinatorviewfeedback.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
+import { DriverManagementComponent } from './components/driver-management/driver-management.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminnavComponent } from './components/adminnav/adminnav.component';
     ManagerviewfeedbackComponent,
     CoordinatorviewfeedbackComponent,
     AdminnavComponent,
+    DriverManagementComponent,
   
 
   ],
