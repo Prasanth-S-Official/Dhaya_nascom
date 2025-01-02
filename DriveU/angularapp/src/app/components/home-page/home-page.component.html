@@ -1,21 +1,21 @@
 <div class="wrapper">
   <!-- Navigation Bar -->
-  <app-managernav *ngIf="userRole === 'Manager'"></app-managernav>
-  <app-coordinatornav *ngIf="userRole === 'Coordinator'"></app-coordinatornav>
+  <app-customernav *ngIf="userRole === 'Customer'"></app-customernav>
+  <app-adminnav *ngIf="userRole === 'Admin'"></app-adminnav>
 
   <!-- Cover Section -->
   <div class="coverimage">
     <div class="title">
-      <h1>TrainerHub</h1>
-      <p>Your ultimate solution for managing trainers and training requirements</p>
+      <h1>DriveU</h1>
+      <p>Your trusted platform for connecting with professional drivers on demand</p>
     </div>
   </div>
 
   <!-- Main Content -->
   <div class="content">
-    <h2>Welcome to TrainerHub</h2>
+    <h2>Welcome to DriveU</h2>
     <p>
-      Streamline your training needs with TrainerHub. We offer a comprehensive platform for managing trainers, tracking requirements, and ensuring efficient execution of training programs.
+      Experience seamless connectivity with our professional drivers. DriveU is your one-stop solution for short-term or long-term driving needs. Whether it's a daily commute, a vacation, or a one-time trip, DriveU ensures safety, trust, and convenience.
     </p>
   </div>
 
@@ -24,7 +24,7 @@
   <!-- Contact Section -->
   <div class="contact">
     <h2>Contact Us</h2>
-    <p>📞 Phone: 123-456-7890</p>
-    <p>📧 Email: support@edu.com</p>
+    <p>📞 Phone: 987-654-3210</p>
+    <p>📧 Email: support@driveu.com</p>
   </div>
 </div>

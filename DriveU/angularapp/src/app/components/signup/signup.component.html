@@ -4,7 +4,7 @@
     <div class="signup-left">
       <img src="/assets/images/background.webp" alt="Signup Image" class="signup-image">
       <div class="image-title">
-        <h1>TrainerHub</h1>
+        <h1>DriveU</h1>
       </div>
     </div>
 
@@ -71,8 +71,8 @@
         <div class="form-group">
           <select name="userRole" [(ngModel)]="formData.userRole">
             <option value="">Select Role</option>
-            <option value="Manager">Manager</option>
-            <option value="Coordinator">Coordinator</option>
+            <option value="Admin">Admin</option>
+            <option value="Customer">Customer</option>
           </select>
           <div *ngIf="errors.userRole" class="error">{{ errors.userRole }}</div>
         </div>
