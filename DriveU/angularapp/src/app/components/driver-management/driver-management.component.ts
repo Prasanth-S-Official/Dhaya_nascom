@@ -15,6 +15,7 @@ export class DriverManagementComponent implements OnInit {
   fileError = '';
   imageBase64 = '';
   id: number | null = null;
+  showError = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +28,6 @@ export class DriverManagementComponent implements OnInit {
       licenseNumber: ['', Validators.required],
       experienceYears: ['', Validators.required],
       contactNumber: ['', Validators.required],
-      availabilityStatus: ['', Validators.required],
       address: ['', Validators.required],
       vehicleType: ['', Validators.required],
       hourlyRate: ['', Validators.required],
@@ -99,24 +99,35 @@ export class DriverManagementComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.driverForm.valid) {
-      const formData: Driver = {
-        ...this.driverForm.value,
-        image: this.imageBase64,
-      };
-
-      if (this.id) {
-        this.driverService.updateDriver(this.id, formData).subscribe(
-          () => this.showSuccessPopup(),
-          (error) => console.error('Error updating driver:', error)
-        );
-      } else {
-        this.driverService.addDriver(formData).subscribe(
-          () => this.showSuccessPopup(),
-          (error) => console.error('Error adding driver:', error)
-        );
-      }
+    if (this.driverForm.invalid) {
+      this.showErrorMessage();
+      return;
     }
+
+    const formData: Driver = {
+      ...this.driverForm.value,
+      image: this.imageBase64,
+      availabilityStatus: 'Available', // Default status
+    };
+
+    if (this.id) {
+      this.driverService.updateDriver(this.id, formData).subscribe(
+        () => this.showSuccessPopup(),
+        (error) => console.error('Error updating driver:', error)
+      );
+    } else {
+      this.driverService.addDriver(formData).subscribe(
+        () => this.showSuccessPopup(),
+        (error) => console.error('Error adding driver:', error)
+      );
+    }
+  }
+
+  showErrorMessage(): void {
+    this.showError = true;
+    setTimeout(() => {
+      this.showError = false;
+    }, 3000); // Hide error message after 3 seconds
   }
 
   showSuccessPopup(): void {
