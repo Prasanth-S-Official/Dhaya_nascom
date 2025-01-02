@@ -16,6 +16,7 @@ import { SelectedTrainersComponent } from './components/selected-trainers/select
 import { ManagerpostfeedbackComponent } from './components/managerpostfeedback/managerpostfeedback.component';
 import { ManagerviewfeedbackComponent } from './components/managerviewfeedback/managerviewfeedback.component';
 import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfeedback/coordinatorviewfeedback.component';
+import { DriverManagementComponent } from './components/driver-management/driver-management.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -23,12 +24,32 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'error', component: ErrorComponent },
 
+  { path: 'admin/add/driver', component: DriverManagementComponent, canActivate: [AuthGuard] },
+  { path: 'admin/edit/driver/:id', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/trainers', component: SelectedTrainersComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
+  { path: 'manager/view/trainer/:trainerId', component: TrainerDetailsComponent, canActivate: [AuthGuard] },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   { path: 'manager/add/requirement', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'manager/edit/requirement/:id', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/trainers', component: SelectedTrainersComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/trainer/:trainerId', component: TrainerDetailsComponent, canActivate: [AuthGuard] },
-  
 
 
   { path: 'coordinator/add/trainer', component: TrainerManagementComponent, canActivate: [AuthGuard] },
