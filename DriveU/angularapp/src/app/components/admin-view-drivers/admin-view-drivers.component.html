@@ -21,6 +21,7 @@
           <option [ngValue]="null">All Status</option>
           <option value="Available">Available</option>
           <option value="On Leave">On Leave</option>
+          <option value="Inactive">Inactive</option>
         </select>
       </div>
     </div>
@@ -63,13 +64,37 @@
           <td>
             <button class="edit-button" (click)="navigateToEditDriver(driver.driverId)">Edit</button>
             <button class="delete-button" (click)="handleDeleteClick(driver.driverId)">Delete</button>
-            <button
-              class="toggle-status-button"
-              [ngClass]="driver.availabilityStatus === 'Active' ? 'inactive-button' : 'active-button'"
-              (click)="toggleDriverStatus(driver)"
-            >
-              {{ driver.availabilityStatus === 'Active' ? 'Mark as On Leave' : 'Mark as Active' }}
-            </button>
+            <div class="dropdown">
+              <button
+                class="toggle-status-button"
+                (click)="toggleDropdown(driver.driverId)"
+              >
+                Mark as
+              </button>
+              <ul
+                *ngIf="activeDropdown === driver.driverId"
+                class="dropdown-menu"
+              >
+                <li
+                  (click)="updateDriverStatus(driver, 'Active')"
+                  *ngIf="driver.availabilityStatus !== 'Active'"
+                >
+                  Active
+                </li>
+                <li
+                  (click)="updateDriverStatus(driver, 'On Leave')"
+                  *ngIf="driver.availabilityStatus !== 'On Leave'"
+                >
+                  On Leave
+                </li>
+                <li
+                  (click)="updateDriverStatus(driver, 'Inactive')"
+                  *ngIf="driver.availabilityStatus !== 'Inactive'"
+                >
+                  Inactive
+                </li>
+              </ul>
+            </div>
             <button
               class="view-image-button"
               (click)="viewDriverImage(driver.image)"

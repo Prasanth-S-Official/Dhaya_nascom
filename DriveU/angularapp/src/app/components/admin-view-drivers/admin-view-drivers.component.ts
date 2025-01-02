@@ -8,7 +8,6 @@ import { DriverService } from 'src/app/services/driver.service';
   styleUrls: ['./admin-view-drivers.component.css']
 })
 export class AdminViewDriversComponent implements OnInit {
-
   allDrivers: any[] = [];
   filteredDrivers: any[] = [];
   showDeletePopup = false;
@@ -19,6 +18,7 @@ export class AdminViewDriversComponent implements OnInit {
   selectedStatus: string | null = null;
   status: string = '';
   errorMessage: string = '';
+  activeDropdown: number | null = null; // To track the currently open dropdown
 
   constructor(private router: Router, private driverService: DriverService) {}
 
@@ -72,13 +72,17 @@ export class AdminViewDriversComponent implements OnInit {
     this.router.navigate(['/admin/edit/driver', id]);
   }
 
-  toggleDriverStatus(driver: any) {
-    const updatedStatus = driver.availabilityStatus === 'Active' ? 'On Leave' : 'Active';
-    const updatedDriver = { ...driver, availabilityStatus: updatedStatus };
+  toggleDropdown(driverId: number) {
+    this.activeDropdown = this.activeDropdown === driverId ? null : driverId;
+  }
+
+  updateDriverStatus(driver: any, newStatus: string) {
+    const updatedDriver = { ...driver, availabilityStatus: newStatus };
 
     this.driverService.updateDriver(driver.driverId, updatedDriver).subscribe(
       () => {
-        driver.availabilityStatus = updatedStatus;
+        driver.availabilityStatus = newStatus;
+        this.activeDropdown = null; // Close the dropdown after updating
       },
       (error) => {
         console.error('Error updating driver status:', error);
