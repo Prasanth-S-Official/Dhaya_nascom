@@ -107,7 +107,7 @@ export class DriverManagementComponent implements OnInit {
     const formData: Driver = {
       ...this.driverForm.value,
       image: this.imageBase64,
-      availabilityStatus: 'Available', // Default status
+      availabilityStatus: 'Active', // Default status
     };
 
     if (this.id) {

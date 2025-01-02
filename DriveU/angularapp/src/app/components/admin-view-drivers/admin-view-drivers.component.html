@@ -65,10 +65,10 @@
             <button class="delete-button" (click)="handleDeleteClick(driver.driverId)">Delete</button>
             <button
               class="toggle-status-button"
-              [ngClass]="driver.availabilityStatus === 'Available' ? 'inactive-button' : 'active-button'"
+              [ngClass]="driver.availabilityStatus === 'Active' ? 'inactive-button' : 'active-button'"
               (click)="toggleDriverStatus(driver)"
             >
-              {{ driver.availabilityStatus === 'Available' ? 'Mark as On Leave' : 'Mark as Available' }}
+              {{ driver.availabilityStatus === 'Active' ? 'Mark as On Leave' : 'Mark as Active' }}
             </button>
             <button
               class="view-image-button"

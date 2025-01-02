@@ -73,7 +73,7 @@ export class AdminViewDriversComponent implements OnInit {
   }
 
   toggleDriverStatus(driver: any) {
-    const updatedStatus = driver.availabilityStatus === 'Available' ? 'On Leave' : 'Available';
+    const updatedStatus = driver.availabilityStatus === 'Active' ? 'On Leave' : 'Active';
     const updatedDriver = { ...driver, availabilityStatus: updatedStatus };
 
     this.driverService.updateDriver(driver.driverId, updatedDriver).subscribe(
