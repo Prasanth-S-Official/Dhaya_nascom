@@ -578,4 +578,15 @@ button.toggle-status-button.active-button {
   }
   
 
+  /* Rounded Driver Image */
+.driver-image {
+  width: 150px; /* Set the width of the image */
+  height: 150px; /* Set the height of the image */
+  object-fit: cover; /* Ensure the image fits within the circle */
+  border-radius: 50%; /* Makes the image rounded */
+  border: 3px solid #000000; /* Add a border around the image */
+  margin: 20px auto; /* Center the image horizontally */
+  display: block; /* Ensure the image behaves like a block element */
+}
+
   
