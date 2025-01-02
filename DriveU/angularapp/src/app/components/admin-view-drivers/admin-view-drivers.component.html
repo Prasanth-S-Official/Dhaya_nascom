@@ -1,0 +1,101 @@
+<app-adminnav></app-adminnav>
+<div id="parent">
+  <div id="driverHomeBody" [ngClass]="{ blur: showDeletePopup || showImagePopup }">
+    <h1>Drivers</h1>
+    <hr />
+
+    <div class="top-container">
+      <div>
+        <label for="searchBox">Search by:</label>
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Driver Name or Vehicle Type..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="applyFilters()"
+        />
+      </div>
+      <div>
+        <label for="statusSelect">Filter by Status:</label>
+        <select [(ngModel)]="selectedStatus" (ngModelChange)="applyFilters()" id="statusSelect">
+          <option [ngValue]="null">All Status</option>
+          <option value="Available">Available</option>
+          <option value="On Leave">On Leave</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="driver-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>License</th>
+          <th>Phone</th>
+          <th>Vehicle Type</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="status === 'loading'">
+        <tr>
+          <td colspan="7">Loading drivers...</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'error'">
+        <tr>
+          <td colspan="7">Error loading drivers</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="status === 'noRecords'">
+        <tr>
+          <td colspan="7" class="no-records-cell">Oops! No records found</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="filteredDrivers.length > 0">
+        <tr *ngFor="let driver of filteredDrivers; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ driver.driverName }}</td>
+          <td>{{ driver.licenseNumber }}</td>
+          <td>{{ driver.contactNumber }}</td>
+          <td>{{ driver.vehicleType }}</td>
+          <td>{{ driver.availabilityStatus }}</td>
+          <td>
+            <button class="edit-button" (click)="navigateToEditDriver(driver.driverId)">Edit</button>
+            <button class="delete-button" (click)="handleDeleteClick(driver.driverId)">Delete</button>
+            <button
+              class="toggle-status-button"
+              [ngClass]="driver.availabilityStatus === 'Available' ? 'inactive-button' : 'active-button'"
+              (click)="toggleDriverStatus(driver)"
+            >
+              {{ driver.availabilityStatus === 'Available' ? 'Mark as On Leave' : 'Mark as Available' }}
+            </button>
+            <button
+              class="view-image-button"
+              (click)="viewDriverImage(driver.image)"
+            >
+              View Image
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Delete Confirmation Popup -->
+  <div *ngIf="showDeletePopup" class="delete-popup">
+    <p>Are you sure you want to delete this driver?</p>
+    <button class="confirm-delete-button" (click)="handleConfirmDelete()" id="delete-btn">Yes, Delete</button>
+    <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+
+  <!-- Driver Image Viewer Popup -->
+  <div *ngIf="showImagePopup" class="image-popup">
+    <div class="image-popup-content">
+      <button class="close-button" (click)="closeImagePopup()">&#10006;</button>
+      <h2>Driver Image</h2>
+      <img *ngIf="driverImage" [src]="'data:image/jpeg;base64,' + driverImage" alt="Driver Image" />
+    </div>
+  </div>
+</div>
