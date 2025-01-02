@@ -5,7 +5,7 @@ body, h1, ul, li, p, button {
     box-sizing: border-box;
   }
   
-  .adminnav {
+  .customernav {
     background-color: #3a3f44;
     background-image: linear-gradient(124deg, #295478 0%, #d1b88fbf 50%, #e9b259bf 100%);
   
