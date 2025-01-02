@@ -82,18 +82,26 @@ export class SignupComponent {
     if (!hasErrors) {
       try {
         const response = await this.authService.register(this.formData).toPromise();
-        if (response) {
+  
+        if (response.status === 409) {
+          this.error = response.body?.message || "User already exists with this email";
+        } else if (response.status === 200 || response.status === 201) {
           this.successPopup = true;
         } else {
-          this.error = "Something went wrong, please try with different data.";
+          this.error = "Something went wrong, please try again.";
         }
-      } catch (error) {
-        this.error = "Something went wrong, please try with different data.";
+      } catch (error: any) {
+        console.log('Error Object:', error); 
+        if (error.status === 409) {
+          this.error = error.error || "User already exists with this email";
+        } else {
+          this.error = "Something went wrong, please try againsssss.";
+        }
       }
     }
   }
   
-  
+
 
   handleSuccessMessage() {
     this.successPopup = false;

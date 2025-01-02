@@ -47,9 +47,12 @@ public class AuthController {
 	
 	
 	@PostMapping("/api/register")
-	public ResponseEntity<User> handler1(@RequestBody User user) {
-		User b= userService.createUser(user);
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
+	public ResponseEntity<?> handler1(@RequestBody User user) {
+		if (userRepo.existsByEmail(user.getEmail())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists with this email");
+		}
+		User newUser = userService.createUser(user);
+		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/api/login")

@@ -76,6 +76,11 @@
           </select>
           <div *ngIf="errors.userRole" class="error">{{ errors.userRole }}</div>
         </div>
+
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        
         
         <button type="submit" class="signup-button" (click)="handleSubmit()">
           Signup
