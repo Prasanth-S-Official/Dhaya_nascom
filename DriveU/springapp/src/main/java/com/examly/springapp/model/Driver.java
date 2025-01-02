@@ -22,14 +22,11 @@ public class Driver {
     @Column(name = "image", nullable = true, columnDefinition = "LONGBLOB")
     private String image; // Base64-encoded image of the driver
 
-    @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
-    private User user; // Relation to the User entity
+
 
     // Constructor with parameters
     public Driver(Long driverId, String driverName, String licenseNumber, Integer experienceYears, String contactNumber,
-                  String availabilityStatus, String address, String vehicleType, Double hourlyRate, String image,
-                  User user) {
+                  String availabilityStatus, String address, String vehicleType, Double hourlyRate, String image) {
         this.driverId = driverId;
         this.driverName = driverName;
         this.licenseNumber = licenseNumber;
@@ -40,7 +37,6 @@ public class Driver {
         this.vehicleType = vehicleType;
         this.hourlyRate = hourlyRate;
         this.image = image;
-        this.user = user;
     }
 
     // Default constructor
