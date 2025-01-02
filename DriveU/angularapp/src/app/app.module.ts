@@ -24,6 +24,7 @@ import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfe
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { DriverManagementComponent } from './components/driver-management/driver-management.component';
 import { AdminViewDriversComponent } from './components/admin-view-drivers/admin-view-drivers.component';
+import { CustomernavComponent } from './components/customernav/customernav.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AdminViewDriversComponent } from './components/admin-view-drivers/admin
     AdminnavComponent,
     DriverManagementComponent,
     AdminViewDriversComponent,
+    CustomernavComponent,
   
 
   ],
