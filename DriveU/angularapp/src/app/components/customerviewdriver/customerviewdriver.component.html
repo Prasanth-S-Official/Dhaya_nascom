@@ -1,0 +1,64 @@
+<app-customernav></app-customernav>
+<div>
+  <div id="driverHomeBody">
+    <h1>Available Drivers</h1>
+    <hr />
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Driver Name, Vehicle Type, or License..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Drivers Table -->
+    <table class="driver-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Driver Name</th>
+          <th>License</th>
+          <th>Phone</th>
+          <th>Vehicle Type</th>
+          <th>Experience</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredDrivers.length && availableDrivers.length; else noRecords">
+        <tr *ngFor="let driver of filteredDrivers; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ driver.driverName }}</td>
+          <td>{{ driver.licenseNumber }}</td>
+          <td>{{ driver.contactNumber }}</td>
+          <td>{{ driver.vehicleType }}</td>
+          <td>{{ driver.experienceYears }} years</td>
+          <td>{{ driver.availabilityStatus }}</td>
+          <td>
+            <button
+              id="requestButton"
+              *ngIf="!isDriverRequested(driver)"
+              (click)="handleRequestClick(driver)"
+              [disabled]="driver.availabilityStatus !== 'Available'"
+              [ngClass]="{ 'grey-button': driver.availabilityStatus !== 'Available' }"
+            >
+              Request
+            </button>
+            <button id="requestedButton" *ngIf="isDriverRequested(driver)">Requested</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colspan="8" class="no-records-cell">Oops! No records found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>
