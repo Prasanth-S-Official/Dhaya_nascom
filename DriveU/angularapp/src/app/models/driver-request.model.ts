@@ -4,7 +4,7 @@ export interface DriverRequest {
   driverId?: number; // ID of the assigned driver (nullable)
   requestDate: string; // ISO Date format (YYYY-MM-DD)
   status: string; // "Pending", "Approved", "Rejected", "Completed"
-  tripDate: string; // ISO Date format (YYYY-MM-DD)
+  tripDate: Date; // ISO Date format (YYYY-MM-DD)
   timeSlot: string; // e.g., "Morning", "Afternoon", "Evening"
   pickupLocation: string; // Pickup location
   dropLocation: string; // Drop location
