@@ -22,27 +22,26 @@ public class DriverRequest {
     private LocalDate requestDate;
     private String status; // e.g., "Pending", "Approved", "Rejected", "Completed"
     private LocalDate tripDate;
-    private String timeSlot; // e.g., "Morning", "Afternoon", "Evening"
+
+    // Updated to store a specific time
+    private LocalTime timeSlot; // e.g., 08:00, 12:00
+
     private String pickupLocation;
     private String dropLocation;
     private String estimatedDuration; // e.g., "3 hours", "Full Day"
 
-    @Column(nullable = true) // Allows paymentAmount to be nullable
+    @Column(nullable = true)
     private Double paymentAmount;
 
     private String comments;
 
-    @Column(nullable = true) // Allows actualPickupTime to be nullable
-    private LocalTime actualPickupTime;
-
-    @Column(nullable = true) // Allows actualDropTime to be nullable
+    @Column(nullable = true)
     private LocalTime actualDropTime;
 
     // Constructor with parameters
     public DriverRequest(Long driverRequestId, User user, Driver driver, LocalDate requestDate, String status,
-                         LocalDate tripDate, String timeSlot, String pickupLocation, String dropLocation,
-                         String estimatedDuration, Double paymentAmount, String comments,
-                         LocalTime actualPickupTime, LocalTime actualDropTime) {
+                         LocalDate tripDate, LocalTime timeSlot, String pickupLocation, String dropLocation,
+                         String estimatedDuration, Double paymentAmount, String comments, LocalTime actualDropTime) {
         this.driverRequestId = driverRequestId;
         this.user = user;
         this.driver = driver;
@@ -55,7 +54,6 @@ public class DriverRequest {
         this.estimatedDuration = estimatedDuration;
         this.paymentAmount = paymentAmount;
         this.comments = comments;
-        this.actualPickupTime = actualPickupTime;
         this.actualDropTime = actualDropTime;
     }
 
@@ -112,11 +110,11 @@ public class DriverRequest {
         this.tripDate = tripDate;
     }
 
-    public String getTimeSlot() {
+    public LocalTime getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(LocalTime timeSlot) {
         this.timeSlot = timeSlot;
     }
 
@@ -158,14 +156,6 @@ public class DriverRequest {
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
-
-    public LocalTime getActualPickupTime() {
-        return actualPickupTime;
-    }
-
-    public void setActualPickupTime(LocalTime actualPickupTime) {
-        this.actualPickupTime = actualPickupTime;
     }
 
     public LocalTime getActualDropTime() {
