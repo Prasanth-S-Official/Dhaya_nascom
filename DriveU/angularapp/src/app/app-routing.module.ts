@@ -18,6 +18,7 @@ import { ManagerviewfeedbackComponent } from './components/managerviewfeedback/m
 import { CoordinatorviewfeedbackComponent } from './components/coordinatorviewfeedback/coordinatorviewfeedback.component';
 import { DriverManagementComponent } from './components/driver-management/driver-management.component';
 import { AdminViewDriversComponent } from './components/admin-view-drivers/admin-view-drivers.component';
+import { CustomerviewdriverComponent } from './components/customerviewdriver/customerviewdriver.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -32,20 +33,6 @@ const routes: Routes = [
   { path: 'manager/view/trainer/:trainerId', component: TrainerDetailsComponent, canActivate: [AuthGuard] },
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   { path: 'manager/add/requirement', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'manager/edit/requirement/:id', component: ManagerRequirementComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/trainers', component: SelectedTrainersComponent, canActivate: [AuthGuard] },
@@ -56,7 +43,7 @@ const routes: Routes = [
   { path: 'coordinator/add/trainer', component: TrainerManagementComponent, canActivate: [AuthGuard] },
   { path: 'coordinator/edit/trainer/:id', component: TrainerManagementComponent, canActivate: [AuthGuard] },
   { path: 'coordinator/view/requirements', component: CoordinatorViewRequirementsComponent, canActivate: [AuthGuard] },
-  { path: 'coordinator/view/trainers', component: CoordinatorViewTrainersComponent, canActivate: [AuthGuard] },
+  { path: 'customer/view/drivers', component: CustomerviewdriverComponent, canActivate: [AuthGuard] },
 
   { path: 'coordinator/view/feedback', component: CoordinatorviewfeedbackComponent, canActivate: [AuthGuard] },
 

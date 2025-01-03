@@ -10,7 +10,7 @@ import { Driver } from 'src/app/models/driver.model';
   templateUrl: './customerviewdriver.component.html',
   styleUrls: ['./customerviewdriver.component.css']
 })
-export class CustomerViewDriverComponent implements OnInit {
+export class CustomerviewdriverComponent implements OnInit {
 
   availableDrivers: Driver[] = [];
   filteredDrivers: Driver[] = [];

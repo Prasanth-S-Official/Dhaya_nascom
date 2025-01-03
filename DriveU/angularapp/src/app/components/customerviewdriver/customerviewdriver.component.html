@@ -15,50 +15,43 @@
       />
     </div>
 
-    <!-- Available Drivers Table -->
-    <table class="driver-table">
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Driver Name</th>
-          <th>License</th>
-          <th>Phone</th>
-          <th>Vehicle Type</th>
-          <th>Experience</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="filteredDrivers.length && availableDrivers.length; else noRecords">
-        <tr *ngFor="let driver of filteredDrivers; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ driver.driverName }}</td>
-          <td>{{ driver.licenseNumber }}</td>
-          <td>{{ driver.contactNumber }}</td>
-          <td>{{ driver.vehicleType }}</td>
-          <td>{{ driver.experienceYears }} years</td>
-          <td>{{ driver.availabilityStatus }}</td>
-          <td>
-            <button
-              id="requestButton"
-              *ngIf="!isDriverRequested(driver)"
-              (click)="handleRequestClick(driver)"
-              [disabled]="driver.availabilityStatus !== 'Available'"
-              [ngClass]="{ 'grey-button': driver.availabilityStatus !== 'Available' }"
-            >
-              Request
-            </button>
-            <button id="requestedButton" *ngIf="isDriverRequested(driver)">Requested</button>
-          </td>
-        </tr>
-      </tbody>
-      <ng-template #noRecords>
-        <tbody>
-          <tr>
-            <td colspan="8" class="no-records-cell">Oops! No records found</td>
-          </tr>
-        </tbody>
-      </ng-template>
-    </table>
+    <!-- Available Drivers Cards -->
+    <div class="driver-cards-container">
+      <div *ngFor="let driver of filteredDrivers; let i = index" class="driver-card">
+        <div class="card-header">
+          <img
+            class="driver-image"
+            [src]="'data:image/jpeg;base64,' + driver.image"
+            alt="Driver Image"
+          />
+        </div>
+        <div class="card-body">
+          <h2>{{ driver.driverName }}</h2>
+          <p><strong>Vehicle Type:</strong> {{ driver.vehicleType }}</p>
+          <p><strong>License:</strong> {{ driver.licenseNumber }}</p>
+          <p><strong>Phone:</strong> {{ driver.contactNumber }}</p>
+          <p><strong>Address:</strong> {{ driver.address }}</p>
+          <p><strong>Experience:</strong> {{ driver.experienceYears }} years</p>
+          <p><strong>Hourly Rate:</strong> ₹{{ driver.hourlyRate }}</p>
+          <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
+        </div>
+        <div class="card-footer">
+          <button
+            class="request-button"
+            *ngIf="!isDriverRequested(driver)"
+            (click)="handleRequestClick(driver)"
+            [disabled]="driver.availabilityStatus !== 'Active'"
+          >
+            Request
+          </button>
+          <button class="requested-button" *ngIf="isDriverRequested(driver)">Requested</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Records Found -->
+    <div *ngIf="!filteredDrivers.length" class="no-records">
+      <p>Oops! No records found</p>
+    </div>
   </div>
 </div>
