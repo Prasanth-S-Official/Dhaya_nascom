@@ -28,6 +28,7 @@ export class CustomerRequestComponent implements OnInit {
       timeSlot: ['', Validators.required],
       estimatedDuration: ['', Validators.required],
       comments: [''],
+      status: [''], // Added to preserve status on edit
     });
   }
 
@@ -43,11 +44,10 @@ export class CustomerRequestComponent implements OnInit {
   fetchRequest(id: number): void {
     this.driverRequestService.getDriverRequestById(id).subscribe(
       (response) => {
-        console.log("Respo",response);
         const requestData = {
           ...response,
           tripDate: this.formatDate(response.tripDate),
-          timeSlot: this.extractTime(response.timeSlot as [number, number]), // Convert array to HH:mm format
+          timeSlot: this.extractTime((response as any).timeSlot as [number, number]),
           userId: (response as any).user.userId,
           driverId: (response as any).driver?.driverId,
         };
@@ -73,7 +73,7 @@ export class CustomerRequestComponent implements OnInit {
       driver: {
         driverId: Number(localStorage.getItem('driverId')),
       },
-      status: this.requestId ? undefined : 'Pending',
+      status: this.requestId ? this.requestForm.value.status : 'Pending', // Preserve existing status or set to Pending
       requestDate: new Date(),
     };
 
@@ -122,10 +122,16 @@ export class CustomerRequestComponent implements OnInit {
 
   handleSuccessMessage(): void {
     this.successPopup = false;
-    this.router.navigate(['/customer/view/drivers']);
+
+    // Navigate based on whether it's an edit or a new request
+    if (this.requestId) {
+      this.router.navigate(['/customer/my/requests']);
+    } else {
+      this.router.navigate(['/customer/view/drivers']);
+    }
   }
 
   navigateBack(): void {
-    this.router.navigate(['/customer/view/requests']);
+    this.router.navigate(['/customer/my/requests']);
   }
 }
