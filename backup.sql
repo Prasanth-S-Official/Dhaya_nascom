@@ -65,15 +65,15 @@ DROP TABLE IF EXISTS `driver_request`;
 CREATE TABLE `driver_request` (
   `driver_request_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `actual_drop_time` time DEFAULT NULL,
-  `actual_pickup_time` time DEFAULT NULL,
+  `actual_duration` decimal(21,0) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
   `drop_location` varchar(255) DEFAULT NULL,
-  `estimated_duration` varchar(255) DEFAULT NULL,
+  `estimated_duration` decimal(21,0) DEFAULT NULL,
   `payment_amount` double DEFAULT NULL,
   `pickup_location` varchar(255) DEFAULT NULL,
   `request_date` date DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `time_slot` varchar(255) DEFAULT NULL,
+  `time_slot` time NOT NULL,
   `trip_date` date DEFAULT NULL,
   `driver_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) NOT NULL,
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-03  7:45:30
+-- Dump completed on 2025-01-03  8:00:31

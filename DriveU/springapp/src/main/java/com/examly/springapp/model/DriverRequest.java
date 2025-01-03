@@ -22,26 +22,27 @@ public class DriverRequest {
     private LocalDate requestDate;
     private String status; // e.g., "Pending", "Approved", "Rejected", "Completed"
     private LocalDate tripDate;
-
-    // Updated to store a specific time
-    private LocalTime timeSlot; // e.g., 08:00, 12:00
-
+    private LocalTime timeSlot; // Now stores actual time (e.g., 10:30 AM)
     private String pickupLocation;
     private String dropLocation;
     private String estimatedDuration; // e.g., "3 hours", "Full Day"
 
-    @Column(nullable = true)
+    @Column(nullable = true) // Allows paymentAmount to be nullable
     private Double paymentAmount;
 
     private String comments;
 
-    @Column(nullable = true)
+    @Column(nullable = true) // Allows actualDropTime to be nullable
     private LocalTime actualDropTime;
+
+    @Column(nullable = true) // Allows actualDuration to be nullable
+    private String actualDuration;
 
     // Constructor with parameters
     public DriverRequest(Long driverRequestId, User user, Driver driver, LocalDate requestDate, String status,
                          LocalDate tripDate, LocalTime timeSlot, String pickupLocation, String dropLocation,
-                         String estimatedDuration, Double paymentAmount, String comments, LocalTime actualDropTime) {
+                         String estimatedDuration, Double paymentAmount, String comments,
+                         LocalTime actualDropTime, String actualDuration) {
         this.driverRequestId = driverRequestId;
         this.user = user;
         this.driver = driver;
@@ -55,6 +56,7 @@ public class DriverRequest {
         this.paymentAmount = paymentAmount;
         this.comments = comments;
         this.actualDropTime = actualDropTime;
+        this.actualDuration = actualDuration;
     }
 
     // Default constructor
@@ -164,5 +166,13 @@ public class DriverRequest {
 
     public void setActualDropTime(LocalTime actualDropTime) {
         this.actualDropTime = actualDropTime;
+    }
+
+    public String getActualDuration() {
+        return actualDuration;
+    }
+
+    public void setActualDuration(String actualDuration) {
+        this.actualDuration = actualDuration;
     }
 }
