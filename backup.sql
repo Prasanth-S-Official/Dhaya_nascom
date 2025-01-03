@@ -82,7 +82,7 @@ CREATE TABLE `driver_request` (
   KEY `FKck4ybb6l264ikxnl0vpclsox9` (`user_id`),
   CONSTRAINT `FK1r7on88l9wdpi42bic317pu3b` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`),
   CONSTRAINT `FKck4ybb6l264ikxnl0vpclsox9` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,6 +91,7 @@ CREATE TABLE `driver_request` (
 
 LOCK TABLES `driver_request` WRITE;
 /*!40000 ALTER TABLE `driver_request` DISABLE KEYS */;
+INSERT INTO `driver_request` VALUES (2,NULL,NULL,'ssssss','demo drop','3 hours',NULL,'demo pick','2025-01-03','Pending','18:50:00','2025-01-10',2,2);
 /*!40000 ALTER TABLE `driver_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-03 10:15:38
+-- Dump completed on 2025-01-03 10:30:38

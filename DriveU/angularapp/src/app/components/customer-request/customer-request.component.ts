@@ -101,7 +101,7 @@ export class CustomerRequestComponent implements OnInit {
 
   handleSuccessMessage(): void {
     this.successPopup = false;
-    this.router.navigate(['/customer/view/requests']);
+    this.router.navigate(['/customer/view/drivers']);
   }
 
   navigateBack(): void {
