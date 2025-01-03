@@ -46,8 +46,8 @@ export class CustomerRequestComponent implements OnInit {
         // Convert nested data into flat structure for form usage
         const requestData = {
           ...response,
-          userId: response.user.userId,
-          driverId: response.driver?.driverId,
+          userId: (response as any).user.userId,
+          driverId: (response as any).driver?.driverId,
         };
         this.requestForm.patchValue(requestData);
       },
@@ -79,6 +79,8 @@ export class CustomerRequestComponent implements OnInit {
         (error) => console.error('Error updating driver request:', error)
       );
     } else {
+      console.log(formData);
+      
       this.driverRequestService.addDriverRequest(formData).subscribe(
         () => this.showSuccessPopup(),
         (error) => console.error('Error submitting driver request:', error)
