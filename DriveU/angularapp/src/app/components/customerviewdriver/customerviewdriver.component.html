@@ -18,22 +18,24 @@
     <!-- Available Drivers Cards -->
     <div class="driver-cards-container">
       <div *ngFor="let driver of filteredDrivers; let i = index" class="driver-card">
-        <div class="card-header">
-          <img
-            class="driver-image"
-            [src]="'data:image/jpeg;base64,' + driver.image"
-            alt="Driver Image"
-          />
-        </div>
-        <div class="card-body">
-          <h2>{{ driver.driverName }}</h2>
-          <p><strong>Vehicle Type:</strong> {{ driver.vehicleType }}</p>
-          <p><strong>License:</strong> {{ driver.licenseNumber }}</p>
-          <p><strong>Phone:</strong> {{ driver.contactNumber }}</p>
-          <p><strong>Address:</strong> {{ driver.address }}</p>
-          <p><strong>Experience:</strong> {{ driver.experienceYears }} years</p>
-          <p><strong>Hourly Rate:</strong> ₹{{ driver.hourlyRate }}</p>
-          <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
+        <div class="card-content">
+          <div class="card-image">
+            <img
+              class="driver-image"
+              [src]="'data:image/jpeg;base64,' + driver.image"
+              alt="Driver Image"
+            />
+          </div>
+          <div class="card-details">
+            <h2>{{ driver.driverName }}</h2>
+            <p><strong>Vehicle Type:</strong> {{ driver.vehicleType }}</p>
+            <p><strong>License:</strong> {{ driver.licenseNumber }}</p>
+            <p><strong>Phone:</strong> {{ driver.contactNumber }}</p>
+            <p><strong>Address:</strong> {{ driver.address }}</p>
+            <p><strong>Experience:</strong> {{ driver.experienceYears }} years</p>
+            <p><strong>Hourly Rate:</strong> ₹{{ driver.hourlyRate }}</p>
+            <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
+          </div>
         </div>
         <div class="card-footer">
           <button
@@ -48,6 +50,7 @@
         </div>
       </div>
     </div>
+    
 
     <!-- No Records Found -->
     <div *ngIf="!filteredDrivers.length" class="no-records">
