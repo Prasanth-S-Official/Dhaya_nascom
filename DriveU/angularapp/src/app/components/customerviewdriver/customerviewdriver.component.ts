@@ -67,6 +67,8 @@ export class CustomerviewdriverComponent implements OnInit {
       alert('You have already requested this driver.');
     } else {
       localStorage.setItem('driverId', driver.driverId.toString());
+      console.log(localStorage.getItem("driverId"));
+      
       this.router.navigate(['/customer/add/request']);
     }
   }

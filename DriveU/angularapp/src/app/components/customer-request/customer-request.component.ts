@@ -66,9 +66,9 @@ export class CustomerRequestComponent implements OnInit {
       user: {
         userId: Number(localStorage.getItem('userId')),
       },
-      driver: this.requestId
-        ? { driverId: Number(localStorage.getItem('driverId')) }
-        : undefined,
+      driver:  { 
+        driverId: Number(localStorage.getItem('driverId')) 
+      },
       status: this.requestId ? undefined : 'Pending',
       requestDate: new Date(), // Automatically set current date
     };
