@@ -47,7 +47,7 @@ export class CustomerRequestComponent implements OnInit {
         const requestData = {
           ...response,
           tripDate: this.formatDate(response.tripDate),
-          timeSlot: this.extractTime(response.timeSlot), // Convert array to HH:mm format
+          timeSlot: this.extractTime(response.timeSlot as [number, number]), // Convert array to HH:mm format
           userId: (response as any).user.userId,
           driverId: (response as any).driver?.driverId,
         };
@@ -122,7 +122,7 @@ export class CustomerRequestComponent implements OnInit {
 
   handleSuccessMessage(): void {
     this.successPopup = false;
-    this.router.navigate(['/customer/view/requests']);
+    this.router.navigate(['/customer/view/drivers']);
   }
 
   navigateBack(): void {
