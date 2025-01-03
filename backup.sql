@@ -82,7 +82,7 @@ CREATE TABLE `driver_request` (
   KEY `FKck4ybb6l264ikxnl0vpclsox9` (`user_id`),
   CONSTRAINT `FK1r7on88l9wdpi42bic317pu3b` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`),
   CONSTRAINT `FKck4ybb6l264ikxnl0vpclsox9` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-03  9:45:38
+-- Dump completed on 2025-01-03 10:00:38
