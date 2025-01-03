@@ -26,6 +26,7 @@ import { DriverManagementComponent } from './components/driver-management/driver
 import { AdminViewDriversComponent } from './components/admin-view-drivers/admin-view-drivers.component';
 import { CustomernavComponent } from './components/customernav/customernav.component';
 import { CustomerviewdriverComponent } from './components/customerviewdriver/customerviewdriver.component';
+import { CustomerRequestComponent } from './components/customer-request/customer-request.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CustomerviewdriverComponent } from './components/customerviewdriver/cus
     AdminViewDriversComponent,
     CustomernavComponent,
     CustomerviewdriverComponent,
+    CustomerRequestComponent,
   
 
   ],
