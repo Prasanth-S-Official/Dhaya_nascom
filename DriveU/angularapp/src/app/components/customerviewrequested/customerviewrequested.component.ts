@@ -79,4 +79,8 @@ export class CustomerviewrequestedComponent implements OnInit {
     this.selectedRequest = null;
     this.showDetailsModal = false;
   }
+
+  navigateToEdit(id: number): void {
+    this.router.navigate(['/customer/edit/request', id]);
+  }
 }

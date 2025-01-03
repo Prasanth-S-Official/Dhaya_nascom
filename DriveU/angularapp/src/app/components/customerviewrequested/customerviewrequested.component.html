@@ -30,6 +30,13 @@
       <div class="action-buttons">
         <button (click)="showRequestDetails(request)">Show More</button>
         <button
+          id="editButton"
+          [disabled]="request.status !== 'Pending'"
+          (click)="navigateToEdit(request.driverRequestId)"
+        >
+          Edit
+        </button>
+        <button
           id="redButton"
           [disabled]="request.status !== 'Pending'"
           (click)="handleDeleteClick(request)"

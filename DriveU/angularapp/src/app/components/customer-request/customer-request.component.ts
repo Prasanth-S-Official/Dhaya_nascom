@@ -41,6 +41,7 @@ export class CustomerRequestComponent implements OnInit {
   }
 
   fetchRequest(id: number): void {
+    console.log("id",id);
     this.driverRequestService.getDriverRequestById(id).subscribe(
       (response) => {
         // Convert nested data into flat structure for form usage
@@ -74,6 +75,7 @@ export class CustomerRequestComponent implements OnInit {
     };
 
     if (this.requestId) {
+      console.log("update" ,formData);
       this.driverRequestService.updateDriverRequest(this.requestId, formData).subscribe(
         () => this.showSuccessPopup(),
         (error) => console.error('Error updating driver request:', error)
