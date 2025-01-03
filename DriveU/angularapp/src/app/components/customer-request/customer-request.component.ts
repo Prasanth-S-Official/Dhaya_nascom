@@ -43,10 +43,11 @@ export class CustomerRequestComponent implements OnInit {
   fetchRequest(id: number): void {
     this.driverRequestService.getDriverRequestById(id).subscribe(
       (response) => {
+        console.log("Respo",response);
         const requestData = {
           ...response,
           tripDate: this.formatDate(response.tripDate),
-          timeSlot: this.formatTime(response.timeSlot),
+          timeSlot: this.extractTime(response.timeSlot), // Convert array to HH:mm format
           userId: (response as any).user.userId,
           driverId: (response as any).driver?.driverId,
         };
@@ -65,7 +66,7 @@ export class CustomerRequestComponent implements OnInit {
     const formData: DriverRequest = {
       ...this.requestForm.value,
       tripDate: new Date(this.requestForm.value.tripDate),
-      timeSlot: this.requestForm.value.timeSlot,
+      timeSlot: this.convertToTimeArray(this.requestForm.value.timeSlot),
       user: {
         userId: Number(localStorage.getItem('userId')),
       },
@@ -89,19 +90,23 @@ export class CustomerRequestComponent implements OnInit {
     }
   }
 
+  extractTime(timeArray: [number, number]): string {
+    const hours = String(timeArray[0]).padStart(2, '0');
+    const minutes = String(timeArray[1]).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
+  convertToTimeArray(time: string): [number, number] {
+    const [hours, minutes] = time.split(':').map(Number);
+    return [hours, minutes];
+  }
+
   formatDate(date: string | Date): string {
     const d = new Date(date);
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
-  }
-
-  formatTime(time: string | Date): string {
-    const t = new Date(`1970-01-01T${time}`);
-    const hours = String(t.getHours()).padStart(2, '0');
-    const minutes = String(t.getMinutes()).padStart(2, '0');
-    return `${hours}:${minutes}`;
   }
 
   showErrorMessage(): void {
