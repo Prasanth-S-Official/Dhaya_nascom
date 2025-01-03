@@ -55,7 +55,8 @@ export class CustomerRequestComponent implements OnInit {
 
     const formData: DriverRequest = {
       ...this.requestForm.value,
-      userId: Number(localStorage.getItem('userId')), // Add the user ID from local storage
+      userId: Number(localStorage.getItem('userId')),
+     driverId : Number(localStorage.getItem('driverId')), // Add the user ID from local storage
       status: this.requestId ? undefined : 'Pending', // Default to "Pending" for new requests
     };
 
@@ -65,6 +66,8 @@ export class CustomerRequestComponent implements OnInit {
         (error) => console.error('Error updating driver request:', error)
       );
     } else {
+      console.log(formData);
+      
       this.driverRequestService.addDriverRequest(formData).subscribe(
         () => this.showSuccessPopup(),
         (error) => console.error('Error submitting driver request:', error)
