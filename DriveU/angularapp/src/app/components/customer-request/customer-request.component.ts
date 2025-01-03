@@ -42,7 +42,15 @@ export class CustomerRequestComponent implements OnInit {
 
   fetchRequest(id: number): void {
     this.driverRequestService.getDriverRequestById(id).subscribe(
-      (response) => this.requestForm.patchValue(response),
+      (response) => {
+        // Convert nested data into flat structure for form usage
+        const requestData = {
+          ...response,
+          userId: response.user.userId,
+          driverId: response.driver?.driverId,
+        };
+        this.requestForm.patchValue(requestData);
+      },
       () => this.router.navigate(['/error'])
     );
   }
@@ -55,9 +63,14 @@ export class CustomerRequestComponent implements OnInit {
 
     const formData: DriverRequest = {
       ...this.requestForm.value,
-      userId: Number(localStorage.getItem('userId')),
-     driverId : Number(localStorage.getItem('driverId')), // Add the user ID from local storage
-      status: this.requestId ? undefined : 'Pending', // Default to "Pending" for new requests
+      user: {
+        userId: Number(localStorage.getItem('userId')),
+      },
+      driver: this.requestId
+        ? { driverId: Number(localStorage.getItem('driverId')) }
+        : undefined,
+      status: this.requestId ? undefined : 'Pending',
+      requestDate: new Date(), // Automatically set current date
     };
 
     if (this.requestId) {
@@ -66,8 +79,6 @@ export class CustomerRequestComponent implements OnInit {
         (error) => console.error('Error updating driver request:', error)
       );
     } else {
-      console.log(formData);
-      
       this.driverRequestService.addDriverRequest(formData).subscribe(
         () => this.showSuccessPopup(),
         (error) => console.error('Error submitting driver request:', error)
@@ -79,7 +90,7 @@ export class CustomerRequestComponent implements OnInit {
     this.showError = true;
     setTimeout(() => {
       this.showError = false;
-    }, 3000); // Hide error message after 3 seconds
+    }, 3000);
   }
 
   showSuccessPopup(): void {
