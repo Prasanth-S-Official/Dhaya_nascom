@@ -1,67 +1,66 @@
 <app-customernav></app-customernav>
 <div class="customer-request-container" [ngClass]="{ blur: successPopup }">
-    <button *ngIf="requestId" type="button" class="back-button" (click)="navigateBack()">Back</button>
-    <h2>{{ requestId ? 'Edit Request' : 'New Driver Request' }}</h2>
-    <hr />
-  
-    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="pickupLocation">Pickup Location<span class="required">*</span></label>
-        <input id="pickupLocation" type="text" formControlName="pickupLocation" />
-        <div *ngIf="requestForm.controls['pickupLocation'].touched && requestForm.controls['pickupLocation'].hasError('required')" class="error">
-          *Pickup Location is required
-        </div>
+  <button *ngIf="requestId" type="button" class="back-button" (click)="navigateBack()">Back</button>
+  <h2>{{ requestId ? 'Edit Request' : 'New Driver Request' }}</h2>
+  <hr />
+
+  <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="pickupLocation">Pickup Location<span class="required">*</span></label>
+      <input id="pickupLocation" type="text" formControlName="pickupLocation" />
+      <div *ngIf="requestForm.controls['pickupLocation'].touched && requestForm.controls['pickupLocation'].hasError('required')" class="error">
+        *Pickup Location is required
       </div>
-  
-      <div>
-        <label for="dropLocation">Drop Location<span class="required">*</span></label>
-        <input id="dropLocation" type="text" formControlName="dropLocation" />
-        <div *ngIf="requestForm.controls['dropLocation'].touched && requestForm.controls['dropLocation'].hasError('required')" class="error">
-          *Drop Location is required
-        </div>
-      </div>
-  
-      <div>
-        <label for="tripDate">Trip Date<span class="required">*</span></label>
-        <input id="tripDate" type="date" formControlName="tripDate" />
-        <div *ngIf="requestForm.controls['tripDate'].touched && requestForm.controls['tripDate'].hasError('required')" class="error">
-          *Trip Date is required
-        </div>
-      </div>
-  
-      <div>
-        <label for="timeSlot">Time Slot<span class="required">*</span></label>
-        <input id="timeSlot" type="time" formControlName="timeSlot" />
-        <div *ngIf="requestForm.controls['timeSlot'].touched && requestForm.controls['timeSlot'].hasError('required')" class="error">
-          *Time Slot is required
-        </div>
-      </div>
-  
-      <div>
-        <label for="estimatedDuration">Estimated Duration<span class="required">*</span></label>
-        <input id="estimatedDuration" type="text" formControlName="estimatedDuration" />
-        <div *ngIf="requestForm.controls['estimatedDuration'].touched && requestForm.controls['estimatedDuration'].hasError('required')" class="error">
-          *Estimated Duration is required
-        </div>
-      </div>
-  
-      <div>
-        <label for="comments">Comments</label>
-        <textarea id="comments" formControlName="comments"></textarea>
-      </div>
-  
-      <div *ngIf="showError" class="error">
-        All required fields must be filled out.
-      </div>
-  
-      <button type="submit" class="submit-button">{{ requestId ? 'Update Request' : 'Submit Request' }}</button>
-    </form>
-  </div>
-  
-  <div *ngIf="successPopup" class="success-popup">
-    <div class="success-popup-content">
-      <p>{{ requestId ? 'Request Updated Successfully!' : 'Request Submitted Successfully!' }}</p>
-      <button (click)="handleSuccessMessage()" class="ok-button">Ok</button>
     </div>
+
+    <div>
+      <label for="dropLocation">Drop Location<span class="required">*</span></label>
+      <input id="dropLocation" type="text" formControlName="dropLocation" />
+      <div *ngIf="requestForm.controls['dropLocation'].touched && requestForm.controls['dropLocation'].hasError('required')" class="error">
+        *Drop Location is required
+      </div>
+    </div>
+
+    <div>
+      <label for="tripDate">Trip Date<span class="required">*</span></label>
+      <input id="tripDate" type="date" formControlName="tripDate" />
+      <div *ngIf="requestForm.controls['tripDate'].touched && requestForm.controls['tripDate'].hasError('required')" class="error">
+        *Trip Date is required
+      </div>
+    </div>
+
+    <div>
+      <label for="timeSlot">Time Slot<span class="required">*</span></label>
+      <input id="timeSlot" type="time" formControlName="timeSlot" />
+      <div *ngIf="requestForm.controls['timeSlot'].touched && requestForm.controls['timeSlot'].hasError('required')" class="error">
+        *Time Slot is required
+      </div>
+    </div>
+
+    <div>
+      <label for="estimatedDuration">Estimated Duration<span class="required">*</span></label>
+      <input id="estimatedDuration" type="text" formControlName="estimatedDuration" />
+      <div *ngIf="requestForm.controls['estimatedDuration'].touched && requestForm.controls['estimatedDuration'].hasError('required')" class="error">
+        *Estimated Duration is required
+      </div>
+    </div>
+
+    <div>
+      <label for="comments">Comments</label>
+      <textarea id="comments" formControlName="comments"></textarea>
+    </div>
+
+    <div *ngIf="showError" class="error">
+      All required fields must be filled out.
+    </div>
+
+    <button type="submit" class="submit-button">{{ requestId ? 'Update Request' : 'Submit Request' }}</button>
+  </form>
+</div>
+
+<div *ngIf="successPopup" class="success-popup">
+  <div class="success-popup-content">
+    <p>{{ requestId ? 'Request Updated Successfully!' : 'Request Submitted Successfully!' }}</p>
+    <button (click)="handleSuccessMessage()" class="ok-button">Ok</button>
   </div>
-  
+</div>

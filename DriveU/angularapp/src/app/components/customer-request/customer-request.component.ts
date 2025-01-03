@@ -41,12 +41,12 @@ export class CustomerRequestComponent implements OnInit {
   }
 
   fetchRequest(id: number): void {
-    console.log("id",id);
     this.driverRequestService.getDriverRequestById(id).subscribe(
       (response) => {
-        // Convert nested data into flat structure for form usage
         const requestData = {
           ...response,
+          tripDate: this.formatDate(response.tripDate),
+          timeSlot: this.formatTime(response.timeSlot),
           userId: (response as any).user.userId,
           driverId: (response as any).driver?.driverId,
         };
@@ -64,30 +64,44 @@ export class CustomerRequestComponent implements OnInit {
 
     const formData: DriverRequest = {
       ...this.requestForm.value,
+      tripDate: new Date(this.requestForm.value.tripDate),
+      timeSlot: this.requestForm.value.timeSlot,
       user: {
         userId: Number(localStorage.getItem('userId')),
       },
-      driver:  { 
-        driverId: Number(localStorage.getItem('driverId')) 
+      driver: {
+        driverId: Number(localStorage.getItem('driverId')),
       },
       status: this.requestId ? undefined : 'Pending',
-      requestDate: new Date(), // Automatically set current date
+      requestDate: new Date(),
     };
 
     if (this.requestId) {
-      console.log("update" ,formData);
       this.driverRequestService.updateDriverRequest(this.requestId, formData).subscribe(
         () => this.showSuccessPopup(),
         (error) => console.error('Error updating driver request:', error)
       );
     } else {
-      console.log(formData);
-      
       this.driverRequestService.addDriverRequest(formData).subscribe(
         () => this.showSuccessPopup(),
         (error) => console.error('Error submitting driver request:', error)
       );
     }
+  }
+
+  formatDate(date: string | Date): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  formatTime(time: string | Date): string {
+    const t = new Date(`1970-01-01T${time}`);
+    const hours = String(t.getHours()).padStart(2, '0');
+    const minutes = String(t.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   showErrorMessage(): void {
@@ -103,7 +117,7 @@ export class CustomerRequestComponent implements OnInit {
 
   handleSuccessMessage(): void {
     this.successPopup = false;
-    this.router.navigate(['/customer/view/drivers']);
+    this.router.navigate(['/customer/view/requests']);
   }
 
   navigateBack(): void {
