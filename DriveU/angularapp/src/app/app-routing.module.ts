@@ -21,6 +21,7 @@ import { AdminViewDriversComponent } from './components/admin-view-drivers/admin
 import { CustomerviewdriverComponent } from './components/customerviewdriver/customerviewdriver.component';
 import { CustomerRequestComponent } from './components/customer-request/customer-request.component';
 import { CustomerviewrequestedComponent } from './components/customerviewrequested/customerviewrequested.component';
+import { AdminviewrequestsComponent } from './components/adminviewrequests/adminviewrequests.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -31,7 +32,7 @@ const routes: Routes = [
   { path: 'admin/add/driver', component: DriverManagementComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/driver/:id', component: DriverManagementComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/drivers', component: AdminViewDriversComponent, canActivate: [AuthGuard] },
-  { path: 'manager/view/requirements', component: ManagerViewRequirementsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/view/requests', component: AdminviewrequestsComponent, canActivate: [AuthGuard] },
   { path: 'manager/view/trainer/:trainerId', component: TrainerDetailsComponent, canActivate: [AuthGuard] },
   
   
