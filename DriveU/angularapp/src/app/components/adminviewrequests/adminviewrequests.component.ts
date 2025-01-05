@@ -72,7 +72,7 @@ export class AdminviewrequestsComponent implements OnInit {
     );
   }
 
-  handleShowMore(request: any): void {
+  handleShowDriverDetails(request: any): void {
     this.selectedRequest = request;
     this.showModal = true;
   }

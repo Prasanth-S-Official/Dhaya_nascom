@@ -44,7 +44,7 @@
         <td>{{ request.tripDate | date: 'yyyy-MM-dd' }}</td>
         <td>{{ request.status }}</td>
         <td>
-          <button (click)="handleShowMore(request)">Show More</button>
+          <button (click)="handleShowDriverDetails(request)">Show Driver Details</button>
           <button
             id="greenButton"
             *ngIf="request.status === 'Pending' || request.status === 'Rejected'"
@@ -70,17 +70,29 @@
   </table>
 </div>
 
-<!-- Details Modal -->
+<!-- Driver Details Modal -->
+<!-- Driver Details Modal -->
 <div *ngIf="showModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-button" (click)="closeModal()">X</button>
-    <h2>Request Details</h2>
-    <p><strong>Username:</strong> {{ selectedRequest?.user?.username }}</p>
-    <p><strong>Pickup Location:</strong> {{ selectedRequest?.pickupLocation }}</p>
-    <p><strong>Drop Location:</strong> {{ selectedRequest?.dropLocation }}</p>
-    <p><strong>Trip Date:</strong> {{ selectedRequest?.tripDate | date: 'yyyy-MM-dd' }}</p>
-    <p><strong>Time Slot:</strong> {{ selectedRequest?.timeSlot }}</p>
-    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
-    <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
+    <h2>Driver Details</h2>
+
+    <!-- Driver Image -->
+    <div class="driver-image-container">
+      <img
+        class="driver-image"
+        [src]="'data:image/jpeg;base64,' + selectedRequest?.driver?.image"
+        alt="Driver Image"
+      />
+    </div>
+
+    <p><strong>Driver Name:</strong> {{ selectedRequest?.driver?.driverName }}</p>
+    <p><strong>License Number:</strong> {{ selectedRequest?.driver?.licenseNumber }}</p>
+    <p><strong>Experience Years:</strong> {{ selectedRequest?.driver?.experienceYears }}</p>
+    <p><strong>Contact Number:</strong> {{ selectedRequest?.driver?.contactNumber }}</p>
+    <p><strong>Vehicle Type:</strong> {{ selectedRequest?.driver?.vehicleType }}</p>
+    <p><strong>Hourly Rate:</strong> ₹{{ selectedRequest?.driver?.hourlyRate }}</p>
+    <p><strong>Address:</strong> {{ selectedRequest?.driver?.address }}</p>
   </div>
 </div>
+
