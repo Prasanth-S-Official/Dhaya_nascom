@@ -357,3 +357,67 @@
     cursor: pointer;
   }
   
+
+  /* ----- */
+
+  /* Blinking column style */
+.blinking-column {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #f8d7da;
+  }
+}
+
+/* Blinking button style */
+.blinking-button {
+  animation: blink-button 1s infinite;
+}
+
+@keyframes blink-button {
+  0%, 100% {
+    background-color: #007bff;
+    color: white;
+  }
+  50% {
+    background-color: #0056b3;
+    color: yellow;
+  }
+}
+
+/* Progress Bar Styling */
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.progress-step {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #ddd;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.progress-step.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.progress-step.rejected {
+  background-color: #f44336;
+  color: white;
+}
+
+.progress-step.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
