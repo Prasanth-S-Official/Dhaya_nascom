@@ -1,21 +1,22 @@
-<app-managernav></app-managernav>
+<app-customernav></app-customernav>
 <div class="main-container">
-  <h1>Add Feedback</h1>
-  <hr/>
+  <h1>Submit Feedback</h1>
+  <hr />
+
   <form
-    [formGroup]="addFeedbackForm"
+    [formGroup]="feedbackForm"
     (ngSubmit)="onSubmit()"
     [ngClass]="{ blur: successPopup }"
   >
-    <!-- Feedback Text Field -->
+    <!-- Feedback Text -->
     <div class="form-group">
       <label for="feedbackText">Feedback<span class="asterisk">*</span></label>
       <textarea id="feedbackText" formControlName="feedbackText"></textarea>
       <div
-        *ngIf="addFeedbackForm.get('feedbackText').hasError('required') && (addFeedbackForm.get('feedbackText').touched || submitted)"
+        *ngIf="feedbackForm.get('feedbackText')?.invalid && (feedbackForm.get('feedbackText')?.touched || submitted)"
         class="error-message"
       >
-        *Feedback is required
+        *Feedback is required.
       </div>
     </div>
 
@@ -29,22 +30,33 @@
         </option>
       </select>
       <div
-        *ngIf="addFeedbackForm.get('category').hasError('required') && (addFeedbackForm.get('category').touched || submitted)"
+        *ngIf="feedbackForm.get('category')?.invalid && (feedbackForm.get('category')?.touched || submitted)"
         class="error-message"
       >
-        *Category is required
+        *Category is required.
       </div>
     </div>
 
-    <!-- Submit Button -->
-    <div class="add-btn">
+    <!-- Rating -->
+    <div class="form-group">
+      <label for="rating">Rating (1-5)<span class="asterisk">*</span></label>
+      <input type="number" id="rating" formControlName="rating" min="1" max="5" />
+      <div
+        *ngIf="feedbackForm.get('rating')?.invalid && (feedbackForm.get('rating')?.touched || submitted)"
+        class="error-message"
+      >
+        *Rating must be between 1 and 5.
+      </div>
+    </div>
+
+    <div class="form-group">
       <button type="submit">Submit</button>
     </div>
   </form>
 
   <!-- Success Popup -->
   <div *ngIf="successPopup" class="success-popup">
-    <p>Successfully Added!</p>
+    <p>Thank you for your feedback!</p>
     <button (click)="handleSuccessMessage()">Ok</button>
   </div>
 </div>
