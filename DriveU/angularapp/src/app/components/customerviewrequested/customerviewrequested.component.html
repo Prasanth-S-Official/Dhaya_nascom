@@ -52,7 +52,7 @@
         </button>
         <button
           id="fetchPayAmountButton"
-          [disabled]="request.status !== 'Trip End'"
+          [disabled]="request.status !== 'Trip End' && request.status !== 'Closed'"
           (click)="openPayAmountModal(request)"
         >
           Fetch PayAmount
