@@ -90,12 +90,26 @@
 <!-- Pay Amount Modal -->
 <div *ngIf="showPayAmountModal" class="details-modal-overlay">
   <div class="details-modal-content">
+    <button class="close-button" (click)="closePayAmountModal()">X</button>
     <h2>Travel Charge</h2>
+    
     <div *ngIf="isLoading" class="loading-spinner"></div>
-    <div *ngIf="!isLoading">
-      <p>Your travel charge is ₹{{ selectedRequest?.paymentAmount }}</p>
-      <button (click)="navigateToReview()">Write a Review</button>
-      <button (click)="closePayAmountModal()">Skip Now</button>
+    
+    <div *ngIf="!isLoading" class="content-container">
+      <div class="happy-journey">
+        <p class="emoji">😊</p>
+        <p class="message">We hope you had a wonderful journey!</p>
+      </div>
+
+      <p class="payment-message">
+        Your travel charge is <strong>₹{{ selectedRequest?.paymentAmount }}</strong>
+      </p>
+      
+      <div class="links-container">
+        <a class="review-link" (click)="navigateToReview()">✍️ Write a Review</a>
+        <a class="skip-link" (click)="closePayAmountModal()">⏩ Skip Now</a>
+      </div>
     </div>
   </div>
 </div>
+

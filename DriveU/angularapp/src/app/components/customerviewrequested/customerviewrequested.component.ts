@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DriverRequestService } from 'src/app/services/driver-request.service';
@@ -11,6 +10,8 @@ import { DriverRequestService } from 'src/app/services/driver-request.service';
 export class CustomerviewrequestedComponent implements OnInit {
   showDeletePopup = false;
   showDetailsModal = false;
+  showPayAmountModal = false;
+  isLoading = false;
   requestToDelete: any = null;
   selectedRequest: any = null;
   appliedRequests: any[] = [];
@@ -27,14 +28,10 @@ export class CustomerviewrequestedComponent implements OnInit {
     const userId = Number(localStorage.getItem('userId'));
     this.driverRequestService.getDriverRequestsByUserId(userId).subscribe(
       (response: any) => {
-        console.log(response);
-        
         this.appliedRequests = response;
         this.filteredRequests = response;
       },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
+      (error) => console.error('Error fetching data:', error)
     );
   }
 
@@ -83,38 +80,48 @@ export class CustomerviewrequestedComponent implements OnInit {
   }
 
   handleTripEnd(request: any): void {
-    const actualDropTime = new Date(); // Get current time
+    const actualDropTime = new Date();
     const timeSlot = new Date();
     timeSlot.setHours(request.timeSlot[0], request.timeSlot[1], 0);
-  
-    // Format actualDropTime as ISO time (HH:mm:ss)
+
     const formattedActualDropTime = actualDropTime.toTimeString().slice(0, 8);
-  
-    // Calculate duration in hours
+
     const durationInHours = Math.abs(
       (actualDropTime.getTime() - timeSlot.getTime()) / (1000 * 60 * 60)
     );
-  
-    // Calculate payment
+
     const payment = Number(durationInHours.toFixed(2)) * request.driver.hourlyRate;
-  
-    // Update request object
+
     const updatedRequest = {
       ...request,
-      actualDropTime: formattedActualDropTime, // Correctly formatted time
+      actualDropTime: formattedActualDropTime,
       actualDuration: `${durationInHours.toFixed(2)} hours`,
       paymentAmount: payment,
       status: 'Trip End',
     };
-    console.log("Check",updatedRequest);
-  
+
     this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
-      () => {
-        // alert('Trip Ended Successfully!');
-        this.fetchData();
-      },
+      () => this.fetchData(),
       (error) => console.error('Error ending trip:', error)
     );
   }
-  
+
+  openPayAmountModal(request: any): void {
+    this.selectedRequest = request;
+    this.isLoading = true;
+    this.showPayAmountModal = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+  }
+
+  closePayAmountModal(): void {
+    this.showPayAmountModal = false;
+    this.selectedRequest = null;
+  }
+
+  navigateToReview(): void {
+    this.router.navigate(['/customer/write-review', this.selectedRequest.driver.driverId]);
+  }
 }
