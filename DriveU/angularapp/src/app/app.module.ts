@@ -29,6 +29,7 @@ import { CustomerRequestComponent } from './components/customer-request/customer
 import { CustomerviewrequestedComponent } from './components/customerviewrequested/customerviewrequested.component';
 import { AdminviewrequestsComponent } from './components/adminviewrequests/adminviewrequests.component';
 import { CustomerpostfeedbackComponent } from './components/customerpostfeedback/customerpostfeedback.component';
+import { CustomerviewfeedbackComponent } from './components/customerviewfeedback/customerviewfeedback.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CustomerpostfeedbackComponent } from './components/customerpostfeedback
     CustomerviewrequestedComponent,
     AdminviewrequestsComponent,
     CustomerpostfeedbackComponent,
+    CustomerviewfeedbackComponent,
   
 
   ],

@@ -477,3 +477,14 @@
     color: #ff0000;
   }
   
+  #redButton{
+    background-color: red !important;
+  } 
+
+  #editButton{
+    background-color:green !important;
+  }
+
+  #tripEndButton{
+    background-color:rgb(106, 224, 9)28, 115, 0) !important;
+  }

@@ -23,6 +23,7 @@ import { CustomerRequestComponent } from './components/customer-request/customer
 import { CustomerviewrequestedComponent } from './components/customerviewrequested/customerviewrequested.component';
 import { AdminviewrequestsComponent } from './components/adminviewrequests/adminviewrequests.component';
 import { CustomerpostfeedbackComponent } from './components/customerpostfeedback/customerpostfeedback.component';
+import { CustomerviewfeedbackComponent } from './components/customerviewfeedback/customerviewfeedback.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -52,7 +53,7 @@ const routes: Routes = [
   { path: 'coordinator/view/feedback', component: CoordinatorviewfeedbackComponent, canActivate: [AuthGuard] },
 
   { path: 'customer/add/feedback/:driverId', component: CustomerpostfeedbackComponent, canActivate: [AuthGuard] },
-  { path: 'manager/view/feedback', component: ManagerviewfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'customer/feedback', component: CustomerviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes
   { path: '', redirectTo: 'login', pathMatch: 'full' },

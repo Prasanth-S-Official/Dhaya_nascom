@@ -83,7 +83,6 @@
     <p><strong>Time Slot:</strong> {{ selectedRequest?.timeSlot }}</p>
     <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
     <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
-    <p><strong>Actual Duration:</strong> {{ selectedRequest?.actualDuration }}</p>
   </div>
 </div>
 
@@ -104,6 +103,7 @@
       <p class="payment-message">
         Your travel charge is <strong>₹{{ selectedRequest?.paymentAmount }}</strong>
       </p>
+      <p><strong>Actual Duration</strong> {{ selectedRequest?.actualDuration }}</p>
       
       <div class="links-container">
         <a class="review-link" (click)="navigateToReview()">✍️ Write a Review</a>
