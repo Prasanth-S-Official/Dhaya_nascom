@@ -1,5 +1,5 @@
 <app-adminnav></app-adminnav>
-<div class="page-content" [ngClass]="{ blur: showModal }">
+<div class="page-content" [ngClass]="{ blur: showModal || showStageModal }">
   <h1>Driver Requests for Approval</h1>
   <hr />
   <div class="top-container">
@@ -10,7 +10,7 @@
       [(ngModel)]="searchValue"
       (input)="handleSearchChange()"
     />
-  
+
     <label id="filter">
       Filter by Status:
       <select [(ngModel)]="statusFilter" (change)="handleFilterChange()">
@@ -59,6 +59,7 @@
           >
             Reject
           </button>
+          <button id="stageButton" (click)="handleViewStage(request)">View Stage</button>
         </td>
       </tr>
     </tbody>
@@ -71,13 +72,10 @@
 </div>
 
 <!-- Driver Details Modal -->
-<!-- Driver Details Modal -->
 <div *ngIf="showModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-button" (click)="closeModal()">X</button>
     <h2>Driver Details</h2>
-
-    <!-- Driver Image -->
     <div class="driver-image-container">
       <img
         class="driver-image"
@@ -85,7 +83,6 @@
         alt="Driver Image"
       />
     </div>
-
     <p><strong>Driver Name:</strong> {{ selectedRequest?.driver?.driverName }}</p>
     <p><strong>License Number:</strong> {{ selectedRequest?.driver?.licenseNumber }}</p>
     <p><strong>Experience Years:</strong> {{ selectedRequest?.driver?.experienceYears }}</p>
@@ -96,3 +93,23 @@
   </div>
 </div>
 
+<!-- Status Progression Modal -->
+<div *ngIf="showStageModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeStageModal()">X</button>
+    <h2>Request Progression</h2>
+    <div class="progress-bar">
+      <div
+        *ngFor="let stage of stages; let i = index"
+        class="progress-step"
+        [ngClass]="{
+          active: i <= currentStageIndex,
+          disabled: i > currentStageIndex
+        }"
+      >
+        {{ stage }}
+      </div>
+    </div>
+    
+  </div>
+</div>

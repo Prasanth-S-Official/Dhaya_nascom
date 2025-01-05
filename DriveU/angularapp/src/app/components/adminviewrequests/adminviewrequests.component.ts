@@ -14,7 +14,7 @@ export class AdminviewrequestsComponent implements OnInit {
   showModal = false;
   selectedRequest: any = null;
   showStageModal = false;
-  stages = ['Pending', 'Accepted', 'Trip End', 'Close'];
+  stages: string[] = [];
   currentStageIndex = 0;
 
   constructor(private driverRequestService: DriverRequestService) {}
@@ -86,6 +86,12 @@ export class AdminviewrequestsComponent implements OnInit {
   }
 
   handleViewStage(request: any): void {
+    if (request.status === 'Rejected') {
+      this.stages = ['Pending', 'Rejected'];
+    } else {
+      this.stages = ['Pending', 'Approved', 'Trip End', 'Close'];
+    }
+
     this.currentStageIndex = this.stages.findIndex(stage => stage === request.status);
     if (this.currentStageIndex === -1) {
       this.currentStageIndex = 0;
