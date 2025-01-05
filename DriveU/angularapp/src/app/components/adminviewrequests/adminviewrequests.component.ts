@@ -13,6 +13,9 @@ export class AdminviewrequestsComponent implements OnInit {
   statusFilter = '-1'; // All statuses by default
   showModal = false;
   selectedRequest: any = null;
+  showStageModal = false;
+  stages = ['Pending', 'Accepted', 'Trip End', 'Close'];
+  currentStageIndex = 0;
 
   constructor(private driverRequestService: DriverRequestService) {}
 
@@ -80,5 +83,17 @@ export class AdminviewrequestsComponent implements OnInit {
   closeModal(): void {
     this.showModal = false;
     this.selectedRequest = null;
+  }
+
+  handleViewStage(request: any): void {
+    this.currentStageIndex = this.stages.findIndex(stage => stage === request.status);
+    if (this.currentStageIndex === -1) {
+      this.currentStageIndex = 0;
+    }
+    this.showStageModal = true;
+  }
+
+  closeStageModal(): void {
+    this.showStageModal = false;
   }
 }
