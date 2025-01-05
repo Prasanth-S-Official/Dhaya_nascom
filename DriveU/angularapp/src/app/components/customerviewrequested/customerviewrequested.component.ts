@@ -167,9 +167,12 @@ export class CustomerviewrequestedComponent implements OnInit {
   }
 
   handleTripEnd(request: any): void {
-    const actualDropTime = new Date(); // Set current time
+    const actualDropTime = new Date(); // Get current time
     const timeSlot = new Date();
     timeSlot.setHours(request.timeSlot[0], request.timeSlot[1], 0);
+  
+    // Format actualDropTime as ISO time (HH:mm:ss)
+    const formattedActualDropTime = actualDropTime.toTimeString().slice(0, 8);
   
     // Calculate duration in hours
     const durationInHours = Math.abs(
@@ -182,21 +185,20 @@ export class CustomerviewrequestedComponent implements OnInit {
     // Update request object
     const updatedRequest = {
       ...request,
-      actualDropTime: actualDropTime.toISOString().slice(11, 19), // Format as HH:mm:ss
+      actualDropTime: formattedActualDropTime, // Correctly formatted time
       actualDuration: `${durationInHours.toFixed(2)} hours`,
       paymentAmount: payment,
       status: 'Completed',
     };
-
     console.log("Check",updatedRequest);
   
-    // this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
-    //   () => {
-    //     alert('Trip Ended Successfully!');
-    //     this.fetchData();
-    //   },
-    //   (error) => console.error('Error ending trip:', error)
-    // );
+    this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
+      () => {
+        // alert('Trip Ended Successfully!');
+        this.fetchData();
+      },
+      (error) => console.error('Error ending trip:', error)
+    );
   }
   
 }
