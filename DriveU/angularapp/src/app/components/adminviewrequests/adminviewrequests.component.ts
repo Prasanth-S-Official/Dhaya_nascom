@@ -12,9 +12,10 @@ export class AdminviewrequestsComponent implements OnInit {
   searchValue = '';
   statusFilter = '-1'; // All statuses by default
   showModal = false;
-  selectedRequest: any = null;
   showStageModal = false;
-  stages: string[] = [];
+  selectedRequest: any = null;
+  stages = ['Pending', 'Approved', 'Trip End', 'Close'];
+  filteredStages: string[] = [];
   currentStageIndex = 0;
 
   constructor(private driverRequestService: DriverRequestService) {}
@@ -26,31 +27,26 @@ export class AdminviewrequestsComponent implements OnInit {
   fetchDriverRequests(): void {
     this.driverRequestService.getAllDriverRequests().subscribe(
       (response) => {
-        console.log('Driver Requests:', response);
         this.driverRequests = response;
         this.filteredRequests = [...this.driverRequests];
       },
-      (error) => {
-        console.error('Error fetching driver requests:', error);
-      }
+      (error) => console.error('Error fetching driver requests:', error)
     );
   }
 
   handleSearchChange(): void {
     const searchValueLower = this.searchValue.toLowerCase();
-    this.filteredRequests = this.driverRequests.filter((request) =>
-      request.user.username.toLowerCase().includes(searchValueLower) ||
-      request.pickupLocation.toLowerCase().includes(searchValueLower)
+    this.filteredRequests = this.driverRequests.filter(
+      (request) =>
+        request.user.username.toLowerCase().includes(searchValueLower) ||
+        request.pickupLocation.toLowerCase().includes(searchValueLower)
     );
   }
 
   handleFilterChange(): void {
     this.filteredRequests = this.driverRequests.filter((request) => {
-      if (this.statusFilter === '-1') {
-        return true; // Show all statuses
-      } else {
-        return request.status === this.statusFilter;
-      }
+      if (this.statusFilter === '-1') return true;
+      return request.status === this.statusFilter;
     });
   }
 
@@ -66,12 +62,8 @@ export class AdminviewrequestsComponent implements OnInit {
 
   updateRequestStatus(request: any): void {
     this.driverRequestService.updateDriverRequest(request.driverRequestId, request).subscribe(
-      () => {
-        this.fetchDriverRequests();
-      },
-      (error) => {
-        console.error('Error updating request status:', error);
-      }
+      () => this.fetchDriverRequests(),
+      (error) => console.error('Error updating request status:', error)
     );
   }
 
@@ -86,16 +78,21 @@ export class AdminviewrequestsComponent implements OnInit {
   }
 
   handleViewStage(request: any): void {
+    this.selectedRequest = request;
+
+    // Filter stages based on status
     if (request.status === 'Rejected') {
-      this.stages = ['Pending', 'Rejected'];
+      this.filteredStages = ['Pending', 'Rejected'];
     } else {
-      this.stages = ['Pending', 'Approved', 'Trip End', 'Close'];
+      this.filteredStages = [...this.stages];
     }
 
-    this.currentStageIndex = this.stages.findIndex(stage => stage === request.status);
+    // Determine the current stage index
+    this.currentStageIndex = this.filteredStages.findIndex(stage => stage === request.status);
     if (this.currentStageIndex === -1) {
       this.currentStageIndex = 0;
     }
+
     this.showStageModal = true;
   }
 

@@ -10,7 +10,6 @@
       [(ngModel)]="searchValue"
       (input)="handleSearchChange()"
     />
-
     <label id="filter">
       Filter by Status:
       <select [(ngModel)]="statusFilter" (change)="handleFilterChange()">
@@ -93,23 +92,25 @@
   </div>
 </div>
 
-<!-- Status Progression Modal -->
+<!-- Stage Modal -->
+<!-- Stage Modal -->
 <div *ngIf="showStageModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-button" (click)="closeStageModal()">X</button>
     <h2>Request Progression</h2>
     <div class="progress-bar">
       <div
-        *ngFor="let stage of stages; let i = index"
+        *ngFor="let stage of filteredStages; let i = index"
         class="progress-step"
         [ngClass]="{
-          active: i <= currentStageIndex,
-          disabled: i > currentStageIndex
+          active: i <= currentStageIndex && selectedRequest?.status !== 'Rejected',
+          rejected: selectedRequest?.status === 'Rejected' && stage === 'Rejected',
+          disabled: i > currentStageIndex && selectedRequest?.status !== 'Rejected'
         }"
       >
         {{ stage }}
       </div>
     </div>
-    
   </div>
 </div>
+
