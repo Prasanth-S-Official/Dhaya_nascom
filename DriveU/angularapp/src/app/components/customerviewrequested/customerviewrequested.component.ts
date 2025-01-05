@@ -188,7 +188,7 @@ export class CustomerviewrequestedComponent implements OnInit {
       actualDropTime: formattedActualDropTime, // Correctly formatted time
       actualDuration: `${durationInHours.toFixed(2)} hours`,
       paymentAmount: payment,
-      status: 'Completed',
+      status: 'Trip End',
     };
     console.log("Check",updatedRequest);
   
