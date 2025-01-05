@@ -30,7 +30,9 @@ export class CustomerpostfeedbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const driverId = this.route.snapshot.queryParamMap.get('driverId');
+    const driverId = this.route.snapshot.paramMap.get('driverId'); 
+    console.log(driverId);
+    
     if (driverId) {
       this.feedbackForm.get('driverId')?.setValue(driverId);
     }
@@ -38,10 +40,11 @@ export class CustomerpostfeedbackComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-
+    console.log('Form State:', this.feedbackForm.value);
+    console.log('Form Validity:', this.feedbackForm.valid);
+    
     if (this.feedbackForm.valid) {
       const userId = Number(localStorage.getItem('userId'));
-
       const feedback: Feedback = {
         feedbackText: this.feedbackForm.get('feedbackText')?.value,
         category: this.feedbackForm.get('category')?.value,
@@ -51,6 +54,8 @@ export class CustomerpostfeedbackComponent implements OnInit {
         driverId: this.feedbackForm.get('driverId')?.value,
       };
 
+      console.log("feed",feedback);
+
       const requestPayload = {
         feedbackText: feedback.feedbackText,
         date: feedback.date.toISOString().split('T')[0],
@@ -59,7 +64,8 @@ export class CustomerpostfeedbackComponent implements OnInit {
         user: { userId: feedback.userId },
         driver: { driverId: feedback.driverId },
       };
-
+      console.log("feedpayload",requestPayload);
+      
       this.feedbackService.sendFeedback(requestPayload as unknown as Feedback).subscribe(
         () => {
           this.successPopup = true;

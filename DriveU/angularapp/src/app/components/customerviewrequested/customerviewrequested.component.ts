@@ -121,7 +121,7 @@ export class CustomerviewrequestedComponent implements OnInit {
     this.selectedRequest = null;
   }
 
-  navigateToReview(): void {
-    this.router.navigate(['/customer/write-review', this.selectedRequest.driver.driverId]);
+  navigateToReview(): void {  
+    this.router.navigate(['/customer/add/feedback', this.selectedRequest.driver.driverId]);
   }
 }
