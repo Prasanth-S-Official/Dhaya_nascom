@@ -360,7 +360,9 @@
 
   /* ----- */
 
-  /* Blinking column style */
+
+
+/* Blinking column style */
 .blinking-column {
   animation: blink 1s infinite;
 }
@@ -376,19 +378,31 @@
 
 /* Blinking button style */
 .blinking-button {
-  animation: blink-button 1s infinite;
+  animation: blink-button 1s infinite; /* Apply animation */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
 }
 
 @keyframes blink-button {
   0%, 100% {
     background-color: #007bff;
+    border-color: #0056b3;
     color: white;
+    transform: scale(1); /* No scaling at the start and end */
   }
   50% {
     background-color: #0056b3;
-    color: yellow;
+    border-color: #003d99;
+    color: rgb(233, 18, 18);
+    transform: scale(1.1); /* Slight scaling to emphasize blinking */
   }
 }
+
+/* Optional hover effect for blinking button */
+.blinking-button:hover {
+  transform: scale(1.15);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 
 /* Progress Bar Styling */
 .progress-bar {
@@ -420,4 +434,23 @@
 .progress-step.disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+/* Close Request Button Styling */
+.close-request-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-request-button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
 }

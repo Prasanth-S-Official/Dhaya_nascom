@@ -185,12 +185,14 @@
             Reject
           </button>
           <button
-            id="stageButton"
-            [ngClass]="{ 'blinking-button': blinkingButtonId === request.driverRequestId }"
-            (click)="handleViewStage(request)"
-          >
-            View Stage
-          </button>
+          id="stageButton"
+          class="stage-button"
+          [ngClass]="{ 'blinking-button': request.status === 'Trip End' }"
+          (click)="handleViewStage(request)"
+        >
+          View Stage
+        </button>
+        
         </td>
       </tr>
     </tbody>
@@ -225,6 +227,7 @@
 </div>
 
 <!-- Stage Modal -->
+<!-- Stage Modal -->
 <div *ngIf="showStageModal" class="modal-overlay">
   <div class="modal-content">
     <button class="close-button" (click)="closeStageModal()">X</button>
@@ -238,10 +241,17 @@
           rejected: selectedRequest?.status === 'Rejected' && stage === 'Rejected',
           disabled: i > currentStageIndex && selectedRequest?.status !== 'Rejected'
         }"
-        (click)="updateStatusToClosed(stage)"
       >
         {{ stage }}
       </div>
     </div>
+    <!-- Show Close Request button only if status is Trip End -->
+    <button
+      *ngIf="selectedRequest?.status === 'Trip End'"
+      (click)="handleCloseRequest()"
+      class="close-request-button"
+    >
+      Close Request
+    </button>
   </div>
 </div>

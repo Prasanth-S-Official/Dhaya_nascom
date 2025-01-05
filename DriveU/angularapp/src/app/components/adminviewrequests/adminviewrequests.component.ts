@@ -120,7 +120,6 @@ export class AdminviewrequestsComponent implements OnInit {
   stages = ['Pending', 'Approved', 'Trip End', 'Closed'];
   filteredStages: string[] = [];
   currentStageIndex = 0;
-  blinkingButtonId: number | null = null;
 
   constructor(private driverRequestService: DriverRequestService) {}
 
@@ -184,39 +183,29 @@ export class AdminviewrequestsComponent implements OnInit {
   handleViewStage(request: any): void {
     this.selectedRequest = request;
 
-    // Filter stages based on status
     if (request.status === 'Rejected') {
       this.filteredStages = ['Pending', 'Rejected'];
     } else {
       this.filteredStages = [...this.stages];
     }
 
-    // Determine the current stage index
     this.currentStageIndex = this.filteredStages.findIndex(stage => stage === request.status);
     if (this.currentStageIndex === -1) {
       this.currentStageIndex = 0;
     }
 
     this.showStageModal = true;
+  }
 
-    // If the status is "Trip End," update to "Closed" after viewing
-    if (request.status === 'Trip End') {
-      request.status = 'Closed';
-      this.updateRequestStatus(request);
+  handleCloseRequest(): void {
+    if (this.selectedRequest) {
+      this.selectedRequest.status = 'Closed';
+      this.updateRequestStatus(this.selectedRequest);
+      this.closeStageModal();
     }
   }
 
   closeStageModal(): void {
     this.showStageModal = false;
-  }
-
-  makeViewStageButtonBlink(request: any): void {
-    if (request.status === 'Trip End') {
-      this.blinkingButtonId = request.driverRequestId;
-    }
-  }
-
-  stopViewStageButtonBlink(): void {
-    this.blinkingButtonId = null;
   }
 }

@@ -30,6 +30,7 @@ import { CustomerviewrequestedComponent } from './components/customerviewrequest
 import { AdminviewrequestsComponent } from './components/adminviewrequests/adminviewrequests.component';
 import { CustomerpostfeedbackComponent } from './components/customerpostfeedback/customerpostfeedback.component';
 import { CustomerviewfeedbackComponent } from './components/customerviewfeedback/customerviewfeedback.component';
+import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CustomerviewfeedbackComponent } from './components/customerviewfeedback
     AdminviewrequestsComponent,
     CustomerpostfeedbackComponent,
     CustomerviewfeedbackComponent,
+    AdminviewfeedbackComponent,
   
 
   ],
