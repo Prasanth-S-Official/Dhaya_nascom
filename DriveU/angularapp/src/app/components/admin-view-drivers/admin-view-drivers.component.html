@@ -19,7 +19,7 @@
         <label for="statusSelect">Filter by Status:</label>
         <select [(ngModel)]="selectedStatus" (ngModelChange)="applyFilters()" id="statusSelect">
           <option [ngValue]="null">All Status</option>
-          <option value="Available">Available</option>
+          <option value="Active">Active</option>
           <option value="On Leave">On Leave</option>
           <option value="Inactive">Inactive</option>
         </select>

@@ -103,8 +103,10 @@
       <p class="payment-message">
         Your travel charge is <strong>₹{{ selectedRequest?.paymentAmount | number:'1.1-1' }}</strong>
       </p>
-      
       <p><strong>Actual Duration</strong> {{ selectedRequest?.actualDuration }}</p>
+      <hr/>
+      <p><strong>Actual Drop Date </strong> {{ selectedRequest?.actualDropDate }}</p>
+      <p><strong>Actual Drop time </strong> {{ selectedRequest?.actualDropTime }}</p>
       
       <div class="links-container">
         <a class="review-link" (click)="navigateToReview()">✍️ Write a Review</a>

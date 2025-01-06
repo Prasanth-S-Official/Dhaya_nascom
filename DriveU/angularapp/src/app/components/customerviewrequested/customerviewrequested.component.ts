@@ -109,19 +109,15 @@ export class CustomerviewrequestedComponent implements OnInit {
   // }
 
   handleTripEnd(request: any): void {
-    // Parse tripDate and timeSlot into a Date object
+    // Get the current date and time
+    const currentDate = new Date();
+  
+    // Set trip start date and time
     const tripStartDate = new Date(request.tripDate[0], request.tripDate[1] - 1, request.tripDate[2]);
     tripStartDate.setHours(request.timeSlot[0], request.timeSlot[1], 0);
   
-    // Parse actualDropDate and actualDropTime into a Date object
-    const actualDropDate = new Date(
-      request.actualDropDate[0], // Year
-      request.actualDropDate[1] - 1, // Month (0-indexed)
-      request.actualDropDate[2], // Day
-      request.actualDropTime[0], // Hours
-      request.actualDropTime[1], // Minutes
-      request.actualDropTime[2] // Seconds
-    );
+    // Set actual drop date and time to the current date and time
+    const actualDropDate = currentDate;
   
     // Calculate duration in milliseconds
     const durationInMs = actualDropDate.getTime() - tripStartDate.getTime();
@@ -136,10 +132,9 @@ export class CustomerviewrequestedComponent implements OnInit {
     // Calculate payment
     const payment = (hours + minutes / 60) * request.driver.hourlyRate;
   
-    // Update the request object
+    // Update the request object with actual drop date and time
     const updatedRequest = {
       ...request,
-      actualDuration: actualDuration,
       actualDropDate: [
         actualDropDate.getFullYear(),
         actualDropDate.getMonth() + 1, // Adjust for 0-indexed month
@@ -150,17 +145,18 @@ export class CustomerviewrequestedComponent implements OnInit {
         actualDropDate.getMinutes(),
         actualDropDate.getSeconds(),
       ],
+      actualDuration: actualDuration,
       paymentAmount: payment.toFixed(2), // Ensure 2 decimal places for payment
       status: 'Trip End',
     };
   
-    console.log(updatedRequest);
-    
+    console.log('Updated Request:', updatedRequest);
+  
     // Call the API to update the request
-    // this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
-    //   () => this.fetchData(),
-    //   (error) => console.error('Error ending trip:', error)
-    // );
+    this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
+      () => this.fetchData(),
+      (error) => console.error('Error ending trip:', error)
+    );
   }
   
 
