@@ -28,6 +28,8 @@ export class CustomerviewrequestedComponent implements OnInit {
     const userId = Number(localStorage.getItem('userId'));
     this.driverRequestService.getDriverRequestsByUserId(userId).subscribe(
       (response: any) => {
+        console.log(response);
+        
         this.appliedRequests = response;
         this.filteredRequests = response;
       },
