@@ -61,22 +61,4 @@ public class DriverController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
-    @GetMapping("/vehicleType/{vehicleType}")
-    public ResponseEntity<List<Driver>> findDriversByVehicleType(@PathVariable String vehicleType) {
-        List<Driver> drivers = driverService.findDriversByVehicleType(vehicleType);
-        if (drivers.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(drivers);
-    }
-
-    @GetMapping("/available")
-    public ResponseEntity<List<Driver>> findAvailableDrivers() {
-        List<Driver> availableDrivers = driverService.findAvailableDrivers();
-        if (availableDrivers.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(availableDrivers);
-    }
 }

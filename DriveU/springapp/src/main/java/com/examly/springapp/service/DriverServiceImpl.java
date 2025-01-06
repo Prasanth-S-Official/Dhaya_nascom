@@ -57,13 +57,4 @@ public class DriverServiceImpl implements DriverService {
         }
     }
 
-    @Override
-    public List<Driver> findDriversByVehicleType(String vehicleType) {
-        return driverRepo.findDriversByVehicleType(vehicleType);
-    }
-
-    @Override
-    public List<Driver> findAvailableDrivers() {
-        return driverRepo.findAvailableDrivers();
-    }
 }

@@ -11,6 +11,5 @@ public interface DriverService {
     List<Driver> getAllDrivers();
     Driver updateDriver(Long driverId, Driver driver);
     Driver deleteDriver(Long driverId);
-    List<Driver> findDriversByVehicleType(String vehicleType);
-    List<Driver> findAvailableDrivers();
+   
 }
