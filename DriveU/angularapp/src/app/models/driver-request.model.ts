@@ -13,4 +13,5 @@ export interface DriverRequest {
   comments?: string; // Optional comments
   actualDropTime?: Date; // Time as a Date object (nullable)
   actualDuration?: string; // Actual trip duration (nullable)
+  actualDropDate?: Date;
 }

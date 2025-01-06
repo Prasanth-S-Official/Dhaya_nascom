@@ -81,32 +81,88 @@ export class CustomerviewrequestedComponent implements OnInit {
     this.router.navigate(['/customer/edit/request', id]);
   }
 
+  // handleTripEnd(request: any): void {
+  //   const actualDropTime = new Date();
+  //   const timeSlot = new Date();
+  //   timeSlot.setHours(request.timeSlot[0], request.timeSlot[1], 0);
+
+  //   const formattedActualDropTime = actualDropTime.toTimeString().slice(0, 8);
+
+  //   const durationInHours = Math.abs(
+  //     (actualDropTime.getTime() - timeSlot.getTime()) / (1000 * 60 * 60)
+  //   );
+
+  //   const payment = Number(durationInHours.toFixed(2)) * request.driver.hourlyRate;
+
+  //   const updatedRequest = {
+  //     ...request,
+  //     actualDropTime: formattedActualDropTime,
+  //     actualDuration: `${durationInHours.toFixed(2)} hours`,
+  //     paymentAmount: payment,
+  //     status: 'Trip End',
+  //   };
+
+  //   this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
+  //     () => this.fetchData(),
+  //     (error) => console.error('Error ending trip:', error)
+  //   );
+  // }
+
   handleTripEnd(request: any): void {
-    const actualDropTime = new Date();
-    const timeSlot = new Date();
-    timeSlot.setHours(request.timeSlot[0], request.timeSlot[1], 0);
-
-    const formattedActualDropTime = actualDropTime.toTimeString().slice(0, 8);
-
-    const durationInHours = Math.abs(
-      (actualDropTime.getTime() - timeSlot.getTime()) / (1000 * 60 * 60)
+    // Parse tripDate and timeSlot into a Date object
+    const tripStartDate = new Date(request.tripDate[0], request.tripDate[1] - 1, request.tripDate[2]);
+    tripStartDate.setHours(request.timeSlot[0], request.timeSlot[1], 0);
+  
+    // Parse actualDropDate and actualDropTime into a Date object
+    const actualDropDate = new Date(
+      request.actualDropDate[0], // Year
+      request.actualDropDate[1] - 1, // Month (0-indexed)
+      request.actualDropDate[2], // Day
+      request.actualDropTime[0], // Hours
+      request.actualDropTime[1], // Minutes
+      request.actualDropTime[2] // Seconds
     );
-
-    const payment = Number(durationInHours.toFixed(2)) * request.driver.hourlyRate;
-
+  
+    // Calculate duration in milliseconds
+    const durationInMs = actualDropDate.getTime() - tripStartDate.getTime();
+  
+    // Convert duration to hours and minutes
+    const totalMinutes = Math.floor(durationInMs / (1000 * 60)); // Total minutes
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+  
+    const actualDuration = `${hours} hours ${minutes} minutes`;
+  
+    // Calculate payment
+    const payment = (hours + minutes / 60) * request.driver.hourlyRate;
+  
+    // Update the request object
     const updatedRequest = {
       ...request,
-      actualDropTime: formattedActualDropTime,
-      actualDuration: `${durationInHours.toFixed(2)} hours`,
-      paymentAmount: payment,
+      actualDuration: actualDuration,
+      actualDropDate: [
+        actualDropDate.getFullYear(),
+        actualDropDate.getMonth() + 1, // Adjust for 0-indexed month
+        actualDropDate.getDate(),
+      ],
+      actualDropTime: [
+        actualDropDate.getHours(),
+        actualDropDate.getMinutes(),
+        actualDropDate.getSeconds(),
+      ],
+      paymentAmount: payment.toFixed(2), // Ensure 2 decimal places for payment
       status: 'Trip End',
     };
-
-    this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
-      () => this.fetchData(),
-      (error) => console.error('Error ending trip:', error)
-    );
+  
+    console.log(updatedRequest);
+    
+    // Call the API to update the request
+    // this.driverRequestService.updateDriverRequest(request.driverRequestId, updatedRequest).subscribe(
+    //   () => this.fetchData(),
+    //   (error) => console.error('Error ending trip:', error)
+    // );
   }
+  
 
   openPayAmountModal(request: any): void {
     this.selectedRequest = {

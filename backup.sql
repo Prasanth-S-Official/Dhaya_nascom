@@ -64,6 +64,7 @@ DROP TABLE IF EXISTS `driver_request`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `driver_request` (
   `driver_request_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `actual_drop_date` date DEFAULT NULL,
   `actual_drop_time` time DEFAULT NULL,
   `actual_duration` varchar(255) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
@@ -82,7 +83,7 @@ CREATE TABLE `driver_request` (
   KEY `FKck4ybb6l264ikxnl0vpclsox9` (`user_id`),
   CONSTRAINT `FK1r7on88l9wdpi42bic317pu3b` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`),
   CONSTRAINT `FKck4ybb6l264ikxnl0vpclsox9` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +92,7 @@ CREATE TABLE `driver_request` (
 
 LOCK TABLES `driver_request` WRITE;
 /*!40000 ALTER TABLE `driver_request` DISABLE KEYS */;
-INSERT INTO `driver_request` VALUES (4,'15:02:45','2.05 hours','demo comments','demo drop','3 hours',819.9999999999999,'demo pick updated','2025-01-04','Trip End','13:00:00','2025-01-05',2,2),(5,'10:41:18','11.78 hours','demo comment , duration may vary','demo drop','2 hours',2945,'demo pick 2','2025-01-04','Closed','22:28:00','2025-01-20',4,2);
+INSERT INTO `driver_request` VALUES (1,NULL,NULL,NULL,'Reqesting','Cbe','2 hours',NULL,'Kinathukdavu','2025-01-06','Approved','11:49:00','2025-01-06',2,2);
 /*!40000 ALTER TABLE `driver_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06  6:08:00
+-- Dump completed on 2025-01-06  6:23:00

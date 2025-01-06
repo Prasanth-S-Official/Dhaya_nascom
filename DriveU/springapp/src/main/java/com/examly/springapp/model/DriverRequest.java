@@ -35,6 +35,9 @@ public class DriverRequest {
     @Column(nullable = true) // Allows actualDropTime to be nullable
     private LocalTime actualDropTime;
 
+    @Column(nullable = true) // Allows actualDropDate to be nullable
+    private LocalDate actualDropDate;
+
     @Column(nullable = true) // Allows actualDuration to be nullable
     private String actualDuration;
 
@@ -42,7 +45,7 @@ public class DriverRequest {
     public DriverRequest(Long driverRequestId, User user, Driver driver, LocalDate requestDate, String status,
                          LocalDate tripDate, LocalTime timeSlot, String pickupLocation, String dropLocation,
                          String estimatedDuration, Double paymentAmount, String comments,
-                         LocalTime actualDropTime, String actualDuration) {
+                         LocalTime actualDropTime, LocalDate actualDropDate, String actualDuration) {
         this.driverRequestId = driverRequestId;
         this.user = user;
         this.driver = driver;
@@ -56,6 +59,7 @@ public class DriverRequest {
         this.paymentAmount = paymentAmount;
         this.comments = comments;
         this.actualDropTime = actualDropTime;
+        this.actualDropDate = actualDropDate;
         this.actualDuration = actualDuration;
     }
 
@@ -166,6 +170,14 @@ public class DriverRequest {
 
     public void setActualDropTime(LocalTime actualDropTime) {
         this.actualDropTime = actualDropTime;
+    }
+
+    public LocalDate getActualDropDate() {
+        return actualDropDate;
+    }
+
+    public void setActualDropDate(LocalDate actualDropDate) {
+        this.actualDropDate = actualDropDate;
     }
 
     public String getActualDuration() {
