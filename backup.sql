@@ -91,7 +91,7 @@ CREATE TABLE `driver_request` (
 
 LOCK TABLES `driver_request` WRITE;
 /*!40000 ALTER TABLE `driver_request` DISABLE KEYS */;
-INSERT INTO `driver_request` VALUES (4,'15:02:45','2.05 hours','demo comments','demo drop','3 hours',819.9999999999999,'demo pick updated','2025-01-04','Trip End','13:00:00','2025-01-05',2,2),(5,NULL,NULL,'demo comment , duration may vary','demo drop','2 hours',NULL,'demo pick 2','2025-01-04','Rejected','22:28:00','2025-01-20',4,2);
+INSERT INTO `driver_request` VALUES (4,'15:02:45','2.05 hours','demo comments','demo drop','3 hours',819.9999999999999,'demo pick updated','2025-01-04','Trip End','13:00:00','2025-01-05',2,2),(5,'10:41:18','11.78 hours','demo comment , duration may vary','demo drop','2 hours',2945,'demo pick 2','2025-01-04','Trip End','22:28:00','2025-01-20',4,2);
 /*!40000 ALTER TABLE `driver_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +115,7 @@ CREATE TABLE `feedback` (
   KEY `FK7k33yw505d347mw3avr93akao` (`user_id`),
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKn4fq1vynlvtvqxkkb0lo8h4a6` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,'Punctuality','2025-01-05','fghj',5,2,2);
+INSERT INTO `feedback` VALUES (2,'Punctuality','2025-01-05','fghj',5,2,2),(3,'Driver Performance','2025-01-06','ff',2,2,2);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06  5:08:00
+-- Dump completed on 2025-01-06  5:23:00

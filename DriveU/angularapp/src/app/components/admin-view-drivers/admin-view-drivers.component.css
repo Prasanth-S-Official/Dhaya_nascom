@@ -589,4 +589,58 @@ button.toggle-status-button.active-button {
   display: block; /* Ensure the image behaves like a block element */
 }
 
-  
+  /* Delete Confirmation Popup */
+.delete-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 10px;
+  padding: 20px 25px;
+  text-align: center;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.delete-popup p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.confirm-delete-button,
+.cancel-delete-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.confirm-delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.confirm-delete-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.cancel-delete-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-delete-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+/* Blur effect */
+#parent.blur {
+  filter: blur(3px);
+}
