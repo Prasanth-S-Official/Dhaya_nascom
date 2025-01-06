@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="driver-cards-container">
+    <div *ngIf="filteredDrivers.length > 0; else noDataFound" class="driver-cards-container">
       <div *ngFor="let driver of filteredDrivers" class="driver-card">
         <div class="card-header">
           <img
@@ -46,14 +46,22 @@
           <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
         </div>
         <div class="card-footer">
-          <button class="edit-button" (click)="navigateToEditDriver(driver.driverId)">Edit</button>
           <button
-          class="delete-button"
-          [disabled]="driver.availabilityStatus !== 'Inactive'"
-          (click)="handleDeleteClick(driver.driverId)"
-        >
-          Delete
-        </button>
+            class="edit-button"
+            [disabled]="driver.availabilityStatus === 'Inactive'"
+            [ngClass]="{ 'disabled-button': driver.availabilityStatus === 'Inactive' }"
+            (click)="navigateToEditDriver(driver.driverId)"
+          >
+            Edit
+          </button>
+          <button
+            class="delete-button"
+            [disabled]="driver.availabilityStatus === 'Inactive'"
+            [ngClass]="{ 'disabled-button': driver.availabilityStatus === 'Inactive' }"
+            (click)="handleDeleteClick(driver.driverId)"
+          >
+            Delete
+          </button>
           <div class="status-popover-container">
             <button class="toggle-status-button" (click)="toggleDropdown(driver.driverId)">Action</button>
             <div *ngIf="activeDropdown === driver.driverId" class="status-popover">
@@ -83,6 +91,13 @@
         </div>
       </div>
     </div>
+
+    <!-- No Data Found Message -->
+    <ng-template #noDataFound>
+      <div class="no-data-message">
+        <p>Oops! No data found.</p>
+      </div>
+    </ng-template>
   </div>
 </div>
 

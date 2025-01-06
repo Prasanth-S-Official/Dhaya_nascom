@@ -469,7 +469,7 @@ button.toggle-status-button.active-button {
   
   /* Edit Button */
   button.edit-button {
-    background: linear-gradient(135deg, #28a745, #218838);
+    background: #28a745;
   }
   
   button.edit-button:hover {
@@ -479,7 +479,7 @@ button.toggle-status-button.active-button {
   
   /* Delete Button */
   button.delete-button {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    background: #c0392b;
   }
   
   button.delete-button:hover {
@@ -643,4 +643,40 @@ button.toggle-status-button.active-button {
 /* Blur effect */
 #parent.blur {
   filter: blur(3px);
+}
+
+.no-data-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-top: 20px;
+}
+
+.disabled-button {
+  background-color: #d6d6d6 !important; /* Grey background */
+  color: #a5a5a5; /* Light grey text */
+  cursor: not-allowed; /* Disabled cursor */
+  border: 1px solid #ccc; /* Light grey border */
+}
+
+.edit-button,
+.delete-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #0056b3;
+}
+
+.edit-button:disabled,
+.delete-button:disabled {
+  pointer-events: none; /* Disable all interactions */
 }
