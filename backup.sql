@@ -91,7 +91,7 @@ CREATE TABLE `driver_request` (
 
 LOCK TABLES `driver_request` WRITE;
 /*!40000 ALTER TABLE `driver_request` DISABLE KEYS */;
-INSERT INTO `driver_request` VALUES (4,'15:02:45','2.05 hours','demo comments','demo drop','3 hours',819.9999999999999,'demo pick updated','2025-01-04','Closed','13:00:00','2025-01-05',2,2),(5,NULL,NULL,'demo comment , duration may vary','demo drop','2 hours',NULL,'demo pick 2','2025-01-04','Rejected','22:28:00','2025-01-20',4,2);
+INSERT INTO `driver_request` VALUES (4,'15:02:45','2.05 hours','demo comments','demo drop','3 hours',819.9999999999999,'demo pick updated','2025-01-04','Trip End','13:00:00','2025-01-05',2,2),(5,NULL,NULL,'demo comment , duration may vary','demo drop','2 hours',NULL,'demo pick 2','2025-01-04','Rejected','22:28:00','2025-01-20',4,2);
 /*!40000 ALTER TABLE `driver_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06  4:53:00
+-- Dump completed on 2025-01-06  5:08:00
