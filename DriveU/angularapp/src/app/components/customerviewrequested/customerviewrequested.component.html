@@ -101,8 +101,9 @@
       </div>
 
       <p class="payment-message">
-        Your travel charge is <strong>₹{{ selectedRequest?.paymentAmount }}</strong>
+        Your travel charge is <strong>₹{{ selectedRequest?.paymentAmount | number:'1.1-1' }}</strong>
       </p>
+      
       <p><strong>Actual Duration</strong> {{ selectedRequest?.actualDuration }}</p>
       
       <div class="links-container">

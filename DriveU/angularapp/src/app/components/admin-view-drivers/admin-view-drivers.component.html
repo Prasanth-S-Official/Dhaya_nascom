@@ -1,5 +1,5 @@
 <app-adminnav></app-adminnav>
-<div id="parent">
+<div id="parent" [ngClass]="{ blur: showDeletePopup }">
   <div id="driverHomeBody">
     <h1>Drivers</h1>
     <hr />
@@ -47,7 +47,13 @@
         </div>
         <div class="card-footer">
           <button class="edit-button" (click)="navigateToEditDriver(driver.driverId)">Edit</button>
-          <button class="delete-button" (click)="handleDeleteClick(driver.driverId)">Delete</button>
+          <button
+          class="delete-button"
+          [disabled]="driver.availabilityStatus !== 'Inactive'"
+          (click)="handleDeleteClick(driver.driverId)"
+        >
+          Delete
+        </button>
           <div class="status-popover-container">
             <button class="toggle-status-button" (click)="toggleDropdown(driver.driverId)">Action</button>
             <div *ngIf="activeDropdown === driver.driverId" class="status-popover">

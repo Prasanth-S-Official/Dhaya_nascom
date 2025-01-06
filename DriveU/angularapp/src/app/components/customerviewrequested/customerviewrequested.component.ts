@@ -107,7 +107,10 @@ export class CustomerviewrequestedComponent implements OnInit {
   }
 
   openPayAmountModal(request: any): void {
-    this.selectedRequest = request;
+    this.selectedRequest = {
+      ...request,
+      paymentAmount: request.paymentAmount ? parseFloat(request.paymentAmount.toFixed(1)) : null
+    };
     this.isLoading = true;
     this.showPayAmountModal = true;
 
