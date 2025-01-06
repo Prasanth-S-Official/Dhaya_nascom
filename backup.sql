@@ -125,7 +125,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,'Punctuality','2025-01-05','fghj',5,2,2),(3,'Driver Performance','2025-01-06','ff',2,2,2);
+INSERT INTO `feedback` VALUES (2,'Punctuality','2025-01-05','excellent in punctuality',5,2,2),(3,'Driver Performance','2025-01-06','demo performance',2,2,2);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06 17:06:49
+-- Dump completed on 2025-01-06 17:21:54
