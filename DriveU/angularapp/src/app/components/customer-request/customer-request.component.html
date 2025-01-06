@@ -1,6 +1,6 @@
 <app-customernav></app-customernav>
 <div class="customer-request-container" [ngClass]="{ blur: successPopup }">
-  <button *ngIf="requestId" type="button" class="back-button" (click)="navigateBack()">Back</button>
+  <button  type="button" class="back-button" (click)="navigateBack()">Back</button>
   <h2>{{ requestId ? 'Edit Request' : 'New Driver Request' }}</h2>
   <hr />
 

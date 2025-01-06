@@ -132,6 +132,10 @@ export class CustomerRequestComponent implements OnInit {
   }
 
   navigateBack(): void {
-    this.router.navigate(['/customer/my/requests']);
+    if (this.requestId) {
+      this.router.navigate(['/customer/my/requests']);
+    } else {
+      this.router.navigate(['/customer/view/drivers']);
+    }
   }
 }

@@ -83,7 +83,7 @@ CREATE TABLE `driver_request` (
   KEY `FKck4ybb6l264ikxnl0vpclsox9` (`user_id`),
   CONSTRAINT `FK1r7on88l9wdpi42bic317pu3b` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`),
   CONSTRAINT `FKck4ybb6l264ikxnl0vpclsox9` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `driver_request` (
 
 LOCK TABLES `driver_request` WRITE;
 /*!40000 ALTER TABLE `driver_request` DISABLE KEYS */;
-INSERT INTO `driver_request` VALUES (1,'2025-01-06','11:55:39','0 hours 6 minutes','Reqesting','Cbe','2 hours',40,'Kinathukdavu','2025-01-06','Trip End','11:49:00','2025-01-06',2,2),(2,NULL,NULL,NULL,'Requesting','demo drop location','2 hours',NULL,'demo location','2025-01-06','Approved','21:58:00','2025-01-06',4,2);
+INSERT INTO `driver_request` VALUES (1,'2025-01-06','11:55:39','0 hours 6 minutes','Reqesting','Cbe','2 hours',40,'Kinathukdavu','2025-01-06','Trip End','11:49:00','2025-01-06',2,2),(2,NULL,NULL,NULL,'Requesting','demo drop location','2 hours',NULL,'demo location','2025-01-06','Pending','21:58:00','2025-01-06',4,2),(3,NULL,NULL,NULL,'demo comments','demo drop 2','3 hours',NULL,'demo pick 2','2025-01-06','Pending','22:56:00','2025-01-06',5,2);
 /*!40000 ALTER TABLE `driver_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06 17:21:54
+-- Dump completed on 2025-01-06 17:37:05
