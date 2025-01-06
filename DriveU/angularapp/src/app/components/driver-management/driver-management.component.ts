@@ -17,6 +17,9 @@ export class DriverManagementComponent implements OnInit {
   id: number | null = null;
   showError = false;
 
+  vehicleTypes: string[] = ['Sedan', 'SUV', 'Hatchback', 'Truck', 'Van'];
+
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

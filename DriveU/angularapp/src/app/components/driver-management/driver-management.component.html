@@ -36,15 +36,18 @@
         *Contact Number is required
       </div>
     </div>
-
+    
     <div>
       <label for="vehicleType">Vehicle Type<span class="required">*</span></label>
-      <input id="vehicleType" type="text" formControlName="vehicleType" />
+      <select id="vehicleType" formControlName="vehicleType">
+        <option value="" disabled selected>Choose Vehicle Type</option>
+        <option *ngFor="let type of vehicleTypes" [value]="type">{{ type }}</option>
+      </select>
       <div *ngIf="driverForm.controls['vehicleType'].touched && driverForm.controls['vehicleType'].hasError('required')" class="error">
         *Vehicle Type is required
       </div>
     </div>
-
+    
     <div>
       <label for="hourlyRate">Hourly Rate<span class="required">*</span></label>
       <input id="hourlyRate" type="number" formControlName="hourlyRate" />
