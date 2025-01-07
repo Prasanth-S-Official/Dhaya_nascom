@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllTrainer() throws Exception {
-	        mockMvc.perform(get("/api/trainer")
+	    public void backend_testGetAllDriver() throws Exception {
+	        mockMvc.perform(get("/api/driver")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -97,10 +97,10 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testRequirementHasManyToOneAnnotation() {
+    public void backend_testDriverRequestHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.Requirement");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.DriverRequest");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
