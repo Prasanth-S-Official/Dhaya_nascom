@@ -127,10 +127,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testRequirementInterfaceAndImplementation() {
+    public void backend_testDriverInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.RequirementService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.RequirementServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.DriverService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.DriverServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testTrainerInterfaceAndImplementation() {
+    public void backend_testDriverRequestInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.TrainerService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.TrainerServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.DriverRequestService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.DriverRequestServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testTrainerControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.TrainerController");
+	   public void backend_testDriverControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.DriverController");
 	   }
 
 	   @Test
-	   public void backend_testRequirementControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.RequirementController");
+	   public void backend_testDriverRequestControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.DriverRequestController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testTrainerModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Trainer");
+	   public void backend_testDriverModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Driver");
 	   }
 	 
 	 @Test
@@ -200,8 +200,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testRequirementModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Requirement");
+	   public void backend_testDriverRequestModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.DriverRequest");
 	   }
 
 }
