@@ -1,19 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RequirementService } from './requirement.service';
+import { DriverRequestService } from './driver-request.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('RequirementService', () => {
-  let service: RequirementService;
+describe('DriverRequestService', () => {
+  let service: DriverRequestService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(RequirementService);
+    service = TestBed.inject(DriverRequestService);
   });
 
-  fit('Frontend_should_create_requirement_service', () => {
+  fit('Frontend_should_create_driverRequest_service', () => {
     expect(service).toBeTruthy();
   });
 });
