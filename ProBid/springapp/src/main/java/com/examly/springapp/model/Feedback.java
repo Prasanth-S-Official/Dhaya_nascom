@@ -9,29 +9,51 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
 @Entity
 public class Feedback {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
 
-    private String feedbackText;
-    private LocalDate date;
+    private String feedbackText; // Textual feedback provided by the user
+    private LocalDate date; // Date when the feedback was submitted
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    private User user; // The user providing feedback
 
     @ManyToOne
-    @JoinColumn(name = "materialId", nullable = true)
-    private Material material; 
+    @JoinColumn(name = "projectId", nullable = true)
+    private Project project; // The project being reviewed (nullable)
 
-    private String category; // Category of feedback, e.g., "Service", "Pricing", etc.
+    @ManyToOne
+    @JoinColumn(name = "bidId", nullable = true)
+    private Bid bid; // Associated bid for which the feedback is given (optional)
 
+    private String category; // Category of feedback, e.g., "Communication", "Work Quality"
+    
+    private Integer rating; // Rating out of 5 (nullable)
+
+    // Default constructor
     public Feedback() {
+        this.rating = null; // Ensures default rating is null
     }
 
+    // Parameterized constructor
+    public Feedback(Long feedbackId, String feedbackText, LocalDate date, User user, Project project, Bid bid, 
+                    String category, Integer rating) {
+        this.feedbackId = feedbackId;
+        this.feedbackText = feedbackText;
+        this.date = date;
+        this.user = user;
+        this.project = project;
+        this.bid = bid;
+        this.category = category;
+        this.rating = rating;
+    }
+
+    // Getters and Setters
     public Long getFeedbackId() {
         return feedbackId;
     }
@@ -64,12 +86,20 @@ public class Feedback {
         this.user = user;
     }
 
-    public Material getMaterial() {
-        return material;
+    public Project getProject() {
+        return project;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Bid getBid() {
+        return bid;
+    }
+
+    public void setBid(Bid bid) {
+        this.bid = bid;
     }
 
     public String getCategory() {
@@ -80,6 +110,11 @@ public class Feedback {
         this.category = category;
     }
 
-    // Getters and Setters
-   
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
 }

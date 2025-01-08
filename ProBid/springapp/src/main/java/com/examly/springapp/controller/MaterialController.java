@@ -1,7 +1,7 @@
 package com.examly.springapp.controller;
 
 import com.examly.springapp.model.Material;
-import com.examly.springapp.service.MaterialService;
+import com.examly.springapp.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class MaterialController {
 
     @Autowired
-    private MaterialService materialService;
+    private ProjectService materialService;
 
     @PostMapping
     public ResponseEntity<?> addMaterial(@RequestBody Material material) {
