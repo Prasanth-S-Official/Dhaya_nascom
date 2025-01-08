@@ -1,5 +1,19 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
 body {
   margin: 0;
   padding: 0;
   max-width: 100%;
+  font-family: 'Roboto', sans-serif; /* Modern sans-serif font for general text */
+}
+
+h1, h2, h3 {
+  font-family: 'Merriweather', serif; /* Classic serif font for headings */
+  font-weight: 700; /* Bold for emphasis */
+}
+
+p {
+  font-family: 'Roboto', sans-serif; /* Keeping paragraphs clean and readable */
+  font-weight: 400;
 }
