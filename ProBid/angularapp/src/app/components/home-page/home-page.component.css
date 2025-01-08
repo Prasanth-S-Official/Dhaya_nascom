@@ -1,0 +1,146 @@
+/* General Body Styles */
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Cover Section */
+.coverimage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url('/assets/images/homepage.webp') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.title h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+.title p {
+  font-size: 1.2em;
+  margin: 10px 0 0;
+  color: #dddddd;
+}
+
+/* Content Section */
+.content {
+  position: relative;
+  padding: 40px 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  margin: -120px auto 20px;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.content h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.content p {
+  color: #555;
+  font-size: 1.2em;
+  line-height: 1.8;
+}
+hr {
+  border: none;
+  height: 3px; /* Adjust thickness */
+  background-color: #333; /* Darker color for visibility */
+  width: 90%; /* Adjust width */
+  margin: 30px auto; /* Center it and add spacing */
+  opacity: 0.8; /* Optional: Slight transparency */
+}
+
+/* Contact Section */
+.contact {
+  background-color: #311130;
+  color: white;
+  padding: 30px 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px auto;
+  max-width: 700px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.contact h2 {
+  margin-bottom: 15px;
+  font-size: 1.8em;
+}
+
+.contact p {
+  margin: 5px 0;
+  font-size: 1.2em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title h1 {
+    font-size: 2.5em;
+  }
+
+  .title p {
+    font-size: 1em;
+  }
+
+  .content {
+    margin: -30px auto 20px;
+    padding: 20px;
+  }
+
+  .contact {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title h1 {
+    font-size: 2em;
+  }
+
+  .title p {
+    font-size: 0.9em;
+  }
+
+  .content h2 {
+    font-size: 1.5em;
+  }
+
+  .contact h2 {
+    font-size: 1.5em;
+  }
+
+  .contact p {
+    font-size: 1em;
+  }
+
+  .custom-hr {
+    max-width: 90%;
+  }
+}

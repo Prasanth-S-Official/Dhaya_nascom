@@ -1,0 +1,94 @@
+<app-usernav></app-usernav>
+<div class="container" [ngClass]="{ blur: successPopup }">
+  <div class="button-container">
+    <button (click)="navigateBack()">Back</button>
+  </div>
+  <h2>Material Request Form</h2>
+
+  <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+    <!-- Address Fields -->
+    <div>
+      <label for="deliveryAddress">Delivery Address<span class="required">*</span></label>
+      <textarea id="deliveryAddress" formControlName="deliveryAddress"></textarea>
+      <div *ngIf="requestForm.controls['deliveryAddress']?.touched && requestForm.controls['deliveryAddress'].hasError('required')" class="error">
+        *Delivery Address is required
+      </div>
+    </div>
+    <div>
+      <label for="contactNumber">Contact Number<span class="required">*</span></label>
+      <input id="contactNumber" type="text" formControlName="contactNumber" />
+      <div *ngIf="requestForm.controls['contactNumber']?.touched && requestForm.controls['contactNumber'].hasError('required')" class="error">
+        *Contact Number is required
+      </div>
+    </div>
+
+    <!-- Material Details -->
+    <div>
+      <label for="quantity">Quantity<span class="required">*</span></label>
+      <input id="quantity" type="number" formControlName="quantity" />
+      <div *ngIf="requestForm.controls['quantity']?.touched && requestForm.controls['quantity'].hasError('required')" class="error">
+        *Quantity is required
+      </div>
+    </div>
+    <div>
+      <label for="urgencyLevel">Urgency Level<span class="required">*</span></label>
+      <select id="urgencyLevel" formControlName="urgencyLevel">
+        <option value="">Select Urgency</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <div *ngIf="requestForm.controls['urgencyLevel']?.touched && requestForm.controls['urgencyLevel'].hasError('required')" class="error">
+        *Urgency Level is required
+      </div>
+    </div>
+
+    <!-- Preferred Delivery -->
+    <div>
+      <label for="preferredDeliveryDate">Preferred Delivery Date<span class="required">*</span></label>
+      <input
+        id="preferredDeliveryDate"
+        type="date"
+        formControlName="preferredDeliveryDate"
+        [min]="minDate"
+      />
+      <div *ngIf="requestForm.controls['preferredDeliveryDate']?.touched && requestForm.controls['preferredDeliveryDate'].hasError('required')" class="error">
+        *Preferred Delivery Date is required
+      </div>
+    </div>
+    <div>
+      <label for="timeSlot">Preferred Time Slot<span class="required">*</span></label>
+      <select id="timeSlot" formControlName="timeSlot">
+        <option value="">Select a time slot</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
+      </select>
+      <div *ngIf="requestForm.controls['timeSlot']?.touched && requestForm.controls['timeSlot'].hasError('required')" class="error">
+        *Time Slot is required
+      </div>
+    </div>
+
+    <!-- Comments Field -->
+    <div>
+      <label for="comments">Comments</label>
+      <textarea id="comments" formControlName="comments"></textarea>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error">
+      *{{ errorMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+      <button type="submit" class="submit-button">Submit</button>
+    </div>
+  </form>
+</div>
+
+<!-- Success Popup -->
+<div *ngIf="successPopup" class="success-popup">
+  <p>Request Submitted Successfully!</p>
+  <button (click)="handleSuccessMessage()">Ok</button>
+</div>
