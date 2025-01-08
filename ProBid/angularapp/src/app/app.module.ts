@@ -22,6 +22,7 @@ import { AdminViewMaterialComponent } from './components/admin-view-material/adm
 import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ClientnavComponent } from './components/clientnav/clientnav.component';
+import { ProjectManagementComponent } from './components/project-management/project-management.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ClientnavComponent } from './components/clientnav/clientnav.component';
     UserviewmaterialComponent,
     AdminInsightsComponent,
     ClientnavComponent,
+    ProjectManagementComponent,
   
 
   ],
