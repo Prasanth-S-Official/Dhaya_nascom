@@ -96,6 +96,41 @@ LOCK TABLES `feedback` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `project`
+--
+
+DROP TABLE IF EXISTS `project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `project` (
+  `project_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `attachments` varchar(1000) DEFAULT NULL,
+  `budget` double DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `deadline` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `payment_terms` varchar(255) DEFAULT NULL,
+  `priority` varchar(255) DEFAULT NULL,
+  `skills_required` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`project_id`),
+  KEY `FKo06v2e9kuapcugnyhttqa1vpt` (`user_id`),
+  CONSTRAINT `FKo06v2e9kuapcugnyhttqa1vpt` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project`
+--
+
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -119,6 +154,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -131,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-08  9:09:36
+-- Dump completed on 2025-01-08  9:24:36
