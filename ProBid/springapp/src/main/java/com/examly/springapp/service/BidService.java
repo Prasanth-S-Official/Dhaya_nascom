@@ -1,17 +1,25 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.model.MaterialRequest;
+import com.examly.springapp.model.Bid;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public interface BidService {
-    MaterialRequest addMaterialRequest(MaterialRequest materialRequest);
-    Optional<MaterialRequest> getMaterialRequestById(Long materialRequestId);
-    List<MaterialRequest> getAllMaterialRequests();
-    MaterialRequest updateMaterialRequest(Long materialRequestId, MaterialRequest materialRequest);
-    boolean deleteMaterialRequest(Long materialRequestId);
-    List<MaterialRequest> getMaterialRequestsByUserId(Long userId);
-    List<Map<String, Object>> getAllUserInsights();
+    Bid addBid(Bid bid);
+
+    Optional<Bid> getBidById(Long bidId);
+
+    List<Bid> getAllBids();
+
+    List<Bid> getBidsByProjectId(Long projectId);
+
+    List<Bid> getBidsByUserId(Long userId);
+
+    Bid updateBid(Long bidId, Bid bid);
+
+    boolean deleteBid(Long bidId);
+
+    List<Map<String, Object>> getAllBidInsights();
 }

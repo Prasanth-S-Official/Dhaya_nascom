@@ -2,8 +2,8 @@ package com.examly.springapp.repository;
 
 import com.examly.springapp.model.Bid;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +17,5 @@ public interface BidRepo extends JpaRepository<Bid, Long> {
     @Query("SELECT b FROM Bid b WHERE b.user.userId = :userId")
     List<Bid> findBidsByUserId(Long userId);
 
-    @Query("SELECT b FROM Bid b WHERE b.status = :status")
-    List<Bid> findBidsByStatus(String status);
-
-    Optional<Bid> findByProject_ProjectIdAndUser_UserId(Long projectId, Long userId);
+    Optional<Bid> findByUser_UserIdAndProject_ProjectId(Long userId, Long projectId);
 }

@@ -1,101 +1,109 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.exceptions.MaterialRequestException;
-import com.examly.springapp.model.MaterialRequest;
+import com.examly.springapp.exceptions.BidNotFoundException;
+import com.examly.springapp.exceptions.DuplicateBidException;
+import com.examly.springapp.model.Bid;
+import com.examly.springapp.model.Project;
 import com.examly.springapp.model.User;
-import com.examly.springapp.repository.MaterialRequestRepo;
+import com.examly.springapp.repository.BidRepo;
+import com.examly.springapp.repository.ProjectRepo;
 import com.examly.springapp.repository.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BidServiceImpl implements BidService {
 
     @Autowired
-    private MaterialRequestRepo materialRequestRepo;
+    private BidRepo bidRepo;
+
+    @Autowired
+    private ProjectRepo projectRepo;
 
     @Autowired
     private UserRepo userRepo;
 
     @Override
-    public MaterialRequest addMaterialRequest(MaterialRequest materialRequest) {
-        Long userId = materialRequest.getUser().getUserId();
-        Long materialId = materialRequest.getMaterial().getMaterialId();
-        Optional<MaterialRequest> existingRequest = materialRequestRepo.findByUser_UserIdAndMaterial_MaterialId(userId, materialId);
-        if (existingRequest.isPresent()) {
-            throw new MaterialRequestException("User has already requested this material.");
+    public Bid addBid(Bid bid) {
+        Long userId = bid.getUser().getUserId();
+        Long projectId = bid.getProject().getProjectId();
+
+        Optional<Bid> existingBid = bidRepo.findByUser_UserIdAndProject_ProjectId(userId, projectId);
+        if (existingBid.isPresent()) {
+            throw new DuplicateBidException("User has already placed a bid on this project.");
         }
-        return materialRequestRepo.save(materialRequest);
+
+        return bidRepo.save(bid);
     }
 
     @Override
-    public List<MaterialRequest> getMaterialRequestsByUserId(Long userId) {
-        return materialRequestRepo.findMaterialRequestsByUserId(userId);
+    public Optional<Bid> getBidById(Long bidId) {
+        return bidRepo.findById(bidId);
     }
 
     @Override
-    public Optional<MaterialRequest> getMaterialRequestById(Long materialRequestId) {
-        return materialRequestRepo.findById(materialRequestId);
+    public List<Bid> getAllBids() {
+        return bidRepo.findAll();
     }
 
     @Override
-    public List<MaterialRequest> getAllMaterialRequests() {
-        return materialRequestRepo.findAll();
+    public List<Bid> getBidsByProjectId(Long projectId) {
+        return bidRepo.findBidsByProjectId(projectId);
     }
 
     @Override
-    public MaterialRequest updateMaterialRequest(Long materialRequestId, MaterialRequest materialRequest) {
-        Optional<MaterialRequest> existingRequest = materialRequestRepo.findById(materialRequestId);
-        if (existingRequest.isPresent()) {
-            materialRequest.setMaterialRequestId(materialRequestId);
-            return materialRequestRepo.save(materialRequest);
+    public List<Bid> getBidsByUserId(Long userId) {
+        return bidRepo.findBidsByUserId(userId);
+    }
+
+    @Override
+    public Bid updateBid(Long bidId, Bid bid) {
+        Optional<Bid> existingBid = bidRepo.findById(bidId);
+        if (existingBid.isPresent()) {
+            bid.setBidId(bidId);
+            return bidRepo.save(bid);
+        } else {
+            throw new BidNotFoundException("Bid not found for updating.");
         }
-        return null;
     }
 
     @Override
-    public boolean deleteMaterialRequest(Long materialRequestId) {
-        Optional<MaterialRequest> existingRequest = materialRequestRepo.findById(materialRequestId);
-        if (existingRequest.isPresent()) {
-            materialRequestRepo.deleteById(materialRequestId);
+    public boolean deleteBid(Long bidId) {
+        Optional<Bid> existingBid = bidRepo.findById(bidId);
+        if (existingBid.isPresent()) {
+            bidRepo.deleteById(bidId);
             return true;
+        } else {
+            throw new BidNotFoundException("Bid not found for deletion.");
         }
-        return false;
     }
 
     @Override
-    public List<Map<String, Object>> getAllUserInsights() {
-        List<User> users = userRepo.findAll();
-        List<Map<String, Object>> allUserInsights = new ArrayList<>();
+    public List<Map<String, Object>> getAllBidInsights() {
+        List<Project> projects = projectRepo.findAll();
+        List<Map<String, Object>> allBidInsights = new ArrayList<>();
 
-        for (User user : users) {
-            if ("Admin".equalsIgnoreCase(user.getUserRole())) {
-                continue;
-            }
+        for (Project project : projects) {
+            List<Bid> projectBids = bidRepo.findBidsByProjectId(project.getProjectId());
 
-            List<MaterialRequest> userRequests = materialRequestRepo.findMaterialRequestsByUserId(user.getUserId());
+            Map<String, Object> bidInsights = new HashMap<>();
+            bidInsights.put("projectId", project.getProjectId());
+            bidInsights.put("title", project.getTitle());
+            bidInsights.put("totalBids", projectBids.size());
+            bidInsights.put("averageBidAmount",
+                    projectBids.stream().mapToDouble(Bid::getBidAmount).average().orElse(0.0));
+            bidInsights.put("highestBidAmount",
+                    projectBids.stream().mapToDouble(Bid::getBidAmount).max().orElse(0.0));
+            bidInsights.put("lowestBidAmount",
+                    projectBids.stream().mapToDouble(Bid::getBidAmount).min().orElse(0.0));
+            bidInsights.put("bids", projectBids);
 
-            Map<String, Object> userInsights = new HashMap<>();
-            userInsights.put("userId", user.getUserId());
-            userInsights.put("username", user.getUsername());
-            userInsights.put("email", user.getEmail());
-            userInsights.put("totalRequests", userRequests.size());
-            userInsights.put("highUrgencyRequests",
-                    userRequests.stream().filter(req -> "High".equalsIgnoreCase(req.getUrgencyLevel())).count());
-            userInsights.put("pendingRequests",
-                    userRequests.stream().filter(req -> "Pending".equalsIgnoreCase(req.getStatus())).count());
-            userInsights.put("orders", userRequests);
-
-            allUserInsights.add(userInsights);
+            allBidInsights.add(bidInsights);
         }
 
-        return allUserInsights;
+        return allBidInsights;
     }
 }
