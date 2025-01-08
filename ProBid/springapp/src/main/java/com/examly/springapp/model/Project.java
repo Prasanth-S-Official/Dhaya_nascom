@@ -37,7 +37,7 @@ public class Project {
 
     // Constructor with parameters
     public Project(Long projectId, String title, String description, Double budget, LocalDate deadline,
-                   String status, String category, List<String> skillsRequired, String attachments,
+                   String status, String category, String skillsRequired, String attachments,
                    String priority, String paymentTerms, User user) {
         this.projectId = projectId;
         this.title = title;

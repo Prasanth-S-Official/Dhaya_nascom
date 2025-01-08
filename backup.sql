@@ -111,6 +111,7 @@ CREATE TABLE `project` (
   `description` varchar(255) DEFAULT NULL,
   `payment_terms` varchar(255) DEFAULT NULL,
   `priority` varchar(255) DEFAULT NULL,
+  `skills_required` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) NOT NULL,
@@ -127,30 +128,6 @@ CREATE TABLE `project` (
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `project_skills_required`
---
-
-DROP TABLE IF EXISTS `project_skills_required`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project_skills_required` (
-  `project_project_id` bigint(20) NOT NULL,
-  `skills_required` varchar(255) DEFAULT NULL,
-  KEY `FKbokwiy2xf5hxfp10rfd8hfnl0` (`project_project_id`),
-  CONSTRAINT `FKbokwiy2xf5hxfp10rfd8hfnl0` FOREIGN KEY (`project_project_id`) REFERENCES `project` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `project_skills_required`
---
-
-LOCK TABLES `project_skills_required` WRITE;
-/*!40000 ALTER TABLE `project_skills_required` DISABLE KEYS */;
-/*!40000 ALTER TABLE `project_skills_required` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -177,7 +154,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$8m5nkbc5tegqXUHCn0HygeeCuc641wfuPYz1Hb7Q8qzBQxp4p.18u','Admin','admin');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$Mg1quAsJ1ub.7CKQykhhM.cso1hXTq9GKwUdcmPsvDtptF9n.uIxS','Admin','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -190,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-08  8:24:34
+-- Dump completed on 2025-01-08  8:39:35
