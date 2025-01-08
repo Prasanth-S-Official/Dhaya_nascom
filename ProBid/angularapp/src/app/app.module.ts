@@ -23,7 +23,7 @@ import { UserviewmaterialComponent } from './components/userviewmaterial/uservie
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ClientnavComponent } from './components/clientnav/clientnav.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
-import { AdminViewProjectsComponent } from './components/admin-view-projects/admin-view-projects.component';
+
 import { ClientViewProjectsComponent } from './components/client-view-projects/client-view-projects.component';
 
 @NgModule({
@@ -48,7 +48,6 @@ import { ClientViewProjectsComponent } from './components/client-view-projects/c
     AdminInsightsComponent,
     ClientnavComponent,
     ProjectManagementComponent,
-    AdminViewProjectsComponent,
     ClientViewProjectsComponent,
   
 

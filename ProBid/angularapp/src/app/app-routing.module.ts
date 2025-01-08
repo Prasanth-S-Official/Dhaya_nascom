@@ -17,6 +17,7 @@ import { AdminViewMaterialComponent } from './components/admin-view-material/adm
 import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
+import { ClientViewProjectsComponent } from './components/client-view-projects/client-view-projects.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'client/add/project', component: ProjectManagementComponent, canActivate: [AuthGuard] },
   { path: 'admin/edit/material/:id', component: AdminMaterialComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
-  { path: 'client/view/projects', component: Clien, canActivate: [AuthGuard] },
+  { path: 'client/view/projects', component: ClientViewProjectsComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
 
