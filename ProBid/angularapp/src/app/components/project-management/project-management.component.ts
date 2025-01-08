@@ -67,7 +67,7 @@ export class ProjectManagementComponent implements OnInit {
     const projectData: Project = {
       ...this.projectForm.value,
       status: 'Open', // Default status for new projects
-      userId: Number(localStorage.getItem('userId')), // Fetch userId from local storage
+      user: {userId: Number(localStorage.getItem('userId'))}, // Fetch userId from local storage
     };
 
     if (this.id) {
