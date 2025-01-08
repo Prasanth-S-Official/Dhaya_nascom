@@ -4,7 +4,7 @@
     <div class="signup-left">
       <img src="/assets/images/background.webp" alt="Signup Image" class="signup-image">
       <div class="image-title">
-        <h1>BidPoint</h1>
+        <h1>DriveU</h1>
       </div>
     </div>
 
@@ -76,9 +76,11 @@
           </select>
           <div *ngIf="errors.userRole" class="error">{{ errors.userRole }}</div>
         </div>
-        
+
 
         <div *ngIf="error" class="error">{{ error }}</div>
+
+        
         
         <button type="submit" class="signup-button" (click)="handleSubmit()">
           Signup

@@ -82,6 +82,8 @@ export class SignupComponent {
     if (!hasErrors) {
       try {
         const response = await this.authService.register(this.formData).toPromise();
+        console.log(response);
+        
   
         if (response.status === 409) {
           this.error = response.body?.message || "User already exists with this email";
@@ -101,8 +103,7 @@ export class SignupComponent {
     }
   }
   
-  
-  
+
 
   handleSuccessMessage() {
     this.successPopup = false;
