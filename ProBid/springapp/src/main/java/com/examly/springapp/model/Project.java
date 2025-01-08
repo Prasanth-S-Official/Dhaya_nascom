@@ -22,8 +22,7 @@ public class Project {
 
     private String category; // e.g., "Web Development", "Graphic Design"
 
-    @ElementCollection
-    private List<String> skillsRequired; // List of skills, e.g., "Python", "Design"
+    private String skillsRequired; // List of skills, e.g., "Python", "Design"
 
     @Column(length = 1000)
     private String attachments; // File URLs or paths for reference materials
@@ -115,11 +114,11 @@ public class Project {
         this.category = category;
     }
 
-    public List<String> getSkillsRequired() {
+    public String getSkillsRequired() {
         return skillsRequired;
     }
 
-    public void setSkillsRequired(List<String> skillsRequired) {
+    public void setSkillsRequired(String skillsRequired) {
         this.skillsRequired = skillsRequired;
     }
 
