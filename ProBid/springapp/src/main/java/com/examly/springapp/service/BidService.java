@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface MaterialRequestService {
+public interface BidService {
     MaterialRequest addMaterialRequest(MaterialRequest materialRequest);
     Optional<MaterialRequest> getMaterialRequestById(Long materialRequestId);
     List<MaterialRequest> getAllMaterialRequests();

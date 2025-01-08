@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class MaterialRequestServiceImpl implements MaterialRequestService {
+public class BidServiceImpl implements BidService {
 
     @Autowired
     private MaterialRequestRepo materialRequestRepo;
