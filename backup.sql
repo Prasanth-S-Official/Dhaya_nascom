@@ -118,7 +118,7 @@ CREATE TABLE `project` (
   PRIMARY KEY (`project_id`),
   KEY `FKo06v2e9kuapcugnyhttqa1vpt` (`user_id`),
   CONSTRAINT `FKo06v2e9kuapcugnyhttqa1vpt` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES (1,'demo url',450000,'SEO Optimization','2025-01-31','demo description','Fixed Price','Low','demo skills','Open','demo title updated',1);
+INSERT INTO `project` VALUES (1,'demo url',450000,'SEO Optimization','2025-01-31','demo description','Fixed Price','Low','demo skills','Open','demo title updated',1),(4,'https://examly467-my.sharepoint.com/:b:/g/personal/dhayananth_d_iamneo_ai/EZc3Wy5SCZ1MoCJcp8b-laIBZ2oPUukSOd_E_qSg1kzP4Q?e=35P0Wi',600000,'Mobile App Development','2025-01-10','demo description 2','Fixed Price','Medium','demo skills','Open','demo title two',1);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09 10:32:13
+-- Dump completed on 2025-01-09 10:47:13
