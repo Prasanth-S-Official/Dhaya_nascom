@@ -18,6 +18,7 @@ import { UserviewmaterialComponent } from './components/userviewmaterial/uservie
 import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { ClientViewProjectsComponent } from './components/client-view-projects/client-view-projects.component';
+import { FreelancerviewprojectComponent } from './components/freelancerviewproject/freelancerviewproject.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -45,7 +46,7 @@ const routes: Routes = [
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // User Routes
-  { path: 'user/view/materials', component: UserviewmaterialComponent, canActivate: [AuthGuard] },
+  { path: 'freelancer/view/projects', component: FreelancerviewprojectComponent, canActivate: [AuthGuard] },
   { path: 'user/add/request', component: UseraddrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/view/applied-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },

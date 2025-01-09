@@ -10,7 +10,7 @@ import { BidService } from 'src/app/services/bid.service';
   templateUrl: './freelancerviewproject.component.html',
   styleUrls: ['./freelancerviewproject.component.css'],
 })
-export class FreelancerViewProjectComponent implements OnInit {
+export class FreelancerviewprojectComponent implements OnInit {
   availableProjects: Project[] = [];
   filteredProjects: Project[] = [];
   placedBids: any[] = [];
