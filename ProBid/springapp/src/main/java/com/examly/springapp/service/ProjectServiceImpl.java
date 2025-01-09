@@ -33,8 +33,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAllProjects() {
-        return projectRepo.findAll();
+        return projectRepo.findAll(); // Fetch all projects from the database
     }
+
 
     @Override
     public List<Project> getProjectsByUserId(Long userId) {
