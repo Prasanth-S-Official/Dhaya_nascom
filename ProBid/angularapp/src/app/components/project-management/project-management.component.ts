@@ -53,7 +53,7 @@ export class ProjectManagementComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching project:', error);
-        this.router.navigate(['/error']);
+        this.router.navigate(['/error']); // Navigate to error page if fetching fails
       }
     );
   }
@@ -67,20 +67,24 @@ export class ProjectManagementComponent implements OnInit {
     const projectData: Project = {
       ...this.projectForm.value,
       status: 'Open', // Default status for new projects
-      user: {userId: Number(localStorage.getItem('userId'))}, // Fetch userId from local storage
+      user: { userId: Number(localStorage.getItem('userId')) }, // Fetch userId from local storage
     };
 
     if (this.id) {
       this.projectService.updateProject(this.id, projectData).subscribe(
         () => this.showSuccessPopup(),
-        (error) => console.error('Error updating project:', error)
+        (error) => {
+          console.error('Error updating project:', error);
+          this.router.navigate(['/error']); // Navigate to error page if update fails
+        }
       );
     } else {
-      console.log("ProjectData",projectData);
-      
       this.projectService.addProject(projectData).subscribe(
         () => this.showSuccessPopup(),
-        (error) => console.error('Error adding project:', error)
+        (error) => {
+          console.error('Error adding project:', error);
+          this.router.navigate(['/error']); // Navigate to error page if addition fails
+        }
       );
     }
   }
@@ -98,10 +102,10 @@ export class ProjectManagementComponent implements OnInit {
 
   handleSuccessMessage(): void {
     this.successPopup = false;
-    this.router.navigate(['/user/view/projects']);
+    this.router.navigate(['/client/view/projects']);
   }
 
   navigateBack(): void {
-    this.router.navigate(['/user/view/projects']);
+    this.router.navigate(['/client/view/projects']);
   }
 }

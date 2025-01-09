@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent },
 
   { path: 'client/add/project', component: ProjectManagementComponent, canActivate: [AuthGuard] },
-  { path: 'admin/edit/material/:id', component: AdminMaterialComponent, canActivate: [AuthGuard] },
+  { path: 'client/edit/project/:id', component: ProjectManagementComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/applied-requests', component: AdminviewappliedrequestComponent, canActivate: [AuthGuard] },
   { path: 'client/view/projects', component: ClientViewProjectsComponent, canActivate: [AuthGuard] },
   { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },

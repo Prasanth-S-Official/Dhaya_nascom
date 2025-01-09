@@ -68,7 +68,7 @@ export class ClientViewProjectsComponent implements OnInit {
   }
 
   navigateToEditProject(projectId: number): void {
-    this.router.navigate(['/admin/edit/project', projectId]);
+    this.router.navigate(['/client/edit/project', projectId]);
   }
 
   applyFilters(): void {
