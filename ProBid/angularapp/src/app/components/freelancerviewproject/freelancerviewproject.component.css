@@ -59,20 +59,20 @@ body {
   }
   
   /* Training Table */
-  .material-table {
+  .project-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
   }
   
-  .material-table th,
-  .material-table td {
+  .project-table th,
+  .project-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
   }
   
-  .material-table th {
+  .project-table th {
     background-color: #3276a6;
     color: white;
   }
