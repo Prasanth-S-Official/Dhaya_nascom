@@ -1,0 +1,62 @@
+<app-freelancernav></app-freelancernav>
+<div>
+  <div id="projectHomeBody">
+    <h1>Available Projects</h1>
+    <hr />
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Project Title, Skills, or Category..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Projects Table -->
+    <table class="project-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Project Title</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Budget</th>
+          <th>Deadline</th>
+          <th>Skills Required</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredProjects.length && availableProjects.length; else noRecords">
+        <tr *ngFor="let project of filteredProjects; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ project.title }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ project.category }}</td>
+          <td>₹{{ project.budget }}</td>
+          <td>{{ project.deadline | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ project.skillsRequired }}</td>
+          <td>
+            <button
+              id="applyButton"
+              *ngIf="!isProjectBid(project)"
+              (click)="handleBidClick(project)"
+            >
+              Place Bid
+            </button>
+            <button id="appliedButton" *ngIf="isProjectBid(project)">Bid Placed</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRecords>
+        <tbody>
+          <tr>
+            <td colspan="8" class="no-records-cell">Oops! No records found</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+</div>
