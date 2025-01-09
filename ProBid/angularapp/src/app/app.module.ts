@@ -25,6 +25,7 @@ import { ClientnavComponent } from './components/clientnav/clientnav.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 
 import { ClientViewProjectsComponent } from './components/client-view-projects/client-view-projects.component';
+import { FreelancernavComponent } from './components/freelancernav/freelancernav.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ClientViewProjectsComponent } from './components/client-view-projects/c
     ClientnavComponent,
     ProjectManagementComponent,
     ClientViewProjectsComponent,
+    FreelancernavComponent,
   
 
   ],
