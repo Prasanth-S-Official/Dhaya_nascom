@@ -72,9 +72,8 @@
   <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
   <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
 </div> -->
-
 <app-clientnav></app-clientnav>
-<div id="parent" [ngClass]="{ blur: showAttachmentPopup }">
+<div id="parent" [ngClass]="{ blur: showDeletePopup }">
   <div id="projectHomeBody">
     <h1>Projects</h1>
     <hr />
@@ -114,19 +113,21 @@
           <p><strong>Status:</strong> {{ project.status }}</p>
           <p><strong>Priority:</strong> {{ project.priority }}</p>
           <p><strong>Payment Terms:</strong> {{ project.paymentTerms }}</p>
-          <p *ngIf="project.attachments">
-            <strong>Attachment:</strong> 
-            <button class="view-attachment-button" (click)="viewAttachment(project.attachments)">View</button>
-          </p>
+          <button class="attachment-button" (click)="viewAttachment(project.attachments)">
+            View Attachment
+          </button>
         </div>
         <div class="card-footer">
-          <button class="edit-button" (click)="navigateToEditProject(project.projectId)">Edit</button>
-          <button class="delete-button" (click)="handleDeleteClick(project.projectId)">Delete</button>
+          <button class="edit-button" (click)="navigateToEditProject(project.projectId)">
+            Edit
+          </button>
+          <button class="delete-button" (click)="handleDeleteClick(project.projectId)">
+            Delete
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- No Data Found Message -->
     <ng-template #noDataFound>
       <div class="no-data-message">
         <p>Oops! No data found.</p>
@@ -135,15 +136,24 @@
   </div>
 </div>
 
-<!-- Attachment Popup -->
 <div *ngIf="showAttachmentPopup" class="attachment-popup">
   <div class="attachment-popup-content">
     <button class="close-button" (click)="closeAttachmentPopup()">×</button>
     <div *ngIf="loadingAttachment" class="spinner"></div>
     <div *ngIf="!loadingAttachment">
-      <iframe *ngIf="attachmentType === 'pdf'" [src]="attachmentUrl | safeUrl" class="attachment-preview"></iframe>
-      <img *ngIf="attachmentType === 'image'" [src]="attachmentUrl" class="attachment-preview" />
+      <iframe
+        *ngIf="attachmentType === 'pdf'"
+        [src]="attachmentUrl | safeUrl"
+        class="attachment-preview"
+      ></iframe>
+      <img
+        *ngIf="attachmentType === 'image'"
+        [src]="attachmentUrl"
+        class="attachment-preview"
+      />
+      <p *ngIf="attachmentType === 'unsupported'" class="unsupported-message">
+        Unable to preview this file. Please download it to view.
+      </p>
     </div>
   </div>
 </div>
-
