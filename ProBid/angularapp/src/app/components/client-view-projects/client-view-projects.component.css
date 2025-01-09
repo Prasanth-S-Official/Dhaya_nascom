@@ -380,93 +380,134 @@ button.toggle-status-button.active-button {
   
 
   /* General Container for Cards */
-.driver-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Individual Card */
+.project-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Individual Card */
+.project-card {
+  background: #ffffff;
+  width: calc(50% - 20px); /* Two cards per row */
+  max-width: 400px; /* Maximum width for each card */
+  min-width: 300px; /* Minimum width for smaller screens */
+  border-radius: 15px; /* Rounded edges */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card Hover Effect */
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Header */
+.card-header {
+  background: linear-gradient(135deg, #6c63ff, #8a80ff); /* Attractive gradient */
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  border-top-left-radius: 15px; /* Match rounded edges */
+  border-top-right-radius: 15px; /* Match rounded edges */
+}
+
+.card-header h2 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+}
+
+/* Card Body */
+.card-body {
+  padding: 20px;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.card-body p {
+  margin: 8px 0;
+}
+
+.card-body strong {
+  color: #333;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-top: 1px solid #ddd;
+  justify-content: center;
+  border-bottom-left-radius: 15px; /* Match rounded edges */
+  border-bottom-right-radius: 15px; /* Match rounded edges */
+}
+
+/* Buttons */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px; /* Fully rounded buttons */
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+/* Edit Button */
+button.edit-button {
+  background: #28a745;
+}
+
+button.edit-button:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+button.delete-button {
+  background: #c0392b;
+}
+
+button.delete-button:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  transform: scale(1.05);
+}
+
+/* No Data Found Message */
+.no-data-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px dashed #ddd;
+  border-radius: 10px;
+  background: #fdfdfd;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .driver-card {
-    background: #ffffff;
-    width: calc(50% - 20px); /* 2 cards per row */
-    min-width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(100% - 20px); /* One card per row on smaller screens */
   }
-  
-  /* Card Hover Effect */
-  .driver-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Card Header */
-  .card-header {
-    background: linear-gradient(135deg, #3276a6, #3c91e6);
-    color: #ffffff;
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .card-header h2 {
-    font-size: 20px;
-    margin: 0;
-  }
-  
-  .card-header p {
-    font-size: 14px;
-    margin: 5px 0 0;
-    font-style: italic;
-  }
-  
-  /* Card Body */
-  .card-body {
-    padding: 15px;
-    color: #555;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  
-  .card-body p {
-    margin: 8px 0;
-  }
-  
-  .card-body strong {
-    color: #333;
-  }
-  
-  /* Card Footer */
-  .card-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 15px;
-    background: #f5f5f5;
-    border-top: 1px solid #ddd;
-    justify-content: center;
-  }
-  
-  /* Buttons */
-  button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s;
-  }
-  
+}
+
   /* Edit Button */
   button.edit-button {
     background: #28a745;
