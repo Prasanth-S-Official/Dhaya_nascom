@@ -155,7 +155,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client'),(5,'free@gmail.com','9876543213','$2a$10$461pSAits7Fkt3fmxrUCVOnGkitPkt1ekWURm7xeqSAnyn5gayifi','Freelancer','freelancer'),(6,'freeone@gmail.com','9876543214','$2a$10$wgVBlyc11W/ohxN9XUzNp.ArkQZh9jQ1mEY1/LNyrIuk45er7yGqS','Freelancer','freelancer');
+INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client'),(5,'free@gmail.com','9876543213','$2a$10$461pSAits7Fkt3fmxrUCVOnGkitPkt1ekWURm7xeqSAnyn5gayifi','Freelancer','freelancer'),(6,'freeone@gmail.com','9876543214','$2a$10$wgVBlyc11W/ohxN9XUzNp.ArkQZh9jQ1mEY1/LNyrIuk45er7yGqS','Freelancer','demofree');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09  9:47:13
+-- Dump completed on 2025-01-09 10:02:13
