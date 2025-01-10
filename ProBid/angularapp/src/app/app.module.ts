@@ -29,6 +29,7 @@ import { FreelancernavComponent } from './components/freelancernav/freelancernav
 import { FreelancerviewprojectComponent } from './components/freelancerviewproject/freelancerviewproject.component';
 import { BidRequestComponent } from './components/bid-request/bid-request.component';
 import { FreelancerViewRequestedComponent } from './components/freelancer-view-requested/freelancer-view-requested.component';
+import { ClientViewRequestsComponent } from './components/client-view-requests/client-view-requests.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { FreelancerViewRequestedComponent } from './components/freelancer-view-r
     FreelancerviewprojectComponent,
     BidRequestComponent,
     FreelancerViewRequestedComponent,
+    ClientViewRequestsComponent,
   
 
   ],

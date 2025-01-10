@@ -1,0 +1,58 @@
+<app-clientnav></app-clientnav>
+<div class="dashboard-container">
+  <h1>Project Bids Dashboard</h1>
+  <hr />
+
+  <!-- Dashboard Summary -->
+  <div class="dashboard-summary">
+    <div class="summary-card">
+      <h3>Total Projects</h3>
+      <p>{{ projects.length }}</p>
+    </div>
+    <div class="summary-card">
+      <h3>Total Bids Received</h3>
+      <p>{{ totalBids }}</p>
+    </div>
+    <div class="summary-card">
+      <h3>Total Project Value</h3>
+      <p>₹{{ totalProjectValue | number: '1.2-2' }}</p>
+    </div>
+  </div>
+
+  <!-- Project List -->
+  <div class="project-list">
+    <h2>Projects</h2>
+    <div *ngFor="let project of projects" class="project-card" (click)="handleProjectClick(project)">
+      <h3>{{ project.title }}</h3>
+      <p><strong>Category:</strong> {{ project.category }}</p>
+      <p><strong>Total Bids:</strong> {{ project.bids.length }}</p>
+      <p><strong>Value:</strong> ₹{{ project.budget }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Bids Section -->
+<div *ngIf="selectedProject" class="bids-container">
+  <h2>Bids for {{ selectedProject.title }}</h2>
+  <hr />
+
+  <!-- No Bids Message -->
+  <div *ngIf="!selectedProject.bids.length" class="no-data-message">
+    <p>No Bids Found</p>
+  </div>
+
+  <!-- Bids List -->
+  <div *ngIf="selectedProject.bids.length" class="bids-list">
+    <div
+      *ngFor="let bid of displayedBids"
+      class="bid-card"
+      [ngClass]="{ highlighted: bid === highlightedBid }"
+    >
+      <p><strong>Freelancer:</strong> {{ bid.user.username }}</p>
+      <p><strong>Bid Amount:</strong> ₹{{ bid.bidAmount }}</p>
+      <p><strong>Proposal:</strong> {{ bid.proposal }}</p>
+      <p><strong>Time Estimation:</strong> {{ bid.timeEstimation | date: 'MMM d, y' }}</p>
+      <p><strong>Status:</strong> {{ bid.status }}</p>
+    </div>
+  </div>
+</div>
