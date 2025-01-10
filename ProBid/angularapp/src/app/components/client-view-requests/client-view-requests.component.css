@@ -1,165 +1,128 @@
-/* General Styling */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7fc;
-  }
-  
-  /* Dashboard Container */
-  .dashboard-container {
+/* Dashboard Styling */
+.dashboard-container {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
   }
   
-  .dashboard-container h1 {
-    text-align: center;
-    color: #333;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  /* Dashboard Summary */
   .dashboard-summary {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
     gap: 20px;
   }
   
   .summary-card {
     flex: 1;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #ffffff;
+    color: white;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .summary-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
   
-  .summary-card h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .summary-card p {
-    font-size: 1.8rem;
-    font-weight: bold;
-  }
-  
-  /* Project List */
-  .project-list {
-    margin-top: 20px;
-  }
-  
-  .project-list h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .project-card {
-    background: #ffffff;
+  .project-list .project-card {
     margin: 10px 0;
     padding: 15px;
+    background: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    border-left: 5px solid #2575fc;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .project-card:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    border-left: 5px solid #6a11cb;
   }
   
-  .project-card h3 {
-    font-size: 1.4rem;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .project-card p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  /* Bids Section */
-  .bids-container {
-    margin-top: 20px;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .bids-container h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  /* Bids List */
-  .bids-list {
+  /* Popup Styling */
+  .bids-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .bids-popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
   }
   
   .bid-card {
-    background: linear-gradient(135deg, #f4f7fc, #ffffff);
     padding: 15px;
+    background: linear-gradient(135deg, #f4f7fc, white);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .bid-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .bid-card.highlighted {
     border: 2px solid #28a745;
-    animation: highlight-blink 1s alternate infinite;
+    animation: highlight-blink 1s infinite alternate;
   }
   
-  .bid-card p {
-    margin: 5px 0;
-    font-size: 1rem;
-    color: #555;
+  .bid-actions button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
   }
   
-  .bid-card p strong {
-    color: #333;
+  #greenButton {
+    background: #28a745;
+  }
+  
+  #redButton {
+    background: #dc3545;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   
   @keyframes highlight-blink {
-    from {
-      background-color: rgba(40, 167, 69, 0.1);
+    0% {
+      background: rgba(40, 167, 69, 0.1);
     }
-    to {
-      background-color: rgba(40, 167, 69, 0.3);
+    100% {
+      background: rgba(40, 167, 69, 0.3);
     }
-  }
-  
-  /* No Data Message */
-  .no-data-message {
-    text-align: center;
-    color: #999;
-    font-size: 1.2rem;
-    margin-top: 20px;
   }
   
