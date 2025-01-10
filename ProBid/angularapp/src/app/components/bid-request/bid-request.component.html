@@ -1,1 +1,81 @@
-<p>bid-request works!</p>
+<app-freelancernav></app-freelancernav>
+<div class="bid-request-container" [ngClass]="{ blur: successPopup }">
+  <button type="button" class="back-button" (click)="navigateBack()">Back</button>
+  <h2>{{ bidId ? 'Edit Bid' : 'New Bid' }}</h2>
+  <hr />
+
+  <form [formGroup]="bidForm" (ngSubmit)="onSubmit()">
+    <!-- Bid Amount -->
+    <div>
+      <label for="bidAmount">Bid Amount<span class="required">*</span></label>
+      <input id="bidAmount" type="number" formControlName="bidAmount" />
+      <div *ngIf="bidForm.controls['bidAmount'].touched && bidForm.controls['bidAmount'].hasError('required')" class="error">
+        *Bid Amount is required
+      </div>
+      <div *ngIf="bidForm.controls['bidAmount'].hasError('min')" class="error">
+        *Bid Amount must be greater than 0
+      </div>
+    </div>
+
+    <!-- Proposal -->
+    <div>
+      <label for="proposal">Proposal<span class="required">*</span></label>
+      <textarea id="proposal" formControlName="proposal"></textarea>
+      <div *ngIf="bidForm.controls['proposal'].touched && bidForm.controls['proposal'].hasError('required')" class="error">
+        *Proposal is required
+      </div>
+    </div>
+
+    <!-- Time Estimation -->
+    <div>
+      <label for="timeEstimation">Time Estimation<span class="required">*</span></label>
+      <input id="timeEstimation" type="text" formControlName="timeEstimation" />
+      <div *ngIf="bidForm.controls['timeEstimation'].touched && bidForm.controls['timeEstimation'].hasError('required')" class="error">
+        *Time Estimation is required
+      </div>
+    </div>
+
+    <!-- Communication Preference -->
+    <div>
+      <label for="communicationPreference">Preferred Communication<span class="required">*</span></label>
+      <select id="communicationPreference" formControlName="communicationPreference">
+        <option value="">Select a mode</option>
+        <option value="Email">Email</option>
+        <option value="Phone">Phone</option>
+        <option value="Messaging Platform">Messaging Platform</option>
+      </select>
+      <div *ngIf="bidForm.controls['communicationPreference'].touched && bidForm.controls['communicationPreference'].hasError('required')" class="error">
+        *Communication Preference is required
+      </div>
+    </div>
+
+    <!-- Upload Resume -->
+    <div>
+      <label for="resumeImage">Resume<span class="required">*</span></label>
+      <input
+        id="resumeImage"
+        type="file"
+        accept="image/jpeg, image/png"
+        (change)="handleFileChange($event)"
+      />
+      <div *ngIf="fileError" class="error">
+        *{{ fileError }}
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="showError" class="error">
+      *All required fields must be filled out.
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-button">{{ bidId ? 'Update Bid' : 'Submit Bid' }}</button>
+  </form>
+</div>
+
+<div *ngIf="successPopup" class="success-popup">
+  <div class="success-popup-content">
+    <p>{{ bidId ? 'Bid Updated Successfully!' : 'Bid Submitted Successfully!' }}</p>
+    <button (click)="handleSuccessMessage()" class="ok-button">Ok</button>
+  </div>
+</div>
