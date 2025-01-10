@@ -137,7 +137,7 @@ export class BidRequestComponent implements OnInit {
   handleSuccessMessage(): void {
     this.successPopup = false;
     if (this.bidId) {
-      this.router.navigate(['/freelancer/my/bids']);
+      this.router.navigate(['/freelancer/view/my-bids']);
     } else {
       this.router.navigate(['/freelancer/view/projects']);
     }
