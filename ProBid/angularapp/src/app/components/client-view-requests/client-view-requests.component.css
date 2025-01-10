@@ -44,85 +44,90 @@
   }
   
   /* Popup Styling */
-  .bids-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+.bids-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.bids-popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s;
+}
+
+.bids-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.bid-card {
+  padding: 15px;
+  background: linear-gradient(135deg, #f4f7fc, white);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bid-card.highlighted {
+  border: 2px solid #28a745;
+  animation: highlight-blink 1s infinite alternate;
+}
+
+.bid-actions button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+#greenButton {
+  background: #28a745;
+}
+
+#redButton {
+  background: #dc3545;
+}
+
+.undo-button {
+  background: #ffc107;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .bids-popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-    width: 90%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 0.5s;
+  to {
+    opacity: 1;
   }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
+}
+
+@keyframes highlight-blink {
+  0% {
+    background: rgba(40, 167, 69, 0.1);
   }
-  
-  .bid-card {
-    padding: 15px;
-    background: linear-gradient(135deg, #f4f7fc, white);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  100% {
+    background: rgba(40, 167, 69, 0.3);
   }
-  
-  .bid-card.highlighted {
-    border: 2px solid #28a745;
-    animation: highlight-blink 1s infinite alternate;
-  }
-  
-  .bid-actions button {
-    margin: 5px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  #greenButton {
-    background: #28a745;
-  }
-  
-  #redButton {
-    background: #dc3545;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes highlight-blink {
-    0% {
-      background: rgba(40, 167, 69, 0.1);
-    }
-    100% {
-      background: rgba(40, 167, 69, 0.3);
-    }
-  }
-  
+}

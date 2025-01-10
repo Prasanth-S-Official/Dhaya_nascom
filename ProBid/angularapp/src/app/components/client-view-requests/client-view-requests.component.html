@@ -38,13 +38,13 @@
     <h2>Bids for {{ selectedProject?.title }}</h2>
     <hr />
 
-    <!-- No Bids Message -->
-    <div *ngIf="!selectedProject?.bids.length" class="no-data-message">
-      <p>No Bids Found</p>
+    <!-- Undo Button -->
+    <div class="undo-container" *ngIf="selectedProject?.hasUndo">
+      <button class="undo-button" (click)="undoAllBids()">Undo Changes</button>
     </div>
 
-    <!-- Bids List -->
-    <div *ngIf="selectedProject?.bids.length" class="bids-list">
+    <!-- Bids Cards -->
+    <div class="bids-grid">
       <div
         *ngFor="let bid of displayedBids"
         class="bid-card"
@@ -59,16 +59,19 @@
           <button
             id="greenButton"
             *ngIf="bid.status === 'Pending'"
-            (click)="updateBidStatus(bid, 'Accepted')"
+            (click)="acceptBid(bid)"
           >
             Accept
           </button>
           <button
             id="redButton"
             *ngIf="bid.status === 'Pending'"
-            (click)="updateBidStatus(bid, 'Rejected')"
+            (click)="rejectBid(bid)"
           >
             Reject
+          </button>
+          <button id="reviewButton" (click)="writeReview(bid.user.userId)">
+            Write a Review
           </button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { BidService } from 'src/app/services/bid.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-view-requests',
@@ -16,7 +17,7 @@ export class ClientViewRequestsComponent implements OnInit {
   displayedBids: any[] = [];
   highlightedBid: any = null;
 
-  constructor(private projectService: ProjectService, private bidService: BidService) {}
+  constructor(private projectService: ProjectService, private bidService: BidService , private router : Router) {}
 
   ngOnInit(): void {
     this.fetchProjects();
@@ -27,7 +28,8 @@ export class ClientViewRequestsComponent implements OnInit {
       (projects: any[]) => {
         this.projects = projects.map(project => ({
           ...project,
-          bids: [] // Initialize empty bids array
+          bids: [],
+          hasUndo: false // Tracks if undo is available for the project
         }));
 
         this.calculateDashboardMetrics();
@@ -72,11 +74,50 @@ export class ClientViewRequestsComponent implements OnInit {
     this.selectedProject = null;
   }
 
+  acceptBid(selectedBid: any): void {
+    this.displayedBids.forEach(bid => {
+      if (bid.bidId !== selectedBid.bidId && bid.status === 'Pending') {
+        bid.previousStatus = bid.status;
+        bid.status = 'Rejected';
+        this.updateBidStatus(bid, 'Rejected');
+      }
+    });
+
+    selectedBid.previousStatus = selectedBid.status;
+    selectedBid.status = 'Accepted';
+    this.updateBidStatus(selectedBid, 'Accepted');
+
+    this.selectedProject.hasUndo = true; // Enable undo for the project
+  }
+
+  rejectBid(bid: any): void {
+    bid.previousStatus = bid.status;
+    bid.status = 'Rejected';
+    this.updateBidStatus(bid, 'Rejected');
+
+    this.selectedProject.hasUndo = true; // Enable undo for the project
+  }
+
+  undoAllBids(): void {
+    this.displayedBids.forEach(bid => {
+      if (bid.previousStatus) {
+        bid.status = bid.previousStatus;
+        delete bid.previousStatus;
+        this.updateBidStatus(bid, bid.status);
+      }
+    });
+
+    this.selectedProject.hasUndo = false; // Disable undo for the project
+  }
+
   updateBidStatus(bid: any, status: string): void {
-    bid.status = status;
     this.bidService.updateBid(bid.bidId, bid).subscribe(
       () => console.log('Bid status updated successfully'),
       error => console.error('Error updating bid status:', error)
     );
+  }
+
+  writeReview(userId: number): void {
+    this.router.navigate(['/client/add/review', userId]);
   }
 }
