@@ -83,11 +83,12 @@ export class ClientViewRequestsComponent implements OnInit {
     this.currentBid = bid;
     this.showMorePopup = true;
   }
-
+  
   closeShowMoreModal(): void {
     this.showMorePopup = false;
     this.currentBid = null;
   }
+  
 
   confirmAction(action: string, bid: any): void {
     this.currentAction = action;
@@ -150,4 +151,6 @@ export class ClientViewRequestsComponent implements OnInit {
   writeReview(freelancerId: number): void {
     console.log(`Navigating to review for freelancer ${freelancerId}`);
   }
+
+  
 }

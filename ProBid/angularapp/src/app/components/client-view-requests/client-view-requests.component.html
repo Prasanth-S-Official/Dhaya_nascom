@@ -68,8 +68,8 @@
 </div>
 
 <!-- Show More Modal -->
-<div *ngIf="showMorePopup" class="show-more-modal-overlay">
-  <div class="show-more-modal-content">
+<div *ngIf="showMorePopup" class="show-more-popup-overlay">
+  <div class="show-more-popup-content">
     <button class="close-button" (click)="closeShowMoreModal()">X</button>
     <h2>Bid Details</h2>
     <p><strong>Freelancer:</strong> {{ currentBid?.user?.username }}</p>
@@ -77,17 +77,22 @@
     <p><strong>Proposal:</strong> {{ currentBid?.proposal }}</p>
     <p><strong>Time Estimation:</strong> {{ currentBid?.timeEstimation | date: 'MMM d, y' }}</p>
     <p><strong>Resume:</strong></p>
-    <img
-      class="resume-image"
-      *ngIf="currentBid?.resumeImage"
-      [src]="'data:image/jpeg;base64,' + currentBid.resumeImage"
-      alt="Resume Image"
-    />
-    <p *ngIf="!currentBid?.resumeImage">Resume not provided</p>
+    <div class="resume-image-container" *ngIf="currentBid?.resumeImage; else noResume">
+      <img
+        class="resume-image"
+        [src]="'data:image/jpeg;base64,' + currentBid.resumeImage"
+        alt="Resume Image"
+      />
+    </div>
+    <ng-template #noResume>
+      <p class="no-resume-message">Not Provided</p>
+    </ng-template>
+    
     <p><strong>Communication Preference:</strong> {{ currentBid?.communicationPreference }}</p>
     <p><strong>Status:</strong> {{ currentBid?.status }}</p>
   </div>
 </div>
+
 
 <!-- Confirmation Modal -->
 <div *ngIf="showConfirmationPopup" class="confirmation-popup-overlay">

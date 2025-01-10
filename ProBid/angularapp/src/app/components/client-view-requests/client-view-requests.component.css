@@ -58,7 +58,6 @@ hr {
   font-weight: bold;
 }
 
-/* Project Cards */
 .project-list {
   margin-top: 40px;
 }
@@ -71,12 +70,74 @@ hr {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border-left: 5px solid #3c91e6; /* Adds a vertical colored line */
+  position: relative;
+  overflow: hidden; /* Ensures no overflow for child elements */
 }
 
 .project-card:hover {
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   background: linear-gradient(135deg, #ffffff, #f9f9f9);
+}
+
+/* Gradient Overlay on Hover */
+.project-card:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(60, 145, 230, 0.1), rgba(102, 111, 233, 0.2));
+  z-index: 1;
+  border-radius: 15px;
+}
+
+/* Project Card Title */
+.project-card h3 {
+  font-size: 1.8rem;
+  color: #3c91e6;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2; /* Ensure it is above the gradient overlay */
+}
+
+.project-card p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* View Attachment Link Styling */
+.project-card a {
+  color: #3c91e6;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.project-card a:hover {
+  color: #2575fc;
+  text-decoration: underline;
+}
+
+/* Add a subtle shadow on the vertical border */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(135deg, #3c91e6, #2575fc);
+  border-radius: 15px 0 0 15px;
+  z-index: 3; /* Ensure the border is on top of the gradient overlay */
 }
 
 .project-card h3 {
@@ -281,4 +342,101 @@ hr {
   100% {
     background: rgba(40, 167, 69, 0.3);
   }
+}
+
+/* Show More Popup Overlay */
+.show-more-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* Higher z-index than bids-popup-overlay */
+}
+
+/* Show More Popup Content */
+.show-more-popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 300px;
+  max-height: 400px; /* Reduce the height */
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.4s ease;
+  position: relative;
+  overflow-y: auto; /* Add scroll for overflow content */
+  z-index: 2001;
+}
+
+.show-more-popup-content h2 {
+  font-size: 1.5rem;
+  color: #3c91e6;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.show-more-popup-content p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.show-more-popup-content .resume-link {
+  display: inline-block;
+  background: #3c91e6;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.show-more-popup-content .resume-link:hover {
+  background: #2a73ba;
+}
+
+/* Close Button */
+.show-more-popup-content .close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.show-more-popup-content .close-button:hover {
+  color: #e74c3c;
+  transform: scale(1.2);
+}
+
+.resume-image-container {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.resume-image {
+  max-width: 100%;
+  max-height: 200px; /* Adjust the image height */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ccc;
+}
+
+.no-resume-message {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: center;
+  margin-top: 8px;
 }
