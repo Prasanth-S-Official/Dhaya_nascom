@@ -20,6 +20,7 @@ import { ProjectManagementComponent } from './components/project-management/proj
 import { ClientViewProjectsComponent } from './components/client-view-projects/client-view-projects.component';
 import { FreelancerviewprojectComponent } from './components/freelancerviewproject/freelancerviewproject.component';
 import { BidRequestComponent } from './components/bid-request/bid-request.component';
+import { FreelancerViewRequestedComponent } from './components/freelancer-view-requested/freelancer-view-requested.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
   // User Routes
   { path: 'freelancer/view/projects', component: FreelancerviewprojectComponent, canActivate: [AuthGuard] },
   { path: 'freelancer/add/bid', component: BidRequestComponent, canActivate: [AuthGuard] },
-  { path: 'user/view/applied-requests', component: UserviewappliedrequestComponent, canActivate: [AuthGuard] },
+  { path: 'freelancer/edit/bid/:id', component: BidRequestComponent, canActivate: [AuthGuard] },
+  { path: 'freelancer/view/my-bids', component: FreelancerViewRequestedComponent, canActivate: [AuthGuard] },
   { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
 
