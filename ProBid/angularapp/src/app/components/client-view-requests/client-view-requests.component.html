@@ -55,6 +55,20 @@
         <p><strong>Proposal:</strong> {{ bid.proposal }}</p>
         <p><strong>Time Estimation:</strong> {{ bid.timeEstimation | date: 'MMM d, y' }}</p>
         <p><strong>Status:</strong> {{ bid.status }}</p>
+        <p>
+          <strong>Resume:</strong>
+          <a class="resume-link" *ngIf="bid.resumeImage" [href]="bid.resumeImage" target="_blank">
+            View Resume
+          </a>
+          <span *ngIf="!bid.resumeImage">Not Provided</span>
+        </p>
+        <p>
+          <strong>Attachment:</strong>
+          <a class="resume-link" *ngIf="bid.attachment" [href]="bid.attachment" target="_blank">
+            View Attachment
+          </a>
+          <span *ngIf="!bid.attachment">No Attachment</span>
+        </p>
         <div class="bid-actions">
           <button
             id="greenButton"

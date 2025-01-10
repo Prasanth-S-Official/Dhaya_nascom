@@ -1,56 +1,96 @@
-/* Dashboard Styling */
+/* General Page Styling */
 .dashboard-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .dashboard-summary {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .summary-card {
-    flex: 1;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .summary-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .project-list .project-card {
-    margin: 10px 0;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .project-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Popup Styling */
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #3c91e6;
+  margin-bottom: 10px;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #3c91e6, #6a11cb);
+  margin-bottom: 20px;
+}
+
+/* Dashboard Summary Cards */
+.dashboard-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.summary-card {
+  flex: 1;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.summary-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.summary-card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Project Cards */
+.project-list {
+  margin-top: 30px;
+}
+
+.project-card {
+  margin: 10px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.project-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Bids Popup Styling */
 .bids-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,50 +100,38 @@
 .bids-popup-content {
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  max-width: 700px;
+  border-radius: 15px;
+  max-width: 800px;
   width: 90%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s ease;
+  position: relative;
 }
 
-.bids-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+.bids-popup-content h2 {
+  font-size: 1.8rem;
+  color: #3c91e6;
+  margin-bottom: 20px;
 }
 
-.bid-card {
-  padding: 15px;
-  background: linear-gradient(135deg, #f4f7fc, white);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bid-card.highlighted {
-  border: 2px solid #28a745;
-  animation: highlight-blink 1s infinite alternate;
-}
-
-.bid-actions button {
-  margin: 5px;
-  padding: 10px 15px;
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
   border: none;
-  border-radius: 20px;
-  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #999;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-#greenButton {
-  background: #28a745;
+.close-button:hover {
+  color: #e74c3c;
 }
 
-#redButton {
-  background: #dc3545;
-}
-
+/* Undo Button */
 .undo-button {
   background: #ffc107;
   color: black;
@@ -112,8 +140,104 @@
   border-radius: 20px;
   cursor: pointer;
   margin: 10px 0;
+  font-size: 1rem;
 }
 
+.undo-button:hover {
+  background: #e0a800;
+}
+
+/* Bids Grid */
+.bids-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.bid-card {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.bid-card.highlighted {
+  border: 2px solid #28a745;
+  animation: highlight-blink 1s infinite alternate;
+}
+
+.bid-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bid-card p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.bid-card .resume-link {
+  margin: 10px 0;
+  display: inline-block;
+  background: #3c91e6;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.bid-card .resume-link:hover {
+  background: #2a73ba;
+}
+
+.bid-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.bid-actions button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#greenButton {
+  background: #28a745;
+}
+
+#greenButton:hover {
+  transform: scale(1.05);
+  background: #218838;
+}
+
+#redButton {
+  background: #dc3545;
+}
+
+#redButton:hover {
+  transform: scale(1.05);
+  background: #c82333;
+}
+
+#reviewButton {
+  background: #17a2b8;
+}
+
+#reviewButton:hover {
+  background: #138496;
+}
+
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
