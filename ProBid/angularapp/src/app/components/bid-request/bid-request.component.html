@@ -28,8 +28,13 @@
 
     <!-- Time Estimation -->
     <div>
-      <label for="timeEstimation">Time Estimation<span class="required">*</span></label>
-      <input id="timeEstimation" type="text" formControlName="timeEstimation" />
+      <label for="timeEstimation">Time Estimation (Start Date)<span class="required">*</span></label>
+      <input
+        id="timeEstimation"
+        type="date"
+        formControlName="timeEstimation"
+        [min]="minDate"
+      />
       <div *ngIf="bidForm.controls['timeEstimation'].touched && bidForm.controls['timeEstimation'].hasError('required')" class="error">
         *Time Estimation is required
       </div>

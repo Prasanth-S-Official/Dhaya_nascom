@@ -16,6 +16,7 @@ export class BidRequestComponent implements OnInit {
   showError = false;
   fileError = '';
   resumeBase64 = '';
+  minDate: string; // Minimum allowed date for the time estimation
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,9 @@ export class BidRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0]; // Set today's date as minimum date
+
     const idParam = this.route.snapshot.paramMap.get('id');
     this.bidId = idParam ? Number(idParam) : null;
 
@@ -45,7 +49,10 @@ export class BidRequestComponent implements OnInit {
   fetchBid(id: number): void {
     this.bidService.getBidById(id).subscribe(
       (response) => {
-        this.bidForm.patchValue(response);
+        this.bidForm.patchValue({
+          ...response,
+          timeEstimation: this.formatDate(response.timeEstimation), // Format date for the form
+        });
         this.resumeBase64 = response.resumeImage || '';
       },
       () => this.router.navigate(['/error'])
@@ -73,12 +80,10 @@ export class BidRequestComponent implements OnInit {
         (error) => console.error('Error updating bid:', error)
       );
     } else {
-      console.log("formData",formData);
-      
-      // this.bidService.addBid(formData).subscribe(
-      //   () => this.showSuccessPopup(),
-      //   (error) => console.error('Error submitting bid:', error)
-      // );
+      this.bidService.addBid(formData).subscribe(
+        () => this.showSuccessPopup(),
+        (error) => console.error('Error submitting bid:', error)
+      );
     }
   }
 
@@ -108,6 +113,14 @@ export class BidRequestComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  formatDate(date: string | Date): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   showErrorMessage(): void {
