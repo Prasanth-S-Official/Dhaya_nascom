@@ -24,7 +24,9 @@ public class Bid {
     private LocalDateTime submissionDate; // Timestamp when the bid was submitted
     private String status; // "Pending", "Accepted", "Rejected", "Withdrawn"
     private String timeEstimation; // Estimated time required to complete the project
+
     @Lob
+    @Column(name = "resumeImage", nullable = true, columnDefinition = "LONGBLOB")
     private String resumeImage; // Resume image as a Base64 string
     private String communicationPreference; // Preferred mode of communication
 
