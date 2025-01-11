@@ -10,8 +10,8 @@ export class ClientviewfeedbackComponent implements OnInit {
 
   feedbacks: any[] = [];
   showDeletePopup = false;
-  showDetailsModal = false;
-  selectedProject: any = null;
+  showBidPopup = false;
+  selectedBid: any = null;
   feedbackToDelete: number | null = null;
 
   constructor(private feedbackService: FeedbackService) {}
@@ -57,13 +57,13 @@ export class ClientviewfeedbackComponent implements OnInit {
     this.showDeletePopup = false;
   }
 
-  showProjectDetails(project: any): void {
-    this.selectedProject = project;
-    this.showDetailsModal = true;
+  viewBidDetails(bid: any): void {
+    this.selectedBid = bid;
+    this.showBidPopup = true;
   }
 
-  closeDetailsModal(): void {
-    this.selectedProject = null;
-    this.showDetailsModal = false;
+  closeBidPopup(): void {
+    this.selectedBid = null;
+    this.showBidPopup = false;
   }
 }
