@@ -47,10 +47,6 @@ export class BidService {
     return this.http.delete<void>(`${this.apiUrl}/${bidId}`, { headers });
   }
 
-  getBidInsights(): Observable<any[]> {
-    const headers = this.getHeaders();
-    return this.http.get<any[]>(`${this.apiUrl}/insights`, { headers });
-  }
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
