@@ -81,5 +81,8 @@
     <p><strong>Status:</strong> {{ selectedBid?.status }}</p>
     <p><strong>Time Estimation:</strong> {{ selectedBid?.timeEstimation }}</p>
     <p><strong>Communication Preference:</strong> {{ selectedBid?.communicationPreference }}</p>
+    <p *ngIf="selectedBid?.withdrawReason">
+      <strong>Withdraw Reason:</strong> {{ selectedBid?.withdrawReason }}
+    </p>
   </div>
 </div>

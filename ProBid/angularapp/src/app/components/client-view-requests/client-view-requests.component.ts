@@ -114,17 +114,44 @@ export class ClientViewRequestsComponent implements OnInit {
     this.showConfirmationPopup = false;
   }
 
+  // acceptBid(bid: any): void {
+  //   bid.status = 'Accepted';
+  //   this.updateBidStatus(bid);
+  //   this.selectedProject.bids.forEach((otherBid) => {
+  //     if (otherBid.bidId !== bid.bidId && otherBid.status === 'Pending') {
+  //       otherBid.status = 'Rejected';
+  //       this.updateBidStatus(otherBid);
+  //     }
+  //   });
+  //   this.selectedProject.hasUndo = true;
+  // }
+
   acceptBid(bid: any): void {
     bid.status = 'Accepted';
     this.updateBidStatus(bid);
+  
+    // Update all other bids as Rejected
     this.selectedProject.bids.forEach((otherBid) => {
       if (otherBid.bidId !== bid.bidId && otherBid.status === 'Pending') {
         otherBid.status = 'Rejected';
         this.updateBidStatus(otherBid);
       }
     });
+  
+    // Update project status to Closed
+    this.selectedProject.status = 'Closed';
+    this.updateProjectStatus(this.selectedProject);
+  
     this.selectedProject.hasUndo = true;
   }
+  
+  updateProjectStatus(project: any): void {
+    this.projectService.updateProject(project.projectId, project).subscribe(
+      () => console.log(`Project ${project.projectId} updated to Closed successfully`),
+      (error) => console.error('Error updating project status:', error)
+    );
+  }
+  
 
   rejectBid(bid: any): void {
     bid.status = 'Rejected';

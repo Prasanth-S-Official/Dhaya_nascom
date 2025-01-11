@@ -28,6 +28,8 @@ export class FreelancerViewRequestedComponent implements OnInit {
     const userId = Number(localStorage.getItem('userId'));
     this.bidService.getBidsByUserId(userId).subscribe(
       (response: any) => {
+        console.log(response);
+        
         this.myBids = response;
         this.filteredBids = response;
       },

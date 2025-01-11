@@ -44,7 +44,7 @@
           </button>
         </div>
         <div class="card-footer">
-          <button class="edit-button" [disabled]="project.status === 'Hold'" (click)="navigateToEditProject(project.projectId)">
+          <button class="edit-button" [disabled]="project.status === 'Hold' || project.status === 'Closed'" (click)="navigateToEditProject(project.projectId)">
             Edit
           </button>
           <button class="delete-button" [disabled]="project.status === 'Hold'" (click)="handleDeleteClick(project.projectId)">

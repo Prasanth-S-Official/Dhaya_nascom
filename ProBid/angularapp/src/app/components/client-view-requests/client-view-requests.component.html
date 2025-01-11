@@ -90,6 +90,9 @@
     
     <p><strong>Communication Preference:</strong> {{ currentBid?.communicationPreference }}</p>
     <p><strong>Status:</strong> {{ currentBid?.status }}</p>
+    <p *ngIf="currentBid?.status === 'Withdrawn' && currentBid?.withdrawReason">
+      <strong>Withdrawn Reason:</strong> {{ currentBid?.withdrawReason }}
+    </p>
   </div>
 </div>
 
