@@ -32,13 +32,18 @@ export class ClientaddfeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     // Get userId from local storage and set it in the form
-    const userId = localStorage.getItem('userId');
+    const userId = Number(localStorage.getItem('userId'));
     this.addFeedbackForm.get('userId').setValue(userId);
 
     // Get projectId and bidId from query parameters and set them in the form
     this.route.queryParams.subscribe((params) => {
-      const projectId = params['projectId'];
-      const bidId = params['bidId'];
+      const projectId = Number(params['projectId']);
+    const bidId = Number(params['bidId']);
+
+    // Debugging: Check if the parameters are being captured
+    console.log('Project ID:', projectId);
+    console.log('Bid ID:', bidId);
+
       if (projectId) {
         this.addFeedbackForm.get('projectId').setValue(projectId);
       }
@@ -50,7 +55,8 @@ export class ClientaddfeedbackComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-
+    console.log(this.addFeedbackForm.value);
+ 
     if (this.addFeedbackForm.valid) {
       const feedback: Feedback = {
         userId: this.addFeedbackForm.get('userId').value,
@@ -77,8 +83,12 @@ export class ClientaddfeedbackComponent implements OnInit {
         bid: feedback.bidId ? { bidId: feedback.bidId } : null, // Include bid only if provided
       };
 
+      console.log(requestPayload);
+      
+
       this.feedbackService.sendFeedback(requestPayload as unknown as Feedback).subscribe(
         (response) => {
+          console.log(response);
           this.successPopup = true;
           this.addFeedbackForm.reset({ userId: this.addFeedbackForm.get('userId').value });
           this.submitted = false;

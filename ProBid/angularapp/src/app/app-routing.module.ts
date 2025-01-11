@@ -8,7 +8,6 @@ import { AdminviewappliedrequestComponent } from './components/adminviewappliedr
 import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
 import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
-import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -22,6 +21,7 @@ import { FreelancerviewprojectComponent } from './components/freelancerviewproje
 import { BidRequestComponent } from './components/bid-request/bid-request.component';
 import { FreelancerViewRequestedComponent } from './components/freelancer-view-requested/freelancer-view-requested.component';
 import { ClientViewRequestsComponent } from './components/client-view-requests/client-view-requests.component';
+import { ClientaddfeedbackComponent } from './components/clientaddfeedback/clientaddfeedback.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'client/edit/project/:id', component: ProjectManagementComponent, canActivate: [AuthGuard] },
   { path: 'client/view/bids', component: ClientViewRequestsComponent, canActivate: [AuthGuard] },
   { path: 'client/view/projects', component: ClientViewProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'admin/view/feedback', component: AdminviewfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'client/add/feedback', component: ClientaddfeedbackComponent, canActivate: [AuthGuard] },
 
 
 
@@ -53,7 +53,6 @@ const routes: Routes = [
   { path: 'freelancer/add/bid', component: BidRequestComponent, canActivate: [AuthGuard] },
   { path: 'freelancer/edit/bid/:id', component: BidRequestComponent, canActivate: [AuthGuard] },
   { path: 'freelancer/view/my-bids', component: FreelancerViewRequestedComponent, canActivate: [AuthGuard] },
-  { path: 'user/add/feedback', component: UseraddfeedbackComponent, canActivate: [AuthGuard] },
   { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes

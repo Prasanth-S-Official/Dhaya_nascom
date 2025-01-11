@@ -150,7 +150,7 @@ export class ClientViewRequestsComponent implements OnInit {
   }
 
   writeReview(projectId: number, bidId: number): void {
-    this.router.navigate(['/write-review'], {
+    this.router.navigate(['/client/add/feedback'], {
       queryParams: { projectId: projectId, bidId: bidId },
     });
   

@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfeedback.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
@@ -42,7 +41,6 @@ import { ClientaddfeedbackComponent } from './components/clientaddfeedback/clien
     ErrorComponent,
     AdminviewfeedbackComponent,
     UserviewfeedbackComponent,
-    UseraddfeedbackComponent,
     AdminnavComponent,
     UsernavComponent,
     UseraddrequestComponent,
