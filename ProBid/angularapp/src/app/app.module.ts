@@ -8,19 +8,9 @@ import { ErrorComponent } from './components/error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
-import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 
-import { UsernavComponent } from './components/usernav/usernav.component';
-import { UseraddrequestComponent } from './components/useraddrequest/useraddrequest.component';
-import { UserviewappliedrequestComponent } from './components/userviewappliedrequest/userviewappliedrequest.component';
-import { AdminviewappliedrequestComponent } from './components/adminviewappliedrequest/adminviewappliedrequest.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { AdminMaterialComponent } from './components/admin-material/admin-material.component';
-import { AdminViewMaterialComponent } from './components/admin-view-material/admin-view-material.component';
-import { UserviewmaterialComponent } from './components/userviewmaterial/userviewmaterial.component';
-import { AdminInsightsComponent } from './components/admin-insights/admin-insights.component';
-
 import { ClientnavComponent } from './components/clientnav/clientnav.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { ClientViewProjectsComponent } from './components/client-view-projects/client-view-projects.component';
@@ -41,17 +31,6 @@ import { FreelancerviewfeedbackComponent } from './components/freelancerviewfeed
     SignupComponent,
     HomePageComponent,
     ErrorComponent,
-    AdminviewfeedbackComponent,
-    UserviewfeedbackComponent,
-    AdminnavComponent,
-    UsernavComponent,
-    UseraddrequestComponent,
-    UserviewappliedrequestComponent,
-    AdminviewappliedrequestComponent,
-    AdminMaterialComponent,
-    AdminViewMaterialComponent,
-    UserviewmaterialComponent,
-    AdminInsightsComponent,
     ClientnavComponent,
     ProjectManagementComponent,
     ClientViewProjectsComponent,
