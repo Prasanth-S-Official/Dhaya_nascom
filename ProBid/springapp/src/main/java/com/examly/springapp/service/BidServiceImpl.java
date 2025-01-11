@@ -80,30 +80,4 @@ public class BidServiceImpl implements BidService {
             throw new BidNotFoundException("Bid not found for deletion.");
         }
     }
-
-    @Override
-    public List<Map<String, Object>> getAllBidInsights() {
-        List<Project> projects = projectRepo.findAll();
-        List<Map<String, Object>> allBidInsights = new ArrayList<>();
-
-        for (Project project : projects) {
-            List<Bid> projectBids = bidRepo.findBidsByProjectId(project.getProjectId());
-
-            Map<String, Object> bidInsights = new HashMap<>();
-            bidInsights.put("projectId", project.getProjectId());
-            bidInsights.put("title", project.getTitle());
-            bidInsights.put("totalBids", projectBids.size());
-            bidInsights.put("averageBidAmount",
-                    projectBids.stream().mapToDouble(Bid::getBidAmount).average().orElse(0.0));
-            bidInsights.put("highestBidAmount",
-                    projectBids.stream().mapToDouble(Bid::getBidAmount).max().orElse(0.0));
-            bidInsights.put("lowestBidAmount",
-                    projectBids.stream().mapToDouble(Bid::getBidAmount).min().orElse(0.0));
-            bidInsights.put("bids", projectBids);
-
-            allBidInsights.add(bidInsights);
-        }
-
-        return allBidInsights;
-    }
 }

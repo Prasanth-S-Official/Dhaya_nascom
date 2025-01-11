@@ -20,6 +20,4 @@ public interface BidService {
     Bid updateBid(Long bidId, Bid bid);
 
     boolean deleteBid(Long bidId);
-
-    List<Map<String, Object>> getAllBidInsights();
 }

@@ -27,9 +27,9 @@ public class FeedbackController {
         return new ResponseEntity<>(createdFeedback, HttpStatus.CREATED);
     }
 
-    @GetMapping("/api/feedback/{id}")
-    public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long id) {
-        Feedback feedback = feedbackService.getFeedbackById(id);
+    @GetMapping("/api/feedback/{feedbackId}")
+    public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long feedbackId) {
+        Feedback feedback = feedbackService.getFeedbackById(feedbackId);
         if (feedback != null) {
             return new ResponseEntity<>(feedback, HttpStatus.OK);
         } else {
@@ -55,9 +55,9 @@ public class FeedbackController {
     }
 
     // Delete a feedback
-    @DeleteMapping("/api/feedback/{id}")
-    public ResponseEntity<Feedback> deleteFeedback(@PathVariable Long id) {
-        Feedback deleted = feedbackService.deleteFeedback(id);
+    @DeleteMapping("/api/feedback/{feedbackId}")
+    public ResponseEntity<Feedback> deleteFeedback(@PathVariable Long feedbackId) {
+        Feedback deleted = feedbackService.deleteFeedback(feedbackId);
         return new ResponseEntity<>(deleted, HttpStatus.OK);
     }
 }

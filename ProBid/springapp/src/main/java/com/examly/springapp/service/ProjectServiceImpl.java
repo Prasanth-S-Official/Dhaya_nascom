@@ -43,11 +43,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getProjectsByStatus(String status) {
-        return projectRepo.findProjectsByStatus(status);
-    }
-
-    @Override
     public Project updateProject(Long projectId, Project project) {
         if (projectRepo.existsById(projectId)) {
             project.setProjectId(projectId);

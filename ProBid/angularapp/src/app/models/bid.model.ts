@@ -9,7 +9,6 @@ export interface Bid {
     timeEstimation: Date; // Estimated time required to complete the project
     resumeImage?: string; // Resume image as a Base64 string
     communicationPreference: string; // Preferred mode of communication
-    rating?: number; // Client's rating of the freelancer (optional)
     withdrawReason?: string; // Reason for withdrawal (optional)
   }
   

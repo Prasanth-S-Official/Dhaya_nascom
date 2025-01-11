@@ -10,7 +10,6 @@ public interface ProjectService {
     Optional<Project> getProjectById(Long projectId);
     List<Project> getAllProjects();
     List<Project> getProjectsByUserId(Long userId);
-    List<Project> getProjectsByStatus(String status);
     Project updateProject(Long projectId, Project project);
     Project deleteProject(Long projectId);
 }

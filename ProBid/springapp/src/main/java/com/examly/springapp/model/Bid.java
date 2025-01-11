@@ -32,16 +32,13 @@ public class Bid {
     private String resumeImage; // Resume image as a Base64 string
     private String communicationPreference; // Preferred mode of communication
 
-    @Column(nullable = true) // Allows the rating to be nullable
-    private Integer rating; // Client's rating of the freelancer after bid acceptance and project completion
-
     @Column(length = 500 , nullable = true) 
     private String withdrawReason; // Reason for withdrawal (optional)
 
     // Constructor with parameters
     public Bid(Long bidId, Project project, User user, Double bidAmount, String proposal,
                LocalDateTime submissionDate, String status, LocalDate timeEstimation, String resumeImage,
-               String communicationPreference, Integer rating, String withdrawReason) {
+               String communicationPreference, String withdrawReason) {
         this.bidId = bidId;
         this.project = project;
         this.user = user;
@@ -52,13 +49,12 @@ public class Bid {
         this.timeEstimation = timeEstimation;
         this.resumeImage = resumeImage;
         this.communicationPreference = communicationPreference;
-        this.rating = rating; // Can be null initially
         this.withdrawReason = withdrawReason;
     }
 
     // Default constructor
     public Bid() {
-        this.rating = null; // Explicitly set rating to null in the default constructor
+    // Explicitly set rating to null in the default constructor
     }
 
     // Getters and Setters
@@ -142,13 +138,6 @@ public class Bid {
         this.communicationPreference = communicationPreference;
     }
 
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
 
     public String getWithdrawReason() {
         return withdrawReason;

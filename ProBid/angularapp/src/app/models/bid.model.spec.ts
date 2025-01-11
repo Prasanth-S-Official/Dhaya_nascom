@@ -15,7 +15,6 @@ describe('Bid Model', () => {
       timeEstimation: new Date('2024-01-15'),
       resumeImage: 'base64EncodedResumeImage',
       communicationPreference: 'Email',
-      rating: 4.5,
       withdrawReason: 'Found a conflicting commitment.'
     };
 
@@ -30,7 +29,6 @@ describe('Bid Model', () => {
     expect(bid.timeEstimation).toEqual(new Date('2024-01-15'));
     expect(bid.resumeImage).toBe('base64EncodedResumeImage');
     expect(bid.communicationPreference).toBe('Email');
-    expect(bid.rating).toBe(4.5);
     expect(bid.withdrawReason).toBe('Found a conflicting commitment.');
   });
 
