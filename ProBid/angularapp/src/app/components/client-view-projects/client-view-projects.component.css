@@ -67,7 +67,8 @@
 }
 
 .edit-button:disabled,
-.delete-button:disabled {
+.delete-button:disabled,
+.hold-button:disabled {
   background-color: #ccc;
   color: #888;
   cursor: not-allowed;

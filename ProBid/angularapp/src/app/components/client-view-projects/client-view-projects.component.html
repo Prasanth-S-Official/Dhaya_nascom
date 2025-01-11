@@ -47,10 +47,10 @@
           <button class="edit-button" [disabled]="project.status === 'Hold' || project.status === 'Closed'" (click)="navigateToEditProject(project.projectId)">
             Edit
           </button>
-          <button class="delete-button" [disabled]="project.status === 'Hold'" (click)="handleDeleteClick(project.projectId)">
+          <button class="delete-button" [disabled]="project.status === 'Hold'|| project.status === 'Closed'" (click)="handleDeleteClick(project.projectId)">
             Delete
           </button>
-          <button class="hold-button" (click)="toggleProjectStatus(project.projectId)">
+          <button class="hold-button" [disabled]="project.status === 'Closed'" (click)="toggleProjectStatus(project.projectId)">
             {{ project.status === 'Hold' ? 'Make as Open' : 'Make as Hold' }}
           </button>
         </div>
