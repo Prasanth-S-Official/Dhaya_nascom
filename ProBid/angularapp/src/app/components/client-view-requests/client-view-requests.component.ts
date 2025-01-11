@@ -169,6 +169,26 @@ export class ClientViewRequestsComponent implements OnInit {
     this.selectedProject.hasUndo = false;
   }
 
+  confirmUndo(): void {
+    // Reset the statuses of all bids to 'Pending', except those with the status 'Withdrawn'
+    this.selectedProject.bids.forEach((bid) => {
+      if (bid.status !== 'Pending' && bid.status !== 'Withdrawn') {
+        bid.status = 'Pending';
+        this.updateBidStatus(bid);
+      }
+    });
+  
+    // Reset the project status back to 'Open' if it was changed
+    if (this.selectedProject.status !== 'Open') {
+      this.selectedProject.status = 'Open';
+      this.updateProjectStatus(this.selectedProject);
+    }
+  
+    // Remove undo option
+    this.selectedProject.hasUndo = false;
+  }
+  
+
   updateBidStatus(bid: any): void {
     this.bidService.updateBid(bid.bidId, bid).subscribe(
       () => console.log(`Bid ${bid.bidId} updated successfully`),
