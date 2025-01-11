@@ -4,7 +4,7 @@ export interface Bid {
     userId: number; // ID of the freelancer submitting the bid
     bidAmount: number; // Amount the freelancer is bidding
     proposal: string; // Detailed proposal/message
-    submissionDate: string; // Timestamp when the bid was submitted (ISO format)
+    submissionDate: Date; // Timestamp when the bid was submitted (ISO format)
     status: string; // "Pending", "Accepted", "Rejected", "Withdrawn"
     timeEstimation: Date; // Estimated time required to complete the project
     resumeImage?: string; // Resume image as a Base64 string

@@ -1,6 +1,8 @@
 package com.examly.springapp.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +25,7 @@ public class Bid {
     private String proposal; // Detailed proposal/message
     private LocalDateTime submissionDate; // Timestamp when the bid was submitted
     private String status; // "Pending", "Accepted", "Rejected", "Withdrawn"
-    private String timeEstimation; // Estimated time required to complete the project
+    private LocalDate timeEstimation; // Estimated time required to complete the project
 
     @Lob
     @Column(name = "resumeImage", nullable = true, columnDefinition = "LONGBLOB")
@@ -38,7 +40,7 @@ public class Bid {
 
     // Constructor with parameters
     public Bid(Long bidId, Project project, User user, Double bidAmount, String proposal,
-               LocalDateTime submissionDate, String status, String timeEstimation, String resumeImage,
+               LocalDateTime submissionDate, String status, LocalDate timeEstimation, String resumeImage,
                String communicationPreference, Integer rating, String withdrawReason) {
         this.bidId = bidId;
         this.project = project;
@@ -116,11 +118,11 @@ public class Bid {
         this.status = status;
     }
 
-    public String getTimeEstimation() {
+    public LocalDate getTimeEstimation() {
         return timeEstimation;
     }
 
-    public void setTimeEstimation(String timeEstimation) {
+    public void setTimeEstimation(LocalDate timeEstimation) {
         this.timeEstimation = timeEstimation;
     }
 
