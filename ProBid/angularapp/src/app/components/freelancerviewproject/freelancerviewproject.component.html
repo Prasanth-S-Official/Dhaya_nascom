@@ -47,6 +47,15 @@
               Place Bid
             </button>
             <button id="appliedButton" *ngIf="isProjectBid(project)">Bid Placed</button>
+            <a
+              *ngIf="project.attachments"
+              class="view-attachment-button"
+              [href]="project.attachments"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Attachment
+            </a>
           </td>
         </tr>
       </tbody>
