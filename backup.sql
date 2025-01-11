@@ -146,7 +146,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client'),(5,'free@gmail.com','9876543213','$2a$10$461pSAits7Fkt3fmxrUCVOnGkitPkt1ekWURm7xeqSAnyn5gayifi','Freelancer','freelancer'),(6,'freeone@gmail.com','9876543214','$2a$10$wgVBlyc11W/ohxN9XUzNp.ArkQZh9jQ1mEY1/LNyrIuk45er7yGqS','Freelancer','demofree'),(7,'free10@gmail.com','8765432199','$2a$10$VdI7PVAA.FrJ/dkaKZYoTu8CFdzm09e8YzCwRkaxSb.ZrjLnI3QO2','Freelancer','free10'),(8,'free11@gmail.com','7654321990','$2a$10$xZkfRUdP1FkDBNL1IJBSt.68b2AqxbqhIQDy2pDsHXsAKNkZcjJe2','Freelancer','free11'),(9,'client2@gmail.com','6888499919','$2a$10$rKNERhbGMHu3Shv3M3bZiOLYBWEeM1LjWTldotNhHKtGA6kUsJ0lu','Client','clienttwo');
+INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client'),(5,'free@gmail.com','9876543213','$2a$10$461pSAits7Fkt3fmxrUCVOnGkitPkt1ekWURm7xeqSAnyn5gayifi','Freelancer','freelancer'),(6,'freeone@gmail.com','9876543214','$2a$10$wgVBlyc11W/ohxN9XUzNp.ArkQZh9jQ1mEY1/LNyrIuk45er7yGqS','Freelancer','demofree'),(7,'free10@gmail.com','8765432199','$2a$10$VdI7PVAA.FrJ/dkaKZYoTu8CFdzm09e8YzCwRkaxSb.ZrjLnI3QO2','Freelancer','free10'),(8,'free11@gmail.com','7654321990','$2a$10$xZkfRUdP1FkDBNL1IJBSt.68b2AqxbqhIQDy2pDsHXsAKNkZcjJe2','Freelancer','free11'),(9,'client2@gmail.com','6888499919','$2a$10$rKNERhbGMHu3Shv3M3bZiOLYBWEeM1LjWTldotNhHKtGA6kUsJ0lu','Client','clienttwo'),(10,'free12@gmail.com','8765432199','$2a$10$ow03DT.A8LIAU/PSn9s5R.oIBGPxAX1rD7zGsNl818s7GkRaI90SW','Freelancer','free12'),(11,'free23@gmail.com','8765432122','$2a$10$HfTe1YZ8ZK74HlQN7Dlg6u6kFpsDKwL.9cDtpDWItbjq2/kqMEBTS','Freelancer','free23');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-11 14:57:16
+-- Dump completed on 2025-01-11 15:12:16
