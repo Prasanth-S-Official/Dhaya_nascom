@@ -161,7 +161,7 @@ hr {
   text-decoration: underline;
 }
 
-/* Bids Popup Styling */
+/* Bids Popup Overlay */
 .bids-popup-overlay {
   position: fixed;
   top: 0;
@@ -173,18 +173,77 @@ hr {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow-x: auto; /* Allow horizontal scrolling */
 }
 
+/* Bids Popup Content */
 .bids-popup-content {
   background: white;
   padding: 30px;
   border-radius: 20px;
-  max-width: 800px;
-  width: 90%;
+  max-width: 500px;
+  width: auto; /* Allow content to define the width */
+  /* min-width: 90%; Ensure it takes up most of the screen */
+  max-height: 90%; /* Prevent overflow on smaller screens */
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.5s ease;
   position: relative;
+  overflow-x: auto; /* Enable horizontal scrolling inside the content */
+  overflow-y: hidden; /* Prevent vertical overflow */
 }
+
+/* Bids Grid */
+.bids-grid {
+  display: grid;
+  grid-auto-flow: column; /* Arrange items in a horizontal row */
+  grid-gap: 20px;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  padding-bottom: 10px; /* Ensure space for the scrollbar */
+  white-space: nowrap; /* Prevent wrapping of cards */
+}
+
+/* Bid Card Styling */
+.bid-card {
+  padding: 5px;
+  background: rgb(175, 83, 83);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block; /* Ensure cards are treated as inline elements */
+  min-width: 300px; /* Set a consistent width for each card */
+}
+
+.bid-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollbar Styling */
+.bids-popup-overlay::-webkit-scrollbar,
+.bids-popup-content::-webkit-scrollbar,
+.bids-grid::-webkit-scrollbar {
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+.bids-popup-overlay::-webkit-scrollbar-thumb,
+.bids-popup-content::-webkit-scrollbar-thumb,
+.bids-grid::-webkit-scrollbar-thumb {
+  background: #3c91e6;
+  border-radius: 4px;
+}
+
+.bids-popup-overlay::-webkit-scrollbar-thumb:hover,
+.bids-popup-content::-webkit-scrollbar-thumb:hover,
+.bids-grid::-webkit-scrollbar-thumb:hover {
+  background: #2575fc;
+}
+
+.bids-popup-overlay::-webkit-scrollbar-track,
+.bids-popup-content::-webkit-scrollbar-track,
+.bids-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
 
 .bids-popup-content h2 {
   font-size: 2rem;
