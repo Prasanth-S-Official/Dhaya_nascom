@@ -22,13 +22,26 @@
   <!-- Project List -->
   <div class="project-list">
     <h2>Projects</h2>
-    <div *ngFor="let project of projects" class="project-card" (click)="handleProjectClick(project)">
-      <h3>{{ project.title }}</h3>
-      <p><strong>Category:</strong> {{ project.category }}</p>
-      <p><strong>Total Bids:</strong> {{ project.bids.length }}</p>
-      <p><strong>Value:</strong> ₹{{ project.budget }}</p>
-      <p><a [href]="project.attachments" target="_blank">View Attachment</a></p>
+    <div *ngIf="projects.length > 0; else noProjectsFound">
+      <div
+        *ngFor="let project of projects"
+        class="project-card"
+        (click)="handleProjectClick(project)"
+      >
+        <h3>{{ project.title }}</h3>
+        <p><strong>Category:</strong> {{ project.category }}</p>
+        <p><strong>Total Bids:</strong> {{ project.bids.length }}</p>
+        <p><strong>Value:</strong> ₹{{ project.budget }}</p>
+        <p><a [href]="project.attachments" target="_blank">View Attachment</a></p>
+      </div>
     </div>
+
+    <!-- No Projects Found -->
+    <ng-template #noProjectsFound>
+      <div class="no-data-message">
+        <p>Oops! No projects found.</p>
+      </div>
+    </ng-template>
   </div>
 </div>
 
@@ -44,25 +57,34 @@
       <button class="undo-button" (click)="confirmUndo()">Undo Changes</button>
     </div>
 
-    <!-- Bids Cards -->
+    <!-- Bids Grid -->
     <div class="bids-grid">
-      <div
-        *ngFor="let bid of displayedBids"
-        class="bid-card"
-        [ngClass]="{ highlighted: bid === highlightedBid }"
-      >
-        <p><strong>Freelancer:</strong> {{ bid.user.username }}</p>
-        <p><strong>Bid Amount:</strong> ₹{{ bid.bidAmount }}</p>
-        <p><strong>Proposal:</strong> {{ bid.proposal }}</p>
-        <p><strong>Time Estimation:</strong> {{ bid.timeEstimation | date: 'MMM d, y' }}</p>
-        <p><strong>Status:</strong> {{ bid.status }}</p>
-        <div class="bid-actions">
-          <button id="greenButton" *ngIf="bid.status === 'Pending'" (click)="confirmAction('accept', bid)">Accept</button>
-          <button id="redButton" *ngIf="bid.status === 'Pending'" (click)="confirmAction('reject', bid)">Reject</button>
-          <button id="reviewButton" (click)="writeReview(selectedProject?.projectId, bid.bidId)">Write a Review</button>
-          <button id="showMoreButton" (click)="openShowMoreModal(bid)">Show More</button>
+      <div *ngIf="displayedBids.length > 0; else noBidsFound">
+        <div
+          *ngFor="let bid of displayedBids"
+          class="bid-card"
+          [ngClass]="{ highlighted: bid === highlightedBid }"
+        >
+          <p><strong>Freelancer:</strong> {{ bid.user.username }}</p>
+          <p><strong>Bid Amount:</strong> ₹{{ bid.bidAmount }}</p>
+          <p><strong>Proposal:</strong> {{ bid.proposal }}</p>
+          <p><strong>Time Estimation:</strong> {{ bid.timeEstimation | date: 'MMM d, y' }}</p>
+          <p><strong>Status:</strong> {{ bid.status }}</p>
+          <div class="bid-actions">
+            <button id="greenButton" *ngIf="bid.status === 'Pending'" (click)="confirmAction('accept', bid)">Accept</button>
+            <button id="redButton" *ngIf="bid.status === 'Pending'" (click)="confirmAction('reject', bid)">Reject</button>
+            <button id="reviewButton" (click)="writeReview(selectedProject?.projectId, bid.bidId)">Write a Review</button>
+            <button id="showMoreButton" (click)="openShowMoreModal(bid)">Show More</button>
+          </div>
         </div>
       </div>
+
+      <!-- No Bids Found -->
+      <ng-template #noBidsFound>
+        <div class="no-data-message">
+          <p>Oops! No bids found.</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
