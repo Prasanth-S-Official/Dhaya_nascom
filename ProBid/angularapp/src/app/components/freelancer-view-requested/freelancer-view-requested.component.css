@@ -577,3 +577,108 @@
     box-shadow: none;
   }
   
+
+  /* Withdraw Confirmation Popup */
+.withdraw-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 15px;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+}
+
+.withdraw-popup p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Textarea Styling */
+.withdraw-popup textarea {
+  width: 80%;
+  height: 80px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  resize: none;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.withdraw-popup textarea:focus {
+  border-color: #3276a6;
+  box-shadow: inset 0px 4px 10px rgba(50, 118, 166, 0.2);
+  outline: none;
+}
+
+/* Withdraw Buttons Container */
+.withdraw-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Confirm and Cancel Buttons */
+.confirm-withdraw-button,
+.cancel-withdraw-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* Confirm Button */
+.confirm-withdraw-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.confirm-withdraw-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Cancel Button */
+.cancel-withdraw-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-withdraw-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 480px) {
+  .withdraw-popup {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .withdraw-popup p {
+    font-size: 14px;
+  }
+
+  .withdraw-popup textarea {
+    font-size: 13px;
+  }
+
+  .confirm-withdraw-button,
+  .cancel-withdraw-button {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+}

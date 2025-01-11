@@ -60,7 +60,6 @@
   <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
 </div>
 
-<!-- Withdraw Confirmation Popup -->
 <div *ngIf="showWithdrawModal" class="withdraw-popup">
   <p>Please provide a reason for withdrawal:</p>
   <textarea [(ngModel)]="withdrawReason" placeholder="Enter your reason..."></textarea>
