@@ -1,0 +1,53 @@
+<app-clientnav></app-clientnav>
+<div class="feedback-table-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal }">
+  <h1>Feedback Received</h1>
+  <hr />
+  <table class="feedback-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Feedback</th>
+        <th>Category</th>
+        <th>Rating</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="feedbacks.length === 0">
+        <td colspan="6" class="no-records-cell">No Feedback Found</td>
+      </tr>
+      <tr *ngFor="let feedback of feedbacks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ feedback.feedbackText }}</td>
+        <td>{{ feedback.category }}</td>
+        <td>{{ feedback.rating }}</td>
+        <td>{{ feedback.user.username }}</td>
+        <td>
+          <button class="view-button" (click)="showProjectDetails(feedback.project)">View Project Info</button>
+          <button class="delete-button" (click)="openDeletePopup(feedback.feedbackId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete this feedback?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Project Info Modal -->
+<div *ngIf="showDetailsModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeDetailsModal()">&#x2715;</button>
+    <h2>Project Details</h2>
+    <p><strong>Project Name:</strong> {{ selectedProject?.title }}</p>
+    <p><strong>Category:</strong> {{ selectedProject?.category }}</p>
+    <p><strong>Budget:</strong> ₹{{ selectedProject?.budget }}</p>
+    <p><strong>Description:</strong> {{ selectedProject?.description }}</p>
+    <p><strong>Deadline:</strong> {{ selectedProject?.deadline | date: 'MMM d, y' }}</p>
+  </div>
+</div>

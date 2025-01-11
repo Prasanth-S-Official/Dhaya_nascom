@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
@@ -27,7 +27,8 @@ export class ClientaddfeedbackComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private feedbackService: FeedbackService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ro : Router
   ) {}
 
   ngOnInit(): void {
@@ -103,5 +104,7 @@ export class ClientaddfeedbackComponent implements OnInit {
   handleSuccessMessage(): void {
     this.successPopup = false;
     this.submitted = false;
+    this.ro.navigate(['/client/view/bids']);
+    
   }
 }

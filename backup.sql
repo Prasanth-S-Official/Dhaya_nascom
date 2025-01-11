@@ -84,7 +84,7 @@ CREATE TABLE `feedback` (
   CONSTRAINT `FK50y0yhmtq64dlsu0t1gigp1ir` FOREIGN KEY (`bid_id`) REFERENCES `bid` (`bid_id`),
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKd3k0p62wu7lsw335o1xul28ah` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +93,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'Communication','2025-01-11','demo feedback',3,2,1,1),(2,'Communication','2025-01-11','demo feedback 2',5,2,1,1);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-11  6:22:11
+-- Dump completed on 2025-01-11  6:37:11
