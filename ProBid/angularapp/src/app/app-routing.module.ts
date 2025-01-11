@@ -23,6 +23,7 @@ import { FreelancerViewRequestedComponent } from './components/freelancer-view-r
 import { ClientViewRequestsComponent } from './components/client-view-requests/client-view-requests.component';
 import { ClientaddfeedbackComponent } from './components/clientaddfeedback/clientaddfeedback.component';
 import { ClientviewfeedbackComponent } from './components/clientviewfeedback/clientviewfeedback.component';
+import { FreelancerviewfeedbackComponent } from './components/freelancerviewfeedback/freelancerviewfeedback.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -54,7 +55,7 @@ const routes: Routes = [
   { path: 'freelancer/add/bid', component: BidRequestComponent, canActivate: [AuthGuard] },
   { path: 'freelancer/edit/bid/:id', component: BidRequestComponent, canActivate: [AuthGuard] },
   { path: 'freelancer/view/my-bids', component: FreelancerViewRequestedComponent, canActivate: [AuthGuard] },
-  { path: 'user/view/feedback', component: UserviewfeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'freelancer/view/feedback', component: FreelancerviewfeedbackComponent, canActivate: [AuthGuard] },
 
   // Redirect to error for unknown routes
   { path: '', redirectTo: 'login', pathMatch: 'full' },

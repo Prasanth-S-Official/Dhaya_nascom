@@ -1,0 +1,74 @@
+<app-freelancernav></app-freelancernav>
+<div id="viewfeedback" [ngClass]="{ blur: showClientPopup || showProjectPopup || showBidPopup }">
+  <div class="main-head">
+    <h1>Feedback Recived</h1>
+  </div>
+  <hr />
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="column-review-id">S.No</th>
+          <th class="column-feedback">Feedback</th>
+          <th class="column-category">Category</th>
+          <th class="column-rating">Rating</th>
+          <th class="column-date">Date</th>
+          <th class="column-action">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.feedbackText }}</td>
+          <td>{{ feedback.category }}</td>
+          <td>{{ feedback.rating }}</td>
+          <td>{{ feedback.date | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button class="button" (click)="showClientInfo(feedback.user)">View Client Info</button>
+            <button class="button" (click)="showProjectInfo(feedback.project)">View Project Info</button>
+            <button class="button" (click)="showBidInfo(feedback.bid)">View Bid Info</button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredFeedbacks.length === 0">
+          <td colspan="6" class="no-records-cell">No Feedback Found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Client Info Popup -->
+<div *ngIf="showClientPopup" class="profile-popup">
+  <h2>Client Information</h2>
+  <p><strong>Email:</strong> {{ selectedClient?.email }}</p>
+  <p><strong>Username:</strong> {{ selectedClient?.username }}</p>
+  <p><strong>Mobile Number:</strong> {{ selectedClient?.mobileNumber }}</p>
+  <button (click)="closeClientPopup()">Close</button>
+</div>
+
+<!-- Project Info Popup -->
+<div *ngIf="showProjectPopup" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeProjectPopup()">&#x2715;</button>
+    <h2>Project Information</h2>
+    <p><strong>Title:</strong> {{ selectedProject?.title }}</p>
+    <p><strong>Description:</strong> {{ selectedProject?.description }}</p>
+    <p><strong>Budget:</strong> ₹{{ selectedProject?.budget }}</p>
+    <p><strong>Deadline:</strong> {{ selectedProject?.deadline | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Category:</strong> {{ selectedProject?.category }}</p>
+  </div>
+</div>
+
+<!-- Bid Info Popup -->
+<div *ngIf="showBidPopup" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeBidPopup()">&#x2715;</button>
+    <h2>Bid Information</h2>
+    <p><strong>Bid Amount:</strong> ₹{{ selectedBid?.bidAmount }}</p>
+    <p><strong>Proposal:</strong> {{ selectedBid?.proposal }}</p>
+    <p><strong>Status:</strong> {{ selectedBid?.status }}</p>
+    <p><strong>Time Estimation:</strong> {{ selectedBid?.timeEstimation | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Communication Preference:</strong> {{ selectedBid?.communicationPreference }}</p>
+  </div>
+</div>

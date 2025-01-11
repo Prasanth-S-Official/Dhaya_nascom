@@ -31,6 +31,7 @@ import { FreelancerViewRequestedComponent } from './components/freelancer-view-r
 import { ClientViewRequestsComponent } from './components/client-view-requests/client-view-requests.component';
 import { ClientaddfeedbackComponent } from './components/clientaddfeedback/clientaddfeedback.component';
 import { ClientviewfeedbackComponent } from './components/clientviewfeedback/clientviewfeedback.component';
+import { FreelancerviewfeedbackComponent } from './components/freelancerviewfeedback/freelancerviewfeedback.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ClientviewfeedbackComponent } from './components/clientviewfeedback/cli
     ClientViewRequestsComponent,
     ClientaddfeedbackComponent,
     ClientviewfeedbackComponent,
+    FreelancerviewfeedbackComponent,
   
 
   ],
