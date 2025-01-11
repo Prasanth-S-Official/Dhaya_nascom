@@ -39,6 +39,7 @@
           <td>{{ project.deadline | date: 'yyyy-MM-dd' }}</td>
           <td>{{ project.skillsRequired }}</td>
           <td>
+            <div class="action-buttons">
             <button
               id="applyButton"
               *ngIf="!isProjectBid(project)"
@@ -46,6 +47,7 @@
             >
               Place Bid
             </button>
+          
             <button id="appliedButton" *ngIf="isProjectBid(project)">Bid Placed</button>
             <a
               *ngIf="project.attachments"
@@ -56,6 +58,7 @@
             >
               ViewAttachment
             </a>
+          </div>
           </td>
         </tr>
       </tbody>
