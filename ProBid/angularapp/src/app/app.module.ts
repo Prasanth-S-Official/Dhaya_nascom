@@ -30,6 +30,7 @@ import { FreelancerviewprojectComponent } from './components/freelancerviewproje
 import { BidRequestComponent } from './components/bid-request/bid-request.component';
 import { FreelancerViewRequestedComponent } from './components/freelancer-view-requested/freelancer-view-requested.component';
 import { ClientViewRequestsComponent } from './components/client-view-requests/client-view-requests.component';
+import { ClientaddfeedbackComponent } from './components/clientaddfeedback/clientaddfeedback.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ClientViewRequestsComponent } from './components/client-view-requests/c
     BidRequestComponent,
     FreelancerViewRequestedComponent,
     ClientViewRequestsComponent,
+    ClientaddfeedbackComponent,
   
 
   ],

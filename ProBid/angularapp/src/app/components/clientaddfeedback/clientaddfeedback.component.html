@@ -1,0 +1,69 @@
+<app-clientnav></app-clientnav>
+<div class="main-container">
+  <h1>Add Feedback</h1>
+
+  <form
+    [formGroup]="addFeedbackForm"
+    (ngSubmit)="onSubmit()"
+    [ngClass]="{ blur: successPopup }"
+  >
+    <!-- Feedback Text Field -->
+    <div class="form-group">
+      <label for="feedbackText">Feedback<span class="asterisk">*</span></label>
+      <textarea id="feedbackText" formControlName="feedbackText"></textarea>
+      <div
+        *ngIf="addFeedbackForm.get('feedbackText').hasError('required') && (addFeedbackForm.get('feedbackText').touched || submitted)"
+        class="error-message"
+      >
+        *Feedback is required
+      </div>
+    </div>
+
+    <!-- Category Dropdown -->
+    <div class="form-group">
+      <label for="category">Category<span class="asterisk">*</span></label>
+      <select id="category" formControlName="category">
+        <option value="" disabled selected>Choose Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+      <div
+        *ngIf="addFeedbackForm.get('category').hasError('required') && (addFeedbackForm.get('category').touched || submitted)"
+        class="error-message"
+      >
+        *Category is required
+      </div>
+    </div>
+
+    <!-- Rating -->
+    <div class="form-group">
+      <label for="rating">Rating<span class="asterisk">*</span></label>
+      <input
+        id="rating"
+        type="number"
+        formControlName="rating"
+        min="1"
+        max="5"
+        step="1"
+      />
+      <div
+        *ngIf="addFeedbackForm.get('rating').hasError('required') && (addFeedbackForm.get('rating').touched || submitted)"
+        class="error-message"
+      >
+        *Rating is required
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="add-btn">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
+  <!-- Success Popup -->
+  <div *ngIf="successPopup" class="success-popup">
+    <p>Successfully Added!</p>
+    <button (click)="handleSuccessMessage()">Ok</button>
+  </div>
+</div>

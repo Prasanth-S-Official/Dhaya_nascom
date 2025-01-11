@@ -59,7 +59,7 @@
         <div class="bid-actions">
           <button id="greenButton" *ngIf="bid.status === 'Pending'" (click)="confirmAction('accept', bid)">Accept</button>
           <button id="redButton" *ngIf="bid.status === 'Pending'" (click)="confirmAction('reject', bid)">Reject</button>
-          <button id="reviewButton" (click)="writeReview(bid.user.userId)">Write a Review</button>
+          <button id="reviewButton" (click)="writeReview(selectedProject?.projectId, bid.bidId)">Write a Review</button>
           <button id="showMoreButton" (click)="openShowMoreModal(bid)">Show More</button>
         </div>
       </div>

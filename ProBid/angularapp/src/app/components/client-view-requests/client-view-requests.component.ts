@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { BidService } from 'src/app/services/bid.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-view-requests',
@@ -20,7 +21,7 @@ export class ClientViewRequestsComponent implements OnInit {
   currentAction = '';
   currentBid: any = null;
 
-  constructor(private projectService: ProjectService, private bidService: BidService) {}
+  constructor(private projectService: ProjectService, private bidService: BidService , private router : Router) {}
 
   ngOnInit(): void {
     this.fetchProjects();
@@ -148,9 +149,10 @@ export class ClientViewRequestsComponent implements OnInit {
     );
   }
 
-  writeReview(freelancerId: number): void {
-    console.log(`Navigating to review for freelancer ${freelancerId}`);
-  }
-
+  writeReview(projectId: number, bidId: number): void {
+    this.router.navigate(['/write-review'], {
+      queryParams: { projectId: projectId, bidId: bidId },
+    });
   
+}
 }
