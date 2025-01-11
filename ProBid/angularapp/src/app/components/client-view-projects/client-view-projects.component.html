@@ -44,19 +44,18 @@
           </button>
         </div>
         <div class="card-footer">
-          <button
-            class="edit-button"
-            (click)="navigateToEditProject(project.projectId)"
-          >
+          <button class="edit-button" [disabled]="project.status === 'Hold'" (click)="navigateToEditProject(project.projectId)">
             Edit
           </button>
-          <button
-            class="delete-button"
-            (click)="handleDeleteClick(project.projectId)"
-          >
+          <button class="delete-button" [disabled]="project.status === 'Hold'" (click)="handleDeleteClick(project.projectId)">
             Delete
           </button>
+          <button class="hold-button" (click)="toggleProjectStatus(project.projectId)">
+            {{ project.status === 'Hold' ? 'Make as Open' : 'Make as Hold' }}
+          </button>
         </div>
+        
+        
       </div>
     </div>
 

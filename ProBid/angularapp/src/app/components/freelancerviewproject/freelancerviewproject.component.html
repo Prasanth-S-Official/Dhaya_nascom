@@ -26,6 +26,7 @@
           <th>Budget</th>
           <th>Deadline</th>
           <th>Skills Required</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -38,34 +39,39 @@
           <td>₹{{ project.budget }}</td>
           <td>{{ project.deadline | date: 'yyyy-MM-dd' }}</td>
           <td>{{ project.skillsRequired }}</td>
+          <td>{{ project.status }}</td>
           <td>
             <div class="action-buttons">
-            <button
-              id="applyButton"
-              *ngIf="!isProjectBid(project)"
-              (click)="handleBidClick(project)"
-            >
-              Place Bid
-            </button>
-          
-            <button id="appliedButton" *ngIf="isProjectBid(project)">Bid Placed</button>
-            <a
-              *ngIf="project.attachments"
-              class="view-attachment-button"
-              [href]="project.attachments"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ViewAttachment
-            </a>
-          </div>
+              <button
+                id="applyButton"
+                *ngIf="!isProjectBid(project)"
+                [disabled]="project.status === 'Hold' || project.status === 'Closed'"
+                (click)="handleBidClick(project)"
+              >
+                Place Bid
+              </button>
+
+              <button id="appliedButton" *ngIf="isProjectBid(project)">
+                Bid Placed
+              </button>
+
+              <a
+                *ngIf="project.attachments"
+                class="view-attachment-button"
+                [href]="project.attachments"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Attachment
+              </a>
+            </div>
           </td>
         </tr>
       </tbody>
       <ng-template #noRecords>
         <tbody>
           <tr>
-            <td colspan="8" class="no-records-cell">Oops! No records found</td>
+            <td colspan="9" class="no-records-cell">Oops! No records found</td>
           </tr>
         </tbody>
       </ng-template>

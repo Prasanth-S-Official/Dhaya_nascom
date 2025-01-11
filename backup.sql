@@ -126,7 +126,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES (1,'demo url',450000,'SEO Optimization','2025-01-31','demo description','Fixed Price','Low','demo skills','Open','demo title updated',1),(4,'https://examly467-my.sharepoint.com/:b:/g/personal/dhayananth_d_iamneo_ai/EZc3Wy5SCZ1MoCJcp8b-laIBZ2oPUukSOd_E_qSg1kzP4Q?e=35P0Wi',600000,'Mobile App Development','2025-01-10','demo description 2','Fixed Price','Medium','demo skills','Open','demo title two',1);
+INSERT INTO `project` VALUES (1,'demo url',450000,'SEO Optimization','2025-01-31','demo description','Fixed Price','Low','demo skills','Open','demo title updated',1),(4,'https://examly467-my.sharepoint.com/:b:/g/personal/dhayananth_d_iamneo_ai/EZc3Wy5SCZ1MoCJcp8b-laIBZ2oPUukSOd_E_qSg1kzP4Q?e=35P0Wi',600000,'Mobile App Development','2025-01-10','demo description 2','Fixed Price','Medium','demo skills','Hold','demo title two',1);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client'),(5,'free@gmail.com','9876543213','$2a$10$461pSAits7Fkt3fmxrUCVOnGkitPkt1ekWURm7xeqSAnyn5gayifi','Freelancer','freelancer'),(6,'freeone@gmail.com','9876543214','$2a$10$wgVBlyc11W/ohxN9XUzNp.ArkQZh9jQ1mEY1/LNyrIuk45er7yGqS','Freelancer','demofree'),(7,'free10@gmail.com','8765432199','$2a$10$VdI7PVAA.FrJ/dkaKZYoTu8CFdzm09e8YzCwRkaxSb.ZrjLnI3QO2','Freelancer','free10'),(8,'free11@gmail.com','7654321990','$2a$10$xZkfRUdP1FkDBNL1IJBSt.68b2AqxbqhIQDy2pDsHXsAKNkZcjJe2','Freelancer','free11');
+INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$Qu1gglWnZcE.5e1lGgwWCOJzpeTX24IZ3I9SEAJhCLd5O8DDPwX.O','Client','Client'),(5,'free@gmail.com','9876543213','$2a$10$461pSAits7Fkt3fmxrUCVOnGkitPkt1ekWURm7xeqSAnyn5gayifi','Freelancer','freelancer'),(6,'freeone@gmail.com','9876543214','$2a$10$wgVBlyc11W/ohxN9XUzNp.ArkQZh9jQ1mEY1/LNyrIuk45er7yGqS','Freelancer','demofree'),(7,'free10@gmail.com','8765432199','$2a$10$VdI7PVAA.FrJ/dkaKZYoTu8CFdzm09e8YzCwRkaxSb.ZrjLnI3QO2','Freelancer','free10'),(8,'free11@gmail.com','7654321990','$2a$10$xZkfRUdP1FkDBNL1IJBSt.68b2AqxbqhIQDy2pDsHXsAKNkZcjJe2','Freelancer','free11'),(9,'client2@gmail.com','6888499919','$2a$10$rKNERhbGMHu3Shv3M3bZiOLYBWEeM1LjWTldotNhHKtGA6kUsJ0lu','Client','clienttwo');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -167,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-11 13:12:05
+-- Dump completed on 2025-01-11 13:27:06

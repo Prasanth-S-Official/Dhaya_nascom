@@ -92,7 +92,6 @@
 //   }
 // }
 
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
@@ -163,17 +162,17 @@ export class ClientViewProjectsComponent implements OnInit {
     }
   }
 
-  makeAsHold(projectId: number): void {
+  toggleProjectStatus(projectId: number): void {
     const project = this.allProjects.find((proj) => proj.projectId === projectId);
     if (project) {
-      const updatedProject = { ...project, status: 'Hold' };
+      const updatedProject = { ...project, status: project.status === 'Hold' ? 'Open' : 'Hold' };
       this.projectService.updateProject(projectId, updatedProject).subscribe(
         () => {
           this.fetchProjects();
-          console.log(`Project ID ${projectId} status updated to Hold.`);
+          console.log(`Project ID ${projectId} status toggled to ${updatedProject.status}.`);
         },
         (error) => {
-          console.error('Error updating project status:', error);
+          console.error('Error toggling project status:', error);
           this.errorMessage = error.error.message || 'Failed to update status';
         }
       );

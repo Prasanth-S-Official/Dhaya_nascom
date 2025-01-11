@@ -24,6 +24,65 @@
     margin: 20px auto;
     border-radius: 10px;
   }
+
+  .hold-button {
+    background-color: #ff9800; /* Orange color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hold-button:hover {
+    background-color: #e68a00;
+  }
+
+  .edit-button,
+.delete-button,
+.hold-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.hold-button {
+  background-color: #ff9800;
+  color: white;
+}
+
+.edit-button:disabled,
+.delete-button:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.edit-button:hover:not(:disabled),
+.delete-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.hold-button:hover {
+  background-color: #e68a00;
+}
+
+  
   
   /* Search and Filter Section */
   .top-container {
