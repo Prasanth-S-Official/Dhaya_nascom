@@ -77,9 +77,4 @@ public class BidController {
         }
     }
 
-    @GetMapping("/insights")
-    public ResponseEntity<?> getAllBidInsights() {
-        List<Map<String, Object>> insights = bidService.getAllBidInsights();
-        return ResponseEntity.status(HttpStatus.OK).body(insights);
-    }
 }
