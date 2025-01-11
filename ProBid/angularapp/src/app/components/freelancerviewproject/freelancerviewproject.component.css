@@ -1,259 +1,50 @@
 /* General Styles */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f7f9fc;
-    color: #333;
-  }
-  
-  /* Logout Button */
-  #logoutbutton {
-    float: right;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  #logoutbutton:hover {
-    background-color: #d32f2f;
-  }
-  
-  /* Main Container */
-  #projectHomeBody {
-    margin: 20px auto;
-    width: 90%;
-    max-width: 1200px; /* Max width for large screens */
-    font-family: Arial, sans-serif;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
-  }
-  
-  /* Headings */
-  h1 {
-    text-align: center;
-    color: #3276a6;
-    margin-bottom: 20px;
-  }
-  
-  /* Search Box */
-  #searchBox {
-    width: 30%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  #searchBox:focus {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
-  }
-  
-  /* Training Table */
-  .project-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .project-table th,
-  .project-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .project-table th {
-    background-color: #3276a6;
-    color: white;
-  }
-  
-  /* Button Styles */
-  #greenButton,
-  #applyButton,
-  #appliedButton {
-    background-color: hsl(122, 39%, 49%);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  #applyButton:hover {
-    background-color: #45a049;
-  }
-  
-  #appliedButton {
-    background-color: hsl(13, 65%, 51%);
-  }
-  
-  #appliedButton:hover {
-    background-color: #d6382d;
-  }
-  
-  /* Top Container for Search and Logout */
-  .top-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  /* General Button Styles */
-  button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 5px; /* Consistent border radius for all buttons */
-  }
-  
-  button:enabled {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  button:enabled:hover {
-    background-color: #45a049;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    color: #888;
-  }
-  
-  /* Horizontal Rule */
-  hr {
-    border: none;
-    border-top: 2px solid #3276a6;
-    color: #3276a6;
-    overflow: visible;
-    text-align: center;
-    height: 8px;
-    margin-bottom: 2%;
-  }
-  
-  /* Pagination Button */
-  .pagination-button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 28px;
-    background-color: #4caf50;
-    color: white;
-    transition: background-color 0.3s;
-    border-radius: 5px;
-  }
-  
-  .pagination-button:disabled {
-    background-color: #ccc;
-    color: #888;
-  }
-  
-  .pagination-button:hover:not(:disabled) {
-    background-color: #45a049;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    #searchBox {
-      width: 100%; /* Full width on smaller screens */
-    }
-  
-    .top-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .training-table {
-      font-size: 14px; /* Smaller font for tables on small screens */
-    }
-  
-    h1 {
-      font-size: 1.5rem; /* Adjust heading size */
-    }
-  }
-
-  /* Define styles for the grey button */
-.grey-button {
-    background-color: grey !important;
-    color: white;
-    cursor: not-allowed;
-  }
-  
-  
-  @media (max-width: 480px) {
-    #searchBox {
-      font-size: 14px; /* Adjust font size */
-    }
-  
-    h1 {
-      font-size: 1.2rem; /* Further adjust heading size */
-    }
-  
-    button {
-      padding: 8px 16px; /* Adjust button size */
-      font-size: 14px; /* Adjust font size */
-    }
-  
-    .pagination-button {
-      font-size: 14px; /* Smaller pagination button size */
-    }
-  }
-  
-  /* General Styles */
-body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f7fc;
   color: #333;
+  line-height: 1.6;
 }
 
 /* Main Container */
 #projectHomeBody {
-  margin: 20px auto;
+  margin: 30px auto;
   width: 90%;
   max-width: 1200px;
   background: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Headings */
 h1 {
   text-align: center;
-  color: #3276a6;
-  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 
 /* Search Box */
 #searchBox {
-  width: 30%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  transition: box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  margin: 0 auto 30px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 #searchBox:focus {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  border-color: #3276a6;
+  box-shadow: 0px 4px 15px rgba(50, 118, 166, 0.3);
+  outline: none;
 }
 
 /* Project Table */
@@ -261,33 +52,56 @@ h1 {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .project-table th,
 .project-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 15px;
   text-align: center;
+  font-size: 1rem;
 }
 
 .project-table th {
-  background-color: #3276a6;
+  background: linear-gradient(90deg, #3276a6, #004080);
   color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.project-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.project-table tr:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.project-table td {
+  vertical-align: middle;
 }
 
 /* Action Buttons */
 button,
 a.view-attachment-button {
-  padding: 10px 20px;
+  padding: 10px 15px;
   border: none;
   cursor: pointer;
   font-size: 0.9rem;
-  border-radius: 5px;
+  border-radius: 25px;
   margin: 5px;
   text-align: center;
   text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
+/* Apply Button */
 #applyButton {
   background-color: #28a745;
   color: white;
@@ -295,8 +109,10 @@ a.view-attachment-button {
 
 #applyButton:hover {
   background-color: #218838;
+  transform: translateY(-2px);
 }
 
+/* Bid Placed Button */
 #appliedButton {
   background-color: #ffc107;
   color: black;
@@ -307,34 +123,58 @@ a.view-attachment-button {
   background-color: #e0a800;
 }
 
+/* Attachment Button */
 .view-attachment-button {
   background-color: #007bff;
   color: white;
-  display: inline-block;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .view-attachment-button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  #searchBox {
-      width: 100%;
-  }
-
-  .project-table {
-      font-size: 14px;
+  #projectHomeBody {
+    padding: 20px;
   }
 
   h1 {
-      font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  #searchBox {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .project-table {
+    font-size: 0.9rem;
   }
 
   button,
   a.view-attachment-button {
-      padding: 8px 16px;
-      font-size: 14px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
   }
 }
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #searchBox {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+
+  button,
+  a.view-attachment-button {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
+}
+
