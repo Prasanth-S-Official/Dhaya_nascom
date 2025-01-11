@@ -37,6 +37,11 @@ export class ProjectService {
     return this.http.delete<void>(`${this.apiUrl}/${projectId}`, { headers: this.getHeaders() });
   }
 
+  getProjectsByUserId(userId: number): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.apiUrl}/user/${userId}`, { headers: this.getHeaders() });
+  }
+
+
   // Utility function to include the Bearer token in headers
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
