@@ -42,8 +42,8 @@ class SpringappApplicationTests {
 	 
 		@Test
 		@Order(1)
-	    public void backend_testGetAllMaterial() throws Exception {
-	        mockMvc.perform(get("/api/material")
+	    public void backend_testGetAllProject() throws Exception {
+	        mockMvc.perform(get("/api/project")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 	        .andDo(print())
@@ -97,10 +97,10 @@ class SpringappApplicationTests {
 	    }
 	 
     @Test
-    public void backend_testMaterialRequestHasManyToOneAnnotation() {
+    public void backend_testBidHasManyToOneAnnotation() {
         try {
             // Use reflection to get the Class object for the Course class
-            Class<?> courseClass = Class.forName("com.examly.springapp.model.MaterialRequest");
+            Class<?> courseClass = Class.forName("com.examly.springapp.model.Bid");
 
             // Get all declared fields in the Course class
             Field[] declaredFields = courseClass.getDeclaredFields();
@@ -127,10 +127,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testMaterialInterfaceAndImplementation() {
+    public void backend_testProjectInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.MaterialService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.MaterialServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.ProjectService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.ProjectServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -140,10 +140,10 @@ class SpringappApplicationTests {
     }
 
     @Test
-    public void backend_testMaterialRequestInterfaceAndImplementation() {
+    public void backend_testBidInterfaceAndImplementation() {
         try {
-            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.MaterialRequestService");
-            Class<?> implementationClass = Class.forName("com.examly.springapp.service.MaterialRequestServiceImpl");
+            Class<?> interfaceClass = Class.forName("com.examly.springapp.service.BidService");
+            Class<?> implementationClass = Class.forName("com.examly.springapp.service.BidServiceImpl");
 
             assertTrue(interfaceClass.isInterface(), "The specified class is not an interface");
             assertTrue(interfaceClass.isAssignableFrom(implementationClass), "Implementation does not implement the interface");
@@ -169,13 +169,13 @@ class SpringappApplicationTests {
      }
 	 
 	 @Test
-	   public void backend_testMaterialControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.MaterialController");
+	   public void backend_testProjectControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.ProjectController");
 	   }
 
 	   @Test
-	   public void backend_testMaterialRequestControllerClassExists() {
-	       checkClassExists("com.examly.springapp.controller.MaterialRequestController");
+	   public void backend_testBidControllerClassExists() {
+	       checkClassExists("com.examly.springapp.controller.BidController");
 	   }
 
 	   @Test
@@ -190,8 +190,8 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testMaterialModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.Material");
+	   public void backend_testBidModelClassExists() {
+	       checkClassExists("com.examly.springapp.model.Bid");
 	   }
 	 
 	 @Test
@@ -201,7 +201,7 @@ class SpringappApplicationTests {
 	 
 	 @Test
 	   public void backend_testMaterialRequestModelClassExists() {
-	       checkClassExists("com.examly.springapp.model.MaterialRequest");
+	       checkClassExists("com.examly.springapp.model.Project");
 	   }
 
 }
