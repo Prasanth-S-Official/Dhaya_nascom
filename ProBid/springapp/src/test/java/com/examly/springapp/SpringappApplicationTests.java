@@ -200,7 +200,7 @@ class SpringappApplicationTests {
 	   }
 	 
 	 @Test
-	   public void backend_testMaterialRequestModelClassExists() {
+	   public void backend_testProjectModelClassExists() {
 	       checkClassExists("com.examly.springapp.model.Project");
 	   }
 
