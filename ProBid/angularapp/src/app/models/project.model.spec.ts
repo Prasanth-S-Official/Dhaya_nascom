@@ -24,7 +24,7 @@ describe('Project Model', () => {
     expect(project.title).toBe('Website Redesign');
     expect(project.description).toBe('Redesign the corporate website with a modern and responsive layout.');
     expect(project.budget).toBe(5000);
-    expect(project.deadline).toBe(new Date(2024-12-31));
+    expect(project.deadline).toEqual(new Date(2024-12-31));
     expect(project.status).toBe('Open');
     expect(project.category).toBe('Web Development');
     expect(project.skillsRequired).toBe('HTML, CSS, JavaScript');
