@@ -18,13 +18,29 @@ body, html {
 }
 
 .signup-box h4 {
-  font-size: 9px; /* Adjust font size */
-  font-weight: 600; /* Make it semi-bold */
-  color: #0073e6; /* Use a vibrant blue color */
+  font-size: 10px; /* Increased font size for better visibility */
+  font-weight: 700; /* Make it bold for emphasis */
+  color: #0073e6; /* Vibrant blue color */
   margin-bottom: 20px; /* Add spacing below */
-  letter-spacing: 1px; /* Add letter spacing for style */
+  letter-spacing: 1.5px; /* Increase letter spacing for style */
   text-transform: uppercase; /* Transform text to uppercase */
-  text-shadow: 1px 1px 5px rgba(0, 115, 230, 0.2); /* Add subtle shadow */
+  text-shadow: 2px 2px 10px rgba(0, 115, 230, 0.5), 0 0 5px rgba(0, 115, 230, 0.3); /* Add a glowing shadow effect */
+  border-bottom: 2px solid #0073e6; /* Add an underline effect */
+  padding-bottom: 5px; /* Add padding for spacing */
+  background: linear-gradient(90deg, #0073e6, #00bfff); /* Add gradient background */
+  -webkit-background-clip: text; /* Clip gradient to text */
+  -webkit-text-fill-color: transparent; /* Make the gradient visible */
+  animation: glowText 3s ease-in-out infinite; /* Add glowing animation */
+}
+
+/* Glowing animation */
+@keyframes glowText {
+  0%, 100% {
+    text-shadow: 2px 2px 10px rgba(0, 115, 230, 0.5), 0 0 5px rgba(0, 115, 230, 0.3);
+  }
+  50% {
+    text-shadow: 2px 2px 20px rgba(0, 115, 230, 0.8), 0 0 10px rgba(0, 115, 230, 0.6);
+  }
 }
 
 
