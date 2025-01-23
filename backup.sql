@@ -142,7 +142,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +151,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$pJtDyuBtmCux2D2JjBBg6u2pbmKfH/QUSSfj6cN5VPgqdPJMvg58u','Client','Clientname'),(2,'manager@gmail.com','9123456789','$2a$10$u/nAaUxD4TiBgznmgZMU6eDXSFGNIAQO/GjlFLwd8wFVPGqiOp/Yy','Manager','managername');
+INSERT INTO `user` VALUES (1,'client@gmail.com','1234567890','$2a$10$pJtDyuBtmCux2D2JjBBg6u2pbmKfH/QUSSfj6cN5VPgqdPJMvg58u','Client','Clientname'),(2,'manager@gmail.com','9123456789','$2a$10$u/nAaUxD4TiBgznmgZMU6eDXSFGNIAQO/GjlFLwd8wFVPGqiOp/Yy','Manager','managername'),(3,'manager123@gmail.com','9876543210','$2a$10$t.YsR8B6ym.zZppAQYiRGehNc76T8DIUePKFR2ewf0W51YTq6RYoW','Manager','demomanager');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-23  9:49:55
+-- Dump completed on 2025-01-23 10:04:56
