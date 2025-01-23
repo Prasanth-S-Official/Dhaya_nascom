@@ -11,7 +11,8 @@
     <!-- Right Side: Signup Form -->
     <div class="signup-right">
       <div class="signup-box">
-        <h2>Signup</h2>
+        <h2>Sign Up</h2>
+        <h4>Join SupportSphere Today</h4>
         <div class="form-group">
           <input
             type="text"
@@ -84,7 +85,7 @@
           Signup
         </button>
         <div class="login-link">
-          Already have an account? <a routerLink="/login">Login</a>
+          Already have an account? <a routerLink="/login">Log In</a>
         </div>
       </div>
     </div>
@@ -92,7 +93,7 @@
 
   <!-- Success Popup -->
   <div class="success-popup" *ngIf="successPopup">
-    <p>User Registration is Successful!</p>
-    <button (click)="handleSuccessMessage()">Ok</button>
+    <p>Registration Successful!</p>
+    <button (click)="handleSuccessMessage()">Log In</button>
   </div>
 </div>

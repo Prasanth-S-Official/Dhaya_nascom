@@ -17,6 +17,17 @@ body, html {
   background-color: #f2f2f2;
 }
 
+.signup-box h4 {
+  font-size: 9px; /* Adjust font size */
+  font-weight: 600; /* Make it semi-bold */
+  color: #0073e6; /* Use a vibrant blue color */
+  margin-bottom: 20px; /* Add spacing below */
+  letter-spacing: 1px; /* Add letter spacing for style */
+  text-transform: uppercase; /* Transform text to uppercase */
+  text-shadow: 1px 1px 5px rgba(0, 115, 230, 0.2); /* Add subtle shadow */
+}
+
+
 .signup-wrapper {
   display: flex;
   flex-direction: row;
