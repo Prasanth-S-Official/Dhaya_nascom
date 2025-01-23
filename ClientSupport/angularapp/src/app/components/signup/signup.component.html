@@ -19,7 +19,7 @@
             name="username"
             [(ngModel)]="formData.username"
             (ngModelChange)="validateField('username', formData.username)"
-            placeholder="Username"
+            placeholder="User name"
           />
           <div *ngIf="errors.username" class="error">{{ errors.username }}</div>
         </div>
@@ -63,7 +63,7 @@
             name="confirmPassword"
             [(ngModel)]="confirmPassword"
             (ngModelChange)="validateField('confirmPassword', confirmPassword)"
-            placeholder="Confirm Password"
+            placeholder="Confirm password"
           />
           <div *ngIf="errors.confirmPassword" class="error">{{ errors.confirmPassword }}</div>
         </div>

@@ -108,7 +108,7 @@ export class SignupComponent {
   
     // Validate confirmPassword separately
     if (!this.confirmPassword.trim()) {
-      this.errors.confirmPassword = 'Confirm Password is required';
+      this.errors.confirmPassword = 'Confirm password is required';
     } else if (this.confirmPassword !== this.formData.password) {
       this.errors.confirmPassword = 'Passwords do not match';
     } else {
