@@ -207,7 +207,7 @@ export class SignupComponent {
           ? 'Password is required'
           : value.length >= 6
             ? ''
-            : 'Password must be at least 6 characters';
+            : 'Password must be at least 6 characters long';
         break;
       case 'confirmPassword':
         fieldErrors.confirmPassword = value.trim() === ''
