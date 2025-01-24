@@ -10,7 +10,7 @@
     },
     {
       "id": 3,
-      "busNumber": "AB124rdrr",
+      "busNumber": "AB124",
       "routeSource": "CityA",
       "routeDestination": "CityB",
       "passengerName": "John Doe",

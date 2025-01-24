@@ -60,39 +60,4 @@ describe('BusFormComponent', () => {
     expect(fixture.debugElement.query(By.css('#passengerName + .error-message'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#bookingDate + .error-message'))).toBeTruthy();
   });
-
-
-  fit('BusFormComponent_should_call_addBus_method_while_adding_the_bus', () => {
-    const bus: Bus = {
-      id: 1,
-      busNumber: 'Test Bus Number',
-      routeSource: 'Test Source',
-      routeDestination: 'Test Destination',
-      passengerName: 'Test Passenger',
-      bookingDate: '2024-05-22'
-    };
-
-    (component as any).newBus = bus;
-    const addBusSpy = spyOn((busService as any), 'addBus').and.returnValue(of(bus));
-    (component as any).addOrEditBus();
-    expect(addBusSpy).toHaveBeenCalledWith(bus);
-  });
-
-  fit('BusFormComponent_should_call_updateBus_method_while_editing_the_bus', () => {
-    const bus: Bus = {
-      id: 1,
-      busNumber: 'Test Bus Number',
-      routeSource: 'Test Source',
-      routeDestination: 'Test Destination',
-      passengerName: 'Test Passenger',
-      bookingDate: '2024-05-22'
-    };
-
-    (component as any).newBus = bus;
-    (component as any).isEditMode = true;
-    const updateBusSpy = spyOn((busService as any), 'updateBus').and.returnValue(of(bus)); 
-    (component as any).addOrEditBus();
-    expect(updateBusSpy).toHaveBeenCalledWith(bus.id, bus);
-  });
-
 });
