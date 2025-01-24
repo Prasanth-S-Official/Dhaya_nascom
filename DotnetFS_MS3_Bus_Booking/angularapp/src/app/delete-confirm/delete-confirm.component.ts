@@ -9,7 +9,7 @@ import { BusService } from '../services/bus.service'; // Adjusted service name
   styleUrls: ['./delete-confirm.component.css']
 })
 export class DeleteConfirmComponent implements OnInit {
-  bookingId: number;
+  id: number;
   bus: Bus = {} as Bus; // Initialize bus property with an empty object
 
   constructor(
@@ -20,8 +20,8 @@ export class DeleteConfirmComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.bookingId = +params['id']; // Adjust parameter name
-      this.busService.getBusById(this.bookingId).subscribe(
+      this.id = +params['id']; // Adjust parameter name
+      this.busService.getBusById(this.id).subscribe(
         (bus: Bus) => { // Adjust type casting
           this.bus = bus;
         },
@@ -32,8 +32,8 @@ export class DeleteConfirmComponent implements OnInit {
     });
   }
 
-  confirmDelete(bookingId: number): void { // Adjust method signature
-    this.busService.deleteBus(bookingId).subscribe(
+  confirmDelete(id: number): void { // Adjust method signature
+    this.busService.deleteBus(id).subscribe(
       () => {
         console.log('Bus deleted successfully.');
         this.router.navigate(['/viewBuses']); // Adjust the route

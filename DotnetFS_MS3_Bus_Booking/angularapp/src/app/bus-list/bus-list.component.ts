@@ -24,13 +24,13 @@ export class BusListComponent implements OnInit {
     });
   }
 
-  deleteBus(bookingId: number): void { // Adjusted method name and parameter
+  deleteBus(id: number): void { // Adjusted method name and parameter
     // Navigate to confirm delete page with the booking ID as a parameter
-    this.router.navigate(['/confirmDelete', bookingId]);
+    this.router.navigate(['/confirmDelete', id]);
   }
 
-  editBus(bookingId: number): void {
+  editBus(id: number): void {
     // Navigate to bus form page with the booking ID for editing
-    this.router.navigate(['/editBus', bookingId]);
+    this.router.navigate(['/editBus', id]);
   }
 }
