@@ -3,7 +3,7 @@ import { Bus } from './bus.model';
 describe('Bus', () => { 
   fit('should_create_bus_instance', () => { 
     const bus: Bus = { 
-      bookingId: 1, 
+      id: 1, 
       busNumber: 'Test Bus Number', 
       routeSource: 'Test Route Source', 
       routeDestination: 'Test Route Destination', 
@@ -12,7 +12,7 @@ describe('Bus', () => {
     };
 
     expect(bus).toBeTruthy();
-    expect(bus.bookingId).toBe(1); 
+    expect(bus.id).toBe(1); 
     expect(bus.busNumber).toBe('Test Bus Number'); 
     expect(bus.routeSource).toBe('Test Route Source'); 
     expect(bus.routeDestination).toBe('Test Route Destination'); 
