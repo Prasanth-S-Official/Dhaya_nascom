@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusService } from '../services/bus.service';
@@ -11,7 +10,7 @@ import { Bus } from '../models/bus.model';
 })
 export class BusFormComponent implements OnInit {
   newBus: Bus = { 
-    bookingId: 0, 
+    id: 0, // Changed bookingId to id
     busNumber: '', 
     routeSource: '', 
     routeDestination: '', 
@@ -34,8 +33,8 @@ export class BusFormComponent implements OnInit {
   }
 
   addOrEditBus() {
-    if (this.isEditMode && this.newBus.bookingId) { // Check if edit mode is enabled and bookingId exists
-      this.busService.updateBus(this.newBus.bookingId, this.newBus).subscribe(() => { // Pass bookingId and newBus
+    if (this.isEditMode && this.newBus.id) { // Changed bookingId to id
+      this.busService.updateBus(this.newBus.id, this.newBus).subscribe(() => { // Pass id and newBus
         this.router.navigate(['/viewBuses']);
       });
     } else {
@@ -44,5 +43,4 @@ export class BusFormComponent implements OnInit {
       });
     }
   }
-
 }

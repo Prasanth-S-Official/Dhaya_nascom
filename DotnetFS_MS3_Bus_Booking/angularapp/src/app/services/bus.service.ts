@@ -45,7 +45,7 @@ import { Bus } from '../models/bus.model'; // Updated Bus model
   providedIn: 'root'
 })
 export class BusService {
-  private apiUrl = 'http://localhost:3000/buses'; // JSON Server URL
+  private apiUrl = 'https://ide-abfdabeabcbaed319332313dbaefebdaefbfone.premiumproject.examly.io/proxy/8080/buses'; // JSON Server URL
 
   constructor(private http: HttpClient) { }
 

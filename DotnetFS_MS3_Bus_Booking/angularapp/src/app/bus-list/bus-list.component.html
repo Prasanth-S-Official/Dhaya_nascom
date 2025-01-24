@@ -24,8 +24,8 @@
                 <td>{{ bus.passengerName }}</td>
                 <td>{{ bus.bookingDate | date: 'mediumDate' }}</td>
                 <td>
-                    <button id="edit" class="edit-button" (click)="editBus(bus.bookingId)">Edit</button>
-                    <button id="delete" class="delete-button" (click)="deleteBus(bus.bookingId)">Delete</button>
+                    <button id="edit" class="edit-button" (click)="editBus(bus.id)">Edit</button>
+                    <button id="delete" class="delete-button" (click)="deleteBus(bus.id)">Delete</button>
                 </td>
             </tr>
         </tbody>
