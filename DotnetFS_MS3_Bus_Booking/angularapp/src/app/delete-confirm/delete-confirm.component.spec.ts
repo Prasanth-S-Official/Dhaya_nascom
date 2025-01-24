@@ -40,12 +40,12 @@ describe('DeleteConfirmComponent', () => {
     });
 
     fit('DeleteConfirmComponent_should_call_deleteBus_method_when_confirmDelete_is_called', () => {
-        const bookingId = 1; // Adjusted ID name
+        const id = 1; // Adjusted ID name
         
         mockBusService['deleteBus'].and.returnValue(of(null)); // Adjusted method name
 
-        component['confirmDelete'](bookingId); // Adjusted parameter name
+        component['confirmDelete'](id); // Adjusted parameter name
 
-        expect(mockBusService['deleteBus']).toHaveBeenCalledWith(bookingId); // Adjusted method name and parameter
+        expect(mockBusService['deleteBus']).toHaveBeenCalledWith(id); // Adjusted method name and parameter
     });
 });

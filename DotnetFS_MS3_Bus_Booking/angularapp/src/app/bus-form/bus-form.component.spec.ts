@@ -40,7 +40,7 @@ describe('BusFormComponent', () => {
 
   fit('BusFormComponent_should_render_error_messages_when_required_fields_are_empty_on_submit', () => {
     (component as any).newBus = {
-      bookingId: null,
+      id: null,
       busNumber: '',
       routeSource: '',
       routeDestination: '',
@@ -64,7 +64,7 @@ describe('BusFormComponent', () => {
 
   fit('BusFormComponent_should_call_addBus_method_while_adding_the_bus', () => {
     const bus: Bus = {
-      bookingId: 1,
+      id: 1,
       busNumber: 'Test Bus Number',
       routeSource: 'Test Source',
       routeDestination: 'Test Destination',
@@ -80,7 +80,7 @@ describe('BusFormComponent', () => {
 
   fit('BusFormComponent_should_call_updateBus_method_while_editing_the_bus', () => {
     const bus: Bus = {
-      bookingId: 1,
+      id: 1,
       busNumber: 'Test Bus Number',
       routeSource: 'Test Source',
       routeDestination: 'Test Destination',
@@ -92,7 +92,7 @@ describe('BusFormComponent', () => {
     (component as any).isEditMode = true;
     const updateBusSpy = spyOn((busService as any), 'updateBus').and.returnValue(of(bus)); 
     (component as any).addOrEditBus();
-    expect(updateBusSpy).toHaveBeenCalledWith(bus.bookingId, bus);
+    expect(updateBusSpy).toHaveBeenCalledWith(bus.id, bus);
   });
 
 });
