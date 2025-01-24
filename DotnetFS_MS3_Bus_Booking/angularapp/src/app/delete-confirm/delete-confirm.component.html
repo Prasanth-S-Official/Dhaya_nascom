@@ -1,0 +1,16 @@
+<div class="container" *ngIf="bus">
+    <h2>Delete Confirmation</h2>
+    <div class="confirmation-message">
+      <p>Are you sure you want to delete this bus?</p>
+      <p>Bus Number: {{ bus.busNumber }}</p>
+      <p>Route Source: {{ bus.routeSource }}</p>
+      <p>Route Destination: {{ bus.routeDestination }}</p>
+      <p>Passenger Name: {{ bus.passengerName }}</p>
+      <p>Booking Date: {{ bus.bookingDate}}</p>
+    </div>
+    <div class="form-buttons">
+      <button type="button" id="confirm" class="confirm-button" (click)="confirmDelete(bus.bookingId)">Confirm Delete</button>
+      <button type="button" id="cancel" class="cancel-button" (click)="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+  

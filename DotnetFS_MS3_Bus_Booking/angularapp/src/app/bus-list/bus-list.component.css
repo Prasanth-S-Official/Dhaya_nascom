@@ -1,0 +1,74 @@
+.container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .no-buses-message {
+    color: red;
+    font-size: 18px;
+  }
+  
+  .bus-table {
+    width: 100%; /* Set table width to fill its container */
+    border-collapse: collapse; /* Collapse borders for a cleaner look */
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  }
+  
+  .bus-table th,
+  .bus-table td {
+    padding: 12px; /* Add padding for cells */
+    border: 1px solid #ddd; /* Add border for cells */
+    text-align: center;
+  
+  }
+  
+  .bus-table th {
+    background-color: #f4f4f4; /* Set background color for header row */
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .bus-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row background color */
+  }
+  
+  .bus-table tbody tr:hover {
+    background-color: #f1f1f1; /* Change background color on hover */
+  }
+  
+  .edit-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin:10px;
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  
+  .delete-button {
+    background-color: #ff2600; /* Coral */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin:10px;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff5733; /* Slightly darker shade on hover */
+  }
+  
