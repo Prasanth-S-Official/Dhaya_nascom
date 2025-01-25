@@ -13,7 +13,7 @@ public class Ticket {
     private String title; // Ticket title
     private String description; // Detailed description of the issue
     private String priority; // e.g., "High", "Medium", "Low"
-    private String status; // e.g., "Open", "In Progress", "Resolved", "Closed"
+    private String status; // e.g., "Open", "Resolved", "Closed"
     private LocalDate createdDate; // Date when the ticket was created
     private LocalDate resolutionDate; // Expected/actual resolution date
     private String issueCategory; // e.g., "Technical", "Billing", "General"
