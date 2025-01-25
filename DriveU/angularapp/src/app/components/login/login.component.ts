@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
       case "email":
         fieldErrors.email = value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
           ? ""
-          : "Please enter a valid email";
+          : "Please enter a valid email address";
         break;
       case "password":
         fieldErrors.password =
-          value.length >= 6 ? "" : "Password must be at least 6 characters";
+          value.length >= 6 ? "" : "Password must be at least 6 characters long";
         break;
       default:
         break;
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       fieldErrors.password.trim() !== ""
     ) {
       this.errors = {
-        email: this.formData.email.trim() === "" ? "Email is required" : fieldErrors.email,
+        email: this.formData.email.trim() === "" ? "Email address is required" : fieldErrors.email,
         password:
           this.formData.password.trim() === ""
             ? "Password is required"
@@ -97,11 +97,11 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);
           }
         } else {
-          this.error = "Invalid Email or Password";
+          this.error = "Invalid email address or password";
         }
       } catch (error) {
         console.log(error);
-        this.error = "Invalid Email or Password";
+        this.error = "Invalid email address or password";
       }
     }
   }
