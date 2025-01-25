@@ -46,7 +46,7 @@ CREATE TABLE `feedback` (
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FK8fth5acovhce06e6atsujlb6e` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`ticket_id`),
   CONSTRAINT `FKss3q5bmq5ojxbu3rc3sk4ckuy` FOREIGN KEY (`agent_id`) REFERENCES `support_agent` (`agent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,6 +55,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'Service Quality','2025-01-25','demo feedback on service',3,4,3,1);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +126,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'2025-01-25','demo connectivity issue','Connectivity','Low',NULL,NULL,NULL,'Open','demo connectivity',NULL,1),(2,'2025-01-23','demo start issue description','Platform Bug','High','2025-01-23','demo resolution on platform issue','\0','Resolved','demo platform start issue',3,1),(3,'2025-01-23','demo content issue description','Content Issue','Medium','2025-01-23','demo resolution summary on content issue.','','Closed','demo content issue',4,1),(4,'2025-01-23','demo dotnet test issue','Tech Stacks','High',NULL,NULL,NULL,'Open','dotnet test',NULL,1),(5,'2025-01-23','demo issue on provided content mismatch','Content Issue','Medium','2025-01-25','demo summary','','Resolved','demo content question issue',4,1);
+INSERT INTO `ticket` VALUES (1,'2025-01-25','demo connectivity issue','Connectivity','Low',NULL,NULL,NULL,'Open','demo connectivity',NULL,1),(2,'2025-01-23','demo start issue description','Platform Bug','High','2025-01-23','demo resolution on platform issue','\0','Resolved','demo platform start issue',3,1),(3,'2025-01-23','demo content issue description','Content Issue','Medium','2025-01-23','demo resolution summary on content issue.','','Closed','demo content issue',4,1),(4,'2025-01-23','demo dotnet test issue','Tech Stacks','High',NULL,NULL,NULL,'Open','dotnet test',NULL,1),(5,'2025-01-23','demo issue on provided content mismatch','Content Issue','Medium',NULL,NULL,NULL,'Open','demo content question issue',4,1);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-25  3:39:48
+-- Dump completed on 2025-01-25  3:54:49
