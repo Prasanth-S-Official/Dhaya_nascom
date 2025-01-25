@@ -141,7 +141,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$JSzaqsgeolfZXtyZI4Hav.h83jwgLdCDhQoNxj8pOwowBZNI6ISCi','Admin','admin');
+INSERT INTO `user` VALUES (1,'admin@gmail.com','1234567890','$2a$10$JSzaqsgeolfZXtyZI4Hav.h83jwgLdCDhQoNxj8pOwowBZNI6ISCi','Admin','adminname'),(2,'cus@gmail.com','9123456789','$2a$10$lTTxKK7xe9sn3FDvCVlzoOyOMGS.cQ2PKU0yWFDY1Al6bHyRUzn52','Customer','customername');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-25  7:11:58
+-- Dump completed on 2025-01-25  7:27:00
