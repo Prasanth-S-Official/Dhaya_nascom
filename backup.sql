@@ -92,7 +92,7 @@ CREATE TABLE `driver_request` (
 
 LOCK TABLES `driver_request` WRITE;
 /*!40000 ALTER TABLE `driver_request` DISABLE KEYS */;
-INSERT INTO `driver_request` VALUES (1,'2025-01-25','15:27:52','4 hours 12 minutes','demo comments','demo drop 2','3 hours',966,'demo pick 2','2025-01-25','Trip End','11:15:00','2025-01-25',2,2),(2,NULL,NULL,NULL,'demo comments','demo drop 3','3 hours',NULL,'demo pick 3','2025-01-25','Pending','01:30:00','2025-01-26',3,2),(3,NULL,NULL,NULL,'demo comments updated','demo drop 4','2 hours',NULL,'demo pick 4','2025-01-25','Approved','14:25:00','2025-01-25',4,2);
+INSERT INTO `driver_request` VALUES (1,'2025-01-25','15:27:52','4 hours 12 minutes','demo comments','demo drop 2','3 hours',966,'demo pick 2','2025-01-25','Closed','11:15:00','2025-01-25',2,2),(2,NULL,NULL,NULL,'demo comments','demo drop 3','3 hours',NULL,'demo pick 3','2025-01-25','Approved','01:30:00','2025-01-26',3,2),(3,'2025-01-25','15:47:02','1 hours 22 minutes','demo comments updated','demo drop 4','2 hours',451,'demo pick 4','2025-01-25','Trip End','14:25:00','2025-01-25',4,2);
 /*!40000 ALTER TABLE `driver_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `feedback` (
   KEY `FK7k33yw505d347mw3avr93akao` (`user_id`),
   CONSTRAINT `FK7k33yw505d347mw3avr93akao` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKn4fq1vynlvtvqxkkb0lo8h4a6` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +125,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'Punctuality','2025-01-25','excellent in punctuality',4,2,2),(2,'Driver Performance','2025-01-25','demo performance',3,4,2);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-25 10:13:10
+-- Dump completed on 2025-01-25 10:28:10
