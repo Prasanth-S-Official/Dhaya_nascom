@@ -1,0 +1,118 @@
+<app-customernav></app-customernav>
+<div class="card-container" [ngClass]="{ blur: showDeletePopup || showDetailsModal || showPayAmountModal }">
+  <h1>Requested Drivers</h1>
+  <hr />
+
+  <!-- Search Box -->
+  <input
+    id="searchBox"
+    type="text"
+    placeholder="Search by Driver Name..."
+    [(ngModel)]="searchValue"
+    (input)="filterRequests()"
+  />
+
+  <!-- No Data Found Message -->
+  <div *ngIf="filteredRequests.length === 0" class="no-data-message">
+    <p>No Data Found</p>
+  </div>
+
+  <!-- Card View for Driver Requests -->
+  <div class="card-row" *ngIf="filteredRequests.length > 0">
+    <div class="card" *ngFor="let request of filteredRequests">
+      <h3>{{ request.driver.driverName }}</h3>
+      <p><strong>Vehicle Type:</strong> {{ request.driver.vehicleType }}</p>
+      <p><strong>Experience:</strong> {{ request.driver.experienceYears }} years</p>
+      <p><strong>Pickup:</strong> {{ request.pickupLocation }}</p>
+      <p><strong>Drop:</strong> {{ request.dropLocation }}</p>
+      <p><strong>Status:</strong> {{ request.status }}</p>
+
+      <div class="action-buttons">
+        <button (click)="showRequestDetails(request)">Show More</button>
+        <button
+          id="editButton"
+          [disabled]="request.status !== 'Pending'"
+          (click)="navigateToEdit(request.driverRequestId)"
+        >
+          Edit
+        </button>
+        <button
+          id="redButton"
+          [disabled]="request.status !== 'Pending'"
+          (click)="handleDeleteClick(request)"
+        >
+          Delete
+        </button>
+        <button
+          id="tripEndButton"
+          [disabled]="request.status !== 'Approved'"
+          (click)="handleTripEnd(request)"
+        >
+          Trip End
+        </button>
+        <button
+          id="fetchPayAmountButton"
+          [disabled]="request.status !== 'Trip End' && request.status !== 'Closed'"
+          (click)="openPayAmountModal(request)"
+        >
+          Fetch PayAmount
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete this request?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>
+
+<!-- Request Details Modal -->
+<div *ngIf="showDetailsModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closeDetailsModal()">X</button>
+    <h2>Request Details</h2>
+    <p><strong>Driver Name:</strong> {{ selectedRequest?.driver?.driverName }}</p>
+    <p><strong>Vehicle Type:</strong> {{ selectedRequest?.driver?.vehicleType }}</p>
+    <p><strong>Experience:</strong> {{ selectedRequest?.driver?.experienceYears }} years</p>
+    <p><strong>Pickup Location:</strong> {{ selectedRequest?.pickupLocation }}</p>
+    <p><strong>Drop Location:</strong> {{ selectedRequest?.dropLocation }}</p>
+    <p><strong>Trip Date:</strong> {{ selectedRequest?.tripDate }}</p>
+    <p><strong>Time Slot:</strong> {{ selectedRequest?.timeSlot }}</p>
+    <p><strong>Status:</strong> {{ selectedRequest?.status }}</p>
+    <p><strong>Comments:</strong> {{ selectedRequest?.comments }}</p>
+  </div>
+</div>
+
+<!-- Pay Amount Modal -->
+<div *ngIf="showPayAmountModal" class="details-modal-overlay">
+  <div class="details-modal-content">
+    <button class="close-button" (click)="closePayAmountModal()">X</button>
+    <h2>Travel Charge</h2>
+    
+    <div *ngIf="isLoading" class="loading-spinner"></div>
+    
+    <div *ngIf="!isLoading" class="content-container">
+      <div class="happy-journey">
+        <p class="emoji">😊</p>
+        <p class="message">We hope you had a wonderful journey!</p>
+      </div>
+
+      <p class="payment-message">
+        Your travel charge is <strong>₹{{ selectedRequest?.paymentAmount | number:'1.1-1' }}</strong>
+      </p>
+      <p><strong>Actual Duration</strong> {{ selectedRequest?.actualDuration }}</p>
+      <hr/>
+      <p><strong>Actual Drop Date </strong> {{ selectedRequest?.actualDropDate }}</p>
+      <p><strong>Actual Drop time </strong> {{ selectedRequest?.actualDropTime }}</p>
+      
+      <div class="links-container">
+        <a class="review-link" (click)="navigateToReview()">✍️ Write a Review</a>
+        <a class="skip-link" (click)="closePayAmountModal()">⏩ Skip Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+

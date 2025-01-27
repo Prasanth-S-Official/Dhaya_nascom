@@ -1,0 +1,257 @@
+<!-- <app-adminnav></app-adminnav>
+<div class="page-content" [ngClass]="{ blur: showModal || showStageModal }">
+  <h1>Driver Requests for Approval</h1>
+  <hr />
+  <div class="top-container">
+    <input
+      id="searchBox"
+      type="text"
+      placeholder="Search by Driver Name or Pickup Location..."
+      [(ngModel)]="searchValue"
+      (input)="handleSearchChange()"
+    />
+    <label id="filter">
+      Filter by Status:
+      <select [(ngModel)]="statusFilter" (change)="handleFilterChange()">
+        <option value="-1">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </label>
+  </div>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Username</th>
+        <th>Pickup Location</th>
+        <th>Drop Location</th>
+        <th>Trip Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredRequests.length > 0; else noRecords">
+      <tr *ngFor="let request of filteredRequests; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ request.user.username }}</td>
+        <td>{{ request.pickupLocation }}</td>
+        <td>{{ request.dropLocation }}</td>
+        <td>{{ request.tripDate | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ request.status }}</td>
+        <td>
+          <button (click)="handleShowDriverDetails(request)">Show Driver Details</button>
+          <button
+            id="greenButton"
+            *ngIf="request.status === 'Pending' || request.status === 'Rejected'"
+            (click)="handleApprove(request)"
+          >
+            Approve
+          </button>
+          <button
+            id="redButton"
+            *ngIf="request.status === 'Pending' || request.status === 'Approved'"
+            (click)="handleReject(request)"
+          >
+            Reject
+          </button>
+          <button id="stageButton" (click)="handleViewStage(request)">View Stage</button>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #noRecords>
+      <tr>
+        <td colspan="7" class="no-records-cell">Oops! No records found</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>
+
+
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeModal()">X</button>
+    <h2>Driver Details</h2>
+    <div class="driver-image-container">
+      <img
+        class="driver-image"
+        [src]="'data:image/jpeg;base64,' + selectedRequest?.driver?.image"
+        alt="Driver Image"
+      />
+    </div>
+    <p><strong>Driver Name:</strong> {{ selectedRequest?.driver?.driverName }}</p>
+    <p><strong>License Number:</strong> {{ selectedRequest?.driver?.licenseNumber }}</p>
+    <p><strong>Experience Years:</strong> {{ selectedRequest?.driver?.experienceYears }}</p>
+    <p><strong>Contact Number:</strong> {{ selectedRequest?.driver?.contactNumber }}</p>
+    <p><strong>Vehicle Type:</strong> {{ selectedRequest?.driver?.vehicleType }}</p>
+    <p><strong>Hourly Rate:</strong> ₹{{ selectedRequest?.driver?.hourlyRate }}</p>
+    <p><strong>Address:</strong> {{ selectedRequest?.driver?.address }}</p>
+  </div>
+</div>
+
+
+
+<div *ngIf="showStageModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeStageModal()">X</button>
+    <h2>Request Progression</h2>
+    <div class="progress-bar">
+      <div
+        *ngFor="let stage of filteredStages; let i = index"
+        class="progress-step"
+        [ngClass]="{
+          active: i <= currentStageIndex && selectedRequest?.status !== 'Rejected',
+          rejected: selectedRequest?.status === 'Rejected' && stage === 'Rejected',
+          disabled: i > currentStageIndex && selectedRequest?.status !== 'Rejected'
+        }"
+      >
+        {{ stage }}
+      </div>
+    </div>
+  </div>
+</div>
+ -->
+
+
+ <app-adminnav></app-adminnav>
+<div class="page-content" [ngClass]="{ blur: showModal || showStageModal }">
+  <h1>Driver Requests for Approval</h1>
+  <hr />
+  <div class="top-container">
+    <input
+      id="searchBox"
+      type="text"
+      placeholder="Search by Driver Name or Pickup Location..."
+      [(ngModel)]="searchValue"
+      (input)="handleSearchChange()"
+    />
+    <label id="filter">
+      Filter by Status:
+      <select [(ngModel)]="statusFilter" (change)="handleFilterChange()">
+        <option value="-1">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Trip End">Trip End</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Closed">Closed</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- Driver Requests Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Username</th>
+        <th>Pickup Location</th>
+        <th>Drop Location</th>
+        <th>Trip Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredRequests.length > 0; else noRecords">
+      <tr *ngFor="let request of filteredRequests; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ request.user.username }}</td>
+        <td>{{ request.pickupLocation }}</td>
+        <td>{{ request.dropLocation }}</td>
+        <td>{{ request.tripDate | date: 'yyyy-MM-dd' }}</td>
+        <td
+          [ngClass]="{ 'blinking-column': request.status === 'Trip End' }"
+          (mouseover)="makeViewStageButtonBlink(request)"
+          (mouseout)="stopViewStageButtonBlink()"
+        >
+          {{ request.status }}
+        </td>
+        <td>
+          <button (click)="handleShowDriverDetails(request)">Show Driver Details</button>
+          <button
+            id="greenButton"
+            *ngIf="request.status === 'Pending' || request.status === 'Rejected'"
+            (click)="handleApprove(request)"
+          >
+            Approve
+          </button>
+          <button
+            id="redButton"
+            *ngIf="request.status === 'Pending' || request.status === 'Approved'"
+            (click)="handleReject(request)"
+          >
+            Reject
+          </button>
+          <button
+          id="stageButton"
+          class="stage-button"
+          [ngClass]="{ 'blinking-button': request.status === 'Trip End' }"
+          (click)="handleViewStage(request)"
+        >
+          View Stage
+        </button>
+        
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #noRecords>
+      <tr>
+        <td colspan="7" class="no-records-cell">Oops! No records found</td>
+      </tr>
+    </ng-template>
+  </table>
+</div>
+
+<!-- Driver Details Modal -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeModal()">X</button>
+    <h2>Driver Details</h2>
+    <div class="driver-image-container">
+      <img
+        class="driver-image"
+        [src]="'data:image/jpeg;base64,' + selectedRequest?.driver?.image"
+        alt="Driver Image"
+      />
+    </div>
+    <p><strong>Driver Name:</strong> {{ selectedRequest?.driver?.driverName }}</p>
+    <p><strong>License Number:</strong> {{ selectedRequest?.driver?.licenseNumber }}</p>
+    <p><strong>Experience Years:</strong> {{ selectedRequest?.driver?.experienceYears }}</p>
+    <p><strong>Contact Number:</strong> {{ selectedRequest?.driver?.contactNumber }}</p>
+    <p><strong>Vehicle Type:</strong> {{ selectedRequest?.driver?.vehicleType }}</p>
+    <p><strong>Hourly Rate:</strong> ₹{{ selectedRequest?.driver?.hourlyRate }}</p>
+    <p><strong>Address:</strong> {{ selectedRequest?.driver?.address }}</p>
+  </div>
+</div>
+
+<!-- Stage Modal -->
+<!-- Stage Modal -->
+<div *ngIf="showStageModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-button" (click)="closeStageModal()">X</button>
+    <h2>Request Progression</h2>
+    <div class="progress-bar">
+      <div
+        *ngFor="let stage of filteredStages; let i = index"
+        class="progress-step"
+        [ngClass]="{
+          active: i <= currentStageIndex && selectedRequest?.status !== 'Rejected',
+          rejected: selectedRequest?.status === 'Rejected' && stage === 'Rejected',
+          disabled: i > currentStageIndex && selectedRequest?.status !== 'Rejected'
+        }"
+      >
+        {{ stage }}
+      </div>
+    </div>
+    <!-- Show Close Request button only if status is Trip End -->
+    <button
+      *ngIf="selectedRequest?.status === 'Trip End'"
+      (click)="handleCloseRequest()"
+      class="close-request-button"
+    >
+      Close Request
+    </button>
+  </div>
+</div>

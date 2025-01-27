@@ -1,0 +1,60 @@
+<app-customernav></app-customernav>
+<div>
+  <div id="driverHomeBody">
+    <h1>Available Drivers</h1>
+    <hr />
+
+    <!-- Search Box -->
+    <div class="top-container">
+      <input
+        id="searchBox"
+        type="text"
+        placeholder="Search by Driver Name, Vehicle Type, or License..."
+        [(ngModel)]="searchField"
+        (ngModelChange)="handleSearchChange($event)"
+      />
+    </div>
+
+    <!-- Available Drivers Cards -->
+    <div class="driver-cards-container">
+      <div *ngFor="let driver of filteredDrivers; let i = index" class="driver-card">
+        <div class="card-content">
+          <div class="card-image">
+            <img
+              class="driver-image"
+              [src]="'data:image/jpeg;base64,' + driver.image"
+              alt="Driver Image"
+            />
+          </div>
+          <div class="card-details">
+            <h2>{{ driver.driverName }}</h2>
+            <p><strong>Vehicle Type:</strong> {{ driver.vehicleType }}</p>
+            <p><strong>License:</strong> {{ driver.licenseNumber }}</p>
+            <p><strong>Phone:</strong> {{ driver.contactNumber }}</p>
+            <p><strong>Address:</strong> {{ driver.address }}</p>
+            <p><strong>Experience:</strong> {{ driver.experienceYears }} years</p>
+            <p><strong>Hourly Rate:</strong> ₹{{ driver.hourlyRate }}</p>
+            <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button
+            class="request-button"
+            *ngIf="!isDriverRequested(driver)"
+            (click)="handleRequestClick(driver)"
+            [disabled]="driver.availabilityStatus !== 'Active'"
+          >
+            Request
+          </button>
+          <button class="requested-button" *ngIf="isDriverRequested(driver)">Requested</button>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- No Records Found -->
+    <div *ngIf="!filteredDrivers.length" class="no-records">
+      <p>Oops! No records found</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="signup-container">
+  <div class="signup-wrapper">
+    <!-- Left Side: Image -->
+    <div class="signup-left">
+      <img src="/assets/images/background.webp" alt="Signup Image" class="signup-image">
+      <div class="image-title">
+        <h1>DriveU</h1>
+      </div>
+    </div>
+
+    <!-- Right Side: Signup Form -->
+    <div class="signup-right">
+      <div class="signup-box">
+        <h2>Sign Up</h2>
+        <h4>Join DriveU Today</h4>
+        <div class="form-group">
+          <input
+            type="text"
+            name="username"
+            [(ngModel)]="formData.username"
+            (ngModelChange)="validateField('username', formData.username)"
+            placeholder="User name"
+          />
+          <div *ngIf="errors.username" class="error">{{ errors.username }}</div>
+        </div>
+        
+        <div class="form-group">
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="formData.email"
+            (ngModelChange)="validateField('email', formData.email)"
+            placeholder="Email"
+          />
+          <div *ngIf="errors.email" class="error">{{ errors.email }}</div>
+        </div>
+        
+        <div class="form-group">
+          <input
+            type="text"
+            name="mobileNumber"
+            [(ngModel)]="formData.mobileNumber"
+            (ngModelChange)="validateField('mobileNumber', formData.mobileNumber)"
+            placeholder="Mobile"
+          />
+          <div *ngIf="errors.mobileNumber" class="error">{{ errors.mobileNumber }}</div>
+        </div>
+        
+        <div class="form-group">
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="formData.password"
+            (ngModelChange)="validateField('password', formData.password)"
+            placeholder="Password"
+          />
+          <div *ngIf="errors.password" class="error">{{ errors.password }}</div>
+        </div>
+        
+        <div class="form-group">
+          <input
+            type="password"
+            name="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            (ngModelChange)="validateField('confirmPassword', confirmPassword)"
+            placeholder="Confirm password"
+          />
+          <div *ngIf="errors.confirmPassword" class="error">{{ errors.confirmPassword }}</div>
+        </div>
+        
+        
+        <div class="form-group">
+          <select name="userRole" [(ngModel)]="formData.userRole">
+            <option value="">Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Customer">Customer</option>
+          </select>
+          <div *ngIf="errors.userRole" class="error">{{ errors.userRole }}</div>
+        </div>
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        
+        <button type="submit" class="signup-button" (click)="handleSubmit()">
+          Sign Up
+        </button>
+        <div class="login-link">
+          Already have an account? <a routerLink="/login">Log In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Popup -->
+  <div class="success-popup" *ngIf="successPopup">
+    <p>Registration Successful!</p>
+    <button (click)="handleSuccessMessage()">Log In</button>
+  </div>
+</div>

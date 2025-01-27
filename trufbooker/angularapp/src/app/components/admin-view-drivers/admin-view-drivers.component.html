@@ -1,0 +1,109 @@
+<app-adminnav></app-adminnav>
+<div id="parent" [ngClass]="{ blur: showDeletePopup }">
+  <div id="driverHomeBody">
+    <h1>Drivers</h1>
+    <hr />
+
+    <div class="top-container">
+      <div>
+        <label for="searchBox">Search by:</label>
+        <input
+          id="searchBox"
+          type="text"
+          placeholder="Driver Name or Vehicle Type..."
+          [(ngModel)]="searchField"
+          (ngModelChange)="applyFilters()"
+        />
+      </div>
+      <div>
+        <label for="statusSelect">Filter by Status:</label>
+        <select [(ngModel)]="selectedStatus" (ngModelChange)="applyFilters()" id="statusSelect">
+          <option [ngValue]="null">All Status</option>
+          <option value="Active">Active</option>
+          <option value="On Leave">On Leave</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="filteredDrivers.length > 0; else noDataFound" class="driver-cards-container">
+      <div *ngFor="let driver of filteredDrivers" class="driver-card">
+        <div class="card-header">
+          <img
+            class="driver-image"
+            [src]="'data:image/jpeg;base64,' + driver.image"
+            alt="Driver Image"
+          />
+        </div>
+        <div class="card-body">
+          <h2>{{ driver.driverName }}</h2>
+          <p><strong>Vehicle Type:</strong> {{ driver.vehicleType }}</p>
+          <p><strong>License:</strong> {{ driver.licenseNumber }}</p>
+          <p><strong>Phone:</strong> {{ driver.contactNumber }}</p>
+          <p><strong>Address:</strong> {{ driver.address }}</p>
+          <p><strong>Experience:</strong> {{ driver.experienceYears }} years</p>
+          <p><strong>Hourly Rate:</strong> ₹{{ driver.hourlyRate }}</p>
+          <p><strong>Status:</strong> {{ driver.availabilityStatus }}</p>
+        </div>
+        <div class="card-footer">
+          <button
+            class="edit-button"
+            [disabled]="driver.availabilityStatus === 'Inactive'"
+            [ngClass]="{ 'disabled-button': driver.availabilityStatus === 'Inactive' }"
+            (click)="navigateToEditDriver(driver.driverId)"
+          >
+            Edit
+          </button>
+          <button
+            class="delete-button"
+            [disabled]="driver.availabilityStatus === 'Inactive'"
+            [ngClass]="{ 'disabled-button': driver.availabilityStatus === 'Inactive' }"
+            (click)="handleDeleteClick(driver.driverId)"
+          >
+            Delete
+          </button>
+          <div class="status-popover-container">
+            <button class="toggle-status-button" (click)="toggleDropdown(driver.driverId)">Action</button>
+            <div *ngIf="activeDropdown === driver.driverId" class="status-popover">
+              <button
+                class="status-option"
+                *ngIf="driver.availabilityStatus !== 'Active'"
+                (click)="updateDriverStatus(driver, 'Active')"
+              >
+                Active
+              </button>
+              <button
+                class="status-option"
+                *ngIf="driver.availabilityStatus !== 'On Leave'"
+                (click)="updateDriverStatus(driver, 'On Leave')"
+              >
+                On Leave
+              </button>
+              <button
+                class="status-option"
+                *ngIf="driver.availabilityStatus !== 'Inactive'"
+                (click)="updateDriverStatus(driver, 'Inactive')"
+              >
+                Inactive
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Data Found Message -->
+    <ng-template #noDataFound>
+      <div class="no-data-message">
+        <p>Oops! No data found.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="delete-popup">
+  <p>Are you sure you want to delete this driver?</p>
+  <button class="confirm-delete-button" (click)="handleConfirmDelete()">Yes, Delete</button>
+  <button class="cancel-delete-button" (click)="closeDeletePopup()">Cancel</button>
+</div>

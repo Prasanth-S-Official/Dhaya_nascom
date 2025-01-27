@@ -1,0 +1,27 @@
+<nav class="customernav">
+    <h1 class="site-title">
+      <a routerLink="/home" style="color: inherit; text-decoration: inherit;">DriveU</a>
+    </h1>
+    <ul class="nav-links">
+      <li>
+        <p class="user-role">{{ userName }} / {{ userRole }}</p>
+      </li>
+      <li><a [routerLink]="['/home']">Home</a></li>
+      <li><a [routerLink]="['/customer/view/drivers']">Available Drivers</a></li>
+      <li><a [routerLink]="['/customer/my/requests']">My Requests</a></li>
+      <li><a [routerLink]="['/customer/feedback']">Feedback</a></li>
+      <li>
+        <button id="logout-button" class="button" (click)="showLogoutPopup = true">Logout</button>
+      </li>
+    </ul>
+  
+    <!-- Logout Popup -->
+    <div *ngIf="showLogoutPopup" class="logout-popup">
+      <div class="logout-popup-content">
+        <p>Are you sure you want to logout?</p>
+        <button (click)="logout(); showLogoutPopup = false;" class="button button-yes">Yes, Logout</button>
+        <button (click)="showLogoutPopup = false" class="button button-cancel">Cancel</button>
+      </div>
+    </div>
+  </nav>
+  

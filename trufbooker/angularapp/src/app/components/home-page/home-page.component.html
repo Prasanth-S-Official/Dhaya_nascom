@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <!-- Navigation Bar -->
+  <app-customernav *ngIf="userRole === 'Customer'"></app-customernav>
+  <app-adminnav *ngIf="userRole === 'Admin'"></app-adminnav>
+
+  <!-- Cover Section -->
+  <div class="coverimage">
+    <div class="title">
+      <h1>DriveU</h1>
+      <p>Your trusted platform for connecting with professional drivers on demand</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Welcome to DriveU</h2>
+    <p>
+      Experience seamless connectivity with our professional drivers. DriveU is your one-stop solution for short-term or long-term driving needs. Whether it's a daily commute, a vacation, or a one-time trip, DriveU ensures safety, trust, and convenience.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- Contact Section -->
+  <div class="contact">
+    <h2>Contact Us</h2>
+    <p>📞 Phone: 987-654-3210</p>
+    <p>📧 Email: support@driveu.com</p>
+  </div>
+</div>

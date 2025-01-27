@@ -1,0 +1,456 @@
+/* General Styling */
+.page-content {
+    margin: 30px auto;
+    padding: 20px;
+    width: 90%;
+    font-family: 'Poppins', sans-serif;
+    /* background: linear-gradient(135deg, #f5f7fa, #e1e9f2); */
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .page-content h1 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  hr {
+    border: none;
+    border-top: 3px solid #3276a6;
+    height: 10px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+  
+  /* Search and Filter Section */
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #searchBox {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    max-width: 40%;
+    background: #fff;
+  }
+  
+  #searchBox:focus {
+    border-color: #3276a6;
+  }
+  
+  #filter {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  #filter select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    background: linear-gradient(135deg, #f5f5f5, #d3d3d3);
+    transition: border-color 0.3s ease;
+  }
+  
+  #filter select:hover {
+    border-color: #3c91e6;
+  }
+  
+  #filter select:focus {
+    border-color: #3276a6;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  table th,
+  table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #3c91e6;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  table tbody tr:hover {
+    background: rgba(60, 145, 230, 0.1);
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* No Records Found Styling */
+  .no-records-cell {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    font-style: italic;
+  }
+  
+  /* Button Styling */
+  button {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #3c91e6, #3276a6);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background: linear-gradient(135deg, #3276a6, #3c91e6);
+    transform: scale(1.1);
+  }
+  
+  #greenButton {
+    background: linear-gradient(135deg, #28a745, #218838);
+  }
+  
+  #greenButton:hover {
+    background: linear-gradient(135deg, #218838, #28a745);
+  }
+  
+  #redButton {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+  }
+  
+  #redButton:hover {
+    background: linear-gradient(135deg, #c82333, #dc3545);
+  }
+  
+  /* Modal Overlay Styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content Styling */
+  .modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .modal-content h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .modal-content p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Close Button Styling */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    color: #c00;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Blur Effect */
+  .blur {
+    filter: blur(5px);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .top-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+    }
+  
+    #searchBox,
+    #filter select {
+      width: 100%;
+      font-size: 14px;
+    }
+  
+    table th,
+    table td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .modal-content {
+      width: 90%;
+    }
+  
+    .close-button {
+      font-size: 18px;
+    }
+  }
+  
+
+  .driver-image-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .driver-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .progress-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+  
+  .progress-step {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #ddd;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 5px;
+    position: relative;
+  }
+  
+  .progress-step.active {
+    background-color: #28a745;
+    color: white;
+    transform: scale(1.1);
+    margin-right: 15px;
+  }
+  
+  .progress-step.rejected {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .progress-step.disabled {
+    background-color: #e0e0e0;
+    color: #888;
+  }
+  
+  .progress-step::after {
+    content: '➔';
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #ddd;
+  }
+  
+  .progress-step.active::after {
+    color: #28a745;
+  }
+  
+  .progress-step.rejected::after {
+    color: #f44336;
+  }
+  
+  .progress-step:last-child::after {
+    display: none;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .close-button {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+
+  /* ----- */
+
+
+
+/* Blinking column style */
+.blinking-column {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #f8d7da;
+  }
+}
+
+/* Blinking button style */
+.blinking-button {
+  animation: blink-button 1s infinite; /* Apply animation */
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+@keyframes blink-button {
+  0%, 100% {
+    background-color: #007bff;
+    border-color: #0056b3;
+    color: white;
+    transform: scale(1); /* No scaling at the start and end */
+  }
+  50% {
+    background-color: #0056b3;
+    border-color: #003d99;
+    color: rgb(233, 18, 18);
+    transform: scale(1.1); /* Slight scaling to emphasize blinking */
+  }
+}
+
+/* Optional hover effect for blinking button */
+.blinking-button:hover {
+  transform: scale(1.15);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Progress Bar Styling */
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.progress-step {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #ddd;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.progress-step.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.progress-step.rejected {
+  background-color: #f44336;
+  color: white;
+}
+
+.progress-step.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Close Request Button Styling */
+.close-request-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-request-button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
