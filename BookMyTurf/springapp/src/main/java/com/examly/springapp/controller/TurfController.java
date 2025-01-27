@@ -1,7 +1,7 @@
 package com.examly.springapp.controller;
 
-import com.examly.springapp.exceptions.DuplicateTurfException;
-import com.examly.springapp.exceptions.TurfNotFoundException;
+import com.examly.springapp.exception.DuplicateTurfException;
+import com.examly.springapp.exception.TurfNotFoundException;
 import com.examly.springapp.model.Turf;
 import com.examly.springapp.service.TurfService;
 
