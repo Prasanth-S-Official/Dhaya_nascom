@@ -3,7 +3,7 @@ package com.examly.springapp.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Driver {
+public class Turf {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Driver {
 
 
     // Constructor with parameters
-    public Driver(Long driverId, String driverName, String licenseNumber, Integer experienceYears, String contactNumber,
+    public Turf(Long driverId, String driverName, String licenseNumber, Integer experienceYears, String contactNumber,
                   String availabilityStatus, String address, String vehicleType, Double hourlyRate, String image) {
         this.driverId = driverId;
         this.driverName = driverName;
@@ -40,7 +40,7 @@ public class Driver {
     }
 
     // Default constructor
-    public Driver() {
+    public Turf() {
     }
 
     // Getters and Setters

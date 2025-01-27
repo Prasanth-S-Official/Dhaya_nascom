@@ -17,7 +17,7 @@ public class DriverRequest {
 
     @ManyToOne
     @JoinColumn(name = "driverId", nullable = true)
-    private Driver driver;
+    private Turf driver;
 
     private LocalDate requestDate;
     private String status; // e.g., "Pending", "Approved", "Rejected", "Completed"
@@ -42,7 +42,7 @@ public class DriverRequest {
     private String actualDuration;
 
     // Constructor with parameters
-    public DriverRequest(Long driverRequestId, User user, Driver driver, LocalDate requestDate, String status,
+    public DriverRequest(Long driverRequestId, User user, Turf driver, LocalDate requestDate, String status,
                          LocalDate tripDate, LocalTime timeSlot, String pickupLocation, String dropLocation,
                          String estimatedDuration, Double paymentAmount, String comments,
                          LocalTime actualDropTime, LocalDate actualDropDate, String actualDuration) {
@@ -84,11 +84,11 @@ public class DriverRequest {
         this.user = user;
     }
 
-    public Driver getDriver() {
+    public Turf getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void setDriver(Turf driver) {
         this.driver = driver;
     }
 
