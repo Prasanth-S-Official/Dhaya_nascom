@@ -18,20 +18,25 @@ public class Feedback {
     private User user; // Relation to the User entity
 
     @ManyToOne
-    @JoinColumn(name = "driverId", nullable = true)
-    private Driver driver; // Relation to the Driver entity, can be nullable
+    @JoinColumn(name = "turfId", nullable = true)
+    private Turf turf; // Relation to the Turf entity, can be nullable
 
-    private String category; // e.g., "Driver Performance", "Service Experience"
+    @ManyToOne
+    @JoinColumn(name = "bookingRequestId", nullable = true)
+    private TurfBookingRequest turfBookingRequest; // Relation to the TurfBookingRequest entity, can be nullable
+
+    private String category; // e.g., "Turf Quality", "Service Experience"
     private Integer rating; // Rating from 1 to 5
 
     // Constructor with parameters
-    public Feedback(Long feedbackId, String feedbackText, LocalDate date, User user, Driver driver, 
-                    String category, Integer rating) {
+    public Feedback(Long feedbackId, String feedbackText, LocalDate date, User user, Turf turf, 
+                    TurfBookingRequest turfBookingRequest, String category, Integer rating) {
         this.feedbackId = feedbackId;
         this.feedbackText = feedbackText;
         this.date = date;
         this.user = user;
-        this.driver = driver;
+        this.turf = turf;
+        this.turfBookingRequest = turfBookingRequest;
         this.category = category;
         this.rating = rating;
     }
@@ -73,12 +78,20 @@ public class Feedback {
         this.user = user;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public Turf getTurf() {
+        return turf;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setTurf(Turf turf) {
+        this.turf = turf;
+    }
+
+    public TurfBookingRequest getTurfBookingRequest() {
+        return turfBookingRequest;
+    }
+
+    public void setTurfBookingRequest(TurfBookingRequest turfBookingRequest) {
+        this.turfBookingRequest = turfBookingRequest;
     }
 
     public String getCategory() {
