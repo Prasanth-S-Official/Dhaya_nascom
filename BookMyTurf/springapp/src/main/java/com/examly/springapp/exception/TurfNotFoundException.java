@@ -1,4 +1,4 @@
-package com.examly.springapp.exceptions;
+package com.examly.springapp.exception;
 
 public class TurfNotFoundException extends RuntimeException {
 
