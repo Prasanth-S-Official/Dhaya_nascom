@@ -5,8 +5,9 @@ import com.examly.springapp.service.ProjectService;
 import com.examly.springapp.exception.ProjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -17,8 +18,9 @@ public class ProjectController {
     private ProjectService projectService;
 
     @PostMapping
-    public Project createProject(@RequestBody Project project) {
-        return projectService.createProject(project);
+    public ResponseEntity<Project> createProject(@RequestBody Project project) {
+        Project createdProject = projectService.createProject(project);
+        return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
     }
 
     @GetMapping("/{projectId}")
@@ -29,22 +31,27 @@ public class ProjectController {
             Project project = projectService.getProjectById(projectId, includeCompleted);
             return ResponseEntity.ok(project);
         } catch (ProjectNotFoundException ex) {
-            // Handle the case when the project is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex) {
-            // Handle other unexpected exceptions
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
         }
     }
-    
+
     @DeleteMapping("/{projectId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProject(@PathVariable int projectId) throws ProjectNotFoundException {
-        projectService.deleteProjectById(projectId);
+    public ResponseEntity<Void> deleteProject(@PathVariable int projectId) {
+        try {
+            projectService.deleteProjectById(projectId);
+            return ResponseEntity.noContent().build();
+        } catch (ProjectNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping
-    public List<Project> getAllProjects() {
-        return projectService.getAllProjects();
+    public ResponseEntity<List<Project>> getAllProjects() {
+        List<Project> projects = projectService.getAllProjects();
+        return ResponseEntity.ok(projects);
     }
 }
