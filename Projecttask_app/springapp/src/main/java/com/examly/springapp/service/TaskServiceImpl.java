@@ -25,7 +25,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task addTaskToProject(int projectId, Task task) throws TaskLimitExceededException, ProjectNotFoundException {
-        Project project = projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException("Project with ID " + projectId + " not found"));
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException("Project with ID " + projectId + " not found"));
 
         if (project.getTasks().size() >= 10) {
             throw new TaskLimitExceededException("Task limit exceeded for Project with ID " + projectId);
@@ -37,24 +38,30 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> getTasksByProjectId(int projectId) throws ProjectNotFoundException {
-        projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException("Project with ID " + projectId + " not found"));
-        return taskRepository.findByProject_ProjectId(projectId);
+        projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException("Project with ID " + projectId + " not found"));
+        return taskRepository.findByProjectId(projectId);
     }
 
     @Override
     public Task updateTaskStatus(int taskId, String status) throws InvalidTaskStatusUpdateException, ProjectCompletedException {
-        Task task = taskRepository.findById(taskId).orElseThrow(() -> new ProjectNotFoundException("Task with ID " + taskId + " not found"));
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ProjectNotFoundException("Task with ID " + taskId + " not found"));
         Project project = task.getProject();
 
-        if (project.getStatus().equals("Completed")) {
+        if ("Completed".equals(project.getStatus())) {
             throw new ProjectCompletedException("Task updates are not allowed for a project with status 'Completed'");
         }
 
-        if (status.equals("Completed") && !task.getStatus().equals("In Progress")) {
-            throw new InvalidTaskStatusUpdateException("Cannot directly change task status from " + task.getStatus() + " to " + status);
-        }
+        validateTaskStatus(task.getStatus(), status);
 
         task.setStatus(status);
         return taskRepository.save(task);
+    }
+
+    private void validateTaskStatus(String currentStatus, String newStatus) throws InvalidTaskStatusUpdateException {
+        if ("Completed".equals(newStatus) && !"In Progress".equals(currentStatus)) {
+            throw new InvalidTaskStatusUpdateException("Cannot directly change task status from " + currentStatus + " to " + newStatus);
+        }
     }
 }

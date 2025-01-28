@@ -1,13 +1,7 @@
 package com.examly.springapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.*;
 
 @Entity
 public class Task {
@@ -15,24 +9,25 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taskId;
-    
+
     private String title;
-    private String status;
+    private String status; // "Pending", "In Progress", "Completed"
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     @JsonBackReference
     private Project project;
 
-    // Getters, Setters, Constructors
+    // Constructors
     public Task() {}
-    
+
     public Task(String title, String status, Project project) {
         this.title = title;
         this.status = status;
         this.project = project;
     }
 
+    // Getters and Setters
     public int getTaskId() {
         return taskId;
     }
