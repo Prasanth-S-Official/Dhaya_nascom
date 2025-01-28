@@ -2,6 +2,10 @@ package com.examly.springapp.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,20 +15,23 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int projectId;
 
+    @NotBlank(message = "Project name cannot be blank")
     private String name;
+
+    @Size(max = 255, message = "Description cannot exceed 255 characters")
     private String description;
 
-    // Add a status field
-    private String status; // Example values: "Pending", "In Progress", "Completed"
+    @Enumerated(EnumType.STRING)
+    private Status status; // Use Enum for status
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     // Constructors
     public Project() {}
 
-    public Project(String name, String description, String status) {
+    public Project(String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -55,11 +62,11 @@ public class Project {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -69,5 +76,15 @@ public class Project {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        task.setProject(this);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+        task.setProject(null);
     }
 }

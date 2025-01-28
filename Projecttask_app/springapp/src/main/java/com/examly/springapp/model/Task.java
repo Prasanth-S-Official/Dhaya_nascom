@@ -2,6 +2,7 @@ package com.examly.springapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Task {
@@ -10,8 +11,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taskId;
 
+    @NotBlank(message = "Task title cannot be blank")
     private String title;
-    private String status; // "Pending", "In Progress", "Completed"
+
+    @Enumerated(EnumType.STRING)
+    private Status status; // Use Enum for status
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -21,7 +25,7 @@ public class Task {
     // Constructors
     public Task() {}
 
-    public Task(String title, String status, Project project) {
+    public Task(String title, Status status, Project project) {
         this.title = title;
         this.status = status;
         this.project = project;
@@ -44,11 +48,11 @@ public class Task {
         this.title = title;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

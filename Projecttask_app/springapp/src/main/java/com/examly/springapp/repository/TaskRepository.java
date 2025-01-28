@@ -13,7 +13,9 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findByProjectIdAndStatusIn(int projectId, List<String> statuses);
 
     // Custom query to fetch all tasks for a specific project (no filtering)
+    List<Task> findByProject_ProjectId(int projectId);
+
+    // Fetch tasks for a specific project ID with specific statuses
     List<Task> findByProject_ProjectIdAndStatusIn(int projectId, List<String> statuses);
-    List<Task> findByProjectId(int projectId);
 
 }
