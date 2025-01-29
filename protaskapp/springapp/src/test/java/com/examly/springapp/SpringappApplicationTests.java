@@ -197,13 +197,30 @@ class SpringappApplicationTests {
                 .andExpect(jsonPath("$.status").value("IN_PROGRESS"));
     }
 
+    @Test
+    @Order(13)
+    public void backend_testGetProjectById_ShouldReturnProjectWithTasks() throws Exception {
+        mockMvc.perform(get("/api/projects/{projectId}", 1)
+                .param("includeCompleted", "false") // Default case: Only Pending & In Progress tasks
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) // ✅ Expect 200 OK
+                .andExpect(jsonPath("$.projectId").value(1))
+                .andExpect(jsonPath("$.name").exists())
+                .andExpect(jsonPath("$.description").exists())
+                .andExpect(jsonPath("$.tasks").isArray()) // ✅ Ensures tasks are included
+                .andExpect(jsonPath("$.tasks.length()").value(greaterThan(0))) // ✅ Ensure tasks exist
+                .andExpect(jsonPath("$.tasks[*].taskId").exists()) // ✅ Each task has a taskId
+                .andExpect(jsonPath("$.tasks[*].title").exists()) // ✅ Each task has a title
+                .andExpect(jsonPath("$.tasks[*].status").exists()) // ✅ Each task has a status
+                .andExpect(jsonPath("$.tasks[*].status").value(not("COMPLETED"))); // ✅ Exclude completed tasks
+    }
 
 
 
 
     // ✅ Test Case 13: Delete Existing Project (204 No Content)
     @Test
-    @Order(13)
+    @Order(14)
     public void backend_testDeleteProject_ShouldReturn204() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
