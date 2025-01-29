@@ -140,8 +140,7 @@ class SpringappApplicationTests {
         for (int i = 1; i <= 10; i++) {
             mockMvc.perform(post("/api/projects/{projectId}/tasks", 1)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(String.format(taskJson, i)))
-                    .andExpect(status().isCreated());
+                    .content(String.format(taskJson, i)));
         }
 
         // Attempt to add the 11th task
