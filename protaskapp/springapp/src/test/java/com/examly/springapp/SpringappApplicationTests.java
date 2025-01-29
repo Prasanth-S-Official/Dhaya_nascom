@@ -34,7 +34,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 1: Create Project
     @Test
     @Order(1)
-    public void backend_testCreateProject_ShouldReturn201() throws Exception {
+    public void testCreateProject_ShouldReturn201() throws Exception {
         String projectJson = """
             {
                 "name": "Project A",
@@ -55,7 +55,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 2: Get Project by ID (200 OK)
     @Test
     @Order(2)
-    public void backend_testGetProjectById_ShouldReturn200() throws Exception {
+    public void testGetProjectById_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -67,7 +67,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 3: Get All Projects (200 OK)
     @Test
     @Order(3)
-    public void backend_testGetAllProjects_ShouldReturn200() throws Exception {
+    public void testGetAllProjects_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -78,7 +78,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 4: Add Task to Project (201 Created)
     @Test
     @Order(4)
-    public void backend_testPostTask_ShouldReturn201() throws Exception {
+    public void testPostTask_ShouldReturn201() throws Exception {
         String taskJson = """
             {
                 "title": "Task 1",
@@ -98,7 +98,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 5: Get All Tasks for a Project
     @Test
     @Order(5)
-    public void backend_testGetAllTasks_ShouldReturn200() throws Exception {
+    public void testGetAllTasks_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects/1/tasks")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -109,7 +109,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 6: Get Non-Existent Project by ID (404 Not Found)
     @Test
     @Order(6)
-    public void backend_testGetProjectById_NotFound_ShouldReturn404() throws Exception {
+    public void testGetProjectById_NotFound_ShouldReturn404() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}", 99999)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -119,7 +119,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 7: Delete Non-Existent Project (404 Not Found)
     @Test
     @Order(7)
-    public void backend_testDeleteProject_NotFound_ShouldReturn404() throws Exception {
+    public void testDeleteProject_NotFound_ShouldReturn404() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 999)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -129,7 +129,7 @@ class SpringappApplicationTests {
     // ✅ Test Case 8: Exceed Task Limit (409 Conflict)
     @Test
     @Order(8)
-    public void backend_testAddTaskToProject_ExceedsTaskLimit_ShouldReturn409() throws Exception {
+    public void testAddTaskToProject_ExceedsTaskLimit_ShouldReturn409() throws Exception {
         String taskJson = """
             {
                 "title": "Task %d",
@@ -161,7 +161,7 @@ class SpringappApplicationTests {
 
     @Test
     @Order(9)
-    public void backend_testGetAllTasksForProject_ShouldReturn200() throws Exception {
+    public void testGetAllTasksForProject_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}/tasks", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -170,7 +170,7 @@ class SpringappApplicationTests {
 
     @Test
     @Order(10)
-    public void backend_testGetTasksForNonExistentProject_ShouldReturn404() throws Exception {
+    public void testGetTasksForNonExistentProject_ShouldReturn404() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}/tasks", 999)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
@@ -179,7 +179,7 @@ class SpringappApplicationTests {
 
     @Test
     @Order(11)
-    public void backend_testUpdateTaskStatus_InvalidTransition_ShouldReturn400() throws Exception {
+    public void testUpdateTaskStatus_InvalidTransition_ShouldReturn400() throws Exception {
         mockMvc.perform(put("/api/tasks/{taskId}/status", 1)
                 .param("status", "COMPLETED") // Skipping IN_PROGRESS
                 .contentType(MediaType.APPLICATION_JSON))
@@ -189,7 +189,7 @@ class SpringappApplicationTests {
 
     @Test
     @Order(12)
-    public void backend_testUpdateTaskStatus_ShouldReturn200() throws Exception {
+    public void testUpdateTaskStatus_ShouldReturn200() throws Exception {
         mockMvc.perform(put("/api/tasks/{taskId}/status", 1)
                 .param("status", "IN_PROGRESS")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -200,8 +200,7 @@ class SpringappApplicationTests {
 
     @Test
     @Order(13)
-    public void backend_testGetProjectById_ShouldReturnProjectWithTasks() throws Exception {
-        System.out.println("helo");
+    public void testGetProjectById_ShouldReturnProjectWithTasks() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}", 1)
                 .param("includeCompleted", "false") // Default case: Only Pending & In Progress tasks
                 .contentType(MediaType.APPLICATION_JSON))
@@ -217,19 +216,16 @@ class SpringappApplicationTests {
                 .andExpect(jsonPath("$.tasks[?(@.status=='COMPLETED')]").doesNotExist()); // ✅ Ensure no task has "PENDING"
     }
 
-
-    // ✅ Test Case 13: Delete Existing Project (204 No Content)
     @Test
     @Order(14)
-    public void backend_testDeleteProject_ShouldReturn204() throws Exception {
+    public void testDeleteProject_ShouldReturn204() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
-    // ✅ Test Case 13: Validate One-To-Many Relationship
     @Test
-    public void backend_testProjectHasOneToManyAnnotation() {
+    public void testProjectHasOneToManyAnnotation() {
         try {
             Class<?> projectClass = Class.forName("com.examly.springapp.model.Project");
             Field[] fields = projectClass.getDeclaredFields();
@@ -248,9 +244,9 @@ class SpringappApplicationTests {
         }
     }
 
-    // ✅ Test Case 11: Validate Many-To-One Relationship
+   
     @Test
-    public void backend_testTaskHasManyToOneAnnotation() {
+    public void testTaskHasManyToOneAnnotation() {
         try {
             Class<?> taskClass = Class.forName("com.examly.springapp.model.Task");
             Field[] fields = taskClass.getDeclaredFields();
@@ -269,9 +265,9 @@ class SpringappApplicationTests {
         }
     }
 
-    // ✅ Test Case 12: Check All Files Exist
+
     @Test
-    public void backend_testAllFilesExist() {
+    public void testAllFilesExist() {
         String[] classNames = {
             "com.examly.springapp.model.Project",
             "com.examly.springapp.model.Task",
@@ -291,9 +287,8 @@ class SpringappApplicationTests {
         }
     }
 
-    // ✅ Test Case 13: Check All Folders Exist
     @Test
-    public void backend_testAllFoldersExist() {
+    public void testAllFoldersExist() {
         String basePath = "src/main/java/com/examly/springapp/";
         String[] folders = { "controller", "model", "repository", "service", "exception" };
         for (String folder : folders) {
