@@ -10,7 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.not;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -200,6 +201,7 @@ class SpringappApplicationTests {
     @Test
     @Order(13)
     public void backend_testGetProjectById_ShouldReturnProjectWithTasks() throws Exception {
+        System.out.println("helo");
         mockMvc.perform(get("/api/projects/{projectId}", 1)
                 .param("includeCompleted", "false") // Default case: Only Pending & In Progress tasks
                 .contentType(MediaType.APPLICATION_JSON))
@@ -212,10 +214,8 @@ class SpringappApplicationTests {
                 .andExpect(jsonPath("$.tasks[*].taskId").exists()) // ✅ Each task has a taskId
                 .andExpect(jsonPath("$.tasks[*].title").exists()) // ✅ Each task has a title
                 .andExpect(jsonPath("$.tasks[*].status").exists()) // ✅ Each task has a status
-                .andExpect(jsonPath("$.tasks[*].status").value(not("COMPLETED"))); // ✅ Exclude completed tasks
+                .andExpect(jsonPath("$.tasks[?(@.status=='COMPLETED')]").doesNotExist()); // ✅ Ensure no task has "PENDING"
     }
-
-
 
 
     // ✅ Test Case 13: Delete Existing Project (204 No Content)
