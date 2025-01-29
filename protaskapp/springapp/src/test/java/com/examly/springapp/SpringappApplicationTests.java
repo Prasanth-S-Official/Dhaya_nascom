@@ -158,18 +158,47 @@ class SpringappApplicationTests {
                 .andExpect(content().string("Task limit exceeded for Project with ID 1"));
     }
 
-    
-
-    // ✅ Test Case 9: Delete Existing Project (204 No Content)
     @Test
     @Order(9)
+    public void backend_testGetAllTasksForProject_ShouldReturn200() throws Exception {
+        mockMvc.perform(get("/api/projects/{projectId}/tasks", 1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+    }
+
+    @Test
+    @Order(10)
+    public void backend_testGetTasksForNonExistentProject_ShouldReturn404() throws Exception {
+        mockMvc.perform(get("/api/projects/{projectId}/tasks", 999)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Project with ID 999 not found"));
+    }
+
+    @Test
+    @Order(11)
+    public void backend_testUpdateTaskStatus_InvalidTransition_ShouldReturn400() throws Exception {
+        mockMvc.perform(put("/api/tasks/{taskId}/status", 1)
+                .param("status", "COMPLETED") // Skipping IN_PROGRESS
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Cannot change task status from PENDING to COMPLETED"));
+    }
+
+
+
+
+    // ✅ Test Case 12: Delete Existing Project (204 No Content)
+    @Test
+    @Order(12)
     public void backend_testDeleteProject_ShouldReturn204() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
-    // ✅ Test Case 10: Validate One-To-Many Relationship
+    // ✅ Test Case 13: Validate One-To-Many Relationship
     @Test
     public void backend_testProjectHasOneToManyAnnotation() {
         try {
