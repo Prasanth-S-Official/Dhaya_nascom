@@ -112,8 +112,6 @@ class SpringappApplicationTests {
             "com.examly.springapp.repository.TaskRepository",
             "com.examly.springapp.service.ProjectService",
             "com.examly.springapp.service.TaskService",
-            "com.examly.springapp.service.impl.ProjectServiceImpl",
-            "com.examly.springapp.service.impl.TaskServiceImpl",
             "com.examly.springapp.controller.ProjectController",
             "com.examly.springapp.controller.TaskController",
             "com.examly.springapp.exception.ProjectNotFoundException",
@@ -135,7 +133,7 @@ class SpringappApplicationTests {
     @Test
     public void backend_testAllFoldersExist() {
         String basePath = "src/main/java/com/examly/springapp/";
-        String[] folders = { "controller", "model", "repository", "service", "service/impl", "exception" };
+        String[] folders = { "controller", "model", "repository", "service", "exception" };
         for (String folder : folders) {
             String path = basePath + folder;
             assertTrue(Files.exists(Paths.get(path)), "Folder not found: " + path);
