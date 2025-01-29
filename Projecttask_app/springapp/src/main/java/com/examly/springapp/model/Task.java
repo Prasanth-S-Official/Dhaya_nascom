@@ -29,11 +29,51 @@ import main.java.com.examly.springapp.model.TaskStatus;
     public Task(String title, Status status, Project project) {
         this.title = title;
         this.status = status;
-        this.project = project;
+      public publi getC() {
+    return c;
+}
+
+public void setC(publi c) {
+    this.c = c;
+}
+
+      this.project = project;
     }
 
     // Getters and Setters
+    p
+
     public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }ublic int getTaskId() {
         return taskId;
     }
 

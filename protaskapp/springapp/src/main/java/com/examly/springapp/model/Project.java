@@ -7,13 +7,16 @@ import java.util.List;
 @Entity
 @Table(name = "projects")
 public class Project {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int projectId;
 
     private String name;
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status = TaskStatus.PENDING;  // Default Status
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -26,6 +29,7 @@ public class Project {
         this.description = description;
     }
 
+    // Getters & Setters
     public int getProjectId() {
         return projectId;
     }
@@ -50,6 +54,14 @@ public class Project {
         this.description = description;
     }
 
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
     public List<Task> getTasks() {
         return tasks;
     }
@@ -57,6 +69,4 @@ public class Project {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
-    
-    
 }
