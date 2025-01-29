@@ -182,16 +182,28 @@ class SpringappApplicationTests {
         mockMvc.perform(put("/api/tasks/{taskId}/status", 1)
                 .param("status", "COMPLETED") // Skipping IN_PROGRESS
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isConflict())
                 .andExpect(content().string("Cannot change task status from PENDING to COMPLETED"));
+    }
+
+    @Test
+    @Order(12)
+    public void backend_testUpdateTaskStatus_ShouldReturn200() throws Exception {
+        mockMvc.perform(put("/api/tasks/{taskId}/status", 1)
+                .param("status", "IN_PROGRESS")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.taskId").value(1))
+                .andExpect(jsonPath("$.status").value("IN_PROGRESS"));
     }
 
 
 
 
-    // ✅ Test Case 12: Delete Existing Project (204 No Content)
+
+    // ✅ Test Case 13: Delete Existing Project (204 No Content)
     @Test
-    @Order(12)
+    @Order(13)
     public void backend_testDeleteProject_ShouldReturn204() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
