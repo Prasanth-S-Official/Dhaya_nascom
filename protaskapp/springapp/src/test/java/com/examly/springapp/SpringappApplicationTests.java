@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 import java.lang.reflect.Field;
 import java.nio.file.Files;
@@ -59,6 +62,38 @@ class SpringappApplicationTests {
             .andReturn();
     }
 
+	@Test
+	@Order(3)
+	public void backend_testCreateProject_ShouldReturn201() throws Exception {
+		String projectJson = """
+			{
+				"name": "Project A",
+				"description": "This is a sample project"
+			}
+		""";
+	
+		mockMvc.perform(post("/api/projects")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(projectJson))
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.projectId").isNotEmpty())
+				.andExpect(jsonPath("$.name").value("Project A"))
+				.andExpect(jsonPath("$.description").value("This is a sample project"))
+				.andExpect(jsonPath("$.status").value("PENDING"));
+	}
+
+
+	@Test
+    @Order(4)
+    public void backend_testGetProjectById_ShouldReturn200() throws Exception {
+        mockMvc.perform(get("/api/projects/{projectId}", 1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.projectId").value(1))
+                .andExpect(jsonPath("$.name").value("Project A"))
+                .andExpect(jsonPath("$.description").value("This is a sample project"));
+    }
+
     // ✅ Check if Project has a One-To-Many Relationship with Task
     @Test
     public void backend_testProjectHasOneToManyAnnotation() {
@@ -79,6 +114,8 @@ class SpringappApplicationTests {
             fail("Class not found: " + e.getMessage());
         }
     }
+
+	
 
     // ✅ Check if Task has a Many-To-One Relationship with Project
     @Test

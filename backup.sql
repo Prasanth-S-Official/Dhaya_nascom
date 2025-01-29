@@ -36,7 +36,7 @@ CREATE TABLE `projects` (
   `name` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'This is a sample project','Project A','PENDING'),(2,'This is a sample project B','Project B','PENDING');
+INSERT INTO `projects` VALUES (1,'This is a sample project','Project A','PENDING'),(2,'This is a sample project B','Project B','PENDING'),(3,'This is a sample project B','Project C','PENDING'),(4,'This is a sample project','Project A','PENDING'),(5,'This is a sample project','Project A','PENDING'),(6,'This is a sample project','Project A','PENDING'),(7,'This is a sample project','Project A','PENDING');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,4 +86,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-29  7:16:56
+-- Dump completed on 2025-01-29  7:31:56
