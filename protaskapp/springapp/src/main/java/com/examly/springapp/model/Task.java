@@ -1,6 +1,6 @@
 package com.examly.springapp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,7 +17,7 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    @JsonBackReference
+    @JsonIgnoreProperties("tasks")
     private Project project;
 
     public Task() {}

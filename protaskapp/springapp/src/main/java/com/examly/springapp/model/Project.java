@@ -19,7 +19,6 @@ public class Project {
     private TaskStatus status = TaskStatus.PENDING;  // Default Status
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Task> tasks;
 
     public Project() {}
