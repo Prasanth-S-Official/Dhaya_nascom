@@ -1,11 +1,15 @@
 package com.examly.springapp.service.impl;
 
-import com.examly.springapp.exception.*;
-import com.examly.springapp.model.Project;
 import com.examly.springapp.model.Task;
+import com.examly.springapp.model.Project;
 import com.examly.springapp.model.TaskStatus;
 import com.examly.springapp.repository.ProjectRepository;
 import com.examly.springapp.repository.TaskRepository;
+import com.examly.springapp.exception.TaskNotFoundException;
+import com.examly.springapp.exception.InvalidTaskStatusUpdateException;
+import com.examly.springapp.exception.ProjectCompletedException;
+import com.examly.springapp.exception.TaskLimitExceededException;
+import com.examly.springapp.exception.ProjectNotFoundException;
 import com.examly.springapp.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,5 +72,14 @@ public class TaskServiceImpl implements TaskService {
 
         task.setStatus(newStatus);
         return taskRepository.save(task);
+    }
+
+    // ✅ Implement deleteTask() method
+    @Override
+    public void deleteTask(int taskId) throws TaskNotFoundException {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new TaskNotFoundException("Task with ID " + taskId + " not found"));
+
+        taskRepository.delete(task);
     }
 }
