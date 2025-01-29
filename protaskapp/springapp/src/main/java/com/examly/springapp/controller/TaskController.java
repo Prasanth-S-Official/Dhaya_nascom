@@ -86,20 +86,6 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    // // ✅ Add Task to a Project
-    // @PostMapping("/projects/{projectId}/tasks")
-    // public ResponseEntity<?> addTaskToProject(@PathVariable int projectId, @RequestBody Task task) {
-    //     try {
-    //         Task createdTask = taskService.addTaskToProject(projectId, task);
-    //         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
-    //     } catch (ProjectNotFoundException ex) {
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    //     } catch (TaskLimitExceededException ex) {
-    //         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
-    //     } catch (Exception ex) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
-    //     }
-    // }
 
     @PostMapping("/projects/{projectId}/tasks")
 public ResponseEntity<?> addTaskToProject(
