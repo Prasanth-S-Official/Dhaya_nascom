@@ -1,26 +1,26 @@
 package com.examly.springapp.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "projects")
 public class Project {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int projectId;
-    
+
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Task> tasks;
 
-    // Getters, Setters, Constructors
     public Project() {}
-    
+
     public Project(String name, String description) {
         this.name = name;
         this.description = description;
@@ -57,4 +57,6 @@ public class Project {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+    
+    
 }

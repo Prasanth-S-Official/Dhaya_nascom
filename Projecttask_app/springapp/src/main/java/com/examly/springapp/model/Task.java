@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 public class Task {
 
+import main.java.com.examly.springapp.model.TaskStatus;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taskId;
