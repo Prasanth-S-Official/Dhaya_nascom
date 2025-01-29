@@ -36,34 +36,8 @@ class SpringappApplicationTests {
     @Autowired
     private MockMvc mockMvc;
 
-    // ✅ Check API: Get All Projects
-    @Test
-    @Order(1)
-    public void backend_testGetAllProjects() throws Exception {
-        mockMvc.perform(get("/api/projects")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(print())
-            .andExpect(content().contentType("application/json"))
-            .andExpect(jsonPath("$").isArray())
-            .andReturn();
-    }
-
-    // ✅ Check API: Get All Tasks for a Project
-    @Test
-    @Order(2)
-    public void backend_testGetAllTasks() throws Exception {
-        mockMvc.perform(get("/api/projects/1/tasks")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(print())
-            .andExpect(content().contentType("application/json"))
-            .andExpect(jsonPath("$").isArray())
-            .andReturn();
-    }
-
 	@Test
-	@Order(3)
+	@Order(1)
 	public void backend_testCreateProject_ShouldReturn201() throws Exception {
 		String projectJson = """
 			{
@@ -84,7 +58,7 @@ class SpringappApplicationTests {
 
 
 	@Test
-    @Order(4)
+    @Order(2)
     public void backend_testGetProjectById_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -93,6 +67,54 @@ class SpringappApplicationTests {
                 .andExpect(jsonPath("$.name").value("Project A"))
                 .andExpect(jsonPath("$.description").value("This is a sample project"));
     }
+
+    // ✅ Check API: Get All Projects
+    @Test
+    @Order(3)
+    public void backend_testGetAllProjects() throws Exception {
+        mockMvc.perform(get("/api/projects")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(print())
+            .andExpect(content().contentType("application/json"))
+            .andExpect(jsonPath("$").isArray())
+            .andReturn();
+    }
+
+    @Test
+    @Order(4)
+    public void backend_testPostTask_ShouldReturn201() throws Exception {
+        // Task JSON Payload
+        String taskJson = """
+            {
+                "title": "Task 1",
+                "status": "PENDING"
+            }
+        """;
+
+        mockMvc.perform(post("/api/projects/{projectId}/tasks", 1) // Use projectId 1
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(taskJson)) // Send task JSON
+                .andExpect(status().isCreated()) // Expect 201 Created
+                .andExpect(jsonPath("$.taskId").isNotEmpty()) // Check if taskId is present
+                .andExpect(jsonPath("$.title").value("Task 1")) // Validate title
+                .andExpect(jsonPath("$.status").value("PENDING")); // Validate status
+    }
+
+       // ✅ Check API: Get All Tasks for a Project
+       @Test
+       @Order(5)
+       public void backend_testGetAllTasks() throws Exception {
+           mockMvc.perform(get("/api/projects/1/tasks")
+               .contentType(MediaType.APPLICATION_JSON))
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andDo(print())
+               .andExpect(content().contentType("application/json"))
+               .andExpect(jsonPath("$").isArray())
+               .andReturn();
+       }
+
+
 
     // ✅ Check if Project has a One-To-Many Relationship with Task
     @Test
