@@ -103,7 +103,7 @@ class SpringappApplicationTests {
 
        // ✅ Check API: Get All Tasks for a Project
        @Test
-       @Order(5)
+       @Order(8)
        public void backend_testGetAllTasks() throws Exception {
            mockMvc.perform(get("/api/projects/1/tasks")
                .contentType(MediaType.APPLICATION_JSON))
@@ -113,6 +113,34 @@ class SpringappApplicationTests {
                .andExpect(jsonPath("$").isArray())
                .andReturn();
        }
+
+       @Test
+        @Order(6)
+        public void backend_testGetProjectById_NotFound_ShouldReturn404() throws Exception {
+            mockMvc.perform(get("/api/projects/{projectId}", 99999)
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isNotFound())
+                    .andExpect(content().string("Project with ID 99999 not found"));
+        }
+
+        @Test
+    @Order(7)
+    public void backend_testDeleteProject_NotFound_ShouldReturn404() throws Exception {
+        mockMvc.perform(delete("/api/projects/{projectId}", 999)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Project with ID 999 not found"));
+    }
+
+
+    @Test
+    @Order(5)
+    public void backend_testDeleteProject_ShouldReturn204() throws Exception {
+        mockMvc.perform(delete("/api/projects/{projectId}", 1)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
 
 
 
