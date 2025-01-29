@@ -63,7 +63,7 @@ CREATE TABLE `task` (
   PRIMARY KEY (`task_id`),
   KEY `FK59mygkh6yxl8yj6j8ocg1k73a` (`project_id`),
   CONSTRAINT `FK59mygkh6yxl8yj6j8ocg1k73a` FOREIGN KEY (`project_id`) REFERENCES `projects` (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-29  8:02:46
+-- Dump completed on 2025-01-29  8:17:46

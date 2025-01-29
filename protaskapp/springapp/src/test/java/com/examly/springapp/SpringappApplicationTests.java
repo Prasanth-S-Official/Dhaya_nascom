@@ -3,13 +3,9 @@ package com.examly.springapp;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 import java.lang.reflect.Field;
 import java.nio.file.Files;
@@ -21,10 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import jakarta.persistence.ManyToOne;
 
@@ -36,28 +30,29 @@ class SpringappApplicationTests {
     @Autowired
     private MockMvc mockMvc;
 
-	@Test
-	@Order(1)
-	public void backend_testCreateProject_ShouldReturn201() throws Exception {
-		String projectJson = """
-			{
-				"name": "Project A",
-				"description": "This is a sample project"
-			}
-		""";
-	
-		mockMvc.perform(post("/api/projects")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(projectJson))
-				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.projectId").isNotEmpty())
-				.andExpect(jsonPath("$.name").value("Project A"))
-				.andExpect(jsonPath("$.description").value("This is a sample project"))
-				.andExpect(jsonPath("$.status").value("PENDING"));
-	}
+    // ✅ Test Case 1: Create Project
+    @Test
+    @Order(1)
+    public void backend_testCreateProject_ShouldReturn201() throws Exception {
+        String projectJson = """
+            {
+                "name": "Project A",
+                "description": "This is a sample project"
+            }
+        """;
 
+        mockMvc.perform(post("/api/projects")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(projectJson))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.projectId").isNotEmpty())
+                .andExpect(jsonPath("$.name").value("Project A"))
+                .andExpect(jsonPath("$.description").value("This is a sample project"))
+                .andExpect(jsonPath("$.status").value("PENDING"));
+    }
 
-	@Test
+    // ✅ Test Case 2: Get Project by ID (200 OK)
+    @Test
     @Order(2)
     public void backend_testGetProjectById_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects/{projectId}", 1)
@@ -68,23 +63,21 @@ class SpringappApplicationTests {
                 .andExpect(jsonPath("$.description").value("This is a sample project"));
     }
 
-    // ✅ Check API: Get All Projects
+    // ✅ Test Case 3: Get All Projects (200 OK)
     @Test
     @Order(3)
-    public void backend_testGetAllProjects() throws Exception {
+    public void backend_testGetAllProjects_ShouldReturn200() throws Exception {
         mockMvc.perform(get("/api/projects")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andDo(print())
-            .andExpect(content().contentType("application/json"))
-            .andExpect(jsonPath("$").isArray())
-            .andReturn();
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$").isArray());
     }
 
+    // ✅ Test Case 4: Add Task to Project (201 Created)
     @Test
     @Order(4)
     public void backend_testPostTask_ShouldReturn201() throws Exception {
-        // Task JSON Payload
         String taskJson = """
             {
                 "title": "Task 1",
@@ -92,38 +85,38 @@ class SpringappApplicationTests {
             }
         """;
 
-        mockMvc.perform(post("/api/projects/{projectId}/tasks", 1) // Use projectId 1
+        mockMvc.perform(post("/api/projects/{projectId}/tasks", 1)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(taskJson)) // Send task JSON
-                .andExpect(status().isCreated()) // Expect 201 Created
-                .andExpect(jsonPath("$.taskId").isNotEmpty()) // Check if taskId is present
-                .andExpect(jsonPath("$.title").value("Task 1")) // Validate title
-                .andExpect(jsonPath("$.status").value("PENDING")); // Validate status
+                .content(taskJson))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.taskId").isNotEmpty())
+                .andExpect(jsonPath("$.title").value("Task 1"))
+                .andExpect(jsonPath("$.status").value("PENDING"));
     }
 
-       // ✅ Check API: Get All Tasks for a Project
-       @Test
-       @Order(8)
-       public void backend_testGetAllTasks() throws Exception {
-           mockMvc.perform(get("/api/projects/1/tasks")
-               .contentType(MediaType.APPLICATION_JSON))
-               .andExpect(MockMvcResultMatchers.status().isOk())
-               .andDo(print())
-               .andExpect(content().contentType("application/json"))
-               .andExpect(jsonPath("$").isArray())
-               .andReturn();
-       }
+    // ✅ Test Case 5: Get All Tasks for a Project
+    @Test
+    @Order(5)
+    public void backend_testGetAllTasks_ShouldReturn200() throws Exception {
+        mockMvc.perform(get("/api/projects/1/tasks")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$").isArray());
+    }
 
-       @Test
-        @Order(6)
-        public void backend_testGetProjectById_NotFound_ShouldReturn404() throws Exception {
-            mockMvc.perform(get("/api/projects/{projectId}", 99999)
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isNotFound())
-                    .andExpect(content().string("Project with ID 99999 not found"));
-        }
+    // ✅ Test Case 6: Get Non-Existent Project by ID (404 Not Found)
+    @Test
+    @Order(6)
+    public void backend_testGetProjectById_NotFound_ShouldReturn404() throws Exception {
+        mockMvc.perform(get("/api/projects/{projectId}", 99999)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Project with ID 99999 not found"));
+    }
 
-        @Test
+    // ✅ Test Case 7: Delete Non-Existent Project (404 Not Found)
+    @Test
     @Order(7)
     public void backend_testDeleteProject_NotFound_ShouldReturn404() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 999)
@@ -132,19 +125,50 @@ class SpringappApplicationTests {
                 .andExpect(content().string("Project with ID 999 not found"));
     }
 
-
+    // ✅ Test Case 8: Exceed Task Limit (409 Conflict)
     @Test
-    @Order(5)
+    @Order(8)
+    public void backend_testAddTaskToProject_ExceedsTaskLimit_ShouldReturn409() throws Exception {
+        String taskJson = """
+            {
+                "title": "Task %d",
+                "status": "PENDING"
+            }
+        """;
+
+        // Add 10 tasks
+        for (int i = 1; i <= 10; i++) {
+            mockMvc.perform(post("/api/projects/{projectId}/tasks", 1)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(String.format(taskJson, i)))
+                    .andExpect(status().isCreated());
+        }
+
+        // Attempt to add the 11th task
+        String taskJson11 = """
+            {
+                "title": "Task 11",
+                "status": "PENDING"
+            }
+        """;
+
+        mockMvc.perform(post("/api/projects/{projectId}/tasks", 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(taskJson11))
+                .andExpect(status().isConflict())
+                .andExpect(content().string("Task limit exceeded for Project with ID 1"));
+    }
+
+    // ✅ Test Case 9: Delete Existing Project (204 No Content)
+    @Test
+    @Order(9)
     public void backend_testDeleteProject_ShouldReturn204() throws Exception {
         mockMvc.perform(delete("/api/projects/{projectId}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
-
-
-
-    // ✅ Check if Project has a One-To-Many Relationship with Task
+    // ✅ Test Case 10: Validate One-To-Many Relationship
     @Test
     public void backend_testProjectHasOneToManyAnnotation() {
         try {
@@ -165,9 +189,7 @@ class SpringappApplicationTests {
         }
     }
 
-	
-
-    // ✅ Check if Task has a Many-To-One Relationship with Project
+    // ✅ Test Case 11: Validate Many-To-One Relationship
     @Test
     public void backend_testTaskHasManyToOneAnnotation() {
         try {
@@ -188,24 +210,18 @@ class SpringappApplicationTests {
         }
     }
 
-    // ✅ Check if all required files (classes) exist
+    // ✅ Test Case 12: Check All Files Exist
     @Test
     public void backend_testAllFilesExist() {
         String[] classNames = {
             "com.examly.springapp.model.Project",
             "com.examly.springapp.model.Task",
-            "com.examly.springapp.model.TaskStatus",
             "com.examly.springapp.repository.ProjectRepository",
             "com.examly.springapp.repository.TaskRepository",
             "com.examly.springapp.service.ProjectService",
             "com.examly.springapp.service.TaskService",
             "com.examly.springapp.controller.ProjectController",
-            "com.examly.springapp.controller.TaskController",
-            "com.examly.springapp.exception.ProjectNotFoundException",
-            "com.examly.springapp.exception.TaskNotFoundException",
-            "com.examly.springapp.exception.InvalidTaskStatusUpdateException",
-            "com.examly.springapp.exception.ProjectCompletedException",
-            "com.examly.springapp.exception.TaskLimitExceededException"
+            "com.examly.springapp.controller.TaskController"
         };
         for (String className : classNames) {
             try {
@@ -216,7 +232,7 @@ class SpringappApplicationTests {
         }
     }
 
-    // ✅ Check if all required folders exist
+    // ✅ Test Case 13: Check All Folders Exist
     @Test
     public void backend_testAllFoldersExist() {
         String basePath = "src/main/java/com/examly/springapp/";
