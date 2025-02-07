@@ -1,6 +1,6 @@
 package com.examly.springapp.model;
 
-public enum TaskStatus
+public enum Status
  {
     PENDING, IN_PROGRESS, COMPLETED
 }
