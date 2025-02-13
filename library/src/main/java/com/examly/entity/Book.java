@@ -3,21 +3,21 @@ package com.examly.entity;
 public class Book {
     private int bookId;
     private String title;
-    private String author;
+    private int authorId; 
     private double price;
     private String publishedDate;
 
-    public Book(int bookId, String title, String author, double price ,String publishedDate ) {
+    public Book(int bookId, String title, int authorId, double price, String publishedDate) {
         this.bookId = bookId;
         this.title = title;
-        this.author = author;
-        this.publishedDate=publishedDate;
+        this.authorId = authorId;
         this.price = price;
+        this.publishedDate = publishedDate;
     }
 
-    public Book(){}
-    
-    // Getters and setters
+    public Book() {}
+
+    // Getters and Setters
     public int getBookId() {
         return bookId;
     }
@@ -34,12 +34,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
     public double getPrice() {
@@ -50,11 +50,9 @@ public class Book {
         this.price = price;
     }
 
-
     public String getPublishedDate() {
         return publishedDate;
     }
-
 
     public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
