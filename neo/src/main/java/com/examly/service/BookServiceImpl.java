@@ -20,49 +20,51 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(Book book) {
-        // Validate book title
-        if (book.getTitle() == null || book.getTitle().isEmpty()) {
-            System.out.println("Error: Book title cannot be empty.");
-            return;
-        }
-
-        // Validate authorId (check if author exists)
-        Author author = authorService.getAuthorById(book.getAuthorId());
-        if (author == null) {
-            System.out.println("Error: Author with ID " + book.getAuthorId() + " does not exist.");
-            return;
-        }
-
-        // Validate published date
-        if (book.getPublishedDate() == null || book.getPublishedDate().isEmpty()) {
-            System.out.println("Error: Published date cannot be empty.");
-            return;
-        }
-
-        // Validate price
-        if (book.getPrice() <= 0) {
-            System.out.println("Error: Price must be greater than zero.");
-            return;
-        }
-
-        String query = "INSERT INTO books (title, authorId, publishedDate, price) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, book.getTitle());
-            statement.setInt(2, book.getAuthorId());
-            statement.setString(3, book.getPublishedDate());
-            statement.setDouble(4, book.getPrice());
-
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Book added successfully!");
-            } else {
-                System.out.println("Error: Failed to add book.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error adding book: " + e.getMessage());
-            e.printStackTrace();
-        }
+    // Validate book title
+    if (book.getTitle() == null || book.getTitle().isEmpty()) {
+        System.out.println("Error: Book title cannot be empty.");
+        return;
     }
+
+    // Validate authorId (check if author exists)
+    Author author = authorService.getAuthorById(book.getAuthorId());
+    if (author == null) {
+        System.out.println("Error: Author with ID " + book.getAuthorId() + " does not exist.");
+        return;  // Stop execution immediately
+    }
+
+    // Validate published date
+    if (book.getPublishedDate() == null || book.getPublishedDate().isEmpty()) {
+        System.out.println("Error: Published date cannot be empty.");
+        return;
+    }
+
+    // Validate price
+    if (book.getPrice() <= 0) {
+        System.out.println("Error: Price must be greater than zero.");
+        return;
+    }
+
+    // If all validations pass, proceed with inserting the book
+    String query = "INSERT INTO books (title, authorId, publishedDate, price) VALUES (?, ?, ?, ?)";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, book.getTitle());
+        statement.setInt(2, book.getAuthorId());
+        statement.setString(3, book.getPublishedDate());
+        statement.setDouble(4, book.getPrice());
+
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Book added successfully!");
+        } else {
+            System.out.println("Error: Failed to add book.");
+        }
+    } catch (SQLException e) {
+        System.err.println("Error adding book: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
 
     @Override
     public void updateBook(Book book) {
