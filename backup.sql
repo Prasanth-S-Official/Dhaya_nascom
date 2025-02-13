@@ -36,7 +36,7 @@ CREATE TABLE `authors` (
   `name` varchar(255) NOT NULL,
   `biography` text,
   PRIMARY KEY (`authorId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `authors` (
 
 LOCK TABLES `authors` WRITE;
 /*!40000 ALTER TABLE `authors` DISABLE KEYS */;
-INSERT INTO `authors` VALUES (1,'Dhaya','best in class'),(3,'demo','romantic');
+INSERT INTO `authors` VALUES (1,'demo 2','demo 2 biography'),(3,'demo','demo biography'),(4,'demo 3','demo 3 bio');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (1,'demo4',1,'2000-12-02',560.00),(2,'demo2',1,'2024-09-07',600.00);
+INSERT INTO `books` VALUES (1,'demo book title 1',1,'2000-12-02',560.00),(2,'demo book title 2',1,'2024-09-07',600.00);
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -87,4 +87,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-13 10:11:39
+-- Dump completed on 2025-02-13 10:26:39
