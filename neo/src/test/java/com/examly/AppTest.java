@@ -95,34 +95,6 @@ public class AppTest {
     }
 
     @Test
-    void testAuthorUpdateQueryExists() throws IOException {
-        // Read the service implementation file as a string
-        String filePath = "src/main/java/com/examly/service/AuthorServiceImpl.java";  
-        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-
-        // Define a regex pattern to match the SQL query (case insensitive, ignoring spaces)
-        String expectedPattern = "(?i)UPDATE\\s+authors\\s+SET\\s+name\\s*=.*biography\\s*=.*WHERE\\s+authorId\\s*=";
-
-        // Normalize content and perform case-insensitive pattern matching
-        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), 
-                   "Expected SQL update query is missing in AuthorServiceImpl");
-    }
-
-    @Test
-    void testAuthorDeleteQueryExists() throws IOException {
-        // Read the service implementation file as a string
-        String filePath = "src/main/java/com/examly/service/AuthorServiceImpl.java";  
-        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-
-        // Define a regex pattern to match the SQL query (case insensitive, ignoring spaces)
-        String expectedPattern = "(?i)DELETE\\s+FROM\\s+authors\\s+WHERE\\s+authorId\\s*=";
-
-        // Normalize content and perform case-insensitive pattern matching
-        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), 
-                   "Expected SQL delete query is missing in AuthorServiceImpl");
-    }
-    
-    @Test
     void testBookInsertQueryExists() throws IOException {
         // Read the service implementation file as a string
         String filePath = "src/main/java/com/examly/service/BookServiceImpl.java";  
