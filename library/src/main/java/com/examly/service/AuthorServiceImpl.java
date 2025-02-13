@@ -1,8 +1,8 @@
 package com.examly.service;
 
 import com.examly.entity.Author;
-import com.examly.service.AuthorService;
 import com.examly.util.DBConnectionUtil;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,58 +17,72 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void addAuthor(Author author) {
-        try {
-            String query = "INSERT INTO authors (name, biography) VALUES (?, ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "INSERT INTO authors (name, biography) VALUES (?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, author.getName());
             statement.setString(2, author.getBiography());
             statement.executeUpdate();
+            System.out.println("Author added successfully!");
         } catch (SQLException e) {
+            System.err.println("Error adding author: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public void updateAuthor(Author author) {
-        try {
-            String query = "UPDATE authors SET name = ?, biography = ? WHERE authorId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "UPDATE authors SET name = ?, biography = ? WHERE authorId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, author.getName());
             statement.setString(2, author.getBiography());
             statement.setInt(3, author.getAuthorId());
-            statement.executeUpdate();
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Author updated successfully!");
+            } else {
+                System.out.println("No author found with ID: " + author.getAuthorId());
+            }
         } catch (SQLException e) {
+            System.err.println("Error updating author: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public void deleteAuthor(int authorId) {
-        try {
-            String query = "DELETE FROM authors WHERE authorId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "DELETE FROM authors WHERE authorId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, authorId);
-            statement.executeUpdate();
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Author deleted successfully!");
+            } else {
+                System.out.println("No author found with ID: " + authorId);
+            }
         } catch (SQLException e) {
+            System.err.println("Error deleting author: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public Author getAuthorById(int authorId) {
-        try {
-            String query = "SELECT * FROM authors WHERE authorId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "SELECT * FROM authors WHERE authorId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, authorId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                Author author = new Author();
-                author.setAuthorId(resultSet.getInt("authorId"));
-                author.setName(resultSet.getString("name"));
-                author.setBiography(resultSet.getString("biography"));
-                return author;
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new Author(
+                        resultSet.getInt("authorId"),
+                        resultSet.getString("name"),
+                        resultSet.getString("biography")
+                    );
+                } else {
+                    System.out.println("No author found with ID: " + authorId);
+                }
             }
         } catch (SQLException e) {
+            System.err.println("Error retrieving author: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -77,18 +91,18 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> getAllAuthors() {
         List<Author> authors = new ArrayList<>();
-        try {
-            String query = "SELECT * FROM authors";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+        String query = "SELECT * FROM authors";
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                Author author = new Author(0, query, query);
-                author.setAuthorId(resultSet.getInt("authorId"));
-                author.setName(resultSet.getString("name"));
-                author.setBiography(resultSet.getString("biography"));
-                authors.add(author);
+                authors.add(new Author(
+                    resultSet.getInt("authorId"),
+                    resultSet.getString("name"),
+                    resultSet.getString("biography")
+                ));
             }
         } catch (SQLException e) {
+            System.err.println("Error retrieving authors: " + e.getMessage());
             e.printStackTrace();
         }
         return authors;

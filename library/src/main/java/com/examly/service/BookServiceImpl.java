@@ -1,8 +1,9 @@
 package com.examly.service;
 
 import com.examly.entity.Book;
-import com.examly.service.BookService;
+import com.examly.entity.Author;
 import com.examly.util.DBConnectionUtil;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,110 +11,125 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private Connection connection;
+    private AuthorService authorService; // To validate author existence
 
     public BookServiceImpl() {
         connection = DBConnectionUtil.getConnection();
+        authorService = new AuthorServiceImpl();
     }
 
     @Override
     public void addBook(Book book) {
-        // Check if the book title is valid
+        // Validate book title
         if (book.getTitle() == null || book.getTitle().isEmpty()) {
-            System.out.println("Book title cannot be empty.");
+            System.out.println("Error: Book title cannot be empty.");
             return;
         }
-    
-        // Check if the author name is valid
-        if (book.getAuthor() == null || book.getAuthor().isEmpty()) {
-            System.out.println("Author name cannot be empty.");
-            return;
-        }
-    
-        // Check if the published date is valid (Ensure the format is correct)
-        if (book.getPublishedDate() == null || book.getPublishedDate().isEmpty()) {
-            System.out.println("Published date cannot be empty.");
-            return;
-        }
-        
-        // Ensure price is valid
-        if (book.getPrice() <= 0) {
-            System.out.println("Price must be greater than zero.");
-            return;
-        }
-    
-        try {
-            String query = "INSERT INTO books (title, author, publishedDate, price) VALUES (?, ?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, book.getTitle());
-            statement.setString(2, book.getAuthor());
-    
-            // Make sure the date is correctly formatted, you can convert it if necessary
-            // Assuming the date format is correct (YYYY-MM-DD) - if not, parse it
-            statement.setString(3, book.getPublishedDate());  // If it's a String in the correct format, no need for Date.valueOf
-    
-            statement.setDouble(4, book.getPrice());
-            int rowsInserted = statement.executeUpdate();
 
-            
-            
-            // Check if the insertion was successful
+        // Validate authorId (check if author exists)
+        Author author = authorService.getAuthorById(book.getAuthorId());
+        if (author == null) {
+            System.out.println("Error: Author with ID " + book.getAuthorId() + " does not exist.");
+            return;
+        }
+
+        // Validate published date
+        if (book.getPublishedDate() == null || book.getPublishedDate().isEmpty()) {
+            System.out.println("Error: Published date cannot be empty.");
+            return;
+        }
+
+        // Validate price
+        if (book.getPrice() <= 0) {
+            System.out.println("Error: Price must be greater than zero.");
+            return;
+        }
+
+        String query = "INSERT INTO books (title, authorId, publishedDate, price) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, book.getTitle());
+            statement.setInt(2, book.getAuthorId());
+            statement.setString(3, book.getPublishedDate());
+            statement.setDouble(4, book.getPrice());
+
+            int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Book added successfully!");
             } else {
-                System.out.println("Failed to add book.");
+                System.out.println("Error: Failed to add book.");
             }
         } catch (SQLException e) {
+            System.err.println("Error adding book: " + e.getMessage());
             e.printStackTrace();
-            System.out.println("Error occurred while adding the book.");
         }
     }
-    
 
     @Override
     public void updateBook(Book book) {
-        try {
-            String query = "UPDATE books SET title = ?, author = ?, publishedDate = ?, price = ? WHERE bookId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        // Validate authorId (check if author exists)
+        Author author = authorService.getAuthorById(book.getAuthorId());
+        if (author == null) {
+            System.out.println("Error: Author with ID " + book.getAuthorId() + " does not exist.");
+            return;
+        }
+
+        String query = "UPDATE books SET title = ?, authorId = ?, publishedDate = ?, price = ? WHERE bookId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, book.getTitle());
-            statement.setString(2, book.getAuthor());
-            statement.setString(3, book.getPublishedDate()); // Handle publishedDate as String
+            statement.setInt(2, book.getAuthorId());
+            statement.setString(3, book.getPublishedDate());
             statement.setDouble(4, book.getPrice());
             statement.setInt(5, book.getBookId());
-            statement.executeUpdate();
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Book updated successfully!");
+            } else {
+                System.out.println("Error: No book found with ID: " + book.getBookId());
+            }
         } catch (SQLException e) {
+            System.err.println("Error updating book: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public void deleteBook(int bookId) {
-        try {
-            String query = "DELETE FROM books WHERE bookId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "DELETE FROM books WHERE bookId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, bookId);
-            statement.executeUpdate();
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Book deleted successfully!");
+            } else {
+                System.out.println("Error: No book found with ID: " + bookId);
+            }
         } catch (SQLException e) {
+            System.err.println("Error deleting book: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
     public Book getBookById(int bookId) {
-        try {
-            String query = "SELECT * FROM books WHERE bookId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+        String query = "SELECT * FROM books WHERE bookId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, bookId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                Book book = new Book();
-                book.setBookId(resultSet.getInt("bookId"));
-                book.setTitle(resultSet.getString("title"));
-                book.setAuthor(resultSet.getString("author"));
-                book.setPublishedDate(resultSet.getString("publishedDate")); // Get as String
-                book.setPrice(resultSet.getDouble("price"));
-                return book;
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new Book(
+                        resultSet.getInt("bookId"),
+                        resultSet.getString("title"),
+                        resultSet.getInt("authorId"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("publishedDate")
+                    );
+                } else {
+                    System.out.println("No book found with ID: " + bookId);
+                }
             }
         } catch (SQLException e) {
+            System.err.println("Error retrieving book: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -122,24 +138,22 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();
-        try {
-            String query = "SELECT * FROM books";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+        String query = "SELECT * FROM books";
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                Book book = new Book();
-                book.setBookId(resultSet.getInt("bookId"));
-                book.setTitle(resultSet.getString("title"));
-                book.setAuthor(resultSet.getString("author"));
-                book.setPublishedDate(resultSet.getString("publishedDate")); // Get as String
-                book.setPrice(resultSet.getDouble("price"));
-                books.add(book);
+                books.add(new Book(
+                    resultSet.getInt("bookId"),
+                    resultSet.getString("title"),
+                    resultSet.getInt("authorId"),
+                    resultSet.getDouble("price"),
+                    resultSet.getString("publishedDate")
+                ));
             }
         } catch (SQLException e) {
+            System.err.println("Error retrieving books: " + e.getMessage());
             e.printStackTrace();
         }
         return books;
     }
 }
-
-
