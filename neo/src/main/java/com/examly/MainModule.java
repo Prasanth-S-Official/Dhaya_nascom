@@ -160,10 +160,8 @@ public class MainModule {
         while (true) {
             System.out.println("\nManage Authors");
             System.out.println("1. Add Author");
-            System.out.println("2. Update Author");
-            System.out.println("3. Delete Author");
-            System.out.println("4. View All Authors");
-            System.out.println("5. Back");
+            System.out.println("2. View All Authors");
+            System.out.println("3. Back");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -173,15 +171,9 @@ public class MainModule {
                     addAuthor(authorService);
                     break;
                 case 2:
-                    updateAuthor(authorService);
-                    break;
-                case 3:
-                    deleteAuthor(authorService);
-                    break;
-                case 4:
                     viewAllAuthors(authorService);
                     break;
-                case 5:
+                case 3:
                     return;
                 default:
                     System.out.println("Invalid choice! Please try again.");
@@ -200,40 +192,6 @@ public class MainModule {
         System.out.println("Author added successfully!");
     }
 
-    private static void updateAuthor(AuthorService authorService) {
-        System.out.print("Enter author ID to update: ");
-        int authorId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
-
-        Author author = authorService.getAuthorById(authorId);
-        if (author != null) {
-            System.out.print("Enter new name (or press Enter to skip): ");
-            String name = scanner.nextLine();
-            if (!name.isEmpty()) {
-                author.setName(name);
-            }
-
-            System.out.print("Enter new biography (or press Enter to skip): ");
-            String biography = scanner.nextLine();
-            if (!biography.isEmpty()) {
-                author.setBiography(biography);
-            }
-
-            authorService.updateAuthor(author);
-            System.out.println("Author updated successfully!");
-        } else {
-            System.out.println("Author not found!");
-        }
-    }
-
-    private static void deleteAuthor(AuthorService authorService) {
-        System.out.print("Enter author ID to delete: ");
-        int authorId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
-
-        authorService.deleteAuthor(authorId);
-        System.out.println("Author deleted successfully!");
-    }
 
     private static void viewAllAuthors(AuthorService authorService) {
         List<Author> authors = authorService.getAllAuthors();

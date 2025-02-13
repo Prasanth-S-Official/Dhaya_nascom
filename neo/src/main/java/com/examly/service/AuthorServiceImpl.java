@@ -29,32 +29,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public String updateAuthor(Author author) {
-        String query = "UPDATE authors SET name = ?, biography = ? WHERE authorId = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, author.getName());
-            statement.setString(2, author.getBiography());
-            statement.setInt(3, author.getAuthorId());
-            int rowsUpdated = statement.executeUpdate();
-            return (rowsUpdated > 0) ? "Author updated successfully!" : "Error: No author found with ID: " + author.getAuthorId();
-        } catch (SQLException e) {
-            return "Database error: " + e.getMessage();
-        }
-    }
-
-    @Override
-    public String deleteAuthor(int authorId) {
-        String query = "DELETE FROM authors WHERE authorId = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, authorId);
-            int rowsDeleted = statement.executeUpdate();
-            return (rowsDeleted > 0) ? "Author deleted successfully!" : "Error: No author found with ID: " + authorId;
-        } catch (SQLException e) {
-            return "Database error: " + e.getMessage();
-        }
-    }
-
-    @Override
     public Author getAuthorById(int authorId) {
         String query = "SELECT * FROM authors WHERE authorId = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
