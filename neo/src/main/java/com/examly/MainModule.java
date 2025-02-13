@@ -81,23 +81,23 @@ public class MainModule {
         String title = scanner.nextLine();
         System.out.print("Enter author ID: ");
         int authorId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();  
         System.out.print("Enter published date (YYYY-MM-DD): ");
         String publishedDate = scanner.nextLine();
         System.out.print("Enter book price: ");
         double price = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
-
+        scanner.nextLine();  
+    
         Book book = new Book(0, title, authorId, price, publishedDate);
-        bookService.addBook(book);
-        System.out.println("Book added successfully!");
+        String result = bookService.addBook(book);
+        System.out.println(result);
     }
 
     private static void updateBook(BookService bookService) {
         System.out.print("Enter book ID to update: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
-
+        scanner.nextLine();  
+    
         Book book = bookService.getBookById(bookId);
         if (book != null) {
             System.out.print("Enter new title (or press Enter to skip): ");
@@ -105,29 +105,29 @@ public class MainModule {
             if (!title.isEmpty()) {
                 book.setTitle(title);
             }
-
+    
             System.out.print("Enter new author ID (or press Enter to skip): ");
             String authorIdInput = scanner.nextLine();
             if (!authorIdInput.isEmpty()) {
                 book.setAuthorId(Integer.parseInt(authorIdInput));
             }
-
+    
             System.out.print("Enter new published date (YYYY-MM-DD, or press Enter to skip): ");
             String publishedDate = scanner.nextLine();
             if (!publishedDate.isEmpty()) {
                 book.setPublishedDate(publishedDate);
             }
-
+    
             System.out.print("Enter new price (or press Enter to skip): ");
             String priceInput = scanner.nextLine();
             if (!priceInput.isEmpty()) {
                 book.setPrice(Double.parseDouble(priceInput));
             }
-
-            bookService.updateBook(book);
-            System.out.println("Book updated successfully!");
+    
+            String result = bookService.updateBook(book);
+            System.out.println(result);
         } else {
-            System.out.println("Book not found!");
+            System.out.println("Error: Book not found!");
         }
     }
 

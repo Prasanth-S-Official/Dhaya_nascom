@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
             return "Error: Price must be greater than zero.";
         }
 
-        // Insert book into the database
+        // If all validations pass, proceed with inserting the book
         String query = "INSERT INTO books (title, authorId, publishedDate, price) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, book.getTitle());
@@ -50,11 +50,7 @@ public class BookServiceImpl implements BookService {
             statement.setDouble(4, book.getPrice());
 
             int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                return "Book added successfully!";
-            } else {
-                return "Error: Failed to add book.";
-            }
+            return (rowsInserted > 0) ? "Book added successfully!" : "Error: Failed to add book.";
         } catch (SQLException e) {
             return "Database error: " + e.getMessage();
         }
@@ -62,7 +58,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public String updateBook(Book book) {
-        // Validate authorId
+        // Validate authorId (check if author exists)
         Author author = authorService.getAuthorById(book.getAuthorId());
         if (author == null) {
             return "Error: Author with ID " + book.getAuthorId() + " does not exist.";
