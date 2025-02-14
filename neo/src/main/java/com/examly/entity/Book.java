@@ -3,14 +3,14 @@ package com.examly.entity;
 public class Book {
     private int bookId;
     private String title;
-    private int authorId; 
+    private String authorName; // Storing author as a string instead of a separate entity
     private double price;
     private String publishedDate;
 
-    public Book(int bookId, String title, int authorId, double price, String publishedDate) {
+    public Book(int bookId, String title, String authorName, double price, String publishedDate) {
         this.bookId = bookId;
         this.title = title;
-        this.authorId = authorId;
+        this.authorName = authorName;
         this.price = price;
         this.publishedDate = publishedDate;
     }
@@ -34,12 +34,12 @@ public class Book {
         this.title = title;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public double getPrice() {
