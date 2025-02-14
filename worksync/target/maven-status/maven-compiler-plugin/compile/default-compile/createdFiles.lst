@@ -1,1 +1,3 @@
-com/examly/App.class
+com/examly/entity/Department.class
+com/examly/service/DepartmentService.class
+com/examly/util/DBConnectionUtil.class
