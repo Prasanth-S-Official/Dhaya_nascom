@@ -22,9 +22,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             return "Error: Employee name cannot be empty.";
         }
 
-        // Validate department
-        if (employee.getDepartment() == null || employee.getDepartment().isEmpty()) {
-            return "Error: Department cannot be empty.";
+        // Validate departmentId
+        if (employee.getDepartmentId() <= 0) {
+            return "Error: Department ID must be a valid number.";
         }
 
         // Validate salary
@@ -32,13 +32,18 @@ public class EmployeeServiceImpl implements EmployeeService {
             return "Error: Salary must be greater than zero.";
         }
 
+        // Validate email
+        if (employee.getEmail() == null || employee.getEmail().isEmpty()) {
+            return "Error: Email cannot be empty.";
+        }
+
         // Insert into database
-        String query = "INSERT INTO employees (name, department, salary, joiningDate) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO employees (name, departmentId, email, salary) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, employee.getName());
-            statement.setString(2, employee.getDepartment());
-            statement.setDouble(3, employee.getSalary());
-            statement.setString(4, employee.getJoiningDate());
+            statement.setInt(2, employee.getDepartmentId());
+            statement.setString(3, employee.getEmail());
+            statement.setDouble(4, employee.getSalary());
 
             int rowsInserted = statement.executeUpdate();
             return (rowsInserted > 0) ? "Employee added successfully!" : "Error: Failed to add employee.";
@@ -49,12 +54,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public String updateEmployee(Employee employee) {
-        String query = "UPDATE employees SET name = ?, department = ?, salary = ?, joiningDate = ? WHERE employeeId = ?";
+        String query = "UPDATE employees SET name = ?, departmentId = ?, email = ?, salary = ? WHERE employeeId = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, employee.getName());
-            statement.setString(2, employee.getDepartment());
-            statement.setDouble(3, employee.getSalary());
-            statement.setString(4, employee.getJoiningDate());
+            statement.setInt(2, employee.getDepartmentId());
+            statement.setString(3, employee.getEmail());
+            statement.setDouble(4, employee.getSalary());
             statement.setInt(5, employee.getEmployeeId());
 
             int rowsUpdated = statement.executeUpdate();
@@ -86,9 +91,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                     return new Employee(
                         resultSet.getInt("employeeId"),
                         resultSet.getString("name"),
-                        resultSet.getString("department"),
-                        resultSet.getDouble("salary"),
-                        resultSet.getString("joiningDate")
+                        resultSet.getInt("departmentId"),
+                        resultSet.getString("email"),
+                        resultSet.getDouble("salary")
                     );
                 } else {
                     System.out.println("No employee found with ID: " + employeeId);
@@ -96,7 +101,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving employee: " + e.getMessage());
-            e.printStackTrace();
         }
         return null;
     }
@@ -111,14 +115,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employees.add(new Employee(
                     resultSet.getInt("employeeId"),
                     resultSet.getString("name"),
-                    resultSet.getString("department"),
-                    resultSet.getDouble("salary"),
-                    resultSet.getString("joiningDate")
+                    resultSet.getInt("departmentId"),
+                    resultSet.getString("email"),
+                    resultSet.getDouble("salary")
                 ));
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving employees: " + e.getMessage());
-            e.printStackTrace();
         }
         return employees;
     }

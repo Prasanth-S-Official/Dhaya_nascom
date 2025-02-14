@@ -17,10 +17,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public String addDepartment(Department department) {
-        String query = "INSERT INTO departments (name, description) VALUES (?, ?)";
+        String query = "INSERT INTO departments (departmentName, location) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, department.getName());
-            statement.setString(2, department.getDescription());
+            statement.setString(1, department.getDepartmentName());
+            statement.setString(2, department.getLocation());
             int rowsInserted = statement.executeUpdate();
             return (rowsInserted > 0) ? "Department added successfully!" : "Error: Failed to add department.";
         } catch (SQLException e) {
@@ -37,16 +37,13 @@ public class DepartmentServiceImpl implements DepartmentService {
                 if (resultSet.next()) {
                     return new Department(
                         resultSet.getInt("departmentId"),
-                        resultSet.getString("name"),
-                        resultSet.getString("description")
+                        resultSet.getString("departmentName"),
+                        resultSet.getString("location")
                     );
-                } else {
-                    System.out.println("No department found with ID: " + departmentId);
                 }
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving department: " + e.getMessage());
-            e.printStackTrace();
         }
         return null;
     }
@@ -60,13 +57,12 @@ public class DepartmentServiceImpl implements DepartmentService {
             while (resultSet.next()) {
                 departments.add(new Department(
                     resultSet.getInt("departmentId"),
-                    resultSet.getString("name"),
-                    resultSet.getString("description")
+                    resultSet.getString("departmentName"),
+                    resultSet.getString("location")
                 ));
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving departments: " + e.getMessage());
-            e.printStackTrace();
         }
         return departments;
     }

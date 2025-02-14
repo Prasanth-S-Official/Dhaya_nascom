@@ -82,17 +82,17 @@ public class MainModule {
         System.out.print("Enter department ID: ");
         int departmentId = scanner.nextInt();
         scanner.nextLine();
+        System.out.print("Enter email: "); // ✅ Ask for email input
+        String email = scanner.nextLine();
         System.out.print("Enter salary: ");
         double salary = scanner.nextDouble();
         scanner.nextLine();
-        System.out.print("Enter joining date (YYYY-MM-DD): ");
-        String joiningDate = scanner.nextLine();
-
-        Employee employee = new Employee(0, name, departmentId, salary, joiningDate);
+    
+        Employee employee = new Employee(0, name, departmentId, email, salary); // ✅ Pass email to Employee constructor
         String result = employeeService.addEmployee(employee);
         System.out.println(result);
     }
-
+    
     private static void updateEmployee(EmployeeService employeeService) {
         System.out.print("Enter employee ID to update: ");
         int employeeId = scanner.nextInt();
@@ -118,12 +118,6 @@ public class MainModule {
                 employee.setSalary(Double.parseDouble(salaryInput));
             }
 
-            System.out.print("Enter new joining date (YYYY-MM-DD, or press Enter to skip): ");
-            String joiningDate = scanner.nextLine();
-            if (!joiningDate.isEmpty()) {
-                employee.setJoiningDate(joiningDate);
-            }
-
             String result = employeeService.updateEmployee(employee);
             System.out.println(result);
         } else {
@@ -145,14 +139,13 @@ public class MainModule {
         if (employees.isEmpty()) {
             System.out.println("No employees available.");
         } else {
-            employees.forEach(employee -> {
+            for (Employee employee : employees) {
                 System.out.println("ID: " + employee.getEmployeeId());
                 System.out.println("Name: " + employee.getName());
                 System.out.println("Department ID: " + employee.getDepartmentId());
                 System.out.println("Salary: " + employee.getSalary());
-                System.out.println("Joining Date: " + employee.getJoiningDate());
                 System.out.println("----------------------------");
-            });
+            }
         }
     }
 
@@ -197,12 +190,12 @@ public class MainModule {
         if (departments.isEmpty()) {
             System.out.println("No departments available.");
         } else {
-            departments.forEach(department -> {
+            for (Department department : departments) {
                 System.out.println("ID: " + department.getDepartmentId());
-                System.out.println("Name: " + department.getName());
+                System.out.println("Name: " + department.getDepartmentName());
                 System.out.println("Location: " + department.getLocation());
                 System.out.println("----------------------------");
-            });
+            }
         }
     }
 }
