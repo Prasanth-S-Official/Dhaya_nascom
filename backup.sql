@@ -25,31 +25,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `appdb` /*!40100 DEFAULT CHARACTER SET 
 USE `appdb`;
 
 --
--- Table structure for table `authors`
---
-
-DROP TABLE IF EXISTS `authors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `authors` (
-  `authorId` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `biography` text,
-  PRIMARY KEY (`authorId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `authors`
---
-
-LOCK TABLES `authors` WRITE;
-/*!40000 ALTER TABLE `authors` DISABLE KEYS */;
-INSERT INTO `authors` VALUES (1,'demo 2','demo 2 biography'),(3,'demo','demo biography'),(4,'demo 3','demo 3 bio');
-/*!40000 ALTER TABLE `authors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `books`
 --
 
@@ -59,13 +34,11 @@ DROP TABLE IF EXISTS `books`;
 CREATE TABLE `books` (
   `bookId` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `authorId` int(11) NOT NULL,
-  `publishedDate` date NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`bookId`),
-  KEY `authorId` (`authorId`),
-  CONSTRAINT `books_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `authors` (`authorId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `authorName` varchar(255) NOT NULL,
+  `price` double NOT NULL,
+  `publishedDate` varchar(50) NOT NULL,
+  PRIMARY KEY (`bookId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,63 +47,8 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (2,'demo book title 2',1,'2024-09-07',600.00),(3,'demo title 6',1,'2020-08-22',450.00);
+INSERT INTO `books` VALUES (1,'demo','demo author',999,'2000-09-01'),(2,'demo onw','demo one author',599,'1999-12-05');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `departments`
---
-
-DROP TABLE IF EXISTS `departments`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `departments` (
-  `departmentId` int(11) NOT NULL AUTO_INCREMENT,
-  `departmentName` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  PRIMARY KEY (`departmentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `departments`
---
-
-LOCK TABLES `departments` WRITE;
-/*!40000 ALTER TABLE `departments` DISABLE KEYS */;
-INSERT INTO `departments` VALUES (1,'demo name','demo location'),(2,'demo name 2','demo location 2');
-/*!40000 ALTER TABLE `departments` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `employees`
---
-
-DROP TABLE IF EXISTS `employees`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `employees` (
-  `employeeId` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `departmentId` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `salary` double NOT NULL,
-  PRIMARY KEY (`employeeId`),
-  UNIQUE KEY `email` (`email`),
-  KEY `departmentId` (`departmentId`),
-  CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`departmentId`) REFERENCES `departments` (`departmentId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employees`
---
-
-LOCK TABLES `employees` WRITE;
-/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (3,'demo emp 3',2,'demoemp3@gmail.com',15000);
-/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -142,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-14 10:26:27
+-- Dump completed on 2025-02-14 11:08:33
