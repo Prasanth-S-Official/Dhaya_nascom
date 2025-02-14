@@ -1,6 +1,7 @@
 package com.examly.service;
 
 import com.examly.entity.Employee;
+import com.examly.entity.Department;
 import com.examly.util.DBConnectionUtil;
 
 import java.sql.*;
@@ -10,9 +11,11 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private Connection connection;
+    private DepartmentService departmentService; // To validate department existence
 
     public EmployeeServiceImpl() {
         connection = DBConnectionUtil.getConnection();
+        departmentService = new DepartmentServiceImpl();
     }
 
     @Override
@@ -22,9 +25,10 @@ public class EmployeeServiceImpl implements EmployeeService {
             return "Error: Employee name cannot be empty.";
         }
 
-        // Validate departmentId
-        if (employee.getDepartmentId() <= 0) {
-            return "Error: Department ID must be a valid number.";
+        // Validate departmentId (check if department exists)
+        Department department = departmentService.getDepartmentById(employee.getDepartmentId());
+        if (department == null) {
+            return "Error: Department with ID " + employee.getDepartmentId() + " does not exist.";
         }
 
         // Validate salary
@@ -54,6 +58,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public String updateEmployee(Employee employee) {
+        // Validate departmentId (check if department exists)
+        Department department = departmentService.getDepartmentById(employee.getDepartmentId());
+        if (department == null) {
+            return "Error: Department with ID " + employee.getDepartmentId() + " does not exist.";
+        }
+
         String query = "UPDATE employees SET name = ?, departmentId = ?, email = ?, salary = ? WHERE employeeId = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, employee.getName());

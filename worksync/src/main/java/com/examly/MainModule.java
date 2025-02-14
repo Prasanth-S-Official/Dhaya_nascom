@@ -82,17 +82,17 @@ public class MainModule {
         System.out.print("Enter department ID: ");
         int departmentId = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Enter email: "); // ✅ Ask for email input
+        System.out.print("Enter email: ");
         String email = scanner.nextLine();
         System.out.print("Enter salary: ");
         double salary = scanner.nextDouble();
         scanner.nextLine();
-    
-        Employee employee = new Employee(0, name, departmentId, email, salary); // ✅ Pass email to Employee constructor
+
+        Employee employee = new Employee(0, name, departmentId, email, salary);
         String result = employeeService.addEmployee(employee);
         System.out.println(result);
     }
-    
+
     private static void updateEmployee(EmployeeService employeeService) {
         System.out.print("Enter employee ID to update: ");
         int employeeId = scanner.nextInt();
@@ -110,6 +110,12 @@ public class MainModule {
             String departmentIdInput = scanner.nextLine();
             if (!departmentIdInput.isEmpty()) {
                 employee.setDepartmentId(Integer.parseInt(departmentIdInput));
+            }
+
+            System.out.print("Enter new email (or press Enter to skip): "); // ✅ Fix: Allow updating email
+            String emailInput = scanner.nextLine();
+            if (!emailInput.isEmpty()) {
+                employee.setEmail(emailInput);
             }
 
             System.out.print("Enter new salary (or press Enter to skip): ");
@@ -143,6 +149,7 @@ public class MainModule {
                 System.out.println("ID: " + employee.getEmployeeId());
                 System.out.println("Name: " + employee.getName());
                 System.out.println("Department ID: " + employee.getDepartmentId());
+                System.out.println("Email: " + employee.getEmail()); // ✅ Fix: Display Email
                 System.out.println("Salary: " + employee.getSalary());
                 System.out.println("----------------------------");
             }
