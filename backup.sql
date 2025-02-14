@@ -38,7 +38,7 @@ CREATE TABLE `books` (
   `price` double NOT NULL,
   `publishedDate` varchar(50) NOT NULL,
   PRIMARY KEY (`bookId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (1,'demo','author one',999,'2000-09-01'),(2,'demo one','author two',599,'1999-12-05'),(3,'demo two','author one',499,'2020-04-10');
+INSERT INTO `books` VALUES (1,'demo updated','author one',999,'2000-09-01'),(3,'demo two','author one',499,'2020-04-10'),(4,'demo title','demo author',699,'2000-09-30');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-14 11:53:33
+-- Dump completed on 2025-02-14 12:08:34
