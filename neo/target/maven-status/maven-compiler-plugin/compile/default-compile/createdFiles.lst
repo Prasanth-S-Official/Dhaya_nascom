@@ -1,8 +1,5 @@
-com/examly/service/AuthorServiceImpl.class
 com/examly/util/DBConnectionUtil.class
 com/examly/entity/Book.class
 com/examly/MainModule.class
-com/examly/service/BookService.class
-com/examly/entity/Author.class
-com/examly/service/AuthorService.class
 com/examly/service/BookServiceImpl.class
+com/examly/service/BookService.class

@@ -1,11 +1,8 @@
 package com.examly;
 
 import com.examly.entity.Book;
-import com.examly.entity.Author;
 import com.examly.service.BookService;
-import com.examly.service.AuthorService;
 import com.examly.service.BookServiceImpl;
-import com.examly.service.AuthorServiceImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,45 +12,19 @@ public class MainModule {
 
     public static void main(String[] args) {
         BookService bookService = new BookServiceImpl();
-        AuthorService authorService = new AuthorServiceImpl();
 
         while (true) {
             System.out.println("\nLibrary Book Management System");
-            System.out.println("1. Manage Books");
-            System.out.println("2. Manage Authors");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
-
-            switch (choice) {
-                case 1:
-                    manageBooks(bookService);
-                    break;
-                case 2:
-                    manageAuthors(authorService);
-                    break;
-                case 3:
-                    System.out.println("Exiting...");
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Invalid choice! Please try again.");
-            }
-        }
-    }
-
-    private static void manageBooks(BookService bookService) {
-        while (true) {
-            System.out.println("\nManage Books");
             System.out.println("1. Add Book");
             System.out.println("2. Update Book");
             System.out.println("3. Delete Book");
             System.out.println("4. View All Books");
-            System.out.println("5. Back");
+            System.out.println("5. Search by Title");
+            System.out.println("6. Filter by Author Name");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -69,7 +40,15 @@ public class MainModule {
                     viewAllBooks(bookService);
                     break;
                 case 5:
-                    return;
+                    searchByTitle(bookService);
+                    break;
+                case 6:
+                    filterByAuthorName(bookService);
+                    break;
+                case 7:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
@@ -79,16 +58,15 @@ public class MainModule {
     private static void addBook(BookService bookService) {
         System.out.print("Enter book title: ");
         String title = scanner.nextLine();
-        System.out.print("Enter author ID: ");
-        int authorId = scanner.nextInt();
-        scanner.nextLine();  
+        System.out.print("Enter author name: ");
+        String authorName = scanner.nextLine();
         System.out.print("Enter published date (YYYY-MM-DD): ");
         String publishedDate = scanner.nextLine();
         System.out.print("Enter book price: ");
         double price = scanner.nextDouble();
-        scanner.nextLine();  
-    
-        Book book = new Book(0, title, authorId, price, publishedDate);
+        scanner.nextLine();
+
+        Book book = new Book(0, title, authorName, price, publishedDate);
         String result = bookService.addBook(book);
         System.out.println(result);
     }
@@ -96,8 +74,8 @@ public class MainModule {
     private static void updateBook(BookService bookService) {
         System.out.print("Enter book ID to update: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  
-    
+        scanner.nextLine();
+
         Book book = bookService.getBookById(bookId);
         if (book != null) {
             System.out.print("Enter new title (or press Enter to skip): ");
@@ -105,25 +83,25 @@ public class MainModule {
             if (!title.isEmpty()) {
                 book.setTitle(title);
             }
-    
-            System.out.print("Enter new author ID (or press Enter to skip): ");
-            String authorIdInput = scanner.nextLine();
-            if (!authorIdInput.isEmpty()) {
-                book.setAuthorId(Integer.parseInt(authorIdInput));
+
+            System.out.print("Enter new author name (or press Enter to skip): ");
+            String authorName = scanner.nextLine();
+            if (!authorName.isEmpty()) {
+                book.setAuthorName(authorName);
             }
-    
+
             System.out.print("Enter new published date (YYYY-MM-DD, or press Enter to skip): ");
             String publishedDate = scanner.nextLine();
             if (!publishedDate.isEmpty()) {
                 book.setPublishedDate(publishedDate);
             }
-    
+
             System.out.print("Enter new price (or press Enter to skip): ");
             String priceInput = scanner.nextLine();
             if (!priceInput.isEmpty()) {
                 book.setPrice(Double.parseDouble(priceInput));
             }
-    
+
             String result = bookService.updateBook(book);
             System.out.println(result);
         } else {
@@ -134,7 +112,7 @@ public class MainModule {
     private static void deleteBook(BookService bookService) {
         System.out.print("Enter book ID to delete: ");
         int bookId = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         bookService.deleteBook(bookId);
         System.out.println("Book deleted successfully!");
@@ -148,7 +126,7 @@ public class MainModule {
             books.forEach(book -> {
                 System.out.println("ID: " + book.getBookId());
                 System.out.println("Title: " + book.getTitle());
-                System.out.println("Author ID: " + book.getAuthorId()); // Shows only author ID
+                System.out.println("Author Name: " + book.getAuthorName());
                 System.out.println("Published Date: " + book.getPublishedDate());
                 System.out.println("Price: " + book.getPrice());
                 System.out.println("----------------------------");
@@ -156,52 +134,37 @@ public class MainModule {
         }
     }
 
-    private static void manageAuthors(AuthorService authorService) {
-        while (true) {
-            System.out.println("\nManage Authors");
-            System.out.println("1. Add Author");
-            System.out.println("2. View All Authors");
-            System.out.println("3. Back");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
-
-            switch (choice) {
-                case 1:
-                    addAuthor(authorService);
-                    break;
-                case 2:
-                    viewAllAuthors(authorService);
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("Invalid choice! Please try again.");
-            }
+    private static void searchByTitle(BookService bookService) {
+        System.out.print("Enter book title to search: ");
+        String title = scanner.nextLine();
+        List<Book> books = bookService.searchByTitle(title);
+        if (books.isEmpty()) {
+            System.out.println("No books found with the given title.");
+        } else {
+            books.forEach(book -> {
+                System.out.println("ID: " + book.getBookId());
+                System.out.println("Title: " + book.getTitle());
+                System.out.println("Author Name: " + book.getAuthorName());
+                System.out.println("Published Date: " + book.getPublishedDate());
+                System.out.println("Price: " + book.getPrice());
+                System.out.println("----------------------------");
+            });
         }
     }
 
-    private static void addAuthor(AuthorService authorService) {
-        System.out.print("Enter author name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter author biography: ");
-        String biography = scanner.nextLine();
-
-        Author author = new Author(0, name, biography);
-        authorService.addAuthor(author);
-        System.out.println("Author added successfully!");
-    }
-
-
-    private static void viewAllAuthors(AuthorService authorService) {
-        List<Author> authors = authorService.getAllAuthors();
-        if (authors.isEmpty()) {
-            System.out.println("No authors available.");
+    private static void filterByAuthorName(BookService bookService) {
+        System.out.print("Enter author name to filter: ");
+        String authorName = scanner.nextLine();
+        List<Book> books = bookService.filterByAuthorName(authorName);
+        if (books.isEmpty()) {
+            System.out.println("No books found for the given author.");
         } else {
-            authors.forEach(author -> {
-                System.out.println("ID: " + author.getAuthorId());
-                System.out.println("Name: " + author.getName());
-                System.out.println("Biography: " + author.getBiography());
+            books.forEach(book -> {
+                System.out.println("ID: " + book.getBookId());
+                System.out.println("Title: " + book.getTitle());
+                System.out.println("Author Name: " + book.getAuthorName());
+                System.out.println("Published Date: " + book.getPublishedDate());
+                System.out.println("Price: " + book.getPrice());
                 System.out.println("----------------------------");
             });
         }
