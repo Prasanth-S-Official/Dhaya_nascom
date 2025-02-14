@@ -1,17 +1,16 @@
 package com.examly;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.File;
 
-/**
- * Unit test for simple App.
- */
+import org.junit.jupiter.api.Test;
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
+ 
     @Test
     public void shouldAnswerWithTrue()
     {
