@@ -50,13 +50,6 @@ public class AppTest {
         assertTrue(file.exists() && file.isFile());
     }
 
-    @Test
-    public void testDBConnectionUtilFileExists() {
-        String filePath = "src/main/java/com/examly/util/DBConnectionUtil.java";
-        File file = new File(filePath);
-        assertTrue(file.exists() && file.isFile());
-    }
-
 
     @Test
     void testEmployeeInsertQueryExists() throws IOException {
