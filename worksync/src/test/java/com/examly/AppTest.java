@@ -1,10 +1,10 @@
 package com.examly;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.File;
 import org.junit.jupiter.api.Test;
 
 public class AppTest {
@@ -30,29 +30,8 @@ public class AppTest {
     }
 
     @Test
-    public void testDepartmentFileExists() {
-        String filePath = "src/main/java/com/examly/entity/Department.java";
-        File file = new File(filePath);
-        assertTrue(file.exists() && file.isFile());
-    }
-
-    @Test
     public void testEmployeeFileExists() {
         String filePath = "src/main/java/com/examly/entity/Employee.java";
-        File file = new File(filePath);
-        assertTrue(file.exists() && file.isFile());
-    }
-
-    @Test
-    public void testDepartmentServiceFileExists() {
-        String filePath = "src/main/java/com/examly/service/DepartmentService.java";
-        File file = new File(filePath);
-        assertTrue(file.exists() && file.isFile());
-    }
-
-    @Test
-    public void testDepartmentServiceImplFileExists() {
-        String filePath = "src/main/java/com/examly/service/DepartmentServiceImpl.java";
         File file = new File(filePath);
         assertTrue(file.exists() && file.isFile());
     }
@@ -78,28 +57,23 @@ public class AppTest {
         assertTrue(file.exists() && file.isFile());
     }
 
-    @Test
-    void testDepartmentInsertQueryExists() throws IOException {
-        String filePath = "src/main/java/com/examly/service/DepartmentServiceImpl.java";
-        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        String expectedPattern = "(?i)INSERT\\s+INTO\\s+departments\\s*\\(.*departmentName.*location.*\\)\\s*VALUES\\s*\\(.*\\)";
-        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL insert query is missing in DepartmentServiceImpl");
-    }
 
     @Test
     void testEmployeeInsertQueryExists() throws IOException {
         String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
         String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        String expectedPattern = "(?i)INSERT\\s+INTO\\s+employees\\s*\\(.*name.*departmentId.*email.*salary.*\\)\\s*VALUES\\s*\\(.*\\)";
-        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL insert query is missing in EmployeeServiceImpl");
+        String expectedPattern = "(?i)INSERT\\s+INTO\\s+employees\\s*\\(.*name.*email.*salary.*\\)\\s*VALUES\\s*\\(.*\\)";
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), 
+                   "Expected SQL insert query is missing in EmployeeServiceImpl");
     }
 
     @Test
     void testEmployeeUpdateQueryExists() throws IOException {
         String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
         String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        String expectedPattern = "(?i)UPDATE\\s+employees\\s+SET\\s+name\\s*=.*departmentId\\s*=.*email\\s*=.*salary\\s*=.*WHERE\\s+employeeId\\s*=";
-        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL update query is missing in EmployeeServiceImpl");
+        String expectedPattern = "(?i)UPDATE\\s+employees\\s+SET\\s+name\\s*=.*email\\s*=.*salary\\s*=.*WHERE\\s+employeeId\\s*=";
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), 
+                   "Expected SQL update query is missing in EmployeeServiceImpl");
     }
 
     @Test
@@ -107,6 +81,39 @@ public class AppTest {
         String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
         String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
         String expectedPattern = "(?i)DELETE\\s+FROM\\s+employees\\s+WHERE\\s+employeeId\\s*=";
-        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL delete query is missing in EmployeeServiceImpl");
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), 
+                   "Expected SQL delete query is missing in EmployeeServiceImpl");
+    }
+
+    @Test
+    void testEmployeeSelectByIdQueryExists() throws IOException {
+        String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
+        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        String expectedPattern = "(?i)SELECT\\s+\\*\\s+FROM\\s+employees\\s+WHERE\\s+employeeId\\s*=";
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL select by ID query is missing in EmployeeServiceImpl");
+    }
+
+    @Test
+    void testEmployeeSelectAllQueryExists() throws IOException {
+        String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
+        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        String expectedPattern = "(?i)SELECT\\s+\\*\\s+FROM\\s+employees";
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL select all query is missing in EmployeeServiceImpl");
+    }
+
+    @Test
+    void testEmployeeSearchByNameQueryExists() throws IOException {
+        String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
+        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        String expectedPattern = "(?i)SELECT\\s+\\*\\s+FROM\\s+employees\\s+WHERE\\s+name\\s+LIKE";
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL search by name query is missing in EmployeeServiceImpl");
+    }
+
+    @Test
+    void testEmployeeFilterByDepartmentQueryExists() throws IOException {
+        String filePath = "src/main/java/com/examly/service/EmployeeServiceImpl.java";
+        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        String expectedPattern = "(?i)SELECT\\s+\\*\\s+FROM\\s+employees\\s+WHERE\\s+departmentName\\s*=";
+        assertTrue(fileContent.replaceAll("\\s+", " ").toLowerCase().matches(".*" + expectedPattern.toLowerCase() + ".*"), "Expected SQL filter by department query is missing in EmployeeServiceImpl");
     }
 }

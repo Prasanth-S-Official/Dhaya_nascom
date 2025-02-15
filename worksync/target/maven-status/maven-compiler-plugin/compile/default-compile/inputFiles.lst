@@ -1,7 +1,4 @@
-/home/coder/project/workspace/worksync/src/main/java/com/examly/service/DepartmentServiceImpl.java
 /home/coder/project/workspace/worksync/src/main/java/com/examly/util/DBConnectionUtil.java
-/home/coder/project/workspace/worksync/src/main/java/com/examly/service/DepartmentService.java
-/home/coder/project/workspace/worksync/src/main/java/com/examly/entity/Department.java
 /home/coder/project/workspace/worksync/src/main/java/com/examly/service/EmployeeService.java
 /home/coder/project/workspace/worksync/src/main/java/com/examly/entity/Employee.java
 /home/coder/project/workspace/worksync/src/main/java/com/examly/service/EmployeeServiceImpl.java
