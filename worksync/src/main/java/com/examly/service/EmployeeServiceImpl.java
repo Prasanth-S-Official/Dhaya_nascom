@@ -1,7 +1,6 @@
 package com.examly.service;
 
 import com.examly.entity.Employee;
-import com.examly.entity.Department;
 import com.examly.util.DBConnectionUtil;
 
 import java.sql.*;
@@ -11,41 +10,30 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private Connection connection;
-    private DepartmentService departmentService; // To validate department existence
 
     public EmployeeServiceImpl() {
         connection = DBConnectionUtil.getConnection();
-        departmentService = new DepartmentServiceImpl();
     }
 
     @Override
     public String addEmployee(Employee employee) {
-        // Validate employee name
         if (employee.getName() == null || employee.getName().isEmpty()) {
             return "Error: Employee name cannot be empty.";
         }
-
-        // Validate departmentId (check if department exists)
-        Department department = departmentService.getDepartmentById(employee.getDepartmentId());
-        if (department == null) {
-            return "Error: Department with ID " + employee.getDepartmentId() + " does not exist.";
+        if (employee.getDepartmentName() == null || employee.getDepartmentName().isEmpty()) {
+            return "Error: Department name cannot be empty.";
         }
-
-        // Validate salary
         if (employee.getSalary() <= 0) {
             return "Error: Salary must be greater than zero.";
         }
-
-        // Validate email
         if (employee.getEmail() == null || employee.getEmail().isEmpty()) {
             return "Error: Email cannot be empty.";
         }
 
-        // Insert into database
-        String query = "INSERT INTO employees (name, departmentId, email, salary) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO employees (name, departmentName, email, salary) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, employee.getName());
-            statement.setInt(2, employee.getDepartmentId());
+            statement.setString(2, employee.getDepartmentName());
             statement.setString(3, employee.getEmail());
             statement.setDouble(4, employee.getSalary());
 
@@ -58,16 +46,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public String updateEmployee(Employee employee) {
-        // Validate departmentId (check if department exists)
-        Department department = departmentService.getDepartmentById(employee.getDepartmentId());
-        if (department == null) {
-            return "Error: Department with ID " + employee.getDepartmentId() + " does not exist.";
+        if (employee.getDepartmentName() == null || employee.getDepartmentName().isEmpty()) {
+            return "Error: Department name cannot be empty.";
         }
 
-        String query = "UPDATE employees SET name = ?, departmentId = ?, email = ?, salary = ? WHERE employeeId = ?";
+        String query = "UPDATE employees SET name = ?, departmentName = ?, email = ?, salary = ? WHERE employeeId = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, employee.getName());
-            statement.setInt(2, employee.getDepartmentId());
+            statement.setString(2, employee.getDepartmentName());
             statement.setString(3, employee.getEmail());
             statement.setDouble(4, employee.getSalary());
             statement.setInt(5, employee.getEmployeeId());
@@ -101,12 +87,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                     return new Employee(
                         resultSet.getInt("employeeId"),
                         resultSet.getString("name"),
-                        resultSet.getInt("departmentId"),
+                        resultSet.getString("departmentName"),
                         resultSet.getString("email"),
                         resultSet.getDouble("salary")
                     );
-                } else {
-                    System.out.println("No employee found with ID: " + employeeId);
                 }
             }
         } catch (SQLException e) {
@@ -125,13 +109,59 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employees.add(new Employee(
                     resultSet.getInt("employeeId"),
                     resultSet.getString("name"),
-                    resultSet.getInt("departmentId"),
+                    resultSet.getString("departmentName"),
                     resultSet.getString("email"),
                     resultSet.getDouble("salary")
                 ));
             }
         } catch (SQLException e) {
             System.err.println("Error retrieving employees: " + e.getMessage());
+        }
+        return employees;
+    }
+
+    @Override
+    public List<Employee> searchByName(String name) {
+        List<Employee> employees = new ArrayList<>();
+        String query = "SELECT * FROM employees WHERE name LIKE ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, "%" + name + "%");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    employees.add(new Employee(
+                        resultSet.getInt("employeeId"),
+                        resultSet.getString("name"),
+                        resultSet.getString("departmentName"),
+                        resultSet.getString("email"),
+                        resultSet.getDouble("salary")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving employees by name: " + e.getMessage());
+        }
+        return employees;
+    }
+
+    @Override
+    public List<Employee> filterByDepartmentName(String departmentName) {
+        List<Employee> employees = new ArrayList<>();
+        String query = "SELECT * FROM employees WHERE departmentName = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, departmentName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    employees.add(new Employee(
+                        resultSet.getInt("employeeId"),
+                        resultSet.getString("name"),
+                        resultSet.getString("departmentName"),
+                        resultSet.getString("email"),
+                        resultSet.getDouble("salary")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving employees by department: " + e.getMessage());
         }
         return employees;
     }
