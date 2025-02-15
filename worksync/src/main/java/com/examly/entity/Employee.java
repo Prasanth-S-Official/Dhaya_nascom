@@ -3,14 +3,14 @@ package com.examly.entity;
 public class Employee {
     private int employeeId;
     private String name;
-    private int departmentId;
+    private String departmentName; // Storing department as a string instead of using a separate entity
     private String email;
     private double salary;
 
-    public Employee(int employeeId, String name, int departmentId, String email, double salary) {
+    public Employee(int employeeId, String name, String departmentName, String email, double salary) {
         this.employeeId = employeeId;
         this.name = name;
-        this.departmentId = departmentId;
+        this.departmentName = departmentName;
         this.email = email;
         this.salary = salary;
     }
@@ -34,12 +34,12 @@ public class Employee {
         this.name = name;
     }
 
-    public int getDepartmentId() {
-        return departmentId;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public String getEmail() {
