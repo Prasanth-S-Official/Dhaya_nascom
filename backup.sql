@@ -75,7 +75,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'demo two updated','department one','one@gmail.com',45000),(2,'demo two','department two','demotwo@gmail.com',50000),(3,'demo three','department one','demo3@gmail.com',23000),(4,'demo four','department two','demo@gmail.com',5500);
+INSERT INTO `employees` VALUES (1,'demo two updated','department one','one@gmail.com',45000),(2,'demo two','department two','demotwo@gmail.com',50000),(4,'demo four','department two','demo@gmail.com',5500);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -88,4 +88,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-16  6:36:34
+-- Dump completed on 2025-02-16  6:51:34
