@@ -1,5 +1,5 @@
-/home/coder/project/workspace/worksync/src/main/java/com/examly/util/DBConnectionUtil.java
-/home/coder/project/workspace/worksync/src/main/java/com/examly/service/EmployeeService.java
-/home/coder/project/workspace/worksync/src/main/java/com/examly/entity/Employee.java
-/home/coder/project/workspace/worksync/src/main/java/com/examly/service/EmployeeServiceImpl.java
-/home/coder/project/workspace/worksync/src/main/java/com/examly/MainModule.java
+/home/coder/project/workspace/prozone/src/main/java/com/examly/service/ProductServiceImpl.java
+/home/coder/project/workspace/prozone/src/main/java/com/examly/MainModule.java
+/home/coder/project/workspace/prozone/src/main/java/com/examly/util/DBConnectionUtil.java
+/home/coder/project/workspace/prozone/src/main/java/com/examly/entity/Product.java
+/home/coder/project/workspace/prozone/src/main/java/com/examly/service/ProductService.java

@@ -7,10 +7,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.examly</groupId>
-  <artifactId>worksync</artifactId>
+  <artifactId>prozone</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>worksync</name>
+  <name>prozone</name>
   <url>http://www.example.com</url>
 
   <properties>
