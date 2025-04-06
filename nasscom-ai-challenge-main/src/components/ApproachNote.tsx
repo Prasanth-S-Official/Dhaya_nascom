@@ -80,7 +80,7 @@ export const ApproachNote: React.FC<ApproachNoteProps> = ({
             {selectedFields.map((field) => (
               <div key={field} className="bg-gray-50 p-4 rounded-md">
                 <div className="flex justify-between items-center mb-2">
-                  <Label className="font-medium">{field}</Label>
+                  {/* <Label className="font-medium">{field}</Label> */}
                   <div className="flex space-x-2">
                     {fieldPdfUploads[field] && (
                       <>
