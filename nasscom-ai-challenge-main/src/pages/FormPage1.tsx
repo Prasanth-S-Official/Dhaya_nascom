@@ -179,42 +179,47 @@ const FormPage1 = () => {
 
   const [emailExists, setEmailExists] = useState(false);
 
-  const checkEmailExists = async (email: string): Promise<boolean> => {
-    console.log("🔍 Checking email existence:", email);
 
+  const checkEmailExists = async (rawEmail: string): Promise<boolean> => {
+    const email = rawEmail.trim().toLowerCase();
+  
+    console.log("🧼 Normalized email for check:", email);
+  
     const { data, error } = await supabase
       .from("form_submissions")
       .select("email")
-      .eq("email", email)
+      .ilike("email", email) // using ilike for case-insensitive match
       .limit(1);
-
-      if (error) {
-        console.error("❌ Supabase email check error:", error);
-        return false;
-      }
   
-      console.log("✅ Supabase email check result:", data);
-      return !!data.length;
+    if (error) {
+      console.error("❌ Supabase email check error:", error);
+      return false;
+    }
+  
+    console.log("✅ Supabase email check result:", data);
+    return !!data.length;
   };
-
+  
+  
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
-
-    // Basic update
-    updateFormData({ [name]: value });
-
-    // Email check
-    if (name === "email") {
-      const exists = await checkEmailExists(value);
-      setEmailExists(exists);
-    }
-
-    // Validate mobile length
+  
+    // Normalize email
+    const normalizedValue =
+      name === "email" ? value.trim().toLowerCase() : value;
+  
+    updateFormData({ [name]: normalizedValue });
+  
+        if (name === "email") {
+        console.log("📨 Raw input email value:", value);
+        const exists = await checkEmailExists(value);
+        setEmailExists(exists);
+      }
     if (name === "mobile" && type === "number" && value.length > 10) {
       return;
     }
   };
-
+  
   const validateForm = (): boolean => {
     const requiredFields = [
       "contactName",
