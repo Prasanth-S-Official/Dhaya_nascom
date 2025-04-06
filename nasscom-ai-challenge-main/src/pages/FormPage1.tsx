@@ -161,8 +161,6 @@
 // };
 
 // export default FormPage1;
-
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm as useFormContext } from "@/context/FormContext";
@@ -170,7 +168,11 @@ import { FormLayout } from "@/components/FormLayout";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/lib/supabase"; // Update if your path is different
+
+const EDGE_FUNCTION_URL = "https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/hyper-service";
+
+// ⛔ NOTE: Do not expose this key in production frontend apps
+const SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0Mzc4NzI4MiwiZXhwIjoyMDU5MzYzMjgyfQ.bQEuA7dxCYxWSSf4TjxNfQ3ZVXlUoroND6hyvGR_Y90";
 
 const FormPage1 = () => {
   const { formData, updateFormData, saveCurrentData } = useFormContext();
@@ -179,47 +181,44 @@ const FormPage1 = () => {
 
   const [emailExists, setEmailExists] = useState(false);
 
-
   const checkEmailExists = async (rawEmail: string): Promise<boolean> => {
     const email = rawEmail.trim().toLowerCase();
-  
     console.log("🧼 Normalized email for check:", email);
-  
-    const { data, error } = await supabase
-      .from("form_submissions")
-      .select("email")
-      .ilike("email", email) // using ilike for case-insensitive match
-      .limit(1);
-  
-    if (error) {
-      console.error("❌ Supabase email check error:", error);
+
+    try {
+      const res = await fetch(`${EDGE_FUNCTION_URL}?email=${encodeURIComponent(email)}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+          apikey: SERVICE_ROLE_KEY,
+        },
+      });
+
+      const result = await res.json();
+      console.log("📩 Email existence check result:", result);
+      return result.exists === true;
+    } catch (error) {
+      console.error("❌ Error checking email existence:", error);
       return false;
     }
-  
-    console.log("✅ Supabase email check result:", data);
-    return !!data.length;
   };
-  
-  
+
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
-  
-    // Normalize email
-    const normalizedValue =
-      name === "email" ? value.trim().toLowerCase() : value;
-  
+    const normalizedValue = name === "email" ? value.trim().toLowerCase() : value;
+
     updateFormData({ [name]: normalizedValue });
-  
-        if (name === "email") {
-        console.log("📨 Raw input email value:", value);
-        const exists = await checkEmailExists(value);
-        setEmailExists(exists);
-      }
+
+    if (name === "email") {
+      const exists = await checkEmailExists(normalizedValue);
+      setEmailExists(exists);
+    }
+
     if (name === "mobile" && type === "number" && value.length > 10) {
       return;
     }
   };
-  
+
   const validateForm = (): boolean => {
     const requiredFields = [
       "contactName",
@@ -236,8 +235,7 @@ const FormPage1 = () => {
     if (missingFields.length > 0) {
       toast({
         title: "Missing required fields",
-        description:
-          "Please fill in all required fields before proceeding.",
+        description: "Please fill in all required fields before proceeding.",
         variant: "destructive",
       });
       return false;
@@ -246,8 +244,7 @@ const FormPage1 = () => {
     if (emailExists) {
       toast({
         title: "Email already registered",
-        description:
-          "This email is already used for a submission. Please use a different one.",
+        description: "This email is already used for a submission. Please use a different one.",
         variant: "destructive",
       });
       return false;
@@ -290,12 +287,7 @@ const FormPage1 = () => {
   };
 
   return (
-    <FormLayout
-      onSave={handleSave}
-      onNext={handleNext}
-      currentStep={1}
-      totalSteps={2}
-    >
+    <FormLayout onSave={handleSave} onNext={handleNext} currentStep={1} totalSteps={2}>
       <form className="form-section">
         <h2 className="form-header">Basic Information</h2>
 
@@ -343,9 +335,7 @@ const FormPage1 = () => {
         </div>
 
         <div className="form-group">
-          <Label htmlFor="organizationName">
-            Name of your Organization *
-          </Label>
+          <Label htmlFor="organizationName">Name of your Organization *</Label>
           <Input
             id="organizationName"
             name="organizationName"
