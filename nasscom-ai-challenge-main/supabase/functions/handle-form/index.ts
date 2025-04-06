@@ -188,7 +188,7 @@ serve(async (req) => {
   try {
     const url = new URL(req.url);
 
-    // =============================
+   // =============================
     // ✅ EMAIL CHECK (GET REQUEST)
     // =============================
     if (req.method === "GET" && url.searchParams.get("email")) {
@@ -222,6 +222,18 @@ serve(async (req) => {
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 200,
+        }
+      );
+    }
+
+    // ✅ Only now check for Content-Type on non-GETs
+    const contentType = req.headers.get("content-type") || "";
+    if (req.method !== "GET" && !contentType.includes("multipart/form-data")) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Missing content type" }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
         }
       );
     }

@@ -184,16 +184,17 @@ const FormPage1 = () => {
   const checkEmailExists = async (rawEmail: string): Promise<boolean> => {
     const email = rawEmail.trim().toLowerCase();
     console.log("🧼 Normalized email for check:", email);
-
+  
     try {
       const res = await fetch(`${EDGE_FUNCTION_URL}?email=${encodeURIComponent(email)}`, {
         method: "GET",
+        // ✅ REMOVE Content-Type — it breaks GETs in Supabase Edge Functions
         headers: {
           Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
           apikey: SERVICE_ROLE_KEY,
         },
       });
-
+  
       const result = await res.json();
       console.log("📩 Email existence check result:", result);
       return result.exists === true;
@@ -202,7 +203,8 @@ const FormPage1 = () => {
       return false;
     }
   };
-
+  
+  
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
     const normalizedValue = name === "email" ? value.trim().toLowerCase() : value;
