@@ -1,11 +1,9 @@
-
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 interface FormLayoutProps {
   children: React.ReactNode;
-  onSave: () => void;
+  onSave: () => void; // You can remove this too if unused elsewhere
   onNext?: () => void;
   onBack?: () => void;
   currentStep?: number;
@@ -15,7 +13,6 @@ interface FormLayoutProps {
 
 export function FormLayout({
   children,
-  onSave,
   onNext,
   onBack,
   currentStep = 1,
@@ -25,27 +22,32 @@ export function FormLayout({
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="form-card">
+        {/* Logo Section */}
         <div className="flex justify-between items-center mb-6">
-          <div>
-            <img 
-              src="/lovable-uploads/a8158608-07a1-4b19-87ca-75a5c8c97516.png" 
-              alt="T-AIM Logo"
-              className="h-12 w-auto"
-            />
-          </div>
-          <div>
-            <img 
-              src="/lovable-uploads/50af34cf-0028-4267-95af-fcdffa3ee943.png" 
-              alt="NASSCOM Logo"
-              className="h-12 w-auto"
-            />
-          </div>
+          <img
+            src="/lovable-uploads/a8158608-07a1-4b19-87ca-75a5c8c97516.png"
+            alt="T-AIM Logo"
+            className="h-12 w-auto"
+          />
+          <img
+            src="/lovable-uploads/50af34cf-0028-4267-95af-fcdffa3ee943.png"
+            alt="NASSCOM Logo"
+            className="h-12 w-auto"
+          />
         </div>
 
+        {/* Heading */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-primary">
-            AI Challenge Registration
-          </h1>
+          <div className="text-center">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-700">
+              Telangana AI GrandChallenge
+            </h1>
+            <p className="text-base sm:text-xl font-semibold text-pink-600 mt-1">
+              Registration
+            </p>
+          </div>
+
+          {/* Stepper */}
           <div className="mt-4 flex justify-center">
             <div className="w-full max-w-xs">
               <div className="flex items-center">
@@ -76,26 +78,21 @@ export function FormLayout({
           </div>
         </div>
 
+        {/* Form Content */}
         {children}
 
+        {/* Navigation Buttons */}
         <div className="form-nav">
           {onBack && (
             <Button variant="outline" onClick={onBack} type="button">
               Back
             </Button>
           )}
-          
-          <div className="flex gap-3 ml-auto">
-            <Button variant="outline" onClick={onSave} type="button">
-              Save
+          {onNext && (
+            <Button onClick={onNext} type="button" className="ml-auto">
+              {isLastStep ? "Submit" : "Next"}
             </Button>
-
-            {onNext && (
-              <Button onClick={onNext} type="button">
-                {isLastStep ? "Submit" : "Next"}
-              </Button>
-            )}
-          </div>
+          )}
         </div>
       </div>
     </div>
