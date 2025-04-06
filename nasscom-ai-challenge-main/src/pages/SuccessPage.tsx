@@ -23,10 +23,6 @@ const SuccessPage = () => {
     }
   }, [formSubmitted, navigate, toast]);
 
-  const handleStartNew = () => {
-    resetForm();
-    navigate("/form/page1");
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
@@ -43,12 +39,7 @@ const SuccessPage = () => {
         <p className="mt-2 text-gray-500">
           You will receive a confirmation email shortly with further instructions.
         </p>
-        <div className="mt-8">
-          <Button onClick={handleStartNew}>
-            Register Another Startup
-          </Button>
-        </div>
-        
+       
         <div className="mt-4">
           <a href="/" className="text-blue-600 hover:underline">
             Return to Home
