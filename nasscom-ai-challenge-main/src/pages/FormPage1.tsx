@@ -1,71 +1,272 @@
 
-import React from "react";
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useForm as useFormContext } from "@/context/FormContext";
+// import { FormLayout } from "@/components/FormLayout";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
+// import { useToast } from "@/components/ui/use-toast";
+// import { supabase } from "@/lib/supabase"; 
+
+
+// const FormPage1 = () => {
+//   const { formData, updateFormData, saveCurrentData, isSavingData } = useFormContext();
+//   const navigate = useNavigate();
+//   const { toast } = useToast();
+
+//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const { name, value, type } = e.target;
+    
+//     // Handle specific validations
+//     if (type === 'number') {
+//       if (name === 'mobile' && value.length > 10) {
+//         return; // Prevent more than 10 digits for mobile
+//       }
+//       updateFormData({ [name]: value });
+//     } else {
+//       updateFormData({ [name]: value });
+//     }
+//   };
+  
+//   const validateForm = (): boolean => {
+//     const requiredFields = [
+//       'contactName', 'email', 'mobile', 
+//       'organizationName', 'website'
+//     ];
+    
+//     const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
+    
+//     if (missingFields.length > 0) {
+//       toast({
+//         title: "Missing required fields",
+//         description: "Please fill in all required fields before proceeding.",
+//         variant: "destructive"
+//       });
+//       return false;
+//     }
+    
+//     // Email validation
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     if (!emailRegex.test(formData.email)) {
+//       toast({
+//         title: "Invalid email",
+//         description: "Please enter a valid email address.",
+//         variant: "destructive"
+//       });
+//       return false;
+//     }
+    
+//     // Mobile validation
+//     if (!/^\d{10}$/.test(formData.mobile)) {
+//       toast({
+//         title: "Invalid mobile number",
+//         description: "Mobile number must be 10 digits.",
+//         variant: "destructive"
+//       });
+//       return false;
+//     }
+    
+//     return true;
+//   };
+
+//   const handleNext = () => {
+//     if (validateForm()) {
+//       navigate("/form/page2");
+//     }
+//   };
+  
+//   const handleSave = async () => {
+//     await saveCurrentData();
+//     toast({
+//       title: "Progress saved",
+//       description: "Your form progress has been saved.",
+//     });
+//   };
+
+//   return (
+//     <FormLayout 
+//       onSave={handleSave}
+//       onNext={handleNext}
+//       currentStep={1}
+//       totalSteps={2}
+//     >
+//       <form className="form-section">
+//         <h2 className="form-header">Basic Information</h2>
+        
+//         <div className="form-group">
+//           <Label htmlFor="contactName">Name (Single point of contact) *</Label>
+//           <Input
+//             id="contactName"
+//             name="contactName"
+//             value={formData.contactName}
+//             onChange={handleInputChange}
+//             placeholder="Enter your name"
+//             required
+//           />
+//         </div>
+        
+//         <div className="form-group">
+//           <Label htmlFor="email">Official Email Id *</Label>
+//           <Input
+//             id="email"
+//             name="email"
+//             type="email"
+//             value={formData.email}
+//             onChange={handleInputChange}
+//             placeholder="Enter your official email"
+//             required
+//           />
+//         </div>
+        
+//         <div className="form-group">
+//           <Label htmlFor="mobile">Mobile Number *</Label>
+//           <Input
+//             id="mobile"
+//             name="mobile"
+//             type="number"
+//             value={formData.mobile}
+//             onChange={handleInputChange}
+//             placeholder="Enter your 10 digit mobile number"
+//             maxLength={10}
+//             required
+//           />
+//         </div>
+        
+//         <div className="form-group">
+//           <Label htmlFor="organizationName">Name of your Organization *</Label>
+//           <Input
+//             id="organizationName"
+//             name="organizationName"
+//             value={formData.organizationName}
+//             onChange={handleInputChange}
+//             placeholder="Enter your organization's name"
+//             required
+//           />
+//         </div>
+        
+//         <div className="form-group">
+//           <Label htmlFor="website">Organization Website / URL *</Label>
+//           <Input
+//             id="website"
+//             name="website"
+//             value={formData.website}
+//             onChange={handleInputChange}
+//             placeholder="https://example.com"
+//             required
+//           />
+//         </div>
+//       </form>
+//     </FormLayout>
+//   );
+// };
+
+// export default FormPage1;
+
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm as useFormContext } from "@/context/FormContext";
 import { FormLayout } from "@/components/FormLayout";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/lib/supabase"; 
-
+import { supabase } from "@/lib/supabase"; // Update if your path is different
 
 const FormPage1 = () => {
-  const { formData, updateFormData, saveCurrentData, isSavingData } = useFormContext();
+  const { formData, updateFormData, saveCurrentData } = useFormContext();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type } = e.target;
-    
-    // Handle specific validations
-    if (type === 'number') {
-      if (name === 'mobile' && value.length > 10) {
-        return; // Prevent more than 10 digits for mobile
+  const [emailExists, setEmailExists] = useState(false);
+
+  const checkEmailExists = async (email: string): Promise<boolean> => {
+    console.log("🔍 Checking email existence:", email);
+
+    const { data, error } = await supabase
+      .from("form_submissions")
+      .select("email")
+      .eq("email", email)
+      .limit(1);
+
+      if (error) {
+        console.error("❌ Supabase email check error:", error);
+        return false;
       }
-      updateFormData({ [name]: value });
-    } else {
-      updateFormData({ [name]: value });
+  
+      console.log("✅ Supabase email check result:", data);
+      return !!data.length;
+  };
+
+  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+
+    // Basic update
+    updateFormData({ [name]: value });
+
+    // Email check
+    if (name === "email") {
+      const exists = await checkEmailExists(value);
+      setEmailExists(exists);
+    }
+
+    // Validate mobile length
+    if (name === "mobile" && type === "number" && value.length > 10) {
+      return;
     }
   };
-  
+
   const validateForm = (): boolean => {
     const requiredFields = [
-      'contactName', 'email', 'mobile', 
-      'organizationName', 'website'
+      "contactName",
+      "email",
+      "mobile",
+      "organizationName",
+      "website",
     ];
-    
-    const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
-    
+
+    const missingFields = requiredFields.filter(
+      (field) => !formData[field as keyof typeof formData]
+    );
+
     if (missingFields.length > 0) {
       toast({
         title: "Missing required fields",
-        description: "Please fill in all required fields before proceeding.",
-        variant: "destructive"
+        description:
+          "Please fill in all required fields before proceeding.",
+        variant: "destructive",
       });
       return false;
     }
-    
-    // Email validation
+
+    if (emailExists) {
+      toast({
+        title: "Email already registered",
+        description:
+          "This email is already used for a submission. Please use a different one.",
+        variant: "destructive",
+      });
+      return false;
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
         title: "Invalid email",
         description: "Please enter a valid email address.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return false;
     }
-    
-    // Mobile validation
+
     if (!/^\d{10}$/.test(formData.mobile)) {
       toast({
         title: "Invalid mobile number",
         description: "Mobile number must be 10 digits.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return false;
     }
-    
+
     return true;
   };
 
@@ -74,7 +275,7 @@ const FormPage1 = () => {
       navigate("/form/page2");
     }
   };
-  
+
   const handleSave = async () => {
     await saveCurrentData();
     toast({
@@ -84,7 +285,7 @@ const FormPage1 = () => {
   };
 
   return (
-    <FormLayout 
+    <FormLayout
       onSave={handleSave}
       onNext={handleNext}
       currentStep={1}
@@ -92,7 +293,7 @@ const FormPage1 = () => {
     >
       <form className="form-section">
         <h2 className="form-header">Basic Information</h2>
-        
+
         <div className="form-group">
           <Label htmlFor="contactName">Name (Single point of contact) *</Label>
           <Input
@@ -104,7 +305,7 @@ const FormPage1 = () => {
             required
           />
         </div>
-        
+
         <div className="form-group">
           <Label htmlFor="email">Official Email Id *</Label>
           <Input
@@ -116,8 +317,13 @@ const FormPage1 = () => {
             placeholder="Enter your official email"
             required
           />
+          {emailExists && (
+            <p className="text-sm text-red-500 mt-1">
+              This email is already registered.
+            </p>
+          )}
         </div>
-        
+
         <div className="form-group">
           <Label htmlFor="mobile">Mobile Number *</Label>
           <Input
@@ -127,13 +333,14 @@ const FormPage1 = () => {
             value={formData.mobile}
             onChange={handleInputChange}
             placeholder="Enter your 10 digit mobile number"
-            maxLength={10}
             required
           />
         </div>
-        
+
         <div className="form-group">
-          <Label htmlFor="organizationName">Name of your Organization *</Label>
+          <Label htmlFor="organizationName">
+            Name of your Organization *
+          </Label>
           <Input
             id="organizationName"
             name="organizationName"
@@ -143,7 +350,7 @@ const FormPage1 = () => {
             required
           />
         </div>
-        
+
         <div className="form-group">
           <Label htmlFor="website">Organization Website / URL *</Label>
           <Input
