@@ -95,20 +95,20 @@ const CompanyRegistrationForm = () => {
       return false;
     }
     
-    if (formData.selectedFields.length > 0) {
-      const missingUploads = formData.selectedFields.filter(
-        field => !formData.fieldPdfUploads[field]
-      );
+    // if (formData.selectedFields.length > 0) {
+    //   const missingUploads = formData.selectedFields.filter(
+    //     field => !formData.fieldPdfUploads[field]
+    //   );
       
-      if (missingUploads.length > 0) {
-        toast({
-          title: "Missing PDF uploads",
-          description: `Please upload PDFs for all selected approach fields: ${missingUploads.join(', ')}`,
-          variant: "destructive"
-        });
-        return false;
-      }
-    }
+    //   if (missingUploads.length > 0) {
+    //     toast({
+    //       title: "Missing PDF uploads helo",
+    //       description: `Please upload PDFs for all selected approach fields: ${missingUploads.join(', ')}`,
+    //       variant: "destructive"
+    //     });
+    //     return false;
+    //   }
+    // }
     
     return true;
   };
