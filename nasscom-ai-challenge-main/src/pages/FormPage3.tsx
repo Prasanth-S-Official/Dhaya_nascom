@@ -95,8 +95,7 @@
 
 // export default FormPage3;
 
-
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm as useFormContext } from "@/context/FormContext";
 import { FormLayout } from "@/components/FormLayout";
@@ -108,16 +107,19 @@ const FormPage3 = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleBack = () => {
-    // Optional: If you want to clear state when going back
-    // updateFormData({ selectedFields: [], fieldPdfUploads: {} });
+  useEffect(() => {
+    // Set step only
+    setCurrentStep(3);
+    // ✅ DO NOT validate anything here
+  }, [setCurrentStep]);
 
+  const handleBack = () => {
     setCurrentStep(2);
     navigate("/form/page2");
   };
 
   const handleReview = async () => {
-    const valid = validateForm(); // Local and safe
+    const valid = validateForm();
     if (!valid) return;
 
     await saveCurrentData();
@@ -126,19 +128,19 @@ const FormPage3 = () => {
   };
 
   const validateForm = () => {
-    if (formData.selectedFields.length > 0) {
-      const missingUploads = formData.selectedFields.filter(
-        (field) => !formData.fieldPdfUploads[field]
-      );
+    if (!formData || !formData.selectedFields) return true;
 
-      if (missingUploads.length > 0) {
-        toast({
-          title: "Missing PDF uploads",
-          description: `Please upload PDFs for all selected approach fields.`,
-          variant: "destructive",
-        });
-        return false;
-      }
+    const missingUploads = formData.selectedFields.filter(
+      (field) => !formData.fieldPdfUploads?.[field]
+    );
+
+    if (missingUploads.length > 0) {
+      toast({
+        title: "Missing PDF MAiru uploads",
+        description: `Please upload PDFs for all selected approach fields.`,
+        variant: "destructive",
+      });
+      return false;
     }
 
     return true;
@@ -157,7 +159,6 @@ const FormPage3 = () => {
       ? formData.selectedFields.filter((f) => f !== field)
       : [...formData.selectedFields, field];
 
-    // Remove PDF from upload map if checkbox is unchecked
     const newFieldPdfUploads = { ...formData.fieldPdfUploads };
     if (!newSelectedFields.includes(field)) {
       delete newFieldPdfUploads[field];
@@ -181,7 +182,7 @@ const FormPage3 = () => {
   return (
     <FormLayout
       onSave={handleSave}
-      onNext={handleReview}
+      onNext={handleReview} // ✅ Only runs on Next button click
       onBack={handleBack}
       currentStep={3}
       totalSteps={4}
