@@ -324,17 +324,6 @@ const CompanyRegistrationForm = () => {
             </Button>
           </div>
         )}
-
-        <div className="form-group mt-6 border-t border-gray-200 pt-6">
-          <a 
-            href="#" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-blue-600 hover:underline"
-          >
-            Click here to view guidelines
-          </a>
-        </div>
       </form>
     </FormLayout>
   );

@@ -42,8 +42,16 @@ export const ApproachNote: React.FC<ApproachNoteProps> = ({
 
   return (
     <div className="space-y-6">
-      <h3 className="text-lg font-medium">Approach Note Submission</h3>
-      
+      <a
+        href="https://examly467.sharepoint.com/sites/neoXCorporate/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FneoXCorporate%2FShared%20Documents%2FGeneral%2FSai%20Vignesh%2FApproach%20Note%20Submission%20Guideline%2Epdf&parent=%2Fsites%2FneoXCorporate%2FShared%20Documents%2FGeneral%2FSai%20Vignesh&p=true&ga=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline hover:text-blue-800"
+      >
+        Click here to view guidelines
+      </a>
+
+
       <div className="space-y-4">
         <Label className="text-base">Select your use case in which you want to upload your solution:</Label>
         <div className="grid grid-cols-1 gap-3">
