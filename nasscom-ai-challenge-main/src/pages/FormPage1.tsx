@@ -172,7 +172,7 @@ import { useToast } from "@/components/ui/use-toast";
 const EDGE_FUNCTION_URL = "https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/hyper-service";
 
 // ⛔ NOTE: Do not expose this key in production frontend apps
-const SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0Mzc4NzI4MiwiZXhwIjoyMDU5MzYzMjgyfQ.bQEuA7dxCYxWSSf4TjxNfQ3ZVXlUoroND6hyvGR_Y90";
+const SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3ODcyODIsImV4cCI6MjA1OTM2MzI4Mn0.8fLJtZi1siljidzfvXw4wrErtP8_QmxbZoaW9EuKX50";
 
 const FormPage1 = () => {
   const { formData, updateFormData, saveCurrentData } = useFormContext();
