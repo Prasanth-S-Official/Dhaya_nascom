@@ -6,6 +6,8 @@ import { FormLayout } from "@/components/FormLayout";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/lib/supabase"; 
+
 
 const FormPage1 = () => {
   const { formData, updateFormData, saveCurrentData, isSavingData } = useFormContext();
