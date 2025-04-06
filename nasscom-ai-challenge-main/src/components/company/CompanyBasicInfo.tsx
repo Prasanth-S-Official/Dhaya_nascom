@@ -202,7 +202,6 @@
 //   );
 // };
 
-
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -270,12 +269,26 @@ export const CompanyBasicInfo: React.FC<CompanyBasicInfoProps> = ({
     }
   };
 
-  const handleFileChange = (file: File | null, field: keyof FormData) => {
-    if (file && file.size > 5 * 1024 * 1024) {
-      toast.error("File size should be less than 5MB");
-      return;
+  const handleFileChange = (
+    file: File | null,
+    field: keyof FormData
+  ) => {
+    if (file) {
+      const isPdf = file.type === "application/pdf";
+      const isTooBig = file.size > 5 * 1024 * 1024;
+
+      if (!isPdf || isTooBig) {
+        toast("Invalid file", {
+          description: !isPdf
+            ? "Only PDF files are allowed."
+            : "File size must be less than 5MB.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      onValueChange(field, file);
     }
-    onValueChange(field, file);
   };
 
   return (
@@ -381,9 +394,10 @@ export const CompanyBasicInfo: React.FC<CompanyBasicInfoProps> = ({
 
           <FileUpload
             id="incorporationCertificate"
-            label="Upload Incorporation certificate (PDF format)"
+            label="Upload Incorporation certificate"
             onChange={(file) => handleFileChange(file, "incorporationCertificate")}
             value={formData.incorporationCertificate}
+            helperText="PDF only, max 5MB"
           />
 
           <div className="form-group mt-4">
@@ -422,9 +436,10 @@ export const CompanyBasicInfo: React.FC<CompanyBasicInfoProps> = ({
 
               <FileUpload
                 id="dpiitCertificate"
-                label="Upload DPIIT Certificate (PDF format) *"
+                label="Upload DPIIT Certificate"
                 onChange={(file) => handleFileChange(file, "dpiitCertificate")}
                 value={formData.dpiitCertificate}
+                helperText="PDF only, max 5MB"
               />
             </div>
           )}

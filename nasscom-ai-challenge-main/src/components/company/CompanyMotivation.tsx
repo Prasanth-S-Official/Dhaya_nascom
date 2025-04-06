@@ -1,9 +1,9 @@
-
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { FileUpload } from "@/components/FileUpload";
 import { FormData } from "@/context/FormContext";
+import { toast } from "sonner";
 
 interface CompanyMotivationProps {
   formData: FormData;
@@ -14,6 +14,26 @@ export const CompanyMotivation: React.FC<CompanyMotivationProps> = ({
   formData,
   onValueChange
 }) => {
+
+  const handlePitchDeckUpload = (file: File | null) => {
+    if (!file) return;
+
+    const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+    const isSizeOk = file.size <= 5 * 1024 * 1024; // 5MB
+
+    if (!isPdf) {
+      toast.error("Only PDF files are allowed.");
+      return;
+    }
+
+    if (!isSizeOk) {
+      toast.error("File size should be less than 5MB.");
+      return;
+    }
+
+    onValueChange("pitchDeck", file);
+  };
+
   return (
     <div className="space-y-6">
       <div className="form-group">
@@ -35,9 +55,10 @@ export const CompanyMotivation: React.FC<CompanyMotivationProps> = ({
 
       <FileUpload
         id="pitchDeck"
-        label="Please share your pitch deck (product/company deck) (PDF format)"
-        onChange={(file) => onValueChange("pitchDeck", file)}
+        label="Please share your pitch deck (product/company deck)"
+        onChange={handlePitchDeckUpload}
         value={formData.pitchDeck}
+        helperText="PDF only, max 5MB"
       />
     </div>
   );

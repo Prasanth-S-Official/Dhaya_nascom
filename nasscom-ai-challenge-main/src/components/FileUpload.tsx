@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Upload } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -10,6 +9,7 @@ interface FileUploadProps {
   value?: File | null;
   className?: string;
   id: string;
+  helperText?: string;
 }
 
 export const FileUpload = ({
@@ -19,22 +19,26 @@ export const FileUpload = ({
   value,
   className,
   id,
+  helperText,
 }: FileUploadProps) => {
   const [dragActive, setDragActive] = useState(false);
-  
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    onChange(file);
+    if (file) {
+      onChange(file);
+    }
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      if (accept.includes(file.type.split('/')[1])) {
+
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+      if (accept.includes(".pdf") && isPdf) {
         onChange(file);
       }
     }
@@ -57,9 +61,10 @@ export const FileUpload = ({
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
+
       <div
         className={cn(
-          "mt-1 flex justify-center px-6 py-4 border-2 border-dashed rounded-md",
+          "mt-1 flex justify-center px-6 py-4 border-2 border-dashed rounded-md transition-colors",
           dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300",
           value ? "bg-green-50 border-green-300" : ""
         )}
@@ -76,10 +81,10 @@ export const FileUpload = ({
           ) : (
             <>
               <Upload className="mx-auto h-12 w-12 text-gray-400" />
-              <div className="flex text-sm text-gray-600">
+              <div className="flex text-sm text-gray-600 justify-center">
                 <label
                   htmlFor={id}
-                  className="relative cursor-pointer rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500"
+                  className="relative cursor-pointer rounded-md bg-white font-medium text-blue-600 hover:text-blue-500"
                 >
                   <span>Upload a file</span>
                   <input
@@ -91,10 +96,12 @@ export const FileUpload = ({
                     accept={accept}
                   />
                 </label>
-                <p className="pl-1">or drag and drop</p>
+                <span className="pl-1">or drag and drop</span>
               </div>
-              <p className="text-xs text-gray-500">PDF only</p>
             </>
+          )}
+          {helperText && (
+            <p className="text-xs text-muted-foreground mt-1">{helperText}</p>
           )}
         </div>
       </div>
