@@ -40,7 +40,7 @@ export function FormLayout({
         <div className="mb-8 text-center">
           <div className="text-center">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-700">
-              Telangana AI GrandChallenge
+              Telangana AI Grand Challenge
             </h1>
             <p className="text-base sm:text-xl font-semibold text-pink-600 mt-1">
               Registration

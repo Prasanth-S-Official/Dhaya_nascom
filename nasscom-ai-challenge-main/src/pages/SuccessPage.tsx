@@ -35,11 +35,7 @@ const SuccessPage = () => {
         </h1>
         <p className="mt-4 text-lg text-gray-600">
           Thank you for registering your startup. Your application has been submitted successfully.
-        </p>
-        <p className="mt-2 text-gray-500">
-          You will receive a confirmation email shortly with further instructions.
-        </p>
-       
+        </p>       
         <div className="mt-4">
           <a href="/" className="text-blue-600 hover:underline">
             Return to Home
