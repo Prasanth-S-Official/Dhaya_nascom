@@ -45,73 +45,104 @@ const CompanyRegistrationForm = () => {
     navigate("/form/page1");
   };
   
-  const validateForm = (): boolean => {
-    const requiredFields = [
-      'isRegisteredInIndia', 'businessStage', 
-      'industries', 'city', 'employees'
-    ];
-    
-    const missingFields = requiredFields.filter(field => {
-      const value = formData[field as keyof typeof formData];
-      return !value || (Array.isArray(value) && value.length === 0);
+const validateForm = (): boolean => {
+  const requiredFields = [
+    'isRegisteredInIndia', 'businessStage', 
+    'industries', 'city', 'employees'
+  ];
+  
+  const missingFields = requiredFields.filter(field => {
+    const value = formData[field as keyof typeof formData];
+    return !value || (Array.isArray(value) && value.length === 0);
+  });
+
+  if (missingFields.length > 0) {
+    toast({
+      title: "Missing required fields",
+      description: "Please fill in all required fields before submitting.",
+      variant: "destructive"
     });
-    
-    if (missingFields.length > 0) {
+    return false;
+  }
+
+  if (formData.isRegisteredInIndia === "Yes") {
+    const incorporationDate = formData.incorporationDate;
+    const incorporationCertificate = formData.incorporationCertificate;
+
+    if (!incorporationDate) {
       toast({
-        title: "Missing required fields",
-        description: "Please fill in all required fields before submitting.",
+        title: "Incorporation Date Required",
+        description: "Please select both year and month of incorporation.",
         variant: "destructive"
       });
       return false;
     }
-    
-    if (formData.isDpiitCertified === "Yes" && !formData.dpiitNumber) {
+
+    const hasYear = incorporationDate.getFullYear();
+    const hasMonth = incorporationDate.getMonth();
+
+    if (isNaN(hasYear) || isNaN(hasMonth)) {
       toast({
-        title: "DPIIT information required",
-        description: "Please provide your DPIIT number.",
+        title: "Incomplete Incorporation Date",
+        description: "Please make sure both year and month are selected.",
         variant: "destructive"
       });
       return false;
     }
-    
-    if (formData.motivation) {
-      const wordCount = formData.motivation.trim().split(/\s+/).length;
-      if (wordCount > 100) {
-        toast({
-          title: "Motivation is too long",
-          description: "Please limit your motivation to 100 words or less.",
-          variant: "destructive"
-        });
-        return false;
-      }
-    }
-    
-    if (formData.industries.includes("Others") && !formData.otherIndustry) {
+
+    if (!incorporationCertificate) {
       toast({
-        title: "Other industry required",
-        description: "Please specify the other industry.",
+        title: "Incorporation Certificate Missing",
+        description: "Please upload the Incorporation Certificate (PDF).",
         variant: "destructive"
       });
       return false;
     }
-    
-    // if (formData.selectedFields.length > 0) {
-    //   const missingUploads = formData.selectedFields.filter(
-    //     field => !formData.fieldPdfUploads[field]
-    //   );
-      
-    //   if (missingUploads.length > 0) {
-    //     toast({
-    //       title: "Missing PDF uploads helo",
-    //       description: `Please upload PDFs for all selected approach fields: ${missingUploads.join(', ')}`,
-    //       variant: "destructive"
-    //     });
-    //     return false;
-    //   }
-    // }
-    
-    return true;
-  };
+  }
+
+  if (formData.isDpiitCertified === "Yes") {
+    if (!formData.dpiitNumber) {
+      toast({
+        title: "DPIIT Number Missing",
+        description: "Please enter your DPIIT Number.",
+        variant: "destructive"
+      });
+      return false;
+    }
+
+    if (!formData.dpiitCertificate) {
+      toast({
+        title: "DPIIT Certificate Missing",
+        description: "Please upload your DPIIT Certificate (PDF).",
+        variant: "destructive"
+      });
+      return false;
+    }
+  }
+
+  if (formData.motivation) {
+    const wordCount = formData.motivation.trim().split(/\s+/).length;
+    if (wordCount > 100) {
+      toast({
+        title: "Motivation is too long",
+        description: "Please limit your motivation to 100 words or less.",
+        variant: "destructive"
+      });
+      return false;
+    }
+  }
+
+  if (formData.industries.includes("Others") && !formData.otherIndustry) {
+    toast({
+      title: "Other industry required",
+      description: "Please specify the other industry.",
+      variant: "destructive"
+    });
+    return false;
+  }
+
+  return true;
+};
 
   const handleNext = async () => {
     if (validateForm()) {
