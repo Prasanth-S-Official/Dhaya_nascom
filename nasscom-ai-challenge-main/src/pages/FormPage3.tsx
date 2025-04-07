@@ -127,24 +127,54 @@ const FormPage3 = () => {
     navigate("/form/review");
   };
 
+  // const validateForm = () => {
+  //   if (!formData || !formData.selectedFields) return true;
+
+  //   const missingUploads = formData.selectedFields.filter(
+  //     (field) => !formData.fieldPdfUploads?.[field]
+  //   );
+
+  //   if (missingUploads.length > 0) {
+  //     toast({
+  //       title: "Missing PDF uploads",
+  //       description: `Please upload PDFs for all selected approach fields.`,
+  //       variant: "destructive",
+  //     });
+  //     return false;
+  //   }
+
+  //   return true;
+  // };
+
   const validateForm = () => {
-    if (!formData || !formData.selectedFields) return true;
-
-    const missingUploads = formData.selectedFields.filter(
-      (field) => !formData.fieldPdfUploads?.[field]
-    );
-
+    if (!formData) return false;
+  
+    const { selectedFields, fieldPdfUploads } = formData;
+    const errors: string[] = [];
+  
+    // ✅ Ensure at least one checkbox is selected
+    if (!selectedFields || selectedFields.length === 0) {
+      errors.push("Please select at least one use case field.");
+    }
+  
+    // ✅ Ensure all selected fields have a PDF uploaded
+    const missingUploads = selectedFields.filter((field) => !fieldPdfUploads?.[field]);
     if (missingUploads.length > 0) {
+      errors.push("Please upload PDFs for all selected approach fields.");
+    }
+  
+    if (errors.length > 0) {
       toast({
         title: "Missing PDF uploads",
-        description: `Please upload PDFs for all selected approach fields.`,
+        description: errors.join("\n"),
         variant: "destructive",
       });
       return false;
     }
-
+  
     return true;
   };
+  
 
   const handleSave = async () => {
     await saveCurrentData();

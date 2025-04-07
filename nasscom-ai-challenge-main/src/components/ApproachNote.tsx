@@ -269,7 +269,7 @@ export const ApproachNote: React.FC<ApproachNoteProps> = ({
                 </div>
                 <FileUpload
                   id={`pdf-${field}`}
-                  label={`Upload PDF for ${field}`}
+                  label={`Upload PDF for ${field} *`}
                   onChange={(file) => handleUpload(field, file)}
                   value={fieldPdfUploads[field]}
                   helperText="PDF only, max 5MB"
