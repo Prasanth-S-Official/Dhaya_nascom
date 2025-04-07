@@ -52,11 +52,12 @@ export default function Signup() {
         password,
 
       });
+      console.log("Signup", data, error)
       if (error) {
         setErrors({ email: "Signup failed: " + error.message });
       } else {
         toast.success("Signup successful! Please check your email to confirm.");
-        navigate("/login");
+        // navigate("/login");
       }
     } catch (err) {
       setErrors({ email: "Unexpected error occurred." });
