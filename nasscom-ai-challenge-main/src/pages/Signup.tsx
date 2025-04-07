@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -11,44 +12,61 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const validatePassword = (pwd: string) => {
-    // Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(pwd);
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMsg("");
 
-    if (!validatePassword(password)) {
-      setErrorMsg(
-        "Password must be at least 8 characters, include uppercase, lowercase, number, and special character."
-      );
-      return;
+    let newErrors: any = {};
+
+    if (!email) newErrors.email = "Email is required.";
+    if (!phone) newErrors.phone = "Phone number is required.";
+    if (!password) {
+      newErrors.password = "Password is required.";
+    } else if (!validatePassword(password)) {
+      newErrors.password =
+        "Must be 8+ characters, include upper & lowercase, number, special character.";
     }
 
-    if (password !== confirmPassword) {
-      setErrorMsg("Passwords do not match.");
-      return;
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password.";
+    } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
     }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return;
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        phone,
+        options: {
+          data: {
+            phone, // store phone in user metadata
+          },
+        },
       });
 
       if (error) {
-        setErrorMsg("Signup failed: " + error.message);
+        setErrors({ email: "Signup failed: " + error.message });
       } else {
+        toast.success("Signup successful! Please check your email to confirm.");
         navigate("/login");
       }
-    } catch (err: any) {
-      setErrorMsg("Unexpected error occurred.");
+    } catch (err) {
+      setErrors({ email: "Unexpected error occurred." });
     }
   };
 
@@ -60,38 +78,53 @@ export default function Signup() {
         </h1>
         <h2 className="text-xl font-semibold mb-4 text-center">Create an Account</h2>
         <form onSubmit={handleSignup} className="space-y-4">
-          <input
-            type="email"
-            className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Email ID"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="tel"
-            className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Mobile Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
+          <div>
+            <input
+              type="email"
+              className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Email ID"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+          </div>
+
+          <div>
+            <input
+              type="tel"
+              className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
+          </div>
+
+          <div>
+            <input
+              type="password"
+              className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && (
+              <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+            )}
+          </div>
+
+          <div>
+            <input
+              type="password"
+              className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-600 text-sm mt-1">{errors.confirmPassword}</p>
+            )}
+          </div>
 
           <label className="flex items-start gap-2 text-sm">
             <input
@@ -99,14 +132,13 @@ export default function Signup() {
               className="mt-1"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              required
             />
             <span>
-              I certify that the information provided is accurate and that my startup meets the eligibility criteria. I also acknowledge that any false or misleading information may result in disqualification from the challenge.
+              I certify that the information provided is accurate and that my startup
+              meets the eligibility criteria. I also acknowledge that any false or
+              misleading information may result in disqualification from the challenge.
             </span>
           </label>
-
-          {errorMsg && <p className="text-red-600 text-sm">{errorMsg}</p>}
 
           <button
             type="submit"
