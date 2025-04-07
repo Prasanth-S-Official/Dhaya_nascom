@@ -45,104 +45,157 @@ const CompanyRegistrationForm = () => {
     navigate("/form/page1");
   };
   
-const validateForm = (): boolean => {
-  const requiredFields = [
-    'isRegisteredInIndia', 'businessStage', 
-    'industries', 'city', 'employees'
-  ];
+  // const validateForm = (): boolean => {
+  //   const requiredFields = [
+  //     'isRegisteredInIndia', 'businessStage', 
+  //     'industries', 'city', 'employees'
+  //   ];
+    
+  //   const missingFields = requiredFields.filter(field => {
+  //     const value = formData[field as keyof typeof formData];
+  //     return !value || (Array.isArray(value) && value.length === 0);
+  //   });
+    
+  //   if (missingFields.length > 0) {
+  //     toast({
+  //       title: "Missing required fields",
+  //       description: "Please fill in all required fields before submitting.",
+  //       variant: "destructive"
+  //     });
+  //     return false;
+  //   }
+    
+  //   if (formData.isDpiitCertified === "Yes" && !formData.dpiitNumber) {
+  //     toast({
+  //       title: "DPIIT information required",
+  //       description: "Please provide your DPIIT number.",
+  //       variant: "destructive"
+  //     });
+  //     return false;
+  //   }
+    
+  //   if (formData.motivation) {
+  //     const wordCount = formData.motivation.trim().split(/\s+/).length;
+  //     if (wordCount > 100) {
+  //       toast({
+  //         title: "Motivation is too long",
+  //         description: "Please limit your motivation to 100 words or less.",
+  //         variant: "destructive"
+  //       });
+  //       return false;
+  //     }
+  //   }
+    
+  //   if (formData.industries.includes("Others") && !formData.otherIndustry) {
+  //     toast({
+  //       title: "Other industry required",
+  //       description: "Please specify the other industry.",
+  //       variant: "destructive"
+  //     });
+  //     return false;
+  //   }
+    
+  //   // if (formData.selectedFields.length > 0) {
+  //   //   const missingUploads = formData.selectedFields.filter(
+  //   //     field => !formData.fieldPdfUploads[field]
+  //   //   );
+      
+  //   //   if (missingUploads.length > 0) {
+  //   //     toast({
+  //   //       title: "Missing PDF uploads helo",
+  //   //       description: `Please upload PDFs for all selected approach fields: ${missingUploads.join(', ')}`,
+  //   //       variant: "destructive"
+  //   //     });
+  //   //     return false;
+  //   //   }
+  //   // }
+    
+  //   return true;
+  // };
+
+  const validateForm = (): boolean => {
+    const {
+      isRegisteredInIndia,
+      incorporationDate,
+      incorporationCertificate,
+      isDpiitCertified,
+      dpiitNumber,
+      dpiitCertificate,
+      businessStage,
+      industries,
+      city,
+      employees,
+      motivation,
+      otherIndustry,
+    } = formData;
   
-  const missingFields = requiredFields.filter(field => {
-    const value = formData[field as keyof typeof formData];
-    return !value || (Array.isArray(value) && value.length === 0);
-  });
-
-  if (missingFields.length > 0) {
-    toast({
-      title: "Missing required fields",
-      description: "Please fill in all required fields before submitting.",
-      variant: "destructive"
-    });
-    return false;
-  }
-
-  if (formData.isRegisteredInIndia === "Yes") {
-    const incorporationDate = formData.incorporationDate;
-    const incorporationCertificate = formData.incorporationCertificate;
-
-    if (!incorporationDate) {
+    const errors: string[] = [];
+  
+    // 1. Validate isRegisteredInIndia
+    if (!isRegisteredInIndia) {
+      errors.push("Is your company a legally registered entity in India?");
+    } else if (isRegisteredInIndia === "Yes") {
+      // 2. If registered in India, check incorporation fields
+      const incorporationErrors: string[] = [];
+      if (!incorporationDate) incorporationErrors.push("Incorporation Date");
+      if (!incorporationCertificate) incorporationErrors.push("Incorporation Certificate");
+  
+      if (incorporationErrors.length > 0) {
+        errors.push(`Missing: ${incorporationErrors.join(", ")}`);
+      }
+  
+      // 3. Then validate DPIIT only if registered in India
+      if (!isDpiitCertified) {
+        errors.push("Is your company DPIIT certified?");
+      } else if (isDpiitCertified === "Yes") {
+        const dpiitErrors: string[] = [];
+        if (!dpiitNumber) dpiitErrors.push("DPIIT Number");
+        if (!dpiitCertificate) dpiitErrors.push("DPIIT Certificate");
+  
+        if (dpiitErrors.length > 0) {
+          errors.push(`Missing: ${dpiitErrors.join(", ")}`);
+        }
+      }
+    }
+  
+    // 4. General required fields
+    const generalErrors: string[] = [];
+    if (!businessStage) generalErrors.push("Business Stage");
+    if (!industries || industries.length === 0) generalErrors.push("Industries");
+    if (!city) generalErrors.push("City");
+    if (!employees) generalErrors.push("Number of Employees");
+  
+    if (generalErrors.length > 0) {
+      errors.push(`Missing: ${generalErrors.join(", ")}`);
+    }
+  
+    // 5. Other industry required if "Others" selected
+    if (industries.includes("Others") && !otherIndustry) {
+      errors.push("Please specify the 'Other' industry.");
+    }
+  
+    // 6. Motivation word limit
+    if (motivation) {
+      const wordCount = motivation.trim().split(/\s+/).length;
+      if (wordCount > 100) {
+        errors.push("Motivation should be 100 words or less.");
+      }
+    }
+  
+    // 7. Display all collected errors
+    if (errors.length > 0) {
       toast({
-        title: "Incorporation Date Required",
-        description: "Please select both year and month of incorporation.",
-        variant: "destructive"
+        title: "Missing required fields",
+        description: errors.join("\n"),
+        variant: "destructive",
       });
       return false;
     }
-
-    const hasYear = incorporationDate.getFullYear();
-    const hasMonth = incorporationDate.getMonth();
-
-    if (isNaN(hasYear) || isNaN(hasMonth)) {
-      toast({
-        title: "Incomplete Incorporation Date",
-        description: "Please make sure both year and month are selected.",
-        variant: "destructive"
-      });
-      return false;
-    }
-
-    if (!incorporationCertificate) {
-      toast({
-        title: "Incorporation Certificate Missing",
-        description: "Please upload the Incorporation Certificate (PDF).",
-        variant: "destructive"
-      });
-      return false;
-    }
-  }
-
-  if (formData.isDpiitCertified === "Yes") {
-    if (!formData.dpiitNumber) {
-      toast({
-        title: "DPIIT Number Missing",
-        description: "Please enter your DPIIT Number.",
-        variant: "destructive"
-      });
-      return false;
-    }
-
-    if (!formData.dpiitCertificate) {
-      toast({
-        title: "DPIIT Certificate Missing",
-        description: "Please upload your DPIIT Certificate (PDF).",
-        variant: "destructive"
-      });
-      return false;
-    }
-  }
-
-  if (formData.motivation) {
-    const wordCount = formData.motivation.trim().split(/\s+/).length;
-    if (wordCount > 100) {
-      toast({
-        title: "Motivation is too long",
-        description: "Please limit your motivation to 100 words or less.",
-        variant: "destructive"
-      });
-      return false;
-    }
-  }
-
-  if (formData.industries.includes("Others") && !formData.otherIndustry) {
-    toast({
-      title: "Other industry required",
-      description: "Please specify the other industry.",
-      variant: "destructive"
-    });
-    return false;
-  }
-
-  return true;
-};
+  
+    return true;
+  };
+  
+  
 
   const handleNext = async () => {
     if (validateForm()) {
