@@ -49,10 +49,8 @@ const CompanyRegistrationForm = () => {
 
   const validateForm = (): boolean => {
     const {
-      isRegisteredInIndia,
       incorporationDate,
       incorporationCertificate,
-      isDpiitCertified,
       dpiitNumber,
       dpiitCertificate,
       businessStage,
@@ -66,62 +64,39 @@ const CompanyRegistrationForm = () => {
   
     const errors: string[] = [];
   
-    // 1. Validate isRegisteredInIndia
-    if (!isRegisteredInIndia) {
-      errors.push("Is your company a legally registered entity in India?");
-    } else if (isRegisteredInIndia === "Yes") {
-      // 2. If registered in India, check incorporation fields
-      const incorporationErrors: string[] = [];
-      if (!incorporationDate) incorporationErrors.push("Incorporation Date");
-      if (!incorporationCertificate) incorporationErrors.push("Incorporation Certificate");
+    // 1. Incorporation fields
+    if (!incorporationDate) errors.push("Incorporation Date");
+    if (!incorporationCertificate) errors.push("Incorporation Certificate");
   
-      if (incorporationErrors.length > 0) {
-        errors.push(`Missing: ${incorporationErrors.join(", ")}`);
-      }
+    // 2. DPIIT fields
+    if (!dpiitNumber?.trim()) errors.push("DPIIT Number");
+    if (!dpiitCertificate) errors.push("DPIIT Certificate");
   
-      // 3. Then validate DPIIT only if registered in India
-      if (!isDpiitCertified) {
-        errors.push("Is your company DPIIT certified?");
-      } else if (isDpiitCertified === "Yes") {
-        const dpiitErrors: string[] = [];
-        if (!dpiitNumber) dpiitErrors.push("DPIIT Number");
-        if (!dpiitCertificate) dpiitErrors.push("DPIIT Certificate");
+    // 3. General required fields
+    if (!businessStage) errors.push("Business Stage");
+    if (!industries || industries.length === 0) errors.push("Industries");
+    if (!city) errors.push("City");
+    if (!employees) errors.push("Number of Employees");
   
-        if (dpiitErrors.length > 0) {
-          errors.push(`Missing: ${dpiitErrors.join(", ")}`);
-        }
-      }
-    }
-  
-    // 4. General required fields
-    const generalErrors: string[] = [];
-    if (!businessStage) generalErrors.push("Business Stage");
-    if (!industries || industries.length === 0) generalErrors.push("Industries");
-    if (!city) generalErrors.push("City");
-    if (!employees) generalErrors.push("Number of Employees");
-  
-    if (generalErrors.length > 0) {
-      errors.push(`Missing: ${generalErrors.join(", ")}`);
-    }
-  
-    // 5. Other industry required if "Others" selected
+    // 4. Other industry required if "Others" selected
     if (industries.includes("Others") && !otherIndustry) {
       errors.push("Please specify the 'Other' industry.");
     }
   
-    // 6. Motivation word limit
+    // 5. Motivation word limit
     if (motivation) {
       const wordCount = motivation.trim().split(/\s+/).length;
       if (wordCount > 100) {
         errors.push("Motivation should be 100 words or less.");
       }
     }
-
+  
+    // 6. Pitch deck check
     if (!pitchDeck) {
       errors.push("Please share your pitch deck (product/company deck).");
     }
   
-    // 7. Display all collected errors
+    // 7. Show collected errors if any
     if (errors.length > 0) {
       toast({
         title: "Missing required fields",
