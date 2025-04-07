@@ -1,45 +1,53 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [otp, setOtp] = useState("");
+  const [userOtp, setUserOtp] = useState("");
+  const [step, setStep] = useState<"form" | "otp">("form");
 
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
 
-    if (!email) {
-      setError("Email is required.");
+    if (!email || !newPassword || !confirmPassword) {
+      toast.error("All fields are required.");
       return;
-    } else if (!validateEmail(email)) {
-      setError("Enter a valid email.");
+    }
+    if (!validateEmail(email)) {
+      toast.error("Enter a valid email.");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match.");
       return;
     }
 
-    const otp = generateOTP();
-    localStorage.setItem("otp", otp);
+    const generatedOtp = generateOTP();
+    setOtp(generatedOtp);
+    localStorage.setItem("otp", generatedOtp);
     localStorage.setItem("reset-email", email);
+    localStorage.setItem("new-password", newPassword);
     const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3ODcyODIsImV4cCI6MjA1OTM2MzI4Mn0.8fLJtZi1siljidzfvXw4wrErtP8_QmxbZoaW9EuKX50';
 
 
     try {
       const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/send-otp", {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${serviceRoleKey}`,
-          'apikey': serviceRoleKey
-        },
-        body: JSON.stringify({ email, otp }),
+      headers: {
+        'Authorization': `Bearer ${serviceRoleKey}`,
+        'apikey': serviceRoleKey
+      },
+        body: JSON.stringify({ email, otp: generatedOtp }),
       });
 
       if (!res.ok) {
@@ -48,9 +56,35 @@ export default function ForgotPassword() {
       }
 
       toast.success("OTP sent to your email!");
-      navigate("/verify-otp"); // 👈 redirect to OTP entry page (you create this)
+      setStep("otp");
     } catch (err: any) {
       toast.error("Error sending OTP: " + err.message);
+    }
+  };
+
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const storedOtp = localStorage.getItem("otp");
+    const storedEmail = localStorage.getItem("reset-email");
+    const newPassword = localStorage.getItem("new-password");
+
+    if (userOtp !== storedOtp) {
+      toast.error("Invalid OTP");
+      return;
+    }
+
+    const { data, error } = await supabase.auth.admin.updateUserByEmail(storedEmail!, {
+      password: newPassword!,
+    });
+
+    if (error) {
+      toast.error("Failed to update password: " + error.message);
+    } else {
+      toast.success("Password updated successfully!");
+      localStorage.removeItem("otp");
+      localStorage.removeItem("reset-email");
+      localStorage.removeItem("new-password");
+      navigate("/login");
     }
   };
 
@@ -65,7 +99,7 @@ export default function ForgotPassword() {
         </div>
       </div>
 
-      {/* Right Side - Forgot Password Form */}
+      {/* Right Side */}
       <div className="md:w-1/2 flex items-center justify-center bg-gray-100 p-6">
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
           <img
@@ -74,35 +108,62 @@ export default function ForgotPassword() {
             className="h-16 mx-auto mb-4"
           />
           <h2 className="text-xl font-semibold mb-6 text-center text-indigo-600">
-            Forgot Password?
+            {step === "form" ? "Forgot Password?" : "Enter OTP"}
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border-b border-gray-300 focus:border-indigo-600 focus:outline-none py-2 transition duration-300 bg-transparent"
-              />
-              {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
-            </div>
+          <form onSubmit={step === "form" ? handleSendOTP : handleVerifyOTP} className="space-y-6">
+            {step === "form" ? (
+              <>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full border-b border-gray-300 focus:border-indigo-600 focus:outline-none py-2 bg-transparent"
+                />
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="w-full border-b border-gray-300 focus:border-indigo-600 focus:outline-none py-2 bg-transparent"
+                />
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full border-b border-gray-300 focus:border-indigo-600 focus:outline-none py-2 bg-transparent"
+                />
+              </>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  placeholder="Enter OTP"
+                  value={userOtp}
+                  onChange={(e) => setUserOtp(e.target.value)}
+                  className="w-full border-b border-gray-300 focus:border-indigo-600 focus:outline-none py-2 bg-transparent"
+                />
+              </>
+            )}
 
             <button
               type="submit"
               className="w-full py-3 rounded bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
             >
-              Send OTP
+              {step === "form" ? "Send OTP" : "Verify OTP & Reset Password"}
             </button>
           </form>
 
-          <p className="text-center mt-6 text-sm text-gray-600">
-            Remembered your password?{" "}
-            <Link to="/login" className="text-indigo-600 font-medium hover:underline">
-              Back to Login
-            </Link>
-          </p>
+          {step === "form" && (
+            <p className="text-center mt-6 text-sm text-gray-600">
+              Remembered your password?{" "}
+              <Link to="/login" className="text-indigo-600 font-medium hover:underline">
+                Back to Login
+              </Link>
+            </p>
+          )}
         </div>
       </div>
     </div>
