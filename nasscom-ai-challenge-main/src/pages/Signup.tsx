@@ -239,7 +239,7 @@ export default function Signup() {
       <div className="md:w-1/2 flex items-center justify-center bg-gray-100 p-6">
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
           <img
-            src="https://media.licdn.com/dms/image/v2/C561BAQHUvXFm8t0SSQ/company-background_10000/company-background_10000/0/1623310598733/et_itec_gots_cover?e=2147483647&v=beta&t=5_SE6HWKUrJN36vtm-SNvFPahqd60i2AKh7A5IX6B4I"
+            src="https://s3.amazonaws.com/prod-users-asset/email-uploads/d12733e5-2c1f-4b3b-b777-c1e70d74dfce/ET%20LOGO%20F1.png"
             alt="Logo"
             className="h-16 mx-auto mb-4"
           />

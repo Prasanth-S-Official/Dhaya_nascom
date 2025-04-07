@@ -196,7 +196,7 @@ export const ApproachNote: React.FC<ApproachNoteProps> = ({
   return (
     <div className="space-y-6">
       <a
-        href="https://examly467.sharepoint.com/sites/neoXCorporate/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FneoXCorporate%2FShared%20Documents%2FGeneral%2FSai%20Vignesh%2FApproach%20Note%20Submission%20Guideline%2Epdf&parent=%2Fsites%2FneoXCorporate%2FShared%20Documents%2FGeneral%2FSai%20Vignesh&p=true&ga=1"
+        href="https://s3.amazonaws.com/prod-users-asset/email-uploads/d12733e5-2c1f-4b3b-b777-c1e70d74dfce/Approach%20Note%20Submission%20Guideline.pdf"
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-600 underline hover:text-blue-800"

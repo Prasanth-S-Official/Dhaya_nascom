@@ -379,27 +379,42 @@ const ReviewPage = () => {
       isLastStep={true}
     >
       {/* 🔔 Reminder Dialog on first load */}
-      <Dialog open={showReminderDialog} onOpenChange={() => {}} modal>
-        <DialogContent
-          className="max-w-md text-center"
-          onInteractOutside={(e) => e.preventDefault()}
-          onEscapeKeyDown={(e) => e.preventDefault()}
-        >
-          <DialogHeader>
-            <DialogTitle className="text-lg font-semibold">
-              Final Reminder
-            </DialogTitle>
-          </DialogHeader>
-          <p className="text-sm text-gray-600">
-            Once you have completed the application, please verify it and make sure to click <strong>“Submit”</strong>.
-            <br /><br />
-            Applications will only be considered if submitted before <strong>00:00 hrs on 01.05.2025</strong>. No changes can be made after this deadline.
-          </p>
-          <div className="mt-4">
-            <Button onClick={() => setShowReminderDialog(false)}>OK</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+  <Dialog open={showReminderDialog} onOpenChange={() => {}} modal>
+  <DialogContent
+    className="max-w-md text-center rounded-lg bg-white shadow-xl p-6"
+    onInteractOutside={(e) => e.preventDefault()}
+    onEscapeKeyDown={(e) => e.preventDefault()}
+    hideClose
+  >
+    <style jsx>{`
+      .dialog-overlay {
+        backdrop-filter: blur(6px);
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    `}</style>
+
+    <DialogHeader>
+      <DialogTitle className="text-xl font-semibold text-gray-800 mb-2">
+        Final Reminder
+      </DialogTitle>
+    </DialogHeader>
+    <p className="text-sm text-gray-600 leading-relaxed">
+      Once you have completed the application, please verify it and make sure to click <strong>“Submit”</strong>.
+      <br /><br />
+      Applications will only be considered if submitted before <strong>00:00 hrs on 01.05.2025</strong>.
+      No changes can be made after this deadline.
+    </p>
+    <div className="mt-6">
+      <Button
+        onClick={() => setShowReminderDialog(false)}
+        className="px-6 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-md"
+      >
+        OK
+      </Button>
+    </div>
+  </DialogContent>
+</Dialog>
+
 
       <div className="space-y-8">
         <h2 className="text-2xl font-bold text-center mb-6">Review Your Submission</h2>
