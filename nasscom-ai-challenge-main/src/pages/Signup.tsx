@@ -7,10 +7,8 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreed, setAgreed] = useState(false);
 
   const [errors, setErrors] = useState({
     email: "",
@@ -18,130 +16,74 @@ export default function Signup() {
     confirmPassword: "",
   });
 
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const validatePassword = (pwd: string) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(pwd);
   };
 
-  // const handleSignup = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  //   let newErrors: any = {};
-
-  //   if (!email) newErrors.email = "Email is required.";
-  //   if (!password) {
-  //     newErrors.password = "Password is required.";
-  //   } else if (!validatePassword(password)) {
-  //     newErrors.password =
-  //       "Must be 8+ characters, include upper & lowercase, number, special character.";
-  //   }
-
-  //   if (!confirmPassword) {
-  //     newErrors.confirmPassword = "Please confirm your password.";
-  //   } else if (password !== confirmPassword) {
-  //     newErrors.confirmPassword = "Passwords do not match.";
-  //   }
-
-  //   setErrors(newErrors);
-  //   if (Object.keys(newErrors).length > 0) return;
-
-  //   try {
-  //     const { data, error } = await supabase.auth.signUp({
-  //       email,
-  //       password,
-  //     });
-
-  //     console.log("Supabase signup response:", { data, error });
-
-  //     if (error) {
-  //       if (
-  //         error.message.includes("User already registered") &&
-  //         data?.user?.identities?.length === 0
-  //       ) {
-  //         toast.error("Email already registered but not confirmed. Please check your email.");
-  //         // Optional: Offer to resend confirmation email
-  //         // await supabase.auth.resend({ type: 'signup', email });
-  //       } else {
-  //         setErrors({ email: "Signup failed: " + error.message });
-  //       }
-  //     } else {
-  //       toast.success("Signup successful! Please check your email to confirm.");
-  //       // navigate("/login"); // Enable this when ready
-  //     }
-  //   } catch (err) {
-  //     console.error("Unexpected error during signup:", err);
-  //     setErrors({ email: "Unexpected error occurred." });
-  //   }
-  // };
-
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     let newErrors: any = {};
-  
-    if (!email) newErrors.email = "Email is required.";
+
+    if (!email) {
+      newErrors.email = "Email is required.";
+    } else if (!validateEmail(email)) {
+      newErrors.email = "Invalid email format.";
+    }
+
     if (!password) {
       newErrors.password = "Password is required.";
     } else if (!validatePassword(password)) {
       newErrors.password =
         "Must be 8+ characters, include upper & lowercase, number, special character.";
     }
-  
+
     if (!confirmPassword) {
       newErrors.confirmPassword = "Please confirm your password.";
     } else if (password !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
-  
+
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
-  
+
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
-  
+
       console.log("Supabase signup response:", { data, error });
-  
+
       if (error) {
         setErrors({ email: "Signup failed: " + error.message });
         return;
       }
-  
-      // Detect existing email (not confirmed)
+
       if (data?.user?.identities?.length === 0) {
-        toast.warning("Email already registered but not confirmed. Please check your inbox.");
-  
-        // Optional: resend confirmation email
-        const { error: resendError } = await supabase.auth.resend({
-          type: "signup",
-          email,
-        });
-  
-        if (resendError) {
-          toast.error("Failed to resend confirmation email.");
-        } else {
-          toast.success("Confirmation email resent. Check your inbox.");
-        }
-  
+        toast.warning("Email already registered. Please signup with a new email.");
         return;
       }
-  
-      toast.success("Signup successful! Please check your email to confirm.");
-      // navigate("/login");
+
+      toast.success("Confirmation email sent. Please check your inbox.");
+      navigate("/login");
     } catch (err) {
       console.error("Unexpected error during signup:", err);
       setErrors({ email: "Unexpected error occurred." });
     }
   };
-  
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h1 className="text-center text-3xl font-bold text-indigo-600 mb-2">
-          Telangana AI Grand Challenge
+          Telangana AI Rising Grand Challenge
         </h1>
         <h2 className="text-xl font-semibold mb-4 text-center">Create an Account</h2>
         <form onSubmit={handleSignup} className="space-y-4">
@@ -182,28 +124,9 @@ export default function Signup() {
             )}
           </div>
 
-          <label className="flex items-start gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="mt-1"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-            />
-            <span>
-              I certify that the information provided is accurate and that my startup
-              meets the eligibility criteria. I also acknowledge that any false or
-              misleading information may result in disqualification from the challenge.
-            </span>
-          </label>
-
           <button
             type="submit"
-            disabled={!agreed}
-            className={`w-full py-3 rounded text-white font-semibold transition ${
-              agreed
-                ? "bg-indigo-600 hover:bg-indigo-700"
-                : "bg-gray-400 cursor-not-allowed"
-            }`}
+            className="w-full py-3 rounded text-white font-semibold transition bg-indigo-600 hover:bg-indigo-700"
           >
             Sign Up
           </button>

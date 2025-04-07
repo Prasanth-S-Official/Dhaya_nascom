@@ -138,7 +138,7 @@ const App = () => (
           <RedirectOnReload />
           <Routes>
             {/* <Route path="/" element={<Navigate to="/form/page1" replace />} /> */}
-            <Route path="/" element={<Signup />} />
+            <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/form">
               <Route path="page1" element={<FormPage1 />} />
