@@ -313,7 +313,7 @@ const FormPage1 = () => {
             type="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="Enter your official email"
+            placeholder="Enter your Account email"
             required
           />
           {emailExists && (

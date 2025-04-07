@@ -35,7 +35,8 @@ export function FormLayout({
                 alt="NASSCOM Logo"
                 className="h-12 w-auto"
               />
-              <p className="text-xs font-bold text-red-600">Implementation Partner</p>
+              <p className="text-[8px] font-bold text-red-400">Implementation Partner</p>
+
             </div>
           </div>
 
