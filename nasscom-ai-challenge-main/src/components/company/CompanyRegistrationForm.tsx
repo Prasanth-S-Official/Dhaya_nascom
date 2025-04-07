@@ -127,6 +127,7 @@ const CompanyRegistrationForm = () => {
       employees,
       motivation,
       otherIndustry,
+      pitchDeck,
     } = formData;
   
     const errors: string[] = [];
@@ -180,6 +181,10 @@ const CompanyRegistrationForm = () => {
       if (wordCount > 100) {
         errors.push("Motivation should be 100 words or less.");
       }
+    }
+
+    if (!pitchDeck) {
+      errors.push("Please share your pitch deck (product/company deck).");
     }
   
     // 7. Display all collected errors
