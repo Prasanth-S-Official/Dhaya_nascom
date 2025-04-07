@@ -23,11 +23,62 @@ export default function Signup() {
     return regex.test(pwd);
   };
 
+  // const handleSignup = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   let newErrors: any = {};
+
+  //   if (!email) newErrors.email = "Email is required.";
+  //   if (!password) {
+  //     newErrors.password = "Password is required.";
+  //   } else if (!validatePassword(password)) {
+  //     newErrors.password =
+  //       "Must be 8+ characters, include upper & lowercase, number, special character.";
+  //   }
+
+  //   if (!confirmPassword) {
+  //     newErrors.confirmPassword = "Please confirm your password.";
+  //   } else if (password !== confirmPassword) {
+  //     newErrors.confirmPassword = "Passwords do not match.";
+  //   }
+
+  //   setErrors(newErrors);
+  //   if (Object.keys(newErrors).length > 0) return;
+
+  //   try {
+  //     const { data, error } = await supabase.auth.signUp({
+  //       email,
+  //       password,
+  //     });
+
+  //     console.log("Supabase signup response:", { data, error });
+
+  //     if (error) {
+  //       if (
+  //         error.message.includes("User already registered") &&
+  //         data?.user?.identities?.length === 0
+  //       ) {
+  //         toast.error("Email already registered but not confirmed. Please check your email.");
+  //         // Optional: Offer to resend confirmation email
+  //         // await supabase.auth.resend({ type: 'signup', email });
+  //       } else {
+  //         setErrors({ email: "Signup failed: " + error.message });
+  //       }
+  //     } else {
+  //       toast.success("Signup successful! Please check your email to confirm.");
+  //       // navigate("/login"); // Enable this when ready
+  //     }
+  //   } catch (err) {
+  //     console.error("Unexpected error during signup:", err);
+  //     setErrors({ email: "Unexpected error occurred." });
+  //   }
+  // };
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     let newErrors: any = {};
-
+  
     if (!email) newErrors.email = "Email is required.";
     if (!password) {
       newErrors.password = "Password is required.";
@@ -35,34 +86,56 @@ export default function Signup() {
       newErrors.password =
         "Must be 8+ characters, include upper & lowercase, number, special character.";
     }
-
+  
     if (!confirmPassword) {
       newErrors.confirmPassword = "Please confirm your password.";
     } else if (password !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
-
+  
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) return;
-
+  
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-
       });
-      console.log("Signup", data, error)
+  
+      console.log("Supabase signup response:", { data, error });
+  
       if (error) {
         setErrors({ email: "Signup failed: " + error.message });
-      } else {
-        toast.success("Signup successful! Please check your email to confirm.");
-        // navigate("/login");
+        return;
       }
+  
+      // Detect existing email (not confirmed)
+      if (data?.user?.identities?.length === 0) {
+        toast.warning("Email already registered but not confirmed. Please check your inbox.");
+  
+        // Optional: resend confirmation email
+        const { error: resendError } = await supabase.auth.resend({
+          type: "signup",
+          email,
+        });
+  
+        if (resendError) {
+          toast.error("Failed to resend confirmation email.");
+        } else {
+          toast.success("Confirmation email resent. Check your inbox.");
+        }
+  
+        return;
+      }
+  
+      toast.success("Signup successful! Please check your email to confirm.");
+      // navigate("/login");
     } catch (err) {
+      console.error("Unexpected error during signup:", err);
       setErrors({ email: "Unexpected error occurred." });
     }
   };
+  
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-4">
@@ -83,7 +156,6 @@ export default function Signup() {
             {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
           </div>
 
-          
           <div>
             <input
               type="password"
