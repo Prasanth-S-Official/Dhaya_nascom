@@ -24,17 +24,22 @@ export function FormLayout({
       <div className="form-card">
         {/* Logo Section */}
         <div className="flex justify-between items-center mb-6">
-          <img
-            src="/lovable-uploads/a8158608-07a1-4b19-87ca-75a5c8c97516.png"
-            alt="T-AIM Logo"
-            className="h-12 w-auto"
-          />
-          <img
-            src="/lovable-uploads/50af34cf-0028-4267-95af-fcdffa3ee943.png"
-            alt="NASSCOM Logo"
-            className="h-12 w-auto"
-          />
-        </div>
+            <img
+              src="https://media.licdn.com/dms/image/v2/C561BAQHUvXFm8t0SSQ/company-background_10000/company-background_10000/0/1623310598733/et_itec_gots_cover?e=2147483647&v=beta&t=5_SE6HWKUrJN36vtm-SNvFPahqd60i2AKh7A5IX6B4I"
+              alt="T-AIM Logo"
+              className="h-12 w-auto"
+            />
+            <div className="text-center">
+              <img
+                src="/lovable-uploads/a8158608-07a1-4b19-87ca-75a5c8c97516.png"
+                alt="NASSCOM Logo"
+                className="h-12 w-auto"
+              />
+              <p className="text-xs font-bold text-red-600">Implementation Partner</p>
+            </div>
+          </div>
+
+
 
         {/* Heading */}
         <div className="mb-8 text-center">
