@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Signup() {
@@ -54,10 +54,7 @@ export default function Signup() {
     if (Object.keys(newErrors).length > 0) return;
 
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      const { data, error } = await supabase.auth.signUp({ email, password });
 
       console.log("Supabase signup response:", { data, error });
 
@@ -82,14 +79,21 @@ export default function Signup() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        {/* Logo */}
+        <img
+          src="https://media.licdn.com/dms/image/v2/C561BAQHUvXFm8t0SSQ/company-background_10000/company-background_10000/0/1623310598733/et_itec_gots_cover?e=2147483647&v=beta&t=5_SE6HWKUrJN36vtm-SNvFPahqd60i2AKh7A5IX6B4I"
+          alt="Logo"
+          className="h-16 mx-auto mb-4"
+        />
+
         <h1 className="text-center text-3xl font-bold text-indigo-600 mb-2">
           Telangana AI Rising Grand Challenge
         </h1>
         <h2 className="text-xl font-semibold mb-4 text-center">Create an Account</h2>
+
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
             <input
-              type="email"
               className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Email ID"
               value={email}
@@ -131,6 +135,14 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
+
+        {/* Link to Login */}
+        <p className="text-center mt-4 text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link to="/login" className="text-indigo-600 font-medium hover:underline">
+            Sign In
+          </Link>
+        </p>
       </div>
     </div>
   );
