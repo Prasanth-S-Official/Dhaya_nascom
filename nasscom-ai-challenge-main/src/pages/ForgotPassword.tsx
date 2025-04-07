@@ -75,6 +75,7 @@ export default function ForgotPassword() {
     }
   
     try {
+      console.log("helo");
       const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/update-password", {
         method: 'POST',
         headers: {
@@ -88,6 +89,7 @@ export default function ForgotPassword() {
         });
   
       const result = await res.json();
+      console.log(res);
   
       if (!res.ok) {
         throw new Error(result.error || "Failed to update password");
