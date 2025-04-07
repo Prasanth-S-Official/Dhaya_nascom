@@ -26,7 +26,7 @@ export default function ForgotPassword() {
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: `${window.location.origin}/reset-password`, // Supabase appends #code=xyz
     });
 
     if (error) {
@@ -39,7 +39,6 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left Side */}
       <div className="md:w-1/2 bg-gradient-to-br from-gray-100 to-gray-300 flex items-center justify-center p-10">
         <div className="text-center">
           <h1 className="text-green-600 text-3xl md:text-5xl font-bold uppercase tracking-tight font-anton">
@@ -48,7 +47,6 @@ export default function ForgotPassword() {
         </div>
       </div>
 
-      {/* Right Side - Forgot Password Form */}
       <div className="md:w-1/2 flex items-center justify-center bg-gray-100 p-6">
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
           <img

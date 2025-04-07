@@ -13,18 +13,23 @@ export default function ResetPassword() {
 
   useEffect(() => {
     const exchangeSession = async () => {
-      const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.hash);
+      const code = new URLSearchParams(window.location.hash.slice(1)).get("code");
+
+      if (!code) {
+        toast.error("Invalid or expired reset link.");
+        return;
+      }
+
+      const { data, error } = await supabase.auth.exchangeCodeForSession(`#code=${code}`);
 
       if (error || !data?.session) {
-        toast.error("Session not found. Please use the reset link again.");
-        // navigate("/forgot-password");
+        toast.error("Session not found or expired. Please use the reset link again.");
         return;
       }
 
       const userResponse = await supabase.auth.getUser();
       if (userResponse.error || !userResponse.data?.user) {
         toast.error("Unable to fetch user. Please try again.");
-        // navigate("/forgot-password");
         return;
       }
 
@@ -32,7 +37,7 @@ export default function ResetPassword() {
     };
 
     exchangeSession();
-  }, [navigate]);
+  }, []);
 
   const validatePassword = (pwd: string) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -70,7 +75,6 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left Side */}
       <div className="md:w-1/2 bg-gradient-to-br from-gray-100 to-gray-300 flex items-center justify-center p-10">
         <div className="text-center">
           <h1 className="text-green-600 text-3xl md:text-5xl font-bold uppercase tracking-tight font-anton">
@@ -79,7 +83,6 @@ export default function ResetPassword() {
         </div>
       </div>
 
-      {/* Right Side - Reset Password Form */}
       <div className="md:w-1/2 flex items-center justify-center bg-gray-100 p-6">
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
           <img
