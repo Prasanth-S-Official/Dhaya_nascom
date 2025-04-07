@@ -105,6 +105,7 @@ import ReviewPage from "./pages/ReviewPage";
 import SuccessPage from "./pages/SuccessPage";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
+import Login from "./pages/LoginPage";
 
 // Redirect on reload ONLY ONCE
 const RedirectOnReload = () => {
@@ -138,6 +139,7 @@ const App = () => (
           <Routes>
             {/* <Route path="/" element={<Navigate to="/form/page1" replace />} /> */}
             <Route path="/" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/form">
               <Route path="page1" element={<FormPage1 />} />
               <Route path="page2" element={<FormPage2 />} />
