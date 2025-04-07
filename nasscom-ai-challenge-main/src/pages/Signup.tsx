@@ -14,7 +14,6 @@ export default function Signup() {
 
   const [errors, setErrors] = useState({
     email: "",
-    phone: "",
     password: "",
     confirmPassword: "",
   });
@@ -30,7 +29,6 @@ export default function Signup() {
     let newErrors: any = {};
 
     if (!email) newErrors.email = "Email is required.";
-    if (!phone) newErrors.phone = "Phone number is required.";
     if (!password) {
       newErrors.password = "Password is required.";
     } else if (!validatePassword(password)) {
@@ -52,13 +50,8 @@ export default function Signup() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            phone, // store phone in user metadata
-          },
-        },
-      });
 
+      });
       if (error) {
         setErrors({ email: "Signup failed: " + error.message });
       } else {
@@ -89,17 +82,7 @@ export default function Signup() {
             {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
           </div>
 
-          <div>
-            <input
-              type="tel"
-              className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Mobile Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
-          </div>
-
+          
           <div>
             <input
               type="password"
