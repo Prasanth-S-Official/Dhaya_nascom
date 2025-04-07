@@ -32,10 +32,12 @@ export const CompanyBusinessInfo: React.FC<CompanyBusinessInfoProps> = ({
 }) => {
   const businessStages = [
     "No Revenue",
-    "Early ($0 to $100k)",
-    "Growth ($100k - $1MN)",
-    "Matured ($1mn+)",
+    "$0 - $50k",
+    "$50k - $300k",
+    "$300k - $1M",
+    "$1M and above",
   ];
+  
 
   const industryOptions = [
     "Automotive",

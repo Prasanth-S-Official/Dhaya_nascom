@@ -205,7 +205,7 @@ const CompanyRegistrationForm = () => {
           onValueChange={handleChange} 
         />
 
-        {formData.isDpiitCertified === "Yes" && formData.dpiitCertificate && (
+        {formData.dpiitCertificate && (
           <div className="flex gap-2 mt-2">
             <Dialog>
               <DialogTrigger asChild>
