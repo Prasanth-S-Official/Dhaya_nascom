@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -13,6 +12,8 @@ export default function ForgotPassword() {
     return regex.test(email);
   };
 
+  const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -25,15 +26,31 @@ export default function ForgotPassword() {
       return;
     }
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
+    const otp = generateOTP();
+    localStorage.setItem("otp", otp);
+    localStorage.setItem("reset-email", email);
+    const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3ODcyODIsImV4cCI6MjA1OTM2MzI4Mn0.8fLJtZi1siljidzfvXw4wrErtP8_QmxbZoaW9EuKX50';
 
-    if (error) {
-      toast.error("Failed to send reset email: " + error.message);
-    } else {
-      toast.success("Password reset email sent!");
-      navigate("/login");
+
+    try {
+      const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/send-otp", {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${serviceRoleKey}`,
+          'apikey': serviceRoleKey
+        },
+        body: JSON.stringify({ email, otp }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || "Failed to send OTP");
+      }
+
+      toast.success("OTP sent to your email!");
+      navigate("/verify-otp"); // 👈 redirect to OTP entry page (you create this)
+    } catch (err: any) {
+      toast.error("Error sending OTP: " + err.message);
     }
   };
 
@@ -76,7 +93,7 @@ export default function ForgotPassword() {
               type="submit"
               className="w-full py-3 rounded bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
             >
-              Send Reset Link
+              Send OTP
             </button>
           </form>
 
