@@ -12,31 +12,26 @@ export default function ResetPassword() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const exchangeSession = async () => {
-      const code = new URLSearchParams(window.location.hash.slice(1)).get("code");
+    const fetchSessionAndUser = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-      if (!code) {
-        toast.error("Invalid or expired reset link.");
-        return;
-      }
-
-      const { data, error } = await supabase.auth.exchangeCodeForSession(`#code=${code}`);
-
-      if (error || !data?.session) {
+      if (!session) {
         toast.error("Session not found or expired. Please use the reset link again.");
         return;
       }
 
-      const userResponse = await supabase.auth.getUser();
-      if (userResponse.error || !userResponse.data?.user) {
+      const { data: userData, error } = await supabase.auth.getUser();
+      if (error || !userData?.user) {
         toast.error("Unable to fetch user. Please try again.");
         return;
       }
 
-      setEmail(userResponse.data.user.email);
+      setEmail(userData.user.email);
     };
 
-    exchangeSession();
+    fetchSessionAndUser();
   }, []);
 
   const validatePassword = (pwd: string) => {
@@ -48,8 +43,9 @@ export default function ResetPassword() {
     e.preventDefault();
     const newErrors: typeof errors = {};
 
-    if (!newPassword) newErrors.newPassword = "New password is required.";
-    else if (!validatePassword(newPassword)) {
+    if (!newPassword) {
+      newErrors.newPassword = "New password is required.";
+    } else if (!validatePassword(newPassword)) {
       newErrors.newPassword =
         "Password must be 8+ chars, include upper/lowercase, number, special char.";
     }
@@ -75,6 +71,7 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Left Side */}
       <div className="md:w-1/2 bg-gradient-to-br from-gray-100 to-gray-300 flex items-center justify-center p-10">
         <div className="text-center">
           <h1 className="text-green-600 text-3xl md:text-5xl font-bold uppercase tracking-tight font-anton">
@@ -83,6 +80,7 @@ export default function ResetPassword() {
         </div>
       </div>
 
+      {/* Right Side */}
       <div className="md:w-1/2 flex items-center justify-center bg-gray-100 p-6">
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
           <img
