@@ -77,15 +77,15 @@ export default function ForgotPassword() {
     try {
       const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/update-password", {
         method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${serviceRoleKey}`,
-        'apikey': serviceRoleKey
-      },
-        body: JSON.stringify({
-          email: storedEmail,
-          newPassword: newPassword,
-        }),
-      });
+        headers: {
+          'Authorization': `Bearer ${serviceRoleKey}`,
+          'apikey': serviceRoleKey
+        },
+          body: JSON.stringify({
+            email: storedEmail,
+            newPassword: newPassword,
+          }),
+        });
   
       const result = await res.json();
   
