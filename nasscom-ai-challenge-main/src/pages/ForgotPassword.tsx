@@ -75,7 +75,7 @@ export default function ForgotPassword() {
     }
   
     try {
-      const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/hyper-responder", {
+      const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/update-password", {
         method: 'POST',
       headers: {
         'Authorization': `Bearer ${serviceRoleKey}`,
