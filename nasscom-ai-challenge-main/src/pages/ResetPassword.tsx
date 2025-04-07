@@ -17,14 +17,14 @@ export default function ResetPassword() {
 
       if (error || !data?.session) {
         toast.error("Session not found. Please use the reset link again.");
-        navigate("/forgot-password");
+        // navigate("/forgot-password");
         return;
       }
 
       const userResponse = await supabase.auth.getUser();
       if (userResponse.error || !userResponse.data?.user) {
         toast.error("Unable to fetch user. Please try again.");
-        navigate("/forgot-password");
+        // navigate("/forgot-password");
         return;
       }
 
