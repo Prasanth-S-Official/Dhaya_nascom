@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Login() {
@@ -44,12 +44,12 @@ export default function Login() {
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <img
-          src="/loveable-uploads/a8158608-07a1-4b19-87ca-75a5c8c97516.png"
+          src="https://media.licdn.com/dms/image/v2/C561BAQHUvXFm8t0SSQ/company-background_10000/company-background_10000/0/1623310598733/et_itec_gots_cover?e=2147483647&v=beta&t=5_SE6HWKUrJN36vtm-SNvFPahqd60i2AKh7A5IX6B4I"
           alt="Logo"
           className="h-16 mx-auto mb-4"
         />
         <h1 className="text-center text-3xl font-bold text-indigo-600 mb-2">
-          Telangana AI Grand Challenge
+          Telangana AI Rising Grand Challenge
         </h1>
         <h2 className="text-xl font-semibold mb-4 text-center">Login to your account</h2>
         <form onSubmit={handleLogin} className="space-y-4">
@@ -82,6 +82,14 @@ export default function Login() {
             Login
           </button>
         </form>
+
+        {/* Link to Signup */}
+        <p className="text-center mt-4 text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <Link to="/signup" className="text-indigo-600 font-medium hover:underline">
+            Create new Account!
+          </Link>
+        </p>
       </div>
     </div>
   );
