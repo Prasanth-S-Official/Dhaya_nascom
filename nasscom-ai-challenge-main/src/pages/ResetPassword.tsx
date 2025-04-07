@@ -11,19 +11,27 @@ export default function ResetPassword() {
   const [errors, setErrors] = useState<{ newPassword?: string; confirmPassword?: string }>({});
   const [loading, setLoading] = useState(false);
 
-  // Fetch user's email after Supabase recovers the session from the URL
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      if (error || !data?.user) {
+    const exchangeSession = async () => {
+      const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.hash);
+
+      if (error || !data?.session) {
         toast.error("Session not found. Please use the reset link again.");
         navigate("/forgot-password");
         return;
       }
-      setEmail(data.user.email);
+
+      const userResponse = await supabase.auth.getUser();
+      if (userResponse.error || !userResponse.data?.user) {
+        toast.error("Unable to fetch user. Please try again.");
+        navigate("/forgot-password");
+        return;
+      }
+
+      setEmail(userResponse.data.user.email);
     };
 
-    fetchUser();
+    exchangeSession();
   }, [navigate]);
 
   const validatePassword = (pwd: string) => {
@@ -36,19 +44,22 @@ export default function ResetPassword() {
     const newErrors: typeof errors = {};
 
     if (!newPassword) newErrors.newPassword = "New password is required.";
-    else if (!validatePassword(newPassword))
-      newErrors.newPassword = "Password must be 8+ chars, include upper/lowercase, number, special char.";
+    else if (!validatePassword(newPassword)) {
+      newErrors.newPassword =
+        "Password must be 8+ chars, include upper/lowercase, number, special char.";
+    }
 
-    if (newPassword !== confirmPassword)
+    if (newPassword !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
+    }
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
     setLoading(true);
     const { error } = await supabase.auth.updateUser({ password: newPassword });
-
     setLoading(false);
+
     if (error) {
       toast.error("Failed to update password: " + error.message);
     } else {
