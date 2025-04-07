@@ -45,73 +45,7 @@ const CompanyRegistrationForm = () => {
     navigate("/form/page1");
   };
   
-  // const validateForm = (): boolean => {
-  //   const requiredFields = [
-  //     'isRegisteredInIndia', 'businessStage', 
-  //     'industries', 'city', 'employees'
-  //   ];
-    
-  //   const missingFields = requiredFields.filter(field => {
-  //     const value = formData[field as keyof typeof formData];
-  //     return !value || (Array.isArray(value) && value.length === 0);
-  //   });
-    
-  //   if (missingFields.length > 0) {
-  //     toast({
-  //       title: "Missing required fields",
-  //       description: "Please fill in all required fields before submitting.",
-  //       variant: "destructive"
-  //     });
-  //     return false;
-  //   }
-    
-  //   if (formData.isDpiitCertified === "Yes" && !formData.dpiitNumber) {
-  //     toast({
-  //       title: "DPIIT information required",
-  //       description: "Please provide your DPIIT number.",
-  //       variant: "destructive"
-  //     });
-  //     return false;
-  //   }
-    
-  //   if (formData.motivation) {
-  //     const wordCount = formData.motivation.trim().split(/\s+/).length;
-  //     if (wordCount > 100) {
-  //       toast({
-  //         title: "Motivation is too long",
-  //         description: "Please limit your motivation to 100 words or less.",
-  //         variant: "destructive"
-  //       });
-  //       return false;
-  //     }
-  //   }
-    
-  //   if (formData.industries.includes("Others") && !formData.otherIndustry) {
-  //     toast({
-  //       title: "Other industry required",
-  //       description: "Please specify the other industry.",
-  //       variant: "destructive"
-  //     });
-  //     return false;
-  //   }
-    
-  //   // if (formData.selectedFields.length > 0) {
-  //   //   const missingUploads = formData.selectedFields.filter(
-  //   //     field => !formData.fieldPdfUploads[field]
-  //   //   );
-      
-  //   //   if (missingUploads.length > 0) {
-  //   //     toast({
-  //   //       title: "Missing PDF uploads helo",
-  //   //       description: `Please upload PDFs for all selected approach fields: ${missingUploads.join(', ')}`,
-  //   //       variant: "destructive"
-  //   //     });
-  //   //     return false;
-  //   //   }
-  //   // }
-    
-  //   return true;
-  // };
+ 
 
   const validateForm = (): boolean => {
     const {
