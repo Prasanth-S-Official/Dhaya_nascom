@@ -89,8 +89,7 @@
 
 // export default App;
 
-
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -106,16 +105,18 @@ import ReviewPage from "./pages/ReviewPage";
 import SuccessPage from "./pages/SuccessPage";
 import NotFound from "./pages/NotFound";
 
-// Redirect component for form reloads
+// Redirect on reload ONLY ONCE
 const RedirectOnReload = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const hasRedirectedRef = useRef(false);
 
   useEffect(() => {
-    const isReload = performance.navigation.type === 1; // Reload detection
+    const isReload = performance.navigation.type === 1;
     const isFormRoute = location.pathname.startsWith("/form") && location.pathname !== "/form/page1";
 
-    if (isReload && isFormRoute) {
+    if (isReload && isFormRoute && !hasRedirectedRef.current) {
+      hasRedirectedRef.current = true;
       navigate("/form/page1", { replace: true });
     }
   }, [location, navigate]);
