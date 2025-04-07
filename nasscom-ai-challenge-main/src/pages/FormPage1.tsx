@@ -161,7 +161,7 @@
 // };
 
 // export default FormPage1;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm as useFormContext } from "@/context/FormContext";
 import { FormLayout } from "@/components/FormLayout";
@@ -169,10 +169,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 
-const EDGE_FUNCTION_URL = "https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/hyper-service";
 
 // ⛔ NOTE: Do not expose this key in production frontend apps
-const SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3ODcyODIsImV4cCI6MjA1OTM2MzI4Mn0.8fLJtZi1siljidzfvXw4wrErtP8_QmxbZoaW9EuKX50";
 
 const FormPage1 = () => {
   const { formData, updateFormData, saveCurrentData } = useFormContext();
@@ -181,40 +179,19 @@ const FormPage1 = () => {
 
   const [emailExists, setEmailExists] = useState(false);
 
-  const checkEmailExists = async (rawEmail: string): Promise<boolean> => {
-    const email = rawEmail.trim().toLowerCase();
-    console.log("🧼 Normalized email for check:", email);
-  
-    try {
-      const res = await fetch(`${EDGE_FUNCTION_URL}?email=${encodeURIComponent(email)}`, {
-        method: "GET",
-        // ✅ REMOVE Content-Type — it breaks GETs in Supabase Edge Functions
-        headers: {
-          Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
-          apikey: SERVICE_ROLE_KEY,
-        },
-      });
-  
-      const result = await res.json();
-      console.log("📩 Email existence check result:", result);
-      return result.exists === true;
-    } catch (error) {
-      console.error("❌ Error checking email existence:", error);
-      return false;
+  // ✅ Prepopulate email from localStorage
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("user-email");
+    if (storedEmail) {
+      updateFormData({ email: storedEmail.trim().toLowerCase() });
     }
-  };
-  
-  
+  }, []);
+
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
     const normalizedValue = name === "email" ? value.trim().toLowerCase() : value;
 
     updateFormData({ [name]: normalizedValue });
-
-    if (name === "email") {
-      const exists = await checkEmailExists(normalizedValue);
-      setEmailExists(exists);
-    }
 
     if (name === "mobile" && type === "number" && value.length > 10) {
       return;
@@ -238,15 +215,6 @@ const FormPage1 = () => {
       toast({
         title: "Missing required fields",
         description: "Please fill in all required fields before proceeding.",
-        variant: "destructive",
-      });
-      return false;
-    }
-
-    if (emailExists) {
-      toast({
-        title: "Email already registered",
-        description: "This email is already used for a submission. Please use a different one.",
         variant: "destructive",
       });
       return false;
@@ -312,15 +280,11 @@ const FormPage1 = () => {
             name="email"
             type="email"
             value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Enter your Account email"
+            readOnly
+            className="bg-gray-100 text-gray-600 cursor-not-allowed"
+            placeholder="Pre-filled from login"
             required
           />
-          {emailExists && (
-            <p className="text-sm text-red-500 mt-1">
-              This email is already registered.
-            </p>
-          )}
         </div>
 
         <div className="form-group">

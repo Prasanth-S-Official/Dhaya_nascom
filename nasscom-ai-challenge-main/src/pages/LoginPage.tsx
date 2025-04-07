@@ -36,6 +36,7 @@ export default function Login() {
     if (error) {
       toast.error("Login failed: " + error.message);
     } else {
+      localStorage.setItem("user-email", email);
       toast.success("Login successful!");
       setTimeout(() => navigate("/form/page1"), 2000);
     }
