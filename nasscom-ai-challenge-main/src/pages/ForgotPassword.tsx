@@ -4,6 +4,8 @@ import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 
 export default function ForgotPassword() {
+  const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3ODcyODIsImV4cCI6MjA1OTM2MzI4Mn0.8fLJtZi1siljidzfvXw4wrErtP8_QmxbZoaW9EuKX50';
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -37,8 +39,7 @@ export default function ForgotPassword() {
     localStorage.setItem("otp", generatedOtp);
     localStorage.setItem("reset-email", email);
     localStorage.setItem("new-password", newPassword);
-    const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtbmZlb2FzZWllcGpsd3hmeHd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3ODcyODIsImV4cCI6MjA1OTM2MzI4Mn0.8fLJtZi1siljidzfvXw4wrErtP8_QmxbZoaW9EuKX50';
-
+   
 
     try {
       const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/send-otp", {
@@ -67,26 +68,41 @@ export default function ForgotPassword() {
     const storedOtp = localStorage.getItem("otp");
     const storedEmail = localStorage.getItem("reset-email");
     const newPassword = localStorage.getItem("new-password");
-
+  
     if (userOtp !== storedOtp) {
       toast.error("Invalid OTP");
       return;
     }
-
-    const { data, error } = await supabase.auth.admin.updateUserByEmail(storedEmail!, {
-      password: newPassword!,
-    });
-
-    if (error) {
-      toast.error("Failed to update password: " + error.message);
-    } else {
+  
+    try {
+      const res = await fetch("https://gmnfeoaseiepjlwxfxwz.supabase.co/functions/v1/hyper-responder", {
+        method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${serviceRoleKey}`,
+        'apikey': serviceRoleKey
+      },
+        body: JSON.stringify({
+          email: storedEmail,
+          newPassword: newPassword,
+        }),
+      });
+  
+      const result = await res.json();
+  
+      if (!res.ok) {
+        throw new Error(result.error || "Failed to update password");
+      }
+  
       toast.success("Password updated successfully!");
       localStorage.removeItem("otp");
       localStorage.removeItem("reset-email");
       localStorage.removeItem("new-password");
       navigate("/login");
+    } catch (err: any) {
+      toast.error("Failed to update password: " + err.message);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
