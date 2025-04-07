@@ -106,6 +106,7 @@ export const CompanyMotivation: React.FC<CompanyMotivationProps> = ({
       <div className="form-group">
         <Label htmlFor="motivation">
           What is your motivation to participate in the Grand Challenge?
+          <span className="text-red-500">*</span>
           <span className="text-xs text-gray-500">(Maximum 100 words)</span>
         </Label>
         <Textarea

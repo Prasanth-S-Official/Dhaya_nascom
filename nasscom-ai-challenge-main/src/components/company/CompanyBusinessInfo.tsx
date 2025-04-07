@@ -168,7 +168,7 @@ export const CompanyBusinessInfo: React.FC<CompanyBusinessInfoProps> = ({
       </div>
 
       <div className="form-group">
-        <Label htmlFor="femaleFounders">Does your startup have female founders?</Label>
+        <Label htmlFor="femaleFounders">Does your startup have female founder/s?</Label>
         <Select 
           value={formData.femaleFounders} 
           onValueChange={(value) => onValueChange("femaleFounders", value)}

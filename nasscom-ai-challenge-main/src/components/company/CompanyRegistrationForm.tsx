@@ -82,14 +82,17 @@ const CompanyRegistrationForm = () => {
     if (industries.includes("Others") && !otherIndustry) {
       errors.push("Please specify the 'Other' industry.");
     }
-  
-    // 5. Motivation word limit
-    if (motivation) {
-      const wordCount = motivation.trim().split(/\s+/).length;
-      if (wordCount > 100) {
-        errors.push("Motivation should be 100 words or less.");
-      }
-    }
+
+   // 5. Motivation required + word limit
+if (!motivation?.trim()) {
+  errors.push("Motivation is required.");
+} else {
+  const wordCount = motivation.trim().split(/\s+/).length;
+  if (wordCount > 100) {
+    errors.push("Motivation should be 100 words or less.");
+  }
+}
+
   
     // 6. Pitch deck check
     if (!pitchDeck) {
